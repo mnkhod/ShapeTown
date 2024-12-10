@@ -1,0 +1,77 @@
+{
+    "id": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "e9013cfb-fd06-4ca4-ac4e-c2edf6686dce",
+            "label": "container_1",
+            "x": 33.46849927902156,
+            "y": 20.681273293494687,
+            "ArcadeComponent.active": true,
+            "allowGravity": false,
+            "body.width": 28,
+            "body.height": 55,
+            "list": [
+                {
+                    "type": "Sprite",
+                    "id": "b992631d-3bdb-45df-9156-719a089757f6",
+                    "label": "skin",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "player",
+                        "frame": 0
+                    },
+                    "x": 14.53150085424582,
+                    "y": 27.318725443132376,
+                    "scaleX": 1.5,
+                    "scaleY": 1.5
+                },
+                {
+                    "type": "Sprite",
+                    "id": "44be326b-d5d0-462d-be83-cbfc839eebd5",
+                    "label": "hair",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "PlayerHair02",
+                        "frame": 0
+                    },
+                    "x": 14.53150085424582,
+                    "y": 27.318725443132376,
+                    "scaleX": 1.5,
+                    "scaleY": 1.5
+                },
+                {
+                    "type": "Sprite",
+                    "id": "73d14d00-0c7c-477c-8166-eff3c2c922c7",
+                    "label": "outfit",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "PlayerOutfit01",
+                        "frame": 0
+                    },
+                    "x": 14.53150085424582,
+                    "y": 27.318725443132376,
+                    "scaleX": 1.5,
+                    "scaleY": 1.5
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
