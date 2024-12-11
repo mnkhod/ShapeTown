@@ -5,9 +5,6 @@
 
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import PlayerPrefab from "../prefabs/PlayerPrefab";
-import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
-import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
-import MessagePrefab from "../prefabs/hud/MessagePrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -110,30 +107,24 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.container(0, 0);
 
 		// oldManJackNpcPrefab
-		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 376, 169);
+		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 361, 216);
 		this.add.existing(oldManJackNpcPrefab);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 286, 352);
+		const playerPrefab = new PlayerPrefab(this, 912, 352);
 		this.add.existing(playerPrefab);
 
-		// itemHudPrefab
-		const itemHudPrefab = new ItemHudPrefab(this, 624.0380149603411, 714.0380149603411);
-		this.add.existing(itemHudPrefab);
-
-		// questBookPrefab
-		const questBookPrefab = new QuestBookPrefab(this, 32, 736);
-		this.add.existing(questBookPrefab);
-
-		// messagePrefab
-		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 678.195422853359);
-		this.add.existing(messagePrefab);
+		// sceneTile
+		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
+		const sceneTile = this.add.sprite(1259, 382, "Fruitbushes_V01", 23);
+		sceneTile.scaleX = 1.3069946364802347;
+		sceneTile.scaleY = 10.586085054631967;
+		this.physics.add.existing(sceneTile, false);
+		sceneTile.body.allowGravity = false;
+		sceneTile.body.setSize(32, 200, false);
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
-		oldManJackNpcPrefab.msgPrefab = messagePrefab;
-		oldManJackNpcPrefab.itemHud = itemHudPrefab;
-		oldManJackNpcPrefab.bookHud = questBookPrefab;
 
 		this.layerFence = layerFence;
 		this.farmingAreaFarmingTile = farmingAreaFarmingTile;
@@ -148,11 +139,8 @@ export default class TutorialScene extends Phaser.Scene {
 		this.layerAppleTree = layerAppleTree;
 		this.layerPine = layerPine;
 		this.layerMapleTree = layerMapleTree;
-		this.oldManJackNpcPrefab = oldManJackNpcPrefab;
 		this.playerPrefab = playerPrefab;
-		this.itemHudPrefab = itemHudPrefab;
-		this.questBookPrefab = questBookPrefab;
-		this.messagePrefab = messagePrefab;
+		this.sceneTile = sceneTile;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -184,16 +172,10 @@ export default class TutorialScene extends Phaser.Scene {
 	layerPine;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	layerMapleTree;
-	/** @type {OldManJackNpcPrefab} */
-	oldManJackNpcPrefab;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
-	/** @type {ItemHudPrefab} */
-	itemHudPrefab;
-	/** @type {QuestBookPrefab} */
-	questBookPrefab;
-	/** @type {MessagePrefab} */
-	messagePrefab;
+	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
+	sceneTile;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 
@@ -273,9 +255,15 @@ export default class TutorialScene extends Phaser.Scene {
 
 		// this.farmingAreaFarmingTile.renderDebug(this.add.graphics());
 
-
-		this.questBookPrefab.visible = false;
-		this.itemHudPrefab.visible = false;
+		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
+            this.scene.start("FarmingScene");
+        });
+		if (this.questBookPrefab) {
+            this.questBookPrefab.visible = false;
+        }
+        if (this.itemHudPrefab) {
+            this.itemHudPrefab.visible = false;
+        }
 	}
 
 	/* END-USER-CODE */

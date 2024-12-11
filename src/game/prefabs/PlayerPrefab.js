@@ -1,4 +1,3 @@
-
 // You can write more code here
 
 /* START OF COMPILED CODE */
@@ -152,30 +151,52 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     }
 
 	settingUpAnimations() {
-		let movementAnimKeys = {
-			right: { start: 13, end: 17 },
-			left: { start: 19, end: 23 },
-			idle: { start: 0, end: 0 },
-			up: { start: 7, end: 9 },
-			down: { start: 1, end: 5 }
-		};
+        let movementAnimKeys = {
+            right: { start: 13, end: 17 },
+            left: { start: 19, end: 23 },
+            idle: { start: 0, end: 0 },
+            up: { start: 7, end: 9 },
+            down: { start: 1, end: 5 }
+        };
 
-		let anims = [
-			{ key: "hair", assetKey: "PlayerHair01" },
-			{ key: "outfit", assetKey: "PlayerOutfit01" },
-		];
+        // Add body animations
+        ["right", "left", "idle", "up", "down"].forEach((i) => {
+            if (!this.scene.anims.exists(`body${this.capitalizeFirstLetter(i)}`)) {
+                this.scene.anims.create({
+                    key: `body${this.capitalizeFirstLetter(i)}`,
+                    frames: this.scene.anims.generateFrameNumbers("player", { 
+                        start: movementAnimKeys[i].start, 
+                        end: movementAnimKeys[i].end 
+                    }),
+                    frameRate: 10,
+                    repeat: -1,
+                });
+            }
+        });
 
-		anims.map((anim) => {
-			["right", "left", "idle", "up", "down"].map((i) => {
-				this.scene.anims.create({
-					key: `${anim.key}${this.capitalizeFirstLetter(i)}`,
-					frames: this.scene.anims.generateFrameNumbers(anim.assetKey, { start: movementAnimKeys[i].start, end: movementAnimKeys[i].end }),
-					frameRate: 10,
-					repeat: -1,
-				});
-			});
-		});
-	}
+        // Add hair and outfit animations
+        let anims = [
+            { key: "hair", assetKey: "PlayerHair01" },
+            { key: "outfit", assetKey: "PlayerOutfit01" },
+        ];
+
+        anims.forEach((anim) => {
+            ["right", "left", "idle", "up", "down"].forEach((i) => {
+                const animKey = `${anim.key}${this.capitalizeFirstLetter(i)}`;
+                if (!this.scene.anims.exists(animKey)) {
+                    this.scene.anims.create({
+                        key: animKey,
+                        frames: this.scene.anims.generateFrameNumbers(anim.assetKey, { 
+                            start: movementAnimKeys[i].start, 
+                            end: movementAnimKeys[i].end 
+                        }),
+                        frameRate: 10,
+                        repeat: -1,
+                    });
+                }
+            });
+        });
+    }
 
 	capitalizeFirstLetter(val) {
 		return String(val).charAt(0).toUpperCase() + String(val).slice(1);

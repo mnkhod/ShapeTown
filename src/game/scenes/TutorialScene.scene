@@ -635,19 +635,12 @@
             "unlock": [
                 "x",
                 "y",
-                "player",
-                "msgPrefab",
-                "itemHud",
-                "bookHud"
+                "player"
             ],
             "label": "oldManJackNpcPrefab",
-            "scope": "CLASS",
             "player": "playerPrefab",
-            "msgPrefab": "messagePrefab",
-            "itemHud": "itemHudPrefab",
-            "bookHud": "questBookPrefab",
-            "x": 376,
-            "y": 169
+            "x": 361,
+            "y": 216
         },
         {
             "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
@@ -658,44 +651,26 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": 286,
+            "x": 912,
             "y": 352
         },
         {
-            "prefabId": "a69b4058-db0e-4e31-b023-568805698db8",
-            "id": "42f7d2f5-dab1-4c64-a2c5-60688a07e31c",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "itemHudPrefab",
+            "type": "Sprite",
+            "id": "7ed5760b-00c9-4c38-a826-37efefcf402c",
+            "label": "sceneTile",
             "scope": "CLASS",
-            "x": 624.0380149603411,
-            "y": 714.0380149603411
-        },
-        {
-            "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
-            "id": "d9e57194-7937-410e-9a2f-cacbd49dfe4e",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "questBookPrefab",
-            "scope": "CLASS",
-            "x": 32,
-            "y": 736
-        },
-        {
-            "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
-            "id": "1eef81e6-77bd-43af-8f6e-afbb261e3b30",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "messagePrefab",
-            "scope": "CLASS",
-            "x": 0.706304947792546,
-            "y": 678.195422853359
+            "texture": {
+                "key": "Fruitbushes_V01",
+                "frame": 23
+            },
+            "x": 1259,
+            "y": 382,
+            "scaleX": 1.3069946364802347,
+            "scaleY": 10.586085054631967,
+            "ArcadeComponent.active": true,
+            "allowGravity": false,
+            "body.width": 32,
+            "body.height": 200
         }
     ],
     "plainObjects": [
