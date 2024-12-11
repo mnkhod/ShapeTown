@@ -9,7 +9,7 @@ function App ()
     const phaserRef = useRef();
 
     // Event emitted from the PhaserGame component
-    const currentScene = (scene) => {
+    const currentScene = (scene) => {   
     }
 
     return (
