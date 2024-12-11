@@ -12,23 +12,32 @@
     },
     "displayList": [
         {
-            "type": "Sprite",
-            "id": "b4227c22-c7fb-466d-afc6-068b5cd9667b",
-            "label": "sprite_1",
-            "texture": {
-                "key": "GameNpcs1",
-                "frame": 0
-            },
+            "type": "Container",
+            "id": "3a8a8e0a-bb5f-4c39-ac3a-fd3987deb622",
+            "label": "container_1",
             "x": 24,
-            "y": 26,
-            "scaleX": 1.5,
-            "scaleY": 1.5,
-            "ArcadeComponent.active": true,
-            "allowGravity": false,
-            "body.width": 32,
-            "body.height": 32,
-            "animationPlayMethod": 1,
-            "animationKey": "npcHarvestStandingAnim"
+            "y": 25,
+            "list": [
+                {
+                    "type": "Sprite",
+                    "id": "b4227c22-c7fb-466d-afc6-068b5cd9667b",
+                    "label": "npc",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "GameNpcs1",
+                        "frame": 0
+                    },
+                    "y": -1,
+                    "scaleX": 1.5,
+                    "scaleY": 1.5,
+                    "ArcadeComponent.active": true,
+                    "allowGravity": false,
+                    "body.width": 32,
+                    "body.height": 32,
+                    "animationPlayMethod": 1,
+                    "animationKey": "npcHarvestStandingAnim"
+                }
+            ]
         }
     ],
     "plainObjects": [],
@@ -42,6 +51,17 @@
         {
             "name": "player",
             "label": "Player",
+            "tooltip": "",
+            "defValue": "",
+            "customDefinition": false,
+            "type": {
+                "id": "object-var",
+                "expressionType": "Phaser.GameObjects.GameObject"
+            }
+        },
+        {
+            "name": "msgPrefab",
+            "label": "Message Prefab",
             "tooltip": "",
             "defValue": "",
             "customDefinition": false,

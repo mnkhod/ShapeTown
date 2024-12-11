@@ -11,6 +11,10 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 	constructor(scene, x, y) {
 		super(scene, x ?? -0.04645841657811656, y ?? -0.002866411641057276);
 
+		scene.physics.add.existing(this, false);
+		this.body.allowGravity = false;
+		this.body.setSize(301, 89, false);
+
 		// bg
 		const bg = scene.add.image(150, 45, "MessageBox");
 		bg.scaleX = 0.5091429221209207;
@@ -21,7 +25,9 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 		const msg = scene.add.text(150, 45, "", {});
 		msg.setOrigin(0.5, 0.5);
 		msg.text = "New text";
-		msg.setStyle({ "fontSize": "12px" });
+		msg.setStyle({ "align": "center", "fixedWidth": 250, "fontSize": "12px", "maxLines": 3 });
+		msg.setLineSpacing(3);
+		msg.setWordWrapWidth(msg.style.wordWrapWidth, true);
 		this.add(msg);
 
 		this.bg = bg;
@@ -29,6 +35,30 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+		this.visible = false
+
+		this.scene.events.on('update', this.onSceneUpdate, this);
+		bg.setInteractive({ useHandCursor: true });
+
+		bg.on('pointerdown', function (_pointer) {
+			if(this.isConversationStarted == false) return;
+			if(this.dialogue == null) return;
+
+			this.conversationIndex += 1;
+			if(this.conversationIndex >= this.conversationMaxIndex){
+				this.hide()
+				console.log("hidden");
+				
+				return;
+			}
+
+			let dialogue = this.dialogue[this.conversationIndex]
+			this.msg.text = dialogue.msg
+			if(dialogue.onComplete != null){
+				dialogue.onComplete()
+			}
+		},this)
+
 		/* END-USER-CTR-CODE */
 	}
 
@@ -39,7 +69,51 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 
 	/* START-USER-CODE */
 
+	dialogue = null;
+	isConversationStarted = false;
+	conversationIndex = 0;
+	conversationMaxIndex = 0;
+
 	// Write your code here.
+
+	onSceneUpdate(){
+		if(this.visible){
+			const cam = this.scene.cameras.main;
+
+			let fullWidth = Math.floor(this.getBounds().width)
+			let fullHeight = Math.floor(this.getBounds().height)
+
+			let newX = cam.worldView.centerX - ( fullWidth / 2) + 10
+			let newY = cam.worldView.centerY + fullHeight
+
+			this.setPosition(
+				Phaser.Math.Linear(this.x, newX, 0.03),
+				Phaser.Math.Linear(this.y, newY, 0.03),
+			);
+		}
+	}
+
+	conversation(conversationData){
+		if(this.isConversationStarted) return;
+
+		this.visible = true;
+		this.dialogue = conversationData;
+		this.isConversationStarted = true;
+		this.conversationMaxIndex = conversationData.length
+
+		let index = this.conversationIndex;
+
+		let dialogue = conversationData[index]
+		this.msg.text = dialogue.msg
+	}
+
+	show(){
+		this.visible = true
+	}
+
+	hide(){
+		this.visible = false
+	}
 
 	/* END-USER-CODE */
 }

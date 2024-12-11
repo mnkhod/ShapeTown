@@ -17,6 +17,10 @@
             "label": "container_1",
             "x": -0.04645841657811656,
             "y": -0.002866411641057276,
+            "ArcadeComponent.active": true,
+            "allowGravity": false,
+            "body.width": 301,
+            "body.height": 89,
             "list": [
                 {
                     "type": "Image",
@@ -41,7 +45,12 @@
                     "originX": 0.5,
                     "originY": 0.5,
                     "text": "New text",
-                    "fontSize": "12px"
+                    "fixedWidth": 250,
+                    "lineSpacing": 3,
+                    "align": "center",
+                    "fontSize": "12px",
+                    "maxLines": 3,
+                    "wordWrapUseAdvanced": true
                 }
             ]
         }

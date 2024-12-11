@@ -5,6 +5,7 @@
 
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import PlayerPrefab from "../prefabs/PlayerPrefab";
+import MessagePrefab from "../prefabs/hud/MessagePrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -107,15 +108,20 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.container(0, 0);
 
 		// oldManJackNpcPrefab
-		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 361, 216);
+		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 376, 169);
 		this.add.existing(oldManJackNpcPrefab);
 
 		// playerPrefab
 		const playerPrefab = new PlayerPrefab(this, 286, 352);
 		this.add.existing(playerPrefab);
 
+		// messagePrefab
+		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 678.195422853359);
+		this.add.existing(messagePrefab);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
+		oldManJackNpcPrefab.msgPrefab = messagePrefab;
 
 		this.layerFence = layerFence;
 		this.farmingAreaFarmingTile = farmingAreaFarmingTile;
@@ -130,7 +136,9 @@ export default class TutorialScene extends Phaser.Scene {
 		this.layerAppleTree = layerAppleTree;
 		this.layerPine = layerPine;
 		this.layerMapleTree = layerMapleTree;
+		this.oldManJackNpcPrefab = oldManJackNpcPrefab;
 		this.playerPrefab = playerPrefab;
+		this.messagePrefab = messagePrefab;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -162,8 +170,12 @@ export default class TutorialScene extends Phaser.Scene {
 	layerPine;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	layerMapleTree;
+	/** @type {OldManJackNpcPrefab} */
+	oldManJackNpcPrefab;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
+	/** @type {MessagePrefab} */
+	messagePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 

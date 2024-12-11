@@ -29,7 +29,7 @@ const config = {
         // mode: Phaser.Scale.RESIZE,
         // width: 1920,
         // height: 1080,
-        autoCenter: Phaser.Scale.Center
+        // autoCenter: Phaser.Scale.Center
     },
     scene: [
         Boot,
