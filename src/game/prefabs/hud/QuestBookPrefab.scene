@@ -1,0 +1,36 @@
+{
+    "id": "37959980-4ccd-448d-8f07-35b88a563f7c",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 70,
+        "borderHeight": 70
+    },
+    "displayList": [
+        {
+            "type": "Sprite",
+            "id": "5bf97bf0-7fa7-4c6f-91b0-200333f66df2",
+            "label": "sprite_1",
+            "hitArea.shape": "RECTANGLE",
+            "hitArea.width": 64,
+            "hitArea.height": 64,
+            "texture": {
+                "key": "Book",
+                "frame": 1
+            },
+            "x": 35,
+            "y": 35
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

@@ -50,6 +50,7 @@
                     "align": "center",
                     "fontSize": "12px",
                     "maxLines": 3,
+                    "wordWrapWidth": 250,
                     "wordWrapUseAdvanced": true
                 }
             ]

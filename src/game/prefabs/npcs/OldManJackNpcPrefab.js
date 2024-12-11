@@ -40,6 +40,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 	msgPrefab;
 	/** @type {Phaser.GameObjects.GameObject} */
 	itemHud;
+	/** @type {Phaser.GameObjects.GameObject} */
+	bookHud;
 
 	/* START-USER-CODE */
 
@@ -52,27 +54,29 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 			onComplete: () => {
 				// alert("Add Tools Icon to Inventory")
 				this.itemHud.visible = true;
+				this.itemHud.addItem("IconBaseTools",0,1)
+				this.itemHud.addItem("IconBaseTools",1,2)
+				this.itemHud.addItem("IconBaseTools",2,3)
 			}
 		},
 		{ msg: `Alright, I am giving you a Quest. Therefore, you may be spot on your Quest Book.` },
 		{
 			msg: `Alright, here’s your quest. You may see it in your quest book, good luck!`,
 			onComplete: () => {
-				alert("Quest Book Lights Up")
+				this.bookHud.visible = true
+				this.bookHud.play("bookLightingUpAnim")
 			}
 		},
 		{ msg: `You have to plant some seeds for me.` },
 		{
 			msg: `Take these.`,
 			onComplete: () => {
-				alert("Carrot Seeds Gets Added To Inventory")
+				this.itemHud.addItem("SeedBag",0,4)
 			}
 		},
 		{
 			msg: `Go to the Cropland. Start working on it!`,
-			onComplete: () => {
-				alert("Conversation Done")
-			}
+			onComplete: () => { }
 		},
 	]
 

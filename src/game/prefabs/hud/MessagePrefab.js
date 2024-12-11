@@ -27,7 +27,7 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 		msg.text = "New text";
 		msg.setStyle({ "align": "center", "fixedWidth": 250, "fontSize": "12px", "maxLines": 3 });
 		msg.setLineSpacing(3);
-		msg.setWordWrapWidth(msg.style.wordWrapWidth, true);
+		msg.setWordWrapWidth(250, true);
 		this.add(msg);
 
 		this.bg = bg;
@@ -48,7 +48,7 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 			if(this.conversationIndex >= this.conversationMaxIndex){
 				this.hide()
 				console.log("hidden");
-				
+
 				return;
 			}
 

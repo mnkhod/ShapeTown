@@ -35,8 +35,8 @@
             {
                 "url": "assets/hud/Book.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -161,6 +161,19 @@
                 },
                 "type": "spritesheet",
                 "key": "HudItemSlot"
+            },
+            {
+                "url": "assets/IconBaseTools.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "IconBaseTools"
             },
             {
                 "url": "assets/hud/ItemSlot.png",
@@ -327,6 +340,19 @@
                 },
                 "type": "spritesheet",
                 "key": "RoadStone"
+            },
+            {
+                "url": "assets/icons/SeedBag.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "SeedBag"
             },
             {
                 "url": "assets/star.png",

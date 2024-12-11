@@ -80,6 +80,17 @@
                 "id": "object-var",
                 "expressionType": "Phaser.GameObjects.GameObject"
             }
+        },
+        {
+            "name": "bookHud",
+            "label": "Book Hud",
+            "tooltip": "",
+            "defValue": "",
+            "customDefinition": false,
+            "type": {
+                "id": "object-var",
+                "expressionType": "Phaser.GameObjects.GameObject"
+            }
         }
     ]
 }

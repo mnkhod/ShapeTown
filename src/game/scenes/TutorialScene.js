@@ -6,6 +6,7 @@
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import PlayerPrefab from "../prefabs/PlayerPrefab";
 import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
+import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
@@ -120,6 +121,10 @@ export default class TutorialScene extends Phaser.Scene {
 		const itemHudPrefab = new ItemHudPrefab(this, 624.0380149603411, 714.0380149603411);
 		this.add.existing(itemHudPrefab);
 
+		// questBookPrefab
+		const questBookPrefab = new QuestBookPrefab(this, 32, 736);
+		this.add.existing(questBookPrefab);
+
 		// messagePrefab
 		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 678.195422853359);
 		this.add.existing(messagePrefab);
@@ -128,6 +133,7 @@ export default class TutorialScene extends Phaser.Scene {
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
 		oldManJackNpcPrefab.itemHud = itemHudPrefab;
+		oldManJackNpcPrefab.bookHud = questBookPrefab;
 
 		this.layerFence = layerFence;
 		this.farmingAreaFarmingTile = farmingAreaFarmingTile;
@@ -145,6 +151,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.oldManJackNpcPrefab = oldManJackNpcPrefab;
 		this.playerPrefab = playerPrefab;
 		this.itemHudPrefab = itemHudPrefab;
+		this.questBookPrefab = questBookPrefab;
 		this.messagePrefab = messagePrefab;
 		this.tutorialMap = tutorialMap;
 
@@ -183,6 +190,8 @@ export default class TutorialScene extends Phaser.Scene {
 	playerPrefab;
 	/** @type {ItemHudPrefab} */
 	itemHudPrefab;
+	/** @type {QuestBookPrefab} */
+	questBookPrefab;
 	/** @type {MessagePrefab} */
 	messagePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
@@ -265,7 +274,8 @@ export default class TutorialScene extends Phaser.Scene {
 		// this.farmingAreaFarmingTile.renderDebug(this.add.graphics());
 
 
-		// this.itemHudPrefab.visible = false;
+		this.questBookPrefab.visible = false;
+		this.itemHudPrefab.visible = false;
 	}
 
 	/* END-USER-CODE */

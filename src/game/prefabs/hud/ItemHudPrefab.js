@@ -229,6 +229,16 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 		);
 	}
 
+	addItem(textureName,textureId,itemNum){
+		let itemIndex = itemNum - 1;
+
+		this.items[itemIndex].visible = true;
+		this.items[itemIndex].setTexture(textureName, textureId)
+
+		this.itemCounters[itemIndex].visible = true;
+		this.itemCounters[itemIndex].text = "1";
+	}
+
 	/* END-USER-CODE */
 }
 
