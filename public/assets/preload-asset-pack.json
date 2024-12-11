@@ -46,6 +46,45 @@
                 "key": "Book"
             },
             {
+                "url": "assets/mapAssets/CityHouses_v02.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "CityHouses_v02"
+            },
+            {
+                "url": "assets/mapAssets/DecorationClouthHangger.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "DecorationClouthHangger"
+            },
+            {
+                "url": "assets/mapAssets/FarmHorseStable.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "FarmHorseStable"
+            },
+            {
                 "url": "assets/mapAssets/FarmingCropsVer2.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -57,6 +96,11 @@
                 },
                 "type": "spritesheet",
                 "key": "FarmingCropsVer2"
+            },
+            {
+                "url": "assets/map/FarmingMap.json",
+                "type": "tilemapTiledJSON",
+                "key": "FarmingMap"
             },
             {
                 "url": "assets/mapAssets/Fishes_1_32x32gif.png",
@@ -96,6 +140,84 @@
                 },
                 "type": "spritesheet",
                 "key": "Fishes_3_32x32"
+            },
+            {
+                "url": "assets/mapAssets/Flower_v01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Flower_v01"
+            },
+            {
+                "url": "assets/mapAssets/Flower_v02.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Flower_v02"
+            },
+            {
+                "url": "assets/mapAssets/Flower_v03.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Flower_v03"
+            },
+            {
+                "url": "assets/mapAssets/Flower_v04.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Flower_v04"
+            },
+            {
+                "url": "assets/mapAssets/Flower_v05.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Flower_v05"
+            },
+            {
+                "url": "assets/mapAssets/Fruitbushes_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Fruitbushes_V01"
             },
             {
                 "url": "assets/GameNpcs1.png",
@@ -228,6 +350,19 @@
                 "key": "LakeFloatingRock_V02"
             },
             {
+                "url": "assets/mapAssets/LakeFloatingRock_V03.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "LakeFloatingRock_V03"
+            },
+            {
                 "url": "assets/logo.png",
                 "type": "image",
                 "key": "logo"
@@ -236,6 +371,19 @@
                 "url": "assets/MessageBox.png",
                 "type": "image",
                 "key": "MessageBox"
+            },
+            {
+                "url": "assets/mapAssets/NPCShopStandMaerchant.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCShopStandMaerchant"
             },
             {
                 "url": "assets/player/player.png",
@@ -358,6 +506,19 @@
                 "url": "assets/star.png",
                 "type": "image",
                 "key": "star"
+            },
+            {
+                "url": "assets/mapAssets/Tent.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Tent"
             },
             {
                 "url": "assets/mapAssets/Tree_v014.png",
