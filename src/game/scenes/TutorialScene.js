@@ -5,6 +5,7 @@
 
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import PlayerPrefab from "../prefabs/PlayerPrefab";
+import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
@@ -115,6 +116,10 @@ export default class TutorialScene extends Phaser.Scene {
 		const playerPrefab = new PlayerPrefab(this, 286, 352);
 		this.add.existing(playerPrefab);
 
+		// itemHudPrefab
+		const itemHudPrefab = new ItemHudPrefab(this, 624.0380149603411, 714.0380149603411);
+		this.add.existing(itemHudPrefab);
+
 		// messagePrefab
 		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 678.195422853359);
 		this.add.existing(messagePrefab);
@@ -122,6 +127,7 @@ export default class TutorialScene extends Phaser.Scene {
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
+		oldManJackNpcPrefab.itemHud = itemHudPrefab;
 
 		this.layerFence = layerFence;
 		this.farmingAreaFarmingTile = farmingAreaFarmingTile;
@@ -138,6 +144,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.layerMapleTree = layerMapleTree;
 		this.oldManJackNpcPrefab = oldManJackNpcPrefab;
 		this.playerPrefab = playerPrefab;
+		this.itemHudPrefab = itemHudPrefab;
 		this.messagePrefab = messagePrefab;
 		this.tutorialMap = tutorialMap;
 
@@ -174,6 +181,8 @@ export default class TutorialScene extends Phaser.Scene {
 	oldManJackNpcPrefab;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
+	/** @type {ItemHudPrefab} */
+	itemHudPrefab;
 	/** @type {MessagePrefab} */
 	messagePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
@@ -254,6 +263,9 @@ export default class TutorialScene extends Phaser.Scene {
 		this.farmingAreaFarmingTile.setCollisionBetween(1282,1282);
 
 		// this.farmingAreaFarmingTile.renderDebug(this.add.graphics());
+
+
+		// this.itemHudPrefab.visible = false;
 	}
 
 	/* END-USER-CODE */

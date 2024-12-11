@@ -20,6 +20,32 @@
                 "key": "Apple"
             },
             {
+                "url": "assets/hud/Backpack.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Backpack"
+            },
+            {
+                "url": "assets/hud/Book.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Book"
+            },
+            {
                 "url": "assets/mapAssets/FarmingCropsVer2.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -122,6 +148,32 @@
                 },
                 "type": "spritesheet",
                 "key": "GroundTilestSoil"
+            },
+            {
+                "url": "assets/hud/HudItemSlot.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "HudItemSlot"
+            },
+            {
+                "url": "assets/hud/ItemSlot.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "ItemSlot"
             },
             {
                 "url": "assets/mapAssets/LakeAccessor.png",

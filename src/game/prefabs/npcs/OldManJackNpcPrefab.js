@@ -38,6 +38,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 	player;
 	/** @type {Phaser.GameObjects.GameObject} */
 	msgPrefab;
+	/** @type {Phaser.GameObjects.GameObject} */
+	itemHud;
 
 	/* START-USER-CODE */
 
@@ -48,7 +50,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		{
 			msg: `Those will be handy soon.`,
 			onComplete: () => {
-				alert("Add Tools Icon to Inventory")
+				// alert("Add Tools Icon to Inventory")
+				this.itemHud.visible = true;
 			}
 		},
 		{ msg: `Alright, I am giving you a Quest. Therefore, you may be spot on your Quest Book.` },
