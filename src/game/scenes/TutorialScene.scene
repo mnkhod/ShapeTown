@@ -630,31 +630,6 @@
             "label": "mapLayers"
         },
         {
-            "prefabId": "c5295ea5-b7f5-4391-9fc6-8c5495a42d18",
-            "id": "6b7332d5-ec40-4067-9de0-bd512037c349",
-            "unlock": [
-                "x",
-                "y",
-                "player"
-            ],
-            "label": "oldManJackNpcPrefab",
-            "player": "playerPrefab",
-            "x": 361,
-            "y": 216
-        },
-        {
-            "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
-            "id": "aff152d8-b681-4e28-9035-0ad873ee40d5",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "playerPrefab",
-            "scope": "CLASS",
-            "x": 912,
-            "y": 352
-        },
-        {
             "type": "Sprite",
             "id": "7ed5760b-00c9-4c38-a826-37efefcf402c",
             "label": "sceneTile",
@@ -671,6 +646,73 @@
             "allowGravity": false,
             "body.width": 32,
             "body.height": 200
+        },
+        {
+            "prefabId": "c5295ea5-b7f5-4391-9fc6-8c5495a42d18",
+            "id": "6b7332d5-ec40-4067-9de0-bd512037c349",
+            "unlock": [
+                "x",
+                "y",
+                "player",
+                "msgPrefab",
+                "itemHud",
+                "bookHud"
+            ],
+            "label": "oldManJackNpcPrefab",
+            "player": "playerPrefab",
+            "msgPrefab": "messagePrefab",
+            "itemHud": "itemHudPrefab",
+            "bookHud": "questBookPrefab",
+            "x": 361,
+            "y": 216
+        },
+        {
+            "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
+            "id": "aff152d8-b681-4e28-9035-0ad873ee40d5",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "playerPrefab",
+            "scope": "CLASS",
+            "x": 336,
+            "y": 429
+        },
+        {
+            "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
+            "id": "36171080-6b9a-44b9-8133-c96009a25605",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "questBookPrefab",
+            "scope": "CLASS",
+            "x": 32,
+            "y": 736
+        },
+        {
+            "prefabId": "a69b4058-db0e-4e31-b023-568805698db8",
+            "id": "12c785bd-c529-4ec9-80f7-49dcb51467de",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "itemHudPrefab",
+            "scope": "CLASS",
+            "x": 624.0380149603411,
+            "y": 714.0380149603411
+        },
+        {
+            "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
+            "id": "7b9adc16-f2ab-470c-9c10-934f5c83d56d",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "messagePrefab",
+            "scope": "CLASS",
+            "x": 0.706304947792546,
+            "y": 0.8045771466410088
         }
     ],
     "plainObjects": [
