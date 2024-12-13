@@ -165,97 +165,6 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "50b84cdc-b551-43fc-9156-ac9516e07a12",
-            "label": "farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
-            "layerName": "Farming Area/Crops[Make it Collision/popup to not able to HARVET]",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "GroundTilestSoil",
-                "GroundAccessor",
-                "LakeAccessor",
-                "Fishes_1_32x32gif",
-                "Fishes_2_32x32",
-                "Fishes_3_32x32",
-                "LakeFloatingRock_V02",
-                "LakeFloatingRock_V01",
-                "TutorliarNPCHouse",
-                "Apple",
-                "Tree_v014",
-                "Tree_v02",
-                "Tree_v04",
-                "Tree_v08",
-                "Tree_v09",
-                "FarmingCropsVer2"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "8abbbfb7-c7bf-4b1a-9292-441e0a6a45dc",
-            "label": "layerfarmingAreaDeadCrops",
-            "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
-            "layerName": "Farming Area/DeadCrops[Make it Collision/Can be HARVEST but noting drops]",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "GroundTilestSoil",
-                "GroundAccessor",
-                "LakeAccessor",
-                "Fishes_1_32x32gif",
-                "Fishes_2_32x32",
-                "Fishes_3_32x32",
-                "LakeFloatingRock_V02",
-                "LakeFloatingRock_V01",
-                "TutorliarNPCHouse",
-                "Apple",
-                "Tree_v014",
-                "Tree_v02",
-                "Tree_v04",
-                "Tree_v08",
-                "Tree_v09",
-                "FarmingCropsVer2"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "1643558e-7310-4d09-b15a-e27d615a6406",
-            "label": "farming_Area_Removeable_ground_use_a_HOE_and_Pickaxe_tool_to_remove__1",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
-            "layerName": "Farming Area/Removeable ground[use a HOE and Pickaxe tool to remove]",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "GroundTilestSoil",
-                "GroundAccessor",
-                "LakeAccessor",
-                "Fishes_1_32x32gif",
-                "Fishes_2_32x32",
-                "Fishes_3_32x32",
-                "LakeFloatingRock_V02",
-                "LakeFloatingRock_V01",
-                "TutorliarNPCHouse",
-                "Apple",
-                "Tree_v014",
-                "Tree_v02",
-                "Tree_v04",
-                "Tree_v08",
-                "Tree_v09",
-                "FarmingCropsVer2"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
             "id": "4156d1de-cfe4-4a83-9420-f58b43a46351",
             "label": "layerFishingPondBorder",
             "scope": "CLASS",
@@ -474,8 +383,8 @@
             "id": "cc0a2d5d-e958-48a3-8589-692068001f38",
             "label": "layerHouse1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
+            "x": -767,
+            "y": -415,
             "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
             "layerName": "House/House",
             "tilesets": [
@@ -695,10 +604,12 @@
             "id": "12c785bd-c529-4ec9-80f7-49dcb51467de",
             "unlock": [
                 "x",
-                "y"
+                "y",
+                "player"
             ],
             "label": "itemHudPrefab",
             "scope": "CLASS",
+            "player": "playerPrefab",
             "x": 624.0380149603411,
             "y": 714.0380149603411
         },
@@ -713,6 +624,50 @@
             "scope": "CLASS",
             "x": 0.706304947792546,
             "y": 0.8045771466410088
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "bb438d94-f3d6-45c6-9e27-cfb7b8ac0647",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab",
+            "x": 207,
+            "y": 592
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "d9d60f36-8616-4c4b-8bcc-94a17484ff11",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab_1",
+            "x": 240,
+            "y": 592
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "37012eb2-7b74-4cc9-b4f7-aed8c82fd3dc",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab_2",
+            "x": 273,
+            "y": 592
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "cc02962e-8d10-406a-8ac0-1bd56f1e216f",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab_3",
+            "x": 306,
+            "y": 592
         }
     ],
     "plainObjects": [

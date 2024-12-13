@@ -281,5 +281,18 @@
                 "4d2710f3-ba50-4f2e-bb9c-f0918727cb31"
             ]
         }
+    ],
+    "prefabProperties": [
+        {
+            "name": "player",
+            "label": "Player",
+            "tooltip": "",
+            "defValue": "",
+            "customDefinition": false,
+            "type": {
+                "id": "object-var",
+                "expressionType": "Phaser.GameObjects.GameObject"
+            }
+        }
     ]
 }

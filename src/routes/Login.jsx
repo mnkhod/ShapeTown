@@ -1,6 +1,4 @@
-import { useState } from 'react';
 import { useNavigate } from "react-router";
-
 
 function Login() {
     let navigate = useNavigate();
@@ -13,7 +11,7 @@ function Login() {
                 <div className='relative'>
                     <img src="public/assets/shapeTownSign.png" className='relative' height={"920"} width={"705"} />
                     <button className='absolute bottom-6 left-0 w-full flex justify-center' onClick={() => { navigate("/game") }}>
-                        <img src="public/assets/loginConnect.png" className='' />
+                        <img src="public/assets/loginConnect.png" />
                     </button>
                 </div>
             </div>

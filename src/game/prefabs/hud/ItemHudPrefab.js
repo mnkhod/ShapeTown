@@ -182,17 +182,21 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 	itemCounters;
 	/** @type {Phaser.GameObjects.Sprite[]} */
 	itemBoxs;
+	/** @type {Phaser.GameObjects.GameObject} */
+	player;
 
 	/* START-USER-CODE */
 
 	// Write your code here.
 
 	activeIndex = -1;
+	selectedItem = null;
+	itemData = [null,null,null,null,null]
 
 	onSceneCreate(){
 		this.items.map((item) => {
 			item.visible = false;
-			item.setInteractive({ useHandCursor: true });
+			// item.setInteractive({ useHandCursor: true });
 		})
 
 		this.itemCounters.map((counter) => {
@@ -203,9 +207,11 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 			box.setInteractive({ useHandCursor: true });
 			box.on('pointerdown', function (_pointer) {
 				let otherBoxes = this.itemBoxs.filter((b) => b != box)
+
 				if(box.frame.name == 0){
 					otherBoxes.map((i) => i.setTexture("HudItemSlot", 0))
 					box.setTexture("HudItemSlot", 1)
+					this.selectedItem = this.itemData[index];
 					this.activeIndex = index;
 				}
 			},this)
@@ -229,8 +235,16 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 		);
 	}
 
-	addItem(textureName,textureId,itemNum){
+	// this.itemHudPrefab.addItem("IconBaseTools",0,1)
+	// this.itemHudPrefab.addItem("IconBaseTools",1,2)
+	// this.itemHudPrefab.addItem("IconBaseTools",2,3)
+	// this.itemHudPrefab.addItem("SeedBag",0,4)
+
+	addItem(key,textureName,textureId,itemNum){
 		let itemIndex = itemNum - 1;
+
+		this.itemData[itemIndex] = key
+		
 
 		this.items[itemIndex].visible = true;
 		this.items[itemIndex].setTexture(textureName, textureId)

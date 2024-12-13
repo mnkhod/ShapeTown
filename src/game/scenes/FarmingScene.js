@@ -101,9 +101,6 @@ export default class FarmingScene extends Phaser.Scene {
 		// merchant_shopStand_1
 		const merchant_shopStand_1 = farmingMap.createLayer("Merchant/shopStand", ["FarmHorseStable"], -1130, -755);
 
-		// merchant_NPCMerchant_1
-		const merchant_NPCMerchant_1 = farmingMap.createLayer("Merchant/NPCMerchant", ["NPCShopStandMaerchant"], -1130, -755);
-
 		// playerPrefab
 		const playerPrefab = new PlayerPrefab(this, 133, 453);
 		this.add.existing(playerPrefab);
@@ -129,7 +126,6 @@ export default class FarmingScene extends Phaser.Scene {
 		this.group_5_Dead_treee_1 = group_5_Dead_treee_1;
 		this.group_5_StrawberryBush_1 = group_5_StrawberryBush_1;
 		this.merchant_shopStand_1 = merchant_shopStand_1;
-		this.merchant_NPCMerchant_1 = merchant_NPCMerchant_1;
 		this.playerPrefab = playerPrefab;
 		this.sceneTile = sceneTile;
 		this.farmingMap = farmingMap;
@@ -165,8 +161,6 @@ export default class FarmingScene extends Phaser.Scene {
 	group_5_StrawberryBush_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	merchant_shopStand_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	merchant_NPCMerchant_1;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
 	/** @type {Phaser.Physics.Arcade.Sprite} */

@@ -8,6 +8,7 @@ import PlayerPrefab from "../prefabs/PlayerPrefab";
 import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
+import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -61,15 +62,6 @@ export default class TutorialScene extends Phaser.Scene {
 		// farmingAreaFarmingTile
 		const farmingAreaFarmingTile = tutorialMap.createLayer("Farming Area/FarmingTile[Use SEED to grow crops]", ["RoadStone"], -768, -416);
 
-		// farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1
-		tutorialMap.createLayer("Farming Area/Crops[Make it Collision/popup to not able to HARVET]", ["FarmingCropsVer2"], -768, -416);
-
-		// layerfarmingAreaDeadCrops
-		const layerfarmingAreaDeadCrops = tutorialMap.createLayer("Farming Area/DeadCrops[Make it Collision/Can be HARVEST but noting drops]", ["FarmingCropsVer2"], -768, -416);
-
-		// farming_Area_Removeable_ground_use_a_HOE_and_Pickaxe_tool_to_remove__1
-		tutorialMap.createLayer("Farming Area/Removeable ground[use a HOE and Pickaxe tool to remove]", ["RoadStone","GroundAccessor"], -768, -416);
-
 		// layerFishingPondBorder
 		const layerFishingPondBorder = tutorialMap.createLayer("FishingPond/FishingPondBOrder[Make it Collision]", ["GroundTileset"], -768, -416);
 
@@ -92,7 +84,7 @@ export default class TutorialScene extends Phaser.Scene {
 		const layerHouseGround = tutorialMap.createLayer("House/HouseGround", ["GroundTileset"], -768, -416);
 
 		// layerHouse1
-		const layerHouse1 = tutorialMap.createLayer("House/House", ["TutorliarNPCHouse","Apple"], -768, -416);
+		const layerHouse1 = tutorialMap.createLayer("House/House", ["TutorliarNPCHouse","Apple"], -767, -415);
 
 		// layerDeadTree
 		const layerDeadTree = tutorialMap.createLayer("Tree/DeadTree", ["Tree_v08"], -768, -416);
@@ -138,15 +130,33 @@ export default class TutorialScene extends Phaser.Scene {
 		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 0.8045771466410088);
 		this.add.existing(messagePrefab);
 
+		// harvestPrefab
+		const harvestPrefab = new HarvestPrefab(this, 207, 592);
+		this.add.existing(harvestPrefab);
+
+		// harvestPrefab_1
+		const harvestPrefab_1 = new HarvestPrefab(this, 240, 592);
+		this.add.existing(harvestPrefab_1);
+
+		// harvestPrefab_2
+		const harvestPrefab_2 = new HarvestPrefab(this, 273, 592);
+		this.add.existing(harvestPrefab_2);
+
+		// harvestPrefab_3
+		const harvestPrefab_3 = new HarvestPrefab(this, 306, 592);
+		this.add.existing(harvestPrefab_3);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
 		oldManJackNpcPrefab.itemHud = itemHudPrefab;
 		oldManJackNpcPrefab.bookHud = questBookPrefab;
 
+		// itemHudPrefab (prefab fields)
+		itemHudPrefab.player = playerPrefab;
+
 		this.layerFence = layerFence;
 		this.farmingAreaFarmingTile = farmingAreaFarmingTile;
-		this.layerfarmingAreaDeadCrops = layerfarmingAreaDeadCrops;
 		this.layerFishingPondBorder = layerFishingPondBorder;
 		this.layerTreeBorder1 = layerTreeBorder1;
 		this.layerTreeBorder = layerTreeBorder;
@@ -171,8 +181,6 @@ export default class TutorialScene extends Phaser.Scene {
 	layerFence;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	farmingAreaFarmingTile;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	layerfarmingAreaDeadCrops;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	layerFishingPondBorder;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -265,12 +273,12 @@ export default class TutorialScene extends Phaser.Scene {
 		this.layerFence.setCollisionBetween(1252,1272);
 		// this.layerFence.renderDebug(this.add.graphics());
 
-		this.physics.add.collider(this.playerPrefab, this.layerFarmingAreaRemoveable);
+		// this.physics.add.collider(this.playerPrefab, this.layerFarmingAreaRemoveable);
 		// this.layerFarmingAreaRemoveable.setCollisionBetween(1292,1829);
 		// this.layerFarmingAreaRemoveable.renderDebug(this.add.graphics());
 
-		this.physics.add.collider(this.playerPrefab, this.layerfarmingAreaDeadCrops);
-		this.layerfarmingAreaDeadCrops.setCollision(2226);
+		// this.physics.add.collider(this.playerPrefab, this.layerfarmingAreaDeadCrops);
+		// this.layerfarmingAreaDeadCrops.setCollision(2226);
 		// this.layerfarmingAreaDeadCrops.renderDebug(this.add.graphics());
 
 		// this.physics.add.collider(this.playerPrefab, this.layerFarmingAreaCrops);
@@ -291,6 +299,15 @@ export default class TutorialScene extends Phaser.Scene {
         if (this.itemHudPrefab) {
             this.itemHudPrefab.visible = false;
         }
+
+		this.time.delayedCall(100, () => {
+			this.itemHudPrefab.visible = true;
+			this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0,1)
+			this.itemHudPrefab.addItem("HOE","IconBaseTools",1,2)
+			this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2,3)
+			this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,4)
+		}, {}, this)
+
 	}
 
 	/* END-USER-CODE */
