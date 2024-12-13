@@ -33,6 +33,45 @@
                 "key": "Backpack"
             },
             {
+                "url": "assets/Ground tileset/BeachStairs_V01R.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "BeachStairs_V01R"
+            },
+            {
+                "url": "assets/Tree/BeachTree_V1.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "BeachTree_V1"
+            },
+            {
+                "url": "assets/Ground tileset/BeachWaterAni_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "BeachWaterAni_V01"
+            },
+            {
                 "url": "assets/hud/Book.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -44,6 +83,32 @@
                 },
                 "type": "spritesheet",
                 "key": "Book"
+            },
+            {
+                "url": "assets/Ground tileset/Campfire_2_32x32.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Campfire_2_32x32"
+            },
+            {
+                "url": "assets/Ground tileset/Campfire_32x32.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Campfire_32x32"
             },
             {
                 "url": "assets/mapAssets/CityHouses_v02.png",
@@ -59,6 +124,45 @@
                 "key": "CityHouses_v02"
             },
             {
+                "url": "assets/Ground tileset/DeckOnTheBeach.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "DeckOnTheBeach"
+            },
+            {
+                "url": "assets/Ground tileset/DecorationAngelStatue.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "DecorationAngelStatue"
+            },
+            {
+                "url": "assets/Ground tileset/DecorationBeachSeagull.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "DecorationBeachSeagull"
+            },
+            {
                 "url": "assets/mapAssets/DecorationClouthHangger.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -70,6 +174,45 @@
                 },
                 "type": "spritesheet",
                 "key": "DecorationClouthHangger"
+            },
+            {
+                "url": "assets/Ground tileset/DecorationMarketplace.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "DecorationMarketplace"
+            },
+            {
+                "url": "assets/Ground tileset/DecorationOnBeach.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "DecorationOnBeach"
+            },
+            {
+                "url": "assets/Ground tileset/DecorationWeaponStand.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "DecorationWeaponStand"
             },
             {
                 "url": "assets/mapAssets/FarmHorseStable.png",
@@ -142,6 +285,19 @@
                 "key": "Fishes_3_32x32"
             },
             {
+                "url": "assets/Ground tileset/FishingBoat_V01R.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "FishingBoat_V01R"
+            },
+            {
                 "url": "assets/mapAssets/Flower_v01.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -205,6 +361,24 @@
                 },
                 "type": "spritesheet",
                 "key": "Flower_v05"
+            },
+            {
+                "url": "assets/map/ForestMap.json",
+                "type": "tilemapTiledJSON",
+                "key": "ForestMap"
+            },
+            {
+                "url": "assets/Ground tileset/ForrestLadge.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "ForrestLadge"
             },
             {
                 "url": "assets/mapAssets/Fruitbushes_V01.png",
@@ -324,6 +498,32 @@
                 "key": "LakeAccessor"
             },
             {
+                "url": "assets/Ground tileset/LakeBorderAni.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "LakeBorderAni"
+            },
+            {
+                "url": "assets/Ground tileset/LakeBorderCornerAni.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "LakeBorderCornerAni"
+            },
+            {
                 "url": "assets/mapAssets/LakeFloatingRock_V01.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -368,9 +568,66 @@
                 "key": "logo"
             },
             {
+                "url": "assets/map/MarketMap.json",
+                "type": "tilemapTiledJSON",
+                "key": "MarketMap"
+            },
+            {
                 "url": "assets/MessageBox.png",
                 "type": "image",
                 "key": "MessageBox"
+            },
+            {
+                "url": "assets/NPC/NpcBlaksmith.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NpcBlaksmith"
+            },
+            {
+                "url": "assets/NPC/NPCGuardian_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCGuardian_V01"
+            },
+            {
+                "url": "assets/NPC/NPCMerchant.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCMerchant"
+            },
+            {
+                "url": "assets/NPC/NPCOldManJack.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCOldManJack"
             },
             {
                 "url": "assets/mapAssets/NPCShopStandMaerchant.png",
@@ -490,6 +747,19 @@
                 "key": "RoadStone"
             },
             {
+                "url": "assets/Building/SeaLevelBuildingLighthouse_v01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "SeaLevelBuildingLighthouse_v01"
+            },
+            {
                 "url": "assets/icons/SeedBag.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -503,9 +773,48 @@
                 "key": "SeedBag"
             },
             {
+                "url": "assets/Ground tileset/Ship_V01-Sheet.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Ship_V01-Sheet"
+            },
+            {
+                "url": "assets/Interior/ShopInteriorObjects_.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "ShopInteriorObjects_"
+            },
+            {
                 "url": "assets/star.png",
                 "type": "image",
                 "key": "star"
+            },
+            {
+                "url": "assets/Ground tileset/StoneFance..png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "StoneFance."
             },
             {
                 "url": "assets/mapAssets/Tent.png",
@@ -586,6 +895,19 @@
                 "key": "Tree_v09"
             },
             {
+                "url": "assets/Building/TreeHouse.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "TreeHouse"
+            },
+            {
                 "url": "assets/mapAssets/TreePatteren.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -615,6 +937,19 @@
                 },
                 "type": "spritesheet",
                 "key": "TutorliarNPCHouse"
+            },
+            {
+                "url": "assets/Ground tileset/Waterfall_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Waterfall_V01"
             }
         ]
     },

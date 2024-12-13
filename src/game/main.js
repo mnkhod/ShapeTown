@@ -6,6 +6,8 @@ import Phaser from 'phaser';
 import Preloader from './scenes/Preloader';
 import TutorialScene from "./scenes/TutorialScene";
 import FarmingScene from "./scenes/FarmingScene";
+import ForestScene from "./scenes/ForestScene";
+import MarketScene from "./scenes/MarketScene";
 
 
 // Find out more information about the Game Config at:
@@ -40,7 +42,9 @@ const config = {
         Game,
         GameOver,
         TutorialScene,
-        FarmingScene
+        FarmingScene,
+        ForestScene,
+        MarketScene,
     ]
 };
 
