@@ -2,9 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const InventorySlot = ({ item, onItemClick, slotIndex, onItemDrop }) => {
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  const handleDragOver = (e) => e.preventDefault();
 
   const handleDrop = (e) => {
     e.preventDefault();
@@ -18,7 +16,7 @@ const InventorySlot = ({ item, onItemClick, slotIndex, onItemDrop }) => {
 
   return (
     <div 
-      className="aspect-square w-16 h-16 bg-gray-700 border-2 border-gray-600 rounded-sm hover:border-gray-500 cursor-pointer relative"
+      className="w-12 h-12 cursor-pointer relative"
       onClick={() => onItemClick(item, slotIndex)}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
@@ -27,9 +25,14 @@ const InventorySlot = ({ item, onItemClick, slotIndex, onItemDrop }) => {
     >
       {item && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-2xl">{item.icon}</span>
+          <img 
+            src={item.icon} 
+            alt={item.name}
+            className="w-12 h-12"
+            style={{ imageRendering: 'pixelated' }}
+          />
           {item.quantity > 1 && (
-            <span className="absolute bottom-1 right-1 text-sm font-bold text-white bg-gray-800/80 px-1 rounded">
+            <span className="absolute bottom-1 right-1 text-sm font-bold text-white bg-neutral-900/80 px-1 rounded">
               {item.quantity}
             </span>
           )}
@@ -41,9 +44,9 @@ const InventorySlot = ({ item, onItemClick, slotIndex, onItemDrop }) => {
 
 const InventoryGrid = ({ onClose }) => {
   const [items, setItems] = useState(Array(36).fill(null).map((_, index) => {
-    if (index === 0) return { id: '1', icon: '🗡️', name: 'Sword', quantity: 1 };
-    if (index === 1) return { id: '2', icon: '🛡️', name: 'Shield', quantity: 1 };
-    if (index === 2) return { id: '3', icon: '🧪', name: 'Potion', quantity: 5 };
+    if (index === 0) return { id: '1', icon: '/assets/files/image 1.png', name: 'Item 1', quantity: 1 };
+    if (index === 1) return { id: '2', icon: '/assets/files/image 2.png', name: 'Item 2', quantity: 1 };
+    if (index === 2) return { id: '3', icon: '/assets/files/image 3.png', name: 'Item 3', quantity: 5 };
     return null;
   }));
 
@@ -70,32 +73,46 @@ const InventoryGrid = ({ onClose }) => {
     setItems(newItems);
   };
 
-  return (
-    <div 
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-40"
-      onClick={onClose}
-    >
-      <div 
-        onClick={(e) => e.stopPropagation()}
-        className="relative"
-      >
-        <div className="bg-gray-800 border-4 border-orange-900/80 rounded-lg relative">
-          {/* Title bar with full-width brown backdrop */}
-          <div className="bg-amber-800/90 border-b-4 border-orange-900/80 w-full px-8 py-4">
-            <div className="text-4xl font-bold text-center text-orange-100/90 flex justify-between">
-                Inventory          
-                <div 
-                    onClick={onClose}
-                    className="w-10 h-10 bg-yellow-500 hover:bg-yellow-600 rounded-full cursor-pointer flex items-center justify-center">
-                    <span className="text-orange-100 text-xl">X</span>
-                </div>
+  const handleTabClick = (tabIndex) => {
+    console.log(`Tab ${tabIndex} clicked`);
+  };
 
-            </div>
-          </div>
-          <div 
-            className="p-8"
-          >
-            <div className="grid grid-cols-9 gap-2">
+  return (
+    <>
+      <div className="fixed inset-0 bg-black/75" />
+      
+      <div 
+        className="fixed inset-0 flex items-center justify-center z-40"
+        onClick={onClose}
+      >
+        <div 
+          onClick={(e) => e.stopPropagation()}
+          className="relative w-full max-w-[800px] mx-4"
+        >
+          <img 
+            src="/assets/files/Inventory.png" 
+            alt="Inventory background"
+            className="w-full h-auto"
+            style={{ imageRendering: 'pixelated' }}
+          />
+          
+          <div className="absolute top-4 left-16 flex gap-8 items-end">
+            <div 
+              className="w-16 h-12 cursor-pointer hover:bg-neutral-700/20"
+              onClick={() => handleTabClick(0)}
+            />
+            <div 
+              className="w-16 h-10 cursor-pointer hover:bg-neutral-700/20"
+              onClick={() => handleTabClick(1)}
+            />
+            <div 
+              className="w-16 h-10 cursor-pointer hover:bg-neutral-700/20"
+              onClick={() => handleTabClick(2)}
+            />
+          </div>  
+
+          <div className="absolute top-24 left-8 p-6">
+            <div className="grid grid-cols-9 gap-7">
               {items.map((item, index) => (
                 <InventorySlot
                   key={index}
@@ -107,9 +124,17 @@ const InventoryGrid = ({ onClose }) => {
               ))}
             </div>
           </div>
+
+          <img 
+            src="/assets/files/image 35.png"
+            alt="Close"
+            onClick={onClose}
+            className="absolute top-8 -right-4 w-12 h-12 cursor-pointer hover:opacity-80"
+            style={{ imageRendering: 'pixelated' }}
+          />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

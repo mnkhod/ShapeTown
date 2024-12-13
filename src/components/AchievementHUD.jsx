@@ -10,8 +10,8 @@ const AchievementSlot = ({ achievement }) => {
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
-      <div className="w-full h-full">
-        <div className="absolute inset-[15%] bg-gray-800/95">
+      <div className="w-full h-full rounded-xl">
+        <div className="absolute inset-[20%]">
           {achievement && (
             <img 
               src={`/assets/files/${achievement.image}`}
@@ -21,8 +21,6 @@ const AchievementSlot = ({ achievement }) => {
           )}
         </div>
       </div>
-
-      <div className="absolute bottom-[5%] right-[5%] w-[20%] h-[20%] bg-green-500 rounded-full border-2 border-green-700" />
 
       {showTooltip && (
         <div className="absolute z-50 w-48 p-2 bg-gray-800 border-2 border-orange-900 rounded-lg -top-20 left-1/2 transform -translate-x-1/2">
@@ -120,11 +118,11 @@ const AchievementHUD = ({ onClose }) => {
           </div>
         </div>
 
-        <div className="relative w-[300px] aspect-square">
+        <div className="relative w-80 aspect-square">
           <div 
             className="absolute inset-0 bg-[url('/assets/files/image%2072.png')] bg-cover bg-no-repeat"
           >
-            <div className="w-full h-full grid grid-cols-3 p-[2%]">
+            <div className="w-full h-full grid grid-cols-3">
               {achievements.map((achievement) => (
                 <AchievementSlot
                   key={achievement.id}
