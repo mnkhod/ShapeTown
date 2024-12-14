@@ -77,9 +77,6 @@ export default class ForestScene extends Phaser.Scene {
 		// lake_WaterFall_1
 		const lake_WaterFall_1 = forestMap.createLayer("Lake/WaterFall", ["GroundTileset","Waterfall_V01","LakeBorderAni","LakeBorderCornerAni"], -2048, -896);
 
-		// road_RoadStone_1
-		const road_RoadStone_1 = forestMap.createLayer("Road/RoadStone", ["RoadStone"], -2048, -896);
-
 		// treeBorder_TreeBordertop_1
 		const treeBorder_TreeBordertop_1 = forestMap.createLayer("TreeBorder/TreeBordertop", ["TreePatteren"], -2048, -896);
 
@@ -130,7 +127,6 @@ export default class ForestScene extends Phaser.Scene {
 		this.lake_LakeAccessor_Just_Generate__1 = lake_LakeAccessor_Just_Generate__1;
 		this.lake_FloatingStones_Animated__1 = lake_FloatingStones_Animated__1;
 		this.lake_WaterFall_1 = lake_WaterFall_1;
-		this.road_RoadStone_1 = road_RoadStone_1;
 		this.treeBorder_TreeBordertop_1 = treeBorder_TreeBordertop_1;
 		this.treeBorder_TreeBorder = treeBorder_TreeBorder;
 		this.treeBorder_TreeBorder_1 = treeBorder_TreeBorder_1;
@@ -164,8 +160,6 @@ export default class ForestScene extends Phaser.Scene {
 	lake_FloatingStones_Animated__1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	lake_WaterFall_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	road_RoadStone_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	treeBorder_TreeBordertop_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -217,11 +211,11 @@ export default class ForestScene extends Phaser.Scene {
 		// this.harvet_Respawn_randomly_around_Trees__Mushrooms_1.renderDebug(this.add.graphics());
 
     	this.physics.add.collider(this.playerPrefab, this.usePickaxe_to_remove_Stone_1);
-    	this.usePickaxe_to_remove_Stone_1.setCollisionBetween(0, 3000);
+    	// this.usePickaxe_to_remove_Stone_1.setCollisionBetween(0, 3000);
 		// this.usePickaxe_to_remove_Stone_1.renderDebug(this.add.graphics());
 
     	this.physics.add.collider(this.playerPrefab, this.assets_Become_Tree_Branches_1);
-    	this.assets_Become_Tree_Branches_1.setCollisionBetween(0, 3000);
+    	// this.assets_Become_Tree_Branches_1.setCollisionBetween(0, 3000);
 		// this.assets_Become_Tree_Branches_1.renderDebug(this.add.graphics());
 
     	this.physics.add.collider(this.playerPrefab, this.assets_Become_Tree_DeadTree_1);
