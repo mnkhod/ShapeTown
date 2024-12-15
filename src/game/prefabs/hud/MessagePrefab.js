@@ -47,8 +47,6 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 			this.conversationIndex += 1;
 			if(this.conversationIndex >= this.conversationMaxIndex){
 				this.hide()
-				console.log("hidden");
-
 				return;
 			}
 

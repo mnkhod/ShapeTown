@@ -19,6 +19,9 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 
 	/** @type {string} */
 	state = "ROCK";
+	seed = "CARROT";
+	isReadyForHarvest = false;
+	isWatered = false;
 
 	/* START-USER-CODE */
 
@@ -36,7 +39,13 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 			let distance = this.getDistance(this.scene.playerPrefab,this)
 
 			if(distance > 60){
-				alert("Too Far")
+				this.scene.alertPrefab.alert("Too Far")
+				return;
+			}
+
+			if(this.isReadyForHarvest){
+				this.scene.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,5,1)
+				this.destroy();
 				return;
 			}
 
@@ -46,6 +55,8 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 	}
 
 	setupBasedOnState(){
+		let timer = this.scene.time;
+
 		switch (this.state) {
 			case "ROCK":
 				this.setTexture("GroundAccessor", this.getRandomInt(12,21))
@@ -59,6 +70,39 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 			case "PLANTED":
 				this.setTexture("FarmingCropsVer2",0)
 				break;
+			case "WATERED":
+				timer.delayedCall(1000, () => {
+					this.state = "CARROT_LEVEL_1"
+					this.setupBasedOnState();
+				},{},this);
+				break;
+
+			// 0 - 4 // so 5 States
+			case "CARROT_LEVEL_1":
+				this.setTexture("FarmingCropsVer2",1)
+				timer.delayedCall(1000, () => {
+					this.state = "CARROT_LEVEL_2"
+					this.setupBasedOnState();
+				},{},this);
+				break;
+			case "CARROT_LEVEL_2":
+				this.setTexture("FarmingCropsVer2",2)
+				timer.delayedCall(1000, () => {
+					this.state = "CARROT_LEVEL_3"
+					this.setupBasedOnState();
+				},{},this);
+				break;
+			case "CARROT_LEVEL_3":
+				this.setTexture("FarmingCropsVer2",3)
+				timer.delayedCall(1000, () => {
+					this.state = "CARROT_LEVEL_4"
+					this.setupBasedOnState();
+				},{},this);
+				break;
+			case "CARROT_LEVEL_4":
+				this.setTexture("FarmingCropsVer2",4)
+				this.isReadyForHarvest = true;
+				break;
 			default:
 				break;
 		}
@@ -67,14 +111,14 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 	changeState(){
 		let item = this.scene.itemHudPrefab.selectedItem
 		if(item == null){
-			alert("No Selected Item")
+			this.scene.alertPrefab.alert("No Selected Item")
 			return;
 		}
 
 		switch (this.state) {
 			case "ROCK":
 				if(item != "PICK_AXE"){
-					alert("Select Pick Axe");
+					this.scene.alertPrefab.alert("Select Pick Axe")
 					break;
 				}
 
@@ -83,7 +127,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 				break;
 			case "GROUND":
 				if(item != "HOE"){
-					alert("Select Hoe");
+					this.scene.alertPrefab.alert("Select Hoe")
 					break;
 				}
 
@@ -92,11 +136,20 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 				break;
 			case "SOIL":
 				if(item != "CARROT_SEED"){
-					alert("Select Seed");
+					this.scene.alertPrefab.alert("Select Seed")
 					break;
 				}
 
 				this.state = "PLANTED"
+				this.setupBasedOnState()
+				break;
+			case "PLANTED":
+				if(item != "WATERING_CAN"){
+					this.scene.alertPrefab.alert("Select Watering Can")
+					break;
+				}
+
+				this.state = "WATERED"
 				this.setupBasedOnState()
 				break;
 			default:

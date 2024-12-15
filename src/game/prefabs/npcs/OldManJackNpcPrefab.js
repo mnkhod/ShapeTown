@@ -94,27 +94,11 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 			let distance = this.getDistance(this.player,this)
 
 			if(distance > 60){
-				alert("Too Far")
+				this.scene.alertPrefab.alert("Too Far")
 				return;
 			}
 
 			this.msgPrefab.conversation(this.dialogueLifeCycle)
-
-			// if(this.lifeCycleStep >= this.dialogueLifeCycle.length){
-			// 	let lastDialogue = this.dialogueLifeCycle[this.lifeCycleStep - 1]
-			// 	let msg = lastDialogue.msgs[lastDialogue.msgs.length - 1]
-			// 	alert(msg)
-			// 	return;
-			// }
-
-			// this.dialogueLifeCycle.map((dialogue) => {
-			// 	dialogue.msgs.map((msg) => {
-			// 		alert(msg)
-			// 	})
-
-			// 	dialogue.onComplete()
-			// 	this.lifeCycleStep += 1;
-			// })
 		},this);
 
 		this.npc.on('pointerout', function (_pointer) {

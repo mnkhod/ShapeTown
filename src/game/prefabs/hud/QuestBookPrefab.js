@@ -11,11 +11,13 @@ export default class QuestBookPrefab extends Phaser.GameObjects.Sprite {
 	constructor(scene, x, y, texture, frame) {
 		super(scene, x ?? 35, y ?? 35, texture || "Book", frame ?? 1);
 
-		this.setInteractive(new Phaser.Geom.Rectangle(0, 0, 64, 64), Phaser.Geom.Rectangle.Contains);
-
 		/* START-USER-CTR-CODE */
 		// Write your code here.
 		this.setInteractive({ useHandCursor: true });
+		this.on('pointerdown', () => {
+			if(this.scene.reactEvent == undefined) throw Error("REACT EVENT BUS NOT HOOKED IN")
+			this.scene.reactEvent.emit("show-achievements-modal",this)
+		},this)
 		this.scene.events.on('update', this.onSceneUpdate, this);
 		/* END-USER-CTR-CODE */
 	}

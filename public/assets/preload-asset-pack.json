@@ -472,6 +472,19 @@
                 "key": "IconBaseTools"
             },
             {
+                "url": "assets/files/image 35.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "ExitButtonIcon"
+            },
+            {
                 "url": "assets/hud/ItemSlot.png",
                 "frameConfig": {
                     "frameWidth": 32,

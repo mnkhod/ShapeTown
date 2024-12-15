@@ -557,6 +557,50 @@
             "body.height": 200
         },
         {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "bb438d94-f3d6-45c6-9e27-cfb7b8ac0647",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab",
+            "x": 207,
+            "y": 592
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "d9d60f36-8616-4c4b-8bcc-94a17484ff11",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab_1",
+            "x": 240,
+            "y": 592
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "37012eb2-7b74-4cc9-b4f7-aed8c82fd3dc",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab_2",
+            "x": 273,
+            "y": 592
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "cc02962e-8d10-406a-8ac0-1bd56f1e216f",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab_3",
+            "x": 306,
+            "y": 592
+        },
+        {
             "prefabId": "c5295ea5-b7f5-4391-9fc6-8c5495a42d18",
             "id": "6b7332d5-ec40-4067-9de0-bd512037c349",
             "unlock": [
@@ -626,48 +670,16 @@
             "y": 0.8045771466410088
         },
         {
-            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
-            "id": "bb438d94-f3d6-45c6-9e27-cfb7b8ac0647",
+            "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
+            "id": "e2aa5288-fa00-42cf-a9bf-c0c83bef2fc6",
             "unlock": [
                 "x",
                 "y"
             ],
-            "label": "harvestPrefab",
-            "x": 207,
-            "y": 592
-        },
-        {
-            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
-            "id": "d9d60f36-8616-4c4b-8bcc-94a17484ff11",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "harvestPrefab_1",
-            "x": 240,
-            "y": 592
-        },
-        {
-            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
-            "id": "37012eb2-7b74-4cc9-b4f7-aed8c82fd3dc",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "harvestPrefab_2",
-            "x": 273,
-            "y": 592
-        },
-        {
-            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
-            "id": "cc02962e-8d10-406a-8ac0-1bd56f1e216f",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "harvestPrefab_3",
-            "x": 306,
-            "y": 592
+            "label": "alertPrefab",
+            "scope": "CLASS",
+            "x": 721.70328457044,
+            "y": 0.0215605880291605
         }
     ],
     "plainObjects": [

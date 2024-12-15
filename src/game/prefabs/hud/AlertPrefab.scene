@@ -1,0 +1,78 @@
+{
+    "id": "f091d24d-337a-4363-a9ac-c2e296f13378",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 180,
+        "borderHeight": 60
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "7b9dd297-1137-4bdb-9993-ef5726f810a8",
+            "label": "container_1",
+            "x": 2,
+            "y": 3,
+            "scaleX": 0.5807462389444868,
+            "scaleY": 0.5807462389444868,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "44469035-53c7-415e-aa43-5722be3ff738",
+                    "label": "bg",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "MessageBox"
+                    },
+                    "x": 150.81828568909967,
+                    "y": 47.456869152431125,
+                    "scaleX": 0.5091429221209207,
+                    "scaleY": 0.5091429221209207
+                },
+                {
+                    "type": "Text",
+                    "id": "bd9c7987-8ee4-42c7-a406-d1ac35723f18",
+                    "label": "msg",
+                    "scope": "CLASS",
+                    "x": 150.81828568909967,
+                    "y": 47.456869152431125,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "New text",
+                    "fixedWidth": 250,
+                    "lineSpacing": 3,
+                    "align": "center",
+                    "fontSize": "12px",
+                    "maxLines": 3,
+                    "wordWrapWidth": 250,
+                    "wordWrapUseAdvanced": true
+                },
+                {
+                    "type": "Sprite",
+                    "id": "6a0d6524-a29c-4acf-9f3a-05bcb6758659",
+                    "label": "exitButton",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "ExitButtonIcon",
+                        "frame": 0
+                    },
+                    "x": 292.8182856890997,
+                    "y": 9.456869152431125,
+                    "scaleX": 0.29620092938938364,
+                    "scaleY": 0.29620092938938364
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

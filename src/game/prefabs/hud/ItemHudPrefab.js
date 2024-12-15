@@ -32,7 +32,7 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 
 		// itemCounter1
 		const itemCounter1 = scene.add.text(44, 49, "", {});
-		itemCounter1.text = "10";
+		itemCounter1.text = "0";
 		itemCounter1.setStyle({ "align": "right", "fontSize": "10px" });
 		itemBox1.add(itemCounter1);
 
@@ -51,7 +51,7 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 
 		// itemCounter2
 		const itemCounter2 = scene.add.text(44, 48, "", {});
-		itemCounter2.text = "10";
+		itemCounter2.text = "0";
 		itemCounter2.setStyle({ "align": "right", "fontSize": "10px" });
 		itemBox2.add(itemCounter2);
 
@@ -70,7 +70,7 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 
 		// itemCounter3
 		const itemCounter3 = scene.add.text(44, 48, "", {});
-		itemCounter3.text = "10";
+		itemCounter3.text = "0";
 		itemCounter3.setStyle({ "align": "right", "fontSize": "10px" });
 		itemBox3.add(itemCounter3);
 
@@ -89,7 +89,7 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 
 		// itemCounter4
 		const itemCounter4 = scene.add.text(44, 48, "", {});
-		itemCounter4.text = "10";
+		itemCounter4.text = "0";
 		itemCounter4.setStyle({ "align": "right", "fontSize": "10px" });
 		itemBox4.add(itemCounter4);
 
@@ -108,7 +108,7 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 
 		// itemCounter5
 		const itemCounter5 = scene.add.text(44, 48, "", {});
-		itemCounter5.text = "10";
+		itemCounter5.text = "0";
 		itemCounter5.setStyle({ "align": "right", "fontSize": "10px" });
 		itemBox5.add(itemCounter5);
 
@@ -141,6 +141,13 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 		// Write your code here.
 		this.scene.events.on('update', this.onSceneUpdate, this);
 		this.scene.events.on('create', this.onSceneCreate, this);
+
+		backpack.setInteractive({ useHandCursor: true });
+		backpack.on('pointerdown', () => {
+			if(this.scene.reactEvent == undefined) throw Error("REACT EVENT BUS NOT HOOKED IN")
+			this.scene.reactEvent.emit("show-inventory-modal",this)
+		},this)
+
 		/* END-USER-CTR-CODE */
 	}
 
@@ -240,17 +247,23 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 	// this.itemHudPrefab.addItem("IconBaseTools",2,3)
 	// this.itemHudPrefab.addItem("SeedBag",0,4)
 
-	addItem(key,textureName,textureId,itemNum){
+	addItem(key,textureName,textureId,itemNum,amount = 0){
 		let itemIndex = itemNum - 1;
 
 		this.itemData[itemIndex] = key
-		
+
 
 		this.items[itemIndex].visible = true;
 		this.items[itemIndex].setTexture(textureName, textureId)
 
 		this.itemCounters[itemIndex].visible = true;
-		this.itemCounters[itemIndex].text = "1";
+		if(amount == 0){
+			this.itemCounters[itemIndex].text = "1";
+		}else{
+			let currAmount = parseInt(this.itemCounters[itemIndex].text)
+			this.itemCounters[itemIndex].text = (currAmount + amount).toString();
+		}
+
 	}
 
 	/* END-USER-CODE */

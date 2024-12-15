@@ -1,14 +1,16 @@
 
 // You can write more code here
+import { EventBus } from '../EventBus';
 
 /* START OF COMPILED CODE */
 
+import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import PlayerPrefab from "../prefabs/PlayerPrefab";
 import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
-import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
+import AlertPrefab from "../prefabs/hud/AlertPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -19,6 +21,7 @@ export default class TutorialScene extends Phaser.Scene {
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+		this.reactEvent = EventBus
 		/* END-USER-CTR-CODE */
 	}
 
@@ -110,6 +113,22 @@ export default class TutorialScene extends Phaser.Scene {
 		sceneTile.body.allowGravity = false;
 		sceneTile.body.setSize(32, 200, false);
 
+		// harvestPrefab
+		const harvestPrefab = new HarvestPrefab(this, 207, 592);
+		this.add.existing(harvestPrefab);
+
+		// harvestPrefab_1
+		const harvestPrefab_1 = new HarvestPrefab(this, 240, 592);
+		this.add.existing(harvestPrefab_1);
+
+		// harvestPrefab_2
+		const harvestPrefab_2 = new HarvestPrefab(this, 273, 592);
+		this.add.existing(harvestPrefab_2);
+
+		// harvestPrefab_3
+		const harvestPrefab_3 = new HarvestPrefab(this, 306, 592);
+		this.add.existing(harvestPrefab_3);
+
 		// oldManJackNpcPrefab
 		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 361, 216);
 		this.add.existing(oldManJackNpcPrefab);
@@ -130,21 +149,9 @@ export default class TutorialScene extends Phaser.Scene {
 		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 0.8045771466410088);
 		this.add.existing(messagePrefab);
 
-		// harvestPrefab
-		const harvestPrefab = new HarvestPrefab(this, 207, 592);
-		this.add.existing(harvestPrefab);
-
-		// harvestPrefab_1
-		const harvestPrefab_1 = new HarvestPrefab(this, 240, 592);
-		this.add.existing(harvestPrefab_1);
-
-		// harvestPrefab_2
-		const harvestPrefab_2 = new HarvestPrefab(this, 273, 592);
-		this.add.existing(harvestPrefab_2);
-
-		// harvestPrefab_3
-		const harvestPrefab_3 = new HarvestPrefab(this, 306, 592);
-		this.add.existing(harvestPrefab_3);
+		// alertPrefab
+		const alertPrefab = new AlertPrefab(this, 721.70328457044, 0.0215605880291605);
+		this.add.existing(alertPrefab);
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
@@ -172,6 +179,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.questBookPrefab = questBookPrefab;
 		this.itemHudPrefab = itemHudPrefab;
 		this.messagePrefab = messagePrefab;
+		this.alertPrefab = alertPrefab;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -211,6 +219,8 @@ export default class TutorialScene extends Phaser.Scene {
 	itemHudPrefab;
 	/** @type {MessagePrefab} */
 	messagePrefab;
+	/** @type {AlertPrefab} */
+	alertPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 
@@ -301,6 +311,8 @@ export default class TutorialScene extends Phaser.Scene {
         }
 
 		this.time.delayedCall(100, () => {
+			this.questBookPrefab.visible = true
+
 			this.itemHudPrefab.visible = true;
 			this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0,1)
 			this.itemHudPrefab.addItem("HOE","IconBaseTools",1,2)
@@ -308,6 +320,9 @@ export default class TutorialScene extends Phaser.Scene {
 			this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,4)
 		}, {}, this)
 
+		this.reactEvent.on('blockchain-account', (address) => {
+            console.log(address);
+        });
 	}
 
 	/* END-USER-CODE */
