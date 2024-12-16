@@ -215,6 +215,19 @@
                 "key": "DecorationWeaponStand"
             },
             {
+                "url": "assets/files/image 35.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "ExitButtonIcon"
+            },
+            {
                 "url": "assets/mapAssets/FarmHorseStable.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -472,19 +485,6 @@
                 "key": "IconBaseTools"
             },
             {
-                "url": "assets/files/image 35.png",
-                "frameConfig": {
-                    "frameWidth": 64,
-                    "frameHeight": 64,
-                    "startFrame": 0,
-                    "endFrame": -1,
-                    "spacing": 0,
-                    "margin": 0
-                },
-                "type": "spritesheet",
-                "key": "ExitButtonIcon"
-            },
-            {
                 "url": "assets/hud/ItemSlot.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -687,6 +687,45 @@
                 "key": "player"
             },
             {
+                "url": "assets/Character/Farming/BaseModel/PlayerAniFarming_V01.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "PlayerAniFarming_V01"
+            },
+            {
+                "url": "assets/Character/Farming/Clothing/PlayerClothingFarming_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "PlayerClothingFarming_V01"
+            },
+            {
+                "url": "assets/Character/Fishing/BasePlayer/PlayerFishing_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "PlayerFishing_V01"
+            },
+            {
                 "url": "assets/player/PlayerHair01.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -726,6 +765,32 @@
                 "key": "PlayerHair03"
             },
             {
+                "url": "assets/Character/Farming/Hair/PlayerHairFarming_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "PlayerHairFarming_V01"
+            },
+            {
+                "url": "assets/Character/Fishing/Hair/PlayerHairFishing_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "PlayerHairFishing_V01"
+            },
+            {
                 "url": "assets/player/PlayerOutfit01.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -763,6 +828,19 @@
                 },
                 "type": "spritesheet",
                 "key": "PlayerOutfit03"
+            },
+            {
+                "url": "assets/Character/Walking/BaseModel/PlayerWalking_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "PlayerWalking_V01"
             },
             {
                 "url": "assets/mapAssets/RoadStone.png",
