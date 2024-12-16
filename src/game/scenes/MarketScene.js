@@ -4,7 +4,6 @@
 /* START OF COMPILED CODE */
 
 import PlayerPrefab from "../prefabs/PlayerPrefab";
-import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -51,218 +50,197 @@ export default class MarketScene extends Phaser.Scene {
 		marketMap.addTilesetImage("Tent", "Tent");
 
 		// must_Background_grass_1
-		marketMap.createLayer("Must Background/grass", ["GroundTileset"], -768, -416);
+		const must_Background_grass_1 = marketMap.createLayer("Must Background/grass", ["GroundTileset"], -928, -496);
 
 		// must_Background_DecorationOnGrass_1
-		marketMap.createLayer("Must Background/DecorationOnGrass", ["RoadStone","Apple"], -768, -416);
+		const must_Background_DecorationOnGrass_1 = marketMap.createLayer("Must Background/DecorationOnGrass", ["RoadStone","Apple"], -928, -496);
 
 		// must_Background_Beach_1
-		marketMap.createLayer("Must Background/Beach", ["RoadStone","GroundTileset"], -768, -416);
-
-		// decoration_DecorationBeachside_1
-		const decoration_DecorationBeachside_1 = marketMap.createLayer("Decoration/DecorationBeachside", ["DecorationOnBeach","LakeFloatingRock_V03"], -768, -416);
+		const must_Background_Beach_1 = marketMap.createLayer("Must Background/Beach", ["RoadStone","GroundTileset"], -928, -496);
 
 		// must_Background_SeaBorder_1
-		const must_Background_SeaBorder_1 = marketMap.createLayer("Must Background/SeaBorder", ["BeachWaterAni_V01"], -768, -416);
+		const must_Background_SeaBorder_1 = marketMap.createLayer("Must Background/SeaBorder", ["BeachWaterAni_V01"], -928, -496);
 
 		// must_Background_StoneRoad_1
-		marketMap.createLayer("Must Background/StoneRoad", ["RoadStone"], -768, -416);
+		const must_Background_StoneRoad_1 = marketMap.createLayer("Must Background/StoneRoad", ["RoadStone"], -928, -496);
 
 		// must_Background_Fence_1
-		const must_Background_Fence_1 = marketMap.createLayer("Must Background/Fence", ["StoneFance."], -768, -416);
-
-		// tree_TreeBorder
-		const tree_TreeBorder = marketMap.createLayer("Tree/TreeBorder4", ["TreePatteren"], -768, -416);
-
-		// tree_TreeBorder_1
-		const tree_TreeBorder_1 = marketMap.createLayer("Tree/TreeBorder3", [], -768, -416);
-
-		// tree_treeborder
-		const tree_treeborder = marketMap.createLayer("Tree/treeborder2", ["TreePatteren"], -768, -416);
-
-		// tree_TreeBorder_2
-		const tree_TreeBorder_2 = marketMap.createLayer("Tree/TreeBorder1", ["TreePatteren","BeachTree_V1"], -768, -416);
+		const must_Background_Fence_1 = marketMap.createLayer("Must Background/Fence", ["StoneFance."], -928, -496);
 
 		// beachSide_BeachDeck_1
-		const beachSide_BeachDeck_1 = marketMap.createLayer("BeachSide/BeachDeck", ["RoadStone","DeckOnTheBeach"], -768, -416);
+		const beachSide_BeachDeck_1 = marketMap.createLayer("BeachSide/BeachDeck", ["RoadStone","DeckOnTheBeach"], -928, -496);
 
 		// beachSide_Stairs_1
-		const beachSide_Stairs_1 = marketMap.createLayer("BeachSide/Stairs", ["BeachStairs_V01R"], -768, -416);
+		const beachSide_Stairs_1 = marketMap.createLayer("BeachSide/Stairs", ["BeachStairs_V01R"], -928, -496);
+
+		// treePatteren_TreeBorder
+		const treePatteren_TreeBorder = marketMap.createLayer("TreePatteren/TreeBorder3", ["TreePatteren"], -928, -496);
+
+		// treePatteren_TreeBorder_1
+		const treePatteren_TreeBorder_1 = marketMap.createLayer("TreePatteren/TreeBorder4", ["TreePatteren"], -928, -496);
+
+		// treePatteren_TreeBorder_2
+		const treePatteren_TreeBorder_2 = marketMap.createLayer("TreePatteren/TreeBorder5", ["TreePatteren"], -928, -496);
+
+		// treePatteren_TreeBorder_3
+		const treePatteren_TreeBorder_3 = marketMap.createLayer("TreePatteren/TreeBorder6", ["TreePatteren"], -928, -496);
 
 		// decoration_SpearStand_1
-		const decoration_SpearStand_1 = marketMap.createLayer("Decoration/SpearStand", ["DecorationWeaponStand"], -768, -416);
+		const decoration_SpearStand_1 = marketMap.createLayer("Decoration/SpearStand", ["DecorationWeaponStand"], -928, -496);
 
 		// decoration_ClockTower_1
-		const decoration_ClockTower_1 = marketMap.createLayer("Decoration/ClockTower", ["SeaLevelBuildingLighthouse_v01"], -768, -416);
+		const decoration_ClockTower_1 = marketMap.createLayer("Decoration/ClockTower", ["SeaLevelBuildingLighthouse_v01"], -928, -496);
 
 		// decoration_Tent_1
-		const decoration_Tent_1 = marketMap.createLayer("Decoration/Tent", ["Tent"], -768, -416);
+		const decoration_Tent_1 = marketMap.createLayer("Decoration/Tent", ["Tent"], -928, -496);
 
 		// decoration_Decoration_1
-		const decoration_Decoration_1 = marketMap.createLayer("Decoration/Decoration", ["ShopInteriorObjects_"], -768, -416);
+		const decoration_Decoration_1 = marketMap.createLayer("Decoration/Decoration", ["ShopInteriorObjects_"], -928, -496);
 
 		// decoration_Decoration
-		const decoration_Decoration = marketMap.createLayer("Decoration/Decoration2", ["DecorationMarketplace","ShopInteriorObjects_"], -768, -416);
+		const decoration_Decoration = marketMap.createLayer("Decoration/Decoration2", ["DecorationMarketplace","ShopInteriorObjects_"], -928, -496);
 
 		// decoration_InfomationBoard_1
-		const decoration_InfomationBoard_1 = marketMap.createLayer("Decoration/InfomationBoard", ["DecorationMarketplace"], -768, -416);
+		const decoration_InfomationBoard_1 = marketMap.createLayer("Decoration/InfomationBoard", ["DecorationMarketplace"], -928, -496);
+
+		// decoration_DecorationBeachside_1
+		const decoration_DecorationBeachside_1 = marketMap.createLayer("Decoration/DecorationBeachside", ["DecorationOnBeach","LakeFloatingRock_V03"], -928, -496);
 
 		// decoration_DecorartionSunScreen_1
-		const decoration_DecorartionSunScreen_1 = marketMap.createLayer("Decoration/DecorartionSunScreen", ["DecorationOnBeach"], -768, -416);
+		const decoration_DecorartionSunScreen_1 = marketMap.createLayer("Decoration/DecorartionSunScreen", ["DecorationOnBeach"], -928, -496);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 481, 451);
+		const playerPrefab = new PlayerPrefab(this, 480, 550);
 		this.add.existing(playerPrefab);
 
-		// tree_TreeBorder_3
-		const tree_TreeBorder_3 = marketMap.createLayer("Tree/TreeBorder4", ["TreePatteren"], -768, -416);
+		// bigShip
+		const bigShip = this.add.sprite(1829, 239, "Ship_V01-Sheet", 0);
+		bigShip.play("BigShip");
 
-		// oldManJackNpcPrefab
-		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 386, 427);
-		this.add.existing(oldManJackNpcPrefab);
+		// floatingCliff
+		const floatingCliff = this.add.sprite(1567, 1038, "LakeFloatingRock_V03", 0);
+		floatingCliff.play("FloatingCliff");
+
+		// campCauldron
+		const campCauldron = this.add.sprite(945, 143, "Campfire_2_32x32", 0);
+		campCauldron.play("CampCauldron");
+
+		// campfire
+		const campfire = this.add.sprite(142, 685, "Campfire_32x32", 0);
+		campfire.play("Campfire");
 
 		// npcBlackSmithRight
-		const npcBlackSmithRight = this.add.sprite(196, 612, "NpcBlaksmith", 0);
+		const npcBlackSmithRight = this.add.sprite(193, 698, "NpcBlaksmith", 0);
 		npcBlackSmithRight.scaleX = 1.5;
 		npcBlackSmithRight.scaleY = 1.5;
 		npcBlackSmithRight.play("NpcBlackSmithRight");
 
-		// npcCapitan
-		const npcCapitan = this.add.sprite(832, 160, "NPCOldManJack", 0);
-		npcCapitan.play("NpcOldManJack");
-
-		// NpcGuardian_2
-		const npcGuardian_2 = this.add.image(-352, 544, "NPCGuardian_V01", 2);
-		npcGuardian_2.scaleX = 1.5;
-		npcGuardian_2.scaleY = 1.5;
-
-		// NpcGuardian_3 
-		const npcGuardian_3_ = this.add.image(960, 576, "NPCGuardian_V01", 1);
-		npcGuardian_3_.scaleX = 1.5;
-		npcGuardian_3_.scaleY = 1.5;
-
-		// NpcGuardian_5
-		const npcGuardian_5 = this.add.image(1413, 450, "NPCGuardian_V01", 3);
-		npcGuardian_5.scaleX = 1.5;
-		npcGuardian_5.scaleY = 1.5;
-
-		// NpcGuardian_4
-		const npcGuardian_4 = this.add.image(1413, 365, "NPCGuardian_V01", 3);
-		npcGuardian_4.scaleX = 1.5;
-		npcGuardian_4.scaleY = 1.5;
-
-		// NpcMerchant
-		const npcMerchant = this.add.image(801, 576, "NPCMerchant", 3);
-		npcMerchant.scaleX = 1.5;
-		npcMerchant.scaleY = 1.5;
-
-		// campCauldron
-		const campCauldron = this.add.sprite(945, 64, "Campfire_2_32x32", 0);
-		campCauldron.play("CampCauldron");
-
-		// campfire
-		const campfire = this.add.sprite(144, 608, "Campfire_32x32", 0);
-		campfire.play("Campfire");
-
-		// NpcGuardian
-		const npcGuardian = this.add.image(-352, 219, "NPCGuardian_V01", 2);
-		npcGuardian.scaleX = 1.5;
-		npcGuardian.scaleY = 1.5;
-
-		// angelStatue
-		const angelStatue = this.add.sprite(496, 326, "DecorationAngelStatue", 0);
-		angelStatue.play("AngelStatue");
-
-		// bigShip
-		const bigShip = this.add.sprite(1800, 164, "Ship_V01-Sheet", 0);
-		bigShip.play("BigShip");
-
-		// floatingCliff
-		const floatingCliff = this.add.sprite(1568, 958, "LakeFloatingRock_V03", 0);
-		floatingCliff.play("FloatingCliff");
-
-		// NpcGuardian_1
-		const npcGuardian_1 = this.add.image(2560, 0, "NPCGuardian_V01", 3);
-		npcGuardian_1.scaleX = 1.5;
-		npcGuardian_1.scaleY = 1.5;
-
-		// Deck
-		const deck = this.add.image(1490, 416, "DeckOnTheBeach", 4);
-
-		// Deck_1
-		const deck_1 = this.add.image(1554, 416, "DeckOnTheBeach", 4);
-
-		// Deck_2
-		const deck_2 = this.add.image(1618, 416, "DeckOnTheBeach", 4);
-
-		// Deck_3
-		const deck_3 = this.add.image(1682, 416, "DeckOnTheBeach", 4);
+		// Npc_Merchant
+		const npc_Merchant = this.add.image(807, 651, "NPCMerchant", 3);
+		npc_Merchant.scaleX = 1.5;
+		npc_Merchant.scaleY = 1.5;
 
 		// fishingShip
-		const fishingShip = this.add.sprite(1664, 542, "FishingBoat_V01R", 0);
+		const fishingShip = this.add.sprite(1708, 611, "FishingBoat_V01R", 0);
 		fishingShip.play("fishingShip");
 
-		this.decoration_DecorationBeachside_1 = decoration_DecorationBeachside_1;
+		// npcOldManJack
+		const npcOldManJack = this.add.sprite(829, 222, "NPCOldManJack", 0);
+		npcOldManJack.play("NpcOldManJack");
+
+		// Npc_Guard_2
+		const npc_Guard_2 = this.add.image(-346, 296, "NPCGuardian_V01", 2);
+		npc_Guard_2.scaleX = 1.5;
+		npc_Guard_2.scaleY = 1.5;
+
+		// Npc_Guard_1
+		const npc_Guard_1 = this.add.image(-346, 622, "NPCGuardian_V01", 2);
+		npc_Guard_1.scaleX = 1.5;
+		npc_Guard_1.scaleY = 1.5;
+
+		// Npc_Guard_5
+		const npc_Guard_5 = this.add.image(984, 643, "NPCGuardian_V01", 1);
+		npc_Guard_5.scaleX = 1.5;
+		npc_Guard_5.scaleY = 1.5;
+
+		// Npc_Guard_3
+		const npc_Guard_3 = this.add.image(1406, 544, "NPCGuardian_V01", 3);
+		npc_Guard_3.scaleX = 1.5;
+		npc_Guard_3.scaleY = 1.5;
+
+		// Npc_Guard_4
+		const npc_Guard_4 = this.add.image(1406, 443, "NPCGuardian_V01", 3);
+		npc_Guard_4.scaleX = 1.5;
+		npc_Guard_4.scaleY = 1.5;
+
+		// angelStatue
+		const angelStatue = this.add.sprite(505, 382, "DecorationAngelStatue", 0);
+		angelStatue.play("AngelStatue");
+
+		this.must_Background_grass_1 = must_Background_grass_1;
+		this.must_Background_DecorationOnGrass_1 = must_Background_DecorationOnGrass_1;
+		this.must_Background_Beach_1 = must_Background_Beach_1;
 		this.must_Background_SeaBorder_1 = must_Background_SeaBorder_1;
+		this.must_Background_StoneRoad_1 = must_Background_StoneRoad_1;
 		this.must_Background_Fence_1 = must_Background_Fence_1;
-		this.tree_TreeBorder = tree_TreeBorder;
-		this.tree_TreeBorder_1 = tree_TreeBorder_1;
-		this.tree_treeborder = tree_treeborder;
-		this.tree_TreeBorder_2 = tree_TreeBorder_2;
 		this.beachSide_BeachDeck_1 = beachSide_BeachDeck_1;
 		this.beachSide_Stairs_1 = beachSide_Stairs_1;
+		this.treePatteren_TreeBorder = treePatteren_TreeBorder;
+		this.treePatteren_TreeBorder_1 = treePatteren_TreeBorder_1;
+		this.treePatteren_TreeBorder_2 = treePatteren_TreeBorder_2;
+		this.treePatteren_TreeBorder_3 = treePatteren_TreeBorder_3;
 		this.decoration_SpearStand_1 = decoration_SpearStand_1;
 		this.decoration_ClockTower_1 = decoration_ClockTower_1;
 		this.decoration_Tent_1 = decoration_Tent_1;
 		this.decoration_Decoration_1 = decoration_Decoration_1;
 		this.decoration_Decoration = decoration_Decoration;
 		this.decoration_InfomationBoard_1 = decoration_InfomationBoard_1;
+		this.decoration_DecorationBeachside_1 = decoration_DecorationBeachside_1;
 		this.decoration_DecorartionSunScreen_1 = decoration_DecorartionSunScreen_1;
 		this.playerPrefab = playerPrefab;
-		this.tree_TreeBorder_3 = tree_TreeBorder_3;
-		this.oldManJackNpcPrefab = oldManJackNpcPrefab;
-		this.npcBlackSmithRight = npcBlackSmithRight;
-		this.npcCapitan = npcCapitan;
-		this.npcGuardian_2 = npcGuardian_2;
-		this.npcGuardian_3_ = npcGuardian_3_;
-		this.npcGuardian_5 = npcGuardian_5;
-		this.npcGuardian_4 = npcGuardian_4;
-		this.npcMerchant = npcMerchant;
-		this.campCauldron = campCauldron;
-		this.campfire = campfire;
-		this.npcGuardian = npcGuardian;
-		this.angelStatue = angelStatue;
 		this.bigShip = bigShip;
 		this.floatingCliff = floatingCliff;
-		this.npcGuardian_1 = npcGuardian_1;
-		this.deck = deck;
-		this.deck_1 = deck_1;
-		this.deck_2 = deck_2;
-		this.deck_3 = deck_3;
+		this.campCauldron = campCauldron;
+		this.campfire = campfire;
+		this.npcBlackSmithRight = npcBlackSmithRight;
+		this.npc_Merchant = npc_Merchant;
 		this.fishingShip = fishingShip;
+		this.npcOldManJack = npcOldManJack;
+		this.npc_Guard_2 = npc_Guard_2;
+		this.npc_Guard_1 = npc_Guard_1;
+		this.npc_Guard_5 = npc_Guard_5;
+		this.npc_Guard_3 = npc_Guard_3;
+		this.npc_Guard_4 = npc_Guard_4;
+		this.angelStatue = angelStatue;
 		this.marketMap = marketMap;
 
 		this.events.emit("scene-awake");
 	}
 
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	decoration_DecorationBeachside_1;
+	must_Background_grass_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	must_Background_DecorationOnGrass_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	must_Background_Beach_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	must_Background_SeaBorder_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	must_Background_StoneRoad_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	must_Background_Fence_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	tree_TreeBorder;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	tree_TreeBorder_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	tree_treeborder;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	tree_TreeBorder_2;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	beachSide_BeachDeck_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	beachSide_Stairs_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	treePatteren_TreeBorder;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	treePatteren_TreeBorder_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	treePatteren_TreeBorder_2;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	treePatteren_TreeBorder_3;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	decoration_SpearStand_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -276,51 +254,39 @@ export default class MarketScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	decoration_InfomationBoard_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	decoration_DecorationBeachside_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	decoration_DecorartionSunScreen_1;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	tree_TreeBorder_3;
-	/** @type {OldManJackNpcPrefab} */
-	oldManJackNpcPrefab;
-	/** @type {Phaser.GameObjects.Sprite} */
-	npcBlackSmithRight;
-	/** @type {Phaser.GameObjects.Sprite} */
-	npcCapitan;
-	/** @type {Phaser.GameObjects.Image} */
-	npcGuardian_2;
-	/** @type {Phaser.GameObjects.Image} */
-	npcGuardian_3_;
-	/** @type {Phaser.GameObjects.Image} */
-	npcGuardian_5;
-	/** @type {Phaser.GameObjects.Image} */
-	npcGuardian_4;
-	/** @type {Phaser.GameObjects.Image} */
-	npcMerchant;
-	/** @type {Phaser.GameObjects.Sprite} */
-	campCauldron;
-	/** @type {Phaser.GameObjects.Sprite} */
-	campfire;
-	/** @type {Phaser.GameObjects.Image} */
-	npcGuardian;
-	/** @type {Phaser.GameObjects.Sprite} */
-	angelStatue;
 	/** @type {Phaser.GameObjects.Sprite} */
 	bigShip;
 	/** @type {Phaser.GameObjects.Sprite} */
 	floatingCliff;
+	/** @type {Phaser.GameObjects.Sprite} */
+	campCauldron;
+	/** @type {Phaser.GameObjects.Sprite} */
+	campfire;
+	/** @type {Phaser.GameObjects.Sprite} */
+	npcBlackSmithRight;
 	/** @type {Phaser.GameObjects.Image} */
-	npcGuardian_1;
-	/** @type {Phaser.GameObjects.Image} */
-	deck;
-	/** @type {Phaser.GameObjects.Image} */
-	deck_1;
-	/** @type {Phaser.GameObjects.Image} */
-	deck_2;
-	/** @type {Phaser.GameObjects.Image} */
-	deck_3;
+	npc_Merchant;
 	/** @type {Phaser.GameObjects.Sprite} */
 	fishingShip;
+	/** @type {Phaser.GameObjects.Sprite} */
+	npcOldManJack;
+	/** @type {Phaser.GameObjects.Image} */
+	npc_Guard_2;
+	/** @type {Phaser.GameObjects.Image} */
+	npc_Guard_1;
+	/** @type {Phaser.GameObjects.Image} */
+	npc_Guard_5;
+	/** @type {Phaser.GameObjects.Image} */
+	npc_Guard_3;
+	/** @type {Phaser.GameObjects.Image} */
+	npc_Guard_4;
+	/** @type {Phaser.GameObjects.Sprite} */
+	angelStatue;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	marketMap;
 
@@ -329,19 +295,21 @@ export default class MarketScene extends Phaser.Scene {
 	// Write your code here
 
 	create() {
+
 		this.editorCreate();
 
-    	const backgroundDepth = 0;
+		const backgroundDepth = 0;
     	const waterDepth = 5;
     	const topLayerDepth = 10;
 		const floatingCliffDepth = 15;
+
 
     	this.must_Background_SeaBorder_1.setDepth(backgroundDepth);
     	this.must_Background_Fence_1.setDepth(backgroundDepth);
 
     	const waterArea = this.add.tileSprite(
     	    1454,
-    	    384,
+    	    464,
     	    32,
     	    1600,
     	    'BeachWaterAni_V01'
@@ -349,24 +317,25 @@ export default class MarketScene extends Phaser.Scene {
     	waterArea.setDepth(waterDepth);
 
     	const seaArea = this.add.tileSprite(
-    	    1630,
-    	    384,
-    	    320,
+    	    1680,
+    	    464,
+    	    420,
     	    1600,
     	    'BeachWaterAni_V01'
     	);
     	seaArea.setDepth(waterDepth);
 
-    	this.tree_TreeBorder.setDepth(topLayerDepth);
-    	this.tree_TreeBorder_1.setDepth(topLayerDepth);
-    	this.tree_treeborder.setDepth(topLayerDepth);
-    	this.tree_TreeBorder_2.setDepth(topLayerDepth);
+    	this.treePatteren_TreeBorder.setDepth(topLayerDepth);
+		this.treePatteren_TreeBorder_1.setDepth(topLayerDepth);
+		this.treePatteren_TreeBorder_2.setDepth(topLayerDepth);
+		this.treePatteren_TreeBorder_3.setDepth(topLayerDepth);
+		this.npc_Guard_5.setDepth(topLayerDepth);
     	this.beachSide_BeachDeck_1.setDepth(topLayerDepth);
 		this.bigShip.setDepth(topLayerDepth);
 		this.floatingCliff.setDepth(floatingCliffDepth);
-		this.npcGuardian_5.setDepth(topLayerDepth);
 		this.fishingShip.setDepth(topLayerDepth);
 		this.decoration_ClockTower_1.setDepth(topLayerDepth);
+		this.playerPrefab.setDepth(topLayerDepth);
 
     	const frames = [32, 36, 40, 44, 48, 52];
     	let currentFrameIndex = 0;
@@ -390,25 +359,58 @@ export default class MarketScene extends Phaser.Scene {
     	    loop: true
     	});
 
-    	this.physics.add.collider(this.playerPrefab, this.decoration_DecorartionSunScreen_1);
-    	this.decoration_DecorartionSunScreen_1.setCollisionBetween(0, 10000);
-		// this.decoration_DecorartionSunScreen_1.renderDebug(this.add.graphics());
+    	this.physics.add.existing(this.campCauldron, true);
+    	this.physics.add.collider(this.playerPrefab, this.campCauldron);
 
-    	this.physics.add.collider(this.playerPrefab, this.decoration_Decoration_1);
-    	this.decoration_Decoration_1.setCollisionBetween(0, 10000);
-		// this.decoration_Decoration_1.renderDebug(this.add.graphics());
+ 		this.physics.add.existing(this.npc_Guard_1, true);
+    	this.physics.add.collider(this.playerPrefab, this.npc_Guard_1);
 
-    	this.physics.add.collider(this.playerPrefab, this.decoration_Decoration);
-    	this.decoration_Decoration.setCollisionBetween(0, 10000);
-		// this.decoration_Decoration.renderDebug(this.add.graphics());
+ 		this.physics.add.existing(this.npc_Guard_2, true);
+    	this.physics.add.collider(this.playerPrefab, this.npc_Guard_2);
+
+ 		this.physics.add.existing(this.npc_Guard_3, true);
+    	this.physics.add.collider(this.playerPrefab, this.npc_Guard_3);
+
+ 		this.physics.add.existing(this.npc_Guard_4, true);
+    	this.physics.add.collider(this.playerPrefab, this.npc_Guard_4);
+
+ 		this.physics.add.existing(this.npc_Guard_5, true);
+    	this.physics.add.collider(this.playerPrefab, this.npc_Guard_5);
+
+ 		this.physics.add.existing(this.campfire, true);
+    	this.physics.add.collider(this.playerPrefab, this.campfire);
+
+ 		this.physics.add.existing(this.npc_Merchant, true);
+    	this.physics.add.collider(this.playerPrefab, this.npc_Merchant);
+
+ 		this.physics.add.existing(this.npcBlackSmithRight, true);
+    	this.physics.add.collider(this.playerPrefab, this.npcBlackSmithRight); 
+
+ 		this.physics.add.existing(this.angelStatue, true);
+    	this.physics.add.collider(this.playerPrefab, this.angelStatue); 
+
+ 		this.physics.add.existing(this.npcOldManJack, true);
+    	this.physics.add.collider(this.playerPrefab, this.npcOldManJack); 
 
     	this.physics.add.collider(this.playerPrefab, this.decoration_ClockTower_1);
     	this.decoration_ClockTower_1.setCollisionBetween(0, 10000);
 		// this.decoration_ClockTower_1.renderDebug(this.add.graphics());
 
+    	this.physics.add.collider(this.playerPrefab, this.decoration_DecorartionSunScreen_1);
+    	this.decoration_DecorartionSunScreen_1.setCollisionBetween(0, 10000);
+		// this.decoration_DecorartionSunScreen_1.renderDebug(this.add.graphics());
+
+    	this.physics.add.collider(this.playerPrefab, this.decoration_Decoration);
+    	this.decoration_Decoration.setCollisionBetween(0, 10000);
+		// this.decoration_Decoration.renderDebug(this.add.graphics());
+
     	this.physics.add.collider(this.playerPrefab, this.decoration_DecorationBeachside_1);
     	this.decoration_DecorationBeachside_1.setCollisionBetween(0, 10000);
 		// this.decoration_DecorationBeachside_1.renderDebug(this.add.graphics());
+
+    	this.physics.add.collider(this.playerPrefab, this.decoration_Decoration_1);
+    	this.decoration_Decoration_1.setCollisionBetween(0, 10000);
+		// this.decoration_Decoration_1.renderDebug(this.add.graphics());
 
     	this.physics.add.collider(this.playerPrefab, this.decoration_InfomationBoard_1);
     	this.decoration_InfomationBoard_1.setCollisionBetween(0, 10000);
@@ -422,65 +424,29 @@ export default class MarketScene extends Phaser.Scene {
     	this.decoration_Tent_1.setCollisionBetween(0, 10000);
 		// this.decoration_Tent_1.renderDebug(this.add.graphics());
 
-    	this.physics.add.collider(this.playerPrefab, this.tree_TreeBorder);
-    	this.tree_TreeBorder.setCollisionBetween(0, 10000);
-		// this.tree_TreeBorder.renderDebug(this.add.graphics());
+    	this.physics.add.collider(this.playerPrefab, this.must_Background_DecorationOnGrass_1);
+    	// this.must_Background_DecorationOnGrass_1.setCollisionBetween(0, 10000);
+		// this.must_Background_DecorationOnGrass_1.renderDebug(this.add.graphics());
 
-    	this.physics.add.collider(this.playerPrefab, this.tree_TreeBorder_1);
-    	this.tree_TreeBorder_1.setCollisionBetween(0, 10000);
-		// this.tree_TreeBorder_1.renderDebug(this.add.graphics());
+    	this.physics.add.collider(this.playerPrefab, this.treePatteren_TreeBorder);
+    	this.treePatteren_TreeBorder.setCollisionBetween(0, 10000);
+		// this.treePatteren_TreeBorder.renderDebug(this.add.graphics());
 
-    	this.physics.add.collider(this.playerPrefab, this.tree_TreeBorder_2);
-    	this.tree_TreeBorder_2.setCollisionBetween(0, 10000);
-		// this.tree_TreeBorder_2.renderDebug(this.add.graphics());
+    	this.physics.add.collider(this.playerPrefab, this.treePatteren_TreeBorder_1);
+    	this.treePatteren_TreeBorder_1.setCollisionBetween(0, 10000);
+		// this.treePatteren_TreeBorder_1.renderDebug(this.add.graphics());
 
-    	this.physics.add.collider(this.playerPrefab, this.tree_treeborder);
-    	this.tree_treeborder.setCollisionBetween(0, 10000);
-		// this.tree_treeborder.renderDebug(this.add.graphics());
+    	this.physics.add.collider(this.playerPrefab, this.treePatteren_TreeBorder_3);
+    	this.treePatteren_TreeBorder_3.setCollisionBetween(0, 10000);
+		// this.treePatteren_TreeBorder_3.renderDebug(this.add.graphics());
+
+    	this.physics.add.collider(this.playerPrefab, this.treePatteren_TreeBorder_2);
+    	this.treePatteren_TreeBorder_2.setCollisionBetween(0, 10000);
+		// this.treePatteren_TreeBorder_2.renderDebug(this.add.graphics());
 
     	this.physics.add.collider(this.playerPrefab, this.must_Background_SeaBorder_1);
     	this.must_Background_SeaBorder_1.setCollisionBetween(0, 10000);
 		// this.must_Background_SeaBorder_1.renderDebug(this.add.graphics());
-
-    	this.physics.add.collider(this.playerPrefab, this.must_Background_Fence_1);
-    	this.must_Background_Fence_1.setCollisionBetween(0, 10000);
-		// this.must_Background_Fence_1.renderDebug(this.add.graphics());
-
- 		this.physics.add.existing(this.campCauldron, true);
-    	this.physics.add.collider(this.playerPrefab, this.campCauldron);
-
- 		this.physics.add.existing(this.npcGuardian, true);
-    	this.physics.add.collider(this.playerPrefab, this.npcGuardian);
-
- 		this.physics.add.existing(this.npcGuardian_2, true);
-    	this.physics.add.collider(this.playerPrefab, this.npcGuardian_2);
-
- 		this.physics.add.existing(this.npcGuardian_3_, true);
-    	this.physics.add.collider(this.playerPrefab, this.npcGuardian_3_);
-
- 		this.physics.add.existing(this.npcGuardian_4, true);
-    	this.physics.add.collider(this.playerPrefab, this.npcGuardian_4);
-
- 		this.physics.add.existing(this.npcGuardian_5, true);
-    	this.physics.add.collider(this.playerPrefab, this.npcGuardian_5);
-
- 		this.physics.add.existing(this.campfire, true);
-    	this.physics.add.collider(this.playerPrefab, this.campfire);
-
- 		this.physics.add.existing(this.npcMerchant, true);
-    	this.physics.add.collider(this.playerPrefab, this.npcMerchant);
-
- 		this.physics.add.existing(this.npcBlackSmithRight, true);
-    	this.physics.add.collider(this.playerPrefab, this.npcBlackSmithRight); 
-
- 		this.physics.add.existing(this.npcCapitan, true);
-    	this.physics.add.collider(this.playerPrefab, this.npcCapitan); 
-
- 		this.physics.add.existing(this.oldManJackNpcPrefab, true);
-    	this.physics.add.collider(this.playerPrefab, this.oldManJackNpcPrefab); 
-
- 		this.physics.add.existing(this.angelStatue, true);
-    	this.physics.add.collider(this.playerPrefab, this.angelStatue); 
 
 	}
 
