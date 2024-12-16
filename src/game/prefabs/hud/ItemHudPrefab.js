@@ -272,6 +272,11 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 		}
 	}
 
+	checkItem(key){
+		let hasItemAlready = this.itemData.filter((x) => x == key).length > 0 ? true : false;
+		return hasItemAlready ? true : false;
+	}
+
 	/* END-USER-CODE */
 }
 

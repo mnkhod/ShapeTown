@@ -98,7 +98,12 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 				return;
 			}
 
-			this.msgPrefab.conversation(this.dialogueLifeCycle)
+			if(this.itemHud.checkItem("CARROT")){
+				this.scene.alertPrefab.alert("First Harvest Achievement")
+			}else{
+				this.msgPrefab.conversation(this.dialogueLifeCycle)
+			}
+
 		},this);
 
 		this.npc.on('pointerout', function (_pointer) {
