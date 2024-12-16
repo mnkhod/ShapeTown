@@ -1,6 +1,5 @@
 /* START OF COMPILED CODE */
 
-import Phaser from "phaser";
 /* START-USER-IMPORTS */
 import { EventBus } from '../EventBus';
 /* END-USER-IMPORTS */
@@ -30,7 +29,7 @@ export default class GameOver extends Phaser.Scene {
 		const textgameover = this.add.text(512, 384, "", {});
 		textgameover.setOrigin(0.5, 0.5);
 		textgameover.text = "Game Over";
-		textgameover.setStyle({ "align": "center", "color": "#ffffff", "fontFamily": "Arial Black", "fontSize": "64px", "stroke": "#000000", "strokeThickness":8});
+		textgameover.setStyle({ "align": "center", "color": "#ffffff", "fontFamily": "Arial Black", "fontSize": "64px", "stroke": "#000000", "strokeThickness": 8 });
 
 		this.events.emit("scene-awake");
 	}

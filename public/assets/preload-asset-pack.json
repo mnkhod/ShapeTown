@@ -87,8 +87,8 @@
             {
                 "url": "assets/Ground tileset/Campfire_2_32x32.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -101,7 +101,7 @@
                 "url": "assets/Ground tileset/Campfire_32x32.png",
                 "frameConfig": {
                     "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -126,8 +126,8 @@
             {
                 "url": "assets/Ground tileset/DeckOnTheBeach.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -139,8 +139,8 @@
             {
                 "url": "assets/Ground tileset/DecorationAngelStatue.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 160,
+                    "frameHeight": 256,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -287,8 +287,8 @@
             {
                 "url": "assets/Ground tileset/FishingBoat_V01R.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 192,
+                    "frameHeight": 128,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -552,8 +552,8 @@
             {
                 "url": "assets/mapAssets/LakeFloatingRock_V03.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 128,
+                    "frameHeight": 128,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -580,8 +580,8 @@
             {
                 "url": "assets/NPC/NpcBlaksmith.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -592,9 +592,14 @@
             },
             {
                 "url": "assets/NPC/NPCGuardian_V01.png",
+                "type": "image",
+                "key": "NPCGuardian_V"
+            },
+            {
+                "url": "assets/NPC/NPCGuardian_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -606,8 +611,8 @@
             {
                 "url": "assets/NPC/NPCMerchant.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -619,8 +624,8 @@
             {
                 "url": "assets/NPC/NPCOldManJack.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -632,7 +637,7 @@
             {
                 "url": "assets/mapAssets/NPCShopStandMaerchant.png",
                 "frameConfig": {
-                    "frameWidth": 32,
+                    "frameWidth": 64,
                     "frameHeight": 32,
                     "startFrame": 0,
                     "endFrame": -1,
@@ -641,6 +646,19 @@
                 },
                 "type": "spritesheet",
                 "key": "NPCShopStandMaerchant"
+            },
+            {
+                "url": "assets/NPC/NPCShopStandMaerchant.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCShopStandMaerchant_1"
             },
             {
                 "url": "assets/player/player.png",
@@ -775,8 +793,8 @@
             {
                 "url": "assets/Ground tileset/Ship_V01-Sheet.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 512,
+                    "frameHeight": 384,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,

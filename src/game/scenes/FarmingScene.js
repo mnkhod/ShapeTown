@@ -26,6 +26,7 @@ export default class FarmingScene extends Phaser.Scene {
 		farmingMap.addTilesetImage("TiletTreePattern", "TreePatteren");
 		farmingMap.addTilesetImage("GroundTilestSoil", "GroundTilestSoil");
 		farmingMap.addTilesetImage("CityHouses_v02", "CityHouses_v02");
+		farmingMap.addTilesetImage("FarmHorseStable", "FarmHorseStable");
 		farmingMap.addTilesetImage("LakeFloatingRock_V03", "LakeFloatingRock_V03");
 		farmingMap.addTilesetImage("LakeFloatingRock_V01", "LakeFloatingRock_V01");
 		farmingMap.addTilesetImage("LakeFloatingRock_V02", "LakeFloatingRock_V02");
@@ -215,7 +216,7 @@ export default class FarmingScene extends Phaser.Scene {
 
 		this.physics.add.collider(this.playerPrefab, this.treeBorder_TreeL_5);
 		this.treeBorder_TreeL_5.setCollisionBetween(1000,2000);
-		// this.treeBorder_TreeL_5.renderDebug(this.add.graphics());
+		this.treeBorder_TreeL_5.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.treeBorder_TreeL_4);
 		this.treeBorder_TreeL_4.setCollisionBetween(1000,2000);
@@ -235,7 +236,7 @@ export default class FarmingScene extends Phaser.Scene {
 
 		this.physics.add.collider(this.playerPrefab, this.treeBorder_TreeL);
 		this.treeBorder_TreeL.setCollisionBetween(1000,2000);
-		// this.treeBorder_TreeL.renderDebug(this.add.graphics());
+		// this.treeBorder_TreeL.renderDebug(this.add.graphics( ));
 
 		this.physics.add.collider(this.playerPrefab, this.render_FenceWooden_Make_a_Collider__1);
 		this.render_FenceWooden_Make_a_Collider__1.setCollisionBetween(2160,2162);

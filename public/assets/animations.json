@@ -237,6 +237,632 @@
             "skipMissedFrames": true,
             "repeat": 3,
             "randomFrame": false
+        },
+        {
+            "key": "NpcBlackSmithRight",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "NpcBlaksmith",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NpcBlaksmith",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NpcBlaksmith",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NpcBlaksmith",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NpcBlaksmith",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 6,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "NpcBlackSmithLeft",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "NpcBlaksmith",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NpcBlaksmith",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NpcBlaksmith",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NpcBlaksmith",
+                    "frame": 8,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NpcBlaksmith",
+                    "frame": 9,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 6,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "NpcOldManJack",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "NPCOldManJack",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCOldManJack",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCOldManJack",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCOldManJack",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCOldManJack",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCOldManJack",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 4,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "Campfire",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "Campfire_32x32",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Campfire_32x32",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Campfire_32x32",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Campfire_32x32",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Campfire_32x32",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Campfire_32x32",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "CampCauldron",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "Campfire_2_32x32",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Campfire_2_32x32",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Campfire_2_32x32",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Campfire_2_32x32",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Campfire_2_32x32",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Campfire_2_32x32",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "Seaborder",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 32,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 36,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 40,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 44,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 48,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 52,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 56,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 60,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 64,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 68,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 72,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 76,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 80,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 84,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 88,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 92,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 6,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "AngelStatue",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "DecorationAngelStatue",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "DecorationAngelStatue",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "DecorationAngelStatue",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "DecorationAngelStatue",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "SeaAnimation",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 33,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 34,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 37,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 38,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 41,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 42,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 45,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 46,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 49,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 50,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 53,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 54,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 57,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterAni_V01",
+                    "frame": 58,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 6,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "BigShip",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "Ship_V01-Sheet",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Ship_V01-Sheet",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Ship_V01-Sheet",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Ship_V01-Sheet",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Ship_V01-Sheet",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Ship_V01-Sheet",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Ship_V01-Sheet",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "Ship_V01-Sheet",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 6,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "FloatingCliff",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "LakeFloatingRock_V03",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "LakeFloatingRock_V03",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "LakeFloatingRock_V03",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "LakeFloatingRock_V03",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "LakeFloatingRock_V03",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "LakeFloatingRock_V03",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "LakeFloatingRock_V03",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "LakeFloatingRock_V03",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 6,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "fishingShip",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "FishingBoat_V01R",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "FishingBoat_V01R",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "FishingBoat_V01R",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "FishingBoat_V01R",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "FishingBoat_V01R",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "FishingBoat_V01R",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "FishingBoat_V01R",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "FishingBoat_V01R",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
         }
     ],
     "globalTimeScale": 1,

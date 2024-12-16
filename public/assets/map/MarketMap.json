@@ -1227,7 +1227,7 @@
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2708, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2725, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2896, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2673, 2674, 2671, 2672, 2669, 2670, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2690, 2691, 2688, 2689, 2686, 2687, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -1770,7 +1770,7 @@
         {
          "columns":12,
          "firstgid":1,
-         "image":"..\/assets\/Ground tileset\/GroundTileset.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/GroundTileset.png",
          "imageheight":3328,
          "imagewidth":384,
          "margin":0,
@@ -1783,7 +1783,7 @@
         {
          "columns":6,
          "firstgid":1249,
-         "image":"..\/assets\/Ground tileset\/RoadStone.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/RoadStone.png",
          "imageheight":1024,
          "imagewidth":192,
          "margin":0,
@@ -1796,7 +1796,7 @@
         {
          "columns":16,
          "firstgid":1441,
-         "image":"..\/assets\/Tree\/TreePatteren.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Tree\/TreePatteren.png",
          "imageheight":992,
          "imagewidth":512,
          "margin":0,
@@ -1809,7 +1809,7 @@
         {
          "columns":9,
          "firstgid":1937,
-         "image":"..\/assets\/Ground tileset\/StoneFance..png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/StoneFance..png",
          "imageheight":256,
          "imagewidth":288,
          "margin":0,
@@ -1822,7 +1822,7 @@
         {
          "columns":32,
          "firstgid":2009,
-         "image":"..\/assets\/Ground tileset\/BeachWaterAni_V01.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/BeachWaterAni_V01.png",
          "imageheight":128,
          "imagewidth":1024,
          "margin":0,
@@ -2412,7 +2412,7 @@
         {
          "columns":7,
          "firstgid":2137,
-         "image":"..\/assets\/Ground tileset\/DeckOnTheBeach.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/DeckOnTheBeach.png",
          "imageheight":160,
          "imagewidth":224,
          "margin":0,
@@ -2425,7 +2425,7 @@
         {
          "columns":48,
          "firstgid":2172,
-         "image":"..\/assets\/Ground tileset\/FishingBoat_V01R.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/FishingBoat_V01R.png",
          "imageheight":128,
          "imagewidth":1536,
          "margin":0,
@@ -3303,7 +3303,7 @@
         {
          "columns":2,
          "firstgid":2364,
-         "image":"..\/assets\/Ground tileset\/BeachStairs_V01R.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/BeachStairs_V01R.png",
          "imageheight":128,
          "imagewidth":64,
          "margin":0,
@@ -3316,7 +3316,7 @@
         {
          "columns":4,
          "firstgid":2372,
-         "image":"..\/assets\/Tree\/BeachTree_V1.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Tree\/BeachTree_V1.png",
          "imageheight":160,
          "imagewidth":128,
          "margin":0,
@@ -3329,7 +3329,7 @@
         {
          "columns":8,
          "firstgid":2392,
-         "image":"..\/assets\/Ground tileset\/Ship_V01-Sheet.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/Ship_V01-Sheet.png",
          "imageheight":384,
          "imagewidth":4096,
          "margin":0,
@@ -3375,7 +3375,7 @@
         {
          "columns":8,
          "firstgid":2400,
-         "image":"..\/assets\/Building\/SeaLevelBuildingLighthouse_v01.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Building\/SeaLevelBuildingLighthouse_v01.png",
          "imageheight":640,
          "imagewidth":256,
          "margin":0,
@@ -3388,7 +3388,7 @@
         {
          "columns":18,
          "firstgid":2560,
-         "image":"..\/assets\/Ground tileset\/Campfire_2_32x32.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/Campfire_2_32x32.png",
          "imageheight":64,
          "imagewidth":576,
          "margin":0,
@@ -3458,7 +3458,7 @@
         {
          "columns":17,
          "firstgid":2596,
-         "image":"..\/assets\/Interior\/ShopInteriorObjects_.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Interior\/ShopInteriorObjects_.png",
          "imageheight":448,
          "imagewidth":544,
          "margin":0,
@@ -3471,7 +3471,7 @@
         {
          "columns":2,
          "firstgid":2834,
-         "image":"..\/assets\/NPC\/NPCGuardian_V01.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/NPC\/NPCGuardian_V01.png",
          "imageheight":256,
          "imagewidth":64,
          "margin":0,
@@ -3484,7 +3484,7 @@
         {
          "columns":10,
          "firstgid":2850,
-         "image":"..\/assets\/NPC\/NpcBlaksmith.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/NPC\/NpcBlaksmith.png",
          "imageheight":128,
          "imagewidth":320,
          "margin":0,
@@ -3594,7 +3594,7 @@
         {
          "columns":6,
          "firstgid":2890,
-         "image":"..\/assets\/Ground tileset\/Campfire_32x32.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/Campfire_32x32.png",
          "imageheight":64,
          "imagewidth":192,
          "margin":0,
@@ -3664,7 +3664,7 @@
         {
          "columns":12,
          "firstgid":2902,
-         "image":"..\/assets\/NPC\/NPCOldManJack.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/NPC\/NPCOldManJack.png",
          "imageheight":64,
          "imagewidth":384,
          "margin":0,
@@ -3790,7 +3790,7 @@
         {
          "columns":3,
          "firstgid":2926,
-         "image":"..\/assets\/Ground tileset\/DecorationWeaponStand.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/DecorationWeaponStand.png",
          "imageheight":72,
          "imagewidth":96,
          "margin":0,
@@ -3803,7 +3803,7 @@
         {
          "columns":7,
          "firstgid":2932,
-         "image":"..\/assets\/Ground tileset\/DecorationOnBeach.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/DecorationOnBeach.png",
          "imageheight":576,
          "imagewidth":224,
          "margin":0,
@@ -3816,7 +3816,7 @@
         {
          "columns":4,
          "firstgid":3058,
-         "image":"..\/assets\/Ground tileset\/DecorationMarketplace.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/DecorationMarketplace.png",
          "imageheight":320,
          "imagewidth":128,
          "margin":0,
@@ -3829,7 +3829,7 @@
         {
          "columns":2,
          "firstgid":3098,
-         "image":"..\/assets\/NPC\/NPCMerchant.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/NPC\/NPCMerchant.png",
          "imageheight":256,
          "imagewidth":64,
          "margin":0,
@@ -3842,7 +3842,7 @@
         {
          "columns":20,
          "firstgid":3114,
-         "image":"..\/assets\/Ground tileset\/DecorationAngelStatue.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/DecorationAngelStatue.png",
          "imageheight":256,
          "imagewidth":640,
          "margin":0,
@@ -3896,7 +3896,7 @@
         {
          "columns":4,
          "firstgid":3274,
-         "image":"..\/assets\/Ground tileset\/Apple.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/Apple.png",
          "imageheight":96,
          "imagewidth":128,
          "margin":0,
@@ -3909,7 +3909,7 @@
         {
          "columns":32,
          "firstgid":3286,
-         "image":"..\/assets\/Ground tileset\/LakeFloatingRock_V03.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/LakeFloatingRock_V03.png",
          "imageheight":128,
          "imagewidth":1024,
          "margin":0,
@@ -4139,7 +4139,7 @@
         {
          "columns":16,
          "firstgid":3414,
-         "image":"..\/assets\/Ground tileset\/DecorationBeachSeagull.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Ground tileset\/DecorationBeachSeagull.png",
          "imageheight":64,
          "imagewidth":512,
          "margin":0,
@@ -4177,7 +4177,7 @@
         {
          "columns":12,
          "firstgid":3446,
-         "image":"..\/assets\/Building\/Tent.png",
+         "image":"..\/..\/..\/..\/..\/Shapecraft\/Hcktn\/Hackton\/assets\/Building\/Tent.png",
          "imageheight":352,
          "imagewidth":384,
          "margin":0,

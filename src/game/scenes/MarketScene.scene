@@ -2,6 +2,9 @@
     "id": "ce6a88ce-a1b3-4fbc-83e5-6cb14db098b3",
     "sceneType": "SCENE",
     "settings": {
+        "snapEnabled": true,
+        "snapWidth": 2560,
+        "snapHeight": 1600,
         "exportClass": true,
         "autoImport": true,
         "preloadPackFiles": [],
@@ -389,44 +392,6 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "a06dbdde-d39a-4a25-abef-62c40c3c7701",
-            "label": "beachSide_FishingBoat_1",
-            "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
-            "layerName": "BeachSide/FishingBoat",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "StoneFance.",
-                "BeachWaterAni_V01",
-                "DeckOnTheBeach",
-                "FishingBoat_V01R",
-                "BeachStairs_V01R",
-                "BeachTree_V1",
-                "Ship_V01-Sheet",
-                "SeaLevelBuildingLighthouse_v01",
-                "Campfire_2_32x32",
-                "ShopInteriorObjects_",
-                "NPCGuardian_V01",
-                "NpcBlaksmith",
-                "Campfire_32x32",
-                "NPCOldManJack",
-                "DecorationWeaponStand",
-                "DecorationOnBeach",
-                "DecorationMarketplace",
-                "NPCMerchant",
-                "DecorationAngelStatue",
-                "Apple",
-                "LakeFloatingRock_V03",
-                "DecorationBeachSeagull",
-                "Tent"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
             "id": "473914f6-6050-45a8-994d-a3899f67ef8d",
             "label": "beachSide_BeachDeck_1",
             "scope": "CLASS",
@@ -472,44 +437,6 @@
             "y": -416,
             "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
             "layerName": "BeachSide/Stairs",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "StoneFance.",
-                "BeachWaterAni_V01",
-                "DeckOnTheBeach",
-                "FishingBoat_V01R",
-                "BeachStairs_V01R",
-                "BeachTree_V1",
-                "Ship_V01-Sheet",
-                "SeaLevelBuildingLighthouse_v01",
-                "Campfire_2_32x32",
-                "ShopInteriorObjects_",
-                "NPCGuardian_V01",
-                "NpcBlaksmith",
-                "Campfire_32x32",
-                "NPCOldManJack",
-                "DecorationWeaponStand",
-                "DecorationOnBeach",
-                "DecorationMarketplace",
-                "NPCMerchant",
-                "DecorationAngelStatue",
-                "Apple",
-                "LakeFloatingRock_V03",
-                "DecorationBeachSeagull",
-                "Tent"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "d28791f0-d697-4afb-9ea9-fe00d7f4a797",
-            "label": "beachSide_Ship_1",
-            "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
-            "layerName": "BeachSide/Ship",
             "tilesets": [
                 "GroundTileset",
                 "RoadStone",
@@ -655,82 +582,6 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "02ebd1d9-f204-4d7e-bb16-73a20d7648aa",
-            "label": "decoration_DecorationFountian_1",
-            "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
-            "layerName": "Decoration/DecorationFountian",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "StoneFance.",
-                "BeachWaterAni_V01",
-                "DeckOnTheBeach",
-                "FishingBoat_V01R",
-                "BeachStairs_V01R",
-                "BeachTree_V1",
-                "Ship_V01-Sheet",
-                "SeaLevelBuildingLighthouse_v01",
-                "Campfire_2_32x32",
-                "ShopInteriorObjects_",
-                "NPCGuardian_V01",
-                "NpcBlaksmith",
-                "Campfire_32x32",
-                "NPCOldManJack",
-                "DecorationWeaponStand",
-                "DecorationOnBeach",
-                "DecorationMarketplace",
-                "NPCMerchant",
-                "DecorationAngelStatue",
-                "Apple",
-                "LakeFloatingRock_V03",
-                "DecorationBeachSeagull",
-                "Tent"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "a353da5d-a053-46d3-ad88-b4b67a2218e8",
-            "label": "decoration_Campfire_1",
-            "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
-            "layerName": "Decoration/Campfire",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "StoneFance.",
-                "BeachWaterAni_V01",
-                "DeckOnTheBeach",
-                "FishingBoat_V01R",
-                "BeachStairs_V01R",
-                "BeachTree_V1",
-                "Ship_V01-Sheet",
-                "SeaLevelBuildingLighthouse_v01",
-                "Campfire_2_32x32",
-                "ShopInteriorObjects_",
-                "NPCGuardian_V01",
-                "NpcBlaksmith",
-                "Campfire_32x32",
-                "NPCOldManJack",
-                "DecorationWeaponStand",
-                "DecorationOnBeach",
-                "DecorationMarketplace",
-                "NPCMerchant",
-                "DecorationAngelStatue",
-                "Apple",
-                "LakeFloatingRock_V03",
-                "DecorationBeachSeagull",
-                "Tent"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
             "id": "e368a111-5c03-47c0-85a7-b65e4e8eee90",
             "label": "decoration_Decoration_1",
             "scope": "CLASS",
@@ -845,44 +696,6 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "82207a47-826c-4010-867a-b6b5d322a7b7",
-            "label": "decoration_DecorationBeachside_1",
-            "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
-            "layerName": "Decoration/DecorationBeachside",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "StoneFance.",
-                "BeachWaterAni_V01",
-                "DeckOnTheBeach",
-                "FishingBoat_V01R",
-                "BeachStairs_V01R",
-                "BeachTree_V1",
-                "Ship_V01-Sheet",
-                "SeaLevelBuildingLighthouse_v01",
-                "Campfire_2_32x32",
-                "ShopInteriorObjects_",
-                "NPCGuardian_V01",
-                "NpcBlaksmith",
-                "Campfire_32x32",
-                "NPCOldManJack",
-                "DecorationWeaponStand",
-                "DecorationOnBeach",
-                "DecorationMarketplace",
-                "NPCMerchant",
-                "DecorationAngelStatue",
-                "Apple",
-                "LakeFloatingRock_V03",
-                "DecorationBeachSeagull",
-                "Tent"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
             "id": "1ccc96fb-d368-49e2-b5ba-4501873dabbd",
             "label": "decoration_DecorartionSunScreen_1",
             "scope": "CLASS",
@@ -890,154 +703,6 @@
             "y": -416,
             "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
             "layerName": "Decoration/DecorartionSunScreen",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "StoneFance.",
-                "BeachWaterAni_V01",
-                "DeckOnTheBeach",
-                "FishingBoat_V01R",
-                "BeachStairs_V01R",
-                "BeachTree_V1",
-                "Ship_V01-Sheet",
-                "SeaLevelBuildingLighthouse_v01",
-                "Campfire_2_32x32",
-                "ShopInteriorObjects_",
-                "NPCGuardian_V01",
-                "NpcBlaksmith",
-                "Campfire_32x32",
-                "NPCOldManJack",
-                "DecorationWeaponStand",
-                "DecorationOnBeach",
-                "DecorationMarketplace",
-                "NPCMerchant",
-                "DecorationAngelStatue",
-                "Apple",
-                "LakeFloatingRock_V03",
-                "DecorationBeachSeagull",
-                "Tent"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "15f84daa-9eba-4b8e-adf5-85b5e5a7e197",
-            "label": "nPC_NPCMerchant_1",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
-            "layerName": "NPC/NPCMerchant",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "StoneFance.",
-                "BeachWaterAni_V01",
-                "DeckOnTheBeach",
-                "FishingBoat_V01R",
-                "BeachStairs_V01R",
-                "BeachTree_V1",
-                "Ship_V01-Sheet",
-                "SeaLevelBuildingLighthouse_v01",
-                "Campfire_2_32x32",
-                "ShopInteriorObjects_",
-                "NPCGuardian_V01",
-                "NpcBlaksmith",
-                "Campfire_32x32",
-                "NPCOldManJack",
-                "DecorationWeaponStand",
-                "DecorationOnBeach",
-                "DecorationMarketplace",
-                "NPCMerchant",
-                "DecorationAngelStatue",
-                "Apple",
-                "LakeFloatingRock_V03",
-                "DecorationBeachSeagull",
-                "Tent"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "550f8022-6a99-45a7-8d2a-5bbc7c6024b3",
-            "label": "nPC_NPCCapitan_1",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
-            "layerName": "NPC/NPCCapitan",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "StoneFance.",
-                "BeachWaterAni_V01",
-                "DeckOnTheBeach",
-                "FishingBoat_V01R",
-                "BeachStairs_V01R",
-                "BeachTree_V1",
-                "Ship_V01-Sheet",
-                "SeaLevelBuildingLighthouse_v01",
-                "Campfire_2_32x32",
-                "ShopInteriorObjects_",
-                "NPCGuardian_V01",
-                "NpcBlaksmith",
-                "Campfire_32x32",
-                "NPCOldManJack",
-                "DecorationWeaponStand",
-                "DecorationOnBeach",
-                "DecorationMarketplace",
-                "NPCMerchant",
-                "DecorationAngelStatue",
-                "Apple",
-                "LakeFloatingRock_V03",
-                "DecorationBeachSeagull",
-                "Tent"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "bb8b410d-4ae8-4c93-862b-f6489cfe134d",
-            "label": "nPC_NPCBlackSmith_1",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
-            "layerName": "NPC/NPCBlackSmith",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "StoneFance.",
-                "BeachWaterAni_V01",
-                "DeckOnTheBeach",
-                "FishingBoat_V01R",
-                "BeachStairs_V01R",
-                "BeachTree_V1",
-                "Ship_V01-Sheet",
-                "SeaLevelBuildingLighthouse_v01",
-                "Campfire_2_32x32",
-                "ShopInteriorObjects_",
-                "NPCGuardian_V01",
-                "NpcBlaksmith",
-                "Campfire_32x32",
-                "NPCOldManJack",
-                "DecorationWeaponStand",
-                "DecorationOnBeach",
-                "DecorationMarketplace",
-                "NPCMerchant",
-                "DecorationAngelStatue",
-                "Apple",
-                "LakeFloatingRock_V03",
-                "DecorationBeachSeagull",
-                "Tent"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "6d34adbb-1c85-48f4-bb72-958affaa949c",
-            "label": "nPC_NPCGarda_1",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "e3c4ab40-5783-4041-b082-00a531186af3",
-            "layerName": "NPC/NPCGarda",
             "tilesets": [
                 "GroundTileset",
                 "RoadStone",
@@ -1076,8 +741,8 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": 497.4684991457542,
-            "y": 356.6812745568676
+            "x": 481,
+            "y": 451
         },
         {
             "type": "TilemapLayer",
@@ -1116,6 +781,277 @@
                 "DecorationBeachSeagull",
                 "Tent"
             ]
+        },
+        {
+            "prefabId": "c5295ea5-b7f5-4391-9fc6-8c5495a42d18",
+            "id": "c8c40885-2655-4055-bb84-0c641692fd7e",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "oldManJackNpcPrefab",
+            "scope": "CLASS",
+            "x": 386,
+            "y": 427
+        },
+        {
+            "type": "Sprite",
+            "id": "9da27106-57f6-42ea-bb5d-632151805551",
+            "label": "npcBlackSmithRight",
+            "scope": "CLASS",
+            "texture": {
+                "key": "NpcBlaksmith",
+                "frame": 0
+            },
+            "x": 196,
+            "y": 612,
+            "scaleX": 1.5,
+            "scaleY": 1.5,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcBlackSmithRight"
+        },
+        {
+            "type": "Sprite",
+            "id": "58abc69b-4c8e-40f8-aef8-ab3cb474d2c9",
+            "label": "npcCapitan",
+            "scope": "CLASS",
+            "texture": {
+                "key": "NPCOldManJack",
+                "frame": 0
+            },
+            "x": 832,
+            "y": 160,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcOldManJack"
+        },
+        {
+            "type": "Image",
+            "id": "44d24eb9-73bf-4961-8447-5bc0f01be61e",
+            "label": "NpcGuardian_2",
+            "scope": "CLASS",
+            "texture": {
+                "key": "NPCGuardian_V01",
+                "frame": 2
+            },
+            "x": -352,
+            "y": 544,
+            "scaleX": 1.5,
+            "scaleY": 1.5
+        },
+        {
+            "type": "Image",
+            "id": "f5642066-adfa-4d70-ad06-9fb6c78bee8f",
+            "label": "NpcGuardian_3 ",
+            "scope": "CLASS",
+            "texture": {
+                "key": "NPCGuardian_V01",
+                "frame": 1
+            },
+            "x": 960,
+            "y": 576,
+            "scaleX": 1.5,
+            "scaleY": 1.5
+        },
+        {
+            "type": "Image",
+            "id": "1e65702c-0772-4697-a9b6-381551d1c4de",
+            "label": "NpcGuardian_5",
+            "scope": "CLASS",
+            "texture": {
+                "key": "NPCGuardian_V01",
+                "frame": 3
+            },
+            "x": 1413,
+            "y": 450,
+            "scaleX": 1.5,
+            "scaleY": 1.5
+        },
+        {
+            "type": "Image",
+            "id": "e73263c3-57e6-4cea-8afa-74a5b843a503",
+            "label": "NpcGuardian_4",
+            "scope": "CLASS",
+            "texture": {
+                "key": "NPCGuardian_V01",
+                "frame": 3
+            },
+            "x": 1413,
+            "y": 365,
+            "scaleX": 1.5,
+            "scaleY": 1.5
+        },
+        {
+            "type": "Image",
+            "id": "f76dd74e-f62f-439f-8031-8c1823746383",
+            "label": "NpcMerchant",
+            "scope": "CLASS",
+            "texture": {
+                "key": "NPCMerchant",
+                "frame": 3
+            },
+            "x": 801,
+            "y": 576,
+            "scaleX": 1.5,
+            "scaleY": 1.5
+        },
+        {
+            "type": "Sprite",
+            "id": "0e771ee7-eaef-497c-88de-2de15d190641",
+            "label": "campCauldron",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Campfire_2_32x32",
+                "frame": 0
+            },
+            "x": 945,
+            "y": 64,
+            "animationPlayMethod": 1,
+            "animationKey": "CampCauldron"
+        },
+        {
+            "type": "Sprite",
+            "id": "556205f2-0b3f-4623-92ca-d9f400567d0a",
+            "label": "campfire",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Campfire_32x32",
+                "frame": 0
+            },
+            "x": 144,
+            "y": 608,
+            "animationPlayMethod": 1,
+            "animationKey": "Campfire"
+        },
+        {
+            "type": "Image",
+            "id": "c1669a5f-96c0-42f4-ad24-df4643603067",
+            "label": "NpcGuardian",
+            "scope": "CLASS",
+            "texture": {
+                "key": "NPCGuardian_V01",
+                "frame": 2
+            },
+            "x": -352,
+            "y": 219,
+            "scaleX": 1.5,
+            "scaleY": 1.5
+        },
+        {
+            "type": "Sprite",
+            "id": "dda2633b-ef42-4405-be4e-1d7ec7d069d4",
+            "label": "angelStatue",
+            "scope": "CLASS",
+            "texture": {
+                "key": "DecorationAngelStatue",
+                "frame": 0
+            },
+            "x": 496,
+            "y": 326,
+            "animationPlayMethod": 1,
+            "animationKey": "AngelStatue"
+        },
+        {
+            "type": "Sprite",
+            "id": "6eeb4396-9fb9-4210-ba30-2f3c98157b5c",
+            "label": "bigShip",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Ship_V01-Sheet",
+                "frame": 0
+            },
+            "x": 1800,
+            "y": 164,
+            "animationPlayMethod": 1,
+            "animationKey": "BigShip"
+        },
+        {
+            "type": "Sprite",
+            "id": "52fc83f6-3aa9-4e7b-9e8b-3a8a57d59b02",
+            "label": "floatingCliff",
+            "scope": "CLASS",
+            "texture": {
+                "key": "LakeFloatingRock_V03",
+                "frame": 0
+            },
+            "x": 1568,
+            "y": 958,
+            "animationPlayMethod": 1,
+            "animationKey": "FloatingCliff"
+        },
+        {
+            "type": "Image",
+            "id": "8a839442-4bb6-4720-8f83-435b0b59e830",
+            "label": "NpcGuardian_1",
+            "scope": "CLASS",
+            "texture": {
+                "key": "NPCGuardian_V01",
+                "frame": 3
+            },
+            "x": 2560,
+            "scaleX": 1.5,
+            "scaleY": 1.5
+        },
+        {
+            "type": "Image",
+            "id": "3af278e3-e81b-4da2-aeee-b4ad164f3ade",
+            "label": "Deck",
+            "scope": "CLASS",
+            "texture": {
+                "key": "DeckOnTheBeach",
+                "frame": 4
+            },
+            "x": 1490,
+            "y": 416
+        },
+        {
+            "type": "Image",
+            "id": "43e74f07-133a-48cc-85c7-d63c736c25c9",
+            "label": "Deck_1",
+            "scope": "CLASS",
+            "texture": {
+                "key": "DeckOnTheBeach",
+                "frame": 4
+            },
+            "x": 1554,
+            "y": 416
+        },
+        {
+            "type": "Image",
+            "id": "8c1b0aae-8554-45c4-8c64-66fa93d8e58f",
+            "label": "Deck_2",
+            "scope": "CLASS",
+            "texture": {
+                "key": "DeckOnTheBeach",
+                "frame": 4
+            },
+            "x": 1618,
+            "y": 416
+        },
+        {
+            "type": "Image",
+            "id": "3feb80d8-e78f-41ea-b0e1-74cf3fc6ce1e",
+            "label": "Deck_3",
+            "scope": "CLASS",
+            "texture": {
+                "key": "DeckOnTheBeach",
+                "frame": 4
+            },
+            "x": 1682,
+            "y": 416
+        },
+        {
+            "type": "Sprite",
+            "id": "a3cfef1b-2fe2-4556-87c4-ac73e31aa8fa",
+            "label": "fishingShip",
+            "scope": "CLASS",
+            "texture": {
+                "key": "FishingBoat_V01R",
+                "frame": 0
+            },
+            "x": 1664,
+            "y": 542,
+            "animationPlayMethod": 1,
+            "animationKey": "fishingShip"
         }
     ],
     "plainObjects": [
