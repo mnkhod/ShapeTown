@@ -54,9 +54,9 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 			onComplete: () => {
 				// alert("Add Tools Icon to Inventory")
 				this.itemHud.visible = true;
-				this.itemHud.addItem("IconBaseTools",0,1)
-				this.itemHud.addItem("IconBaseTools",1,2)
-				this.itemHud.addItem("IconBaseTools",2,3)
+				this.itemHud.addItem("WATERING_CAN","IconBaseTools",0)
+				this.itemHud.addItem("HOE","IconBaseTools",1)
+				this.itemHud.addItem("PICK_AXE","IconBaseTools",2)
 			}
 		},
 		{ msg: `Alright, I am giving you a Quest. Therefore, you may be spot on your Quest Book.` },
@@ -71,7 +71,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		{
 			msg: `Take these.`,
 			onComplete: () => {
-				this.itemHud.addItem("SeedBag",0,4)
+				this.itemHud.addItem("CARROT_SEED","SeedBag",0)
 			}
 		},
 		{

@@ -44,7 +44,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 			}
 
 			if(this.isReadyForHarvest){
-				this.scene.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,5,1)
+				this.scene.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
 				this.destroy();
 				return;
 			}

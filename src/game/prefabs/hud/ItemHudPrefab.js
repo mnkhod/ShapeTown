@@ -242,16 +242,23 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 		);
 	}
 
-	// this.itemHudPrefab.addItem("IconBaseTools",0,1)
-	// this.itemHudPrefab.addItem("IconBaseTools",1,2)
-	// this.itemHudPrefab.addItem("IconBaseTools",2,3)
-	// this.itemHudPrefab.addItem("SeedBag",0,4)
 
-	addItem(key,textureName,textureId,itemNum,amount = 0){
-		let itemIndex = itemNum - 1;
+	addItem(key,textureName,textureId,amount = 0){
+		let hasEmptySlot = this.itemData.filter((x) => x == null).length > 0 ? true : false;
+		if(!hasEmptySlot){
+			this.scene.alertPrefab.alert("No Empty Slot")
+			return;
+		};
+
+		let hasItemAlready = this.itemData.filter((x) => x == key).length > 0 ? true : false;
+		if(hasItemAlready){
+			this.scene.alertPrefab.alert("Already Has Item")
+			return;
+		};
+
+		let itemIndex = this.itemData.findIndex((x) => x == null)
 
 		this.itemData[itemIndex] = key
-
 
 		this.items[itemIndex].visible = true;
 		this.items[itemIndex].setTexture(textureName, textureId)
@@ -263,7 +270,6 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 			let currAmount = parseInt(this.itemCounters[itemIndex].text)
 			this.itemCounters[itemIndex].text = (currAmount + amount).toString();
 		}
-
 	}
 
 	/* END-USER-CODE */
