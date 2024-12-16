@@ -59,6 +59,9 @@ export default class MarketScene extends Phaser.Scene {
 		// must_Background_Beach_1
 		marketMap.createLayer("Must Background/Beach", ["RoadStone","GroundTileset"], -768, -416);
 
+		// decoration_DecorationBeachside_1
+		const decoration_DecorationBeachside_1 = marketMap.createLayer("Decoration/DecorationBeachside", ["DecorationOnBeach","LakeFloatingRock_V03"], -768, -416);
+
 		// must_Background_SeaBorder_1
 		const must_Background_SeaBorder_1 = marketMap.createLayer("Must Background/SeaBorder", ["BeachWaterAni_V01"], -768, -416);
 
@@ -199,6 +202,7 @@ export default class MarketScene extends Phaser.Scene {
 		const fishingShip = this.add.sprite(1664, 542, "FishingBoat_V01R", 0);
 		fishingShip.play("fishingShip");
 
+		this.decoration_DecorationBeachside_1 = decoration_DecorationBeachside_1;
 		this.must_Background_SeaBorder_1 = must_Background_SeaBorder_1;
 		this.must_Background_Fence_1 = must_Background_Fence_1;
 		this.tree_TreeBorder = tree_TreeBorder;
@@ -241,6 +245,8 @@ export default class MarketScene extends Phaser.Scene {
 		this.events.emit("scene-awake");
 	}
 
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	decoration_DecorationBeachside_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	must_Background_SeaBorder_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -359,7 +365,8 @@ export default class MarketScene extends Phaser.Scene {
 		this.bigShip.setDepth(topLayerDepth);
 		this.floatingCliff.setDepth(floatingCliffDepth);
 		this.npcGuardian_5.setDepth(topLayerDepth);
-		this.fishingShip.setDepth(topLayerDepth)
+		this.fishingShip.setDepth(topLayerDepth);
+		this.decoration_ClockTower_1.setDepth(topLayerDepth);
 
     	const frames = [32, 36, 40, 44, 48, 52];
     	let currentFrameIndex = 0;
@@ -398,6 +405,10 @@ export default class MarketScene extends Phaser.Scene {
     	this.physics.add.collider(this.playerPrefab, this.decoration_ClockTower_1);
     	this.decoration_ClockTower_1.setCollisionBetween(0, 10000);
 		// this.decoration_ClockTower_1.renderDebug(this.add.graphics());
+
+    	this.physics.add.collider(this.playerPrefab, this.decoration_DecorationBeachside_1);
+    	this.decoration_DecorationBeachside_1.setCollisionBetween(0, 10000);
+		// this.decoration_DecorationBeachside_1.renderDebug(this.add.graphics());
 
     	this.physics.add.collider(this.playerPrefab, this.decoration_InfomationBoard_1);
     	this.decoration_InfomationBoard_1.setCollisionBetween(0, 10000);
