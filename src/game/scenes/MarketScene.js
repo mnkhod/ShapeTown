@@ -344,8 +344,11 @@ export default class MarketScene extends Phaser.Scene {
 	// Write your code here
 
 	create() {
-
 		this.editorCreate();
+
+		this.itemHudPrefab.setDepth(100);
+		this.questBookPrefab.setDepth(100)
+		this.playerPrefab.setDepth(50)
 
 		const backgroundDepth = 0;
     	const waterDepth = 5;

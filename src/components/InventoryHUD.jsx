@@ -43,12 +43,14 @@ const InventorySlot = ({ item, onItemClick, slotIndex, onItemDrop }) => {
 };
 
 const InventoryGrid = ({ onClose }) => {
-  const [items, setItems] = useState(Array(36).fill(null).map((_, index) => {
-    if (index === 0) return { id: '1', icon: '/assets/files/image 1.png', name: 'Item 1', quantity: 1 };
-    if (index === 1) return { id: '2', icon: '/assets/files/image 2.png', name: 'Item 2', quantity: 1 };
-    if (index === 2) return { id: '3', icon: '/assets/files/image 3.png', name: 'Item 3', quantity: 5 };
-    return null;
-  }));
+  // const [items, setItems] = useState(Array(36).fill(null).map((_, index) => {
+  //   if (index === 0) return { id: '1', icon: '/assets/files/image 1.png', name: 'Item 1', quantity: 1 };
+  //   if (index === 1) return { id: '2', icon: '/assets/files/image 2.png', name: 'Item 2', quantity: 1 };
+  //   if (index === 2) return { id: '3', icon: '/assets/files/image 3.png', name: 'Item 3', quantity: 5 };
+  //   return null;
+  // }));
+
+  const [items, setItems] = useState([]);
 
   const handleItemClick = (item, slotIndex) => {
     if (item) {

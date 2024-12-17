@@ -319,12 +319,12 @@ export default class TutorialScene extends Phaser.Scene {
 			this.itemHudPrefab.addItem("HOE","IconBaseTools",1)
 			this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
 			this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
-			this.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
+			// this.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
 		}, {}, this)
 
-		this.reactEvent.on('blockchain-account', (address) => {
-            console.log(address);
-        });
+		// this.reactEvent.on('blockchain-account', (address) => {
+        //     console.log(address);
+        // });
 	}
 
 	/* END-USER-CODE */

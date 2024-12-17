@@ -43,8 +43,13 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 				return;
 			}
 
+			if(this.isWatered && this.isReadyForHarvest == false){
+				this.scene.alertPrefab.alert("Already Watered")
+				return;
+			}
+
 			if(this.isReadyForHarvest){
-				this.scene.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
+				this.scene.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1,true)
 				this.destroy();
 				return;
 			}
@@ -73,6 +78,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 			case "WATERED":
 				timer.delayedCall(1000, () => {
 					this.state = "CARROT_LEVEL_1"
+					this.isWatered = true;
 					this.setupBasedOnState();
 				},{},this);
 				break;
