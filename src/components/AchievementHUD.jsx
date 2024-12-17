@@ -55,7 +55,7 @@ const AchievementHUD = ({ onClose }) => {
     try{
       let result = await axios(config)
       if(result.data.ownedNfts){
-        let results = result.data.ownedNfts.filter((nft) => nft.contract.address == "0x3A711d5E7e4d69eBef1B7e1b3715f463619A254c").map((nft) => {
+        let results = result.data.ownedNfts.filter((nft) => nft.contract.address == "0x3a711d5e7e4d69ebef1b7e1b3715f463619a254c").map((nft) => {
           return {
             id: nft.id.tokenId,
             title: nft.metadata.name,
@@ -64,6 +64,9 @@ const AchievementHUD = ({ onClose }) => {
             unlocked: true            
           }
         })
+
+        console.log(results);
+        
 
         if(results.length > 9){
           setNfts(results.slice(9-1))
