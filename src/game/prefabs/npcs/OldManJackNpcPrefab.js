@@ -105,6 +105,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 				if(hasNFT){
 					this.scene.alertPrefab.alert("Already Has Achievement NFT")
 				}else{
+					this.scene.alertPrefab.alert("Minting Has Started")
 					await mintNft({
 						onSuccess: () => this.scene.alertPrefab.alert("First Harvest Achievement"),
 						onError: () => this.scene.alertPrefab.alert("Contract Error Occurred"),
@@ -146,7 +147,7 @@ async function mintNft({ onSuccess , onError }){
 
 	var config = {
 		method: 'get',
-		url: `${baseURL}/test/nft/create/${metamaskAccount}`
+		url: `${baseURL}/main/nft/create/${metamaskAccount}`
 	};
 
 	try{
@@ -163,7 +164,8 @@ async function mintNft({ onSuccess , onError }){
 async function checkIfHasNFT(){
 	let metamaskAccount = await fetchMetamaskAccount()
 	const apiKey = import.meta.env.VITE_ALCHEMY_API;
-	const baseURL = `https://shape-sepolia.g.alchemy.com/v2/${apiKey}/getNFTs/`;
+	// const baseURL = `https://shape-sepolia.g.alchemy.com/v2/${apiKey}/getNFTs/`;
+	const baseURL = `https://shape-mainnet.g.alchemy.com/v2/${apiKey}/getNFTs/`;
 	
 	var config = {
 	  method: 'get',
@@ -173,7 +175,7 @@ async function checkIfHasNFT(){
 	try{
 	  let result = await axios(config)
 	  if(result.data.ownedNfts){
-		let nfts = result.data.ownedNfts.filter((nft) => nft.contract.address == "0x41c9509461908fd608cffe07d6a1b99cf744649c")
+		let nfts = result.data.ownedNfts.filter((nft) => nft.contract.address == "0x3A711d5E7e4d69eBef1B7e1b3715f463619A254c")
 		if(nfts.length > 0) return true
 	  }
 	}catch(e){ 
