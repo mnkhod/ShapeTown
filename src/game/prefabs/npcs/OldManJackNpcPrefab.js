@@ -30,6 +30,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		// Write your code here.
 		scene.events.on('create', this.prefabCreateCycle, this);
 		npc.setInteractive({ useHandCursor: true });
+		this.isMinting = false;
 
 		/* END-USER-CTR-CODE */
 	}
@@ -100,16 +101,24 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 				return;
 			}
 
+			if(this.isMinting){
+				this.scene.alertPrefab.alert("Minting")
+				return;
+			}
+
 			if(this.itemHud.checkItem("CARROT")){
 				let hasNFT = await checkIfHasNFT()
 				if(hasNFT){
 					this.scene.alertPrefab.alert("Already Has Achievement NFT")
 				}else{
+					this.isMinting = true;
 					this.scene.alertPrefab.alert("Minting Has Started")
 					await mintNft({
 						onSuccess: () => this.scene.alertPrefab.alert("First Harvest Achievement"),
 						onError: () => this.scene.alertPrefab.alert("Contract Error Occurred"),
 					})
+
+					this.isMinting = false;
 				}
 				
 			}else{
