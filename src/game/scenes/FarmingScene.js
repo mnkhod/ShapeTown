@@ -4,6 +4,10 @@
 /* START OF COMPILED CODE */
 
 import PlayerPrefab from "../prefabs/PlayerPrefab";
+import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
+import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
+import MessagePrefab from "../prefabs/hud/MessagePrefab";
+import AlertPrefab from "../prefabs/hud/AlertPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -124,6 +128,25 @@ export default class FarmingScene extends Phaser.Scene {
 		sceneTileNext.body.allowGravity = false;
 		sceneTileNext.body.setSize(32, 200, false);
 
+		// questBookPrefab
+		const questBookPrefab = new QuestBookPrefab(this, 32, 736);
+		this.add.existing(questBookPrefab);
+
+		// itemHudPrefab
+		const itemHudPrefab = new ItemHudPrefab(this, 624.0380088210627, 714.0380069435164);
+		this.add.existing(itemHudPrefab);
+
+		// messagePrefab
+		const messagePrefab = new MessagePrefab(this, 723.2936950522075, -0.19542285335897702);
+		this.add.existing(messagePrefab);
+
+		// alertPrefab
+		const alertPrefab = new AlertPrefab(this, -0.06503853301296658, 0.012522237048884222);
+		this.add.existing(alertPrefab);
+
+		// itemHudPrefab (prefab fields)
+		itemHudPrefab.player = playerPrefab;
+
 		this.render_BackGround_1 = render_BackGround_1;
 		this.render_RoadStone_JustRender__1 = render_RoadStone_JustRender__1;
 		this.render_FenceWooden_Make_a_Collider__1 = render_FenceWooden_Make_a_Collider__1;
@@ -147,6 +170,10 @@ export default class FarmingScene extends Phaser.Scene {
 		this.playerPrefab = playerPrefab;
 		this.sceneTilePrev = sceneTilePrev;
 		this.sceneTileNext = sceneTileNext;
+		this.questBookPrefab = questBookPrefab;
+		this.itemHudPrefab = itemHudPrefab;
+		this.messagePrefab = messagePrefab;
+		this.alertPrefab = alertPrefab;
 		this.farmingMap = farmingMap;
 
 		this.events.emit("scene-awake");
@@ -198,6 +225,14 @@ export default class FarmingScene extends Phaser.Scene {
 	sceneTilePrev;
 	/** @type {Phaser.Physics.Arcade.Sprite} */
 	sceneTileNext;
+	/** @type {QuestBookPrefab} */
+	questBookPrefab;
+	/** @type {ItemHudPrefab} */
+	itemHudPrefab;
+	/** @type {MessagePrefab} */
+	messagePrefab;
+	/** @type {AlertPrefab} */
+	alertPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	farmingMap;
 

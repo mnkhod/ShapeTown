@@ -794,6 +794,56 @@
             "allowGravity": false,
             "body.width": 32,
             "body.height": 200
+        },
+        {
+            "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
+            "id": "0e11033d-ee67-4ec7-8927-655c74df62b7",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "questBookPrefab",
+            "scope": "CLASS",
+            "x": 32,
+            "y": 736
+        },
+        {
+            "prefabId": "a69b4058-db0e-4e31-b023-568805698db8",
+            "id": "bbe02a17-f6f3-41ca-a10f-e283c93fc183",
+            "unlock": [
+                "x",
+                "y",
+                "player"
+            ],
+            "label": "itemHudPrefab",
+            "scope": "CLASS",
+            "player": "playerPrefab",
+            "x": 624.0380088210627,
+            "y": 714.0380069435164
+        },
+        {
+            "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
+            "id": "26d701ed-d6c1-47bf-a8c2-1c5143c15389",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "messagePrefab",
+            "scope": "CLASS",
+            "x": 723.2936950522075,
+            "y": -0.19542285335897702
+        },
+        {
+            "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
+            "id": "7b8be664-6fe8-4d6e-a6e8-228c8a47f7c7",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "alertPrefab",
+            "scope": "CLASS",
+            "x": -0.06503853301296658,
+            "y": 0.012522237048884222
         }
     ],
     "plainObjects": [
