@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const commonTokens = [
   { symbol: 'GOLD', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Merchant/IconGold.png' },
-  { symbol: 'ETHEREUM', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/ethereum.png' },
+  { symbol: 'ETHEREUM', chain: 'Ethereum', balance: 0, image: 'assets/TradeIcons/ethereum.png' },
   { symbol: 'BLUEBERRY', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Farmer/blueberry.png' },
   { symbol: 'CABBAGE', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Farmer/Cabbage.png' },
   { symbol: 'CARROT', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Farmer/carrot.png' },
@@ -15,7 +15,7 @@ const commonTokens = [
 
 const tokenList = [
   { symbol: 'GOLD', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Merchant/IconGold.png' },
-  { symbol: 'ETHEREUM', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/ethereum.png' },
+  { symbol: 'ETHEREUM', name: 'Ethereum', balance: 0, image: 'assets/TradeIcons/ethereum.png' },
   { symbol: 'BLUEBERRY', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/blueberry.png' },
   { symbol: 'CABBAGE', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/Cabbage.png' },
   { symbol: 'CARROT', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/carrot.png' },
@@ -30,6 +30,20 @@ const tokenList = [
 
 export default function TokenSelect({ onClose, onTokenSelect }) {
   const [searchText, setSearchText] = useState('');
+  const modalRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const filteredTokens = tokenList.filter(token => 
     token.symbol.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -38,7 +52,7 @@ export default function TokenSelect({ onClose, onTokenSelect }) {
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-yellow-100 border-4 border-yellow-900 rounded-2xl w-auto p-6 relative">
+      <div ref={modalRef} className="bg-yellow-100 border-4 border-yellow-900 rounded-2xl w-auto p-6 relative">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 text-yellow-900 hover:text-yellow-700"
@@ -52,7 +66,7 @@ export default function TokenSelect({ onClose, onTokenSelect }) {
 
         <input
           type="text"
-          placeholder="Search name or paste address"
+          placeholder="Search name"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           className="w-full px-4 py-3 bg-yellow-100 border-2 border-yellow-900 rounded-lg mb-4 focus:outline-none text-yellow-900"
