@@ -948,7 +948,7 @@
                 "key": "NPCGuardian_V01",
                 "frame": 3
             },
-            "x": 1406,
+            "x": 1395,
             "y": 544,
             "scaleX": 1.5,
             "scaleY": 1.5
@@ -962,7 +962,7 @@
                 "key": "NPCGuardian_V01",
                 "frame": 3
             },
-            "x": 1406,
+            "x": 1395,
             "y": 443,
             "scaleX": 1.5,
             "scaleY": 1.5

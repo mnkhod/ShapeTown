@@ -164,12 +164,12 @@ export default class MarketScene extends Phaser.Scene {
 		npc_Guard_5.scaleY = 1.5;
 
 		// Npc_Guard_3
-		const npc_Guard_3 = this.add.image(1406, 544, "NPCGuardian_V01", 3);
+		const npc_Guard_3 = this.add.image(1395, 544, "NPCGuardian_V01", 3);
 		npc_Guard_3.scaleX = 1.5;
 		npc_Guard_3.scaleY = 1.5;
 
 		// Npc_Guard_4
-		const npc_Guard_4 = this.add.image(1406, 443, "NPCGuardian_V01", 3);
+		const npc_Guard_4 = this.add.image(1395, 443, "NPCGuardian_V01", 3);
 		npc_Guard_4.scaleX = 1.5;
 		npc_Guard_4.scaleY = 1.5;
 
