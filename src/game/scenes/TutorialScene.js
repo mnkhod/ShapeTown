@@ -317,7 +317,7 @@ export default class TutorialScene extends Phaser.Scene {
 			this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
 			this.itemHudPrefab.addItem("HOE","IconBaseTools",1)
 			this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
-			this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0)
+			this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
 		}, {}, this)
 
 		this.reactEvent.on('blockchain-account', (address) => {

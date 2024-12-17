@@ -8,13 +8,11 @@ const uiConfig = {
     },
 };
 
-console.log(import.meta.env.ALCHEMY_API);
-
 export const config = createConfig({
     // if you don't want to leak api keys, you can proxy to a backend and set the rpcUrl instead here
     // get this from the app config you create at https://dashboard.alchemy.com/accounts?utm_source=demo_alchemy_com&utm_medium=referral&utm_campaign=demo_to_dashboard
     // transport: alchemy({ apiKey: import.meta.env.ALCHEMY_API }),
-    transport: alchemy({ apiKey: "W1jAAZ34DDUfsXtWZJ5XTX6EUJT7r5yf" }),
+    transport: alchemy({ apiKey: import.meta.env.VITE_ALCHEMY_API }),
     chain: sepolia,
     ssr: true, // set to false if you're not using server-side rendering
     enablePopupOauth: true,

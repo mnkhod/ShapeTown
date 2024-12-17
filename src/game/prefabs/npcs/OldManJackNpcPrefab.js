@@ -71,7 +71,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		{
 			msg: `Take these.`,
 			onComplete: () => {
-				this.itemHud.addItem("CARROT_SEED","SeedBag",0)
+				this.itemHud.addItem("CARROT_SEED","SeedBag",0,5)
 			}
 		},
 		{

@@ -243,7 +243,7 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 	}
 
 
-	addItem(key,textureName,textureId,amount = 0){
+	addItem(key,textureName,textureId,amount){
 		let hasEmptySlot = this.itemData.filter((x) => x == null).length > 0 ? true : false;
 		if(!hasEmptySlot){
 			this.scene.alertPrefab.alert("No Empty Slot")
@@ -264,11 +264,31 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 		this.items[itemIndex].setTexture(textureName, textureId)
 
 		this.itemCounters[itemIndex].visible = true;
-		if(amount == 0){
+		if(amount == undefined || amount == 0){
 			this.itemCounters[itemIndex].text = "1";
 		}else{
 			let currAmount = parseInt(this.itemCounters[itemIndex].text)
 			this.itemCounters[itemIndex].text = (currAmount + amount).toString();
+		}
+	}
+
+	useItem(key){
+		let hasItemAlready = this.itemData.filter((x) => x == key).length > 0 ? true : false;
+		if(!hasItemAlready){
+			this.scene.alertPrefab.alert("Doesnt Have Item")
+			return;
+		};
+
+		let itemIndex = this.itemData.findIndex((id) => id == key)
+		let amount = parseInt(this.itemCounters[itemIndex].text)
+
+		if(amount - 1 <= 0){
+			this.itemCounters[itemIndex].text = "0"
+			this.itemCounters[itemIndex].visible = false
+			this.items[itemIndex].visible = false
+			this.itemData[itemIndex] = null
+		}else{
+			this.itemCounters[itemIndex].text = (amount - 1).toString()
 		}
 	}
 

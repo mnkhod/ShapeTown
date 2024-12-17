@@ -38,7 +38,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 
 			let distance = this.getDistance(this.scene.playerPrefab,this)
 
-			if(distance > 60){
+			if(distance > 80){
 				this.scene.alertPrefab.alert("Too Far")
 				return;
 			}
@@ -139,6 +139,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 					this.scene.alertPrefab.alert("Select Seed")
 					break;
 				}
+				this.scene.itemHudPrefab.useItem("CARROT_SEED")
 
 				this.state = "PLANTED"
 				this.setupBasedOnState()

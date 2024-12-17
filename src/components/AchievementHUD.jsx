@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from "axios";
+import { ethers } from "ethers";
 
 const AchievementSlot = ({ achievement }) => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -14,7 +16,7 @@ const AchievementSlot = ({ achievement }) => {
         <div className="absolute inset-[20%]">
           {achievement && (
             <img 
-              src={`/assets/files/${achievement.image}`}
+              src={achievement.image}
               alt={achievement.title}
               className={`w-full h-full object-contain p-2 ${!achievement.unlocked ? 'opacity-30' : ''}`}
             />
@@ -33,6 +35,52 @@ const AchievementSlot = ({ achievement }) => {
 };
 
 const AchievementHUD = ({ onClose }) => {
+  const [nfts,setNfts] = useState([])
+
+  useEffect(() => {
+    fetchNftInfo()
+  },[])
+
+  async function fetchNftInfo(){
+    let metamaskAccount = await fetchMetamaskAccount()
+    const apiKey = import.meta.env.VITE_ALCHEMY_API;
+    const baseURL = `https://shape-sepolia.g.alchemy.com/v2/${apiKey}/getNFTs/`;
+
+    var config = {
+      method: 'get',
+      url: `${baseURL}?owner=${metamaskAccount}`
+    };
+
+    try{
+      let result = await axios(config)
+      if(result.data.ownedNfts){
+        let results = result.data.ownedNfts.filter((nft) => nft.contract.address == "0x41c9509461908fd608cffe07d6a1b99cf744649c").map((nft) => {
+          return {
+            id: nft.id.tokenId,
+            title: nft.metadata.name,
+            description: nft.metadata.description,
+            image: nft.metadata.image,
+            unlocked: true            
+          }
+        })
+
+        if(results.length > 9){
+          setNfts(results.slice(9-1))
+        }else{
+          setNfts(results)
+        }
+        
+      }
+    }catch(e){}
+
+  }
+
+  async function fetchMetamaskAccount(){
+    if(!window.ethereum || !window.ethereum.selectedAddress) return "0x081901916FF0eBff4573533D1b34D54029B89B07"
+    
+    return window.ethereum.selectedAddress 
+  }
+
   const achievements = [
     {
       id: 1,
@@ -123,7 +171,7 @@ const AchievementHUD = ({ onClose }) => {
             className="absolute inset-0 bg-[url('/assets/files/image%2072.png')] bg-cover bg-no-repeat"
           >
             <div className="w-full h-full grid grid-cols-3">
-              {achievements.map((achievement) => (
+              {nfts.map((achievement) => (
                 <AchievementSlot
                   key={achievement.id}
                   achievement={achievement}
@@ -143,7 +191,7 @@ AchievementHUD.propTypes = {
 
 AchievementSlot.propTypes = {
   achievement: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
     image: PropTypes.string,

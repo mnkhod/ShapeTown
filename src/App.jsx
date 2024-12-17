@@ -20,6 +20,7 @@ function App ()
 
     // Event emitted from the PhaserGame component
     const currentScene = (scene) => {   
+
     }
 
     const showModal = (id,scene) => {
