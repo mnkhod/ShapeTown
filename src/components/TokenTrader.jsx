@@ -5,7 +5,11 @@ import TokenSelect from './TokenSelect';
 export default function TokenTrader({ onTrade, balance = 0, onClose }) {
   const [fromAmount, setFromAmount] = useState('0.0');
   const [toAmount, setToAmount] = useState('0.0');
-  const [fromToken, setFromToken] = useState({ symbol: 'JEWEL', icon: '💎' });
+  const [fromToken, setFromToken] = useState({ 
+    symbol: 'GOLD', 
+    image: 'assets/TradeIcons/Merchant/IconGold.png',
+    name: 'Shape Token'
+  });
   const [toToken, setToToken] = useState(null);
   const [showTokenSelect, setShowTokenSelect] = useState(false);
   const [selectingFor, setSelectingFor] = useState(null);
@@ -60,7 +64,7 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
       case 'price':
         return 'The difference between the market price and estimated price due to trade size';
       case 'fee':
-        return 'A portion of each trade (0.30%) goes to liquidity providers and Jeweler stakers as a protocol incentive';
+        return 'A portion of each trade (0.30%) goes to liquidity providers as a protocol incentive';
       case 'route':
         return 'Route path your trade will take through different tokens';
       default:
@@ -118,7 +122,8 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
                 className="bg-orange-300 border-2 border-yellow-900 rounded px-2 py-1 hover:bg-orange-400 transition text-yellow-900"
               >
                 <span className="flex items-center gap-1">
-                  {fromToken?.icon} {fromToken?.symbol}
+                  <img src={fromToken?.image} alt={fromToken?.symbol} className="w-6 h-6" />
+                  {fromToken?.symbol}
                 </span>
               </button>
             </div>
@@ -142,7 +147,8 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
               >
                 {toToken ? (
                   <span className="flex items-center gap-1">
-                    {toToken.icon} {toToken.symbol}
+                    <img src={toToken.image} alt={toToken.symbol} className="w-6 h-6" />
+                    {toToken.symbol}
                   </span>
                 ) : (
                   'Select a Token'
@@ -153,7 +159,7 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
 
           {balance < parseFloat(fromAmount) && (
             <div className="text-center mb-4 bg-gray-200 border border-yellow-900 rounded p-2">
-              Insufficient JEWEL balance
+              Insufficient {fromToken.symbol} balance
             </div>
           )}
 
@@ -169,8 +175,8 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
               {[
                 { label: 'Minimum Received', value: `${(parseFloat(toAmount) * 0.99).toFixed(1)} ${toToken.symbol}`, type: 'minimum' },
                 { label: 'Price Impact', value: '2.52%', type: 'price' },
-                { label: 'Liquidity Provider Fee', value: `${(parseFloat(fromAmount) * 0.003).toFixed(6)} JEWEL`, type: 'fee' },
-                { label: 'Route', value: `JEWEL › DFKGOLD › ${toToken.symbol}`, type: 'route' }
+                { label: 'Liquidity Provider Fee', value: `${(parseFloat(fromAmount) * 0.003).toFixed(6)} ${fromToken.symbol}`, type: 'fee' },
+                { label: 'Route', value: `${fromToken.symbol} › ${toToken.symbol}`, type: 'route' }
               ].map((item) => (
                 <div key={item.type} className="flex justify-between items-center mb-2 relative">
                   <div className="flex items-center gap-1">

@@ -2,21 +2,30 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const commonTokens = [
-  { symbol: 'JEWEL', chain: 'DFK Chain', balance: 0, icon: '💎' },
-  { symbol: 'CRYSTAL', chain: 'Crystal', balance: 0, icon: '🔷' },
-  { symbol: 'ETH', chain: '', balance: 0, icon: '⬡' },
-  { symbol: 'AVAX', chain: 'Avalanche', balance: 0, icon: '🔺' },
-  { symbol: 'USDC', chain: '', balance: 0, icon: '💵' },
-  { symbol: 'KAIA', chain: '', balance: 0, icon: '🌿' },
-  { symbol: 'BTC.b', chain: 'BTC.b', balance: 0, icon: '₿' },
+  { symbol: 'GOLD', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Merchant/IconGold.png' },
+  { symbol: 'ETHEREUM', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/ethereum.png' },
+  { symbol: 'BLUEBERRY', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Farmer/blueberry.png' },
+  { symbol: 'CABBAGE', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Farmer/Cabbage.png' },
+  { symbol: 'CARROT', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Farmer/carrot.png' },
+  { symbol: 'GRAPES', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Farmer/grapes.png' },
+  { symbol: 'KIWI', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Farmer/kiwi.png' },
+  { symbol: 'PUMPKIN', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Farmer/Pupmkin.png' },
+  { symbol: 'SOYBEAN', chain: 'Shape', balance: 0, image: 'assets/TradeIcons/Farmer/SoyBean.png' },
 ];
 
 const tokenList = [
-  { symbol: 'JEWEL', name: 'DFK Chain', balance: 0, icon: '💎' },
-  { symbol: 'AVAX', name: 'Avalanche', balance: 0, icon: '🔺' },
-  { symbol: 'BTC.b', name: 'BTC.b', balance: 0, icon: '₿' },
-  { symbol: 'CRYSTAL', name: 'Crystal', balance: 0, icon: '🔷' },
-  { symbol: 'DFKAMBRTFY', name: 'Ambertaffy', balance: 0, icon: '🍬' },
+  { symbol: 'GOLD', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Merchant/IconGold.png' },
+  { symbol: 'ETHEREUM', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/ethereum.png' },
+  { symbol: 'BLUEBERRY', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/blueberry.png' },
+  { symbol: 'CABBAGE', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/Cabbage.png' },
+  { symbol: 'CARROT', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/carrot.png' },
+  { symbol: 'GRAPES', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/grapes.png' },
+  { symbol: 'KIWI', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/kiwi.png' },
+  { symbol: 'PUMPKIN', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/Pupmkin.png' },
+  { symbol: 'SOYBEAN', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/SoyBean.png' },
+  { symbol: 'STRAWBERRY', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/strawberry.png' },
+  { symbol: 'SWEET', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/Sweet potato.png' },
+  { symbol: 'WATERMELON', name: 'Shape Token', balance: 0, image: 'assets/TradeIcons/Farmer/watermelon.png' },
 ];
 
 export default function TokenSelect({ onClose, onTokenSelect }) {
@@ -32,7 +41,8 @@ export default function TokenSelect({ onClose, onTokenSelect }) {
       <div className="bg-yellow-100 border-4 border-yellow-900 rounded-2xl w-auto p-6 relative">
         <button 
           onClick={onClose}
-          className="absolute top-4 right-4 text-yellow-900 hover:text-yellow-900">
+          className="absolute top-4 right-4 text-yellow-900 hover:text-yellow-700"
+        >
           X
         </button>
 
@@ -61,9 +71,9 @@ export default function TokenSelect({ onClose, onTokenSelect }) {
                   onTokenSelect(token);
                   onClose();
                 }}
-                className="flex items-center gap-1 px-3 py-1.5 bg-yellow-50 border-2 border-yellow-900 rounded-lg hover:bg-yellow-50 text-yellow-900"
+                className="flex items-center gap-1 px-3 py-1.5 bg-yellow-50 border-2 border-yellow-900 rounded-lg hover:bg-yellow-100 text-yellow-900"
               >
-                <span>{token.icon}</span>
+                <img src={token.image} alt={token.symbol} className="w-6 h-6" />
                 <span>{token.symbol}</span>
               </button>
             ))}
@@ -82,7 +92,7 @@ export default function TokenSelect({ onClose, onTokenSelect }) {
                 className="w-full flex items-center justify-between p-3 hover:bg-yellow-300 border-b border-yellow-900 last:border-b-0"
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">{token.icon}</span>
+                  <img src={token.image} alt={token.symbol} className="w-8 h-8" />
                   <div className="text-left">
                     <div className="font-medium text-yellow-900">{token.symbol}</div>
                     <div className="text-sm text-yellow-800">{token.name}</div>
@@ -104,5 +114,5 @@ export default function TokenSelect({ onClose, onTokenSelect }) {
 
 TokenSelect.propTypes = {
   onClose: PropTypes.func.isRequired,
-  onTokenSelect: PropTypes.func.isRequired
+  onTokenSelect: PropTypes.func.isRequired,
 };
