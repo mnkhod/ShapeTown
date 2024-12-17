@@ -4,32 +4,40 @@ import Phaser from 'phaser';
 import { PhaserGame } from './game/PhaserGame';
 import AchievementHUD from './components/AchievementHUD';
 import InventoryHUD from './components/InventoryHUD';
+import TokenTrader from './components/TokenTrader';
 import { ethers } from "ethers";
 import { EventBus } from "./game/EventBus";
 
 
-function App ()
-{
+function App() {
     //  References to the PhaserGame component (game and scene are exposed)
     const phaserRef = useRef();
 
     const [showAchievements, setShowAchievements] = useState(false);
     const [showInventory, setShowInventory] = useState(false);
+    const [showTrader, setShowTrader] = useState(false);
 
     const [gameData] = useState({});
 
     // Event emitted from the PhaserGame component
-    const currentScene = (scene) => {   
+    const currentScene = (scene) => {
 
     }
 
-    const showModal = (id,scene) => {
+    const handleTrade = ({ fromAmount, fromToken, toToken }) => {
+        console.log('Trading:', { fromAmount, fromToken, toToken });
+    };
+
+    const showModal = (id, scene) => {
         switch (id) {
             case "ACHIVEMENTS":
                 setShowAchievements(true)
                 break;
             case "INVENTORY":
                 setShowInventory(true)
+                break;
+            case "MARKET":
+                setShowTrader(true)
                 break;
             default:
                 break;
@@ -40,15 +48,15 @@ function App ()
         getMetamaskAccount()
     }, [])
 
-    async function getMetamaskAccount(){
+    async function getMetamaskAccount() {
         let signer = null;
 
         let provider;
         if (window.ethereum) {
             provider = new ethers.BrowserProvider(window.ethereum)
             signer = await provider.getSigner();
-            
-            EventBus.emit("blockchain-account",signer.address)
+
+            EventBus.emit("blockchain-account", signer.address)
         }
     }
 
@@ -61,9 +69,16 @@ function App ()
                 />
             )}
             {showInventory && (
-              <InventoryHUD 
-                onClose={() => setShowInventory(false)}
-              />
+                <InventoryHUD
+                    onClose={() => setShowInventory(false)}
+                />
+            )}
+            {showTrader && (
+                <TokenTrader
+                    balance={1000}
+                    onTrade={handleTrade}
+                    onClose={() => setShowTrader(false)}
+                />
             )}
         </div>
     )

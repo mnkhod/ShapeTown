@@ -1,0 +1,37 @@
+{
+    "id": "720fdb25-2d09-4ed7-af24-7213d9a32756",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Sprite",
+            "id": "ab8c2791-7a8d-458c-86ee-b2d462048da8",
+            "label": "sprite_1",
+            "texture": {
+                "key": "GameNpcs1",
+                "frame": 6
+            },
+            "x": 12.8,
+            "y": 12.8,
+            "scaleX": 0.8,
+            "scaleY": 0.8,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcOldManJack"
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

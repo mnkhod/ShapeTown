@@ -1,9 +1,16 @@
 
 // You can write more code here
+import { EventBus } from '../EventBus';
+
 
 /* START OF COMPILED CODE */
 
 import PlayerPrefab from "../prefabs/PlayerPrefab";
+import MarketNpcPrefab from "../prefabs/npcs/MarketNpcPrefab";
+import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
+import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
+import MessagePrefab from "../prefabs/hud/MessagePrefab";
+import AlertPrefab from "../prefabs/hud/AlertPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -14,6 +21,8 @@ export default class MarketScene extends Phaser.Scene {
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+		this.reactEvent = EventBus
+
 		/* END-USER-CTR-CODE */
 	}
 
@@ -144,10 +153,6 @@ export default class MarketScene extends Phaser.Scene {
 		const fishingShip = this.add.sprite(1708, 611, "FishingBoat_V01R", 0);
 		fishingShip.play("fishingShip");
 
-		// npcOldManJack
-		const npcOldManJack = this.add.sprite(829, 222, "NPCOldManJack", 0);
-		npcOldManJack.play("NpcOldManJack");
-
 		// Npc_Guard_2
 		const npc_Guard_2 = this.add.image(-346, 296, "NPCGuardian_V01", 2);
 		npc_Guard_2.scaleX = 1.5;
@@ -177,11 +182,28 @@ export default class MarketScene extends Phaser.Scene {
 		const angelStatue = this.add.sprite(505, 382, "DecorationAngelStatue", 0);
 		angelStatue.play("AngelStatue");
 
-		// sceneTilePrev
-		const sceneTilePrev = this.physics.add.sprite(-474, 466, "Fruitbushes_V01", 26);
-		sceneTilePrev.scaleY = 10;
-		sceneTilePrev.body.allowGravity = false;
-		sceneTilePrev.body.setSize(32, 200, false);
+		// marketNpcPrefab
+		const marketNpcPrefab = new MarketNpcPrefab(this, 829, 226);
+		this.add.existing(marketNpcPrefab);
+
+		// questBookPrefab
+		const questBookPrefab = new QuestBookPrefab(this, 32, 736);
+		this.add.existing(questBookPrefab);
+
+		// itemHudPrefab
+		const itemHudPrefab = new ItemHudPrefab(this, 624.0380145431086, 714.0379998207613);
+		this.add.existing(itemHudPrefab);
+
+		// messagePrefab
+		const messagePrefab = new MessagePrefab(this, 0.706304947792546, -0.19542654884695307);
+		this.add.existing(messagePrefab);
+
+		// alertPrefab
+		const alertPrefab = new AlertPrefab(this, 848.4423149866814, 0.012521230289181062);
+		this.add.existing(alertPrefab);
+
+		// itemHudPrefab (prefab fields)
+		itemHudPrefab.player = playerPrefab;
 
 		this.must_Background_grass_1 = must_Background_grass_1;
 		this.must_Background_DecorationOnGrass_1 = must_Background_DecorationOnGrass_1;
@@ -211,14 +233,17 @@ export default class MarketScene extends Phaser.Scene {
 		this.npcBlackSmithRight = npcBlackSmithRight;
 		this.npc_Merchant = npc_Merchant;
 		this.fishingShip = fishingShip;
-		this.npcOldManJack = npcOldManJack;
 		this.npc_Guard_2 = npc_Guard_2;
 		this.npc_Guard_1 = npc_Guard_1;
 		this.npc_Guard_5 = npc_Guard_5;
 		this.npc_Guard_3 = npc_Guard_3;
 		this.npc_Guard_4 = npc_Guard_4;
 		this.angelStatue = angelStatue;
-		this.sceneTilePrev = sceneTilePrev;
+		this.marketNpcPrefab = marketNpcPrefab;
+		this.questBookPrefab = questBookPrefab;
+		this.itemHudPrefab = itemHudPrefab;
+		this.messagePrefab = messagePrefab;
+		this.alertPrefab = alertPrefab;
 		this.marketMap = marketMap;
 
 		this.events.emit("scene-awake");
@@ -280,8 +305,6 @@ export default class MarketScene extends Phaser.Scene {
 	npc_Merchant;
 	/** @type {Phaser.GameObjects.Sprite} */
 	fishingShip;
-	/** @type {Phaser.GameObjects.Sprite} */
-	npcOldManJack;
 	/** @type {Phaser.GameObjects.Image} */
 	npc_Guard_2;
 	/** @type {Phaser.GameObjects.Image} */
@@ -294,8 +317,16 @@ export default class MarketScene extends Phaser.Scene {
 	npc_Guard_4;
 	/** @type {Phaser.GameObjects.Sprite} */
 	angelStatue;
-	/** @type {Phaser.Physics.Arcade.Sprite} */
-	sceneTilePrev;
+	/** @type {MarketNpcPrefab} */
+	marketNpcPrefab;
+	/** @type {QuestBookPrefab} */
+	questBookPrefab;
+	/** @type {ItemHudPrefab} */
+	itemHudPrefab;
+	/** @type {MessagePrefab} */
+	messagePrefab;
+	/** @type {AlertPrefab} */
+	alertPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	marketMap;
 
@@ -398,8 +429,8 @@ export default class MarketScene extends Phaser.Scene {
  		this.physics.add.existing(this.angelStatue, true);
     	this.physics.add.collider(this.playerPrefab, this.angelStatue); 
 
- 		this.physics.add.existing(this.npcOldManJack, true);
-    	this.physics.add.collider(this.playerPrefab, this.npcOldManJack); 
+ 		// this.physics.add.existing(this.marketNpcPrefab, true);
+    	// this.physics.add.collider(this.playerPrefab, this.marketNpcPrefab); 
 
     	this.physics.add.collider(this.playerPrefab, this.decoration_ClockTower_1);
     	this.decoration_ClockTower_1.setCollisionBetween(0, 10000);

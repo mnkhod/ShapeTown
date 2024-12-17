@@ -130,7 +130,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.existing(harvestPrefab_3);
 
 		// oldManJackNpcPrefab
-		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 361, 216);
+		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 361, 217);
 		this.add.existing(oldManJackNpcPrefab);
 
 		// playerPrefab
@@ -138,19 +138,19 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.existing(playerPrefab);
 
 		// questBookPrefab
-		const questBookPrefab = new QuestBookPrefab(this, 32, 736);
+		const questBookPrefab = new QuestBookPrefab(this, 32, 735);
 		this.add.existing(questBookPrefab);
 
 		// itemHudPrefab
-		const itemHudPrefab = new ItemHudPrefab(this, 624.0380149603411, 714.0380149603411);
+		const itemHudPrefab = new ItemHudPrefab(this, 624.0380149603411, 713.0380149603411);
 		this.add.existing(itemHudPrefab);
 
 		// messagePrefab
-		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 0.8045771466410088);
+		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 9.804577146641009);
 		this.add.existing(messagePrefab);
 
 		// alertPrefab
-		const alertPrefab = new AlertPrefab(this, 721.70328457044, 0.0215605880291605);
+		const alertPrefab = new AlertPrefab(this, 721.70328457044, -1.9784394119708395);
 		this.add.existing(alertPrefab);
 
 		// oldManJackNpcPrefab (prefab fields)
@@ -319,6 +319,7 @@ export default class TutorialScene extends Phaser.Scene {
 			this.itemHudPrefab.addItem("HOE","IconBaseTools",1)
 			this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
 			this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
+			this.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
 		}, {}, this)
 
 		this.reactEvent.on('blockchain-account', (address) => {

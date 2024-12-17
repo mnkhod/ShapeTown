@@ -617,7 +617,7 @@
             "itemHud": "itemHudPrefab",
             "bookHud": "questBookPrefab",
             "x": 361,
-            "y": 216
+            "y": 217
         },
         {
             "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
@@ -641,7 +641,7 @@
             "label": "questBookPrefab",
             "scope": "CLASS",
             "x": 32,
-            "y": 736
+            "y": 735
         },
         {
             "prefabId": "a69b4058-db0e-4e31-b023-568805698db8",
@@ -655,7 +655,7 @@
             "scope": "CLASS",
             "player": "playerPrefab",
             "x": 624.0380149603411,
-            "y": 714.0380149603411
+            "y": 713.0380149603411
         },
         {
             "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
@@ -667,7 +667,7 @@
             "label": "messagePrefab",
             "scope": "CLASS",
             "x": 0.706304947792546,
-            "y": 0.8045771466410088
+            "y": 9.804577146641009
         },
         {
             "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
@@ -679,7 +679,7 @@
             "label": "alertPrefab",
             "scope": "CLASS",
             "x": 721.70328457044,
-            "y": 0.0215605880291605
+            "y": -1.9784394119708395
         }
     ],
     "plainObjects": [

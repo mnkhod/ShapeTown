@@ -884,20 +884,6 @@
             "animationKey": "fishingShip"
         },
         {
-            "type": "Sprite",
-            "id": "a176ef35-1bad-4a5c-b803-b378b0e1809c",
-            "label": "npcOldManJack",
-            "scope": "CLASS",
-            "texture": {
-                "key": "NPCOldManJack",
-                "frame": 0
-            },
-            "x": 829,
-            "y": 222,
-            "animationPlayMethod": 1,
-            "animationKey": "NpcOldManJack"
-        },
-        {
             "type": "Image",
             "id": "547d86b3-5e81-4519-bccb-76e52f2d617a",
             "label": "Npc_Guard_2",
@@ -982,20 +968,66 @@
             "animationKey": "AngelStatue"
         },
         {
-            "type": "ArcadeSprite",
-            "id": "8787c498-443e-4e44-94a3-6471282d82cc",
-            "label": "sceneTilePrev",
+            "prefabId": "720fdb25-2d09-4ed7-af24-7213d9a32756",
+            "id": "374f1a68-63dc-4e9e-8c99-b28913f401b8",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "marketNpcPrefab",
             "scope": "CLASS",
-            "texture": {
-                "key": "Fruitbushes_V01",
-                "frame": 26
-            },
-            "x": -474,
-            "y": 466,
-            "scaleY": 10,
-            "allowGravity": false,
-            "body.width": 32,
-            "body.height": 200
+            "x": 829,
+            "y": 226
+        },
+        {
+            "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
+            "id": "423096a6-9f14-49be-b65f-c6e7b7570db2",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "questBookPrefab",
+            "scope": "CLASS",
+            "x": 32,
+            "y": 736
+        },
+        {
+            "prefabId": "a69b4058-db0e-4e31-b023-568805698db8",
+            "id": "26189a89-dd36-42e1-9875-c822c71b1e99",
+            "unlock": [
+                "x",
+                "y",
+                "player"
+            ],
+            "label": "itemHudPrefab",
+            "scope": "CLASS",
+            "player": "playerPrefab",
+            "x": 624.0380145431086,
+            "y": 714.0379998207613
+        },
+        {
+            "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
+            "id": "f7776df8-9407-4e60-add3-6adc78d9bf83",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "messagePrefab",
+            "scope": "CLASS",
+            "x": 0.706304947792546,
+            "y": -0.19542654884695307
+        },
+        {
+            "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
+            "id": "032995f5-f1d3-4e34-8265-2d89873feb8b",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "alertPrefab",
+            "scope": "CLASS",
+            "x": 848.4423149866814,
+            "y": 0.012521230289181062
         }
     ],
     "plainObjects": [
