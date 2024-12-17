@@ -109,8 +109,20 @@ export default class FarmingScene extends Phaser.Scene {
 		const merchant_NPCMerchant_1 = farmingMap.createLayer("Merchant/NPCMerchant", ["NPCShopStandMaerchant"], -864, -496);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, -367, 506);
+		const playerPrefab = new PlayerPrefab(this, -302, 506);
 		this.add.existing(playerPrefab);
+
+		// sceneTilePrev
+		const sceneTilePrev = this.physics.add.sprite(-401, 532, "CityHouses_v02", 0);
+		sceneTilePrev.scaleY = 10;
+		sceneTilePrev.body.allowGravity = false;
+		sceneTilePrev.body.setSize(32, 200, false);
+
+		// sceneTileNext
+		const sceneTileNext = this.physics.add.sprite(1486, 517, "CityHouses_v02", 0);
+		sceneTileNext.scaleY = 10;
+		sceneTileNext.body.allowGravity = false;
+		sceneTileNext.body.setSize(32, 200, false);
 
 		this.render_BackGround_1 = render_BackGround_1;
 		this.render_RoadStone_JustRender__1 = render_RoadStone_JustRender__1;
@@ -133,6 +145,8 @@ export default class FarmingScene extends Phaser.Scene {
 		this.merchant_shopStand_1 = merchant_shopStand_1;
 		this.merchant_NPCMerchant_1 = merchant_NPCMerchant_1;
 		this.playerPrefab = playerPrefab;
+		this.sceneTilePrev = sceneTilePrev;
+		this.sceneTileNext = sceneTileNext;
 		this.farmingMap = farmingMap;
 
 		this.events.emit("scene-awake");
@@ -180,6 +194,10 @@ export default class FarmingScene extends Phaser.Scene {
 	merchant_NPCMerchant_1;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
+	/** @type {Phaser.Physics.Arcade.Sprite} */
+	sceneTilePrev;
+	/** @type {Phaser.Physics.Arcade.Sprite} */
+	sceneTileNext;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	farmingMap;
 
@@ -250,6 +268,17 @@ export default class FarmingScene extends Phaser.Scene {
     	this.physics.add.collider(this.playerPrefab, this.render_FenceWooden_Make_a_Collider__1);
     	this.render_FenceWooden_Make_a_Collider__1.setCollisionBetween(0, 10000);
 		// this.render_FenceWooden_Make_a_Collider__1.renderDebug(this.add.graphics());
+
+
+		this.physics.add.overlap(this.sceneTilePrev, this.playerPrefab, () => {
+			this.playerPrefab.x += 50
+            this.scene.switch("TutorialScene");
+        });
+
+		this.physics.add.overlap(this.sceneTileNext, this.playerPrefab, () => {
+			this.playerPrefab.x -= 50
+            this.scene.switch("MarketScene");
+        });
 
 
 	}

@@ -301,7 +301,8 @@ export default class TutorialScene extends Phaser.Scene {
 		// this.farmingAreaFarmingTile.renderDebug(this.add.graphics());
 
 		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-            this.scene.start("FarmingScene");
+            this.scene.switch("FarmingScene");
+			this.playerPrefab.x -= 50
         });
 		if (this.questBookPrefab) {
             this.questBookPrefab.visible = false;

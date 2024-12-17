@@ -760,8 +760,40 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": -367,
+            "x": -302,
             "y": 506
+        },
+        {
+            "type": "ArcadeSprite",
+            "id": "be78645b-c8b1-40a5-97e2-a9326368d72a",
+            "label": "sceneTilePrev",
+            "scope": "CLASS",
+            "texture": {
+                "key": "CityHouses_v02",
+                "frame": 0
+            },
+            "x": -401,
+            "y": 532,
+            "scaleY": 10,
+            "allowGravity": false,
+            "body.width": 32,
+            "body.height": 200
+        },
+        {
+            "type": "ArcadeSprite",
+            "id": "78d30b5d-8ec5-4bbb-8086-32d24c290329",
+            "label": "sceneTileNext",
+            "scope": "CLASS",
+            "texture": {
+                "key": "CityHouses_v02",
+                "frame": 0
+            },
+            "x": 1486,
+            "y": 517,
+            "scaleY": 10,
+            "allowGravity": false,
+            "body.width": 32,
+            "body.height": 200
         }
     ],
     "plainObjects": [

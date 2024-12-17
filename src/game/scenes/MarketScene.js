@@ -110,7 +110,7 @@ export default class MarketScene extends Phaser.Scene {
 		const decoration_DecorartionSunScreen_1 = marketMap.createLayer("Decoration/DecorartionSunScreen", ["DecorationOnBeach"], -928, -496);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 480, 550);
+		const playerPrefab = new PlayerPrefab(this, -388, 434);
 		this.add.existing(playerPrefab);
 
 		// bigShip
@@ -177,6 +177,12 @@ export default class MarketScene extends Phaser.Scene {
 		const angelStatue = this.add.sprite(505, 382, "DecorationAngelStatue", 0);
 		angelStatue.play("AngelStatue");
 
+		// sceneTilePrev
+		const sceneTilePrev = this.physics.add.sprite(-474, 466, "Fruitbushes_V01", 26);
+		sceneTilePrev.scaleY = 10;
+		sceneTilePrev.body.allowGravity = false;
+		sceneTilePrev.body.setSize(32, 200, false);
+
 		this.must_Background_grass_1 = must_Background_grass_1;
 		this.must_Background_DecorationOnGrass_1 = must_Background_DecorationOnGrass_1;
 		this.must_Background_Beach_1 = must_Background_Beach_1;
@@ -212,6 +218,7 @@ export default class MarketScene extends Phaser.Scene {
 		this.npc_Guard_3 = npc_Guard_3;
 		this.npc_Guard_4 = npc_Guard_4;
 		this.angelStatue = angelStatue;
+		this.sceneTilePrev = sceneTilePrev;
 		this.marketMap = marketMap;
 
 		this.events.emit("scene-awake");
@@ -287,6 +294,8 @@ export default class MarketScene extends Phaser.Scene {
 	npc_Guard_4;
 	/** @type {Phaser.GameObjects.Sprite} */
 	angelStatue;
+	/** @type {Phaser.Physics.Arcade.Sprite} */
+	sceneTilePrev;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	marketMap;
 
@@ -447,6 +456,11 @@ export default class MarketScene extends Phaser.Scene {
     	this.physics.add.collider(this.playerPrefab, this.must_Background_SeaBorder_1);
     	this.must_Background_SeaBorder_1.setCollisionBetween(0, 10000);
 		// this.must_Background_SeaBorder_1.renderDebug(this.add.graphics());
+
+		this.physics.add.overlap(this.sceneTilePrev, this.playerPrefab, () => {
+			this.playerPrefab.x += 50
+            this.scene.switch("FarmingScene");
+        });
 
 	}
 

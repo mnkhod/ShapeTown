@@ -163,6 +163,9 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     }
 
 	settingUpAnimations() {
+        if(!this.scene) return;
+        if(!this.scene.anims) return;
+
         let movementAnimKeys = {
             right: { start: 13, end: 17 },
             left: { start: 19, end: 23 },
