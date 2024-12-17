@@ -311,16 +311,16 @@ export default class TutorialScene extends Phaser.Scene {
             this.itemHudPrefab.visible = false;
         }
 
-		this.time.delayedCall(100, () => {
-			this.questBookPrefab.visible = true
+		// this.time.delayedCall(100, () => {
+		// 	this.questBookPrefab.visible = true
 
-			this.itemHudPrefab.visible = true;
-			this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
-			this.itemHudPrefab.addItem("HOE","IconBaseTools",1)
-			this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
-			this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
-			// this.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
-		}, {}, this)
+		// 	this.itemHudPrefab.visible = true;
+		// 	this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
+		// 	this.itemHudPrefab.addItem("HOE","IconBaseTools",1)
+		// 	this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
+		// 	this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
+		// 	// this.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
+		// }, {}, this)
 
 		// this.reactEvent.on('blockchain-account', (address) => {
         //     console.log(address);
