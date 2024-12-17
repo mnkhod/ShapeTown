@@ -109,9 +109,6 @@ export default class FarmingScene extends Phaser.Scene {
 		// merchant_shopStand_1
 		const merchant_shopStand_1 = farmingMap.createLayer("Merchant/shopStand", ["FarmHorseStable"], -864, -496);
 
-		// merchant_NPCMerchant_1
-		const merchant_NPCMerchant_1 = farmingMap.createLayer("Merchant/NPCMerchant", ["NPCShopStandMaerchant"], -864, -496);
-
 		// playerPrefab
 		const playerPrefab = new PlayerPrefab(this, -302, 506);
 		this.add.existing(playerPrefab);
@@ -166,7 +163,6 @@ export default class FarmingScene extends Phaser.Scene {
 		this.group_5_Dead_treee_1 = group_5_Dead_treee_1;
 		this.group_5_StrawberryBush_1 = group_5_StrawberryBush_1;
 		this.merchant_shopStand_1 = merchant_shopStand_1;
-		this.merchant_NPCMerchant_1 = merchant_NPCMerchant_1;
 		this.playerPrefab = playerPrefab;
 		this.sceneTilePrev = sceneTilePrev;
 		this.sceneTileNext = sceneTileNext;
@@ -217,8 +213,6 @@ export default class FarmingScene extends Phaser.Scene {
 	group_5_StrawberryBush_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	merchant_shopStand_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	merchant_NPCMerchant_1;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
 	/** @type {Phaser.Physics.Arcade.Sprite} */
@@ -243,10 +237,6 @@ export default class FarmingScene extends Phaser.Scene {
 	create() {
 
 		this.editorCreate();
-
-    	this.physics.add.collider(this.playerPrefab, this.merchant_NPCMerchant_1);
-    	this.merchant_NPCMerchant_1.setCollisionBetween(0, 10000);
-		// this.merchant_NPCMerchant_1.renderDebug(this.add.graphics());
 
     	this.physics.add.collider(this.playerPrefab, this.merchant_shopStand_1);
     	this.merchant_shopStand_1.setCollisionBetween(0, 10000);

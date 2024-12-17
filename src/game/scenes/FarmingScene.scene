@@ -715,43 +715,6 @@
             ]
         },
         {
-            "type": "TilemapLayer",
-            "id": "0748c8de-5ef7-4b10-827d-68f7a9c8d4e8",
-            "label": "merchant_NPCMerchant_1",
-            "scope": "CLASS",
-            "x": -864,
-            "y": -496,
-            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
-            "layerName": "Merchant/NPCMerchant",
-            "tilesets": [
-                "GroundTileset",
-                "TiletTreePattern",
-                "GroundTilestSoil",
-                "CityHouses_v02",
-                "FarmHorseStable",
-                "LakeFloatingRock_V03",
-                "LakeFloatingRock_V01",
-                "LakeFloatingRock_V02",
-                "Flower_v05",
-                "Flower_v01",
-                "Flower_v02",
-                "Flower_v03",
-                "Flower_v04",
-                "LakeAccessor",
-                "GroundAccessor",
-                "RoadStone",
-                "Tree_v09",
-                "Tree_v08",
-                "DecorationClouthHangger",
-                "Tree_v02",
-                "Tree_v014",
-                "Fruitbushes_V01",
-                "NPCShopStandMaerchant",
-                "ShopInteriorObjects_",
-                "StoneFance."
-            ]
-        },
-        {
             "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
             "id": "50d32df1-90c0-4cca-81c1-e1c002c6186a",
             "unlock": [
