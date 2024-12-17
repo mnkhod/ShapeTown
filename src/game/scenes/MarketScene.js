@@ -119,7 +119,7 @@ export default class MarketScene extends Phaser.Scene {
 		const decoration_DecorartionSunScreen_1 = marketMap.createLayer("Decoration/DecorartionSunScreen", ["DecorationOnBeach"], -928, -496);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, -388, 434);
+		const playerPrefab = new PlayerPrefab(this, 480, 550);
 		this.add.existing(playerPrefab);
 
 		// bigShip
@@ -182,6 +182,15 @@ export default class MarketScene extends Phaser.Scene {
 		const angelStatue = this.add.sprite(505, 382, "DecorationAngelStatue", 0);
 		angelStatue.play("AngelStatue");
 
+		// sceneTilePrev
+		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
+		const sceneTilePrev = this.add.sprite(-718, 452, "Fruitbushes_V01", 23);
+		sceneTilePrev.scaleX = 1.3069946364802347;
+		sceneTilePrev.scaleY = 10.586085054631967;
+		this.physics.add.existing(sceneTilePrev, false);
+		sceneTilePrev.body.allowGravity = false;
+		sceneTilePrev.body.setSize(32, 200, false);
+
 		// marketNpcPrefab
 		const marketNpcPrefab = new MarketNpcPrefab(this, 829, 226);
 		this.add.existing(marketNpcPrefab);
@@ -239,6 +248,7 @@ export default class MarketScene extends Phaser.Scene {
 		this.npc_Guard_3 = npc_Guard_3;
 		this.npc_Guard_4 = npc_Guard_4;
 		this.angelStatue = angelStatue;
+		this.sceneTilePrev = sceneTilePrev;
 		this.marketNpcPrefab = marketNpcPrefab;
 		this.questBookPrefab = questBookPrefab;
 		this.itemHudPrefab = itemHudPrefab;
@@ -317,6 +327,8 @@ export default class MarketScene extends Phaser.Scene {
 	npc_Guard_4;
 	/** @type {Phaser.GameObjects.Sprite} */
 	angelStatue;
+	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
+	sceneTilePrev;
 	/** @type {MarketNpcPrefab} */
 	marketNpcPrefab;
 	/** @type {QuestBookPrefab} */

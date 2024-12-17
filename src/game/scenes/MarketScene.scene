@@ -780,8 +780,8 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": -388,
-            "y": 434
+            "x": 480,
+            "y": 550
         },
         {
             "type": "Sprite",
@@ -966,6 +966,24 @@
             "y": 382,
             "animationPlayMethod": 1,
             "animationKey": "AngelStatue"
+        },
+        {
+            "type": "Sprite",
+            "id": "4bb6a95b-b5e6-45a5-9444-2df538accaed",
+            "label": "sceneTilePrev",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Fruitbushes_V01",
+                "frame": 23
+            },
+            "x": -718,
+            "y": 452,
+            "scaleX": 1.3069946364802347,
+            "scaleY": 10.586085054631967,
+            "ArcadeComponent.active": true,
+            "allowGravity": false,
+            "body.width": 32,
+            "body.height": 200
         },
         {
             "prefabId": "720fdb25-2d09-4ed7-af24-7213d9a32756",
