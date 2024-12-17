@@ -780,8 +780,8 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": 480,
-            "y": 550
+            "x": -333,
+            "y": 439
         },
         {
             "type": "Sprite",
@@ -968,24 +968,6 @@
             "animationKey": "AngelStatue"
         },
         {
-            "type": "Sprite",
-            "id": "4bb6a95b-b5e6-45a5-9444-2df538accaed",
-            "label": "sceneTilePrev",
-            "scope": "CLASS",
-            "texture": {
-                "key": "Fruitbushes_V01",
-                "frame": 23
-            },
-            "x": -718,
-            "y": 452,
-            "scaleX": 1.3069946364802347,
-            "scaleY": 10.586085054631967,
-            "ArcadeComponent.active": true,
-            "allowGravity": false,
-            "body.width": 32,
-            "body.height": 200
-        },
-        {
             "prefabId": "720fdb25-2d09-4ed7-af24-7213d9a32756",
             "id": "374f1a68-63dc-4e9e-8c99-b28913f401b8",
             "unlock": [
@@ -1046,6 +1028,22 @@
             "scope": "CLASS",
             "x": 848.4423149866814,
             "y": 0.012521230289181062
+        },
+        {
+            "type": "ArcadeSprite",
+            "id": "792df1a4-b642-4466-9360-0085c95e8dc2",
+            "label": "sceneTilePrev",
+            "scope": "CLASS",
+            "texture": {
+                "key": "CityHouses_v02",
+                "frame": 0
+            },
+            "x": -441,
+            "y": 458,
+            "scaleY": 10,
+            "allowGravity": false,
+            "body.width": 32,
+            "body.height": 200
         }
     ],
     "plainObjects": [

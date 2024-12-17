@@ -1137,6 +1137,52 @@
             "skipMissedFrames": true,
             "repeat": -1,
             "randomFrame": false
+        },
+        {
+            "key": "merchantAnimation",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "NPCShopStandMaerchant",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCShopStandMaerchant",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCShopStandMaerchant",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCShopStandMaerchant",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCShopStandMaerchant",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCShopStandMaerchant",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
         }
     ],
     "globalTimeScale": 1,
