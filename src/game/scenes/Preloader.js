@@ -18,11 +18,8 @@ export default class Preloader extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
-		// background
-		this.add.image(512, 384, "background");
-
 		// progressBar
-		const progressBar = this.add.rectangle(704, 158, 468, 32);
+		const progressBar = this.add.rectangle(512, 384, 468, 32);
 		progressBar.isFilled = true;
 		progressBar.fillColor = 14737632;
 		progressBar.isStroked = true;
