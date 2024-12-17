@@ -1,5 +1,5 @@
 {
-    "id": "c2c2d25c-7621-415f-9f4e-83715c780aa3",
+    "id": "33d025d3-04c5-48ec-9857-c2e7053b9fc6",
     "sceneType": "SCENE",
     "settings": {
         "exportClass": true,
@@ -13,12 +13,12 @@
     "displayList": [
         {
             "type": "TilemapLayer",
-            "id": "5d235e36-fb0e-47d8-a35c-c6b96a3467ab",
+            "id": "aa517d71-8555-4b39-91b0-06fabf9867e7",
             "label": "render_BackGround_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "Render/BackGround",
             "tilesets": [
                 "GroundTileset",
@@ -43,7 +43,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -51,12 +50,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "4c2f285a-c7b8-416c-87d6-76a2080ab0d6",
+            "id": "c66c9b8d-2991-4e4e-9093-aa1014d15be1",
             "label": "render_RoadStone_JustRender__1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "Render/RoadStone[JustRender]",
             "tilesets": [
                 "GroundTileset",
@@ -81,7 +80,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -89,12 +87,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "7351605f-4414-4db9-b273-7a821102858f",
+            "id": "221b604b-4d12-4983-a605-497163049cff",
             "label": "render_FenceWooden_Make_a_Collider__1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "Render/FenceWooden[Make a Collider]",
             "tilesets": [
                 "GroundTileset",
@@ -119,7 +117,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -127,50 +124,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "f4f1ee25-86f0-45c4-8686-0de4b132d875",
-            "label": "removeable_Assets_1",
-            "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
-            "layerName": "Removeable Assets",
-            "tilesets": [
-                "GroundTileset",
-                "TiletTreePattern",
-                "GroundTilestSoil",
-                "CityHouses_v02",
-                "FarmHorseStable",
-                "LakeFloatingRock_V03",
-                "LakeFloatingRock_V01",
-                "LakeFloatingRock_V02",
-                "Flower_v05",
-                "Flower_v01",
-                "Flower_v02",
-                "Flower_v03",
-                "Flower_v04",
-                "LakeAccessor",
-                "GroundAccessor",
-                "RoadStone",
-                "Tree_v09",
-                "Tree_v08",
-                "DecorationClouthHangger",
-                "Tree_v02",
-                "Tree_v014",
-                "Fruitbushes_V01",
-                "FarmHorseStable",
-                "NPCShopStandMaerchant",
-                "ShopInteriorObjects_",
-                "StoneFance."
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "cf40ade7-9037-47df-8bf2-5cb213280db2",
+            "id": "fc438f0a-c9e0-4500-a519-9c9a97719592",
             "label": "dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "DEVS IMPORTANT!!!/Soil[Are which can plain crop on top]",
             "tilesets": [
                 "GroundTileset",
@@ -195,7 +154,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -203,12 +161,49 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "d73288b8-ad37-489a-a9c4-608090ce41f2",
+            "id": "28f27448-bb3b-4f79-b2f5-932a2f1146cf",
+            "label": "dEVS_IMPORTANT____Removeable_Assets_1",
+            "scope": "CLASS",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
+            "layerName": "DEVS IMPORTANT!!!/Removeable Assets",
+            "tilesets": [
+                "GroundTileset",
+                "TiletTreePattern",
+                "GroundTilestSoil",
+                "CityHouses_v02",
+                "FarmHorseStable",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "Flower_v05",
+                "Flower_v01",
+                "Flower_v02",
+                "Flower_v03",
+                "Flower_v04",
+                "LakeAccessor",
+                "GroundAccessor",
+                "RoadStone",
+                "Tree_v09",
+                "Tree_v08",
+                "DecorationClouthHangger",
+                "Tree_v02",
+                "Tree_v014",
+                "Fruitbushes_V01",
+                "NPCShopStandMaerchant",
+                "ShopInteriorObjects_",
+                "StoneFance."
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "2c7d4d93-d895-417f-8966-d6d120efc0d8",
             "label": "treeBorder_TreeL",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "TreeBorder/TreeL7",
             "tilesets": [
                 "GroundTileset",
@@ -233,7 +228,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -241,12 +235,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "99f0b1fa-4ee6-4d00-9cc2-3106578b11e6",
+            "id": "4b6a8229-ccc4-4582-bfe4-a3d720b896e8",
             "label": "treeBorder_TreeL_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "TreeBorder/TreeL6",
             "tilesets": [
                 "GroundTileset",
@@ -271,7 +265,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -279,12 +272,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "a1677db1-f443-4885-8528-3dc0473b6ab7",
+            "id": "9dbca0b7-2a73-4d7f-8077-72cb832ed7f3",
             "label": "treeBorder_StoneFance_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "TreeBorder/StoneFance",
             "tilesets": [
                 "GroundTileset",
@@ -309,7 +302,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -317,12 +309,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "936c567a-c6a9-4c85-93f9-0d5f1a2ed893",
+            "id": "51049e8c-85e3-495e-b5f8-ad9e19a95ea5",
             "label": "treeBorder_TreeL_2",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "TreeBorder/TreeL4",
             "tilesets": [
                 "GroundTileset",
@@ -347,7 +339,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -355,12 +346,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "f7d3fa54-8f82-4259-8958-1243801002fd",
+            "id": "a7ff7870-615b-478a-ac9c-b4c829c0fd21",
             "label": "treeBorder_TreeL_3",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "TreeBorder/TreeL3",
             "tilesets": [
                 "GroundTileset",
@@ -385,7 +376,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -393,12 +383,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "67c1e1c1-781c-4a64-b0f8-862d66433971",
+            "id": "8a414c0d-e418-493b-b3de-3a6e844e7dce",
             "label": "treeBorder_TreeL_4",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "TreeBorder/TreeL2",
             "tilesets": [
                 "GroundTileset",
@@ -423,7 +413,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -431,12 +420,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "640b0c10-aff4-4cbd-a496-09fce1baf14b",
+            "id": "e161fac5-6b45-455b-b884-652fec7606a3",
             "label": "treeBorder_TreeL_5",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "TreeBorder/TreeL1",
             "tilesets": [
                 "GroundTileset",
@@ -461,7 +450,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -469,12 +457,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "201b18dc-e7b3-4312-941e-4e43fde978b4",
+            "id": "f0f2edee-b020-4a85-9115-b10cf13ec7b2",
             "label": "house_area_HouseUnderGround_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "House area/HouseUnderGround",
             "tilesets": [
                 "GroundTileset",
@@ -499,7 +487,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -507,12 +494,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "fec25e87-1041-4ff0-a7c5-dfaf1fe2e1b1",
+            "id": "1212b545-f517-4c30-9c13-2cccefa663d3",
             "label": "house_area_House_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "House area/House",
             "tilesets": [
                 "GroundTileset",
@@ -537,7 +524,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -545,12 +531,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "2411efbf-c846-4c0a-a960-42b43a98b151",
+            "id": "4a4f9c48-d51c-472b-83cf-3d1cae29d09c",
             "label": "house_area_chest_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "House area/chest",
             "tilesets": [
                 "GroundTileset",
@@ -575,7 +561,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -583,12 +568,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "d7f4040d-c098-4354-a33e-017513a2249d",
+            "id": "a712e280-cfcb-4904-a74d-ef682aafd090",
             "label": "group_5_Decoration_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "Group 5/Decoration",
             "tilesets": [
                 "GroundTileset",
@@ -613,7 +598,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -621,12 +605,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "516fa2c5-4975-46f8-82fa-74503c3287df",
+            "id": "494be540-4426-4423-bc3f-3c3c074bb992",
             "label": "group_5_Dead_treee_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "Group 5/Dead treee",
             "tilesets": [
                 "GroundTileset",
@@ -651,7 +635,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -659,12 +642,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "5232232f-eee1-4116-89a2-ce4c818ff6ed",
+            "id": "04daaf32-376c-422c-a0c1-13ba208ff040",
             "label": "group_5_StrawberryBush_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "Group 5/StrawberryBush",
             "tilesets": [
                 "GroundTileset",
@@ -689,7 +672,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -697,12 +679,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "6b593b03-f6e6-4d45-8ac1-3ba117e9492d",
+            "id": "ede3aec7-63d8-4d4b-b7ad-45cc7840b6ed",
             "label": "merchant_shopStand_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "Merchant/shopStand",
             "tilesets": [
                 "GroundTileset",
@@ -727,7 +709,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -735,12 +716,12 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "ea5fcd6d-d5ff-412d-ab59-7ac65ed559d6",
+            "id": "0748c8de-5ef7-4b10-827d-68f7a9c8d4e8",
             "label": "merchant_NPCMerchant_1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "x": -864,
+            "y": -496,
+            "tilemapId": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "layerName": "Merchant/NPCMerchant",
             "tilesets": [
                 "GroundTileset",
@@ -765,7 +746,6 @@
                 "Tree_v02",
                 "Tree_v014",
                 "Fruitbushes_V01",
-                "FarmHorseStable",
                 "NPCShopStandMaerchant",
                 "ShopInteriorObjects_",
                 "StoneFance."
@@ -773,20 +753,20 @@
         },
         {
             "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
-            "id": "1a503d07-104d-4a08-8f7c-e01942637f8e",
+            "id": "50d32df1-90c0-4cca-81c1-e1c002c6186a",
             "unlock": [
                 "x",
                 "y"
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": -321,
-            "y": 405
+            "x": -367,
+            "y": 506
         }
     ],
     "plainObjects": [
         {
-            "id": "5e4c31e3-ebb0-4a4c-8aa7-200219a16c41",
+            "id": "f5bcef68-7ce2-4c61-8a0c-4a6e1b765569",
             "type": "Tilemap",
             "label": "farmingMap",
             "key": "FarmingMap",
@@ -878,10 +858,6 @@
                 {
                     "name": "Fruitbushes_V01",
                     "imageKey": "Fruitbushes_V01"
-                },
-                {
-                    "name": "FarmHorseStable",
-                    "imageKey": "FarmHorseStable"
                 },
                 {
                     "name": "NPCShopStandMaerchant",
