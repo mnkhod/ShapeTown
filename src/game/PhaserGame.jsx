@@ -67,7 +67,7 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     }, [showModal, ref])
 
     return (
-        <div id="game-container"></div>
+        <div id="game-container" className="h-screen"></div>
     );
 
 });

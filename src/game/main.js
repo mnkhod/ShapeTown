@@ -29,11 +29,18 @@ const config = {
         pixelArt: true,
     },
     scale: {
-        // mode: Phaser.Scale.FIT,
-        // mode: Phaser.Scale.RESIZE,
-        // width: 1920,
-        // height: 1080,
-        // autoCenter: Phaser.Scale.Center
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 1920,
+        height: 1080,
+        min: {
+            width: 800,
+            height: 450
+        },
+        max: {
+            width: 3480,
+            height: 2160
+        }
     },
     scene: [
         Boot,
