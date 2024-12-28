@@ -23,6 +23,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -38,7 +39,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -53,6 +57,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -68,7 +73,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -83,6 +91,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -98,7 +107,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -114,6 +126,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -129,7 +142,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -145,6 +161,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -160,7 +177,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -176,6 +196,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -191,7 +212,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -206,6 +230,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -221,7 +246,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -236,6 +264,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -251,7 +280,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -267,6 +299,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -282,7 +315,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -298,6 +334,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -313,7 +350,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -329,6 +369,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -344,7 +385,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -360,6 +404,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -375,7 +420,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -383,14 +431,15 @@
             "id": "cc0a2d5d-e958-48a3-8589-692068001f38",
             "label": "layerHouse1",
             "scope": "CLASS",
-            "x": -767,
-            "y": -415,
+            "x": -768,
+            "y": -416,
             "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
             "layerName": "House/House",
             "tilesets": [
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -406,7 +455,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -422,6 +474,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -437,38 +490,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "5bc06376-2756-4a27-acee-2aa2ff1c5a12",
-            "label": "layerAppleTree",
-            "scope": "CLASS",
-            "x": -768,
-            "y": -416,
-            "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
-            "layerName": "Tree/AppleTree",
-            "tilesets": [
-                "GroundTileset",
-                "RoadStone",
-                "TreePatteren",
-                "GroundTilestSoil",
-                "GroundAccessor",
-                "LakeAccessor",
-                "Fishes_1_32x32gif",
-                "Fishes_2_32x32",
-                "Fishes_3_32x32",
-                "LakeFloatingRock_V02",
-                "LakeFloatingRock_V01",
-                "TutorliarNPCHouse",
-                "Apple",
-                "Tree_v014",
-                "Tree_v02",
-                "Tree_v04",
-                "Tree_v08",
-                "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -484,6 +509,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -499,7 +525,10 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -515,6 +544,7 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
+                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -530,7 +560,115 @@
                 "Tree_v04",
                 "Tree_v08",
                 "Tree_v09",
-                "FarmingCropsVer2"
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "68d54b36-9cbe-441f-ae22-43959c9a05ea",
+            "label": "appleTree_1",
+            "scope": "CLASS",
+            "x": -768,
+            "y": -416,
+            "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
+            "layerName": "Tree/AppleTree",
+            "tilesets": [
+                "GroundTileset",
+                "RoadStone",
+                "TreePatteren",
+                "Tree_v014",
+                "GroundTilestSoil",
+                "GroundAccessor",
+                "LakeAccessor",
+                "Fishes_1_32x32gif",
+                "Fishes_2_32x32",
+                "Fishes_3_32x32",
+                "LakeFloatingRock_V02",
+                "LakeFloatingRock_V01",
+                "TutorliarNPCHouse",
+                "Apple",
+                "Tree_v014",
+                "Tree_v02",
+                "Tree_v04",
+                "Tree_v08",
+                "Tree_v09",
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "4a1e1d57-8aef-49d9-89f8-aac1db45e66e",
+            "label": "farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1",
+            "scope": "CLASS",
+            "x": -768,
+            "y": -416,
+            "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
+            "layerName": "Farming Area/Crops[Make it Collision/popup to not able to HARVET]",
+            "tilesets": [
+                "GroundTileset",
+                "RoadStone",
+                "TreePatteren",
+                "Tree_v014",
+                "GroundTilestSoil",
+                "GroundAccessor",
+                "LakeAccessor",
+                "Fishes_1_32x32gif",
+                "Fishes_2_32x32",
+                "Fishes_3_32x32",
+                "LakeFloatingRock_V02",
+                "LakeFloatingRock_V01",
+                "TutorliarNPCHouse",
+                "Apple",
+                "Tree_v014",
+                "Tree_v02",
+                "Tree_v04",
+                "Tree_v08",
+                "Tree_v09",
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "aea84180-a239-445b-84eb-c1f72e1060bf",
+            "label": "farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1",
+            "scope": "CLASS",
+            "x": -768,
+            "y": -416,
+            "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
+            "layerName": "Farming Area/DeadCrops[Make it Collision/Can be HARVEST but noting drops]",
+            "tilesets": [
+                "GroundTileset",
+                "RoadStone",
+                "TreePatteren",
+                "Tree_v014",
+                "GroundTilestSoil",
+                "GroundAccessor",
+                "LakeAccessor",
+                "Fishes_1_32x32gif",
+                "Fishes_2_32x32",
+                "Fishes_3_32x32",
+                "LakeFloatingRock_V02",
+                "LakeFloatingRock_V01",
+                "TutorliarNPCHouse",
+                "Apple",
+                "Tree_v014",
+                "Tree_v02",
+                "Tree_v04",
+                "Tree_v08",
+                "Tree_v09",
+                "FarmingCropsVer2",
+                "NPCOldManJack X2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni"
             ]
         },
         {
@@ -680,13 +818,57 @@
             "scope": "CLASS",
             "x": 721.70328457044,
             "y": 0.0215605880291605
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "1dbd4832-52cc-47c0-949b-a0e20ac55d5a",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab_4",
+            "x": 207,
+            "y": 559
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "bb580999-e7d7-469f-a7ca-ad79c6ed5ea6",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab_5",
+            "x": 240,
+            "y": 559
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "1dda7fb7-df95-4945-82e8-b59c4f507e19",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab_6",
+            "x": 273,
+            "y": 559
+        },
+        {
+            "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
+            "id": "0e70dfe2-ccad-4dce-abeb-3497da7eb3d3",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "harvestPrefab_7",
+            "x": 306,
+            "y": 559
         }
     ],
     "plainObjects": [
         {
             "id": "33835dd0-37d1-4fc9-93a0-0be62142d471",
             "type": "Tilemap",
-            "label": "tutorialMap",
+            "label": "TutorialMap",
             "key": "TutorialMap",
             "tilesets": [
                 {
@@ -700,6 +882,10 @@
                 {
                     "name": "TreePatteren",
                     "imageKey": "TreePatteren"
+                },
+                {
+                    "name": "Tree_v014",
+                    "imageKey": "Tree_v014"
                 },
                 {
                     "name": "GroundTilestSoil",
@@ -751,7 +937,7 @@
                 },
                 {
                     "name": "Tree_v04",
-                    "imageKey": "Tree_v04"
+                    "imageKey": "Tree_v"
                 },
                 {
                     "name": "Tree_v08",
@@ -764,6 +950,18 @@
                 {
                     "name": "FarmingCropsVer2",
                     "imageKey": "FarmingCropsVer2"
+                },
+                {
+                    "name": "NPCOldManJack X2",
+                    "imageKey": "NPCOldManJack"
+                },
+                {
+                    "name": "LakeBorderCornerAni",
+                    "imageKey": "LakeBorderCornerAni"
+                },
+                {
+                    "name": "LakeBorderAni",
+                    "imageKey": "LakeBorderAni"
                 }
             ]
         }

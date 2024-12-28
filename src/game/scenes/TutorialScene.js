@@ -28,7 +28,7 @@ export default class TutorialScene extends Phaser.Scene {
 	/** @returns {void} */
 	editorCreate() {
 
-		// tutorialMap
+		// TutorialMap
 		const tutorialMap = this.add.tilemap("TutorialMap");
 		tutorialMap.addTilesetImage("GroundTileset", "GroundTileset");
 		tutorialMap.addTilesetImage("RoadStone", "RoadStone");
@@ -45,10 +45,13 @@ export default class TutorialScene extends Phaser.Scene {
 		tutorialMap.addTilesetImage("Apple", "Apple");
 		tutorialMap.addTilesetImage("Tree_v014", "Tree_v014");
 		tutorialMap.addTilesetImage("Tree_v02", "Tree_v02");
-		tutorialMap.addTilesetImage("Tree_v04", "Tree_v04");
+		tutorialMap.addTilesetImage("Tree_v04", "Tree_v");
 		tutorialMap.addTilesetImage("Tree_v08", "Tree_v08");
 		tutorialMap.addTilesetImage("Tree_v09", "Tree_v09");
 		tutorialMap.addTilesetImage("FarmingCropsVer2", "FarmingCropsVer2");
+		tutorialMap.addTilesetImage("NPCOldManJack X2", "NPCOldManJack");
+		tutorialMap.addTilesetImage("LakeBorderCornerAni", "LakeBorderCornerAni");
+		tutorialMap.addTilesetImage("LakeBorderAni", "LakeBorderAni");
 
 		// map_environment_Background_Just_Render__1
 		tutorialMap.createLayer("Map environment/Background[Just Render]", ["GroundTileset"], -768, -416);
@@ -87,19 +90,25 @@ export default class TutorialScene extends Phaser.Scene {
 		const layerHouseGround = tutorialMap.createLayer("House/HouseGround", ["GroundTileset"], -768, -416);
 
 		// layerHouse1
-		const layerHouse1 = tutorialMap.createLayer("House/House", ["TutorliarNPCHouse","Apple"], -767, -415);
+		const layerHouse1 = tutorialMap.createLayer("House/House", ["TutorliarNPCHouse","Apple"], -768, -416);
 
 		// layerDeadTree
 		const layerDeadTree = tutorialMap.createLayer("Tree/DeadTree", ["Tree_v08"], -768, -416);
-
-		// layerAppleTree
-		const layerAppleTree = tutorialMap.createLayer("Tree/AppleTree", ["Tree_v02","Tree_v014"], -768, -416);
 
 		// layerPine
 		const layerPine = tutorialMap.createLayer("Tree/PineTree", ["Apple"], -768, -416);
 
 		// layerMapleTree
 		const layerMapleTree = tutorialMap.createLayer("Tree/MapleTree", ["Tree_v04"], -768, -416);
+
+		// appleTree_1
+		const appleTree_1 = tutorialMap.createLayer("Tree/AppleTree", ["Tree_v02", "Tree_v014"], -768, -416);
+
+		// farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1
+		const farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1 = tutorialMap.createLayer("Farming Area/Crops[Make it Collision/popup to not able to HARVET]", ["FarmingCropsVer2"], -768, -416);
+
+		// farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1
+		const farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1 = tutorialMap.createLayer("Farming Area/DeadCrops[Make it Collision/Can be HARVEST but noting drops]", ["FarmingCropsVer2"], -768, -416);
 
 		// mapLayers
 		this.add.container(0, 0);
@@ -153,6 +162,22 @@ export default class TutorialScene extends Phaser.Scene {
 		const alertPrefab = new AlertPrefab(this, 721.70328457044, 0.0215605880291605);
 		this.add.existing(alertPrefab);
 
+		// harvestPrefab_4
+		const harvestPrefab_4 = new HarvestPrefab(this, 207, 559);
+		this.add.existing(harvestPrefab_4);
+
+		// harvestPrefab_5
+		const harvestPrefab_5 = new HarvestPrefab(this, 240, 559);
+		this.add.existing(harvestPrefab_5);
+
+		// harvestPrefab_6
+		const harvestPrefab_6 = new HarvestPrefab(this, 273, 559);
+		this.add.existing(harvestPrefab_6);
+
+		// harvestPrefab_7
+		const harvestPrefab_7 = new HarvestPrefab(this, 306, 559);
+		this.add.existing(harvestPrefab_7);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
@@ -171,9 +196,11 @@ export default class TutorialScene extends Phaser.Scene {
 		this.layerHouseGround = layerHouseGround;
 		this.layerHouse1 = layerHouse1;
 		this.layerDeadTree = layerDeadTree;
-		this.layerAppleTree = layerAppleTree;
 		this.layerPine = layerPine;
 		this.layerMapleTree = layerMapleTree;
+		this.appleTree_1 = appleTree_1;
+		this.farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1 = farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1;
+		this.farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1 = farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1;
 		this.sceneTile = sceneTile;
 		this.playerPrefab = playerPrefab;
 		this.questBookPrefab = questBookPrefab;
@@ -204,11 +231,15 @@ export default class TutorialScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	layerDeadTree;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	layerAppleTree;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	layerPine;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	layerMapleTree;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	appleTree_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1;
 	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
 	sceneTile;
 	/** @type {PlayerPrefab} */
@@ -232,59 +263,59 @@ export default class TutorialScene extends Phaser.Scene {
 		this.editorCreate();
 
 		this.physics.add.collider(this.playerPrefab, this.layerMapleTree);
-		this.layerMapleTree.setCollisionBetween(2000,2200);
+		this.layerMapleTree.setCollisionBetween(0,10000);
 		// this.layerMapleTree.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerTreeBorder);
-		this.layerTreeBorder.setCollisionBetween(1573,1724);
+		this.layerTreeBorder.setCollisionBetween(0,10000);
 		// this.layerTreeBorder.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerTreeBorder1);
-		this.layerTreeBorder1.setCollisionBetween(1361,1471);
+		this.layerTreeBorder1.setCollisionBetween(0,10000);
 		// this.layerTreeBorder1.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerTreeBorder2);
-		this.layerTreeBorder2.setCollisionBetween(1486,1551);
+		this.layerTreeBorder2.setCollisionBetween(0,10000);
 		// this.layerTreeBorder2.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerPine);
 		this.layerPine.setCollision(1955);
 		// this.layerPine.renderDebug(this.add.graphics());
 
-		this.physics.add.collider(this.playerPrefab, this.layerAppleTree);
-		this.layerAppleTree.setCollisionBetween(1961,2004);
-		// this.layerAppleTree.renderDebug(this.add.graphics());
+		this.physics.add.collider(this.playerPrefab, this.appleTree_1);
+		this.appleTree_1.setCollisionBetween(0,10000);
+		this.appleTree_1.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerDeadTree);
-		this.layerDeadTree.setCollisionBetween(2133,2144);
+		this.layerDeadTree.setCollisionBetween(0,10000);
 		// this.layerDeadTree.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerHouse1);
-		this.layerHouse1.setCollisionBetween(1925,1948);
+		this.layerHouse1.setCollisionBetween(0,10000);
 		// this.layerHouse1.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerHouseGround);
-		this.layerHouseGround.setCollisionBetween(633,672);
+		this.layerHouseGround.setCollisionBetween(0,10000);
 		// this.layerHouseGround.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerFishingPondAccessor);
-		// this.layerFishingPondAccessor.setCollisionBetween(1862,1917);
+		// this.layerFishingPondAccessor.setCollisionBetween(0,10000);
 		// this.layerFishingPondAccessor.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerFishingPondWaterForFishing);
-		// this.layerFishingPondWaterForFishing.setCollisionBetween(130,1895);
+		// this.layerFishingPondWaterForFishing.setCollisionBetween(0,10000);
 		// this.layerFishingPondWaterForFishing.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerFishingPondBorder);
-		this.layerFishingPondBorder.setCollisionBetween(105,142);
+		this.layerFishingPondBorder.setCollisionBetween(0,10000);
 		// this.layerFishingPondBorder.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerFence);
-		this.layerFence.setCollisionBetween(1252,1272);
+		this.layerFence.setCollisionBetween(0,10000);
 		// this.layerFence.renderDebug(this.add.graphics());
 
 		// this.physics.add.collider(this.playerPrefab, this.layerFarmingAreaRemoveable);
-		// this.layerFarmingAreaRemoveable.setCollisionBetween(1292,1829);
+		// this.layerFarmingAreaRemoveable.setCollisionBetween(0,10000);
 		// this.layerFarmingAreaRemoveable.renderDebug(this.add.graphics());
 
 		// this.physics.add.collider(this.playerPrefab, this.layerfarmingAreaDeadCrops);
@@ -296,7 +327,7 @@ export default class TutorialScene extends Phaser.Scene {
 		// this.layerFarmingAreaCrops.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.farmingAreaFarmingTile);
-		this.farmingAreaFarmingTile.setCollisionBetween(1282,1282);
+		this.farmingAreaFarmingTile.setCollisionBetween(0,10000);
 
 		// this.farmingAreaFarmingTile.renderDebug(this.add.graphics());
 
