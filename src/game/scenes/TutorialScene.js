@@ -284,7 +284,7 @@ export default class TutorialScene extends Phaser.Scene {
 
 		this.physics.add.collider(this.playerPrefab, this.appleTree_1);
 		this.appleTree_1.setCollisionBetween(0,10000);
-		this.appleTree_1.renderDebug(this.add.graphics());
+		// this.appleTree_1.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerDeadTree);
 		this.layerDeadTree.setCollisionBetween(0,10000);
