@@ -69,7 +69,7 @@ export default class TutorialScene extends Phaser.Scene {
 		const farmingAreaFarmingTile = tutorialMap.createLayer("Farming Area/FarmingTile[Use SEED to grow crops]", ["RoadStone"], -768, -416);
 
 		// layerFishingPondBorder
-		const layerFishingPondBorder = tutorialMap.createLayer("FishingPond/FishingPondBOrder[Make it Collision]", ["GroundTileset"], -768, -416);
+		const layerFishingPondBorder = tutorialMap.createLayer("FishingPond/FishingPondBOrder[Make it Collision]", ["GroundTileset", "LakeBorderCornerAni", "LakeBorderAni"], -768, -416);
 
 		// fishingPond_FishingPondWater_Anywhere_can_be_fishing_action_start__1
 		tutorialMap.createLayer("FishingPond/FishingPondWater[Anywhere can be fishing action start]", ["GroundTileset","LakeAccessor","Fishes_3_32x32"], -768, -416);
@@ -314,21 +314,8 @@ export default class TutorialScene extends Phaser.Scene {
 		this.layerFence.setCollisionBetween(0,10000);
 		// this.layerFence.renderDebug(this.add.graphics());
 
-		// this.physics.add.collider(this.playerPrefab, this.layerFarmingAreaRemoveable);
-		// this.layerFarmingAreaRemoveable.setCollisionBetween(0,10000);
-		// this.layerFarmingAreaRemoveable.renderDebug(this.add.graphics());
-
-		// this.physics.add.collider(this.playerPrefab, this.layerfarmingAreaDeadCrops);
-		// this.layerfarmingAreaDeadCrops.setCollision(2226);
-		// this.layerfarmingAreaDeadCrops.renderDebug(this.add.graphics());
-
-		// this.physics.add.collider(this.playerPrefab, this.layerFarmingAreaCrops);
-		// this.layerFarmingAreaCrops.setCollision(1282);
-		// this.layerFarmingAreaCrops.renderDebug(this.add.graphics());
-
 		this.physics.add.collider(this.playerPrefab, this.farmingAreaFarmingTile);
-		this.farmingAreaFarmingTile.setCollisionBetween(0,10000);
-
+		// this.farmingAreaFarmingTile.setCollisionBetween(0,10000);
 		// this.farmingAreaFarmingTile.renderDebug(this.add.graphics());
 
 		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {

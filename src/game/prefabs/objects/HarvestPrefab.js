@@ -14,6 +14,14 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 		// Write your code here.
 		scene.events.on('create', this.prefabCreateCycle, this);
 		this.setInteractive({ useHandCursor: true });
+
+        scene.physics.world.enable(this);
+        this.physicsBody = this.body;
+        
+        if (this.physicsBody) {
+            this.physicsBody.setImmovable(true);
+            this.physicsBody.enable = false;
+        }
 		/* END-USER-CTR-CODE */
 	}
 
@@ -64,10 +72,21 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 
 		switch (this.state) {
 			case "ROCK":
-				this.setTexture("GroundAccessor", this.getRandomInt(12,21))
-				break;
+				this.setTexture("GroundAccessor", this.getRandomInt(12,21));
+                if (this.physicsBody) {
+                    this.physicsBody.enable = true;
+                    this.physicsBody.setSize(32, 32);
+                    if (this.scene.playerPrefab && !this.hasPlayerCollider) {
+                        this.scene.physics.add.collider(this, this.scene.playerPrefab);
+                        this.hasPlayerCollider = true;
+                    }
+                }
+                break;
 			case "GROUND":
 				this.setTexture("RoadStone",83)
+                if (this.physicsBody) {
+                    this.physicsBody.enable = false;
+                }
 				break;
 			case "SOIL":
 				this.setTexture("GroundTilestSoil",3)
@@ -83,7 +102,6 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 				},{},this);
 				break;
 
-			// 0 - 4 // so 5 States
 			case "CARROT_LEVEL_1":
 				this.setTexture("FarmingCropsVer2",1)
 				timer.delayedCall(1000, () => {

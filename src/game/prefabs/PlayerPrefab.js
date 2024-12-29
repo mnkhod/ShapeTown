@@ -15,6 +15,8 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 		this.body.setSize(24, 12, false);
         this.body.setOffset(0, 40);
 
+        this.setDepth(1);
+
 		// skin
 		const skin = scene.add.sprite(14.53150085424582, 27.318725443132376, "player", 0);
 		skin.scaleX = 1.5;
