@@ -8,6 +8,8 @@ import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
+import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
+import { EventBus } from '../EventBus';
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -18,6 +20,7 @@ export default class FarmingScene extends Phaser.Scene {
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+		this.reactEvent = EventBus
 		/* END-USER-CTR-CODE */
 	}
 
@@ -63,6 +66,7 @@ export default class FarmingScene extends Phaser.Scene {
 
 		// dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1
 		const dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1 = farmingMap.createLayer("DEVS IMPORTANT!!!/Soil[Are which can plain crop on top]", ["GroundTilestSoil"], -864, -496);
+		dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1.visible = false;
 
 		// dEVS_IMPORTANT____Removeable_Assets_1
 		const dEVS_IMPORTANT____Removeable_Assets_1 = farmingMap.createLayer("DEVS IMPORTANT!!!/Removeable Assets", ["Flower_v02","Flower_v01","Flower_v03","Flower_v04","GroundAccessor","CityHouses_v02","RoadStone","Flower_v05"], -864, -496);
@@ -233,10 +237,101 @@ export default class FarmingScene extends Phaser.Scene {
 	/* START-USER-CODE */
 
 	// Write your code here
+	setupStartingItems() {
+	    this.itemHudPrefab.visible = true;
+	    this.questBookPrefab.visible = true;
+	
+	    this.itemHudPrefab.addItem("WATERING_CAN", "IconBaseTools", 0);
+	    this.itemHudPrefab.addItem("HOE", "IconBaseTools", 1);
+	    this.itemHudPrefab.addItem("PICK_AXE", "IconBaseTools", 2);
+	
+	    this.itemHudPrefab.addItem("CARROT_SEED", "SeedBag", 0, 5);
+	}
+	setupLayerDepths() {
+	    this.render_BackGround_1.setDepth(1);
+	    this.render_RoadStone_JustRender__1.setDepth(2);
+	
+	    this.dEVS_IMPORTANT____Removeable_Assets_1.setDepth(10);
+	    this.house_area_HouseUnderGround_1.setDepth(11);
+	    this.house_area_chest_1.setDepth(12);
+	    this.house_area_House_1.setDepth(13);
+	
+	    this.group_5_Decoration_1.setDepth(30);
+	    this.group_5_Dead_treee_1.setDepth(31);
+	    this.group_5_StrawberryBush_1.setDepth(32);
+	
+	    this.treeBorder_TreeL.setDepth(50);
+	    this.treeBorder_TreeL_1.setDepth(50);
+	    this.treeBorder_TreeL_2.setDepth(50);
+	    this.treeBorder_TreeL_3.setDepth(50);
+	    this.treeBorder_TreeL_4.setDepth(50);
+	    this.treeBorder_TreeL_5.setDepth(50);
+	    this.treeBorder_StoneFance_1.setDepth(50);
+	    this.render_FenceWooden_Make_a_Collider__1.setDepth(50);
+	
+	    this.merchant_shopStand_1.setDepth(70);
+	
+	    this.playerPrefab.setDepth(80);
+	
+	    this.questBookPrefab?.setDepth(90);
+	    this.itemHudPrefab?.setDepth(90);
+	    this.messagePrefab?.setDepth(90);
+	    this.alertPrefab?.setDepth(90);
+	}
+	setupHarvestTiles() {
+	    const soilLayer = this.dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1;
+	    const width = soilLayer.width;
+	    const height = soilLayer.height;
 
+	    for (let y = 0; y < height; y++) {
+	        for (let x = 0; x < width; x++) {
+	            const tile = soilLayer.getTileAt(x, y);
+
+	            if (tile && tile.index === 1748) {
+	                const worldX = tile.pixelX + soilLayer.x + (tile.width / 2);
+	                const worldY = tile.pixelY + soilLayer.y + (tile.height / 2);
+
+	                const harvestTile = new HarvestPrefab(this, worldX, worldY);
+	                this.add.existing(harvestTile);
+	                harvestTile.state = "GROUND"; 
+	                harvestTile.setupBasedOnState();
+	                 harvestTile.setDepth(5);
+	                if (!this.harvestTiles) {
+	                    this.harvestTiles = [];
+	                }
+	                this.harvestTiles.push(harvestTile);
+	            }
+	        }
+	    }
+	}
 	create() {
 
 		this.editorCreate();
+
+		this.events.emit("create");
+        this.itemHudPrefab.visible = true;
+        this.questBookPrefab.visible = true;
+	  	this.setupLayerDepths();
+		this.time.delayedCall(100, () => {
+    	    this.itemHudPrefab.itemBoxs.map((box, index) => {
+    	        box.setInteractive({ useHandCursor: true });
+    	        box.on('pointerdown', function (_pointer) {
+    	            let otherBoxes = this.itemHudPrefab.itemBoxs.filter((b) => b != box);
+	
+    	            if(box.frame.name == 0){
+    	                otherBoxes.map((i) => i.setTexture("HudItemSlot", 0));
+    	                box.setTexture("HudItemSlot", 1);
+    	                this.itemHudPrefab.selectedItem = this.itemHudPrefab.itemData[index];
+    	                this.itemHudPrefab.activeIndex = index;
+    	            }
+    	        }, this);
+    	    });
+	
+    	    this.itemHudPrefab.addItem("WATERING_CAN", "IconBaseTools", 0);
+    	    this.itemHudPrefab.addItem("HOE", "IconBaseTools", 1);
+    	    this.itemHudPrefab.addItem("PICK_AXE", "IconBaseTools", 2);
+    	    this.itemHudPrefab.addItem("CARROT_SEED", "SeedBag", 0, 5);
+    	}, {}, this);
 
     	this.physics.add.collider(this.playerPrefab, this.merchant_shopStand_1);
     	this.merchant_shopStand_1.setCollisionBetween(0, 10000);
@@ -294,6 +389,8 @@ export default class FarmingScene extends Phaser.Scene {
     	this.render_FenceWooden_Make_a_Collider__1.setCollisionBetween(0, 10000);
 		// this.render_FenceWooden_Make_a_Collider__1.renderDebug(this.add.graphics());
 
+		
+ 		this.setupHarvestTiles();
 
 		this.physics.add.overlap(this.sceneTilePrev, this.playerPrefab, () => {
 			this.playerPrefab.x += 50
