@@ -24,6 +24,12 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		npc.play("npcHarvestStandingAnim");
 		this.add(npc);
 
+		const questMark = scene.add.sprite(0, -40, "GameNpcs1", 6);
+    	questMark.setScale();
+    	questMark.play("BeforeQuest");
+    	this.add(questMark);
+    	this.questMark = questMark;
+
 		this.npc = npc;
 
 		/* START-USER-CTR-CODE */
@@ -35,6 +41,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		/* END-USER-CTR-CODE */
 	}
 
+	/** @type {Phaser.GameObjects.Sprite} */
+	questMark;
 	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
 	npc;
 	/** @type {Phaser.GameObjects.GameObject} */
@@ -107,6 +115,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 			}
 
 			if(this.itemHud.checkItem("CARROT")){
+    			this.questMark.play("AfterQuest");
 				let hasNFT = await checkIfHasNFT()
 				if(hasNFT){
 					this.scene.alertPrefab.alert("Already Has Achievement NFT")

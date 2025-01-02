@@ -16,7 +16,7 @@ export default class QuestBookPrefab extends Phaser.GameObjects.Sprite {
 		this.setInteractive({ useHandCursor: true });
 		this.on('pointerdown', () => {
 			if(this.scene.reactEvent == undefined) throw Error("REACT EVENT BUS NOT HOOKED IN")
-			this.scene.reactEvent.emit("show-achievements-modal",this)
+			this.scene.reactEvent.emit("show-quest-modal", this.scene);
 		},this)
 		this.scene.events.on('update', this.onSceneUpdate, this);
 		/* END-USER-CTR-CODE */

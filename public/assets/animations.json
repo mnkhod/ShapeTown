@@ -1183,6 +1183,114 @@
             "skipMissedFrames": true,
             "repeat": -1,
             "randomFrame": false
+        },
+        {
+            "key": "BeforeQuest",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "NPCDialoguePopUpSheet",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpSheet",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpSheet",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpSheet",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpSheet",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpSheet",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpSheet",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "randomFrame": false
+        },
+        {
+            "key": "AfterQuest",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "NPCDialoguePopUpMainQuestSheet",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpMainQuestSheet",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpMainQuestSheet",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpMainQuestSheet",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpMainQuestSheet",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpMainQuestSheet",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpMainQuestSheet",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpMainQuestSheet",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "randomFrame": false
         }
     ],
     "globalTimeScale": 1,

@@ -5,6 +5,7 @@ import { PhaserGame } from './game/PhaserGame';
 import AchievementHUD from './components/AchievementHUD';
 import InventoryHUD from './components/InventoryHUD';
 import TokenTrader from './components/TokenTrader';
+import QuestComponent from './components/QuestComponent';
 import { ethers } from "ethers";
 import { EventBus } from "./game/EventBus";
 
@@ -16,6 +17,7 @@ function App() {
     const [showAchievements, setShowAchievements] = useState(false);
     const [showInventory, setShowInventory] = useState(false);
     const [showTrader, setShowTrader] = useState(false);
+    const [showQuest, setShowQuest] = useState(false);
 
     const [gameData] = useState({});
 
@@ -38,6 +40,9 @@ function App() {
                 break;
             case "MARKET":
                 setShowTrader(true)
+                break;
+            case "QUEST":
+                setShowQuest(true)
                 break;
             default:
                 break;
@@ -80,6 +85,11 @@ function App() {
                     onClose={() => setShowTrader(false)}
                 />
             )}
+            {showQuest && (
+               <QuestComponent 
+                   onClose={() => setShowQuest(false)}
+               />
+           )}
         </div>
     )
 }

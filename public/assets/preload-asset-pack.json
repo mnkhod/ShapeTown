@@ -604,6 +604,32 @@
                 "key": "NpcBlaksmith"
             },
             {
+                "url": "assets/Icon/NPCDialoguePopUpMainQuestSheet.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCDialoguePopUpMainQuestSheet"
+            },
+            {
+                "url": "assets/Icon/NPCDialoguePopUpSheet.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCDialoguePopUpSheet"
+            },
+            {
                 "url": "assets/NPC/NPCGuardian_V01.png",
                 "type": "image",
                 "key": "NPCGuardian_V"

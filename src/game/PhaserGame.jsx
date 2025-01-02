@@ -65,7 +65,14 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
 
         return () => EventBus.removeListener('show-market-modal');
     }, [showModal, ref])
-
+    useEffect(() => {
+    
+        EventBus.on('show-quest-modal', (currentScene) => {
+            showModal("QUEST", currentScene);
+        });
+    
+        return () => EventBus.removeListener('show-quest-modal');
+    }, [showModal]);
     return (
         <div id="game-container" className="h-screen"></div>
     );

@@ -8,9 +8,9 @@ import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
+/* START-USER-IMPORTS */
 import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
 import { EventBus } from '../EventBus';
-/* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
 export default class FarmingScene extends Phaser.Scene {
