@@ -11,6 +11,10 @@ import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
+import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
+import PineTreePrefab from "../prefabs/Trees/PineTreePrefab";
+import MapleTreePrefab from "../prefabs/Trees/MapleTreePrefab";
+import TutorealHousePrefab from "../prefabs/House/TutorealHousePrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -89,20 +93,8 @@ export default class TutorialScene extends Phaser.Scene {
 		// layerHouseGround
 		const layerHouseGround = tutorialMap.createLayer("House/HouseGround", ["GroundTileset"], -768, -416);
 
-		// layerHouse1
-		const layerHouse1 = tutorialMap.createLayer("House/House", ["TutorliarNPCHouse","Apple"], -768, -416);
-
-		// layerDeadTree
-		const layerDeadTree = tutorialMap.createLayer("Tree/DeadTree", ["Tree_v08"], -768, -416);
-
 		// layerPine
 		const layerPine = tutorialMap.createLayer("Tree/PineTree", ["Apple"], -768, -416);
-
-		// layerMapleTree
-		const layerMapleTree = tutorialMap.createLayer("Tree/MapleTree", ["Tree_v04"], -768, -416);
-
-		// appleTree_1
-		const appleTree_1 = tutorialMap.createLayer("Tree/AppleTree", ["Tree_v02","Tree_v014"], -768, -416);
 
 		// farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1
 		const farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1 = tutorialMap.createLayer("Farming Area/Crops[Make it Collision/popup to not able to HARVET]", ["FarmingCropsVer2"], -768, -416);
@@ -178,6 +170,22 @@ export default class TutorialScene extends Phaser.Scene {
 		const harvestPrefab_7 = new HarvestPrefab(this, 303, 560);
 		this.add.existing(harvestPrefab_7);
 
+		// appleTreePrefab
+		const appleTreePrefab = new AppleTreePrefab(this, 496, 156);
+		this.add.existing(appleTreePrefab);
+
+		// pineTreePrefab
+		const pineTreePrefab = new PineTreePrefab(this, 620, 342);
+		this.add.existing(pineTreePrefab);
+
+		// mapleTreePrefab
+		const mapleTreePrefab = new MapleTreePrefab(this, 162, 325);
+		this.add.existing(mapleTreePrefab);
+
+		// tutorealHousePrefab
+		const tutorealHousePrefab = new TutorealHousePrefab(this, 256, 90);
+		this.add.existing(tutorealHousePrefab);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
@@ -194,11 +202,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.layerTreeBorder = layerTreeBorder;
 		this.layerTreeBorder2 = layerTreeBorder2;
 		this.layerHouseGround = layerHouseGround;
-		this.layerHouse1 = layerHouse1;
-		this.layerDeadTree = layerDeadTree;
 		this.layerPine = layerPine;
-		this.layerMapleTree = layerMapleTree;
-		this.appleTree_1 = appleTree_1;
 		this.farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1 = farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1;
 		this.farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1 = farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1;
 		this.sceneTile = sceneTile;
@@ -207,6 +211,10 @@ export default class TutorialScene extends Phaser.Scene {
 		this.itemHudPrefab = itemHudPrefab;
 		this.messagePrefab = messagePrefab;
 		this.alertPrefab = alertPrefab;
+		this.appleTreePrefab = appleTreePrefab;
+		this.pineTreePrefab = pineTreePrefab;
+		this.mapleTreePrefab = mapleTreePrefab;
+		this.tutorealHousePrefab = tutorealHousePrefab;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -227,15 +235,7 @@ export default class TutorialScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	layerHouseGround;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	layerHouse1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	layerDeadTree;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	layerPine;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	layerMapleTree;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	appleTree_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -252,6 +252,14 @@ export default class TutorialScene extends Phaser.Scene {
 	messagePrefab;
 	/** @type {AlertPrefab} */
 	alertPrefab;
+	/** @type {AppleTreePrefab} */
+	appleTreePrefab;
+	/** @type {PineTreePrefab} */
+	pineTreePrefab;
+	/** @type {MapleTreePrefab} */
+	mapleTreePrefab;
+	/** @type {TutorealHousePrefab} */
+	tutorealHousePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 
@@ -259,12 +267,15 @@ export default class TutorialScene extends Phaser.Scene {
 
 	// Write your code here
 
+
+
 	create() {
 		this.editorCreate();
 
-		this.physics.add.collider(this.playerPrefab, this.layerMapleTree);
-		this.layerMapleTree.setCollisionBetween(0,10000);
-		// this.layerMapleTree.renderDebug(this.add.graphics());
+		this.appleTreePrefab.setupCollision(this.playerPrefab)
+		this.pineTreePrefab.setupCollision(this.playerPrefab)
+		this.mapleTreePrefab.setupCollision(this.playerPrefab)
+		this.tutorealHousePrefab.setupCollision(this.playerPrefab)
 
 		this.physics.add.collider(this.playerPrefab, this.layerTreeBorder);
 		this.layerTreeBorder.setCollisionBetween(0,10000);
@@ -282,16 +293,9 @@ export default class TutorialScene extends Phaser.Scene {
 		this.layerPine.setCollision(1955);
 		// this.layerPine.renderDebug(this.add.graphics());
 
-		this.physics.add.collider(this.playerPrefab, this.appleTree_1);
-		this.appleTree_1.setCollisionBetween(0,10000);
-		// this.appleTree_1.renderDebug(this.add.graphics());
 
-		this.physics.add.collider(this.playerPrefab, this.layerDeadTree);
-		this.layerDeadTree.setCollisionBetween(0,10000);
-		// this.layerDeadTree.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.layerHouse1);
-		this.layerHouse1.setCollisionBetween(0,10000);
+		// this.physics.add.collider(this.playerPrefab, this.layerHouse1);
+		// this.layerHouse1.setCollisionBetween(0,10000);
 		// this.layerHouse1.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.layerHouseGround);

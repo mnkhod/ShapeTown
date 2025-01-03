@@ -967,8 +967,8 @@
             {
                 "url": "assets/Tree/Tree_v04.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 256,
+                    "frameHeight": 256,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -980,8 +980,8 @@
             {
                 "url": "assets/mapAssets/Tree_v014.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 128,
+                    "frameHeight": 128,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -993,8 +993,8 @@
             {
                 "url": "assets/mapAssets/Tree_v02.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 128,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -1076,8 +1076,8 @@
             {
                 "url": "assets/mapAssets/TutorliarNPCHouse.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 128,
+                    "frameHeight": 160,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -1106,6 +1106,7 @@
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
         "version": 2,
-        "showAllFilesInBlocks": false
+        "showAllFilesInBlocks": false,
+        "visible": true
     }
 }

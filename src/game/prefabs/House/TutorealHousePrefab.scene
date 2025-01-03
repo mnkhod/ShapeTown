@@ -1,0 +1,33 @@
+{
+    "id": "539d9f3b-484a-4047-bc14-e5a464303a3e",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "88b97475-8122-4dd2-88f2-f04349f3c46d",
+            "label": "tutorliarNPCHouse0",
+            "texture": {
+                "key": "TutorliarNPCHouse",
+                "frame": 0
+            },
+            "x": 63,
+            "y": 79
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
