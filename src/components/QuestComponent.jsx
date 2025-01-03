@@ -42,7 +42,7 @@ const QuestComponent = ({ onClose }) => {
 
   return (
     <div 
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-40"
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-40 font-malio"
       onClick={onClose}
     >
       <div 
@@ -68,8 +68,8 @@ const QuestComponent = ({ onClose }) => {
           </div>
 
           <div className="pt-16 pb-6">
-            <h2 className="text-2xl font-bold text-center text-gray-800">TASKS</h2>
-            <p className="text-sm text-center text-gray-600 mt-2">
+            <h2 className="text-base font-malio text-center text-gray-800">TASKS</h2>
+            <p className="text-xs font-malio text-center text-gray-600 mt-2">
               Complete these tasks to improve your equipment<br />
               and earn achievements
             </p>
@@ -86,7 +86,7 @@ const QuestComponent = ({ onClose }) => {
                       className="w-4 h-4 mt-1 flex-shrink-0 object-contain" 
                     />
                     <div className="flex-1">
-                      <p className={`text-sm ${task.completed ? 'text-green-600' : 'text-gray-900/90'}`}>
+                      <p className={`text-xs font-malio ${task.completed ? 'text-green-600' : 'text-gray-900/90'}`}>
                         {task.text}
                       </p>
                       {task.subtasks && (
@@ -94,7 +94,7 @@ const QuestComponent = ({ onClose }) => {
                           {task.subtasks.map((subtask, subIndex) => (
                             <li 
                               key={subIndex} 
-                              className="text-sm text-gray-600 ml-2"
+                              className="text-xs font-malio text-gray-600 ml-2"
                             >
                               • {subtask}
                             </li>

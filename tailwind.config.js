@@ -9,12 +9,15 @@ export default withAccountKitUi(
       "./src/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
-      extend: {},
+      extend: {
+        fontFamily: {
+          'malio': ['"Little Malio 8-Bit"', 'monospace']
+        },
+      },
     },
     plugins: [],
   },
   {
-    // override account kit themes
     colors: {
       "btn-primary": createColorSet("#E82594", "#FF66CC"),
       "fg-accent-brand": createColorSet("#E82594", "#FF66CC"),

@@ -57,7 +57,7 @@ export default class TutorialScene extends Phaser.Scene {
 		tutorialMap.createLayer("Map environment/Background[Just Render]", ["GroundTileset"], -768, -416);
 
 		// map_environment_Ground_just_render__1
-		tutorialMap.createLayer("Map environment/Ground[just render]", ["RoadStone"], -768, -416);
+		tutorialMap.createLayer("Map environment/Ground[just render]", ["RoadStone"], -767, -416);
 
 		// map_environment_Road_Just_render__1
 		tutorialMap.createLayer("Map environment/Road[Just render]", ["RoadStone"], -768, -416);
@@ -69,7 +69,7 @@ export default class TutorialScene extends Phaser.Scene {
 		const farmingAreaFarmingTile = tutorialMap.createLayer("Farming Area/FarmingTile[Use SEED to grow crops]", ["RoadStone"], -768, -416);
 
 		// layerFishingPondBorder
-		const layerFishingPondBorder = tutorialMap.createLayer("FishingPond/FishingPondBOrder[Make it Collision]", ["GroundTileset", "LakeBorderCornerAni", "LakeBorderAni"], -768, -416);
+		const layerFishingPondBorder = tutorialMap.createLayer("FishingPond/FishingPondBOrder[Make it Collision]", ["LakeBorderAni","LakeBorderCornerAni","GroundTileset"], -768, -416);
 
 		// fishingPond_FishingPondWater_Anywhere_can_be_fishing_action_start__1
 		tutorialMap.createLayer("FishingPond/FishingPondWater[Anywhere can be fishing action start]", ["GroundTileset","LakeAccessor","Fishes_3_32x32"], -768, -416);
@@ -102,7 +102,7 @@ export default class TutorialScene extends Phaser.Scene {
 		const layerMapleTree = tutorialMap.createLayer("Tree/MapleTree", ["Tree_v04"], -768, -416);
 
 		// appleTree_1
-		const appleTree_1 = tutorialMap.createLayer("Tree/AppleTree", ["Tree_v02", "Tree_v014"], -768, -416);
+		const appleTree_1 = tutorialMap.createLayer("Tree/AppleTree", ["Tree_v02","Tree_v014"], -768, -416);
 
 		// farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1
 		const farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1 = tutorialMap.createLayer("Farming Area/Crops[Make it Collision/popup to not able to HARVET]", ["FarmingCropsVer2"], -768, -416);
@@ -127,15 +127,15 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.existing(harvestPrefab);
 
 		// harvestPrefab_1
-		const harvestPrefab_1 = new HarvestPrefab(this, 240, 592);
+		const harvestPrefab_1 = new HarvestPrefab(this, 239, 592);
 		this.add.existing(harvestPrefab_1);
 
 		// harvestPrefab_2
-		const harvestPrefab_2 = new HarvestPrefab(this, 273, 592);
+		const harvestPrefab_2 = new HarvestPrefab(this, 271, 592);
 		this.add.existing(harvestPrefab_2);
 
 		// harvestPrefab_3
-		const harvestPrefab_3 = new HarvestPrefab(this, 306, 592);
+		const harvestPrefab_3 = new HarvestPrefab(this, 303, 592);
 		this.add.existing(harvestPrefab_3);
 
 		// oldManJackNpcPrefab
@@ -163,19 +163,19 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.existing(alertPrefab);
 
 		// harvestPrefab_4
-		const harvestPrefab_4 = new HarvestPrefab(this, 207, 559);
+		const harvestPrefab_4 = new HarvestPrefab(this, 207, 560);
 		this.add.existing(harvestPrefab_4);
 
 		// harvestPrefab_5
-		const harvestPrefab_5 = new HarvestPrefab(this, 240, 559);
+		const harvestPrefab_5 = new HarvestPrefab(this, 239, 560);
 		this.add.existing(harvestPrefab_5);
 
 		// harvestPrefab_6
-		const harvestPrefab_6 = new HarvestPrefab(this, 273, 559);
+		const harvestPrefab_6 = new HarvestPrefab(this, 271, 560);
 		this.add.existing(harvestPrefab_6);
 
 		// harvestPrefab_7
-		const harvestPrefab_7 = new HarvestPrefab(this, 306, 559);
+		const harvestPrefab_7 = new HarvestPrefab(this, 303, 560);
 		this.add.existing(harvestPrefab_7);
 
 		// oldManJackNpcPrefab (prefab fields)

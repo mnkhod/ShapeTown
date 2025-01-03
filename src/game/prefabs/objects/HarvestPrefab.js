@@ -83,11 +83,22 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 }
                 break;
 			case "GROUND":
-				this.setTexture("RoadStone",83)
-                if (this.physicsBody) {
-                    this.physicsBody.enable = false;
-                }
-				break;
+    			const roll = Phaser.Math.RND.frac();
+
+    			let tileId;
+    			if (roll < 0.7) {
+    			    tileId = 34;
+    			} else if (roll < 0.85) {
+    			    tileId = 83;
+    			} else {
+    			    tileId = 89;
+    			}
+
+    			this.setTexture("RoadStone", tileId);
+    			if (this.physicsBody) {
+    			    this.physicsBody.enable = false;
+    			}
+    			break;
 			case "SOIL":
 				this.setTexture("GroundTilestSoil",3)
 				break;

@@ -10,4 +10,9 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
-  }
+}
+@font-face {
+    font-family: 'Little Malio 8-Bit';
+    src: url('../public/assets/fonts/Little Malio 8-Bit.otf') format('truetype');
+    font-display: swap;
+}

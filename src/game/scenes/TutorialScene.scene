@@ -23,7 +23,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -49,7 +48,7 @@
             "type": "TilemapLayer",
             "id": "f98344bf-89a4-4894-a73a-61beff22c1a3",
             "label": "map_environment_Ground_just_render__1",
-            "x": -768,
+            "x": -767,
             "y": -416,
             "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
             "layerName": "Map environment/Ground[just render]",
@@ -57,7 +56,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -91,7 +89,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -126,7 +123,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -161,7 +157,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -196,7 +191,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -230,7 +224,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -264,7 +257,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -299,7 +291,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -334,7 +325,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -369,7 +359,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -404,7 +393,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -439,7 +427,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -474,7 +461,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -509,7 +495,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -544,7 +529,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -579,7 +563,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -614,7 +597,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -649,7 +631,6 @@
                 "GroundTileset",
                 "RoadStone",
                 "TreePatteren",
-                "Tree_v014",
                 "GroundTilestSoil",
                 "GroundAccessor",
                 "LakeAccessor",
@@ -713,7 +694,7 @@
                 "y"
             ],
             "label": "harvestPrefab_1",
-            "x": 240,
+            "x": 239,
             "y": 592
         },
         {
@@ -724,7 +705,7 @@
                 "y"
             ],
             "label": "harvestPrefab_2",
-            "x": 273,
+            "x": 271,
             "y": 592
         },
         {
@@ -735,7 +716,7 @@
                 "y"
             ],
             "label": "harvestPrefab_3",
-            "x": 306,
+            "x": 303,
             "y": 592
         },
         {
@@ -828,7 +809,7 @@
             ],
             "label": "harvestPrefab_4",
             "x": 207,
-            "y": 559
+            "y": 560
         },
         {
             "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
@@ -838,8 +819,8 @@
                 "y"
             ],
             "label": "harvestPrefab_5",
-            "x": 240,
-            "y": 559
+            "x": 239,
+            "y": 560
         },
         {
             "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
@@ -849,8 +830,8 @@
                 "y"
             ],
             "label": "harvestPrefab_6",
-            "x": 273,
-            "y": 559
+            "x": 271,
+            "y": 560
         },
         {
             "prefabId": "a1fa0a70-a3b6-4765-87c1-03960867693d",
@@ -860,8 +841,8 @@
                 "y"
             ],
             "label": "harvestPrefab_7",
-            "x": 306,
-            "y": 559
+            "x": 303,
+            "y": 560
         }
     ],
     "plainObjects": [
@@ -882,10 +863,6 @@
                 {
                     "name": "TreePatteren",
                     "imageKey": "TreePatteren"
-                },
-                {
-                    "name": "Tree_v014",
-                    "imageKey": "Tree_v014"
                 },
                 {
                     "name": "GroundTilestSoil",
