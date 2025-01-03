@@ -19,7 +19,7 @@
             "y": -0.002866411641057276,
             "ArcadeComponent.active": true,
             "allowGravity": false,
-            "body.width": 301,
+            "body.width": 100,
             "body.height": 89,
             "list": [
                 {
@@ -28,12 +28,12 @@
                     "label": "bg",
                     "scope": "CLASS",
                     "texture": {
-                        "key": "MessageBox"
+                        "key": "MessageBox_1"
                     },
                     "x": 150,
                     "y": 45,
-                    "scaleX": 0.5091429221209207,
-                    "scaleY": 0.5091429221209207
+                    "scaleX": 0.46457169907734824,
+                    "scaleY": 0.46457169907734824
                 },
                 {
                     "type": "Text",
@@ -42,15 +42,20 @@
                     "scope": "CLASS",
                     "x": 150,
                     "y": 45,
+                    "scaleX": 1.0077466928617544,
+                    "scaleY": 1.0077466928617544,
                     "originX": 0.5,
                     "originY": 0.5,
                     "text": "New text",
-                    "fixedWidth": 250,
+                    "fixedWidth": 200,
                     "lineSpacing": 3,
                     "align": "center",
-                    "fontSize": "12px",
+                    "fontFamily": "Little Malio 8-Bit",
+                    "fontSize": "20px",
+                    "color": "#000",
+                    "stroke": "#000",
                     "maxLines": 3,
-                    "wordWrapWidth": 250,
+                    "wordWrapWidth": 200,
                     "wordWrapUseAdvanced": true
                 }
             ]

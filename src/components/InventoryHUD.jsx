@@ -131,7 +131,7 @@ const InventoryGrid = ({ onClose }) => {
             src="/assets/files/image 35.png"
             alt="Close"
             onClick={onClose}
-            className="absolute top-8 -right-4 w-12 h-12 cursor-pointer hover:opacity-80"
+            className="absolute top-12 -right-4 w-10 h-10 cursor-pointer hover:opacity-80"
             style={{ imageRendering: 'pixelated' }}
           />
         </div>

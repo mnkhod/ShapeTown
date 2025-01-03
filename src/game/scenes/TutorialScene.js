@@ -15,6 +15,7 @@ import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
 import PineTreePrefab from "../prefabs/Trees/PineTreePrefab";
 import MapleTreePrefab from "../prefabs/Trees/MapleTreePrefab";
 import TutorealHousePrefab from "../prefabs/House/TutorealHousePrefab";
+import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -186,11 +187,16 @@ export default class TutorialScene extends Phaser.Scene {
 		const tutorealHousePrefab = new TutorealHousePrefab(this, 256, 90);
 		this.add.existing(tutorealHousePrefab);
 
+		// profilePrefab
+		const profilePrefab = new ProfilePrefab(this, 34, 42);
+		this.add.existing(profilePrefab);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
 		oldManJackNpcPrefab.itemHud = itemHudPrefab;
 		oldManJackNpcPrefab.bookHud = questBookPrefab;
+		oldManJackNpcPrefab.profilePrefab = profilePrefab;
 
 		// itemHudPrefab (prefab fields)
 		itemHudPrefab.player = playerPrefab;
@@ -215,6 +221,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.pineTreePrefab = pineTreePrefab;
 		this.mapleTreePrefab = mapleTreePrefab;
 		this.tutorealHousePrefab = tutorealHousePrefab;
+		this.profilePrefab = profilePrefab;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -260,6 +267,8 @@ export default class TutorialScene extends Phaser.Scene {
 	mapleTreePrefab;
 	/** @type {TutorealHousePrefab} */
 	tutorealHousePrefab;
+	/** @type {ProfilePrefab} */
+	profilePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 
@@ -272,6 +281,13 @@ export default class TutorialScene extends Phaser.Scene {
 	create() {
 		this.editorCreate();
 
+		this.questBookPrefab.setDepth(100)
+    	this.itemHudPrefab.setDepth(100)
+    	this.messagePrefab.setDepth(100)
+    	this.alertPrefab.setDepth(100)
+    	this.profilePrefab.setDepth(100)
+
+		this.profilePrefab.visible = true;
 		this.appleTreePrefab.setupCollision(this.playerPrefab)
 		this.pineTreePrefab.setupCollision(this.playerPrefab)
 		this.mapleTreePrefab.setupCollision(this.playerPrefab)
@@ -332,10 +348,11 @@ export default class TutorialScene extends Phaser.Scene {
         if (this.itemHudPrefab) {
             this.itemHudPrefab.visible = false;
         }
-
+        if (this.profilePrefab) {
+            this.profilePrefab.visible = false;
+        }
 		// this.time.delayedCall(100, () => {
 		// 	this.questBookPrefab.visible = true
-
 		// 	this.itemHudPrefab.visible = true;
 		// 	this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
 		// 	this.itemHudPrefab.addItem("HOE","IconBaseTools",1)

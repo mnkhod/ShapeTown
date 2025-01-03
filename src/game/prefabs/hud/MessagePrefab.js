@@ -13,21 +13,23 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 
 		scene.physics.add.existing(this, false);
 		this.body.allowGravity = false;
-		this.body.setSize(301, 89, false);
+		this.body.setSize(100, 89, false);
 
 		// bg
-		const bg = scene.add.image(150, 45, "MessageBox");
-		bg.scaleX = 0.5091429221209207;
-		bg.scaleY = 0.5091429221209207;
+		const bg = scene.add.image(150, 45, "MessageBox_1");
+		bg.scaleX = 0.46457169907734824;
+		bg.scaleY = 0.46457169907734824;
 		this.add(bg);
 
 		// msg
 		const msg = scene.add.text(150, 45, "", {});
+		msg.scaleX = 1.0077466928617544;
+		msg.scaleY = 1.0077466928617544;
 		msg.setOrigin(0.5, 0.5);
 		msg.text = "New text";
-		msg.setStyle({ "align": "center", "fixedWidth": 250, "fontSize": "12px", "maxLines": 3 });
+		msg.setStyle({ "align": "center", "color": "#000", "fixedWidth": 200, "fontFamily": "Little Malio 8-Bit", "fontSize": "20px", "maxLines": 3, "stroke": "#000" });
 		msg.setLineSpacing(3);
-		msg.setWordWrapWidth(250, true);
+		msg.setWordWrapWidth(200, true);
 		this.add(msg);
 
 		this.bg = bg;

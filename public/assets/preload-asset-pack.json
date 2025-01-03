@@ -2,6 +2,13 @@
     "section1": {
         "files": [
             {
+                "url": "assets/fonts/8-bit Arcade In.ttf",
+                "format": "truetype",
+                "descriptors": {},
+                "type": "font",
+                "key": "8-bit Arcade In"
+            },
+            {
                 "url": "assets/animations.json",
                 "type": "animation",
                 "key": "animations"
@@ -576,6 +583,13 @@
                 "key": "LakeFloatingRock_V03"
             },
             {
+                "url": "assets/fonts/Little Malio 8-Bit.otf",
+                "format": "opentype",
+                "descriptors": {},
+                "type": "font",
+                "key": "Little Malio 8-Bit"
+            },
+            {
                 "url": "assets/logo.png",
                 "type": "image",
                 "key": "logo"
@@ -589,6 +603,11 @@
                 "url": "assets/MessageBox.png",
                 "type": "image",
                 "key": "MessageBox"
+            },
+            {
+                "url": "assets/hud/MessageBox.png",
+                "type": "image",
+                "key": "MessageBox_1"
             },
             {
                 "url": "assets/NPC/NpcBlaksmith.png",
@@ -869,6 +888,11 @@
                 "key": "PlayerWalking_V01"
             },
             {
+                "url": "assets/hud/ProfileBackground.png",
+                "type": "image",
+                "key": "ProfileBackground"
+            },
+            {
                 "url": "assets/mapAssets/RoadStone.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -1106,7 +1130,6 @@
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
         "version": 2,
-        "showAllFilesInBlocks": false,
-        "visible": true
+        "showAllFilesInBlocks": false
     }
 }

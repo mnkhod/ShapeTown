@@ -40,7 +40,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
 		/* END-USER-CTR-CODE */
 	}
-
+	
 	/** @type {Phaser.GameObjects.Sprite} */
 	questMark;
 	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
@@ -53,6 +53,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 	itemHud;
 	/** @type {Phaser.GameObjects.GameObject} */
 	bookHud;
+	/** @type {Phaser.GameObjects.GameObject} */
+	profilePrefab;
 
 	/* START-USER-CODE */
 
@@ -74,7 +76,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		{
 			msg: `Alright, here’s your quest. You may see it in your quest book, good luck!`,
 			onComplete: () => {
-				this.bookHud.visible = true
+				this.bookHud.visible = true;
+				this.profilePrefab.visible = true;
 				this.bookHud.play("bookLightingUpAnim")
 			}
 		},
@@ -129,7 +132,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
 					this.isMinting = false;
 				}
-				
+
 			}else{
 				this.msgPrefab.conversation(this.dialogueLifeCycle)
 			}
@@ -184,7 +187,7 @@ async function checkIfHasNFT(){
 	const apiKey = import.meta.env.VITE_ALCHEMY_API;
 	// const baseURL = `https://shape-sepolia.g.alchemy.com/v2/${apiKey}/getNFTs/`;
 	const baseURL = `https://shape-mainnet.g.alchemy.com/v2/${apiKey}/getNFTs/`;
-	
+
 	var config = {
 	  method: 'get',
 	  url: `${baseURL}?owner=${metamaskAccount}`
@@ -199,12 +202,12 @@ async function checkIfHasNFT(){
 	}catch(e){ 
 		console.log(e);
 	}
-	
+
 	return false;
 }
 
 async function fetchMetamaskAccount(){
 	if(!window.ethereum || !window.ethereum.selectedAddress) return "0x081901916FF0eBff4573533D1b34D54029B89B07"
-	
+
 	return window.ethereum.selectedAddress 
 }
