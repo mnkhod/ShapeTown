@@ -15,8 +15,7 @@ import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
 import PineTreePrefab from "../prefabs/Trees/PineTreePrefab";
 import MapleTreePrefab from "../prefabs/Trees/MapleTreePrefab";
 import TutorealHousePrefab from "../prefabs/House/TutorealHousePrefab";
-import DeadTree1 from "../prefabs/Trees/DeadTree1";
-import DeadTree2 from "../prefabs/Trees/DeadTree2";
+import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -63,7 +62,7 @@ export default class TutorialScene extends Phaser.Scene {
 		tutorialMap.createLayer("Map environment/Background[Just Render]", ["GroundTileset"], -768, -416);
 
 		// map_environment_Ground_just_render__1
-		const map_environment_Ground_just_render__1 = tutorialMap.createLayer("Map environment/Ground[just render]", ["RoadStone"], -767, -416);
+		tutorialMap.createLayer("Map environment/Ground[just render]", ["RoadStone"], -767, -416);
 
 		// map_environment_Road_Just_render__1
 		tutorialMap.createLayer("Map environment/Road[Just render]", ["RoadStone"], -768, -416);
@@ -188,24 +187,20 @@ export default class TutorialScene extends Phaser.Scene {
 		const tutorealHousePrefab = new TutorealHousePrefab(this, 256, 90);
 		this.add.existing(tutorealHousePrefab);
 
-		// deadTree1
-		const deadTree1 = new DeadTree1(this, 409, 315);
-		this.add.existing(deadTree1);
-
-		// deadTree2
-		const deadTree2 = new DeadTree2(this, 540, 473);
-		this.add.existing(deadTree2);
+		// profilePrefab
+		const profilePrefab = new ProfilePrefab(this, 34, 42);
+		this.add.existing(profilePrefab);
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
 		oldManJackNpcPrefab.itemHud = itemHudPrefab;
 		oldManJackNpcPrefab.bookHud = questBookPrefab;
+		oldManJackNpcPrefab.profilePrefab = profilePrefab;
 
 		// itemHudPrefab (prefab fields)
 		itemHudPrefab.player = playerPrefab;
 
-		this.map_environment_Ground_just_render__1 = map_environment_Ground_just_render__1;
 		this.layerFence = layerFence;
 		this.farmingAreaFarmingTile = farmingAreaFarmingTile;
 		this.layerFishingPondBorder = layerFishingPondBorder;
@@ -226,15 +221,12 @@ export default class TutorialScene extends Phaser.Scene {
 		this.pineTreePrefab = pineTreePrefab;
 		this.mapleTreePrefab = mapleTreePrefab;
 		this.tutorealHousePrefab = tutorealHousePrefab;
-		this.deadTree1 = deadTree1;
-		this.deadTree2 = deadTree2;
+		this.profilePrefab = profilePrefab;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
 	}
 
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	map_environment_Ground_just_render__1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	layerFence;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -275,10 +267,8 @@ export default class TutorialScene extends Phaser.Scene {
 	mapleTreePrefab;
 	/** @type {TutorealHousePrefab} */
 	tutorealHousePrefab;
-	/** @type {DeadTree1} */
-	deadTree1;
-	/** @type {DeadTree2} */
-	deadTree2;
+	/** @type {ProfilePrefab} */
+	profilePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 
@@ -295,15 +285,13 @@ export default class TutorialScene extends Phaser.Scene {
     	this.itemHudPrefab.setDepth(100)
     	this.messagePrefab.setDepth(100)
     	this.alertPrefab.setDepth(100)
-    	// this.profilePrefab.setDepth(100)
+    	this.profilePrefab.setDepth(100)
 
-		// this.profilePrefab.visible = true;
+		this.profilePrefab.visible = true;
 		this.appleTreePrefab.setupCollision(this.playerPrefab)
 		this.pineTreePrefab.setupCollision(this.playerPrefab)
 		this.mapleTreePrefab.setupCollision(this.playerPrefab)
 		this.tutorealHousePrefab.setupCollision(this.playerPrefab)
-		this.deadTree1.setupCollision(this.playerPrefab)
-		this.deadTree2.setupCollision(this.playerPrefab)
 
 		this.physics.add.collider(this.playerPrefab, this.layerTreeBorder);
 		this.layerTreeBorder.setCollisionBetween(0,10000);

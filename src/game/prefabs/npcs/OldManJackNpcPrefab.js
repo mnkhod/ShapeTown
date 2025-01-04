@@ -185,6 +185,7 @@ async function mintNft({ onSuccess , onError }){
 async function checkIfHasNFT(){
 	let metamaskAccount = await fetchMetamaskAccount()
 	const apiKey = import.meta.env.VITE_ALCHEMY_API;
+	const contractAddress = import.meta.env.VITE_ACHIEVEMENT_NFT_ADDRESS;
 	// const baseURL = `https://shape-sepolia.g.alchemy.com/v2/${apiKey}/getNFTs/`;
 	const baseURL = `https://shape-mainnet.g.alchemy.com/v2/${apiKey}/getNFTs/`;
 
@@ -196,7 +197,7 @@ async function checkIfHasNFT(){
 	try{
 	  let result = await axios(config)
 	  if(result.data.ownedNfts){
-		let nfts = result.data.ownedNfts.filter((nft) => nft.contract.address == "0x3A711d5E7e4d69eBef1B7e1b3715f463619A254c")
+		let nfts = result.data.ownedNfts.filter((nft) => nft.contract.address == contractAddress)
 		if(nfts.length > 0) return true
 	  }
 	}catch(e){ 

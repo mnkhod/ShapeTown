@@ -38,12 +38,14 @@ const AchievementHUD = ({ onClose }) => {
   const [nfts,setNfts] = useState([])
 
   useEffect(() => {
-    fetchNftInfo()
+    // fetchNftInfo()
+    fetchAchievementInfo()
   },[])
 
   async function fetchNftInfo(){
     let metamaskAccount = await fetchMetamaskAccount()
     const apiKey = import.meta.env.VITE_ALCHEMY_API;
+	  const contractAddress = import.meta.env.VITE_ACHIEVEMENT_NFT_ADDRESS;
     // const baseURL = `https://shape-sepolia.g.alchemy.com/v2/${apiKey}/getNFTs/`;
     const baseURL = `https://shape-mainnet.g.alchemy.com/v2/${apiKey}/getNFTs/`;
 
@@ -55,7 +57,7 @@ const AchievementHUD = ({ onClose }) => {
     try{
       let result = await axios(config)
       if(result.data.ownedNfts){
-        let results = result.data.ownedNfts.filter((nft) => nft.contract.address == "0x3a711d5e7e4d69ebef1b7e1b3715f463619a254c").map((nft) => {
+        let results = result.data.ownedNfts.filter((nft) => nft.contract.address == contractAddress).map((nft) => {
           return {
             id: nft.id.tokenId,
             title: nft.metadata.name,
@@ -77,6 +79,40 @@ const AchievementHUD = ({ onClose }) => {
       }
     }catch(e){}
 
+  }
+
+  async function fetchAchievementInfo(){
+    let contractAddress = "0x6bc9Da82cB85D6D9e34EF7b8B2F930a8A83F5FB2"
+    let contractAbi = [
+      "function balanceOf(address,uint256) view returns (uint256)",
+      "function mint(address,uint256,uint256,bytes)",
+      "function uri(uint256) view returns (string)"
+    ]
+
+    let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital")
+    let metamaskAccount = await fetchMetamaskAccount()
+
+    const nftContract = new ethers.Contract(contractAddress, contractAbi, provider);
+
+    let nftIds = [0,1,2,3,4]
+    let results = []
+
+    for (let i = 0; i < nftIds.length; i++) {
+      const nftId = nftIds[i];
+      let result = await nftContract.balanceOf(metamaskAccount,nftId)
+      if(result > 0){
+        let axiosResult = await axios.get(`https://shape-town-api.vercel.app/nft/data/${nftId}`)
+        results.push({
+          id: nftId.toString(),
+          title: axiosResult.data.name,
+          description: axiosResult.data.description,
+          image: axiosResult.data.image,
+          unlocked: true            
+        })
+      }
+    }
+
+    setNfts(results)
   }
 
   async function fetchMetamaskAccount(){
