@@ -1,6 +1,7 @@
 
 // You can write more code here
 import axios from "axios";
+import { ethers } from "ethers";
 
 
 /* START OF COMPILED CODE */
@@ -168,7 +169,7 @@ async function mintNft({ onSuccess , onError }){
 
 	var config = {
 		method: 'get',
-		url: `${baseURL}/main/nft/create/${metamaskAccount}`
+		url: `${baseURL}/edu/nft/create/0/${metamaskAccount}`
 	};
 
 	try{
@@ -184,24 +185,23 @@ async function mintNft({ onSuccess , onError }){
 
 async function checkIfHasNFT(){
 	let metamaskAccount = await fetchMetamaskAccount()
-	const apiKey = import.meta.env.VITE_ALCHEMY_API;
-	const contractAddress = import.meta.env.VITE_ACHIEVEMENT_NFT_ADDRESS;
-	// const baseURL = `https://shape-sepolia.g.alchemy.com/v2/${apiKey}/getNFTs/`;
-	const baseURL = `https://shape-mainnet.g.alchemy.com/v2/${apiKey}/getNFTs/`;
 
-	var config = {
-	  method: 'get',
-	  url: `${baseURL}?owner=${metamaskAccount}`
-	};
+    let contractAddress = "0x6bc9Da82cB85D6D9e34EF7b8B2F930a8A83F5FB2"
+    let contractAbi = [
+      "function balanceOf(address,uint256) view returns (uint256)",
+      "function mint(address,uint256,uint256,bytes)",
+      "function uri(uint256) view returns (string)"
+    ]
 
-	try{
-	  let result = await axios(config)
-	  if(result.data.ownedNfts){
-		let nfts = result.data.ownedNfts.filter((nft) => nft.contract.address == contractAddress)
-		if(nfts.length > 0) return true
-	  }
-	}catch(e){ 
-		console.log(e);
+    let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital")
+
+	try {
+		const nftContract = new ethers.Contract(contractAddress, contractAbi, provider);
+		let result = await nftContract.balanceOf(metamaskAccount,0)
+
+		if (result > 0) return true;
+	} catch (e) {
+		return false;
 	}
 
 	return false;
