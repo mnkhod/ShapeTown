@@ -2,6 +2,9 @@
     "id": "61b2af8d-97d7-4fb5-87a9-8613f40d584a",
     "sceneType": "SCENE",
     "settings": {
+        "snapEnabled": true,
+        "snapWidth": 2560,
+        "snapHeight": 1600,
         "exportClass": true,
         "autoImport": true,
         "preloadPackFiles": [],
@@ -48,6 +51,7 @@
             "type": "TilemapLayer",
             "id": "f98344bf-89a4-4894-a73a-61beff22c1a3",
             "label": "map_environment_Ground_just_render__1",
+            "scope": "CLASS",
             "x": -767,
             "y": -416,
             "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
@@ -757,16 +761,28 @@
             "y": 90
         },
         {
-            "prefabId": "05640e95-1b2a-411d-bbb2-3af441962740",
-            "id": "748e9d4a-da37-478c-ab70-bc0104efba29",
+            "prefabId": "8862e7a5-8606-4b46-965f-fb00b3c30ce2",
+            "id": "756e0bb4-8d31-4240-8be0-4fe95a723de0",
             "unlock": [
                 "x",
                 "y"
             ],
-            "label": "profilePrefab",
+            "label": "deadTree1",
             "scope": "CLASS",
-            "x": 56.5,
-            "y": 22.25
+            "x": 409,
+            "y": 315
+        },
+        {
+            "prefabId": "bc8f70fc-832b-45aa-97fa-b71d8d26bbbc",
+            "id": "3be710dc-02cc-459b-8e90-23c807ffd365",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "deadTree2",
+            "scope": "CLASS",
+            "x": 540,
+            "y": 473
         }
     ],
     "plainObjects": [

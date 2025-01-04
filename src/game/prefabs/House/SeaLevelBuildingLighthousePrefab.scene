@@ -1,0 +1,33 @@
+{
+    "id": "5aebe3a1-c3ca-4c4d-8c06-25a73ca34ef3",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "926dac31-3158-4d5b-a2cc-725400e93806",
+            "label": "seaLevelBuildingLighthouse_v010",
+            "texture": {
+                "key": "SeaLevelBuildingLighthouse_v01",
+                "frame": 0
+            },
+            "x": 126,
+            "y": 317
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

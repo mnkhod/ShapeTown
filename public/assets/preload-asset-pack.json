@@ -908,8 +908,8 @@
             {
                 "url": "assets/Building/SeaLevelBuildingLighthouse_v01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 256,
+                    "frameHeight": 704,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -1043,8 +1043,8 @@
             {
                 "url": "assets/mapAssets/Tree_v08.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 128,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -1056,8 +1056,8 @@
             {
                 "url": "assets/mapAssets/Tree_v09.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 96,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -1130,6 +1130,7 @@
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
         "version": 2,
-        "showAllFilesInBlocks": false
+        "showAllFilesInBlocks": false,
+        "visible": true
     }
 }

@@ -1,0 +1,33 @@
+{
+    "id": "a17545ab-6625-4506-83de-be2c251c9095",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "309b3781-29e3-4e60-b68a-119b02cad04c",
+            "label": "decorationAngelStatue0",
+            "texture": {
+                "key": "DecorationAngelStatue",
+                "frame": 0
+            },
+            "x": 77,
+            "y": 125
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

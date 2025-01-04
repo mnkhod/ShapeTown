@@ -11,6 +11,8 @@ import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
+import AngelPrefab from "../prefabs/npcs/AngelPrefab";
+import SeaLevelBuildingLighthousePrefab from "../prefabs/House/SeaLevelBuildingLighthousePrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -97,20 +99,11 @@ export default class MarketScene extends Phaser.Scene {
 		// decoration_SpearStand_1
 		const decoration_SpearStand_1 = marketMap.createLayer("Decoration/SpearStand", ["DecorationWeaponStand"], -928, -496);
 
-		// decoration_ClockTower_1
-		const decoration_ClockTower_1 = marketMap.createLayer("Decoration/ClockTower", ["SeaLevelBuildingLighthouse_v01"], -928, -496);
-
 		// decoration_Tent_1
 		const decoration_Tent_1 = marketMap.createLayer("Decoration/Tent", ["Tent"], -928, -496);
 
 		// decoration_Decoration_1
 		const decoration_Decoration_1 = marketMap.createLayer("Decoration/Decoration", ["ShopInteriorObjects_"], -928, -496);
-
-		// decoration_Decoration
-		const decoration_Decoration = marketMap.createLayer("Decoration/Decoration2", ["DecorationMarketplace","ShopInteriorObjects_"], -928, -496);
-
-		// decoration_InfomationBoard_1
-		const decoration_InfomationBoard_1 = marketMap.createLayer("Decoration/InfomationBoard", ["DecorationMarketplace"], -928, -496);
 
 		// decoration_DecorationBeachside_1
 		const decoration_DecorationBeachside_1 = marketMap.createLayer("Decoration/DecorationBeachside", ["DecorationOnBeach","LakeFloatingRock_V03"], -928, -496);
@@ -178,10 +171,6 @@ export default class MarketScene extends Phaser.Scene {
 		npc_Guard_4.scaleX = 1.5;
 		npc_Guard_4.scaleY = 1.5;
 
-		// angelStatue
-		const angelStatue = this.add.sprite(505, 382, "DecorationAngelStatue", 0);
-		angelStatue.play("AngelStatue");
-
 		// marketNpcPrefab
 		const marketNpcPrefab = new MarketNpcPrefab(this, 829, 226);
 		this.add.existing(marketNpcPrefab);
@@ -208,6 +197,14 @@ export default class MarketScene extends Phaser.Scene {
 		sceneTilePrev.body.allowGravity = false;
 		sceneTilePrev.body.setSize(32, 200, false);
 
+		// angelPrefab
+		const angelPrefab = new AngelPrefab(this, 508, 442);
+		this.add.existing(angelPrefab);
+
+		// seaLevelBuildingLighthousePrefab
+		const seaLevelBuildingLighthousePrefab = new SeaLevelBuildingLighthousePrefab(this, 510, -119);
+		this.add.existing(seaLevelBuildingLighthousePrefab);
+
 		// itemHudPrefab (prefab fields)
 		itemHudPrefab.player = playerPrefab;
 
@@ -224,11 +221,8 @@ export default class MarketScene extends Phaser.Scene {
 		this.treePatteren_TreeBorder_2 = treePatteren_TreeBorder_2;
 		this.treePatteren_TreeBorder_3 = treePatteren_TreeBorder_3;
 		this.decoration_SpearStand_1 = decoration_SpearStand_1;
-		this.decoration_ClockTower_1 = decoration_ClockTower_1;
 		this.decoration_Tent_1 = decoration_Tent_1;
 		this.decoration_Decoration_1 = decoration_Decoration_1;
-		this.decoration_Decoration = decoration_Decoration;
-		this.decoration_InfomationBoard_1 = decoration_InfomationBoard_1;
 		this.decoration_DecorationBeachside_1 = decoration_DecorationBeachside_1;
 		this.decoration_DecorartionSunScreen_1 = decoration_DecorartionSunScreen_1;
 		this.playerPrefab = playerPrefab;
@@ -244,13 +238,14 @@ export default class MarketScene extends Phaser.Scene {
 		this.npc_Guard_5 = npc_Guard_5;
 		this.npc_Guard_3 = npc_Guard_3;
 		this.npc_Guard_4 = npc_Guard_4;
-		this.angelStatue = angelStatue;
 		this.marketNpcPrefab = marketNpcPrefab;
 		this.questBookPrefab = questBookPrefab;
 		this.itemHudPrefab = itemHudPrefab;
 		this.messagePrefab = messagePrefab;
 		this.alertPrefab = alertPrefab;
 		this.sceneTilePrev = sceneTilePrev;
+		this.angelPrefab = angelPrefab;
+		this.seaLevelBuildingLighthousePrefab = seaLevelBuildingLighthousePrefab;
 		this.marketMap = marketMap;
 
 		this.events.emit("scene-awake");
@@ -283,15 +278,9 @@ export default class MarketScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	decoration_SpearStand_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	decoration_ClockTower_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	decoration_Tent_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	decoration_Decoration_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	decoration_Decoration;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	decoration_InfomationBoard_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	decoration_DecorationBeachside_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -322,8 +311,6 @@ export default class MarketScene extends Phaser.Scene {
 	npc_Guard_3;
 	/** @type {Phaser.GameObjects.Image} */
 	npc_Guard_4;
-	/** @type {Phaser.GameObjects.Sprite} */
-	angelStatue;
 	/** @type {MarketNpcPrefab} */
 	marketNpcPrefab;
 	/** @type {QuestBookPrefab} */
@@ -336,6 +323,10 @@ export default class MarketScene extends Phaser.Scene {
 	alertPrefab;
 	/** @type {Phaser.Physics.Arcade.Sprite} */
 	sceneTilePrev;
+	/** @type {AngelPrefab} */
+	angelPrefab;
+	/** @type {SeaLevelBuildingLighthousePrefab} */
+	seaLevelBuildingLighthousePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	marketMap;
 
@@ -386,8 +377,7 @@ export default class MarketScene extends Phaser.Scene {
 		this.bigShip.setDepth(topLayerDepth);
 		this.floatingCliff.setDepth(floatingCliffDepth);
 		this.fishingShip.setDepth(topLayerDepth);
-		this.decoration_ClockTower_1.setDepth(topLayerDepth);
-		this.playerPrefab.setDepth(topLayerDepth);
+		this.playerPrefab.setDepth(topLayerDepth)
 
     	const frames = [32, 36, 40, 44, 48, 52];
     	let currentFrameIndex = 0;
@@ -409,7 +399,10 @@ export default class MarketScene extends Phaser.Scene {
     	        seaArea.setFrame(frames1[currentFrameIndex1]);
     	    },
     	    loop: true
-    	});
+    	})
+
+		this.angelPrefab.setupCollision(this.playerPrefab)
+		this.seaLevelBuildingLighthousePrefab.setupCollision(this.playerPrefab)
 
     	this.physics.add.existing(this.campCauldron, true);
     	this.physics.add.collider(this.playerPrefab, this.campCauldron);
@@ -438,35 +431,16 @@ export default class MarketScene extends Phaser.Scene {
  		this.physics.add.existing(this.npcBlackSmithRight, true);
     	this.physics.add.collider(this.playerPrefab, this.npcBlackSmithRight); 
 
- 		this.physics.add.existing(this.angelStatue, true);
-    	this.physics.add.collider(this.playerPrefab, this.angelStatue); 
+
 
  		// this.physics.add.existing(this.marketNpcPrefab, true);
     	// this.physics.add.collider(this.playerPrefab, this.marketNpcPrefab); 
 
-    	this.physics.add.collider(this.playerPrefab, this.decoration_ClockTower_1);
-    	this.decoration_ClockTower_1.setCollisionBetween(0, 10000);
-		// this.decoration_ClockTower_1.renderDebug(this.add.graphics());
 
     	this.physics.add.collider(this.playerPrefab, this.decoration_DecorartionSunScreen_1);
     	this.decoration_DecorartionSunScreen_1.setCollisionBetween(0, 10000);
 		// this.decoration_DecorartionSunScreen_1.renderDebug(this.add.graphics());
 
-    	this.physics.add.collider(this.playerPrefab, this.decoration_Decoration);
-    	this.decoration_Decoration.setCollisionBetween(0, 10000);
-		// this.decoration_Decoration.renderDebug(this.add.graphics());
-
-    	this.physics.add.collider(this.playerPrefab, this.decoration_DecorationBeachside_1);
-    	this.decoration_DecorationBeachside_1.setCollisionBetween(0, 10000);
-		// this.decoration_DecorationBeachside_1.renderDebug(this.add.graphics());
-
-    	this.physics.add.collider(this.playerPrefab, this.decoration_Decoration_1);
-    	this.decoration_Decoration_1.setCollisionBetween(0, 10000);
-		// this.decoration_Decoration_1.renderDebug(this.add.graphics());
-
-    	this.physics.add.collider(this.playerPrefab, this.decoration_InfomationBoard_1);
-    	this.decoration_InfomationBoard_1.setCollisionBetween(0, 10000);
-		// this.decoration_InfomationBoard_1.renderDebug(this.add.graphics());
 
     	this.physics.add.collider(this.playerPrefab, this.decoration_SpearStand_1);
     	this.decoration_SpearStand_1.setCollisionBetween(0, 10000);
@@ -499,6 +473,7 @@ export default class MarketScene extends Phaser.Scene {
     	this.physics.add.collider(this.playerPrefab, this.must_Background_SeaBorder_1);
     	this.must_Background_SeaBorder_1.setCollisionBetween(0, 10000);
 		// this.must_Background_SeaBorder_1.renderDebug(this.add.graphics());
+
 
 		this.physics.add.overlap(this.sceneTilePrev, this.playerPrefab, () => {
 			this.playerPrefab.x += 50
