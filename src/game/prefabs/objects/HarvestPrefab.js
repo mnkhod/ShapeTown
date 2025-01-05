@@ -84,24 +84,28 @@ constructor(scene, x, y, texture, frame) {
                 }
                 break;
             case "GROUND":
-                if (this.previousState === "ROCK") {
-                    this.tileId = 83;
-                } else {
-                    const roll = Phaser.Math.RND.frac();
-                    if (roll < 0.7) {
-                        this.tileId = 34;
-                    } else if (roll < 0.85) {
-                        this.tileId = 83;
-                    } else {
-                        this.tileId = 89;
-                    }
-                }
-                
-                this.setTexture("RoadStone", this.tileId);
-                if (this.physicsBody) {
-                    this.physicsBody.enable = false;
-                }
-                break;
+    if (this.previousState === "ROCK") {
+        this.tileId = 83;
+    } else {
+        const roll = Phaser.Math.RND.frac();
+        if (roll < 0.05) {
+            this.state = "ROCK";
+            this.setupBasedOnState();
+            return;
+        } else if (roll < 0.7) {
+            this.tileId = 34;
+        } else if (roll < 0.9) {
+            this.tileId = 83;
+        } else {
+            this.tileId = 89;
+        }
+    }
+    
+    this.setTexture("RoadStone", this.tileId);
+    if (this.physicsBody) {
+        this.physicsBody.enable = false;
+    }
+    break;
             case "SOIL":
                 this.setTexture("GroundTilestSoil", 3)
                 break;

@@ -69,9 +69,6 @@ export default class FarmingScene extends Phaser.Scene {
 		const dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1 = farmingMap.createLayer("DEVS IMPORTANT!!!/Soil[Are which can plain crop on top]", ["GroundTilestSoil"], -864, -496);
 		dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1.visible = false;
 
-		// dEVS_IMPORTANT____Removeable_Assets_1
-		const dEVS_IMPORTANT____Removeable_Assets_1 = farmingMap.createLayer("DEVS IMPORTANT!!!/Removeable Assets", ["Flower_v02","Flower_v01","Flower_v03","Flower_v04","GroundAccessor","CityHouses_v02","RoadStone","Flower_v05"], -864, -496);
-
 		// treeBorder_TreeL
 		const treeBorder_TreeL = farmingMap.createLayer("TreeBorder/TreeL7", ["TiletTreePattern"], -864, -496);
 
@@ -125,7 +122,7 @@ export default class FarmingScene extends Phaser.Scene {
 		sceneTilePrev.body.setSize(32, 200, false);
 
 		// sceneTileNext
-		const sceneTileNext = this.physics.add.sprite(1449, 517, "CityHouses_v02", 0);
+		const sceneTileNext = this.physics.add.sprite(1486, 517, "CityHouses_v02", 0);
 		sceneTileNext.scaleY = 10;
 		sceneTileNext.body.allowGravity = false;
 		sceneTileNext.body.setSize(32, 200, false);
@@ -157,7 +154,6 @@ export default class FarmingScene extends Phaser.Scene {
 		this.render_RoadStone_JustRender__1 = render_RoadStone_JustRender__1;
 		this.render_FenceWooden_Make_a_Collider__1 = render_FenceWooden_Make_a_Collider__1;
 		this.dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1 = dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1;
-		this.dEVS_IMPORTANT____Removeable_Assets_1 = dEVS_IMPORTANT____Removeable_Assets_1;
 		this.treeBorder_TreeL = treeBorder_TreeL;
 		this.treeBorder_TreeL_1 = treeBorder_TreeL_1;
 		this.treeBorder_StoneFance_1 = treeBorder_StoneFance_1;
@@ -193,8 +189,6 @@ export default class FarmingScene extends Phaser.Scene {
 	render_FenceWooden_Make_a_Collider__1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	dEVS_IMPORTANT____Removeable_Assets_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	treeBorder_TreeL;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -261,7 +255,6 @@ export default class FarmingScene extends Phaser.Scene {
 	    this.render_BackGround_1.setDepth(1);
 	    this.render_RoadStone_JustRender__1.setDepth(2);
 
-	    this.dEVS_IMPORTANT____Removeable_Assets_1.setDepth(10);
 	    this.house_area_HouseUnderGround_1.setDepth(11);
 	    this.house_area_chest_1.setDepth(12);
 	    this.house_area_House_1.setDepth(13);
