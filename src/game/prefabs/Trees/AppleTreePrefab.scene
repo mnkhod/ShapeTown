@@ -17,10 +17,10 @@
             "label": "tree_v0141",
             "texture": {
                 "key": "Tree_v014",
-                "frame": 1
+                "frame": 0
             },
-            "x": 60,
-            "y": 60
+            "x": 64,
+            "y": 64
         }
     ],
     "plainObjects": [],

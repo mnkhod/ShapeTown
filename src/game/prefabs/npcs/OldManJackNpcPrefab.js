@@ -25,16 +25,17 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		npc.play("npcHarvestStandingAnim");
 		this.add(npc);
 
+		this.npc = npc;
+
+		/* START-USER-CTR-CODE */
+		// Write your code here.
+
 		const questMark = scene.add.sprite(0, -40, "GameNpcs1", 6);
     	questMark.setScale();
     	questMark.play("BeforeQuest");
     	this.add(questMark);
     	this.questMark = questMark;
 
-		this.npc = npc;
-
-		/* START-USER-CTR-CODE */
-		// Write your code here.
 		scene.events.on('create', this.prefabCreateCycle, this);
 		npc.setInteractive({ useHandCursor: true });
 		this.isMinting = false;

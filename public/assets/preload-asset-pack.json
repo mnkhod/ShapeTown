@@ -14,6 +14,19 @@
                 "key": "animations"
             },
             {
+                "url": "assets/TradeIcons/Forager/apple.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "AppleItem"
+            },
+            {
                 "url": "assets/mapAssets/Apple.png",
                 "frameConfig": {
                     "frameWidth": 32,
