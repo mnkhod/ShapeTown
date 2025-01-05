@@ -14,7 +14,7 @@ function Demo() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center gap-4 bg-gray-900">
+        <div className="min-h-screen flex items-center justify-center gap-4 font-malio bg-gray-900">
             <button 
                 onClick={() => setShowTrader(true)}
                 className="px-4 py-2 bg-orange-300 border-2 border-yellow-900 rounded text-yellow-900"

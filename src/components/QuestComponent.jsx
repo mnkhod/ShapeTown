@@ -57,13 +57,13 @@ const QuestComponent = ({ onClose }) => {
         
         <div className="absolute inset-0">
           <div 
-            className="absolute top-1 right-1 cursor-pointer"
+            className="absolute top-0 -right-2 cursor-pointer"
             onClick={onClose}
           >
             <img 
               src="/assets/files/image%2035.png" 
               alt="Close"
-              className="w-8 h-8 m-2 hover:opacity-80 transition-opacity"
+              className="w-16 h-16 hover:opacity-80 transition-opacity"
             />
           </div>
 

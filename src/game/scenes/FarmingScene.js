@@ -8,6 +8,7 @@ import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
+import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 /* START-USER-IMPORTS */
 import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
 import { EventBus } from '../EventBus';
@@ -145,6 +146,10 @@ export default class FarmingScene extends Phaser.Scene {
 		const alertPrefab = new AlertPrefab(this, -0.06503853301296658, 0.012522237048884222);
 		this.add.existing(alertPrefab);
 
+		// profilePrefab
+		const profilePrefab = new ProfilePrefab(this, 0, 0);
+		this.add.existing(profilePrefab);
+
 		// itemHudPrefab (prefab fields)
 		itemHudPrefab.player = playerPrefab;
 
@@ -174,6 +179,7 @@ export default class FarmingScene extends Phaser.Scene {
 		this.itemHudPrefab = itemHudPrefab;
 		this.messagePrefab = messagePrefab;
 		this.alertPrefab = alertPrefab;
+		this.profilePrefab = profilePrefab;
 		this.farmingMap = farmingMap;
 
 		this.events.emit("scene-awake");
@@ -231,6 +237,8 @@ export default class FarmingScene extends Phaser.Scene {
 	messagePrefab;
 	/** @type {AlertPrefab} */
 	alertPrefab;
+	/** @type {ProfilePrefab} */
+	profilePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	farmingMap;
 
@@ -240,26 +248,28 @@ export default class FarmingScene extends Phaser.Scene {
 	setupStartingItems() {
 	    this.itemHudPrefab.visible = true;
 	    this.questBookPrefab.visible = true;
-	
+	    this.profilePrefab.visible = true;
+		this.profilePrefab.setDepth(90); 
+
 	    this.itemHudPrefab.addItem("WATERING_CAN", "IconBaseTools", 0);
 	    this.itemHudPrefab.addItem("HOE", "IconBaseTools", 1);
 	    this.itemHudPrefab.addItem("PICK_AXE", "IconBaseTools", 2);
-	
+
 	    this.itemHudPrefab.addItem("CARROT_SEED", "SeedBag", 0, 5);
 	}
 	setupLayerDepths() {
 	    this.render_BackGround_1.setDepth(1);
 	    this.render_RoadStone_JustRender__1.setDepth(2);
-	
+
 	    this.dEVS_IMPORTANT____Removeable_Assets_1.setDepth(10);
 	    this.house_area_HouseUnderGround_1.setDepth(11);
 	    this.house_area_chest_1.setDepth(12);
 	    this.house_area_House_1.setDepth(13);
-	
+
 	    this.group_5_Decoration_1.setDepth(30);
 	    this.group_5_Dead_treee_1.setDepth(31);
 	    this.group_5_StrawberryBush_1.setDepth(32);
-	
+
 	    this.treeBorder_TreeL.setDepth(50);
 	    this.treeBorder_TreeL_1.setDepth(50);
 	    this.treeBorder_TreeL_2.setDepth(50);
@@ -268,15 +278,16 @@ export default class FarmingScene extends Phaser.Scene {
 	    this.treeBorder_TreeL_5.setDepth(50);
 	    this.treeBorder_StoneFance_1.setDepth(50);
 	    this.render_FenceWooden_Make_a_Collider__1.setDepth(50);
-	
+
 	    this.merchant_shopStand_1.setDepth(70);
-	
+
 	    this.playerPrefab.setDepth(80);
-	
+
 	    this.questBookPrefab?.setDepth(90);
 	    this.itemHudPrefab?.setDepth(90);
 	    this.messagePrefab?.setDepth(90);
 	    this.alertPrefab?.setDepth(90);
+		this.profilePrefab?.setDepth(90);
 	}
 	setupHarvestTiles() {
 	    const soilLayer = this.dEVS_IMPORTANT____Soil_Are_which_can_plain_crop_on_top__1;
@@ -309,6 +320,12 @@ export default class FarmingScene extends Phaser.Scene {
 		this.editorCreate();
 
 		this.events.emit("create");
+		console.log("Profile Prefab exists:", !!this.profilePrefab); // Check if it exists
+    console.log("Profile Prefab position:", this.profilePrefab.x, this.profilePrefab.y); // Check position
+    this.events.emit("create");
+    this.profilePrefab.visible = true;
+    this.profilePrefab.setPosition(34, 42); // Try setting a specific position like in TutorialScene
+    this.profilePrefab.setDepth(90);
         this.itemHudPrefab.visible = true;
         this.questBookPrefab.visible = true;
 	  	this.setupLayerDepths();
@@ -317,7 +334,7 @@ export default class FarmingScene extends Phaser.Scene {
     	        box.setInteractive({ useHandCursor: true });
     	        box.on('pointerdown', function (_pointer) {
     	            let otherBoxes = this.itemHudPrefab.itemBoxs.filter((b) => b != box);
-	
+
     	            if(box.frame.name == 0){
     	                otherBoxes.map((i) => i.setTexture("HudItemSlot", 0));
     	                box.setTexture("HudItemSlot", 1);
@@ -326,7 +343,7 @@ export default class FarmingScene extends Phaser.Scene {
     	            }
     	        }, this);
     	    });
-	
+
     	    this.itemHudPrefab.addItem("WATERING_CAN", "IconBaseTools", 0);
     	    this.itemHudPrefab.addItem("HOE", "IconBaseTools", 1);
     	    this.itemHudPrefab.addItem("PICK_AXE", "IconBaseTools", 2);
@@ -389,7 +406,7 @@ export default class FarmingScene extends Phaser.Scene {
     	this.render_FenceWooden_Make_a_Collider__1.setCollisionBetween(0, 10000);
 		// this.render_FenceWooden_Make_a_Collider__1.renderDebug(this.add.graphics());
 
-		
+
  		this.setupHarvestTiles();
 
 		this.physics.add.overlap(this.sceneTilePrev, this.playerPrefab, () => {

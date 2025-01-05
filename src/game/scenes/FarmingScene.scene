@@ -808,6 +808,18 @@
             "scope": "CLASS",
             "x": -0.06503853301296658,
             "y": 0.012522237048884222
+        },
+        {
+            "prefabId": "05640e95-1b2a-411d-bbb2-3af441962740",
+            "id": "7dc5dcda-0ed5-4814-babe-606b54866966",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "profilePrefab",
+            "scope": "CLASS",
+            "x": 0,
+            "y": 0
         }
     ],
     "plainObjects": [

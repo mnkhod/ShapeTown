@@ -610,6 +610,21 @@
                 "key": "MessageBox_1"
             },
             {
+                "url": "assets/hud/MessageBox1.png",
+                "type": "image",
+                "key": "MessageBox1"
+            },
+            {
+                "url": "assets/hud/MessageBox2.png",
+                "type": "image",
+                "key": "MessageBox2"
+            },
+            {
+                "url": "assets/hud/MessageBox3.png",
+                "type": "image",
+                "key": "MessageBox3"
+            },
+            {
                 "url": "assets/NPC/NpcBlaksmith.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -1130,7 +1145,6 @@
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
         "version": 2,
-        "showAllFilesInBlocks": false,
-        "visible": true
+        "showAllFilesInBlocks": false
     }
 }

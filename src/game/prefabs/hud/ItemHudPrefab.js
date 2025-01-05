@@ -233,12 +233,12 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 		let fullWidth = Math.floor(this.getBounds().width)
 		let fullHeight = Math.floor(this.getBounds().height)
 
-		let newX = cam.worldView.right - fullWidth - 20
-		let newY = cam.worldView.bottom - fullHeight - 25
+		let newX = cam.worldView.right - fullWidth
+		let newY = cam.worldView.bottom - fullHeight + 10
 
 		this.setPosition(
-			Phaser.Math.Linear(this.x, newX, 0.03),
-			Phaser.Math.Linear(this.y, newY, 0.03),
+			Phaser.Math.Linear(this.x, newX, 1),
+			Phaser.Math.Linear(this.y, newY, 1),
 		);
 	}
 

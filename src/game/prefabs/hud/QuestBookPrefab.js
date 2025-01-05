@@ -35,11 +35,11 @@ export default class QuestBookPrefab extends Phaser.GameObjects.Sprite {
 		let fullHeight = Math.floor(this.getBounds().height)
 
 		let newX = cam.worldView.left + fullWidth - 15
-		let newY = cam.worldView.bottom - fullHeight - 20
+		let newY = cam.worldView.bottom - fullHeight + 20
 
 		this.setPosition(
-			Phaser.Math.Linear(this.x, newX, 0.03),
-			Phaser.Math.Linear(this.y, newY, 0.03),
+			Phaser.Math.Linear(this.x, newX, 1),
+			Phaser.Math.Linear(this.y, newY, 1),
 		);
 	}
 

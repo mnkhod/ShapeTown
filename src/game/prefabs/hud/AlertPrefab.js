@@ -15,9 +15,9 @@ export default class AlertPrefab extends Phaser.GameObjects.Container {
 		this.scaleY = 0.5807462389444868;
 
 		// bg
-		const bg = scene.add.image(150.81828568909967, 47.456869152431125, "MessageBox");
-		bg.scaleX = 0.5091429221209207;
-		bg.scaleY = 0.5091429221209207;
+		const bg = scene.add.image(150.81828568909967, 47.456869152431125, "MessageBox3");
+		bg.scaleX = 0.36023565316852846;
+		bg.scaleY = 0.36023565316852846;
 		this.add(bg);
 
 		// msg
@@ -30,7 +30,7 @@ export default class AlertPrefab extends Phaser.GameObjects.Container {
 		this.add(msg);
 
 		// exitButton
-		const exitButton = scene.add.sprite(292.8182856890997, 9.456869152431125, "ExitButtonIcon", 0);
+		const exitButton = scene.add.sprite(292, 3, "ExitButtonIcon", 0);
 		exitButton.scaleX = 0.29620092938938364;
 		exitButton.scaleY = 0.29620092938938364;
 		this.add(exitButton);
@@ -75,8 +75,8 @@ export default class AlertPrefab extends Phaser.GameObjects.Container {
 			let newY = cam.worldView.top + 10
 
 			this.setPosition(
-				Phaser.Math.Linear(this.x, newX, 0.03),
-				Phaser.Math.Linear(this.y, newY, 0.03),
+				Phaser.Math.Linear(this.x, newX, 1),
+				Phaser.Math.Linear(this.y, newY, 1),
 			);
 		}
 	}

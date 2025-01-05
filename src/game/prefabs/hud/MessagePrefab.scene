@@ -28,12 +28,12 @@
                     "label": "bg",
                     "scope": "CLASS",
                     "texture": {
-                        "key": "MessageBox_1"
+                        "key": "MessageBox3"
                     },
                     "x": 150,
                     "y": 45,
-                    "scaleX": 0.46457169907734824,
-                    "scaleY": 0.46457169907734824
+                    "scaleX": 0.35945619789439076,
+                    "scaleY": 0.35945619789439076
                 },
                 {
                     "type": "Text",

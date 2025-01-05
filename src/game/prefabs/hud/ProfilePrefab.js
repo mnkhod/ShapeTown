@@ -24,7 +24,7 @@ export default class ProfilePrefab extends Phaser.GameObjects.Image {
 
     // Write your code here.
     onSceneCreate() {
-        this.visible = false;
+        // this.visible = false;
         
         this.setInteractive({ useHandCursor: true });
         
@@ -40,13 +40,13 @@ export default class ProfilePrefab extends Phaser.GameObjects.Image {
         const cam = this.scene.cameras.main;
 
         // Position in top-left corner with some padding
-        let newX = cam.worldView.left + this.width/2 + 10;
-        let newY = cam.worldView.top + this.height/2 + 10;
+        let newX = cam.worldView.left + this.width/2-44;
+        let newY = cam.worldView.top + this.height/2-16;
 
         // Smooth movement to new position
         this.setPosition(
-            Phaser.Math.Linear(this.x, newX, 0.03),
-            Phaser.Math.Linear(this.y, newY, 0.03)
+            Phaser.Math.Linear(this.x, newX, 1),
+            Phaser.Math.Linear(this.y, newY, 1)
         );
     }
 

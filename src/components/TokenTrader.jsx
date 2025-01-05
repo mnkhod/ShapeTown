@@ -74,7 +74,7 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
 
   return (
     <div 
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-40"
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-40 font-malio"
       onClick={onClose}
     >
       <div 
@@ -84,15 +84,15 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
         <div className="bg-yellow-50 border-4 border-yellow-900 rounded-lg p-6 relative">
           <button 
             onClick={onClose}
-            className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-yellow-500 rounded-full text-white hover:bg-yellow-600"
+            className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-yellow-500 rounded-full text-white hover:bg-yellow-600 font-malio"
           >
             X
           </button>
 
-          <div className="text-3xl font-extrabold text-center mb-6 text-yellow-900">Trader</div>
+          <div className="text-3xl font-malio font-extrabold text-center mb-6 text-yellow-900">Trader</div>
           
           <div className="mb-4 bg-yellow-200 rounded-xl border-yellow-900 border-4 p-4">
-            <div className="flex justify-between mb-2 text-yellow-900">
+            <div className="flex justify-between mb-2 text-yellow-900 font-malio">
               <span className='flex justify-between items-center w-full'>
                 <p>From</p>
                 <p>Balance: {balance}</p>
@@ -103,23 +103,23 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
                 type="text"
                 value={fromAmount}
                 onChange={(e) => handleFromAmountChange(e.target.value)}
-                className="border-2 border-yellow-900 rounded px-2 py-1 w-32 bg-yellow-100 focus:outline-none"
+                className="border-2 border-yellow-900 rounded px-2 py-1 w-32 bg-yellow-100 focus:outline-none font-malio"
               />
               <button
                 onClick={() => handleFromAmountChange((balance / 2).toString())}
-                className="px-2 py-1 bg-orange-300 border-2 border-yellow-900 rounded hover:bg-orange-400 transition text-yellow-900"
+                className="px-2 py-1 bg-orange-300 border-2 border-yellow-900 rounded hover:bg-orange-400 transition text-yellow-900 font-malio"
               >
                 50%
               </button>
               <button
                 onClick={() => handleFromAmountChange(balance.toString())}
-                className="px-2 py-1 bg-orange-300 border-2 border-yellow-900 rounded hover:bg-orange-400 transition text-yellow-900"
+                className="px-2 py-1 bg-orange-300 border-2 border-yellow-900 rounded hover:bg-orange-400 transition text-yellow-900 font-malio"
               >
                 MAX
               </button>
               <button 
                 onClick={() => openTokenSelect('from')}
-                className="bg-orange-300 border-2 border-yellow-900 rounded px-2 py-1 hover:bg-orange-400 transition text-yellow-900"
+                className="bg-orange-300 border-2 border-yellow-900 rounded px-2 py-1 hover:bg-orange-400 transition text-yellow-900 font-malio"
               >
                 <span className="flex items-center gap-1">
                   <img src={fromToken?.image} alt={fromToken?.symbol} className="w-6 h-6" />
@@ -130,7 +130,7 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
           </div>
 
           <div className="mb-4 bg-yellow-200 rounded-xl border-yellow-900 border-4 p-4">
-            <div className="flex justify-between mb-2">
+            <div className="flex justify-between mb-2 font-malio">
               <span>To (estimated)</span>
               <span>Balance: 0</span>
             </div>
@@ -139,11 +139,11 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
                 type="text"
                 value={toAmount}
                 onChange={(e) => handleToAmountChange(e.target.value)}
-                className="border-2 border-yellow-900 rounded px-2 py-1 w-32 bg-yellow-100 focus:outline-none"
+                className="border-2 border-yellow-900 rounded px-2 py-1 w-32 bg-yellow-100 focus:outline-none font-malio"
               />
               <button 
                 onClick={() => openTokenSelect('to')}
-                className="bg-orange-300 border-2 border-yellow-900 rounded px-3 py-1 hover:bg-orange-400 text-yellow-900"
+                className="bg-orange-300 border-2 border-yellow-900 rounded px-3 py-1 hover:bg-orange-400 text-yellow-900 font-malio"
               >
                 {toToken ? (
                   <span className="flex items-center gap-1">
@@ -158,20 +158,20 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
           </div>
 
           {balance < parseFloat(fromAmount) && (
-            <div className="text-center mb-4 bg-gray-200 border border-yellow-900 rounded p-2">
+            <div className="text-center mb-4 bg-gray-200 border border-yellow-900 rounded p-2 font-malio">
               Insufficient {fromToken.symbol} balance
             </div>
           )}
 
           <button
             onClick={() => onTrade({ fromAmount, fromToken, toToken })}
-            className="w-full bg-orange-300 border-2 border-yellow-900 rounded py-2 mb-4 hover:bg-orange-400"
+            className="w-full bg-orange-300 border-2 border-yellow-900 rounded py-2 mb-4 hover:bg-orange-400 font-malio"
           >
             {getButtonText()}
           </button>
 
           {toToken && (
-            <div className="bg-yellow-100 border-2 border-yellow-900 rounded p-4">
+            <div className="bg-yellow-100 border-2 border-yellow-900 rounded p-4 font-malio">
               {[
                 { label: 'Minimum Received', value: `${(parseFloat(toAmount) * 0.99).toFixed(1)} ${toToken.symbol}`, type: 'minimum' },
                 { label: 'Price Impact', value: '2.52%', type: 'price' },

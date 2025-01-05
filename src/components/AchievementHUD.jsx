@@ -8,26 +8,26 @@ const AchievementSlot = ({ achievement }) => {
 
   return (
     <div 
-      className="relative aspect-square w-full"
+      className="relative w-full h-full p-2"
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
-      <div className="w-full h-full rounded-xl">
-        <div className="absolute inset-[20%]">
+      <div className="w-full h-full bg-[url('public/assets/hud/achievementSlot.png')] bg-contain bg-no-repeat bg-center">
+        <div className="absolute inset-[20%] flex items-center justify-center">
           {achievement && (
             <img 
               src={achievement.image}
               alt={achievement.title}
-              className={`w-full h-full object-contain p-2 ${!achievement.unlocked ? 'opacity-30' : ''}`}
+              className={`w-3/4 h-3/4 object-contain ${!achievement.unlocked ? 'opacity-30' : ''}`}
             />
           )}
         </div>
       </div>
 
-      {showTooltip && (
-        <div className="absolute z-50 w-48 p-2 bg-gray-800 border-2 border-orange-900 rounded-lg -top-20 left-1/2 transform -translate-x-1/2">
-          <h3 className="font-bold text-white">{achievement.title}</h3>
-          <p className="text-sm text-gray-300">{achievement.description}</p>
+      {showTooltip && achievement && (
+        <div className="absolute z-50 w-48 p-2 font-malio bg-orange-100 border-2 border-yellow-900 rounded-lg -top-20 left-1/2 transform -translate-x-1/2">
+          <h3 className="font-bold text-yellow-900">{achievement.title}</h3>
+          <p className="text-sm text-yellow-800">{achievement.description}</p>
         </div>
       )}
     </div>
@@ -35,188 +35,88 @@ const AchievementSlot = ({ achievement }) => {
 };
 
 const AchievementHUD = ({ onClose }) => {
-  const [nfts,setNfts] = useState([])
+  const [nfts, setNfts] = useState([]);
 
   useEffect(() => {
-    // fetchNftInfo()
-    fetchAchievementInfo()
-  },[])
+    fetchAchievementInfo();
+  }, []);
 
-  async function fetchNftInfo(){
-    let metamaskAccount = await fetchMetamaskAccount()
-    const apiKey = import.meta.env.VITE_ALCHEMY_API;
-	  const contractAddress = import.meta.env.VITE_ACHIEVEMENT_NFT_ADDRESS;
-    // const baseURL = `https://shape-sepolia.g.alchemy.com/v2/${apiKey}/getNFTs/`;
-    const baseURL = `https://shape-mainnet.g.alchemy.com/v2/${apiKey}/getNFTs/`;
-
-    var config = {
-      method: 'get',
-      url: `${baseURL}?owner=${metamaskAccount}`
-    };
-
-    try{
-      let result = await axios(config)
-      if(result.data.ownedNfts){
-        let results = result.data.ownedNfts.filter((nft) => nft.contract.address == contractAddress).map((nft) => {
-          return {
-            id: nft.id.tokenId,
-            title: nft.metadata.name,
-            description: nft.metadata.description,
-            image: nft.metadata.image,
-            unlocked: true            
-          }
-        })
-
-        console.log(results);
-        
-
-        if(results.length > 9){
-          setNfts(results.slice(9-1))
-        }else{
-          setNfts(results)
-        }
-        
-      }
-    }catch(e){}
-
-  }
-
-  async function fetchAchievementInfo(){
-    let contractAddress = "0x6bc9Da82cB85D6D9e34EF7b8B2F930a8A83F5FB2"
+  async function fetchAchievementInfo() {
+    let contractAddress = "0x6bc9Da82cB85D6D9e34EF7b8B2F930a8A83F5FB2";
     let contractAbi = [
       "function balanceOf(address,uint256) view returns (uint256)",
       "function mint(address,uint256,uint256,bytes)",
       "function uri(uint256) view returns (string)"
-    ]
+    ];
 
-    let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital")
-    let metamaskAccount = await fetchMetamaskAccount()
+    let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital");
+    let metamaskAccount = await fetchMetamaskAccount();
 
     const nftContract = new ethers.Contract(contractAddress, contractAbi, provider);
 
-    let nftIds = [0,1,2,3,4]
-    let results = []
+    let nftIds = [0, 1, 2, 3, 4];
+    let results = [];
 
     for (let i = 0; i < nftIds.length; i++) {
       const nftId = nftIds[i];
-      let result = await nftContract.balanceOf(metamaskAccount,nftId)
-      if(result > 0){
-        let axiosResult = await axios.get(`https://shape-town-api.vercel.app/nft/data/${nftId}`)
+      let result = await nftContract.balanceOf(metamaskAccount, nftId);
+      if (result > 0) {
+        let axiosResult = await axios.get(`https://shape-town-api.vercel.app/nft/data/${nftId}`);
         results.push({
           id: nftId.toString(),
           title: axiosResult.data.name,
           description: axiosResult.data.description,
           image: axiosResult.data.image,
-          unlocked: true            
-        })
+          unlocked: true
+        });
       }
     }
 
-    setNfts(results)
+    setNfts(results);
   }
 
-  async function fetchMetamaskAccount(){
-    if(!window.ethereum || !window.ethereum.selectedAddress) return "0x081901916FF0eBff4573533D1b34D54029B89B07"
-    
-    return window.ethereum.selectedAddress 
+  async function fetchMetamaskAccount() {
+    if (!window.ethereum || !window.ethereum.selectedAddress) 
+      return "0x081901916FF0eBff4573533D1b34D54029B89B07";
+    return window.ethereum.selectedAddress;
   }
 
-  const achievements = [
-    {
-      id: 1,
-      title: "First Steps",
-      description: "Begin your journey",
-      image: "image 1.png",
-      unlocked: true
-    },
-    {
-      id: 2,
-      title: "Battle Master",
-      description: "Win 10 battles",
-      image: "image 4.png",
-      unlocked: false
-    },
-    {
-      id: 3,
-      title: "Gem Collector",
-      description: "Collect 100 gems",
-      image: "image 22.png",
-      unlocked: false
-    },
-    {
-      id: 4,
-      title: "Blacksmith",
-      description: "Craft 50 items",
-      image: "image 11.png",
-      unlocked: false
-    },
-    {
-      id: 5,
-      title: "Monster Hunter",
-      description: "Defeat 100 monsters",
-      image: "image 13.png",
-      unlocked: false
-    },
-    {
-      id: 6,
-      title: "Weaponsmith",
-      description: "Craft 20 weapons",
-      image: "image 35.png",
-      unlocked: false
-    },
-    {
-      id: 7,
-      title: "Scholar",
-      description: "Read 30 books",
-      image: "image 63.png",
-      unlocked: false
-    },
-    {
-      id: 8,
-      title: "Wealthy",
-      description: "Collect 10000 gold",
-      image: "image 15.png",
-      unlocked: false
-    },
-    {
-      id: 9,
-      title: "Legend",
-      description: "Complete all achievements",
-      image: "image 72.png",
-      unlocked: false
-    }
-  ];
+  const filledSlots = [...nfts];
+  while (filledSlots.length < 9) {
+    filledSlots.push(null);
+  }
 
   return (
     <div 
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-40"
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-40 font-malio"
       onClick={onClose}
     >
       <div 
         onClick={(e) => e.stopPropagation()}
-        className="relative bg-gray-800 border-4 border-amber-900/80 rounded-lg"
+        className="relative"
       >
-        <div className="bg-amber-800/90 border-b-4 border-amber-900/80 w-full px-4 py-2">
-          <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-orange-100/90 flex justify-between items-center">
-            Achievements
-            <div 
-              onClick={onClose}
-              className="w-8 h-8 sm:w-10 sm:h-10 bg-[url('/assets/files/image%2035.png')] bg-contain cursor-pointer"
-            />
-          </div>
-        </div>
-
-        <div className="relative w-80 aspect-square">
-          <div 
-            className="absolute inset-0 bg-[url('/assets/files/image%2072.png')] bg-cover bg-no-repeat"
-          >
-            <div className="w-full h-full grid grid-cols-3">
-              {nfts.map((achievement) => (
-                <AchievementSlot
-                  key={achievement.id}
-                  achievement={achievement}
+        <div className="bg-[url('public/assets/hud/achievementDashboard.png')] bg-contain bg-no-repeat pr-16 pl-10 py-10">
+                <img 
+                  src="/assets/files/image%2035.png"
+                  alt="Close"
+                  onClick={onClose}
+                  className="w-12 h-12 right-0 top-0 absolute cursor-pointer hover:opacity-80"
                 />
-              ))}
+          <div className="bg-[url('public/assets/hud/achievementBackground.png')] bg-contain bg-no-repeat">
+            <div className="px-4 py-2">
+              <div className="text-xl font-bold text-yellow-900 flex justify-between items-center">
+                <span>Achievements</span>
+              </div>
+            </div>
+            <div className="w-96 aspect-square p-6">
+              <div className="w-full h-full grid grid-cols-3 gap-1">
+                {filledSlots.map((achievement, index) => (
+                  <AchievementSlot
+                    key={achievement?.id || `empty-${index}`}
+                    achievement={achievement}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>

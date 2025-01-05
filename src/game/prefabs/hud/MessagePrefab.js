@@ -16,9 +16,9 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 		this.body.setSize(100, 89, false);
 
 		// bg
-		const bg = scene.add.image(150, 45, "MessageBox_1");
-		bg.scaleX = 0.46457169907734824;
-		bg.scaleY = 0.46457169907734824;
+		const bg = scene.add.image(150, 45, "MessageBox3");
+		bg.scaleX = 0.35945619789439076;
+		bg.scaleY = 0.35945619789439076;
 		this.add(bg);
 
 		// msg
@@ -87,8 +87,8 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 			let newY = cam.worldView.centerY + fullHeight
 
 			this.setPosition(
-				Phaser.Math.Linear(this.x, newX, 0.03),
-				Phaser.Math.Linear(this.y, newY, 0.03),
+				Phaser.Math.Linear(this.x, newX, 0.08),
+				Phaser.Math.Linear(this.y, newY, 0.08),
 			);
 		}
 	}

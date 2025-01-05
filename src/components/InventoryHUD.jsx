@@ -92,7 +92,7 @@ const InventoryGrid = ({ onClose }) => {
           className="relative w-full max-w-[800px] mx-4"
         >
           <img 
-            src="/assets/files/Inventory.png" 
+            src="/assets/hud/inventory.png" 
             alt="Inventory background"
             className="w-full h-auto"
             style={{ imageRendering: 'pixelated' }}
@@ -131,7 +131,7 @@ const InventoryGrid = ({ onClose }) => {
             src="/assets/files/image 35.png"
             alt="Close"
             onClick={onClose}
-            className="absolute top-12 -right-4 w-10 h-10 cursor-pointer hover:opacity-80"
+            className="absolute top-0 -right-1 w-10 h-10 cursor-pointer hover:opacity-80"
             style={{ imageRendering: 'pixelated' }}
           />
         </div>
