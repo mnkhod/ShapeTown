@@ -13,6 +13,6 @@
 }
 @font-face {
     font-family: 'Little Malio 8-Bit';
-    src: url('../public/assets/fonts/Little Malio 8-Bit.otf') format('truetype');
+    src: url('assets/fonts/Little Malio 8-Bit.otf') format('truetype');
     font-display: swap;
 }

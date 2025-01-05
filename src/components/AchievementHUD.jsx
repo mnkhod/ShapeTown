@@ -12,7 +12,7 @@ const AchievementSlot = ({ achievement }) => {
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
-      <div className="w-full h-full bg-[url('public/assets/hud/achievementSlot.png')] bg-contain bg-no-repeat bg-center">
+      <div className="w-full h-full bg-[url('assets/hud/achievementSlot.png')] bg-contain bg-no-repeat bg-center">
         <div className="absolute inset-[20%] flex items-center justify-center">
           {achievement && (
             <img 
@@ -140,14 +140,14 @@ const AchievementHUD = ({ onClose }) => {
             </div>
           </div>
         ) : (
-          <div className="bg-[url('public/assets/hud/achievementDashboard.png')] bg-contain bg-no-repeat pr-16 pl-10 py-10">
+          <div className="bg-[url('assets/hud/achievementDashboard.png')] bg-contain bg-no-repeat pr-16 pl-10 py-10">
             <img 
               src="/assets/files/image%2035.png"
               alt="Close"
               onClick={onClose}
               className="w-12 h-12 right-0 top-0 absolute cursor-pointer hover:opacity-80"
             />
-            <div className="bg-[url('public/assets/hud/achievementBackground.png')] bg-contain bg-no-repeat">
+            <div className="bg-[url('assets/hud/achievementBackground.png')] bg-contain bg-no-repeat">
               <div className="px-4 py-2">
                 <div className="text-xl font-bold text-yellow-900 flex justify-between items-center">
                   <span>Achievements</span>
