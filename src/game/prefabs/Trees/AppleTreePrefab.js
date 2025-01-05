@@ -141,7 +141,7 @@ export default class AppleTreePrefab extends Phaser.GameObjects.Image {
 			this.preFX.clear();
 		});
 
-        this.scene.time.delayedCall(5000, () => {
+        this.scene.time.delayedCall(30 * 1000, () => {
 			this.setTexture("Tree_v014", 1);
             this.isHarvastable = true
             this.setInteractive({ useHandCursor: true });
