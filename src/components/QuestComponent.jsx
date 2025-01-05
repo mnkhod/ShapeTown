@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const QuestComponent = ({ onClose }) => {
+  const [expandedTasks, setExpandedTasks] = useState(new Set());
+
   const tasks = [
     {
       text: "Collecte these crops and comeback to me with a bag full of crops by the end of the week",
@@ -39,6 +42,16 @@ const QuestComponent = ({ onClose }) => {
       completed: false
     }
   ];
+
+  const toggleTask = (index) => {
+    const newExpandedTasks = new Set(expandedTasks);
+    if (newExpandedTasks.has(index)) {
+      newExpandedTasks.delete(index);
+    } else {
+      newExpandedTasks.add(index);
+    }
+    setExpandedTasks(newExpandedTasks);
+  };
 
   return (
     <div 
@@ -79,18 +92,30 @@ const QuestComponent = ({ onClose }) => {
             <div className="space-y-4">
               {tasks.map((task, index) => (
                 <div key={index} className="group">
-                  <div className="flex gap-4 items-start">
+                  <div 
+                    className={`flex gap-4 items-start ${task.subtasks ? 'cursor-pointer' : ''}`}
+                    onClick={() => task.subtasks && toggleTask(index)}
+                  >
                     <img 
                       src="/assets/hud/Taskscheckon.png"
                       alt="Task checkbox"
                       className="w-4 h-4 mt-1 flex-shrink-0 object-contain" 
                     />
                     <div className="flex-1">
-                      <p className={`text-xs font-malio ${task.completed ? 'text-green-600' : 'text-gray-900/90'}`}>
-                        {task.text}
-                      </p>
-                      {task.subtasks && (
-                        <ul className="mt-3 space-y-3">
+                      <div className="flex justify-between items-start">
+                        <p className={`text-xs font-malio ${task.completed ? 'text-green-600' : 'text-gray-900/90'}`}>
+                          {task.text}
+                        </p>
+                        {task.subtasks && (
+                          <img 
+                            src={expandedTasks.has(index) ? '/assets/hud/accordionDown.png' : '/assets/hud/accordionUp.png'}
+                            alt={expandedTasks.has(index) ? 'Collapse' : 'Expand'}
+                            className="w-4 h-4 ml-2 transition-transform duration-200"
+                          />
+                        )}
+                      </div>
+                      {task.subtasks && expandedTasks.has(index) && (
+                        <ul className="mt-3 space-y-3 transition-all duration-200">
                           {task.subtasks.map((subtask, subIndex) => (
                             <li 
                               key={subIndex} 
