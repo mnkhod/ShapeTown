@@ -1229,6 +1229,12 @@
                     "frame": 6,
                     "duration": 0,
                     "keyframe": false
+                },
+                {
+                    "key": "NPCDialoguePopUpSheet",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
                 }
             ],
             "frameRate": 10,
