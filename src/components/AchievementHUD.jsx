@@ -25,7 +25,7 @@ const AchievementSlot = ({ achievement }) => {
       </div>
 
       {showTooltip && achievement && (
-        <div className="absolute z-50 w-64 p-2 font-malio bg-orange-100 border-2 border-yellow-900 rounded-lg -top-20 left-1/2 transform -translate-x-1/2">
+        <div className="absolute z-50 w-64 p-2 font-malio bg-orange-100 border-2 border-yellow-900 rounded-lg top-0 left-56 transform -translate-x-1/2">
           <h3 className="font-bold text-sm pb-2 text-yellow-900">{achievement.title}</h3>
           <p className="text-xs text-yellow-800">{achievement.description}</p>
         </div>
@@ -36,43 +36,58 @@ const AchievementSlot = ({ achievement }) => {
 
 const AchievementHUD = ({ onClose }) => {
   const [nfts, setNfts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [dots, setDots] = useState(0);
 
   useEffect(() => {
     fetchAchievementInfo();
+    
+    const dotsInterval = setInterval(() => {
+      setDots(prev => (prev + 1) % 4);
+    }, 500);
+
+    return () => clearInterval(dotsInterval);
   }, []);
 
   async function fetchAchievementInfo() {
-    let contractAddress = "0x6bc9Da82cB85D6D9e34EF7b8B2F930a8A83F5FB2";
-    let contractAbi = [
-      "function balanceOf(address,uint256) view returns (uint256)",
-      "function mint(address,uint256,uint256,bytes)",
-      "function uri(uint256) view returns (string)"
-    ];
+    try {
+      setIsLoading(true);
+      let contractAddress = "0x6bc9Da82cB85D6D9e34EF7b8B2F930a8A83F5FB2";
+      let contractAbi = [
+        "function balanceOf(address,uint256) view returns (uint256)",
+        "function mint(address,uint256,uint256,bytes)",
+        "function uri(uint256) view returns (string)"
+      ];
 
-    let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital");
-    let metamaskAccount = await fetchMetamaskAccount();
+      let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital");
+      let metamaskAccount = await fetchMetamaskAccount();
 
-    const nftContract = new ethers.Contract(contractAddress, contractAbi, provider);
+      const nftContract = new ethers.Contract(contractAddress, contractAbi, provider);
 
-    let nftIds = [0, 1, 2, 3, 4];
-    let results = [];
+      let nftIds = [0, 1, 2, 3, 4];
+      let results = [];
 
-    for (let i = 0; i < nftIds.length; i++) {
-      const nftId = nftIds[i];
-      let result = await nftContract.balanceOf(metamaskAccount, nftId);
-      if (result > 0) {
-        let axiosResult = await axios.get(`https://shape-town-api.vercel.app/nft/data/${nftId}`);
-        results.push({
-          id: nftId.toString(),
-          title: axiosResult.data.name,
-          description: axiosResult.data.description,
-          image: axiosResult.data.image,
-          unlocked: true
-        });
+      for (let i = 0; i < nftIds.length; i++) {
+        const nftId = nftIds[i];
+        let result = await nftContract.balanceOf(metamaskAccount, nftId);
+        if (result > 0) {
+          let axiosResult = await axios.get(`https://shape-town-api.vercel.app/nft/data/${nftId}`);
+          results.push({
+            id: nftId.toString(),
+            title: axiosResult.data.name,
+            description: axiosResult.data.description,
+            image: axiosResult.data.image,
+            unlocked: true
+          });
+        }
       }
-    }
 
-    setNfts(results);
+      setNfts(results);
+    } catch (error) {
+      console.error('Error fetching achievements:', error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   async function fetchMetamaskAccount() {
@@ -81,7 +96,10 @@ const AchievementHUD = ({ onClose }) => {
     return window.ethereum.selectedAddress;
   }
 
-  const filledSlots = [...nfts];
+  const filledSlots = isLoading 
+    ? Array(9).fill(null) 
+    : [...nfts];
+
   while (filledSlots.length < 9) {
     filledSlots.push(null);
   }
@@ -95,31 +113,59 @@ const AchievementHUD = ({ onClose }) => {
         onClick={(e) => e.stopPropagation()}
         className="relative"
       >
-        <div className="bg-[url('public/assets/hud/achievementDashboard.png')] bg-contain bg-no-repeat pr-16 pl-10 py-10">
-                <img 
-                  src="/assets/files/image%2035.png"
-                  alt="Close"
-                  onClick={onClose}
-                  className="w-12 h-12 right-0 top-0 absolute cursor-pointer hover:opacity-80"
-                />
-          <div className="bg-[url('public/assets/hud/achievementBackground.png')] bg-contain bg-no-repeat">
-            <div className="px-4 py-2">
-              <div className="text-xl font-bold text-yellow-900 flex justify-between items-center">
-                <span>Achievements</span>
-              </div>
+        {isLoading ? (
+          <div className="w-96 h-96 relative">
+            <img 
+              src="/assets/files/LoadingFrame.png"
+              alt="Loading frame"
+              className="w-full h-full object-contain"
+            />
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-gray-600 mb-4 font-pixel inline-flex w-24 justify-center">
+                Loading{'.'.repeat(dots)}
+                <span className="invisible">...</span>
+              </span>
+              <img 
+                src="/assets/files/LoadingIcon.png"
+                alt="Loading icon"
+                className="w-20 h-20 animate-spin"
+                style={{ animationDuration: '1s' }}
+              />
+              <img 
+                src="/assets/TradeIcons/Merchant/IconGold.png"
+                alt="Loading icon"
+                className="w-8 h-8 absolute mt-12 animate-bounce"
+                style={{ animationDuration: '1s'  }}
+              />
             </div>
-            <div className="w-96 aspect-square p-6">
-              <div className="w-full h-full grid grid-cols-3 gap-1">
-                {filledSlots.map((achievement, index) => (
-                  <AchievementSlot
-                    key={achievement?.id || `empty-${index}`}
-                    achievement={achievement}
-                  />
-                ))}
+          </div>
+        ) : (
+          <div className="bg-[url('public/assets/hud/achievementDashboard.png')] bg-contain bg-no-repeat pr-16 pl-10 py-10">
+            <img 
+              src="/assets/files/image%2035.png"
+              alt="Close"
+              onClick={onClose}
+              className="w-12 h-12 right-0 top-0 absolute cursor-pointer hover:opacity-80"
+            />
+            <div className="bg-[url('public/assets/hud/achievementBackground.png')] bg-contain bg-no-repeat">
+              <div className="px-4 py-2">
+                <div className="text-xl font-bold text-yellow-900 flex justify-between items-center">
+                  <span>Achievements</span>
+                </div>
+              </div>
+              <div className="w-96 aspect-square pt-6 ml-2 mt-1 pr-8 pb-4">
+                <div className="w-full h-full grid grid-cols-3">
+                  {filledSlots.map((achievement, index) => (
+                    <AchievementSlot
+                      key={achievement?.id || `empty-${index}`}
+                      achievement={achievement}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

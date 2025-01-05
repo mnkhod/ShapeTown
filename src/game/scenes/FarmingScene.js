@@ -320,12 +320,9 @@ export default class FarmingScene extends Phaser.Scene {
 		this.editorCreate();
 
 		this.events.emit("create");
-		console.log("Profile Prefab exists:", !!this.profilePrefab); // Check if it exists
-    console.log("Profile Prefab position:", this.profilePrefab.x, this.profilePrefab.y); // Check position
-    this.events.emit("create");
-    this.profilePrefab.visible = true;
-    this.profilePrefab.setPosition(34, 42); // Try setting a specific position like in TutorialScene
-    this.profilePrefab.setDepth(90);
+    	this.profilePrefab.visible = true;
+    	this.profilePrefab.setPosition(34, 42);
+    	this.profilePrefab.setDepth(90);
         this.itemHudPrefab.visible = true;
         this.questBookPrefab.visible = true;
 	  	this.setupLayerDepths();
@@ -412,11 +409,13 @@ export default class FarmingScene extends Phaser.Scene {
 		this.physics.add.overlap(this.sceneTilePrev, this.playerPrefab, () => {
 			this.playerPrefab.x += 50
             this.scene.switch("TutorialScene");
+        	this.cameras.main.fadeIn(2000, 0, 0, 0);
         });
 
 		this.physics.add.overlap(this.sceneTileNext, this.playerPrefab, () => {
 			this.playerPrefab.x -= 50
             this.scene.switch("MarketScene");
+        	this.cameras.main.fadeIn(2000, 0, 0, 0);
         });
 
 

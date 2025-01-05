@@ -519,6 +519,7 @@ export default class MarketScene extends Phaser.Scene {
 		this.physics.add.overlap(this.sceneTilePrev, this.playerPrefab, () => {
 			this.playerPrefab.x += 50
             this.scene.switch("FarmingScene");
+        	this.cameras.main.fadeIn(2000, 0, 0, 0);
         });
 
 	}
