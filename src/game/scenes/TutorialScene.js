@@ -17,6 +17,7 @@ import MapleTreePrefab from "../prefabs/Trees/MapleTreePrefab";
 import TutorealHousePrefab from "../prefabs/House/TutorealHousePrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 /* START-USER-IMPORTS */
+import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement } from "../utility";
 /* END-USER-IMPORTS */
 
 export default class TutorialScene extends Phaser.Scene {
@@ -275,7 +276,7 @@ export default class TutorialScene extends Phaser.Scene {
 	/* START-USER-CODE */
 
 	// Write your code here
-
+	achievements = {};
 
 
 	create() {
@@ -352,19 +353,37 @@ export default class TutorialScene extends Phaser.Scene {
         if (this.profilePrefab) {
             this.profilePrefab.visible = false;
         }
-		// this.time.delayedCall(100, () => {
-		// 	this.questBookPrefab.visible = true
-		// 	this.itemHudPrefab.visible = true;
-		// 	this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
-		// 	this.itemHudPrefab.addItem("HOE","IconBaseTools",1)
-		// 	this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
-		// 	this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
-		// 	// this.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
-		// }, {}, this)
+
+		this.time.delayedCall(100, () => {
+			this.questBookPrefab.visible = true
+			this.itemHudPrefab.visible = true;
+			this.profilePrefab.visible = true;
+
+			this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
+			this.itemHudPrefab.addItem("HOE","IconBaseTools",1)
+			this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
+			this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
+			// this.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
+		}, {}, this)
 
 		// this.reactEvent.on('blockchain-account', (address) => {
         //     console.log(address);
         // });
+
+		this.setupSceneAchievementNftsData()
+	}
+
+	async setupSceneAchievementNftsData(){
+		this.achievements.firstHarvestAchievement = await checkFirstHarvestAchievement();
+		this.achievements.giftFromNatureAchievement = await checkGiftFromNatureAchievement();
+
+		if(this.achievements.firstHarvestAchievement){
+			this.questBookPrefab.visible = true
+			this.itemHudPrefab.visible = true;
+			this.profilePrefab.visible = true;
+		}
+
+		console.log(this.achievements);
 	}
 
 	/* END-USER-CODE */

@@ -1,25 +1,30 @@
 import { useNavigate } from "react-router";
-import {
-    useAuthModal,
-    useAccount
-  } from "@account-kit/react";
-  import { useUser } from "@account-kit/react";
-  
+import { useEffect } from 'react'
+import { ethers } from "ethers";
 
 function Login() {
     let navigate = useNavigate();
-    const { openAuthModal } = useAuthModal();
-    const user = useUser();
 
-    if(user != null){
-        navigate("/game")
+
+    useEffect(() => {
+        if(window.ethereum){
+            if(window.ethereum.selectedAddress && window.ethereum.selectedAddress.length > 0){
+                navigate("/game")
+            }
+        }
+    }, [])
+
+    async function openLogin(){
+        if(window.ethereum){
+            let provider = new ethers.BrowserProvider(window.ethereum)
+            try {
+                await provider.getSigner();
+                navigate("/game")
+            } catch (e) {}
+        }else{
+            alert("No Metamask Detected")
+        }
     }
-    
-
-    function openLogin(){
-        openAuthModal()
-    }
-
 
     return (
         <div className="">

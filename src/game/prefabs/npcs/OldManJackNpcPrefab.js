@@ -1,7 +1,6 @@
 
 // You can write more code here
-import axios from "axios";
-import { ethers } from "ethers";
+import { mintFirstHarvestAchievement,mintGiftFromNatureAchievement } from "../../utility";
 
 
 /* START OF COMPILED CODE */
@@ -60,7 +59,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
 	/* START-USER-CODE */
 
-	dialogueLifeCycle = [
+	firstHarvestDialogueLifeCycle = [
 		{ msg : "Hello there… Welcome to Shaper Town. I’m Jack. This is my humble farm." },
 		{ msg: `You haven’t chosen your ‘Profession’ yet. I will help you choose one today. So we shall start?` },
 		{ msg: `First thing first, take these tools, those coming in handy, any time soon.` },
@@ -96,6 +95,15 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		},
 	]
 
+	giftFromNatureDialogueLifeCycle = [
+		{ msg : "Ho ho ho! Good job!" },
+		{ msg: `So easy, wasn’t it?` },
+		{ msg: `Ready for a new quest?` },
+		{ msg: `Do you see those trees?` },
+		{ msg: `That is an apple tree.` },
+		{ msg: `My Quest is you have to bring something from all those trees.` },
+	]
+
 	lifeCycleStep = 0;
 
 	// Write your code here.
@@ -119,24 +127,63 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 				return;
 			}
 
+			if(!this.scene.achievements) return;
+
+			let hasFirstHarvestNFT = this.scene.achievements.firstHarvestAchievement
+			if(hasFirstHarvestNFT){
+				if(this.itemHud.checkItem("APPLE")){
+
+					this.questMark.play("AfterQuest");
+
+					let hasNFT = this.scene.achievements.giftFromNatureAchievement
+					if(hasNFT){
+						this.scene.alertPrefab.alert("Already Has Achievement NFT")
+					}else{
+						this.isMinting = true;
+						this.scene.alertPrefab.alert("Minting Has Started")
+						await mintGiftFromNatureAchievement({
+							onSuccess: () => {
+								this.scene.alertPrefab.alert("Gift From Nature Achievement")
+								this.scene.achievements.giftFromNatureAchievement = true;
+
+								this.itemHud.removeItemByKey("APPLE")
+							},
+							onError: () => this.scene.alertPrefab.alert("Contract Error Occurred"),
+						})
+						this.isMinting = false;
+					}
+
+					return;
+				}
+
+				this.msgPrefab.conversation(this.giftFromNatureDialogueLifeCycle)
+				return;
+			}
+
+
 			if(this.itemHud.checkItem("CARROT")){
     			this.questMark.play("AfterQuest");
-				let hasNFT = await checkIfHasNFT()
+
+				let hasNFT = this.scene.achievements.firstHarvestAchievement
 				if(hasNFT){
 					this.scene.alertPrefab.alert("Already Has Achievement NFT")
 				}else{
 					this.isMinting = true;
 					this.scene.alertPrefab.alert("Minting Has Started")
-					await mintNft({
-						onSuccess: () => this.scene.alertPrefab.alert("First Harvest Achievement"),
+					await mintFirstHarvestAchievement({
+						onSuccess: () => {
+							this.scene.alertPrefab.alert("First Harvest Achievement")
+
+							this.scene.achievements.firstHarvestAchievement = true;
+							this.itemHud.removeItemByKey("CARROT")
+						},
 						onError: () => this.scene.alertPrefab.alert("Contract Error Occurred"),
 					})
-
 					this.isMinting = false;
 				}
-
+				return
 			}else{
-				this.msgPrefab.conversation(this.dialogueLifeCycle)
+				this.msgPrefab.conversation(this.firstHarvestDialogueLifeCycle)
 			}
 
 		},this);
@@ -163,53 +210,3 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 /* END OF COMPILED CODE */
 
 // You can write more code here
-
-async function mintNft({ onSuccess , onError }){
-	let metamaskAccount = await fetchMetamaskAccount()
-	let baseURL = `${import.meta.env.VITE_REST_ENDPOINT}`;
-
-	var config = {
-		method: 'get',
-		url: `${baseURL}/edu/nft/create/0/${metamaskAccount}`
-	};
-
-	try{
-		let result = await axios(config)
-		if(result.data.hash){
-			onSuccess()
-		}
-	  }catch(e){ 
-		  console.log(e);
-		  onError()
-	  }
-}
-
-async function checkIfHasNFT(){
-	let metamaskAccount = await fetchMetamaskAccount()
-
-    let contractAddress = "0x6bc9Da82cB85D6D9e34EF7b8B2F930a8A83F5FB2"
-    let contractAbi = [
-      "function balanceOf(address,uint256) view returns (uint256)",
-      "function mint(address,uint256,uint256,bytes)",
-      "function uri(uint256) view returns (string)"
-    ]
-
-    let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital")
-
-	try {
-		const nftContract = new ethers.Contract(contractAddress, contractAbi, provider);
-		let result = await nftContract.balanceOf(metamaskAccount,0)
-
-		if (result > 0) return true;
-	} catch (e) {
-		return false;
-	}
-
-	return false;
-}
-
-async function fetchMetamaskAccount(){
-	if(!window.ethereum || !window.ethereum.selectedAddress) return "0x081901916FF0eBff4573533D1b34D54029B89B07"
-
-	return window.ethereum.selectedAddress 
-}

@@ -311,6 +311,15 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
 		return hasItemAlready ? true : false;
 	}
 
+	removeItemByKey(keyName){
+		let index = this.itemData.findIndex((item) => item == keyName);
+		this.itemData[index] = null
+		this.items[index].visible = false;
+		this.items[index].setTexture(null)
+		this.itemCounters[index].text = "0"
+		this.itemCounters[index].visible = false
+	}
+
 	/* END-USER-CODE */
 }
 
