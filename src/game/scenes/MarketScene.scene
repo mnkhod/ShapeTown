@@ -727,36 +727,6 @@
         },
         {
             "type": "Sprite",
-            "id": "c1f224b3-ba10-434c-b036-143a0c9c4bbe",
-            "label": "npcBlackSmithRight",
-            "scope": "CLASS",
-            "texture": {
-                "key": "NpcBlaksmith",
-                "frame": 0
-            },
-            "x": 193,
-            "y": 698,
-            "scaleX": 1.5,
-            "scaleY": 1.5,
-            "animationPlayMethod": 1,
-            "animationKey": "NpcBlackSmithRight"
-        },
-        {
-            "type": "Image",
-            "id": "319b182c-c00d-4b93-93a1-a74aaba5eb02",
-            "label": "Npc_Merchant",
-            "scope": "CLASS",
-            "texture": {
-                "key": "NPCMerchant",
-                "frame": 3
-            },
-            "x": 807,
-            "y": 651,
-            "scaleX": 1.5,
-            "scaleY": 1.5
-        },
-        {
-            "type": "Sprite",
             "id": "c1945ae7-c6d2-4033-8f4d-31ea20f0dff3",
             "label": "fishingShip",
             "scope": "CLASS",
@@ -768,76 +738,6 @@
             "y": 611,
             "animationPlayMethod": 1,
             "animationKey": "fishingShip"
-        },
-        {
-            "type": "Image",
-            "id": "547d86b3-5e81-4519-bccb-76e52f2d617a",
-            "label": "Npc_Guard_2",
-            "scope": "CLASS",
-            "texture": {
-                "key": "NPCGuardian_V01",
-                "frame": 2
-            },
-            "x": -346,
-            "y": 296,
-            "scaleX": 1.5,
-            "scaleY": 1.5
-        },
-        {
-            "type": "Image",
-            "id": "727ff91c-7ae2-41df-8fd8-9bcb7e138bb9",
-            "label": "Npc_Guard_1",
-            "scope": "CLASS",
-            "texture": {
-                "key": "NPCGuardian_V01",
-                "frame": 2
-            },
-            "x": -346,
-            "y": 622,
-            "scaleX": 1.5,
-            "scaleY": 1.5
-        },
-        {
-            "type": "Image",
-            "id": "2c35cae6-f37f-427f-b8d3-7a07a91e222a",
-            "label": "Npc_Guard_5",
-            "scope": "CLASS",
-            "texture": {
-                "key": "NPCGuardian_V01",
-                "frame": 1
-            },
-            "x": 984,
-            "y": 643,
-            "scaleX": 1.5,
-            "scaleY": 1.5
-        },
-        {
-            "type": "Image",
-            "id": "85bc61df-217d-40d6-827d-2fa58bb2da4f",
-            "label": "Npc_Guard_3",
-            "scope": "CLASS",
-            "texture": {
-                "key": "NPCGuardian_V01",
-                "frame": 3
-            },
-            "x": 1395,
-            "y": 544,
-            "scaleX": 1.5,
-            "scaleY": 1.5
-        },
-        {
-            "type": "Image",
-            "id": "f5ca9cda-5d71-4ba5-8c8f-39349af97c01",
-            "label": "Npc_Guard_4",
-            "scope": "CLASS",
-            "texture": {
-                "key": "NPCGuardian_V01",
-                "frame": 3
-            },
-            "x": 1395,
-            "y": 443,
-            "scaleX": 1.5,
-            "scaleY": 1.5
         },
         {
             "prefabId": "720fdb25-2d09-4ed7-af24-7213d9a32756",
@@ -940,6 +840,110 @@
             "scope": "CLASS",
             "x": 510,
             "y": -119
+        },
+        {
+            "prefabId": "05640e95-1b2a-411d-bbb2-3af441962740",
+            "id": "a6efda39-faab-49b5-acf5-9fea43916fcf",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "profilePrefab",
+            "scope": "CLASS",
+            "x": -1,
+            "y": -17
+        },
+        {
+            "prefabId": "3ea53c19-3795-4560-9fb7-0bf9f521f2f1",
+            "id": "8e7af0df-1a32-42ab-b3ea-ae22ed7dc8bf",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY"
+            ],
+            "label": "blackSmithPrefab",
+            "scope": "CLASS",
+            "x": 192,
+            "y": 702,
+            "scaleX": 1,
+            "scaleY": 1
+        },
+        {
+            "prefabId": "1b05c2d1-47c3-45c5-a53b-1f1d6c4bb7c5",
+            "id": "871d428e-81c8-4273-b587-7131976c57a8",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY"
+            ],
+            "label": "merchantPrefab",
+            "scope": "CLASS",
+            "x": 813,
+            "y": 657,
+            "scaleX": 1,
+            "scaleY": 1
+        },
+        {
+            "prefabId": "c3ca969c-5f6e-4993-9865-53345b297c24",
+            "id": "845fa24e-1511-4a7e-976e-1c223a9e7d70",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "commanderPrefab",
+            "scope": "CLASS",
+            "x": 938,
+            "y": 638
+        },
+        {
+            "prefabId": "c04fbc08-22b1-4793-bd93-ce9c5b4f7216",
+            "id": "3fe12899-96da-467b-9ce6-5681fad5a51e",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "soldierErikPrefab",
+            "scope": "CLASS",
+            "x": 1406,
+            "y": 453
+        },
+        {
+            "prefabId": "a01bf94c-80bc-40fb-9735-62de014abae8",
+            "id": "676ca2a0-3412-4ba5-8186-89408e573071",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "soldierKaiPrefab",
+            "scope": "CLASS",
+            "x": 1406,
+            "y": 515
+        },
+        {
+            "prefabId": "6ee4d04f-6c17-48ee-8c58-6a28e7daef6c",
+            "id": "37b0e440-2425-484c-9c83-96e6fed893b9",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "soldierNolanPrefab",
+            "scope": "CLASS",
+            "x": -362,
+            "y": 284
+        },
+        {
+            "prefabId": "f6afb4e2-b5ce-4266-8762-00a9b447b07d",
+            "id": "41b962eb-ae21-4583-8efe-9428ab200ef9",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "soldierWillemPrefab",
+            "scope": "CLASS",
+            "x": -356,
+            "y": 598
         }
     ],
     "plainObjects": [

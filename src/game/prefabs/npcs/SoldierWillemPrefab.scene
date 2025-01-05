@@ -1,0 +1,41 @@
+{
+    "id": "f6afb4e2-b5ce-4266-8762-00a9b447b07d",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "187c50f6-09da-4736-a31d-3e256cbaba49",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "Sprite",
+                    "id": "ac24746c-ca5c-460d-bd36-6e1ae96bef1a",
+                    "label": "sprite_1",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "NPCGuardian_V01",
+                        "frame": 2
+                    },
+                    "x": 32,
+                    "y": 32
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

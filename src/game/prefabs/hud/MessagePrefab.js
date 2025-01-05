@@ -112,7 +112,11 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 	}
 
 	hide(){
-		this.visible = false
+		this.visible = false;
+		this.isConversationStarted = false;
+    	this.conversationIndex = 0;
+    	this.dialogue = null;
+
 	}
 
 	/* END-USER-CODE */

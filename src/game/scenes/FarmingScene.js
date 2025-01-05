@@ -125,7 +125,7 @@ export default class FarmingScene extends Phaser.Scene {
 		sceneTilePrev.body.setSize(32, 200, false);
 
 		// sceneTileNext
-		const sceneTileNext = this.physics.add.sprite(1486, 517, "CityHouses_v02", 0);
+		const sceneTileNext = this.physics.add.sprite(1449, 517, "CityHouses_v02", 0);
 		sceneTileNext.scaleY = 10;
 		sceneTileNext.body.allowGravity = false;
 		sceneTileNext.body.setSize(32, 200, false);

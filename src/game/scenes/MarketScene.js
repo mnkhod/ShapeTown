@@ -13,6 +13,14 @@ import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
 import AngelPrefab from "../prefabs/npcs/AngelPrefab";
 import SeaLevelBuildingLighthousePrefab from "../prefabs/House/SeaLevelBuildingLighthousePrefab";
+import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
+import BlackSmithPrefab from "../prefabs/npcs/BlackSmithPrefab";
+import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
+import CommanderPrefab from "../prefabs/npcs/CommanderPrefab";
+import SoldierErikPrefab from "../prefabs/npcs/SoldierErikPrefab";
+import SoldierKaiPrefab from "../prefabs/npcs/SoldierKaiPrefab";
+import SoldierNolanPrefab from "../prefabs/npcs/SoldierNolanPrefab";
+import SoldierWillemPrefab from "../prefabs/npcs/SoldierWillemPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -131,45 +139,9 @@ export default class MarketScene extends Phaser.Scene {
 		const campfire = this.add.sprite(142, 685, "Campfire_32x32", 0);
 		campfire.play("Campfire");
 
-		// npcBlackSmithRight
-		const npcBlackSmithRight = this.add.sprite(193, 698, "NpcBlaksmith", 0);
-		npcBlackSmithRight.scaleX = 1.5;
-		npcBlackSmithRight.scaleY = 1.5;
-		npcBlackSmithRight.play("NpcBlackSmithRight");
-
-		// Npc_Merchant
-		const npc_Merchant = this.add.image(807, 651, "NPCMerchant", 3);
-		npc_Merchant.scaleX = 1.5;
-		npc_Merchant.scaleY = 1.5;
-
 		// fishingShip
 		const fishingShip = this.add.sprite(1708, 611, "FishingBoat_V01R", 0);
 		fishingShip.play("fishingShip");
-
-		// Npc_Guard_2
-		const npc_Guard_2 = this.add.image(-346, 296, "NPCGuardian_V01", 2);
-		npc_Guard_2.scaleX = 1.5;
-		npc_Guard_2.scaleY = 1.5;
-
-		// Npc_Guard_1
-		const npc_Guard_1 = this.add.image(-346, 622, "NPCGuardian_V01", 2);
-		npc_Guard_1.scaleX = 1.5;
-		npc_Guard_1.scaleY = 1.5;
-
-		// Npc_Guard_5
-		const npc_Guard_5 = this.add.image(984, 643, "NPCGuardian_V01", 1);
-		npc_Guard_5.scaleX = 1.5;
-		npc_Guard_5.scaleY = 1.5;
-
-		// Npc_Guard_3
-		const npc_Guard_3 = this.add.image(1395, 544, "NPCGuardian_V01", 3);
-		npc_Guard_3.scaleX = 1.5;
-		npc_Guard_3.scaleY = 1.5;
-
-		// Npc_Guard_4
-		const npc_Guard_4 = this.add.image(1395, 443, "NPCGuardian_V01", 3);
-		npc_Guard_4.scaleX = 1.5;
-		npc_Guard_4.scaleY = 1.5;
 
 		// marketNpcPrefab
 		const marketNpcPrefab = new MarketNpcPrefab(this, 829, 226);
@@ -205,6 +177,42 @@ export default class MarketScene extends Phaser.Scene {
 		const seaLevelBuildingLighthousePrefab = new SeaLevelBuildingLighthousePrefab(this, 510, -119);
 		this.add.existing(seaLevelBuildingLighthousePrefab);
 
+		// profilePrefab
+		const profilePrefab = new ProfilePrefab(this, -1, -17);
+		this.add.existing(profilePrefab);
+
+		// blackSmithPrefab
+		const blackSmithPrefab = new BlackSmithPrefab(this, 192, 702);
+		this.add.existing(blackSmithPrefab);
+		blackSmithPrefab.scaleX = 1;
+		blackSmithPrefab.scaleY = 1;
+
+		// merchantPrefab
+		const merchantPrefab = new MerchantPrefab(this, 813, 657);
+		this.add.existing(merchantPrefab);
+		merchantPrefab.scaleX = 1;
+		merchantPrefab.scaleY = 1;
+
+		// commanderPrefab
+		const commanderPrefab = new CommanderPrefab(this, 938, 638);
+		this.add.existing(commanderPrefab);
+
+		// soldierErikPrefab
+		const soldierErikPrefab = new SoldierErikPrefab(this, 1406, 453);
+		this.add.existing(soldierErikPrefab);
+
+		// soldierKaiPrefab
+		const soldierKaiPrefab = new SoldierKaiPrefab(this, 1406, 515);
+		this.add.existing(soldierKaiPrefab);
+
+		// soldierNolanPrefab
+		const soldierNolanPrefab = new SoldierNolanPrefab(this, -362, 284);
+		this.add.existing(soldierNolanPrefab);
+
+		// soldierWillemPrefab
+		const soldierWillemPrefab = new SoldierWillemPrefab(this, -356, 598);
+		this.add.existing(soldierWillemPrefab);
+
 		// itemHudPrefab (prefab fields)
 		itemHudPrefab.player = playerPrefab;
 
@@ -230,14 +238,7 @@ export default class MarketScene extends Phaser.Scene {
 		this.floatingCliff = floatingCliff;
 		this.campCauldron = campCauldron;
 		this.campfire = campfire;
-		this.npcBlackSmithRight = npcBlackSmithRight;
-		this.npc_Merchant = npc_Merchant;
 		this.fishingShip = fishingShip;
-		this.npc_Guard_2 = npc_Guard_2;
-		this.npc_Guard_1 = npc_Guard_1;
-		this.npc_Guard_5 = npc_Guard_5;
-		this.npc_Guard_3 = npc_Guard_3;
-		this.npc_Guard_4 = npc_Guard_4;
 		this.marketNpcPrefab = marketNpcPrefab;
 		this.questBookPrefab = questBookPrefab;
 		this.itemHudPrefab = itemHudPrefab;
@@ -246,6 +247,14 @@ export default class MarketScene extends Phaser.Scene {
 		this.sceneTilePrev = sceneTilePrev;
 		this.angelPrefab = angelPrefab;
 		this.seaLevelBuildingLighthousePrefab = seaLevelBuildingLighthousePrefab;
+		this.profilePrefab = profilePrefab;
+		this.blackSmithPrefab = blackSmithPrefab;
+		this.merchantPrefab = merchantPrefab;
+		this.commanderPrefab = commanderPrefab;
+		this.soldierErikPrefab = soldierErikPrefab;
+		this.soldierKaiPrefab = soldierKaiPrefab;
+		this.soldierNolanPrefab = soldierNolanPrefab;
+		this.soldierWillemPrefab = soldierWillemPrefab;
 		this.marketMap = marketMap;
 
 		this.events.emit("scene-awake");
@@ -296,21 +305,7 @@ export default class MarketScene extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Sprite} */
 	campfire;
 	/** @type {Phaser.GameObjects.Sprite} */
-	npcBlackSmithRight;
-	/** @type {Phaser.GameObjects.Image} */
-	npc_Merchant;
-	/** @type {Phaser.GameObjects.Sprite} */
 	fishingShip;
-	/** @type {Phaser.GameObjects.Image} */
-	npc_Guard_2;
-	/** @type {Phaser.GameObjects.Image} */
-	npc_Guard_1;
-	/** @type {Phaser.GameObjects.Image} */
-	npc_Guard_5;
-	/** @type {Phaser.GameObjects.Image} */
-	npc_Guard_3;
-	/** @type {Phaser.GameObjects.Image} */
-	npc_Guard_4;
 	/** @type {MarketNpcPrefab} */
 	marketNpcPrefab;
 	/** @type {QuestBookPrefab} */
@@ -327,6 +322,22 @@ export default class MarketScene extends Phaser.Scene {
 	angelPrefab;
 	/** @type {SeaLevelBuildingLighthousePrefab} */
 	seaLevelBuildingLighthousePrefab;
+	/** @type {ProfilePrefab} */
+	profilePrefab;
+	/** @type {BlackSmithPrefab} */
+	blackSmithPrefab;
+	/** @type {MerchantPrefab} */
+	merchantPrefab;
+	/** @type {CommanderPrefab} */
+	commanderPrefab;
+	/** @type {SoldierErikPrefab} */
+	soldierErikPrefab;
+	/** @type {SoldierKaiPrefab} */
+	soldierKaiPrefab;
+	/** @type {SoldierNolanPrefab} */
+	soldierNolanPrefab;
+	/** @type {SoldierWillemPrefab} */
+	soldierWillemPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	marketMap;
 
@@ -338,13 +349,21 @@ export default class MarketScene extends Phaser.Scene {
 		this.editorCreate();
 
 		this.itemHudPrefab.setDepth(100);
-		this.questBookPrefab.setDepth(100)
-		this.playerPrefab.setDepth(50)
+		this.questBookPrefab.setDepth(100);
+		this.playerPrefab.setDepth(50);
+		this.profilePrefab.visible = true;
+    	this.profilePrefab.setDepth(100);
+		this.alertPrefab.setDepth(100);
+		this.messagePrefab.setDepth(100);
+		
 
 		const backgroundDepth = 0;
     	const waterDepth = 5;
+		const treeDepth = 2;
     	const topLayerDepth = 10;
 		const floatingCliffDepth = 15;
+		const npcDepth = 16;
+		const lighthouseDepth = 18;
 
 
     	this.must_Background_SeaBorder_1.setDepth(backgroundDepth);
@@ -368,16 +387,20 @@ export default class MarketScene extends Phaser.Scene {
     	);
     	seaArea.setDepth(waterDepth);
 
-    	this.treePatteren_TreeBorder.setDepth(topLayerDepth);
-		this.treePatteren_TreeBorder_1.setDepth(topLayerDepth);
-		this.treePatteren_TreeBorder_2.setDepth(topLayerDepth);
-		this.treePatteren_TreeBorder_3.setDepth(topLayerDepth);
-		this.npc_Guard_5.setDepth(topLayerDepth);
+    	this.treePatteren_TreeBorder.setDepth(treeDepth);
+		this.treePatteren_TreeBorder_1.setDepth(treeDepth);
+		this.treePatteren_TreeBorder_2.setDepth(treeDepth);
+		this.treePatteren_TreeBorder_3.setDepth(treeDepth);
     	this.beachSide_BeachDeck_1.setDepth(topLayerDepth);
 		this.bigShip.setDepth(topLayerDepth);
 		this.floatingCliff.setDepth(floatingCliffDepth);
 		this.fishingShip.setDepth(topLayerDepth);
-		this.playerPrefab.setDepth(topLayerDepth)
+		this.soldierErikPrefab.setDepth(npcDepth);
+		this.soldierKaiPrefab.setDepth(npcDepth);
+		this.soldierNolanPrefab.setDepth(npcDepth);
+		this.soldierWillemPrefab.setDepth(npcDepth);
+		this.seaLevelBuildingLighthousePrefab.setDepth(lighthouseDepth);
+		this.decoration_Decoration_1.setDepth(topLayerDepth);
 
     	const frames = [32, 36, 40, 44, 48, 52];
     	let currentFrameIndex = 0;
@@ -407,29 +430,8 @@ export default class MarketScene extends Phaser.Scene {
     	this.physics.add.existing(this.campCauldron, true);
     	this.physics.add.collider(this.playerPrefab, this.campCauldron);
 
- 		this.physics.add.existing(this.npc_Guard_1, true);
-    	this.physics.add.collider(this.playerPrefab, this.npc_Guard_1);
-
- 		this.physics.add.existing(this.npc_Guard_2, true);
-    	this.physics.add.collider(this.playerPrefab, this.npc_Guard_2);
-
- 		this.physics.add.existing(this.npc_Guard_3, true);
-    	this.physics.add.collider(this.playerPrefab, this.npc_Guard_3);
-
- 		this.physics.add.existing(this.npc_Guard_4, true);
-    	this.physics.add.collider(this.playerPrefab, this.npc_Guard_4);
-
- 		this.physics.add.existing(this.npc_Guard_5, true);
-    	this.physics.add.collider(this.playerPrefab, this.npc_Guard_5);
-
  		this.physics.add.existing(this.campfire, true);
     	this.physics.add.collider(this.playerPrefab, this.campfire);
-
- 		this.physics.add.existing(this.npc_Merchant, true);
-    	this.physics.add.collider(this.playerPrefab, this.npc_Merchant);
-
- 		this.physics.add.existing(this.npcBlackSmithRight, true);
-    	this.physics.add.collider(this.playerPrefab, this.npcBlackSmithRight); 
 
 
 
@@ -474,6 +476,45 @@ export default class MarketScene extends Phaser.Scene {
     	this.must_Background_SeaBorder_1.setCollisionBetween(0, 10000);
 		// this.must_Background_SeaBorder_1.renderDebug(this.add.graphics());
 
+    	this.physics.add.collider(this.playerPrefab, this.decoration_Decoration_1);
+    	this.decoration_Decoration_1.setCollisionBetween(0, 10000);
+		// this.decoration_Decoration_1.renderDebug(this.add.graphics());
+
+    	this.physics.add.collider(this.playerPrefab, this.decoration_Decoration_1);
+    	this.decoration_Decoration_1.setCollisionBetween(0, 10000);
+		// this.decoration_Decoration_1.renderDebug(this.add.graphics());
+
+    	this.physics.add.collider(this.playerPrefab, this.decoration_DecorationBeachside_1);
+    	this.decoration_DecorationBeachside_1.setCollisionBetween(0, 10000);
+		// this.decoration_DecorationBeachside_1.renderDebug(this.add.graphics());
+
+		this.blackSmithPrefab.player = this.playerPrefab;
+	    this.blackSmithPrefab.msgPrefab = this.messagePrefab;
+	    this.physics.add.existing(this.blackSmithPrefab, true);
+
+		this.merchantPrefab.player = this.playerPrefab;
+    	this.merchantPrefab.msgPrefab = this.messagePrefab;
+    	this.physics.add.existing(this.merchantPrefab, true);
+
+		this.commanderPrefab.player = this.playerPrefab;
+		this.commanderPrefab.msgPrefab = this.messagePrefab;
+		this.physics.add.existing(this.commanderPrefab, true);
+
+		this.soldierErikPrefab.player = this.playerPrefab;
+		this.soldierErikPrefab.msgPrefab = this.messagePrefab;
+		this.physics.add.existing(this.soldierErikPrefab, true);
+
+		this.soldierKaiPrefab.player = this.playerPrefab;
+		this.soldierKaiPrefab.msgPrefab = this.messagePrefab;
+		this.physics.add.existing(this.soldierKaiPrefab, true);
+
+		this.soldierNolanPrefab.player = this.playerPrefab;
+		this.soldierNolanPrefab.msgPrefab = this.messagePrefab;
+		this.physics.add.existing(this.soldierNolanPrefab, true);
+
+		this.soldierWillemPrefab.player = this.playerPrefab;
+		this.soldierWillemPrefab.msgPrefab = this.messagePrefab;
+		this.physics.add.existing(this.soldierWillemPrefab, true);
 
 		this.physics.add.overlap(this.sceneTilePrev, this.playerPrefab, () => {
 			this.playerPrefab.x += 50

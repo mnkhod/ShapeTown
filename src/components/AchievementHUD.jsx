@@ -25,9 +25,9 @@ const AchievementSlot = ({ achievement }) => {
       </div>
 
       {showTooltip && achievement && (
-        <div className="absolute z-50 w-48 p-2 font-malio bg-orange-100 border-2 border-yellow-900 rounded-lg -top-20 left-1/2 transform -translate-x-1/2">
-          <h3 className="font-bold text-yellow-900">{achievement.title}</h3>
-          <p className="text-sm text-yellow-800">{achievement.description}</p>
+        <div className="absolute z-50 w-64 p-2 font-malio bg-orange-100 border-2 border-yellow-900 rounded-lg -top-20 left-1/2 transform -translate-x-1/2">
+          <h3 className="font-bold text-sm pb-2 text-yellow-900">{achievement.title}</h3>
+          <p className="text-xs text-yellow-800">{achievement.description}</p>
         </div>
       )}
     </div>
