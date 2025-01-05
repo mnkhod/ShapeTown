@@ -1,6 +1,4 @@
-
 // You can write more code here
-import { EventBus } from '../EventBus';
 
 /* START OF COMPILED CODE */
 
@@ -15,9 +13,12 @@ import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
 import PineTreePrefab from "../prefabs/Trees/PineTreePrefab";
 import MapleTreePrefab from "../prefabs/Trees/MapleTreePrefab";
 import TutorealHousePrefab from "../prefabs/House/TutorealHousePrefab";
+import DeadTree2 from "../prefabs/Trees/DeadTree2";
+import FishingComponentPrefab from "../prefabs/hud/FishingComponentPrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 /* START-USER-IMPORTS */
-import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement } from "../utility";
+import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
+import { EventBus } from '../EventBus';
 /* END-USER-IMPORTS */
 
 export default class TutorialScene extends Phaser.Scene {
@@ -63,7 +64,7 @@ export default class TutorialScene extends Phaser.Scene {
 		tutorialMap.createLayer("Map environment/Background[Just Render]", ["GroundTileset"], -768, -416);
 
 		// map_environment_Ground_just_render__1
-		tutorialMap.createLayer("Map environment/Ground[just render]", ["RoadStone"], -767, -416);
+		const map_environment_Ground_just_render__1 = tutorialMap.createLayer("Map environment/Ground[just render]", ["RoadStone"], -767, -416);
 
 		// map_environment_Road_Just_render__1
 		tutorialMap.createLayer("Map environment/Road[Just render]", ["RoadStone"], -768, -416);
@@ -137,7 +138,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.existing(oldManJackNpcPrefab);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 336, 429);
+		const playerPrefab = new PlayerPrefab(this, 353, 288);
 		this.add.existing(playerPrefab);
 
 		// questBookPrefab
@@ -145,7 +146,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.existing(questBookPrefab);
 
 		// itemHudPrefab
-		const itemHudPrefab = new ItemHudPrefab(this, 624.0380149603411, 714.0380149603411);
+		const itemHudPrefab = new ItemHudPrefab(this, 17.999990057997366, 714.0380149603411);
 		this.add.existing(itemHudPrefab);
 
 		// messagePrefab
@@ -188,8 +189,19 @@ export default class TutorialScene extends Phaser.Scene {
 		const tutorealHousePrefab = new TutorealHousePrefab(this, 256, 90);
 		this.add.existing(tutorealHousePrefab);
 
+		// deadTree2
+		const deadTree2 = new DeadTree2(this, 540, 473);
+		this.add.existing(deadTree2);
+
+		// fishingArea
+		const fishingArea = this.add.sprite(852, 714, "LakeAccessor", 0);
+
+		// fishingComponentPrefab
+		const fishingComponentPrefab = new FishingComponentPrefab(this, 64, 640);
+		this.add.existing(fishingComponentPrefab);
+
 		// profilePrefab
-		const profilePrefab = new ProfilePrefab(this, 34, 42);
+		const profilePrefab = new ProfilePrefab(this, 56.5, 23);
 		this.add.existing(profilePrefab);
 
 		// oldManJackNpcPrefab (prefab fields)
@@ -197,11 +209,11 @@ export default class TutorialScene extends Phaser.Scene {
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
 		oldManJackNpcPrefab.itemHud = itemHudPrefab;
 		oldManJackNpcPrefab.bookHud = questBookPrefab;
-		oldManJackNpcPrefab.profilePrefab = profilePrefab;
 
 		// itemHudPrefab (prefab fields)
 		itemHudPrefab.player = playerPrefab;
 
+		this.map_environment_Ground_just_render__1 = map_environment_Ground_just_render__1;
 		this.layerFence = layerFence;
 		this.farmingAreaFarmingTile = farmingAreaFarmingTile;
 		this.layerFishingPondBorder = layerFishingPondBorder;
@@ -222,12 +234,17 @@ export default class TutorialScene extends Phaser.Scene {
 		this.pineTreePrefab = pineTreePrefab;
 		this.mapleTreePrefab = mapleTreePrefab;
 		this.tutorealHousePrefab = tutorealHousePrefab;
+		this.deadTree2 = deadTree2;
+		this.fishingArea = fishingArea;
+		this.fishingComponentPrefab = fishingComponentPrefab;
 		this.profilePrefab = profilePrefab;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
 	}
 
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	map_environment_Ground_just_render__1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	layerFence;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -268,6 +285,12 @@ export default class TutorialScene extends Phaser.Scene {
 	mapleTreePrefab;
 	/** @type {TutorealHousePrefab} */
 	tutorealHousePrefab;
+	/** @type {DeadTree2} */
+	deadTree2;
+	/** @type {Phaser.GameObjects.Sprite} */
+	fishingArea;
+	/** @type {FishingComponentPrefab} */
+	fishingComponentPrefab;
 	/** @type {ProfilePrefab} */
 	profilePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
@@ -281,6 +304,14 @@ export default class TutorialScene extends Phaser.Scene {
 
 	create() {
 		this.editorCreate();
+
+
+		this.fishingArea.setInteractive({ useHandCursor: true });
+		this.fishingArea.on('pointerdown', function (_pointer) {
+			this.fishingComponentPrefab.play(() => {
+				this.itemHudPrefab.addItem("FISH","FishIcon",0,1,true)
+			})
+		},this)
 
 		this.questBookPrefab.setDepth(100)
     	this.itemHudPrefab.setDepth(100)
@@ -354,33 +385,51 @@ export default class TutorialScene extends Phaser.Scene {
             this.profilePrefab.visible = false;
         }
 
-		this.time.delayedCall(100, () => {
-			this.questBookPrefab.visible = true
-			this.itemHudPrefab.visible = true;
-			this.profilePrefab.visible = true;
+		// this.time.delayedCall(100, () => {
+		// 	this.questBookPrefab.visible = true
+		// 	this.itemHudPrefab.visible = true;
+		// 	this.profilePrefab.visible = true;
 
-			this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
-			this.itemHudPrefab.addItem("HOE","IconBaseTools",1)
-			this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
-			this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
-			// this.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
-		}, {}, this)
+		// 	this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
+		// 	this.itemHudPrefab.addItem("HOE","IconBaseTools",1)
+		// 	this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
+		// 	this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
+		// 	// this.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
+
+		// 	this.itemHudPrefab.addItem("FISH","FishIcon",0,1,true)
+		// }, {}, this)
 
 		// this.reactEvent.on('blockchain-account', (address) => {
         //     console.log(address);
         // });
 
+        let bounds = this.fishingArea.getBounds()
+        let newX = bounds.x + bounds.width
+        let newY = bounds.y - 10
+		let questMark = this.add.sprite(0, -40, "NPCDialoguePopUpMainQuestSheet", 7);
+    	questMark.setScale(1.5);
+    	this.questMark = questMark;
+        this.questMark.setPosition(newX,newY)
+        this.physics.add.existing(this.questMark, false);
+
 		this.setupSceneAchievementNftsData()
 	}
+
+
 
 	async setupSceneAchievementNftsData(){
 		this.achievements.firstHarvestAchievement = await checkFirstHarvestAchievement();
 		this.achievements.giftFromNatureAchievement = await checkGiftFromNatureAchievement();
+		this.achievements.firstFishAchievement = await checkFirstFishAchievement();
 
 		if(this.achievements.firstHarvestAchievement){
 			this.questBookPrefab.visible = true
 			this.itemHudPrefab.visible = true;
 			this.profilePrefab.visible = true;
+		}
+
+		if(this.achievements.giftFromNatureAchievement){
+        	this.questMark.visible = true;
 		}
 
 		console.log(this.achievements);

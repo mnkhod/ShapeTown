@@ -24,7 +24,7 @@ export default class AppleTreePrefab extends Phaser.GameObjects.Image {
         let newX = bounds.x + bounds.width - 15
         let newY = bounds.y + 10
 		const questMark = scene.add.sprite(0, -40, "NPCDialoguePopUpMainQuestSheet", 7);
-    	// questMark.setScale();
+    	questMark.setScale(1.5);
     	this.questMark = questMark;
         this.questMark.setPosition(newX,newY)
         scene.physics.add.existing(this.questMark, false);

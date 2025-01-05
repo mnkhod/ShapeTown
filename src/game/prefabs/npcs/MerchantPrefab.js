@@ -19,7 +19,7 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         this.add(npc);
 
         const questMark = scene.add.sprite(0, -40, "GameNpcs1", 6);
-        questMark.setScale(1);
+        questMark.setScale(1.5);
         questMark.play("BeforeQuest");
         this.add(questMark);
         

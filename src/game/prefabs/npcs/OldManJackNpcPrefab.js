@@ -1,6 +1,6 @@
 
 // You can write more code here
-import { mintFirstHarvestAchievement,mintGiftFromNatureAchievement } from "../../utility";
+import { mintFirstHarvestAchievement,mintGiftFromNatureAchievement,mintFirstFishAchievement } from "../../utility";
 
 
 /* START OF COMPILED CODE */
@@ -30,7 +30,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		// Write your code here.
 
 		const questMark = scene.add.sprite(0, -40, "GameNpcs1", 6);
-    	questMark.setScale();
+    	questMark.setScale(1.5);
     	questMark.play("BeforeQuest");
     	this.add(questMark);
     	this.questMark = questMark;
@@ -78,7 +78,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 			msg: `Alright, here’s your quest. You may see it in your quest book, good luck!`,
 			onComplete: () => {
 				this.bookHud.visible = true;
-				this.profilePrefab.visible = true;
+				this.scene.profilePrefab.visible = true;
+
 				this.bookHud.play("bookLightingUpAnim")
 			}
 		},
@@ -102,6 +103,17 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		{ msg: `Do you see those trees?` },
 		{ msg: `That is an apple tree.` },
 		{ msg: `My Quest is you have to bring something from all those trees.` },
+	]
+
+	firstFishDialogueLifeCycle = [
+		{ msg : "Alright mate! Well done!" },
+		{ msg: `I hope you are not tired already. Cause you have not completed my last Quest yet!` },
+		{ msg: `Go to the Fishing Pond and catch 1 Blue Fin Salmon for me.` },
+	]
+
+	questEndDialogueLifeCycle = [
+		{ msg : "I am glad i helped you, now our path going to split." },
+		{ msg : "Good luck mate!" },
 	]
 
 	lifeCycleStep = 0;
@@ -129,10 +141,47 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
 			if(!this.scene.achievements) return;
 
+			let hasFirstFishNFT = this.scene.achievements.firstFishAchievement
+
+			if(hasFirstFishNFT){
+				this.msgPrefab.conversation(this.questEndDialogueLifeCycle)
+				return;
+			}
+
+			let hasGiftFromNatureNFT = this.scene.achievements.giftFromNatureAchievement
+			if(hasGiftFromNatureNFT){
+				if(this.itemHud.checkItem("FISH")){
+					this.questMark.play("AfterQuest");
+
+					let hasNFT = this.scene.achievements.firstFishAchievement
+					if(hasNFT){
+						this.scene.alertPrefab.alert("Already Has Achievement NFT")
+					}else{
+						this.isMinting = true;
+						this.scene.alertPrefab.alert("Minting Has Started")
+						await mintFirstFishAchievement({
+							onSuccess: () => {
+								this.scene.alertPrefab.alert("First Fish Achievement")
+								this.scene.achievements.firstFishAchievement = true;
+
+								this.itemHud.removeItemByKey("FISH")
+							},
+							onError: () => this.scene.alertPrefab.alert("Contract Error Occurred"),
+						})
+						this.isMinting = false;
+					}
+
+					return;
+				}
+
+				this.msgPrefab.conversation(this.firstFishDialogueLifeCycle)
+				return;
+			}
+
+
 			let hasFirstHarvestNFT = this.scene.achievements.firstHarvestAchievement
 			if(hasFirstHarvestNFT){
 				if(this.itemHud.checkItem("APPLE")){
-
 					this.questMark.play("AfterQuest");
 
 					let hasNFT = this.scene.achievements.giftFromNatureAchievement

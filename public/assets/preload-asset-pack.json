@@ -318,6 +318,19 @@
                 "key": "Fishes_3_32x32"
             },
             {
+                "url": "assets/Icon/FishIcon.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "FishIcon"
+            },
+            {
                 "url": "assets/Ground tileset/FishingBoat_V01R.png",
                 "frameConfig": {
                     "frameWidth": 192,
@@ -329,6 +342,16 @@
                 },
                 "type": "spritesheet",
                 "key": "FishingBoat_V01R"
+            },
+            {
+                "url": "assets/hud/FishingHud.png",
+                "type": "image",
+                "key": "FishingHud"
+            },
+            {
+                "url": "assets/hud/FishingHudBackground.png",
+                "type": "image",
+                "key": "FishingHudBackground"
             },
             {
                 "url": "assets/mapAssets/Flower_v01.png",

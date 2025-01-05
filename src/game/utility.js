@@ -46,6 +46,10 @@ export async function checkGiftFromNatureAchievement() {
 	return await checkAchievementNFT(1)
 }
 
+export async function checkFirstFishAchievement() {
+	return await checkAchievementNFT(2)
+}
+
 export async function mintFirstHarvestAchievement({ onSuccess, onError }) {
 	let metamaskAccount = await fetchMetamaskAccount()
 	let baseURL = `${import.meta.env.VITE_REST_ENDPOINT}`;
@@ -72,6 +76,24 @@ export async function mintGiftFromNatureAchievement({ onSuccess, onError }) {
 		let result = await axios({
 			method: 'get',
 			url: `${baseURL}/edu/nft/create/1/${metamaskAccount}`
+		})
+		if (result.data.hash) {
+			onSuccess()
+		}
+	} catch (e) {
+		console.log(e);
+		onError()
+	}
+}
+
+export async function mintFirstFishAchievement({ onSuccess, onError }) {
+	let metamaskAccount = await fetchMetamaskAccount()
+	let baseURL = `${import.meta.env.VITE_REST_ENDPOINT}`;
+
+	try {
+		let result = await axios({
+			method: 'get',
+			url: `${baseURL}/edu/nft/create/2/${metamaskAccount}`
 		})
 		if (result.data.hash) {
 			onSuccess()

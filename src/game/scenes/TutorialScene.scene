@@ -2,7 +2,6 @@
     "id": "61b2af8d-97d7-4fb5-87a9-8613f40d584a",
     "sceneType": "SCENE",
     "settings": {
-        "snapEnabled": true,
         "snapWidth": 2560,
         "snapHeight": 1600,
         "exportClass": true,
@@ -615,8 +614,8 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": 336,
-            "y": 429
+            "x": 353,
+            "y": 288
         },
         {
             "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
@@ -641,7 +640,7 @@
             "label": "itemHudPrefab",
             "scope": "CLASS",
             "player": "playerPrefab",
-            "x": 624.0380149603411,
+            "x": 17.999990057997366,
             "y": 714.0380149603411
         },
         {
@@ -761,18 +760,6 @@
             "y": 90
         },
         {
-            "prefabId": "8862e7a5-8606-4b46-965f-fb00b3c30ce2",
-            "id": "756e0bb4-8d31-4240-8be0-4fe95a723de0",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "deadTree1",
-            "scope": "CLASS",
-            "x": 409,
-            "y": 315
-        },
-        {
             "prefabId": "bc8f70fc-832b-45aa-97fa-b71d8d26bbbc",
             "id": "3be710dc-02cc-459b-8e90-23c807ffd365",
             "unlock": [
@@ -783,6 +770,42 @@
             "scope": "CLASS",
             "x": 540,
             "y": 473
+        },
+        {
+            "type": "Sprite",
+            "id": "14874867-cac4-40e0-8cef-4808a04425ef",
+            "label": "fishingArea",
+            "scope": "CLASS",
+            "texture": {
+                "key": "LakeAccessor",
+                "frame": 0
+            },
+            "x": 852,
+            "y": 714
+        },
+        {
+            "prefabId": "49079006-fbcb-44e1-a048-2912c2954192",
+            "id": "f19f91ba-46f6-4a0d-b468-76f154bfa3e0",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "fishingComponentPrefab",
+            "scope": "CLASS",
+            "x": 64,
+            "y": 640
+        },
+        {
+            "prefabId": "05640e95-1b2a-411d-bbb2-3af441962740",
+            "id": "a50bdf89-8de0-4d6f-8fd0-5b915923f09a",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "profilePrefab",
+            "scope": "CLASS",
+            "x": 56.5,
+            "y": 23
         }
     ],
     "plainObjects": [
