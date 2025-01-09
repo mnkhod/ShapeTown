@@ -52,14 +52,16 @@ const AchievementHUD = ({ onClose }) => {
   async function fetchAchievementInfo() {
     try {
       setIsLoading(true);
-      let contractAddress = "0x6bc9Da82cB85D6D9e34EF7b8B2F930a8A83F5FB2";
+      let contractAddress = "0x23d6e7fe6dc435cdDC32e5aBBd3d6bE7f807bAbD";
+      // let contractAddress = "0x6bc9Da82cB85D6D9e34EF7b8B2F930a8A83F5FB2";
       let contractAbi = [
         "function balanceOf(address,uint256) view returns (uint256)",
         "function mint(address,uint256,uint256,bytes)",
         "function uri(uint256) view returns (string)"
       ];
 
-      let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital");
+      // let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital");
+	    let provider = new ethers.JsonRpcProvider("https://mainnet.shape.network")
       let metamaskAccount = await fetchMetamaskAccount();
 
       const nftContract = new ethers.Contract(contractAddress, contractAbi, provider);
