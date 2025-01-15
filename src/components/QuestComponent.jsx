@@ -108,7 +108,7 @@ const QuestComponent = ({ onClose }) => {
                         </p>
                         {task.subtasks && (
                           <img 
-                            src={expandedTasks.has(index) ? '/assets/hud/accordionDown.png' : '/assets/hud/accordionUp.png'}
+                            src={expandedTasks.has(index) ? '/assets/hud/accordionUp.png' : '/assets/hud/accordionDown.png'}
                             alt={expandedTasks.has(index) ? 'Collapse' : 'Expand'}
                             className="w-4 h-4 ml-2 transition-transform duration-200"
                           />

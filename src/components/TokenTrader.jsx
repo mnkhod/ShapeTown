@@ -81,15 +81,22 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
         onClick={(e) => e.stopPropagation()}
         className="relative"
       >
-        <div className="bg-yellow-50 border-4 border-yellow-900 rounded-lg p-6 relative">
-          <button 
-            onClick={onClose}
-            className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center bg-yellow-500 rounded-full text-white hover:bg-yellow-600 font-malio"
-          >
-            X
-          </button>
+        <div className="rounded-lg px-12 py-24 relative"
+          style={{
+            backgroundImage: `url('/assets/hud/tokenTradeBackground.png')`,
+            backgroundSize: '100% 100%',
+            backgroundPosition: 'center',
+            imageRendering: 'pixelated'
+          }}>
+        <img 
+          src="/assets/files/image 35.png"
+          alt="Close"
+          onClick={onClose}
+          className="absolute -top-1 -right-2 w-16 h-16 cursor-pointer hover:opacity-80"
+          style={{ imageRendering: 'pixelated' }}
+        />
 
-          <div className="text-3xl font-malio font-extrabold text-center mb-6 text-yellow-900">Trader</div>
+          <div className="text-3xl font-malio font-extrabold text-center mb-6 -mt-8 text-yellow-900">Trader</div>
           
           <div className="mb-4 bg-yellow-200 rounded-xl border-yellow-900 border-4 p-4">
             <div className="flex justify-between mb-2 text-yellow-900 font-malio">
