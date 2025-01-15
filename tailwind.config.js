@@ -13,6 +13,9 @@ export default withAccountKitUi(
         fontFamily: {
           'malio': ['"Little Malio 8-Bit"', 'monospace']
         },
+        cursor: {
+          'default': 'url(/assets/hud/Cursor.png) 1 1, auto',
+        },
       },
     },
     plugins: [],

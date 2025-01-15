@@ -16,3 +16,7 @@
     src: url('fonts/Little Malio 8-Bit.otf') format('truetype');
     font-display: swap;
 }
+
+* {
+  @apply cursor-default;
+}
