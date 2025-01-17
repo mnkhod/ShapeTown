@@ -16,8 +16,8 @@ export async function getReadAchievementNftContract() {
 		"function uri(uint256) view returns (string)"
 	]
 
-	// let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital")
-	let provider = new ethers.JsonRpcProvider("https://mainnet.shape.network")
+	let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital")
+	// let provider = new ethers.JsonRpcProvider("https://mainnet.shape.network")
 
 	const nftContract = new ethers.Contract(contractAddress, contractAbi, provider);
 
