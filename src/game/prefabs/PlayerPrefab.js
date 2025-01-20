@@ -164,6 +164,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         }
     }
 
+    // Cloth
 	settingUpAnimations() {
         if(!this.scene) return;
         if(!this.scene.anims) return;

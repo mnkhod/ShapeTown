@@ -1,22 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const InventorySlot = ({ item, onItemClick, slotIndex, onItemDrop }) => {
+const InventorySlot = ({ 
+  item, 
+  onItemClick, 
+  slotIndex, 
+  onItemDrop,
+  isQuickAccess = false,
+  isActive = false
+}) => {
   const handleDragOver = (e) => e.preventDefault();
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const fromIndex = e.dataTransfer.getData('text/plain');
-    onItemDrop(parseInt(fromIndex), slotIndex);
+    const fromData = JSON.parse(e.dataTransfer.getData('text/plain'));
+    onItemDrop(fromData, slotIndex);
   };
 
   const handleDragStart = (e) => {
-    e.dataTransfer.setData('text/plain', slotIndex.toString());
+    e.dataTransfer.setData('text/plain', JSON.stringify({
+      index: slotIndex,
+      isQuickAccess
+    }));
   };
 
   return (
     <div 
-      className="w-12 h-12 cursor-pointer relative"
+      className="relative cursor-pointer"
+      style={{
+        width: '50px',
+        height: '50px',
+      }}
       onClick={() => onItemClick(item, slotIndex)}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
@@ -28,11 +42,11 @@ const InventorySlot = ({ item, onItemClick, slotIndex, onItemDrop }) => {
           <img 
             src={item.icon} 
             alt={item.name}
-            className="w-12 h-12"
+            className="w-[48px] h-[48px] "
             style={{ imageRendering: 'pixelated' }}
           />
           {item.quantity > 1 && (
-            <span className="absolute bottom-1 right-1 text-sm font-bold text-white bg-neutral-900/80 px-1 rounded">
+            <span className="absolute bottom-1 right-1 text-[10px] text-white">
               {item.quantity}
             </span>
           )}
@@ -42,106 +56,183 @@ const InventorySlot = ({ item, onItemClick, slotIndex, onItemDrop }) => {
   );
 };
 
-const InventoryGrid = ({ onClose }) => {
-  // const [items, setItems] = useState(Array(36).fill(null).map((_, index) => {
-  //   if (index === 0) return { id: '1', icon: '/assets/files/image 1.png', name: 'Item 1', quantity: 1 };
-  //   if (index === 1) return { id: '2', icon: '/assets/files/image 2.png', name: 'Item 2', quantity: 1 };
-  //   if (index === 2) return { id: '3', icon: '/assets/files/image 3.png', name: 'Item 3', quantity: 5 };
-  //   return null;
-  // }));
+const PhaserInventory = ({ onClose, phaserInstance }) => {
+  const [mainItems, setMainItems] = useState(Array(24).fill(null));
+  const [quickItems, setQuickItems] = useState(Array(8).fill(null));
+  const [activeQuickSlot, setActiveQuickSlot] = useState(0);
 
-  const [items, setItems] = useState([]);
+  useEffect(() => {
+    if (phaserInstance) {
+      const phaserItems = phaserInstance.itemData.map((key, index) => {
+        if (!key) return null;
+        return {
+          id: key,
+          icon: phaserInstance.items[index].texture.key,
+          textureId: phaserInstance.items[index].frame.name,
+          quantity: parseInt(phaserInstance.itemCounters[index].text),
+          name: key
+        };
+      });
+      setQuickItems(phaserItems);
+    }
+  }, [phaserInstance]);
 
-  const handleItemClick = (item, slotIndex) => {
-    if (item) {
-      const newItems = [...items];
-      if (item.quantity > 1) {
-        newItems[slotIndex] = { ...item, quantity: item.quantity - 1 };
-      } else {
-        newItems[slotIndex] = null;
+  const handleItemClick = (item, slotIndex, isQuickAccess) => {
+    if (isQuickAccess) {
+      setActiveQuickSlot(slotIndex);
+      if (phaserInstance) {
+        phaserInstance.activeIndex = slotIndex;
+        phaserInstance.selectedItem = item?.id || null;
       }
-      setItems(newItems);
     }
   };
 
-  const handleItemDrop = (fromIndex, toIndex) => {
-    const newItems = [...items];
-    const fromItem = newItems[fromIndex];
-    const toItem = newItems[toIndex];
-
-    newItems[toIndex] = fromItem;
-    newItems[fromIndex] = toItem;
+  const handleItemDrop = (fromData, toIndex) => {
+    const { index: fromIndex, isQuickAccess: fromQuickAccess } = fromData;
     
-    setItems(newItems);
-  };
-
-  const handleTabClick = (tabIndex) => {
-    console.log(`Tab ${tabIndex} clicked`);
+    if (fromQuickAccess) {
+      const newQuickItems = [...quickItems];
+      const fromItem = newQuickItems[fromIndex];
+      
+      if (toIndex >= 24) {
+        const toItem = quickItems[toIndex - 24];
+        newQuickItems[toIndex - 24] = fromItem;
+        newQuickItems[fromIndex] = toItem;
+        setQuickItems(newQuickItems);
+      } else {
+        // Drop to main inventory
+        const newMainItems = [...mainItems];
+        const toItem = mainItems[toIndex];
+        newMainItems[toIndex] = fromItem;
+        newQuickItems[fromIndex] = toItem;
+        setMainItems(newMainItems);
+        setQuickItems(newQuickItems);
+      }
+    } else {
+      const newMainItems = [...mainItems];
+      const fromItem = newMainItems[fromIndex];
+      
+      if (toIndex >= 24) {
+        const newQuickItems = [...quickItems];
+        const toItem = quickItems[toIndex - 24];
+        newQuickItems[toIndex - 24] = fromItem;
+        newMainItems[fromIndex] = toItem;
+        setQuickItems(newQuickItems);
+        setMainItems(newMainItems);
+      } else {
+        const toItem = mainItems[toIndex];
+        newMainItems[toIndex] = fromItem;
+        newMainItems[fromIndex] = toItem;
+        setMainItems(newMainItems);
+      }
+    }
   };
 
   return (
-    <>
-      <div className="fixed inset-0 bg-black/75" />
-      
+    <div 
+      className="fixed inset-0 flex items-center justify-center bg-black/50"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+    >
       <div 
-        className="fixed inset-0 flex items-center justify-center z-40"
-        onClick={onClose}
+        className="relative"
+        onClick={(e) => e.stopPropagation()}
       >
-        <div 
-          onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-[800px] mx-4"
-        >
+        <img 
+          src="/assets/hud/Inventory/InventoryBackground.png" 
+          alt="Inventory background"
+          className=''
+          style={{ 
+            imageRendering: 'pixelated',
+            width: '800px',
+            height: 'auto'
+          }}
+        />
+        
+        <div className="absolute top-12 left-20">
           <img 
-            src="/assets/hud/inventory.png" 
-            alt="Inventory background"
-            className="w-full h-auto"
-            style={{ imageRendering: 'pixelated' }}
+            src="/assets/hud/Inventory/InactiveSlotBackground.png"
+            alt="Inactive slot background"
+            style={{ 
+              imageRendering: 'pixelated',
+              width: '90%',
+              height: '90%'
+            }}
           />
-          
-          <div className="absolute top-4 left-16 flex gap-8 items-end">
-            <div 
-              className="w-16 h-12 cursor-pointer hover:bg-neutral-700/20"
-              onClick={() => handleTabClick(0)}
-            />
-            <div 
-              className="w-16 h-10 cursor-pointer hover:bg-neutral-700/20"
-              onClick={() => handleTabClick(1)}
-            />
-            <div 
-              className="w-16 h-10 cursor-pointer hover:bg-neutral-700/20"
-              onClick={() => handleTabClick(2)}
-            />
-          </div>  
-
-          <div className="absolute top-24 left-8 p-6">
-            <div className="grid grid-cols-9 gap-7">
-              {items.map((item, index) => (
-                <InventorySlot
-                  key={index}
-                  item={item}
-                  slotIndex={index}
-                  onItemClick={handleItemClick}
-                  onItemDrop={handleItemDrop}
-                />
-              ))}
-            </div>
+          <div 
+            className="absolute top-[16px] left-[24px]"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(8, 78px)',
+              gridTemplateRows: 'repeat(3, 72px)',
+              gap: 0
+            }}
+          >
+            {mainItems.map((item, index) => (
+              <InventorySlot
+                key={index}
+                item={item}
+                slotIndex={index}
+                onItemClick={(item) => handleItemClick(item, index, false)}
+                onItemDrop={handleItemDrop}
+              />
+            ))}
           </div>
+        </div>
 
+        <div className="absolute bottom-12 left-20">
+          <img 
+            src="/assets/hud/Inventory/ActiveSlotBackground.png"
+            alt="Active slot background"
+            style={{ 
+              imageRendering: 'pixelated',
+              width: '90%',
+              height: '90%'
+            }}
+          />
+          <div 
+            className="absolute top-[16px] left-[24px] "
+            style={{
+              display: 'flex',
+              gap: 28,
+            }}
+          >
+            {quickItems.map((item, index) => (
+              <InventorySlot
+                key={index}
+                item={item}
+                slotIndex={index + 24}
+                onItemClick={(item) => handleItemClick(item, index, true)}
+                onItemDrop={handleItemDrop}
+                isQuickAccess={true}
+                isActive={index === activeQuickSlot}
+              />
+            ))}
+          </div>
+        </div>
+
+        <button
+          onClick={onClose}
+          className="absolute top-1 right-1"
+          style={{
+            width: '32px',
+            height: '32px',
+            cursor: 'pointer'
+          }}
+        >
           <img 
             src="/assets/files/image 35.png"
             alt="Close"
-            onClick={onClose}
-            className="absolute top-0 -right-1 w-10 h-10 cursor-pointer hover:opacity-80"
+            className="w-full h-full"
             style={{ imageRendering: 'pixelated' }}
           />
-        </div>
+        </button>
       </div>
-    </>
+    </div>
   );
-};
-
-InventoryGrid.propTypes = {
-  onClose: PropTypes.func.isRequired
 };
 
 InventorySlot.propTypes = {
@@ -153,7 +244,14 @@ InventorySlot.propTypes = {
   }),
   onItemClick: PropTypes.func.isRequired,
   slotIndex: PropTypes.number.isRequired,
-  onItemDrop: PropTypes.func.isRequired
+  onItemDrop: PropTypes.func.isRequired,
+  isQuickAccess: PropTypes.bool,
+  isActive: PropTypes.bool
 };
 
-export default InventoryGrid;
+PhaserInventory.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  phaserInstance: PropTypes.object
+};
+
+export default PhaserInventory;

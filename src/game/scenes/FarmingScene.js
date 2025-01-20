@@ -102,12 +102,6 @@ export default class FarmingScene extends Phaser.Scene {
 		// group_5_Decoration_1
 		const group_5_Decoration_1 = farmingMap.createLayer("Group 5/Decoration", ["DecorationClouthHangger"], -864, -496);
 
-		// group_5_Dead_treee_1
-		const group_5_Dead_treee_1 = farmingMap.createLayer("Group 5/Dead treee", ["Tree_v09","Tree_v02","Tree_v08","Tree_v014"], -864, -496);
-
-		// group_5_StrawberryBush_1
-		const group_5_StrawberryBush_1 = farmingMap.createLayer("Group 5/StrawberryBush", ["Fruitbushes_V01"], -864, -496);
-
 		// merchant_shopStand_1
 		const merchant_shopStand_1 = farmingMap.createLayer("Merchant/shopStand", ["FarmHorseStable"], -864, -496);
 
@@ -122,7 +116,7 @@ export default class FarmingScene extends Phaser.Scene {
 		sceneTilePrev.body.setSize(32, 200, false);
 
 		// sceneTileNext
-		const sceneTileNext = this.physics.add.sprite(1486, 517, "CityHouses_v02", 0);
+		const sceneTileNext = this.physics.add.sprite(1432, 517, "CityHouses_v02", 0);
 		sceneTileNext.scaleY = 10;
 		sceneTileNext.body.allowGravity = false;
 		sceneTileNext.body.setSize(32, 200, false);
@@ -165,8 +159,6 @@ export default class FarmingScene extends Phaser.Scene {
 		this.house_area_House_1 = house_area_House_1;
 		this.house_area_chest_1 = house_area_chest_1;
 		this.group_5_Decoration_1 = group_5_Decoration_1;
-		this.group_5_Dead_treee_1 = group_5_Dead_treee_1;
-		this.group_5_StrawberryBush_1 = group_5_StrawberryBush_1;
 		this.merchant_shopStand_1 = merchant_shopStand_1;
 		this.playerPrefab = playerPrefab;
 		this.sceneTilePrev = sceneTilePrev;
@@ -212,10 +204,6 @@ export default class FarmingScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	group_5_Decoration_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	group_5_Dead_treee_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	group_5_StrawberryBush_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	merchant_shopStand_1;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
@@ -260,8 +248,6 @@ export default class FarmingScene extends Phaser.Scene {
 	    this.house_area_House_1.setDepth(13);
 
 	    this.group_5_Decoration_1.setDepth(30);
-	    this.group_5_Dead_treee_1.setDepth(31);
-	    this.group_5_StrawberryBush_1.setDepth(32);
 
 	    this.treeBorder_TreeL.setDepth(50);
 	    this.treeBorder_TreeL_1.setDepth(50);
@@ -343,14 +329,6 @@ export default class FarmingScene extends Phaser.Scene {
     	this.physics.add.collider(this.playerPrefab, this.merchant_shopStand_1);
     	this.merchant_shopStand_1.setCollisionBetween(0, 10000);
 		// this.merchant_shopStand_1.renderDebug(this.add.graphics());
-
-    	this.physics.add.collider(this.playerPrefab, this.group_5_StrawberryBush_1);
-    	this.group_5_StrawberryBush_1.setCollisionBetween(0, 10000);
-		// this.group_5_StrawberryBush_1.renderDebug(this.add.graphics());
-
-    	this.physics.add.collider(this.playerPrefab, this.group_5_Dead_treee_1);
-    	this.group_5_Dead_treee_1.setCollisionBetween(0, 10000);
-		// this.group_5_Dead_treee_1.renderDebug(this.add.graphics());
 
     	this.physics.add.collider(this.playerPrefab, this.group_5_Decoration_1);
     	this.group_5_Decoration_1.setCollisionBetween(0, 10000);

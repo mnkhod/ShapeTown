@@ -92,7 +92,7 @@ export default function TokenTrader({ onTrade, balance = 0, onClose }) {
           src="/assets/files/image 35.png"
           alt="Close"
           onClick={onClose}
-          className="absolute -top-1 -right-2 w-16 h-16 cursor-pointer hover:opacity-80"
+          className="absolute top-1 right-1 w-9 h-9 cursor-pointer hover:opacity-80"
           style={{ imageRendering: 'pixelated' }}
         />
 

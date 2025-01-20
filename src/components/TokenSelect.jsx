@@ -95,7 +95,7 @@ const TokenSelect = ({ onClose, onTokenSelect }) => {
           src="/assets/files/image 35.png"
           alt="Close"
           onClick={onClose}
-          className="absolute top-0 -right-1 w-16 h-16 cursor-pointer hover:opacity-80"
+          className="absolute top-2 right-2 w-10 h-10 cursor-pointer hover:opacity-80"
           style={{ imageRendering: 'pixelated' }}
         />
 

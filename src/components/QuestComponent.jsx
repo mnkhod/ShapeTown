@@ -76,7 +76,7 @@ const QuestComponent = ({ onClose }) => {
             <img 
               src="/assets/files/image%2035.png" 
               alt="Close"
-              className="w-16 h-16 hover:opacity-80 transition-opacity"
+              className="w-10 h-10 mr-4 mt-2 hover:opacity-80 transition-opacity"
             />
           </div>
 
