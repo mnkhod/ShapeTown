@@ -770,6 +770,11 @@
                 "key": "NPCShopStandMaerchant_1"
             },
             {
+                "url": "assets/files/OldManJackName.png",
+                "type": "image",
+                "key": "OldManJackName"
+            },
+            {
                 "url": "assets/player/player.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -1181,6 +1186,7 @@
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
         "version": 2,
-        "showAllFilesInBlocks": false
+        "showAllFilesInBlocks": false,
+        "visible": true
     }
 }

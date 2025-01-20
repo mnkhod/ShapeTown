@@ -16,6 +16,7 @@ import TutorealHousePrefab from "../prefabs/House/TutorealHousePrefab";
 import DeadTree2 from "../prefabs/Trees/DeadTree2";
 import FishingComponentPrefab from "../prefabs/hud/FishingComponentPrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
+import SoldierWillemPrefab from "../prefabs/npcs/SoldierWillemPrefab";
 /* START-USER-IMPORTS */
 import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
 import { EventBus } from '../EventBus';
@@ -134,7 +135,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.existing(harvestPrefab_3);
 
 		// oldManJackNpcPrefab
-		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 361, 216);
+		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 375, 234);
 		this.add.existing(oldManJackNpcPrefab);
 
 		// playerPrefab
@@ -203,6 +204,10 @@ export default class TutorialScene extends Phaser.Scene {
 		// profilePrefab
 		const profilePrefab = new ProfilePrefab(this, 56.5, 23);
 		this.add.existing(profilePrefab);
+
+		// soldierWillemPrefab
+		const soldierWillemPrefab = new SoldierWillemPrefab(this, 262, 458);
+		this.add.existing(soldierWillemPrefab);
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;

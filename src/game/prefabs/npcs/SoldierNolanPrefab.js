@@ -18,13 +18,15 @@ export default class SoldierNolanPrefab extends Phaser.GameObjects.Container {
         npc.body.setSize(32, 32, false);
         this.add(npc);
 
-        const questMark = scene.add.sprite(0, -40, "GameNpcs1", 6);
-        questMark.setScale(1.5);
-        questMark.play("BeforeQuest");
-        this.add(questMark);
+        // const questMark = scene.add.sprite(0, -40, "GameNpcs1", 6);
+        // questMark.setScale(1.5);
+        // questMark.play("BeforeQuest");
+        // this.add(questMark);
         
-        this.npc = npc;
-        this.questMark = questMark;
+        // this.npc = npc;
+        // this.questMark = questMark;
+
+ 
 
         /* START-USER-CTR-CODE */
         scene.events.on('create', this.prefabCreateCycle, this);

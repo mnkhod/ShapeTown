@@ -602,8 +602,8 @@
             "msgPrefab": "messagePrefab",
             "itemHud": "itemHudPrefab",
             "bookHud": "questBookPrefab",
-            "x": 361,
-            "y": 216
+            "x": 375,
+            "y": 234
         },
         {
             "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
@@ -806,6 +806,17 @@
             "scope": "CLASS",
             "x": 56.5,
             "y": 23
+        },
+        {
+            "prefabId": "f6afb4e2-b5ce-4266-8762-00a9b447b07d",
+            "id": "77317b6f-1d56-4c1b-a8c1-28ea2335d167",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "soldierWillemPrefab",
+            "x": 262,
+            "y": 458
         }
     ],
     "plainObjects": [
