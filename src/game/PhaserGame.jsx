@@ -49,13 +49,18 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     }, [showModal, ref])
 
     useEffect(() => {
-
-        EventBus.on('show-inventory-modal', (currentScene) => {
-            showModal("INVENTORY", currentScene)
-        });
-
-        return () => EventBus.removeListener('show-inventory-modal');
-    }, [showModal, ref])
+        const handleInventoryModal = (modalData) => {
+            console.log('PhaserGame received:', modalData);
+            if (modalData && modalData.phaserInstance) {
+                showModal("INVENTORY", modalData);
+            } else {
+                console.error('Invalid modal data received:', modalData);
+            }
+        };
+    
+        EventBus.on('show-inventory-modal', handleInventoryModal);
+        return () => EventBus.removeListener('show-inventory-modal', handleInventoryModal);
+    }, [showModal]);
 
     useEffect(() => {
 
@@ -80,6 +85,11 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
 });
 
 // Props definitions
+
 PhaserGame.propTypes = {
-    currentActiveScene: PropTypes.func
-}
+    currentActiveScene: PropTypes.func,
+    showModal: PropTypes.func.isRequired,
+    gameData: PropTypes.object
+};
+
+export default PhaserGame;

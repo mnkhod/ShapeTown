@@ -630,20 +630,6 @@
             "y": 736
         },
         {
-            "prefabId": "a69b4058-db0e-4e31-b023-568805698db8",
-            "id": "12c785bd-c529-4ec9-80f7-49dcb51467de",
-            "unlock": [
-                "x",
-                "y",
-                "player"
-            ],
-            "label": "itemHudPrefab",
-            "scope": "CLASS",
-            "player": "playerPrefab",
-            "x": 17.999990057997366,
-            "y": 714.0380149603411
-        },
-        {
             "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
             "id": "7b9adc16-f2ab-470c-9c10-934f5c83d56d",
             "unlock": [
@@ -808,15 +794,36 @@
             "y": 23
         },
         {
-            "prefabId": "f6afb4e2-b5ce-4266-8762-00a9b447b07d",
-            "id": "77317b6f-1d56-4c1b-a8c1-28ea2335d167",
+            "prefabId": "9be122bc-3a2e-4c06-a98e-b5754929a6d2",
+            "id": "e25d9758-788a-4801-b579-3e492d7162a2",
             "unlock": [
                 "x",
-                "y"
+                "y",
+                "scaleX",
+                "scaleY"
             ],
-            "label": "soldierWillemPrefab",
-            "x": 262,
-            "y": 458
+            "label": "newItemHudPrefab",
+            "scope": "CLASS",
+            "x": 0,
+            "y": 0,
+            "scaleX": 0.5,
+            "scaleY": 0.5
+        },
+        {
+            "prefabId": "d9cd0bbb-a8fc-4188-bf3b-a1043ac8444d",
+            "id": "f1922d9f-0808-404c-83ee-86ac042ac58e",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY"
+            ],
+            "label": "openInventory",
+            "scope": "CLASS",
+            "x": 267,
+            "y": 478,
+            "scaleX": 0.5,
+            "scaleY": 0.5
         }
     ],
     "plainObjects": [

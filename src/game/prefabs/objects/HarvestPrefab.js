@@ -22,7 +22,6 @@ constructor(scene, x, y, texture, frame) {
             this.physicsBody.enable = false;
         }
 
-        // Initialize additional properties
         this.previousState = null;
         this.tileId = null;
         /* END-USER-CTR-CODE */
@@ -59,7 +58,7 @@ constructor(scene, x, y, texture, frame) {
             }
 
             if (this.isReadyForHarvest) {
-                this.scene.itemHudPrefab.addItem("CARROT", "FarmingCropsVer2", 6, 1, true)
+                this.scene.newItemHudPrefab.addItem("CARROT", "FarmingCropsVer2", 6, 1, true)
                 this.destroy();
                 return;
             }
@@ -150,7 +149,7 @@ constructor(scene, x, y, texture, frame) {
     }
 
     changeState() {
-        let item = this.scene.itemHudPrefab.selectedItem
+        let item = this.scene.newItemHudPrefab.selectedItem
         if (item == null) {
             this.scene.alertPrefab.alert("No Selected Item")
             return;
@@ -183,7 +182,7 @@ constructor(scene, x, y, texture, frame) {
                     this.scene.alertPrefab.alert("Select Seed")
                     break;
                 }
-                this.scene.itemHudPrefab.useItem("CARROT_SEED")
+                this.scene.newItemHudPrefab.useItem("CARROT_SEED")
 
                 this.state = "PLANTED"
                 this.setupBasedOnState()

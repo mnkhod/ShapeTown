@@ -18,6 +18,7 @@ function App() {
     const [showInventory, setShowInventory] = useState(false);
     const [showTrader, setShowTrader] = useState(false);
     const [showQuest, setShowQuest] = useState(false);
+    const [phaserInstance, setPhaserInstance] = useState(null);
 
     const [gameData] = useState({});
 
@@ -30,24 +31,32 @@ function App() {
         console.log('Trading:', { fromAmount, fromToken, toToken });
     };
 
-    const showModal = (id, scene) => {
+    const showModal = (id, modalData) => {
+        console.log('App showModal received:', { id, modalData });
+    
         switch (id) {
             case "ACHIVEMENTS":
-                setShowAchievements(true)
+                setShowAchievements(true);
                 break;
             case "INVENTORY":
-                setShowInventory(true)
+                console.log('Inventory modal data:', modalData);
+                if (modalData && modalData.phaserInstance) {
+                    setPhaserInstance(modalData.phaserInstance);
+                    setShowInventory(true);
+                } else {
+                    console.error('Missing phaserInstance in modalData:', modalData);
+                }
                 break;
             case "MARKET":
-                setShowTrader(true)
+                setShowTrader(true);
                 break;
             case "QUEST":
-                setShowQuest(true)
+                setShowQuest(true);
                 break;
             default:
                 break;
         }
-    }
+    };
 
     useEffect(() => {
         getMetamaskAccount()
@@ -67,7 +76,12 @@ function App() {
 
     return (
         <div id="app">
-            <PhaserGame ref={phaserRef} currentActiveScene={currentScene} showModal={showModal} gameData={gameData} />
+            <PhaserGame 
+                ref={phaserRef} 
+                currentActiveScene={currentScene} 
+                showModal={showModal} 
+                gameData={gameData} 
+            />
             {showAchievements && (
                 <AchievementHUD
                     onClose={() => setShowAchievements(false)}
@@ -75,7 +89,11 @@ function App() {
             )}
             {showInventory && (
                 <InventoryHUD
-                    onClose={() => setShowInventory(false)}
+                    phaserInstance={phaserInstance}
+                    onClose={() => {
+                        setShowInventory(false);
+                        setPhaserInstance(null);
+                    }}
                 />
             )}
             {showTrader && (
@@ -89,7 +107,7 @@ function App() {
                <QuestComponent 
                    onClose={() => setShowQuest(false)}
                />
-           )}
+            )}
         </div>
     )
 }

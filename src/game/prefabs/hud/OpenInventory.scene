@@ -1,0 +1,86 @@
+{
+    "id": "d9cd0bbb-a8fc-4188-bf3b-a1043ac8444d",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "10fd96a7-cf12-42c9-ac88-39818026bed5",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "2fbb1f0a-123c-48d2-a128-b5f82f8268ab",
+                    "label": "openInventory",
+                    "texture": {
+                        "key": "OpenInventory"
+                    },
+                    "x": 24,
+                    "y": 24
+                },
+                {
+                    "type": "Image",
+                    "id": "9071639f-156b-44fc-a95f-17b219ded5ff",
+                    "label": "hoveredOpenInventory",
+                    "texture": {
+                        "key": "HoveredOpenInventory"
+                    },
+                    "x": 24,
+                    "y": 24,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "f0373346-e50f-4416-91c2-7af19855d93b",
+                    "label": "hotkey",
+                    "texture": {
+                        "key": "Hotkey"
+                    },
+                    "x": 47,
+                    "y": 49
+                }
+            ]
+        }
+    ],
+    "plainObjects": [
+        {
+            "id": "3a2f61c9-fb13-44c0-8429-4d057154ed56",
+            "type": "Keyboard.Key",
+            "label": "keyboard_key",
+            "keyCode": "TAB"
+        },
+        {
+            "id": "528b2079-efcf-4b07-a6f5-6a10c881a679",
+            "type": "Keyboard.Key",
+            "label": "keyboard_key_1",
+            "keyCode": "ESC"
+        }
+    ],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    },
+    "prefabProperties": [
+        {
+            "name": "player",
+            "label": "Player",
+            "tooltip": "",
+            "defValue": "",
+            "customDefinition": false,
+            "type": {
+                "id": "object-var",
+                "expressionType": "Phaser.GameObjects.GameObject"
+            }
+        }
+    ]
+}

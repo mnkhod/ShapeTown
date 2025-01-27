@@ -1,0 +1,558 @@
+{
+    "id": "9be122bc-3a2e-4c06-a98e-b5754929a6d2",
+    "sceneType": "PREFAB",
+    "settings": {
+        "snapEnabled": true,
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "c5a4fc72-2015-4507-ada4-fe1c6b43965a",
+            "label": "container_1",
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "fc8814df-d662-421b-9e6c-b7fccafea526",
+                    "label": "Inventory_background",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "InGameInventoryBackground"
+                    },
+                    "x": 310.5,
+                    "y": 49.5
+                },
+                {
+                    "type": "Container",
+                    "id": "e291e1da-5767-4d60-97dc-63c089deb466",
+                    "label": "ItemBox1",
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "c559974f-c983-4a6d-84e3-d37db2d477cf",
+                            "label": "Slot_1",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "InactiveSlot1"
+                            },
+                            "x": 48,
+                            "y": 53
+                        },
+                        {
+                            "type": "Image",
+                            "id": "edadcefd-8955-4a64-8d00-bf558f745bb2",
+                            "label": "ActiveSlot_1",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "ActiveSlot1"
+                            },
+                            "x": 48,
+                            "y": 53,
+                            "visible": false
+                        },
+                        {
+                            "type": "Sprite",
+                            "id": "01aac818-f3fc-4fd3-b31e-aa0f71520730",
+                            "label": "item1",
+                            "scope": "CLASS",
+                            "texture": {},
+                            "x": 48,
+                            "y": 54
+                        },
+                        {
+                            "type": "Text",
+                            "id": "f12e6e65-bd6a-4e4e-aa37-45fc0647cd92",
+                            "label": "text1",
+                            "scope": "CLASS",
+                            "x": 65,
+                            "y": 62,
+                            "scaleX": 1.5,
+                            "scaleY": 1.5,
+                            "text": "0\n",
+                            "align": "right",
+                            "fontFamily": "Little Malio 8-Bit",
+                            "fontSize": "10px",
+                            "color": "#000"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "c6ba3786-6262-4d42-a62f-eee7b183e349",
+                    "label": "ItemBox2",
+                    "x": -888.3583374023438,
+                    "y": -33.3109245300293,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "d498bea4-d061-4fda-88cc-ec4fe330af89",
+                            "label": "Slot_2",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "InactiveSlot2"
+                            },
+                            "x": 1011,
+                            "y": 86
+                        },
+                        {
+                            "type": "Image",
+                            "id": "742cbcba-906a-427f-8e82-b70fb89f06e7",
+                            "label": "ActiveSlot_2",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "ActiveSlot2"
+                            },
+                            "x": 1011,
+                            "y": 86,
+                            "visible": false
+                        },
+                        {
+                            "type": "Sprite",
+                            "id": "7ae45aac-a57b-4c00-876f-50881ecf61c6",
+                            "label": "item2",
+                            "scope": "CLASS",
+                            "texture": {},
+                            "x": 1012,
+                            "y": 87
+                        },
+                        {
+                            "type": "Text",
+                            "id": "0ebed176-414c-4a63-82a4-9c354e606383",
+                            "label": "text2",
+                            "scope": "CLASS",
+                            "x": 1028,
+                            "y": 96,
+                            "scaleX": 1.5,
+                            "scaleY": 1.5,
+                            "text": "0\n",
+                            "align": "right",
+                            "fontFamily": "Little Malio 8-Bit",
+                            "fontSize": "10px",
+                            "color": "#000"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "d5689307-4932-4670-bee2-8e26fd9e5c2d",
+                    "label": "ItemBox3",
+                    "x": -888.3583374023438,
+                    "y": -33.3109245300293,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "05089fad-25d8-427d-920f-ef98d609d072",
+                            "label": "Slot_3",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "InactiveSlot3"
+                            },
+                            "x": 1086,
+                            "y": 86
+                        },
+                        {
+                            "type": "Image",
+                            "id": "1f7782ae-458b-45fc-b2e4-975d4c1a2e13",
+                            "label": "ActiveSlot_3",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "ActiveSlot3"
+                            },
+                            "x": 1086,
+                            "y": 86,
+                            "visible": false
+                        },
+                        {
+                            "type": "Sprite",
+                            "id": "a05f074b-2744-451a-9657-fe724a8e78ce",
+                            "label": "item3",
+                            "scope": "CLASS",
+                            "texture": {},
+                            "x": 1087,
+                            "y": 87
+                        },
+                        {
+                            "type": "Text",
+                            "id": "f6b2d001-79e3-4768-88be-633939dcf14d",
+                            "label": "text3",
+                            "scope": "CLASS",
+                            "x": 1103,
+                            "y": 96,
+                            "scaleX": 1.5,
+                            "scaleY": 1.5,
+                            "text": "0\n",
+                            "align": "right",
+                            "fontFamily": "Little Malio 8-Bit",
+                            "fontSize": "10px",
+                            "color": "#000"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "4d5a86c7-ae84-414c-acf9-f250020ddcec",
+                    "label": "ItemBox4",
+                    "x": -888.3583374023438,
+                    "y": -33.3109245300293,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "ef4735c5-70d3-4bc2-871c-872617bfb3bc",
+                            "label": "Slot_4",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "InactiveSlot4"
+                            },
+                            "x": 1161,
+                            "y": 86
+                        },
+                        {
+                            "type": "Image",
+                            "id": "288b9e20-0245-455d-8a8f-425293312ffe",
+                            "label": "ActiveSlot_4",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "ActiveSlot4"
+                            },
+                            "x": 1161,
+                            "y": 86,
+                            "visible": false
+                        },
+                        {
+                            "type": "Sprite",
+                            "id": "2103dc53-8bd5-4abe-b220-6d9dac793a68",
+                            "label": "item4",
+                            "scope": "CLASS",
+                            "texture": {},
+                            "x": 1162,
+                            "y": 88
+                        },
+                        {
+                            "type": "Text",
+                            "id": "c1917b21-a033-4eff-9c5b-0379ecdf3b6a",
+                            "label": "text4",
+                            "scope": "CLASS",
+                            "x": 1178,
+                            "y": 96,
+                            "scaleX": 1.5,
+                            "scaleY": 1.5,
+                            "text": "0\n",
+                            "align": "right",
+                            "fontFamily": "Little Malio 8-Bit",
+                            "fontSize": "10px",
+                            "color": "#000"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "4b752b81-2976-48be-a003-6767728297ac",
+                    "label": "ItemBox5",
+                    "x": -888.3583374023438,
+                    "y": -33.3109245300293,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "81278610-79b6-4003-b17a-d3bbe10d7e2a",
+                            "label": "Slot_5",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "InactiveSlot5"
+                            },
+                            "x": 1236,
+                            "y": 86
+                        },
+                        {
+                            "type": "Image",
+                            "id": "3c5e7996-91ee-4d4f-b993-fc0fb71d51ef",
+                            "label": "ActiveSlot_5",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "ActiveSlot5"
+                            },
+                            "x": 1236,
+                            "y": 86,
+                            "visible": false
+                        },
+                        {
+                            "type": "Sprite",
+                            "id": "556dd44e-34d4-4d12-a3f2-d73c8ae47ab4",
+                            "label": "item5",
+                            "scope": "CLASS",
+                            "texture": {},
+                            "x": 1237,
+                            "y": 88
+                        },
+                        {
+                            "type": "Text",
+                            "id": "a98548d1-8d58-440f-8958-2604ccbac4e9",
+                            "label": "text5",
+                            "scope": "CLASS",
+                            "x": 1252,
+                            "y": 96,
+                            "scaleX": 1.5,
+                            "scaleY": 1.5,
+                            "text": "0\n",
+                            "align": "right",
+                            "fontFamily": "Little Malio 8-Bit",
+                            "fontSize": "10px",
+                            "color": "#000"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "4b85ea1f-3528-4a83-a0e8-0408f641879d",
+                    "label": "ItemBox6",
+                    "x": -888.3583374023438,
+                    "y": -33.3109245300293,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "9af8cee7-2b9d-4ccd-b8e3-f2a9613acb00",
+                            "label": "Slot_6",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "InactiveSlot6"
+                            },
+                            "x": 1311,
+                            "y": 86
+                        },
+                        {
+                            "type": "Image",
+                            "id": "f071c92b-dfa8-4a07-b9c2-7639d4f62342",
+                            "label": "ActiveSlot_6",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "ActiveSlot6"
+                            },
+                            "x": 1311,
+                            "y": 86,
+                            "visible": false
+                        },
+                        {
+                            "type": "Sprite",
+                            "id": "ed1cb41c-9152-417c-8b46-e3044b8ca206",
+                            "label": "item6",
+                            "scope": "CLASS",
+                            "texture": {},
+                            "x": 1312,
+                            "y": 88
+                        },
+                        {
+                            "type": "Text",
+                            "id": "09a26d0e-945b-4bac-bff1-06a28fd362e8",
+                            "label": "text6",
+                            "scope": "CLASS",
+                            "x": 1328,
+                            "y": 96,
+                            "scaleX": 1.5,
+                            "scaleY": 1.5,
+                            "text": "0\n",
+                            "align": "right",
+                            "fontFamily": "Little Malio 8-Bit",
+                            "fontSize": "10px",
+                            "color": "#000"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "71226f5e-2fa9-4902-87ed-ad74f1181d1c",
+                    "label": "ItemBox7",
+                    "x": -888.3583374023438,
+                    "y": -33.3109245300293,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "3b9dbfe6-ec48-4ead-96ba-5c13fdf74c60",
+                            "label": "Slot_7",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "InactiveSlot7"
+                            },
+                            "x": 1386,
+                            "y": 86
+                        },
+                        {
+                            "type": "Image",
+                            "id": "3789636c-b101-450c-a111-4e447fb444b3",
+                            "label": "ActiveSlot_7",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "ActiveSlot7"
+                            },
+                            "x": 1386,
+                            "y": 86,
+                            "visible": false
+                        },
+                        {
+                            "type": "Sprite",
+                            "id": "bea27bfc-c610-4bba-aa51-2d35d0930df2",
+                            "label": "item7",
+                            "scope": "CLASS",
+                            "texture": {},
+                            "x": 1387,
+                            "y": 88
+                        },
+                        {
+                            "type": "Text",
+                            "id": "ea3e35bb-bcbf-44d6-b7f9-f37972dd9674",
+                            "label": "text7",
+                            "scope": "CLASS",
+                            "x": 1402,
+                            "y": 96,
+                            "scaleX": 1.5,
+                            "scaleY": 1.5,
+                            "text": "0\n",
+                            "align": "right",
+                            "fontFamily": "Little Malio 8-Bit",
+                            "fontSize": "10px",
+                            "color": "#000"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "a6d84470-e5cd-4a5f-a133-2ea0f040e308",
+                    "label": "ItemBox8",
+                    "x": -883.4107055664062,
+                    "y": 222.31504821777344,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "7cf22efd-e288-476c-9189-d6a8e9a3356c",
+                            "label": "Slot_8",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "InactiveSlot8"
+                            },
+                            "x": 1456,
+                            "y": -170
+                        },
+                        {
+                            "type": "Image",
+                            "id": "a5385b06-5be6-440a-bfc8-226c78ba30ea",
+                            "label": "ActiveSlot_8",
+                            "scope": "CLASS",
+                            "texture": {
+                                "key": "ActiveSlot8"
+                            },
+                            "x": 1456,
+                            "y": -170,
+                            "visible": false
+                        },
+                        {
+                            "type": "Sprite",
+                            "id": "34601ae9-d31b-4a2d-9750-ad74c458b786",
+                            "label": "item8",
+                            "scope": "CLASS",
+                            "texture": {},
+                            "x": 1457,
+                            "y": -168
+                        },
+                        {
+                            "type": "Text",
+                            "id": "e7319ac5-f096-4a05-baa1-f915e9faa8ed",
+                            "label": "text8",
+                            "scope": "CLASS",
+                            "x": 1473,
+                            "y": -160,
+                            "scaleX": 1.5,
+                            "scaleY": 1.5,
+                            "text": "0\n",
+                            "align": "right",
+                            "fontFamily": "Little Malio 8-Bit",
+                            "fontSize": "10px",
+                            "color": "#000"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    },
+    "lists": [
+        {
+            "id": "33c97158-17f2-4cbc-846d-b9eaaef3ae30",
+            "label": "items",
+            "objectIds": [
+                "01aac818-f3fc-4fd3-b31e-aa0f71520730",
+                "7ae45aac-a57b-4c00-876f-50881ecf61c6",
+                "a05f074b-2744-451a-9657-fe724a8e78ce",
+                "2103dc53-8bd5-4abe-b220-6d9dac793a68",
+                "556dd44e-34d4-4d12-a3f2-d73c8ae47ab4",
+                "ed1cb41c-9152-417c-8b46-e3044b8ca206",
+                "bea27bfc-c610-4bba-aa51-2d35d0930df2",
+                "34601ae9-d31b-4a2d-9750-ad74c458b786"
+            ]
+        },
+        {
+            "id": "d7cbca6b-009d-49a4-80dd-1ff3c361a3dc",
+            "label": "itemCounters",
+            "objectIds": [
+                "f12e6e65-bd6a-4e4e-aa37-45fc0647cd92",
+                "0ebed176-414c-4a63-82a4-9c354e606383",
+                "f6b2d001-79e3-4768-88be-633939dcf14d",
+                "c1917b21-a033-4eff-9c5b-0379ecdf3b6a",
+                "a98548d1-8d58-440f-8958-2604ccbac4e9",
+                "09a26d0e-945b-4bac-bff1-06a28fd362e8",
+                "ea3e35bb-bcbf-44d6-b7f9-f37972dd9674",
+                "e7319ac5-f096-4a05-baa1-f915e9faa8ed"
+            ]
+        },
+        {
+            "id": "1a9a33c9-9451-4b84-980e-01ad4d33980e",
+            "label": "activeItemSlots",
+            "objectIds": [
+                "edadcefd-8955-4a64-8d00-bf558f745bb2",
+                "742cbcba-906a-427f-8e82-b70fb89f06e7",
+                "1f7782ae-458b-45fc-b2e4-975d4c1a2e13",
+                "288b9e20-0245-455d-8a8f-425293312ffe",
+                "3c5e7996-91ee-4d4f-b993-fc0fb71d51ef",
+                "f071c92b-dfa8-4a07-b9c2-7639d4f62342",
+                "3789636c-b101-450c-a111-4e447fb444b3",
+                "a5385b06-5be6-440a-bfc8-226c78ba30ea"
+            ]
+        },
+        {
+            "id": "0ec43414-8bc8-450b-907f-fcb4476e90a5",
+            "label": "passiveItemSlots",
+            "objectIds": [
+                "c559974f-c983-4a6d-84e3-d37db2d477cf",
+                "d498bea4-d061-4fda-88cc-ec4fe330af89",
+                "05089fad-25d8-427d-920f-ef98d609d072",
+                "ef4735c5-70d3-4bc2-871c-872617bfb3bc",
+                "81278610-79b6-4003-b17a-d3bbe10d7e2a",
+                "9af8cee7-2b9d-4ccd-b8e3-f2a9613acb00",
+                "3b9dbfe6-ec48-4ead-96ba-5c13fdf74c60",
+                "7cf22efd-e288-476c-9189-d6a8e9a3356c"
+            ]
+        }
+    ],
+    "prefabProperties": [
+        {
+            "name": "player",
+            "label": "Player",
+            "tooltip": "",
+            "defValue": "",
+            "customDefinition": false,
+            "type": {
+                "id": "object-var",
+                "expressionType": "Phaser.GameObjects.GameObject"
+            }
+        }
+    ]
+}

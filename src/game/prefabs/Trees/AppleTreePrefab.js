@@ -128,7 +128,7 @@ export default class AppleTreePrefab extends Phaser.GameObjects.Image {
 				return;
 			}
 
-			this.scene.itemHudPrefab.addItem("APPLE","AppleItem",0,1,true)
+			this.scene.newItemHudPrefab.addItem("APPLE","AppleItem",0,1,true)
 
             this.isHarvastable = false
 			this.preFX.clear();

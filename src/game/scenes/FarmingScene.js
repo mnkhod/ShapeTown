@@ -5,10 +5,10 @@
 
 import PlayerPrefab from "../prefabs/PlayerPrefab";
 import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
-import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
+import NewItemHudPrefab from "../../../NewItemHudPrefab";
 /* START-USER-IMPORTS */
 import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
 import { EventBus } from '../EventBus';
@@ -125,10 +125,6 @@ export default class FarmingScene extends Phaser.Scene {
 		const questBookPrefab = new QuestBookPrefab(this, 32, 736);
 		this.add.existing(questBookPrefab);
 
-		// itemHudPrefab
-		const itemHudPrefab = new ItemHudPrefab(this, 624.0380088210627, 714.0380069435164);
-		this.add.existing(itemHudPrefab);
-
 		// messagePrefab
 		const messagePrefab = new MessagePrefab(this, 723.2936950522075, -0.19542285335897702);
 		this.add.existing(messagePrefab);
@@ -141,8 +137,11 @@ export default class FarmingScene extends Phaser.Scene {
 		const profilePrefab = new ProfilePrefab(this, 0, 0);
 		this.add.existing(profilePrefab);
 
-		// itemHudPrefab (prefab fields)
-		itemHudPrefab.player = playerPrefab;
+		// newItemHudPrefab
+		const newItemHudPrefab = new NewItemHudPrefab(this, 432, 578);
+		this.add.existing(newItemHudPrefab);
+		newItemHudPrefab.scaleX = 0.5;
+		newItemHudPrefab.scaleY = 0.5;
 
 		this.render_BackGround_1 = render_BackGround_1;
 		this.render_RoadStone_JustRender__1 = render_RoadStone_JustRender__1;
@@ -164,10 +163,10 @@ export default class FarmingScene extends Phaser.Scene {
 		this.sceneTilePrev = sceneTilePrev;
 		this.sceneTileNext = sceneTileNext;
 		this.questBookPrefab = questBookPrefab;
-		this.itemHudPrefab = itemHudPrefab;
 		this.messagePrefab = messagePrefab;
 		this.alertPrefab = alertPrefab;
 		this.profilePrefab = profilePrefab;
+		this.newItemHudPrefab = newItemHudPrefab;
 		this.farmingMap = farmingMap;
 
 		this.events.emit("scene-awake");
@@ -213,14 +212,14 @@ export default class FarmingScene extends Phaser.Scene {
 	sceneTileNext;
 	/** @type {QuestBookPrefab} */
 	questBookPrefab;
-	/** @type {ItemHudPrefab} */
-	itemHudPrefab;
 	/** @type {MessagePrefab} */
 	messagePrefab;
 	/** @type {AlertPrefab} */
 	alertPrefab;
 	/** @type {ProfilePrefab} */
 	profilePrefab;
+	/** @type {NewItemHudPrefab} */
+	newItemHudPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	farmingMap;
 
@@ -228,16 +227,16 @@ export default class FarmingScene extends Phaser.Scene {
 
 	// Write your code here
 	setupStartingItems() {
-	    this.itemHudPrefab.visible = true;
+	    this.newItemHudPrefab.visible = true;
 	    this.questBookPrefab.visible = true;
 	    this.profilePrefab.visible = true;
 		this.profilePrefab.setDepth(90); 
 
-	    this.itemHudPrefab.addItem("WATERING_CAN", "IconBaseTools", 0);
-	    this.itemHudPrefab.addItem("HOE", "IconBaseTools", 1);
-	    this.itemHudPrefab.addItem("PICK_AXE", "IconBaseTools", 2);
+	    this.newItemHudPrefab.addItem("WATERING_CAN", "IconBaseTools", 0);
+	    this.newItemHudPrefab.addItem("HOE", "IconBaseTools", 1);
+	    this.newItemHudPrefab.addItem("PICK_AXE", "IconBaseTools", 2);
 
-	    this.itemHudPrefab.addItem("CARROT_SEED", "SeedBag", 0, 5);
+	    this.newItemHudPrefab.addItem("CARROT_SEED", "SeedBag", 0, 5);
 	}
 	setupLayerDepths() {
 	    this.render_BackGround_1.setDepth(1);
@@ -263,7 +262,7 @@ export default class FarmingScene extends Phaser.Scene {
 	    this.playerPrefab.setDepth(80);
 
 	    this.questBookPrefab?.setDepth(90);
-	    this.itemHudPrefab?.setDepth(90);
+	    this.newItemHudPrefab?.setDepth(90);
 	    this.messagePrefab?.setDepth(90);
 	    this.alertPrefab?.setDepth(90);
 		this.profilePrefab?.setDepth(90);
@@ -302,29 +301,32 @@ export default class FarmingScene extends Phaser.Scene {
     	this.profilePrefab.visible = true;
     	this.profilePrefab.setPosition(34, 42);
     	this.profilePrefab.setDepth(90);
-        this.itemHudPrefab.visible = true;
         this.questBookPrefab.visible = true;
+        this.newItemHudPrefab.visible = true;
 	  	this.setupLayerDepths();
 		this.time.delayedCall(100, () => {
-    	    this.itemHudPrefab.itemBoxs.map((box, index) => {
+    	if (this.newItemHudPrefab && this.newItemHudPrefab.itemBoxs) {  // Add check
+    	    this.newItemHudPrefab.itemBoxs.map((box, index) => {
     	        box.setInteractive({ useHandCursor: true });
     	        box.on('pointerdown', function (_pointer) {
-    	            let otherBoxes = this.itemHudPrefab.itemBoxs.filter((b) => b != box);
+    	            let otherBoxes = this.newItemHudPrefab.itemBoxs.filter((b) => b != box);
 
     	            if(box.frame.name == 0){
     	                otherBoxes.map((i) => i.setTexture("HudItemSlot", 0));
     	                box.setTexture("HudItemSlot", 1);
-    	                this.itemHudPrefab.selectedItem = this.itemHudPrefab.itemData[index];
-    	                this.itemHudPrefab.activeIndex = index;
+    	                this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[index];
+    	                this.newItemHudPrefab.activeIndex = index;
     	            }
     	        }, this);
     	    });
 
-    	    this.itemHudPrefab.addItem("WATERING_CAN", "IconBaseTools", 0);
-    	    this.itemHudPrefab.addItem("HOE", "IconBaseTools", 1);
-    	    this.itemHudPrefab.addItem("PICK_AXE", "IconBaseTools", 2);
-    	    this.itemHudPrefab.addItem("CARROT_SEED", "SeedBag", 0, 5);
-    	}, {}, this);
+    	    // Add items after setup
+    	    this.newItemHudPrefab.addItem("WATERING_CAN", "IconBaseTools", 0);
+    	    this.newItemHudPrefab.addItem("HOE", "IconBaseTools", 1);
+    	    this.newItemHudPrefab.addItem("PICK_AXE", "IconBaseTools", 2);
+    	    this.newItemHudPrefab.addItem("CARROT_SEED", "SeedBag", 0, 5);
+    	}
+		}, {}, this);
 
     	this.physics.add.collider(this.playerPrefab, this.merchant_shopStand_1);
     	this.merchant_shopStand_1.setCollisionBetween(0, 10000);

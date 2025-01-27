@@ -9,6 +9,46 @@
                 "key": "8-bit Arcade In"
             },
             {
+                "url": "assets/hud/Inventory/ActiveSlot1.png",
+                "type": "image",
+                "key": "ActiveSlot1"
+            },
+            {
+                "url": "assets/hud/Inventory/ActiveSlot2.png",
+                "type": "image",
+                "key": "ActiveSlot2"
+            },
+            {
+                "url": "assets/hud/Inventory/ActiveSlot3.png",
+                "type": "image",
+                "key": "ActiveSlot3"
+            },
+            {
+                "url": "assets/hud/Inventory/ActiveSlot4.png",
+                "type": "image",
+                "key": "ActiveSlot4"
+            },
+            {
+                "url": "assets/hud/Inventory/ActiveSlot5.png",
+                "type": "image",
+                "key": "ActiveSlot5"
+            },
+            {
+                "url": "assets/hud/Inventory/ActiveSlot6.png",
+                "type": "image",
+                "key": "ActiveSlot6"
+            },
+            {
+                "url": "assets/hud/Inventory/ActiveSlot7.png",
+                "type": "image",
+                "key": "ActiveSlot7"
+            },
+            {
+                "url": "assets/hud/Inventory/ActiveSlot8.png",
+                "type": "image",
+                "key": "ActiveSlot8"
+            },
+            {
                 "url": "assets/animations.json",
                 "type": "animation",
                 "key": "animations"
@@ -502,6 +542,16 @@
                 "key": "GroundTilestSoil"
             },
             {
+                "url": "assets/hud/Inventory/Hotkey.png",
+                "type": "image",
+                "key": "Hotkey"
+            },
+            {
+                "url": "assets/hud/Inventory/HoveredOpenInventory.png",
+                "type": "image",
+                "key": "HoveredOpenInventory"
+            },
+            {
                 "url": "assets/hud/HudItemSlot.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -526,6 +576,51 @@
                 },
                 "type": "spritesheet",
                 "key": "IconBaseTools"
+            },
+            {
+                "url": "assets/hud/Inventory/InactiveSlot1.png",
+                "type": "image",
+                "key": "InactiveSlot1"
+            },
+            {
+                "url": "assets/hud/Inventory/InactiveSlot2.png",
+                "type": "image",
+                "key": "InactiveSlot2"
+            },
+            {
+                "url": "assets/hud/Inventory/InactiveSlot3.png",
+                "type": "image",
+                "key": "InactiveSlot3"
+            },
+            {
+                "url": "assets/hud/Inventory/InactiveSlot4.png",
+                "type": "image",
+                "key": "InactiveSlot4"
+            },
+            {
+                "url": "assets/hud/Inventory/InactiveSlot5.png",
+                "type": "image",
+                "key": "InactiveSlot5"
+            },
+            {
+                "url": "assets/hud/Inventory/InactiveSlot6.png",
+                "type": "image",
+                "key": "InactiveSlot6"
+            },
+            {
+                "url": "assets/hud/Inventory/InactiveSlot7.png",
+                "type": "image",
+                "key": "InactiveSlot7"
+            },
+            {
+                "url": "assets/hud/Inventory/InactiveSlot8.png",
+                "type": "image",
+                "key": "InactiveSlot8"
+            },
+            {
+                "url": "assets/hud/Inventory/InGameInventoryBackground.png",
+                "type": "image",
+                "key": "InGameInventoryBackground"
             },
             {
                 "url": "assets/hud/ItemSlot.png",
@@ -773,6 +868,11 @@
                 "url": "assets/files/OldManJackName.png",
                 "type": "image",
                 "key": "OldManJackName"
+            },
+            {
+                "url": "assets/hud/Inventory/OpenInventory.png",
+                "type": "image",
+                "key": "OpenInventory"
             },
             {
                 "url": "assets/player/player.png",
@@ -1186,7 +1286,6 @@
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
         "version": 2,
-        "showAllFilesInBlocks": false,
-        "visible": true
+        "showAllFilesInBlocks": false
     }
 }

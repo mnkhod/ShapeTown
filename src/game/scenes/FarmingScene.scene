@@ -661,20 +661,6 @@
             "y": 736
         },
         {
-            "prefabId": "a69b4058-db0e-4e31-b023-568805698db8",
-            "id": "bbe02a17-f6f3-41ca-a10f-e283c93fc183",
-            "unlock": [
-                "x",
-                "y",
-                "player"
-            ],
-            "label": "itemHudPrefab",
-            "scope": "CLASS",
-            "player": "playerPrefab",
-            "x": 624.0380088210627,
-            "y": 714.0380069435164
-        },
-        {
             "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
             "id": "26d701ed-d6c1-47bf-a8c2-1c5143c15389",
             "unlock": [
@@ -709,6 +695,22 @@
             "scope": "CLASS",
             "x": 0,
             "y": 0
+        },
+        {
+            "prefabId": "9be122bc-3a2e-4c06-a98e-b5754929a6d2",
+            "id": "68739b97-e093-45a4-b40f-aba540aab32f",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY"
+            ],
+            "label": "newItemHudPrefab",
+            "scope": "CLASS",
+            "x": 432,
+            "y": 578,
+            "scaleX": 0.5,
+            "scaleY": 0.5
         }
     ],
     "plainObjects": [

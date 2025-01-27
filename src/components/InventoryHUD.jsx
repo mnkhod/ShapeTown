@@ -9,10 +9,20 @@ const InventorySlot = ({
   isQuickAccess = false,
   isActive = false
 }) => {
-  const handleDragOver = (e) => e.preventDefault();
+  const [isDragOver, setIsDragOver] = useState(false);
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragOver(false);
+  };
 
   const handleDrop = (e) => {
     e.preventDefault();
+    setIsDragOver(false);
     const fromData = JSON.parse(e.dataTransfer.getData('text/plain'));
     onItemDrop(fromData, slotIndex);
   };
@@ -20,19 +30,21 @@ const InventorySlot = ({
   const handleDragStart = (e) => {
     e.dataTransfer.setData('text/plain', JSON.stringify({
       index: slotIndex,
-      isQuickAccess
+      isQuickAccess,
+      item
     }));
   };
 
   return (
     <div 
-      className="relative cursor-pointer"
+      className={`relative cursor-pointer ${isDragOver ? 'bg-gray-500/20' : ''}`}
       style={{
         width: '50px',
         height: '50px',
       }}
       onClick={() => onItemClick(item, slotIndex)}
       onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
       onDrop={handleDrop}
       draggable={!!item}
       onDragStart={handleDragStart}
@@ -40,10 +52,14 @@ const InventorySlot = ({
       {item && (
         <div className="absolute inset-0 flex items-center justify-center">
           <img 
-            src={item.icon} 
+            src={`/assets/${item.icon}.png`}
             alt={item.name}
-            className="w-[48px] h-[48px] "
-            style={{ imageRendering: 'pixelated' }}
+            className="w-[32px] h-[48px]"
+            style={{ 
+              imageRendering: 'pixelated',
+              objectFit: 'none',
+              objectPosition: `${item.frame * -32}px 10px`
+            }}
           />
           {item.quantity > 1 && (
             <span className="absolute bottom-1 right-1 text-[10px] text-white">
@@ -62,69 +78,139 @@ const PhaserInventory = ({ onClose, phaserInstance }) => {
   const [activeQuickSlot, setActiveQuickSlot] = useState(0);
 
   useEffect(() => {
-    if (phaserInstance) {
-      const phaserItems = phaserInstance.itemData.map((key, index) => {
-        if (!key) return null;
-        return {
-          id: key,
-          icon: phaserInstance.items[index].texture.key,
-          textureId: phaserInstance.items[index].frame.name,
-          quantity: parseInt(phaserInstance.itemCounters[index].text),
-          name: key
-        };
-      });
-      setQuickItems(phaserItems);
-    }
+    if (!phaserInstance) return;
+
+    const mappedQuickItems = phaserInstance.itemData.map((key, index) => {
+      if (!key || !phaserInstance.items?.[index]?.visible) return null;
+
+      const phaserItem = phaserInstance.items[index];
+      return {
+        id: key,
+        icon: phaserItem.texture.key,
+        frame: phaserItem.frame.name,
+        textureKey: phaserItem.texture.key,
+        frameName: phaserItem.frame.name,
+        quantity: parseInt(phaserInstance.itemCounters[index].text) || 1,
+        name: key
+      };
+    });
+
+    const mappedMainItems = phaserInstance.mainInventoryData?.map((item) => {
+      if (!item) return null;
+      return {
+        ...item,
+        textureKey: item.textureKey || item.icon,
+        frameName: item.frameName || item.frame
+      };
+    }) || Array(24).fill(null);
+
+    setQuickItems(mappedQuickItems);
+    setMainItems(mappedMainItems);
   }, [phaserInstance]);
 
   const handleItemClick = (item, slotIndex, isQuickAccess) => {
-    if (isQuickAccess) {
-      setActiveQuickSlot(slotIndex);
-      if (phaserInstance) {
-        phaserInstance.activeIndex = slotIndex;
-        phaserInstance.selectedItem = item?.id || null;
-      }
+    if (!isQuickAccess || !phaserInstance) return;
+
+    const quickIndex = slotIndex - 24;
+    setActiveQuickSlot(quickIndex);
+    phaserInstance.activeIndex = quickIndex;
+    phaserInstance.selectedItem = item?.id || null;
+
+    if (phaserInstance.activeItemSlots) {
+      phaserInstance.activeItemSlots.forEach((slot, i) => {
+        if (slot) {
+          slot.visible = i === quickIndex;
+        }
+      });
     }
   };
 
   const handleItemDrop = (fromData, toIndex) => {
-    const { index: fromIndex, isQuickAccess: fromQuickAccess } = fromData;
+    const { index: fromIndex, isQuickAccess: fromQuickAccess, item: draggedItem } = fromData;
     
-    if (fromQuickAccess) {
-      const newQuickItems = [...quickItems];
-      const fromItem = newQuickItems[fromIndex];
+    const isToQuickAccess = toIndex >= 24;
+    const toActualIndex = isToQuickAccess ? toIndex - 24 : toIndex;
+    const fromActualIndex = fromQuickAccess ? fromIndex - 24 : fromIndex;
+    
+    const newQuickItems = [...quickItems];
+    const newMainItems = [...mainItems];
+    
+    const targetItem = isToQuickAccess ? quickItems[toActualIndex] : mainItems[toActualIndex];
+    
+    if (targetItem && draggedItem && 
+        targetItem.id === draggedItem.id && 
+        targetItem.icon === draggedItem.icon &&
+        targetItem.frame === draggedItem.frame) {
+      const combinedItem = {
+        ...targetItem,
+        quantity: (targetItem.quantity || 1) + (draggedItem.quantity || 1)
+      };
       
-      if (toIndex >= 24) {
-        const toItem = quickItems[toIndex - 24];
-        newQuickItems[toIndex - 24] = fromItem;
-        newQuickItems[fromIndex] = toItem;
-        setQuickItems(newQuickItems);
+      if (isToQuickAccess) {
+        newQuickItems[toActualIndex] = combinedItem;
       } else {
-        // Drop to main inventory
-        const newMainItems = [...mainItems];
-        const toItem = mainItems[toIndex];
-        newMainItems[toIndex] = fromItem;
-        newQuickItems[fromIndex] = toItem;
-        setMainItems(newMainItems);
-        setQuickItems(newQuickItems);
+        newMainItems[toActualIndex] = combinedItem;
+      }
+      
+      if (fromQuickAccess) {
+        newQuickItems[fromActualIndex] = null;
+      } else {
+        newMainItems[fromActualIndex] = null;
       }
     } else {
-      const newMainItems = [...mainItems];
-      const fromItem = newMainItems[fromIndex];
-      
-      if (toIndex >= 24) {
-        const newQuickItems = [...quickItems];
-        const toItem = quickItems[toIndex - 24];
-        newQuickItems[toIndex - 24] = fromItem;
-        newMainItems[fromIndex] = toItem;
-        setQuickItems(newQuickItems);
-        setMainItems(newMainItems);
+      if (fromQuickAccess) {
+        newQuickItems[fromActualIndex] = targetItem;
+        if (isToQuickAccess) {
+          newQuickItems[toActualIndex] = draggedItem;
+        } else {
+          newMainItems[toActualIndex] = draggedItem;
+        }
       } else {
-        const toItem = mainItems[toIndex];
-        newMainItems[toIndex] = fromItem;
-        newMainItems[fromIndex] = toItem;
-        setMainItems(newMainItems);
+        newMainItems[fromActualIndex] = targetItem;
+        if (isToQuickAccess) {
+          newQuickItems[toActualIndex] = draggedItem;
+        } else {
+          newMainItems[toActualIndex] = draggedItem;
+        }
       }
+    }
+
+    setMainItems(newMainItems);
+    setQuickItems(newQuickItems);
+
+    if (phaserInstance && phaserInstance.items) {
+      phaserInstance.itemData = newQuickItems.map(item => item?.id || null);
+      phaserInstance.mainInventoryData = newMainItems.map(item => item ? {
+        id: item.id,
+        icon: item.icon,
+        frame: item.frame,
+        textureKey: item.textureKey || item.icon,
+        frameName: item.frameName || item.frame,
+        quantity: item.quantity,
+        name: item.name
+      } : null);
+      
+      newQuickItems.forEach((item, index) => {
+        if (!phaserInstance.items[index]) return;
+        
+        if (item) {
+          phaserInstance.items[index].visible = true;
+          phaserInstance.items[index].setTexture(item.textureKey || item.icon);
+          if (item.frameName !== undefined) {
+            phaserInstance.items[index].setFrame(item.frameName);
+          }
+          
+          if (phaserInstance.itemCounters?.[index]) {
+            phaserInstance.itemCounters[index].visible = true;
+            phaserInstance.itemCounters[index].text = item.quantity.toString();
+          }
+        } else {
+          phaserInstance.items[index].visible = false;
+          if (phaserInstance.itemCounters?.[index]) {
+            phaserInstance.itemCounters[index].visible = false;
+          }
+        }
+      });
     }
   };
 
@@ -194,7 +280,7 @@ const PhaserInventory = ({ onClose, phaserInstance }) => {
             }}
           />
           <div 
-            className="absolute top-[16px] left-[24px] "
+            className="absolute top-[16px] left-[24px]"
             style={{
               display: 'flex',
               gap: 28,
@@ -205,7 +291,7 @@ const PhaserInventory = ({ onClose, phaserInstance }) => {
                 key={index}
                 item={item}
                 slotIndex={index + 24}
-                onItemClick={(item) => handleItemClick(item, index, true)}
+                onItemClick={(item) => handleItemClick(item, index + 24, true)}
                 onItemDrop={handleItemDrop}
                 isQuickAccess={true}
                 isActive={index === activeQuickSlot}
@@ -240,7 +326,8 @@ InventorySlot.propTypes = {
     id: PropTypes.string,
     icon: PropTypes.string,
     name: PropTypes.string,
-    quantity: PropTypes.number
+    quantity: PropTypes.number,
+    frame: PropTypes.number
   }),
   onItemClick: PropTypes.func.isRequired,
   slotIndex: PropTypes.number.isRequired,

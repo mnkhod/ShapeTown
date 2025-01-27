@@ -6,7 +6,6 @@ import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import PlayerPrefab from "../prefabs/PlayerPrefab";
 import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
-import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
 import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
@@ -16,7 +15,8 @@ import TutorealHousePrefab from "../prefabs/House/TutorealHousePrefab";
 import DeadTree2 from "../prefabs/Trees/DeadTree2";
 import FishingComponentPrefab from "../prefabs/hud/FishingComponentPrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
-import SoldierWillemPrefab from "../prefabs/npcs/SoldierWillemPrefab";
+import NewItemHudPrefab from "../../../NewItemHudPrefab";
+import OpenInventory from "../prefabs/hud/OpenInventory";
 /* START-USER-IMPORTS */
 import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
 import { EventBus } from '../EventBus';
@@ -146,10 +146,6 @@ export default class TutorialScene extends Phaser.Scene {
 		const questBookPrefab = new QuestBookPrefab(this, 32, 736);
 		this.add.existing(questBookPrefab);
 
-		// itemHudPrefab
-		const itemHudPrefab = new ItemHudPrefab(this, 17.999990057997366, 714.0380149603411);
-		this.add.existing(itemHudPrefab);
-
 		// messagePrefab
 		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 0.8045771466410088);
 		this.add.existing(messagePrefab);
@@ -205,18 +201,23 @@ export default class TutorialScene extends Phaser.Scene {
 		const profilePrefab = new ProfilePrefab(this, 56.5, 23);
 		this.add.existing(profilePrefab);
 
-		// soldierWillemPrefab
-		const soldierWillemPrefab = new SoldierWillemPrefab(this, 262, 458);
-		this.add.existing(soldierWillemPrefab);
+		// newItemHudPrefab
+		const newItemHudPrefab = new NewItemHudPrefab(this, 0, 0);
+		this.add.existing(newItemHudPrefab);
+		newItemHudPrefab.scaleX = 0.5;
+		newItemHudPrefab.scaleY = 0.5;
+
+		// openInventory
+		const openInventory = new OpenInventory(this, 267, 478);
+		this.add.existing(openInventory);
+		openInventory.scaleX = 0.5;
+		openInventory.scaleY = 0.5;
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
-		oldManJackNpcPrefab.itemHud = itemHudPrefab;
+		oldManJackNpcPrefab.itemHud = newItemHudPrefab;
 		oldManJackNpcPrefab.bookHud = questBookPrefab;
-
-		// itemHudPrefab (prefab fields)
-		itemHudPrefab.player = playerPrefab;
 
 		this.map_environment_Ground_just_render__1 = map_environment_Ground_just_render__1;
 		this.layerFence = layerFence;
@@ -232,7 +233,6 @@ export default class TutorialScene extends Phaser.Scene {
 		this.sceneTile = sceneTile;
 		this.playerPrefab = playerPrefab;
 		this.questBookPrefab = questBookPrefab;
-		this.itemHudPrefab = itemHudPrefab;
 		this.messagePrefab = messagePrefab;
 		this.alertPrefab = alertPrefab;
 		this.appleTreePrefab = appleTreePrefab;
@@ -243,6 +243,8 @@ export default class TutorialScene extends Phaser.Scene {
 		this.fishingArea = fishingArea;
 		this.fishingComponentPrefab = fishingComponentPrefab;
 		this.profilePrefab = profilePrefab;
+		this.newItemHudPrefab = newItemHudPrefab;
+		this.openInventory = openInventory;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -276,8 +278,6 @@ export default class TutorialScene extends Phaser.Scene {
 	playerPrefab;
 	/** @type {QuestBookPrefab} */
 	questBookPrefab;
-	/** @type {ItemHudPrefab} */
-	itemHudPrefab;
 	/** @type {MessagePrefab} */
 	messagePrefab;
 	/** @type {AlertPrefab} */
@@ -298,6 +298,10 @@ export default class TutorialScene extends Phaser.Scene {
 	fishingComponentPrefab;
 	/** @type {ProfilePrefab} */
 	profilePrefab;
+	/** @type {NewItemHudPrefab} */
+	newItemHudPrefab;
+	/** @type {OpenInventory} */
+	openInventory;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 
@@ -314,15 +318,16 @@ export default class TutorialScene extends Phaser.Scene {
 		this.fishingArea.setInteractive({ useHandCursor: true });
 		this.fishingArea.on('pointerdown', function (_pointer) {
 			this.fishingComponentPrefab.play(() => {
-				this.itemHudPrefab.addItem("FISH","FishIcon",0,1,true)
+				this.newItemHudPrefab.addItem("FISH","FishIcon",0,1,true)
 			})
 		},this)
 
 		this.questBookPrefab.setDepth(100)
-    	this.itemHudPrefab.setDepth(100)
     	this.messagePrefab.setDepth(100)
     	this.alertPrefab.setDepth(100)
     	this.profilePrefab.setDepth(100)
+		this.newItemHudPrefab.setDepth(100)
+		this.openInventory.setDepth(100)
 
 		this.profilePrefab.visible = true;
 		this.appleTreePrefab.setupCollision(this.playerPrefab)
@@ -383,8 +388,8 @@ export default class TutorialScene extends Phaser.Scene {
 		if (this.questBookPrefab) {
             this.questBookPrefab.visible = false;
         }
-        if (this.itemHudPrefab) {
-            this.itemHudPrefab.visible = false;
+        if (this.newItemHudPrefab) {
+            this.newItemHudPrefab.visible = false;
         }
         if (this.profilePrefab) {
             this.profilePrefab.visible = false;
@@ -392,16 +397,16 @@ export default class TutorialScene extends Phaser.Scene {
 
 		// this.time.delayedCall(100, () => {
 		// 	this.questBookPrefab.visible = true
-		// 	this.itemHudPrefab.visible = true;
+		// 	this.newItemHudPrefab.visible = true;
 		// 	this.profilePrefab.visible = true;
 
-		// 	this.itemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
-		// 	this.itemHudPrefab.addItem("HOE","IconBaseTools",1)
-		// 	this.itemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
-		// 	this.itemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
-		// 	// this.itemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
+		// 	this.newItemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
+		// 	this.newItemHudPrefab.addItem("HOE","IconBaseTools",1)
+		// 	this.newItemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
+		// 	this.newItemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
+		// 	// this.newItemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
 
-		// 	this.itemHudPrefab.addItem("FISH","FishIcon",0,1,true)
+		// 	this.newItemHudPrefab.addItem("FISH","FishIcon",0,1,true)
 		// }, {}, this)
 
 		// this.reactEvent.on('blockchain-account', (address) => {
@@ -429,7 +434,7 @@ export default class TutorialScene extends Phaser.Scene {
 
 		if(this.achievements.firstHarvestAchievement){
 			this.questBookPrefab.visible = true
-			this.itemHudPrefab.visible = true;
+			this.newItemHudPrefab.visible = true;
 			this.profilePrefab.visible = true;
 		}
 
