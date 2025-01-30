@@ -10,12 +10,19 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	constructor(scene, x, y) {
 		super(scene, x ?? 0, y ?? 0);
 
+		this.scaleX = 0.5;
+		this.scaleY = 0.5;
+
 		// Inventory_background
-		const inventory_background = scene.add.image(310.5, 49.5, "InGameInventoryBackground");
+		const inventory_background = scene.add.image(155.25, 24.75, "InGameInventoryBackground");
+		inventory_background.scaleX = 0.5;
+		inventory_background.scaleY = 0.5;
 		this.add(inventory_background);
 
 		// ItemBox1
 		const itemBox1 = scene.add.container(0, 0);
+		itemBox1.scaleX = 0.5;
+		itemBox1.scaleY = 0.5;
 		this.add(itemBox1);
 
 		// Slot_1
@@ -40,7 +47,9 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 		itemBox1.add(text1);
 
 		// ItemBox2
-		const itemBox2 = scene.add.container(-888.3583374023438, -33.3109245300293);
+		const itemBox2 = scene.add.container(-444, -17);
+		itemBox2.scaleX = 0.5;
+		itemBox2.scaleY = 0.5;
 		this.add(itemBox2);
 
 		// Slot_2
@@ -65,7 +74,9 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 		itemBox2.add(text2);
 
 		// ItemBox3
-		const itemBox3 = scene.add.container(-888.3583374023438, -33.3109245300293);
+		const itemBox3 = scene.add.container(-444, -17);
+		itemBox3.scaleX = 0.5;
+		itemBox3.scaleY = 0.5;
 		this.add(itemBox3);
 
 		// Slot_3
@@ -90,7 +101,9 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 		itemBox3.add(text3);
 
 		// ItemBox4
-		const itemBox4 = scene.add.container(-888.3583374023438, -33.3109245300293);
+		const itemBox4 = scene.add.container(-444, -17);
+		itemBox4.scaleX = 0.5;
+		itemBox4.scaleY = 0.5;
 		this.add(itemBox4);
 
 		// Slot_4
@@ -115,7 +128,9 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 		itemBox4.add(text4);
 
 		// ItemBox5
-		const itemBox5 = scene.add.container(-888.3583374023438, -33.3109245300293);
+		const itemBox5 = scene.add.container(-444, -17);
+		itemBox5.scaleX = 0.5;
+		itemBox5.scaleY = 0.5;
 		this.add(itemBox5);
 
 		// Slot_5
@@ -140,7 +155,9 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 		itemBox5.add(text5);
 
 		// ItemBox6
-		const itemBox6 = scene.add.container(-888.3583374023438, -33.3109245300293);
+		const itemBox6 = scene.add.container(-444, -17);
+		itemBox6.scaleX = 0.5;
+		itemBox6.scaleY = 0.5;
 		this.add(itemBox6);
 
 		// Slot_6
@@ -165,7 +182,9 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 		itemBox6.add(text6);
 
 		// ItemBox7
-		const itemBox7 = scene.add.container(-888.3583374023438, -33.3109245300293);
+		const itemBox7 = scene.add.container(-444, -17);
+		itemBox7.scaleX = 0.5;
+		itemBox7.scaleY = 0.5;
 		this.add(itemBox7);
 
 		// Slot_7
@@ -190,7 +209,9 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 		itemBox7.add(text7);
 
 		// ItemBox8
-		const itemBox8 = scene.add.container(-883.4107055664062, 222.31504821777344);
+		const itemBox8 = scene.add.container(-441.5, 111);
+		itemBox8.scaleX = 0.5;
+		itemBox8.scaleY = 0.5;
 		this.add(itemBox8);
 
 		// Slot_8
@@ -262,7 +283,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 		// Write your code here.
 		this.scene.events.on('create', this.onSceneCreate, this);
 		this.scene.events.on('update', this.onSceneUpdate, this);
-		
+
 		this.activeIndex = -1;
 		this.selectedItem = null;
 		this.itemData = [null, null, null, null, null, null, null, null];
@@ -372,7 +393,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	        slot.on('pointerdown', () => {
 	            this.activeItemSlots.forEach(activeSlot => activeSlot.visible = false);
 	            this.activeItemSlots[index].visible = true;
-	
+
 	            this.selectedItem = this.itemData[index];
 	            this.activeIndex = index;
 
@@ -390,10 +411,10 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	    if (!this.visible) return;
 
 	    const cam = this.scene.cameras.main;
-	
+
 	    let fullWidth = Math.floor(this.getBounds().width);
 	    let fullHeight = Math.floor(this.getBounds().height);
-	
+
 	    let newX = cam.midPoint.x - (fullWidth / 2);
 	    let newY = cam.worldView.bottom - fullHeight - 20;
 
@@ -429,7 +450,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	    if (emptySlotIndex === -1) return;
 
 	    this.itemData[emptySlotIndex] = key;
-	
+
 	    this.items[emptySlotIndex].visible = true;
 	    this.items[emptySlotIndex].setTexture(textureName, textureId);
 

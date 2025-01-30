@@ -806,8 +806,8 @@
             "scope": "CLASS",
             "x": 0,
             "y": 0,
-            "scaleX": 0.5,
-            "scaleY": 0.5
+            "scaleX": 1,
+            "scaleY": 1
         },
         {
             "prefabId": "d9cd0bbb-a8fc-4188-bf3b-a1043ac8444d",
@@ -822,8 +822,8 @@
             "scope": "CLASS",
             "x": 267,
             "y": 478,
-            "scaleX": 0.5,
-            "scaleY": 0.5
+            "scaleX": 1,
+            "scaleY": 1
         }
     ],
     "plainObjects": [

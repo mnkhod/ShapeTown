@@ -15,6 +15,8 @@
             "type": "Container",
             "id": "10fd96a7-cf12-42c9-ac88-39818026bed5",
             "label": "container_1",
+            "scaleX": 0.5,
+            "scaleY": 0.5,
             "list": [
                 {
                     "type": "Image",
@@ -24,7 +26,9 @@
                         "key": "OpenInventory"
                     },
                     "x": 24,
-                    "y": 24
+                    "y": 24,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
                 },
                 {
                     "type": "Image",
@@ -35,6 +39,8 @@
                     },
                     "x": 24,
                     "y": 24,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
                     "visible": false
                 },
                 {
@@ -44,8 +50,10 @@
                     "texture": {
                         "key": "Hotkey"
                     },
-                    "x": 47,
-                    "y": 49
+                    "x": 37,
+                    "y": 35,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
                 }
             ]
         }

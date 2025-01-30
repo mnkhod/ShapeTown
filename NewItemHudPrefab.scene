@@ -16,6 +16,8 @@
             "type": "Container",
             "id": "c5a4fc72-2015-4507-ada4-fe1c6b43965a",
             "label": "container_1",
+            "scaleX": 0.5,
+            "scaleY": 0.5,
             "list": [
                 {
                     "type": "Image",
@@ -25,13 +27,17 @@
                     "texture": {
                         "key": "InGameInventoryBackground"
                     },
-                    "x": 310.5,
-                    "y": 49.5
+                    "x": 155.25,
+                    "y": 24.75,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
                 },
                 {
                     "type": "Container",
                     "id": "e291e1da-5767-4d60-97dc-63c089deb466",
                     "label": "ItemBox1",
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
                     "list": [
                         {
                             "type": "Image",
@@ -86,8 +92,10 @@
                     "type": "Container",
                     "id": "c6ba3786-6262-4d42-a62f-eee7b183e349",
                     "label": "ItemBox2",
-                    "x": -888.3583374023438,
-                    "y": -33.3109245300293,
+                    "x": -444,
+                    "y": -17,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
                     "list": [
                         {
                             "type": "Image",
@@ -142,8 +150,10 @@
                     "type": "Container",
                     "id": "d5689307-4932-4670-bee2-8e26fd9e5c2d",
                     "label": "ItemBox3",
-                    "x": -888.3583374023438,
-                    "y": -33.3109245300293,
+                    "x": -444,
+                    "y": -17,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
                     "list": [
                         {
                             "type": "Image",
@@ -198,8 +208,10 @@
                     "type": "Container",
                     "id": "4d5a86c7-ae84-414c-acf9-f250020ddcec",
                     "label": "ItemBox4",
-                    "x": -888.3583374023438,
-                    "y": -33.3109245300293,
+                    "x": -444,
+                    "y": -17,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
                     "list": [
                         {
                             "type": "Image",
@@ -254,8 +266,10 @@
                     "type": "Container",
                     "id": "4b752b81-2976-48be-a003-6767728297ac",
                     "label": "ItemBox5",
-                    "x": -888.3583374023438,
-                    "y": -33.3109245300293,
+                    "x": -444,
+                    "y": -17,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
                     "list": [
                         {
                             "type": "Image",
@@ -310,8 +324,10 @@
                     "type": "Container",
                     "id": "4b85ea1f-3528-4a83-a0e8-0408f641879d",
                     "label": "ItemBox6",
-                    "x": -888.3583374023438,
-                    "y": -33.3109245300293,
+                    "x": -444,
+                    "y": -17,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
                     "list": [
                         {
                             "type": "Image",
@@ -366,8 +382,10 @@
                     "type": "Container",
                     "id": "71226f5e-2fa9-4902-87ed-ad74f1181d1c",
                     "label": "ItemBox7",
-                    "x": -888.3583374023438,
-                    "y": -33.3109245300293,
+                    "x": -444,
+                    "y": -17,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
                     "list": [
                         {
                             "type": "Image",
@@ -422,8 +440,10 @@
                     "type": "Container",
                     "id": "a6d84470-e5cd-4a5f-a133-2ea0f040e308",
                     "label": "ItemBox8",
-                    "x": -883.4107055664062,
-                    "y": 222.31504821777344,
+                    "x": -441.5,
+                    "y": 111,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
                     "list": [
                         {
                             "type": "Image",

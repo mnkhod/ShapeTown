@@ -9,6 +9,7 @@ import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
+import OpenInventory from "../prefabs/hud/OpenInventory";
 /* START-USER-IMPORTS */
 import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
 import { EventBus } from '../EventBus';
@@ -110,13 +111,13 @@ export default class FarmingScene extends Phaser.Scene {
 		this.add.existing(playerPrefab);
 
 		// sceneTilePrev
-		const sceneTilePrev = this.physics.add.sprite(-401, 532, "CityHouses_v02", 0);
+		const sceneTilePrev = this.physics.add.sprite(-401, 532, "_MISSING");
 		sceneTilePrev.scaleY = 10;
 		sceneTilePrev.body.allowGravity = false;
 		sceneTilePrev.body.setSize(32, 200, false);
 
 		// sceneTileNext
-		const sceneTileNext = this.physics.add.sprite(1432, 517, "CityHouses_v02", 0);
+		const sceneTileNext = this.physics.add.sprite(1432, 517, "_MISSING");
 		sceneTileNext.scaleY = 10;
 		sceneTileNext.body.allowGravity = false;
 		sceneTileNext.body.setSize(32, 200, false);
@@ -140,8 +141,14 @@ export default class FarmingScene extends Phaser.Scene {
 		// newItemHudPrefab
 		const newItemHudPrefab = new NewItemHudPrefab(this, 432, 578);
 		this.add.existing(newItemHudPrefab);
-		newItemHudPrefab.scaleX = 0.5;
-		newItemHudPrefab.scaleY = 0.5;
+		newItemHudPrefab.scaleX = 1;
+		newItemHudPrefab.scaleY = 1;
+
+		// openInventory
+		const openInventory = new OpenInventory(this, 914, 692);
+		this.add.existing(openInventory);
+		openInventory.scaleX = 1;
+		openInventory.scaleY = 1;
 
 		this.render_BackGround_1 = render_BackGround_1;
 		this.render_RoadStone_JustRender__1 = render_RoadStone_JustRender__1;
@@ -167,6 +174,7 @@ export default class FarmingScene extends Phaser.Scene {
 		this.alertPrefab = alertPrefab;
 		this.profilePrefab = profilePrefab;
 		this.newItemHudPrefab = newItemHudPrefab;
+		this.openInventory = openInventory;
 		this.farmingMap = farmingMap;
 
 		this.events.emit("scene-awake");
@@ -220,6 +228,8 @@ export default class FarmingScene extends Phaser.Scene {
 	profilePrefab;
 	/** @type {NewItemHudPrefab} */
 	newItemHudPrefab;
+	/** @type {OpenInventory} */
+	openInventory;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	farmingMap;
 
@@ -261,6 +271,7 @@ export default class FarmingScene extends Phaser.Scene {
 
 	    this.playerPrefab.setDepth(80);
 
+		this.openInventory?.setDepth(90);
 	    this.questBookPrefab?.setDepth(90);
 	    this.newItemHudPrefab?.setDepth(90);
 	    this.messagePrefab?.setDepth(90);

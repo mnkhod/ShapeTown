@@ -764,20 +764,6 @@
             "y": 736
         },
         {
-            "prefabId": "a69b4058-db0e-4e31-b023-568805698db8",
-            "id": "26189a89-dd36-42e1-9875-c822c71b1e99",
-            "unlock": [
-                "x",
-                "y",
-                "player"
-            ],
-            "label": "itemHudPrefab",
-            "scope": "CLASS",
-            "player": "playerPrefab",
-            "x": 624.0380145431086,
-            "y": 714.0379998207613
-        },
-        {
             "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
             "id": "f7776df8-9407-4e60-add3-6adc78d9bf83",
             "unlock": [
@@ -806,13 +792,11 @@
             "id": "792df1a4-b642-4466-9360-0085c95e8dc2",
             "label": "sceneTilePrev",
             "scope": "CLASS",
-            "texture": {
-                "key": "CityHouses_v02",
-                "frame": 0
-            },
+            "texture": {},
             "x": -441,
             "y": 458,
             "scaleY": 10,
+            "visible": false,
             "allowGravity": false,
             "body.width": 32,
             "body.height": 200
@@ -944,6 +928,38 @@
             "scope": "CLASS",
             "x": -356,
             "y": 598
+        },
+        {
+            "prefabId": "9be122bc-3a2e-4c06-a98e-b5754929a6d2",
+            "id": "010fc6ba-265f-49e5-b831-e17234b9a03a",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY"
+            ],
+            "label": "newItemHudPrefab",
+            "scope": "CLASS",
+            "x": 350,
+            "y": 700,
+            "scaleX": 1,
+            "scaleY": 1
+        },
+        {
+            "prefabId": "d9cd0bbb-a8fc-4188-bf3b-a1043ac8444d",
+            "id": "b32e0255-3c0a-446d-afd3-12e1ca010ce5",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY"
+            ],
+            "label": "openInventory",
+            "scope": "CLASS",
+            "x": 975,
+            "y": 720,
+            "scaleX": 1,
+            "scaleY": 1
         }
     ],
     "plainObjects": [

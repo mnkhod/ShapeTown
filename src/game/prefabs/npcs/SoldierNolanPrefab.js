@@ -23,7 +23,7 @@ export default class SoldierNolanPrefab extends Phaser.GameObjects.Container {
         // questMark.play("BeforeQuest");
         // this.add(questMark);
         
-        // this.npc = npc;
+        this.npc = npc;
         // this.questMark = questMark;
 
  

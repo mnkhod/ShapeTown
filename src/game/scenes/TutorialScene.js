@@ -204,14 +204,14 @@ export default class TutorialScene extends Phaser.Scene {
 		// newItemHudPrefab
 		const newItemHudPrefab = new NewItemHudPrefab(this, 0, 0);
 		this.add.existing(newItemHudPrefab);
-		newItemHudPrefab.scaleX = 0.5;
-		newItemHudPrefab.scaleY = 0.5;
+		newItemHudPrefab.scaleX = 1;
+		newItemHudPrefab.scaleY = 1;
 
 		// openInventory
 		const openInventory = new OpenInventory(this, 267, 478);
 		this.add.existing(openInventory);
-		openInventory.scaleX = 0.5;
-		openInventory.scaleY = 0.5;
+		openInventory.scaleX = 1;
+		openInventory.scaleY = 1;
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
@@ -316,7 +316,7 @@ export default class TutorialScene extends Phaser.Scene {
 
 		this.cameras.main.setBounds(-120, -130, 1344, 1792);
         this.physics.world.bounds.width = 1000;
-         this.physics.world.bounds.height = 800;
+        this.physics.world.bounds.height = 800;
 
 
 		this.fishingArea.setInteractive({ useHandCursor: true });

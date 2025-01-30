@@ -10,17 +10,26 @@ export default class OpenInventory extends Phaser.GameObjects.Container {
 	constructor(scene, x, y) {
 		super(scene, x ?? 0, y ?? 0);
 
+		this.scaleX = 0.5;
+		this.scaleY = 0.5;
+
 		// openInventory
 		const openInventory = scene.add.image(24, 24, "OpenInventory");
+		openInventory.scaleX = 0.5;
+		openInventory.scaleY = 0.5;
 		this.add(openInventory);
 
 		// hoveredOpenInventory
 		const hoveredOpenInventory = scene.add.image(24, 24, "HoveredOpenInventory");
+		hoveredOpenInventory.scaleX = 0.5;
+		hoveredOpenInventory.scaleY = 0.5;
 		hoveredOpenInventory.visible = false;
 		this.add(hoveredOpenInventory);
 
 		// hotkey
-		const hotkey = scene.add.image(47, 49, "Hotkey");
+		const hotkey = scene.add.image(39, 34, "Hotkey");
+		hotkey.scaleX = 0.5;
+		hotkey.scaleY = 0.5;
 		this.add(hotkey);
 
 		// keyboard_key
@@ -87,7 +96,7 @@ export default class OpenInventory extends Phaser.GameObjects.Container {
     }
     handleInventoryClose() {
         if (!this.scene.reactEvent) return;
-        
+
         this.isInventoryOpen = false;
         this.scene.reactEvent.emit("close-inventory-modal");
     }

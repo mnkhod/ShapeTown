@@ -8,7 +8,6 @@ import { EventBus } from '../EventBus';
 import PlayerPrefab from "../prefabs/PlayerPrefab";
 import MarketNpcPrefab from "../prefabs/npcs/MarketNpcPrefab";
 import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
-import ItemHudPrefab from "../prefabs/hud/ItemHudPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
 import AngelPrefab from "../prefabs/npcs/AngelPrefab";
@@ -21,6 +20,8 @@ import SoldierErikPrefab from "../prefabs/npcs/SoldierErikPrefab";
 import SoldierKaiPrefab from "../prefabs/npcs/SoldierKaiPrefab";
 import SoldierNolanPrefab from "../prefabs/npcs/SoldierNolanPrefab";
 import SoldierWillemPrefab from "../prefabs/npcs/SoldierWillemPrefab";
+import NewItemHudPrefab from "../../../NewItemHudPrefab";
+import OpenInventory from "../prefabs/hud/OpenInventory";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -151,10 +152,6 @@ export default class MarketScene extends Phaser.Scene {
 		const questBookPrefab = new QuestBookPrefab(this, 32, 736);
 		this.add.existing(questBookPrefab);
 
-		// itemHudPrefab
-		const itemHudPrefab = new ItemHudPrefab(this, 624.0380145431086, 714.0379998207613);
-		this.add.existing(itemHudPrefab);
-
 		// messagePrefab
 		const messagePrefab = new MessagePrefab(this, 0.706304947792546, -0.19542654884695307);
 		this.add.existing(messagePrefab);
@@ -164,8 +161,9 @@ export default class MarketScene extends Phaser.Scene {
 		this.add.existing(alertPrefab);
 
 		// sceneTilePrev
-		const sceneTilePrev = this.physics.add.sprite(-441, 458, "CityHouses_v02", 0);
+		const sceneTilePrev = this.physics.add.sprite(-441, 458, "_MISSING");
 		sceneTilePrev.scaleY = 10;
+		sceneTilePrev.visible = false;
 		sceneTilePrev.body.allowGravity = false;
 		sceneTilePrev.body.setSize(32, 200, false);
 
@@ -213,8 +211,17 @@ export default class MarketScene extends Phaser.Scene {
 		const soldierWillemPrefab = new SoldierWillemPrefab(this, -356, 598);
 		this.add.existing(soldierWillemPrefab);
 
-		// itemHudPrefab (prefab fields)
-		itemHudPrefab.player = playerPrefab;
+		// newItemHudPrefab
+		const newItemHudPrefab = new NewItemHudPrefab(this, 350, 700);
+		this.add.existing(newItemHudPrefab);
+		newItemHudPrefab.scaleX = 1;
+		newItemHudPrefab.scaleY = 1;
+
+		// openInventory
+		const openInventory = new OpenInventory(this, 975, 720);
+		this.add.existing(openInventory);
+		openInventory.scaleX = 1;
+		openInventory.scaleY = 1;
 
 		this.must_Background_grass_1 = must_Background_grass_1;
 		this.must_Background_DecorationOnGrass_1 = must_Background_DecorationOnGrass_1;
@@ -241,7 +248,6 @@ export default class MarketScene extends Phaser.Scene {
 		this.fishingShip = fishingShip;
 		this.marketNpcPrefab = marketNpcPrefab;
 		this.questBookPrefab = questBookPrefab;
-		this.itemHudPrefab = itemHudPrefab;
 		this.messagePrefab = messagePrefab;
 		this.alertPrefab = alertPrefab;
 		this.sceneTilePrev = sceneTilePrev;
@@ -255,6 +261,8 @@ export default class MarketScene extends Phaser.Scene {
 		this.soldierKaiPrefab = soldierKaiPrefab;
 		this.soldierNolanPrefab = soldierNolanPrefab;
 		this.soldierWillemPrefab = soldierWillemPrefab;
+		this.newItemHudPrefab = newItemHudPrefab;
+		this.openInventory = openInventory;
 		this.marketMap = marketMap;
 
 		this.events.emit("scene-awake");
@@ -310,8 +318,6 @@ export default class MarketScene extends Phaser.Scene {
 	marketNpcPrefab;
 	/** @type {QuestBookPrefab} */
 	questBookPrefab;
-	/** @type {ItemHudPrefab} */
-	itemHudPrefab;
 	/** @type {MessagePrefab} */
 	messagePrefab;
 	/** @type {AlertPrefab} */
@@ -338,6 +344,10 @@ export default class MarketScene extends Phaser.Scene {
 	soldierNolanPrefab;
 	/** @type {SoldierWillemPrefab} */
 	soldierWillemPrefab;
+	/** @type {NewItemHudPrefab} */
+	newItemHudPrefab;
+	/** @type {OpenInventory} */
+	openInventory;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	marketMap;
 
@@ -348,14 +358,14 @@ export default class MarketScene extends Phaser.Scene {
 	create() {
 		this.editorCreate();
 
-		this.itemHudPrefab.setDepth(100);
+		this.newItemHudPrefab.setDepth(100);
 		this.questBookPrefab.setDepth(100);
 		this.playerPrefab.setDepth(50);
 		this.profilePrefab.visible = true;
     	this.profilePrefab.setDepth(100);
 		this.alertPrefab.setDepth(100);
 		this.messagePrefab.setDepth(100);
-		
+
 
 		const backgroundDepth = 0;
     	const waterDepth = 5;

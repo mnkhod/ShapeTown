@@ -621,10 +621,7 @@
             "id": "be78645b-c8b1-40a5-97e2-a9326368d72a",
             "label": "sceneTilePrev",
             "scope": "CLASS",
-            "texture": {
-                "key": "CityHouses_v02",
-                "frame": 0
-            },
+            "texture": {},
             "x": -401,
             "y": 532,
             "scaleY": 10,
@@ -637,10 +634,7 @@
             "id": "78d30b5d-8ec5-4bbb-8086-32d24c290329",
             "label": "sceneTileNext",
             "scope": "CLASS",
-            "texture": {
-                "key": "CityHouses_v02",
-                "frame": 0
-            },
+            "texture": {},
             "x": 1432,
             "y": 517,
             "scaleY": 10,
@@ -709,8 +703,24 @@
             "scope": "CLASS",
             "x": 432,
             "y": 578,
-            "scaleX": 0.5,
-            "scaleY": 0.5
+            "scaleX": 1,
+            "scaleY": 1
+        },
+        {
+            "prefabId": "d9cd0bbb-a8fc-4188-bf3b-a1043ac8444d",
+            "id": "b77a42c1-72c7-44ef-8473-31a427fdfa71",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY"
+            ],
+            "label": "openInventory",
+            "scope": "CLASS",
+            "x": 914,
+            "y": 692,
+            "scaleX": 1,
+            "scaleY": 1
         }
     ],
     "plainObjects": [

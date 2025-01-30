@@ -620,15 +620,9 @@
                 "key": "GroundTilestSoil"
             },
             {
-                "url": "assets/hud/Inventory/Hotkey.png",
-                "type": "image",
-                "key": "Hotkey"
-            },
-            {
-                "url": "assets/hud/Inventory/HoveredOpenInventory.png",
-                "type": "image",
-                "key": "HoveredOpenInventory",
                 "url": "assets/Ground tileset/GroundTilestSoil.png",
+                "type": "spritesheet",
+                "key": "GroundTilestSoil_1",
                 "frameConfig": {
                     "frameWidth": 32,
                     "frameHeight": 32,
@@ -636,9 +630,17 @@
                     "endFrame": -1,
                     "spacing": 0,
                     "margin": 0
-                },
-                "type": "spritesheet",
-                "key": "GroundTilestSoil_1"
+                }
+            },
+            {
+                "url": "assets/hud/Inventory/Hotkey.png",
+                "type": "image",
+                "key": "Hotkey"
+            },
+            {
+                "url": "assets/hud/Inventory/HoveredOpenInventory.png",
+                "type": "image",
+                "key": "HoveredOpenInventory"
             },
             {
                 "url": "assets/hud/HudItemSlot.png",
