@@ -1,170 +1,6 @@
 {
     "anims": [
         {
-            "key": "bodyRight",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "player",
-                    "frame": 13,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 14,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 15,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 16,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 17,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 10,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "randomFrame": false
-        },
-        {
-            "key": "bodyLeft",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "player",
-                    "frame": 19,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 20,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 21,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 22,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 23,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 10,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "randomFrame": false
-        },
-        {
-            "key": "bodyIdleDown",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "player",
-                    "frame": 0,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 10,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "randomFrame": false
-        },
-        {
-            "key": "bodyUp",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "player",
-                    "frame": 7,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 8,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 9,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 10,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "randomFrame": false
-        },
-        {
-            "key": "bodyDown",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "player",
-                    "frame": 1,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 2,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 3,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 4,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "player",
-                    "frame": 5,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 10,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "randomFrame": false
-        },
-        {
             "key": "npcHarvestStandingAnim",
             "type": "frame",
             "frames": [
@@ -1091,54 +927,6 @@
             "randomFrame": false
         },
         {
-            "key": "bodyIdleLeft",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "player",
-                    "frame": 18,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 24,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "randomFrame": false
-        },
-        {
-            "key": "bodyIdleUp",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "player",
-                    "frame": 6,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 24,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "randomFrame": false
-        },
-        {
-            "key": "bodyIdleRight",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "player",
-                    "frame": 12,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 24,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "randomFrame": false
-        },
-        {
             "key": "merchantAnimation",
             "type": "frame",
             "frames": [
@@ -1296,6 +1084,278 @@
             ],
             "frameRate": 10,
             "skipMissedFrames": true,
+            "randomFrame": false
+        },
+        {
+            "key": "bodyDown",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "bodyUp",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 8,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 9,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 10,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 11,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 12,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 13,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "bodyRight",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 14,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 15,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 16,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 17,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 18,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 19,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 20,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "bodyLeft",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 21,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 22,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 23,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 24,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 25,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 26,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 27,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "bodyIdleDown",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "bodyIdleLeft",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 21,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "bodyIdleUp",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "bodyIdleRight",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "PlayerWalking_V01",
+                    "frame": 14,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 24,
+            "skipMissedFrames": true,
+            "repeat": -1,
             "randomFrame": false
         }
     ],

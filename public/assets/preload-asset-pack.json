@@ -171,6 +171,45 @@
                 "key": "Campfire_32x32"
             },
             {
+                "url": "assets/Character/Walking/Clothing/CharacterOutfit_1.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "CharacterOutfit_1"
+            },
+            {
+                "url": "assets/Character/Walking/Clothing/CharacterOutfit_2.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "CharacterOutfit_2"
+            },
+            {
+                "url": "assets/Character/Walking/Clothing/CharacterOutfit_3.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "CharacterOutfit_3"
+            },
+            {
                 "url": "assets/mapAssets/CityHouses_v02.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -875,19 +914,6 @@
                 "key": "OpenInventory"
             },
             {
-                "url": "assets/player/player.png",
-                "frameConfig": {
-                    "frameWidth": 64,
-                    "frameHeight": 64,
-                    "startFrame": 0,
-                    "endFrame": -1,
-                    "spacing": 0,
-                    "margin": 0
-                },
-                "type": "spritesheet",
-                "key": "player"
-            },
-            {
                 "url": "assets/Character/Farming/BaseModel/PlayerAniFarming_V01.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -927,45 +953,6 @@
                 "key": "PlayerFishing_V01"
             },
             {
-                "url": "assets/player/PlayerHair01.png",
-                "frameConfig": {
-                    "frameWidth": 64,
-                    "frameHeight": 64,
-                    "startFrame": 0,
-                    "endFrame": -1,
-                    "spacing": 0,
-                    "margin": 0
-                },
-                "type": "spritesheet",
-                "key": "PlayerHair01"
-            },
-            {
-                "url": "assets/player/PlayerHair02.png",
-                "frameConfig": {
-                    "frameWidth": 64,
-                    "frameHeight": 64,
-                    "startFrame": 0,
-                    "endFrame": -1,
-                    "spacing": 0,
-                    "margin": 0
-                },
-                "type": "spritesheet",
-                "key": "PlayerHair02"
-            },
-            {
-                "url": "assets/player/PlayerHair03.png",
-                "frameConfig": {
-                    "frameWidth": 64,
-                    "frameHeight": 64,
-                    "startFrame": 0,
-                    "endFrame": -1,
-                    "spacing": 0,
-                    "margin": 0
-                },
-                "type": "spritesheet",
-                "key": "PlayerHair03"
-            },
-            {
                 "url": "assets/Character/Farming/Hair/PlayerHairFarming_V01.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -992,7 +979,7 @@
                 "key": "PlayerHairFishing_V01"
             },
             {
-                "url": "assets/player/PlayerOutfit01.png",
+                "url": "assets/Character/Walking/Hair/PlayerHairWalking_01.png",
                 "frameConfig": {
                     "frameWidth": 64,
                     "frameHeight": 64,
@@ -1002,10 +989,10 @@
                     "margin": 0
                 },
                 "type": "spritesheet",
-                "key": "PlayerOutfit01"
+                "key": "PlayerHairWalking_01"
             },
             {
-                "url": "assets/player/PlayerOutfit02.png",
+                "url": "assets/Character/Walking/Hair/PlayerHairWalking_02.png",
                 "frameConfig": {
                     "frameWidth": 64,
                     "frameHeight": 64,
@@ -1015,10 +1002,10 @@
                     "margin": 0
                 },
                 "type": "spritesheet",
-                "key": "PlayerOutfit02"
+                "key": "PlayerHairWalking_02"
             },
             {
-                "url": "assets/player/PlayerOutfit03.png",
+                "url": "assets/Character/Walking/Hair/PlayerHairWalking_03.png",
                 "frameConfig": {
                     "frameWidth": 64,
                     "frameHeight": 64,
@@ -1028,13 +1015,13 @@
                     "margin": 0
                 },
                 "type": "spritesheet",
-                "key": "PlayerOutfit03"
+                "key": "PlayerHairWalking_03"
             },
             {
                 "url": "assets/Character/Walking/BaseModel/PlayerWalking_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -1042,6 +1029,32 @@
                 },
                 "type": "spritesheet",
                 "key": "PlayerWalking_V01"
+            },
+            {
+                "url": "assets/Character/Walking/BaseModel/PlayerWalking_V02.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "PlayerWalking_V02"
+            },
+            {
+                "url": "assets/Character/Walking/BaseModel/PlayerWalking_V03.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "PlayerWalking_V03"
             },
             {
                 "url": "assets/hud/ProfileBackground.png",

@@ -28,11 +28,11 @@
                     "label": "skin",
                     "scope": "CLASS",
                     "texture": {
-                        "key": "player",
+                        "key": "PlayerWalking_V01",
                         "frame": 0
                     },
-                    "x": 14.53150085424582,
-                    "y": 27.318725443132376,
+                    "x": 14,
+                    "y": 27,
                     "scaleX": 1.5,
                     "scaleY": 1.5
                 },
@@ -42,11 +42,11 @@
                     "label": "hair",
                     "scope": "CLASS",
                     "texture": {
-                        "key": "PlayerHair02",
+                        "key": "PlayerHairWalking_01",
                         "frame": 0
                     },
-                    "x": 14.53150085424582,
-                    "y": 27.318725443132376,
+                    "x": 14,
+                    "y": 27,
                     "scaleX": 1.5,
                     "scaleY": 1.5
                 },
@@ -56,11 +56,11 @@
                     "label": "outfit",
                     "scope": "CLASS",
                     "texture": {
-                        "key": "PlayerOutfit01",
+                        "key": "CharacterOutfit_1",
                         "frame": 0
                     },
-                    "x": 14.53150085424582,
-                    "y": 27.318725443132376,
+                    "x": 14,
+                    "y": 27,
                     "scaleX": 1.5,
                     "scaleY": 1.5
                 }

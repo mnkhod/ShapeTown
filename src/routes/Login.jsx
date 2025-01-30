@@ -9,7 +9,7 @@ function Login() {
     useEffect(() => {
         if(window.ethereum){
             if(window.ethereum.selectedAddress && window.ethereum.selectedAddress.length > 0){
-                navigate("/game")
+                navigate("/customize")
             }
         }
     }, [])
@@ -19,7 +19,7 @@ function Login() {
             let provider = new ethers.BrowserProvider(window.ethereum)
             try {
                 await provider.getSigner();
-                navigate("/game")
+                navigate("/customize")
             } catch (e) {}
         }else{
             alert("No Metamask Detected")
