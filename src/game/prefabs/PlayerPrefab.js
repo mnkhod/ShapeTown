@@ -11,8 +11,9 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 		super(scene, x ?? 33.46849927902156, y ?? 20.681273293494687);
 
 		scene.physics.add.existing(this, false);
-		this.body.allowGravity = false;
-		this.body.setSize(28, 55, false);
+        this.body.setSize(24, 12, false);
+        this.body.setOffset(0, 40);
+        this.setDepth(1);
 
 		// skin
 		const skin = scene.add.sprite(14, 27, "PlayerWalking_V01", 0);
