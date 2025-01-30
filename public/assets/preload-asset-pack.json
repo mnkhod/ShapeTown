@@ -145,6 +145,19 @@
                 "key": "Book"
             },
             {
+                "url": "assets/Building/Building_5_Door_32x32_2.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Building_5_Door_32x32_2"
+            },
+            {
                 "url": "assets/Ground tileset/Campfire_2_32x32.png",
                 "frameConfig": {
                     "frameWidth": 96,
@@ -212,8 +225,8 @@
             {
                 "url": "assets/mapAssets/CityHouses_v02.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 256,
+                    "frameHeight": 416,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -568,6 +581,32 @@
                 "key": "GroundTileset"
             },
             {
+                "url": "assets/Ground tileset/GroundTileset.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "GroundTileset_1"
+            },
+            {
+                "url": "assets/Ground tileset/GroundTileset_V02.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "GroundTileset_V02"
+            },
+            {
                 "url": "assets/mapAssets/GroundTilestSoil.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -588,7 +627,18 @@
             {
                 "url": "assets/hud/Inventory/HoveredOpenInventory.png",
                 "type": "image",
-                "key": "HoveredOpenInventory"
+                "key": "HoveredOpenInventory",
+                "url": "assets/Ground tileset/GroundTilestSoil.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "GroundTilestSoil_1"
             },
             {
                 "url": "assets/hud/HudItemSlot.png",
@@ -1075,6 +1125,32 @@
                 "key": "RoadStone"
             },
             {
+                "url": "assets/Decoration/RockOnGrass_V02.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnGrass_V02"
+            },
+            {
+                "url": "assets/Decoration/RocksOnGrass_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RocksOnGrass_V01"
+            },
+            {
                 "url": "assets/Building/SeaLevelBuildingLighthouse_v01.png",
                 "frameConfig": {
                     "frameWidth": 256,
@@ -1101,6 +1177,16 @@
                 "key": "SeedBag"
             },
             {
+                "url": "assets/map/ShapetownFarming.json",
+                "type": "tilemapTiledJSON",
+                "key": "ShapetownFarming"
+            },
+            {
+                "url": "assets/map/ShapetownFarmingMap.json",
+                "type": "tilemapTiledJSON",
+                "key": "ShapetownFarmingMap"
+            },
+            {
                 "url": "assets/Ground tileset/Ship_V01-Sheet.png",
                 "frameConfig": {
                     "frameWidth": 512,
@@ -1125,6 +1211,32 @@
                 },
                 "type": "spritesheet",
                 "key": "ShopInteriorObjects_"
+            },
+            {
+                "url": "assets/Ground tileset/SoilCorner_v02.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "SoilCorner_v02"
+            },
+            {
+                "url": "assets/Ground tileset/SoilCorners.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "SoilCorners"
             },
             {
                 "url": "assets/star.png",
@@ -1249,7 +1361,7 @@
                 "key": "TreeHouse"
             },
             {
-                "url": "assets/mapAssets/TreePatteren.png",
+                "url": "assets/Tree/TreePatteren.png",
                 "frameConfig": {
                     "frameWidth": 32,
                     "frameHeight": 32,

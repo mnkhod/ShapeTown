@@ -286,8 +286,8 @@
             "id": "76275834-5e14-4c6f-a409-6feb1ecb6de5",
             "label": "layerTreeBorder1",
             "scope": "CLASS",
-            "x": -768,
-            "y": -416,
+            "x": -767,
+            "y": -415,
             "tilemapId": "33835dd0-37d1-4fc9-93a0-0be62142d471",
             "layerName": "Treeborder[Make it Collision]/TreeBorder",
             "tilesets": [

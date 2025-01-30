@@ -1,0 +1,33 @@
+{
+    "id": "05b18f69-d6c6-46a7-b8a8-62b2841aef15",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "8f5ee2c0-d777-4344-bb81-d9cbdcedf506",
+            "label": "cityHouses_v020",
+            "texture": {
+                "key": "CityHouses_v02",
+                "frame": 0
+            },
+            "x": 128,
+            "y": 208
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

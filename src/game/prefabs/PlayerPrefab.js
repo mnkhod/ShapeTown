@@ -6,13 +6,18 @@
 /* END-USER-IMPORTS */
 
 export default class PlayerPrefab extends Phaser.GameObjects.Container {
+    
 
 	constructor(scene, x, y) {
 		super(scene, x ?? 33.46849927902156, y ?? 20.681273293494687);
 
 		scene.physics.add.existing(this, false);
 		this.body.allowGravity = false;
-		this.body.setSize(28, 55, false);
+		this.body.setSize(24, 12, false);
+        this.body.setOffset(0, 40);
+      
+
+        this.setDepth(1);
 
 		// skin
 		const skin = scene.add.sprite(14, 27, "PlayerWalking_V01", 0);
@@ -40,6 +45,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 		// Write your code here.
 
 		const cam = scene.cameras.main;
+
 		cam.startFollow(this, true, 0.1, 0.1);
 		cam.setZoom(2);
 		cam.fadeIn(1000);
@@ -50,6 +56,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 		scene.events.on('create', this.prefabCreateCycle, this);
 		/* END-USER-CTR-CODE */
 	}
+
 
 	/** @type {Phaser.GameObjects.Sprite} */
 	skin;
@@ -76,6 +83,15 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 	prefabUpdateCycle() {
 		this.playerMovement();
 	}
+
+    setupFollow() {
+        // Set initial lerp (smooth follow) values
+        this.lerpX = 0.1;
+        this.lerpY = 0.1;
+        
+        // Stop the default camera follow
+        this.camera.stopFollow();
+    }
 
     playerMovement() {
 		let input = this.scene.input;

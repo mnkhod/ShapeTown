@@ -86,7 +86,7 @@ export default class TutorialScene extends Phaser.Scene {
 		tutorialMap.createLayer("FishingPond/FishingPondAccessor[]just render]", ["LakeAccessor","LakeFloatingRock_V02","LakeFloatingRock_V01"], -768, -416);
 
 		// layerTreeBorder1
-		const layerTreeBorder1 = tutorialMap.createLayer("Treeborder[Make it Collision]/TreeBorder", ["TreePatteren"], -768, -416);
+		const layerTreeBorder1 = tutorialMap.createLayer("Treeborder[Make it Collision]/TreeBorder", ["TreePatteren"], -767, -415);
 
 		// layerTreeBorder
 		const layerTreeBorder = tutorialMap.createLayer("Treeborder[Make it Collision]/TreeBorder1", ["TreePatteren"], -768, -416);
@@ -313,6 +313,10 @@ export default class TutorialScene extends Phaser.Scene {
 
 	create() {
 		this.editorCreate();
+
+		this.cameras.main.setBounds(-120, -130, 1344, 1792);
+        this.physics.world.bounds.width = 1000;
+         this.physics.world.bounds.height = 800;
 
 
 		this.fishingArea.setInteractive({ useHandCursor: true });

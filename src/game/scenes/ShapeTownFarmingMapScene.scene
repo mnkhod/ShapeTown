@@ -1,0 +1,590 @@
+{
+    "id": "67b2780a-7889-4518-b00c-fc7f4e4c15e1",
+    "sceneType": "SCENE",
+    "settings": {
+        "snapEnabled": true,
+        "snapWidth": 2560,
+        "snapHeight": 1920,
+        "exportClass": true,
+        "autoImport": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "ShapeTownFarmingMapScene",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "TilemapLayer",
+            "id": "eb429b1b-81e0-444e-9898-00aa5db80dad",
+            "label": "bG_Grass_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "BG/Grass",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "b83033f5-14eb-47f9-b443-3ec6a75d6344",
+            "label": "bG_Cliff_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "BG/Cliff",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "af1990c1-64f2-4324-90ad-52e0d72d9cdd",
+            "label": "bG_Rock_On_Cliff_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "BG/Rock On Cliff",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "2b2c8347-7068-47f3-8dc4-18b5ace02ccf",
+            "label": "bG_ramp_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "BG/ramp",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "d7fa9deb-56de-45cf-af5a-fe56e799bc8a",
+            "label": "lake_lake_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "Lake/lake",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "43aefa57-97fb-4944-a795-dddde74aaac5",
+            "label": "lake_Lake_Decoration_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "Lake/Lake Decoration",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "bf581fcc-bbf4-44c1-be6c-c95063842ab2",
+            "label": "tree_border_Fence_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "tree border/Fence",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "72abbacb-116e-4533-8b07-2bee0b01dcf1",
+            "label": "tree_border_",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "tree border/7",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "f00f7d1d-f43e-4681-884e-e18bebf5fe98",
+            "label": "tree_border",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "tree border/6",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "c918f1fc-53d7-48d1-8f09-771388e05854",
+            "label": "tree_border_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "tree border/5",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "6d660715-64af-4d59-83c1-b723923fe6b1",
+            "label": "tree_border_2",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "tree border/4",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "055471ee-a594-48d5-b018-13ea7efcb82b",
+            "label": "tree_border_3",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "tree border/3",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "27b3846b-b20e-46b9-93db-5182d035c91e",
+            "label": "tree_border_4",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "tree border/2",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "52fc2b09-82fa-46b5-9b12-4381e291343c",
+            "label": "tree_border_5",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "tree border/1",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "7c6963ef-176a-488e-90a8-08aeca8de8ff",
+            "label": "tree_border_6",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "tree border/0",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        },
+        {
+            "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
+            "id": "0e2c6a35-ee30-40f2-8a1f-4a3939d07a0c",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "playerPrefab",
+            "scope": "CLASS",
+            "x": 434,
+            "y": 633
+        },
+        {
+            "prefabId": "05b18f69-d6c6-46a7-b8a8-62b2841aef15",
+            "id": "f052b291-ce1a-4a6b-80a5-9027d430216f",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "shapeFarmingHousePrefab",
+            "scope": "CLASS",
+            "x": 576,
+            "y": 360
+        },
+        {
+            "prefabId": "3f334556-ed3f-4297-8ad8-f1c3aa42e40f",
+            "id": "5811feeb-272f-4978-bdbd-54b405c9e54b",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "appleTreePrefab",
+            "scope": "CLASS",
+            "x": 526,
+            "y": 967
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "7248e0a3-48c7-4fcd-8339-514a8269d4e6",
+            "label": "tree_border_7",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "tree border/7",
+            "tilesets": [
+                "GroundTileset",
+                "ForrestLadge",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundAccessor",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone"
+            ]
+        }
+    ],
+    "plainObjects": [
+        {
+            "id": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "type": "Tilemap",
+            "label": "shapetownFarmingMap",
+            "key": "ShapetownFarmingMap",
+            "tilesets": [
+                {
+                    "name": "GroundTileset",
+                    "imageKey": "GroundTileset"
+                },
+                {
+                    "name": "ForrestLadge",
+                    "imageKey": "ForrestLadge"
+                },
+                {
+                    "name": "TreePatteren",
+                    "imageKey": "TreePatteren"
+                },
+                {
+                    "name": "CityHouses_v02",
+                    "imageKey": "CityHouses_v02"
+                },
+                {
+                    "name": "Building_5_Door_32x32_2",
+                    "imageKey": "Building_5_Door_32x32_2"
+                },
+                {
+                    "name": "LakeBorderCornerAni",
+                    "imageKey": "LakeBorderCornerAni"
+                },
+                {
+                    "name": "LakeBorderAni",
+                    "imageKey": "LakeBorderAni"
+                },
+                {
+                    "name": "Fishes_3_32x32",
+                    "imageKey": "Fishes_3_32x32"
+                },
+                {
+                    "name": "LakeDecoration",
+                    "imageKey": "LakeAccessor"
+                },
+                {
+                    "name": "LakeFloatingRock_V03",
+                    "imageKey": "LakeFloatingRock_V03"
+                },
+                {
+                    "name": "LakeFloatingRock_V01",
+                    "imageKey": "LakeFloatingRock_V01"
+                },
+                {
+                    "name": "LakeFloatingRock_V02",
+                    "imageKey": "LakeFloatingRock_V02"
+                },
+                {
+                    "name": "GroundAccessor",
+                    "imageKey": "GroundAccessor"
+                },
+                {
+                    "name": "GroundTileset_V02",
+                    "imageKey": "GroundTileset_V02"
+                },
+                {
+                    "name": "SoilCorner_v02",
+                    "imageKey": "SoilCorner_v02"
+                },
+                {
+                    "name": "RocksOnGrass_V01",
+                    "imageKey": "RocksOnGrass_V01"
+                },
+                {
+                    "name": "RockOnGrass_V02",
+                    "imageKey": "RockOnGrass_V02"
+                },
+                {
+                    "name": "RoadStone",
+                    "imageKey": "RoadStone"
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

@@ -8,6 +8,8 @@ import TutorialScene from "./scenes/TutorialScene";
 import FarmingScene from "./scenes/FarmingScene";
 import ForestScene from "./scenes/ForestScene";
 import MarketScene from "./scenes/MarketScene";
+import ShapeFarmingScene from "./scenes/ShapeFarmingScene"
+import ShapeTownFarmingMapScene from "./scenes/ShapeTownFarmingMapScene"
 
 
 // Find out more information about the Game Config at:
@@ -21,7 +23,7 @@ const config = {
     physics: {
         default: "arcade",
         arcade: {
-            debug: false,
+            debug: true,
             tileBias: 32,
         }
     },
@@ -52,6 +54,8 @@ const config = {
         FarmingScene,
         ForestScene,
         MarketScene,
+        ShapeFarmingScene,
+        ShapeTownFarmingMapScene
     ]
 };
 
