@@ -63,11 +63,11 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 	/* START-USER-CODE */
 
     firstHarvestDialogueLifeCycle = [
-        { msg: "Hello there… Welcome to Shaper Town. I'm Jack. This is my humble farm." },
-        { msg: `You haven't chosen your 'Profession' yet. I will help you choose one today. So we shall start?` },
-        { msg: `First thing first, take these tools, those coming in handy, any time soon.` },
+        { msg: "Welcome aboard to Shaper Town! I'm Jack, your friendly conductor. This is my charming train station." },
+        { msg: "I see you haven't chosen your 'Travel Class' yet. Let me help you pick one today. Ready to begin?"},
+        { msg: "To start your journey, here are your travel essentials - they'll be quite useful along the way." },
         {
-            msg: `Those will be handy soon.`,
+            msg: "These tools will make your adventure much smoother.",
             onComplete: () => {
                 this.itemHud.visible = true;
                 this.itemHud.addItem("WATERING_CAN", "IconBaseTools", 0)
@@ -75,25 +75,24 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
                 this.itemHud.addItem("PICK_AXE", "IconBaseTools", 2)
             }
         },
-        { msg: `Alright, I am giving you a Quest. Therefore, you may be spot on your Quest Book.` },
+        { msg: "Now, I have a special travel mission for you. You can track it in your Journey Log." },
         {
-            msg: `Alright, here's your quest. You may see it in your quest book, good luck!`,
+            msg: "Here's your first adventure quest. Check your travel log for details. Safe travels!",
             onComplete: () => {
                 this.bookHud.visible = true;
                 this.scene.profilePrefab.visible = true;
-
                 this.bookHud.play("bookLightingUpAnim")
             }
         },
-        { msg: `You have to plant some seeds for me.` },
+        { msg: "Your first task is to prepare the station platform." },
         {
-            msg: `Take these.`,
+            msg: "Here are your platform passes.",
             onComplete: () => {
                 this.itemHud.addItem("CARROT_SEED", "SeedBag", 0, 5)
             }
         },
         {
-            msg: `Go to the Cropland. Start working on it!`,
+            msg: "Head to Platform One and begin your railway adventure!",
             onComplete: () => { }
         },
     ]
@@ -257,6 +256,28 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
             texture2.x,
             texture2.y
         );
+    }
+
+    typeText(text) {
+        this.isTyping = true;
+        this.dialogueText.setText('');
+        
+        let currentChar = 0;
+        const typingSpeed = 30;
+        this.typeTimer = this.time.addEvent({
+            delay: typingSpeed,
+            callback: () => {
+                if (currentChar < text.length) {
+                    this.dialogueText.text += text[currentChar];
+                    currentChar++;
+                } else {
+                    this.typeTimer.destroy();
+                    this.isTyping = false;
+                    this.onTypingComplete();
+                }
+            },
+            repeat: text.length - 1
+        });
     }
 
     /* END-USER-CODE */
