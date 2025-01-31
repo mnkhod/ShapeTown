@@ -5,50 +5,78 @@
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class ProfilePrefab extends Phaser.GameObjects.Image {
+export default class ProfilePrefab extends Phaser.GameObjects.Container {
 
-    constructor(scene, x, y, texture, frame) {
-        super(scene, x ?? 56.5, y ?? 22.25, texture || "ProfileBackground", frame);
+	constructor(scene, x, y) {
+		super(scene, x ?? 56.5, y ?? 16);
 
-        this.scaleX = 0.5;
-        this.scaleY = 0.5;
+		// image_1
+		const image_1 = scene.add.image(0, 6.25, "ProfileBackground");
+		image_1.scaleX = 0.5;
+		image_1.scaleY = 0.5;
+		this.add(image_1);
 
-        /* START-USER-CTR-CODE */
+		// nickname
+		const nickname = scene.add.text(-52, 31, "", {});
+		nickname.text = "New text";
+		nickname.setStyle({ "fontFamily": "courier", "fontSize": "12px" });
+		this.add(nickname);
+
+		this.nickname = nickname;
+
+		/* START-USER-CTR-CODE */
         // Write your code here.
         this.scene.events.on('update', this.onSceneUpdate, this);
         this.scene.events.on('create', this.onSceneCreate, this);
         /* END-USER-CTR-CODE */
-    }
+	}
 
-    /* START-USER-CODE */
+	/** @type {Phaser.GameObjects.Text} */
+	nickname;
+	/** @type {string} */
+	nickname = "";
+
+	/* START-USER-CODE */
 
     // Write your code here.
-    onSceneCreate() {
-        // this.visible = false;
-        
-        this.setInteractive({ useHandCursor: true });
-        
-        this.on('pointerdown', () => {
-            if (this.scene.reactEvent == undefined) throw Error("REACT EVENT BUS NOT HOOKED IN");
-            this.scene.reactEvent.emit("show-achievements-modal", this);
-        }, this);
+    loadCustomization() {
+        try {
+            const savedData = JSON.parse(localStorage.getItem('playerCustomization'));
+            if (savedData && savedData.playerName) {
+                this.nickname.setText(savedData.playerName);
+            }
+        } catch (error) {
+            console.error("Error loading player name:", error);
+        }
     }
 
-    onSceneUpdate() {
-        if (this.visible == false) return;
+onSceneCreate() {
+    this.visible = false;
 
-        const cam = this.scene.cameras.main;
+    this.setInteractive({ 
+        useHandCursor: true,
+        hitArea: new Phaser.Geom.Rectangle(-60, -20, 120, 70),
+        hitAreaCallback: Phaser.Geom.Rectangle.Contains
+    });
 
-        // Position in top-left corner with some padding
-        let newX = cam.worldView.left + this.width/2-44;
-        let newY = cam.worldView.top + this.height/2-16;
+    this.on('pointerdown', () => {
+        if (this.scene.reactEvent == undefined) throw Error("REACT EVENT BUS NOT HOOKED IN");
+        this.scene.reactEvent.emit("show-achievements-modal", this);
+    }, this);
 
-        // Smooth movement to new position
-        this.setPosition(
-            Phaser.Math.Linear(this.x, newX, 1),
-            Phaser.Math.Linear(this.y, newY, 1)
-        );
-    }
+    this.loadCustomization();
+}
+
+onSceneUpdate() {
+    if (this.visible == false) return;
+
+    const cam = this.scene.cameras.main;
+
+    let newX = cam.worldView.left + 64;
+    let newY = cam.worldView.top + 20;
+
+    this.setPosition(newX, newY);
+}
 
     /* END-USER-CODE */
 }

@@ -198,7 +198,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.existing(fishingComponentPrefab);
 
 		// profilePrefab
-		const profilePrefab = new ProfilePrefab(this, 56.5, 23);
+		const profilePrefab = new ProfilePrefab(this, 57, 24);
 		this.add.existing(profilePrefab);
 
 		// newItemHudPrefab

@@ -790,8 +790,8 @@
             ],
             "label": "profilePrefab",
             "scope": "CLASS",
-            "x": 56.5,
-            "y": 23
+            "x": 57,
+            "y": 24
         },
         {
             "prefabId": "9be122bc-3a2e-4c06-a98e-b5754929a6d2",

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const CharacterCustomizer = () => {
   const navigate = useNavigate();
+  const [playerName, setPlayerName] = useState('Player');
   
   const options = {
     skin: ['PlayerWalking_V01.png', 'PlayerWalking_V02.png', 'PlayerWalking_V03.png'],
@@ -15,18 +16,18 @@ const CharacterCustomizer = () => {
     hair: options.hair[2],
     clothing: options.clothing[0]
   });
-
-  const setCustomizationAndStore = (newCustomization) => {
-    setCustomization(newCustomization);
-    localStorage.setItem('characterCustomization', JSON.stringify(newCustomization));
-  };
-
+  
   const [direction, setDirection] = useState(0);
 
   const SPRITE_SIZE = 24;
   const SPRITE_SCALE = 10;
   const ROWS = 4;
   const COLS = 6;
+
+  const handleNameChange = (e) => {
+    const value = e.target.value.slice(0, 12);
+    setPlayerName(value);
+  };
 
   const cycleOption = (category, forward = true) => {
     const currentIndex = options[category].indexOf(customization[category]);
@@ -38,10 +39,10 @@ const CharacterCustomizer = () => {
       newIndex = (currentIndex - 1 + options[category].length) % options[category].length;
     }
 
-    setCustomizationAndStore({
-      ...customization,
+    setCustomization(prev => ({
+      ...prev,
       [category]: options[category][newIndex]
-    });
+    }));
   };
 
   const rotateCharacter = (clockwise) => {
@@ -107,6 +108,17 @@ const CharacterCustomizer = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
       <div className="flex gap-8 p-8 bg-gray-800 rounded-lg">
         <div className="flex flex-col w-64">
+          <div className="mb-4">
+            <div className="text-white font-bold mb-2 text-center">NAME</div>
+            <input
+              type="text"
+              value={playerName}
+              onChange={handleNameChange}
+              className="w-full px-4 py-2 bg-yellow-400 rounded-xl font-bold text-black text-center"
+              placeholder="Enter name..."
+              maxLength={12}
+            />
+          </div>
           <div className="text-white font-bold mb-2 text-center">SKIN</div>
           <CustomizationOption 
             category="skin"
@@ -150,7 +162,16 @@ const CharacterCustomizer = () => {
           </div>
 
           <button 
-            onClick={() => navigate('/game')}
+            onClick={() => {
+              const savedData = {
+                skin: customization.skin.split('.')[0],
+                hair: customization.hair.split('.')[0],
+                clothing: customization.clothing.split('.')[0],
+                playerName: playerName.trim() || 'Player'
+              };
+              localStorage.setItem('playerCustomization', JSON.stringify(savedData));
+              navigate('/game');
+            }}
             className="w-full py-3 bg-green-500 rounded-lg text-white font-bold hover:bg-green-600 tracking-wider"
           >
             PLAY
