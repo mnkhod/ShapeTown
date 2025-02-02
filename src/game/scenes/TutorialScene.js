@@ -12,11 +12,11 @@ import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
 import PineTreePrefab from "../prefabs/Trees/PineTreePrefab";
 import MapleTreePrefab from "../prefabs/Trees/MapleTreePrefab";
 import TutorealHousePrefab from "../prefabs/House/TutorealHousePrefab";
-import DeadTree2 from "../prefabs/Trees/DeadTree2";
 import FishingComponentPrefab from "../prefabs/hud/FishingComponentPrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import OpenInventory from "../prefabs/hud/OpenInventory";
+import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
 /* START-USER-IMPORTS */
 import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
 import { EventBus } from '../EventBus';
@@ -186,10 +186,6 @@ export default class TutorialScene extends Phaser.Scene {
 		const tutorealHousePrefab = new TutorealHousePrefab(this, 256, 90);
 		this.add.existing(tutorealHousePrefab);
 
-		// deadTree2
-		const deadTree2 = new DeadTree2(this, 540, 473);
-		this.add.existing(deadTree2);
-
 		// fishingArea
 		const fishingArea = this.add.sprite(852, 714, "LakeAccessor", 0);
 
@@ -212,6 +208,10 @@ export default class TutorialScene extends Phaser.Scene {
 		this.add.existing(openInventory);
 		openInventory.scaleX = 1;
 		openInventory.scaleY = 1;
+
+		// openMapPrefab
+		const openMapPrefab = new OpenMapPrefab(this, 346, 480);
+		this.add.existing(openMapPrefab);
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
@@ -239,12 +239,12 @@ export default class TutorialScene extends Phaser.Scene {
 		this.pineTreePrefab = pineTreePrefab;
 		this.mapleTreePrefab = mapleTreePrefab;
 		this.tutorealHousePrefab = tutorealHousePrefab;
-		this.deadTree2 = deadTree2;
 		this.fishingArea = fishingArea;
 		this.fishingComponentPrefab = fishingComponentPrefab;
 		this.profilePrefab = profilePrefab;
 		this.newItemHudPrefab = newItemHudPrefab;
 		this.openInventory = openInventory;
+		this.openMapPrefab = openMapPrefab;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -290,8 +290,6 @@ export default class TutorialScene extends Phaser.Scene {
 	mapleTreePrefab;
 	/** @type {TutorealHousePrefab} */
 	tutorealHousePrefab;
-	/** @type {DeadTree2} */
-	deadTree2;
 	/** @type {Phaser.GameObjects.Sprite} */
 	fishingArea;
 	/** @type {FishingComponentPrefab} */
@@ -302,6 +300,8 @@ export default class TutorialScene extends Phaser.Scene {
 	newItemHudPrefab;
 	/** @type {OpenInventory} */
 	openInventory;
+	/** @type {OpenMapPrefab} */
+	openMapPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 

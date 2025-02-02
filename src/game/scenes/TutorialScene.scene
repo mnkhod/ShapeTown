@@ -746,18 +746,6 @@
             "y": 90
         },
         {
-            "prefabId": "bc8f70fc-832b-45aa-97fa-b71d8d26bbbc",
-            "id": "3be710dc-02cc-459b-8e90-23c807ffd365",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "deadTree2",
-            "scope": "CLASS",
-            "x": 540,
-            "y": 473
-        },
-        {
             "type": "Sprite",
             "id": "14874867-cac4-40e0-8cef-4808a04425ef",
             "label": "fishingArea",
@@ -824,6 +812,18 @@
             "y": 478,
             "scaleX": 1,
             "scaleY": 1
+        },
+        {
+            "prefabId": "511211d3-4280-4710-b0e3-c823277bb8e4",
+            "id": "b993fcaa-b984-4de2-b630-74b999474d91",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "openMapPrefab",
+            "scope": "CLASS",
+            "x": 346,
+            "y": 480
         }
     ],
     "plainObjects": [

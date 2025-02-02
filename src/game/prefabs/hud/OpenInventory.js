@@ -27,19 +27,19 @@ export default class OpenInventory extends Phaser.GameObjects.Container {
 		this.add(hoveredOpenInventory);
 
 		// hotkey
-		const hotkey = scene.add.image(39, 34, "Hotkey");
+		const hotkey = scene.add.image(37, 35, "HotkeyTab");
 		hotkey.scaleX = 0.5;
 		hotkey.scaleY = 0.5;
 		this.add(hotkey);
 
-		// keyboard_key
-		const keyboard_key = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TAB);
+		// key_tab
+		const key_tab = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TAB);
 
-		// keyboard_key_1
-		const keyboard_key_1 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+		// key_esc
+		const key_esc = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
 
-		this.keyboard_key = keyboard_key;
-		this.keyboard_key_1 = keyboard_key_1;
+		this.key_tab = key_tab;
+		this.key_esc = key_esc;
 
 		/* START-USER-CTR-CODE */
         this.setSize(openInventory.width, openInventory.height);
@@ -67,9 +67,9 @@ export default class OpenInventory extends Phaser.GameObjects.Container {
 	}
 
 	/** @type {Phaser.Input.Keyboard.Key} */
-	keyboard_key;
+	key_tab;
 	/** @type {Phaser.Input.Keyboard.Key} */
-	keyboard_key_1;
+	key_esc;
 	/** @type {Phaser.GameObjects.GameObject} */
 	player;
 
@@ -132,14 +132,14 @@ export default class OpenInventory extends Phaser.GameObjects.Container {
 
         const cam = this.scene.cameras.main;
         let newX = cam.worldView.right - 100; 
-        let newY = cam.worldView.bottom - 50;
+        let newY = cam.worldView.bottom - 60;
 
         this.setPosition(
             Phaser.Math.Linear(this.x, newX, 1),
             Phaser.Math.Linear(this.y, newY, 1)
         );
 
-        if (this.keyboard_key.isDown) {
+        if (this.key_tab.isDown) {
             if (!this.isKeyPressed) {
                 this.isKeyPressed = true;
                 if (this.isInventoryOpen) {
@@ -152,7 +152,7 @@ export default class OpenInventory extends Phaser.GameObjects.Container {
             this.isKeyPressed = false;
         }
 
-        if (this.keyboard_key_1.isDown) {
+        if (this.key_esc.isDown) {
             if (this.isInventoryOpen) {
                 this.handleInventoryClose();
             }

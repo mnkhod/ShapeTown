@@ -638,9 +638,24 @@
                 "key": "Hotkey"
             },
             {
+                "url": "assets/hud/Map/HotkeyM.png",
+                "type": "image",
+                "key": "HotkeyM"
+            },
+            {
+                "url": "assets/hud/Inventory/HotkeyTab.png",
+                "type": "image",
+                "key": "HotkeyTab"
+            },
+            {
                 "url": "assets/hud/Inventory/HoveredOpenInventory.png",
                 "type": "image",
                 "key": "HoveredOpenInventory"
+            },
+            {
+                "url": "assets/hud/Map/HoveredOpenMapIcon.png",
+                "type": "image",
+                "key": "HoveredOpenMapIcon"
             },
             {
                 "url": "assets/hud/HudItemSlot.png",
@@ -964,6 +979,11 @@
                 "url": "assets/hud/Inventory/OpenInventory.png",
                 "type": "image",
                 "key": "OpenInventory"
+            },
+            {
+                "url": "assets/hud/Map/OpenMapIcon.png",
+                "type": "image",
+                "key": "OpenMapIcon"
             },
             {
                 "url": "assets/Character/Farming/BaseModel/PlayerAniFarming_V01.png",

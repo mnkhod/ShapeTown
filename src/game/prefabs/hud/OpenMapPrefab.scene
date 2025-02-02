@@ -1,5 +1,5 @@
 {
-    "id": "d9cd0bbb-a8fc-4188-bf3b-a1043ac8444d",
+    "id": "511211d3-4280-4710-b0e3-c823277bb8e4",
     "sceneType": "PREFAB",
     "settings": {
         "exportClass": true,
@@ -13,17 +13,15 @@
     "displayList": [
         {
             "type": "Container",
-            "id": "10fd96a7-cf12-42c9-ac88-39818026bed5",
+            "id": "f519a2f3-5d9c-40f3-91ae-dc505a091e07",
             "label": "container_1",
-            "scaleX": 0.5,
-            "scaleY": 0.5,
             "list": [
                 {
                     "type": "Image",
-                    "id": "2fbb1f0a-123c-48d2-a128-b5f82f8268ab",
-                    "label": "openInventory",
+                    "id": "0164681b-a243-4d69-a417-8c4a73d7a549",
+                    "label": "openMapIcon",
                     "texture": {
-                        "key": "OpenInventory"
+                        "key": "OpenMapIcon"
                     },
                     "x": 24,
                     "y": 24,
@@ -32,10 +30,10 @@
                 },
                 {
                     "type": "Image",
-                    "id": "9071639f-156b-44fc-a95f-17b219ded5ff",
-                    "label": "hoveredOpenInventory",
+                    "id": "751a2695-9f57-41b7-ba79-9fa19885b03c",
+                    "label": "hoveredOpenMapIcon",
                     "texture": {
-                        "key": "HoveredOpenInventory"
+                        "key": "HoveredOpenMapIcon"
                     },
                     "x": 24,
                     "y": 24,
@@ -45,12 +43,12 @@
                 },
                 {
                     "type": "Image",
-                    "id": "f0373346-e50f-4416-91c2-7af19855d93b",
-                    "label": "hotkey",
+                    "id": "339189c4-9de8-4c1c-ae2b-e2c5cd2e8269",
+                    "label": "hotkey_m",
                     "texture": {
-                        "key": "HotkeyTab"
+                        "key": "HotkeyM"
                     },
-                    "x": 37,
+                    "x": 38,
                     "y": 35,
                     "scaleX": 0.5,
                     "scaleY": 0.5
@@ -60,13 +58,13 @@
     ],
     "plainObjects": [
         {
-            "id": "3a2f61c9-fb13-44c0-8429-4d057154ed56",
+            "id": "d7eb39a0-841c-4bbe-9799-2a8221db9444",
             "type": "Keyboard.Key",
-            "label": "key_tab",
-            "keyCode": "TAB"
+            "label": "key_m",
+            "keyCode": "M"
         },
         {
-            "id": "528b2079-efcf-4b07-a6f5-6a10c881a679",
+            "id": "d987a04e-6d42-463b-b6ec-de5fedc676f0",
             "type": "Keyboard.Key",
             "label": "key_esc",
             "keyCode": "ESC"
