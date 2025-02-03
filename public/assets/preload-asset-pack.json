@@ -633,6 +633,45 @@
                 }
             },
             {
+                "url": "assets/hud/Options/HelpBottomIcon.png",
+                "frameConfig": {
+                    "frameWidth": 48,
+                    "frameHeight": 51,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "HelpBottomIcon"
+            },
+            {
+                "url": "assets/hud/Options/HelpButtonIcon.png",
+                "frameConfig": {
+                    "frameWidth": 48,
+                    "frameHeight": 51,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "HelpButtonIcon"
+            },
+            {
+                "url": "assets/hud/Options/HomeButtonIcon.png",
+                "frameConfig": {
+                    "frameWidth": 48,
+                    "frameHeight": 51,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "HomeButtonIcon"
+            },
+            {
                 "url": "assets/hud/Inventory/Hotkey.png",
                 "type": "image",
                 "key": "Hotkey"
@@ -722,6 +761,19 @@
                 "url": "assets/hud/Inventory/InactiveSlot8.png",
                 "type": "image",
                 "key": "InactiveSlot8"
+            },
+            {
+                "url": "assets/hud/Options/InboxIcon.png",
+                "frameConfig": {
+                    "frameWidth": 48,
+                    "frameHeight": 51,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "InboxIcon"
             },
             {
                 "url": "assets/hud/Inventory/InGameInventoryBackground.png",
@@ -832,6 +884,19 @@
                 "key": "logo"
             },
             {
+                "url": "assets/hud/Options/LogoutIcon.png",
+                "frameConfig": {
+                    "frameWidth": 48,
+                    "frameHeight": 51,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "LogoutIcon"
+            },
+            {
                 "url": "assets/map/MarketMap.json",
                 "type": "tilemapTiledJSON",
                 "key": "MarketMap"
@@ -864,8 +929,8 @@
             {
                 "url": "assets/NPC/NpcBlaksmith.png",
                 "frameConfig": {
-                    "frameWidth": 64,
-                    "frameHeight": 64,
+                    "frameWidth": 128,
+                    "frameHeight": 128,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -984,6 +1049,19 @@
                 "url": "assets/hud/Map/OpenMapIcon.png",
                 "type": "image",
                 "key": "OpenMapIcon"
+            },
+            {
+                "url": "assets/hud/Options/OptionMenuIcon.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "OptionMenuIcon"
             },
             {
                 "url": "assets/Character/Farming/BaseModel/PlayerAniFarming_V01.png",
@@ -1199,6 +1277,19 @@
                 "key": "SeedBag"
             },
             {
+                "url": "assets/hud/Options/SettingsIcon.png",
+                "frameConfig": {
+                    "frameWidth": 48,
+                    "frameHeight": 51,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "SettingsIcon"
+            },
+            {
                 "url": "assets/map/ShapetownFarming.json",
                 "type": "tilemapTiledJSON",
                 "key": "ShapetownFarming"
@@ -1394,6 +1485,19 @@
                 },
                 "type": "spritesheet",
                 "key": "TreePatteren"
+            },
+            {
+                "url": "assets/hud/Options/TrophyIcon.png",
+                "frameConfig": {
+                    "frameWidth": 48,
+                    "frameHeight": 51,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "TrophyIcon"
             },
             {
                 "url": "assets/map/TutorialMap.json",

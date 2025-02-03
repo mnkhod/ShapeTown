@@ -3,12 +3,14 @@ import TokenTrader from '../components/TokenTrader';
 import AchievementHUD from '../components/AchievementHUD';
 import InventoryHUD from '../components/InventoryHUD';
 import QuestComponent from '../components/QuestComponent';
+import SettingsComponent from '../components/Settings';
 
 function Demo() {
     const [showTrader, setShowTrader] = useState(false);
     const [showAchievements, setShowAchievements] = useState(false);
     const [showInventory, setShowInventory] = useState(false);
     const [showQuest, setShowQuest] = useState(false);
+    const [showSetting, setShowSetting] = useState(false);
     const handleTrade = ({ fromAmount, fromToken, toToken }) => {
         console.log('Trading:', { fromAmount, fromToken, toToken });
     };
@@ -42,6 +44,13 @@ function Demo() {
             >
                 Show Quest
             </button>
+
+            <button 
+                onClick={() => setShowSetting(true)}
+                className="px-4 py-2 bg-orange-300 border-2 border-yellow-900 rounded text-yellow-900"
+            >
+                Show Settings
+            </button>
             {showTrader && (
                 <TokenTrader 
                     balance={1000}
@@ -65,6 +74,12 @@ function Demo() {
             {showQuest && (
               <QuestComponent
                 onClose={() => setShowQuest(false)}
+              />
+            )}
+
+            {showSetting && (
+              <SettingsComponent
+                onClose={() => setShowSetting(false)}
               />
             )}
         </div>

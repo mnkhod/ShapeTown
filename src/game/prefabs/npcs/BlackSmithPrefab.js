@@ -10,8 +10,8 @@ export default class BlackSmithPrefab extends Phaser.GameObjects.Container {
         super(scene, x ?? 32, y ?? 32);
 
         const npc = scene.add.sprite(0, 0, "NpcBlaksmith", 0);
-        npc.scaleX = 1.5;
-        npc.scaleY = 1.5;
+        npc.scaleX = 0.75;
+        npc.scaleY = 0.75;
         scene.physics.add.existing(npc, false);
         npc.body.allowGravity = false;
         npc.body.setSize(32, 32, false);
