@@ -17,6 +17,7 @@ import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import OpenInventory from "../prefabs/hud/OpenInventory";
 import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
+import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 /* START-USER-IMPORTS */
 import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
 import { EventBus } from '../EventBus';
@@ -212,6 +213,10 @@ export default class TutorialScene extends Phaser.Scene {
 		// openMapPrefab
 		const openMapPrefab = new OpenMapPrefab(this, 346, 480);
 		this.add.existing(openMapPrefab);
+
+		// optionsListPrefab
+		const optionsListPrefab = new OptionsListPrefab(this, 971, 47);
+		this.add.existing(optionsListPrefab);
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;

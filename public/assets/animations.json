@@ -1595,6 +1595,62 @@
             "skipMissedFrames": true,
             "yoyo": true,
             "randomFrame": false
+        },
+        {
+            "key": "OptionMenuIconOptionMenuIcon",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "OptionMenuIcon",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "OptionMenuIcon",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "OptionMenuIcon",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "yoyo": true,
+            "randomFrame": false
+        },
+        {
+            "key": "SettingsIconSettingsIcon",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "SettingsIcon",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "SettingsIcon",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "SettingsIcon",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "yoyo": true,
+            "randomFrame": false
         }
     ],
     "globalTimeScale": 1,

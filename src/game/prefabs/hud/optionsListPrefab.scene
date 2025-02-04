@@ -1,25 +1,136 @@
 {
     "id": "e1ab5904-77e5-46c1-9532-c3d7be0e73be",
+    "sceneType": "PREFAB",
     "settings": {
-        "createMethodName": "",
-        "preloadMethodName": "",
-        "compilerOutputLanguage": "JAVA_SCRIPT",
         "exportClass": true,
         "autoImport": true,
-        "importFileExtension": false,
-        "generateAwakeHandler": false,
-        "compilerInsertSpaces": false,
-        "compilerTabSize": 4,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
         "borderWidth": 1024,
-        "borderHeight": 768,
-        "borderX": 0,
-        "borderY": 0
+        "borderHeight": 768
     },
-    "sceneType": "PREFAB",
-    "displayList": [],
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "cc390ac1-801b-423b-87e2-c7d1cf3292a3",
+            "label": "container_1",
+            "x": 971,
+            "y": 45,
+            "list": [
+                {
+                    "type": "Sprite",
+                    "id": "15f464b3-b96b-4a39-b1b1-cfbbd2801723",
+                    "label": "optionMenuIconOptionMenuIcon",
+                    "texture": {
+                        "key": "OptionMenuIcon",
+                        "frame": 0
+                    },
+                    "x": 7,
+                    "y": -1,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "animationPlayMethod": 1,
+                    "animationKey": "OptionMenuIconOptionMenuIcon"
+                },
+                {
+                    "type": "Sprite",
+                    "id": "4aca8d85-c922-4940-bc86-982831356c06",
+                    "label": "settingsIconSettingsIcon",
+                    "texture": {
+                        "key": "SettingsIcon",
+                        "frame": 0
+                    },
+                    "x": 8,
+                    "y": 32,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "animationPlayMethod": 1,
+                    "animationKey": "SettingsIconSettingsIcon"
+                },
+                {
+                    "type": "Sprite",
+                    "id": "9e69a3a2-8baa-466a-a014-7955925a2ce0",
+                    "label": "homeButtonIconHomeButtonIcon",
+                    "texture": {
+                        "key": "HomeButtonIcon",
+                        "frame": 0
+                    },
+                    "x": 8,
+                    "y": 60,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "animationPlayMethod": 1,
+                    "animationKey": "HomeButtonIconHomeButtonIcon"
+                },
+                {
+                    "type": "Sprite",
+                    "id": "b58fd043-8176-4219-bf60-978a328365b0",
+                    "label": "inboxIconInboxIcon",
+                    "texture": {
+                        "key": "InboxIcon",
+                        "frame": 0
+                    },
+                    "x": 8,
+                    "y": 88,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "animationPlayMethod": 1,
+                    "animationKey": "InboxIconInboxIcon"
+                },
+                {
+                    "type": "Sprite",
+                    "id": "40c04fd8-5a27-44cc-b467-4dabc051876a",
+                    "label": "helpBottomIconHelpBottomIcon",
+                    "texture": {
+                        "key": "HelpBottomIcon",
+                        "frame": 0
+                    },
+                    "x": 8,
+                    "y": 116,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "animationPlayMethod": 1,
+                    "animationKey": "HelpBottomIconHelpBottomIcon"
+                },
+                {
+                    "type": "Sprite",
+                    "id": "27882cbf-f759-4a34-b386-7afdacf0df21",
+                    "label": "logoutIconLogoutIcon",
+                    "texture": {
+                        "key": "LogoutIcon",
+                        "frame": 0
+                    },
+                    "x": 8,
+                    "y": 144,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "animationPlayMethod": 1,
+                    "animationKey": "LogoutIconLogoutIcon"
+                },
+                {
+                    "type": "Sprite",
+                    "id": "70a26086-33d8-41e6-a604-d2f0302fe1ea",
+                    "label": "trophyIconTrophyIcon",
+                    "texture": {
+                        "key": "TrophyIcon",
+                        "frame": 0
+                    },
+                    "x": 8,
+                    "y": 172,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "animationPlayMethod": 1,
+                    "animationKey": "TrophyIconTrophyIcon"
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
     "meta": {
-        "app": "Phaser Editor 2D - Scene Editor",
-        "url": "https://phasereditor2d.com",
-        "contentType": "phasereditor2d.core.scene.SceneContentType"
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
     }
 }

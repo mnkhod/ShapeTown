@@ -824,6 +824,18 @@
             "scope": "CLASS",
             "x": 346,
             "y": 480
+        },
+        {
+            "prefabId": "e1ab5904-77e5-46c1-9532-c3d7be0e73be",
+            "id": "c9a5c53b-410c-46c9-936e-a81737f92fb0",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "optionsListPrefab",
+            "scope": "CLASS",
+            "x": 971,
+            "y": 47
         }
     ],
     "plainObjects": [
