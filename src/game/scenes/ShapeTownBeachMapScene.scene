@@ -1,0 +1,448 @@
+{
+    "id": "4d2fb1bf-853f-4c5d-adbc-4126a1d17a5d",
+    "sceneType": "SCENE",
+    "settings": {
+        "snapEnabled": true,
+        "snapWidth": 2560,
+        "snapHeight": 1920,
+        "exportClass": true,
+        "autoImport": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "ShapeTownBeachMapScene",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "TilemapLayer",
+            "id": "05447995-98a7-4bd5-94ad-3ffe4e53aa2e",
+            "label": "sand_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "Sand",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "59ca3227-8458-48a6-b34c-880c290061be",
+            "label": "ship_stranded_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "ship stranded",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "bbc992a7-e8e2-4485-81cc-72f723cfc7f8",
+            "label": "boat_stranded_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "boat stranded",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "03653e9c-d04c-48f9-9d7d-6fe49a7edbc4",
+            "label": "grass_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "grass",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "4296f0a5-cbfc-46a6-8be8-34e475d16d49",
+            "label": "cabin_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "Cabin",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "e9475884-b6b8-49a8-95b3-e0d8a7f4180b",
+            "label": "tree_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "tree",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "c0792e2e-46f5-4530-b6ec-985fab0ae730",
+            "label": "stonesoad_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "stonesoad",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "1c615ea8-166e-4866-8c38-1e73f8735038",
+            "label": "deck_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "deck",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "44be98ad-f0b7-465e-a68f-af39786c10c2",
+            "label": "rock_decor_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "Rock decor",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "b18a6bb2-3a25-42df-81db-97b830824c11",
+            "label": "shell_Decor_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "Shell Decor",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "afa447a9-a008-4bcb-bda9-9866e950a722",
+            "label": "blocker",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "blocker1",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "65188a17-c072-44c7-8638-ff2bd367776a",
+            "label": "blocker_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "blocker2",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "15c029be-33e4-4476-b684-7a2f4d5c545d",
+            "label": "blocker_2",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "blocker3",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "81fbd3aa-fce1-46d2-95d1-a9496f16e5d1",
+            "label": "blocker_3",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "blocker4",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "85b50ad9-5771-4206-b0f4-3f919fffd3fe",
+            "label": "ligthhouse_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "ligthhouse",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
+            "id": "df96cb92-d1ce-4e02-bb0f-d6b7183367e4",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "playerPrefab",
+            "scope": "CLASS",
+            "x": 1347,
+            "y": 235
+        },
+        {
+            "prefabId": "f7980c66-1efa-4178-a1ab-2857ad730e33",
+            "id": "dcc4a27f-6eed-488b-b5f6-51fbbe2229c7",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachHousePrefab",
+            "scope": "CLASS",
+            "x": 1415,
+            "y": 435
+        },
+        {
+            "prefabId": "93169918-71ac-4559-bb2b-f0c83006ec31",
+            "id": "f0b20148-6c7a-4b4e-ac09-ab17f49f384c",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree1Prefab",
+            "scope": "CLASS",
+            "x": 1182,
+            "y": 350
+        }
+    ],
+    "plainObjects": [
+        {
+            "id": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "type": "Tilemap",
+            "label": "shapetownBeach",
+            "key": "ShapetownBeach",
+            "tilesets": [
+                {
+                    "name": "BeachWaterSheet_v01",
+                    "imageKey": "BeachWaterSheet_v01"
+                },
+                {
+                    "name": "BeachDeckSheet",
+                    "imageKey": "BeachDeckSheet"
+                },
+                {
+                    "name": "Lighthouse_v01",
+                    "imageKey": "Lighthouse_v01"
+                },
+                {
+                    "name": "ShipStranded_01",
+                    "imageKey": "ShipStranded_01"
+                },
+                {
+                    "name": "BoatStranded",
+                    "imageKey": "BoatStranded"
+                },
+                {
+                    "name": "PalmTreePattern",
+                    "imageKey": "PalmTreePattern"
+                },
+                {
+                    "name": "TreePalmSheet_01",
+                    "imageKey": "TreePalmSheet_01"
+                },
+                {
+                    "name": "TreePalmSheet_03",
+                    "imageKey": "TreePalmSheet_03"
+                },
+                {
+                    "name": "TreePalmSheet_02",
+                    "imageKey": "TreePalmSheet_02"
+                },
+                {
+                    "name": "CapitansCabin",
+                    "imageKey": "CapitansCabin"
+                },
+                {
+                    "name": "RockOnSand_V01",
+                    "imageKey": "RockOnSand_V01"
+                },
+                {
+                    "name": "ShellBeach_V01",
+                    "imageKey": "ShellBeach_V01"
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

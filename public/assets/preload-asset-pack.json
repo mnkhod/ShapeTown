@@ -93,6 +93,19 @@
                 "key": "Backpack"
             },
             {
+                "url": "assets/Ground tileset/BeachDeckSheet.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "BeachDeckSheet"
+            },
+            {
                 "url": "assets/Ground tileset/BeachStairs_V01R.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -119,6 +132,19 @@
                 "key": "BeachTree_V1"
             },
             {
+                "url": "assets/Ground tileset/BeachWaterAni_03.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "BeachWaterAni_03"
+            },
+            {
                 "url": "assets/Ground tileset/BeachWaterAni_V01.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -130,6 +156,45 @@
                 },
                 "type": "spritesheet",
                 "key": "BeachWaterAni_V01"
+            },
+            {
+                "url": "assets/Ground tileset/BeachWaterAni_V02.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "BeachWaterAni_V02"
+            },
+            {
+                "url": "assets/Ground tileset/BeachWaterSheet_v01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "BeachWaterSheet_v01"
+            },
+            {
+                "url": "assets/Decoration/BoatStranded.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "BoatStranded"
             },
             {
                 "url": "assets/hud/Book.png",
@@ -182,6 +247,19 @@
                 },
                 "type": "spritesheet",
                 "key": "Campfire_32x32"
+            },
+            {
+                "url": "assets/Building/CapitansCabin.png",
+                "frameConfig": {
+                    "frameWidth": 224,
+                    "frameHeight": 288,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "CapitansCabin"
             },
             {
                 "url": "assets/Character/Walking/Clothing/CharacterOutfit_1.png",
@@ -872,6 +950,19 @@
                 "key": "LakeFloatingRock_V03"
             },
             {
+                "url": "assets/Building/Lighthouse_v01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Lighthouse_v01"
+            },
+            {
                 "url": "assets/fonts/Little Malio 8-Bit.otf",
                 "format": "opentype",
                 "descriptors": {},
@@ -1051,17 +1142,17 @@
                 "key": "OpenMapIcon"
             },
             {
-                "url": "assets/hud/Options/OptionMenuIcon.png",
+                "url": "assets/Tree/PalmTreePattern.png",
                 "frameConfig": {
-                    "frameWidth": 64,
-                    "frameHeight": 64,
+                    "frameWidth": 32,
+                    "frameHeight": 32,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
                     "margin": 0
                 },
                 "type": "spritesheet",
-                "key": "OptionMenuIcon"
+                "key": "PalmTreePattern"
             },
             {
                 "url": "assets/Character/Farming/BaseModel/PlayerAniFarming_V01.png",
@@ -1238,6 +1329,19 @@
                 "key": "RockOnGrass_V02"
             },
             {
+                "url": "assets/Decoration/RockOnSand_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnSand_V01"
+            },
+            {
                 "url": "assets/Decoration/RocksOnGrass_V01.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -1277,17 +1381,9 @@
                 "key": "SeedBag"
             },
             {
-                "url": "assets/hud/Options/SettingsIcon.png",
-                "frameConfig": {
-                    "frameWidth": 48,
-                    "frameHeight": 51,
-                    "startFrame": 0,
-                    "endFrame": -1,
-                    "spacing": 0,
-                    "margin": 0
-                },
-                "type": "spritesheet",
-                "key": "SettingsIcon"
+                "url": "assets/map/ShapetownBeach.json",
+                "type": "tilemapTiledJSON",
+                "key": "ShapetownBeach"
             },
             {
                 "url": "assets/map/ShapetownFarming.json",
@@ -1298,6 +1394,19 @@
                 "url": "assets/map/ShapetownFarmingMap.json",
                 "type": "tilemapTiledJSON",
                 "key": "ShapetownFarmingMap"
+            },
+            {
+                "url": "assets/Decoration/ShellBeach_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "ShellBeach_V01"
             },
             {
                 "url": "assets/Ground tileset/Ship_V01-Sheet.png",
@@ -1311,6 +1420,19 @@
                 },
                 "type": "spritesheet",
                 "key": "Ship_V01-Sheet"
+            },
+            {
+                "url": "assets/Decoration/ShipStranded_01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "ShipStranded_01"
             },
             {
                 "url": "assets/Interior/ShopInteriorObjects_.png",
@@ -1474,6 +1596,45 @@
                 "key": "TreeHouse"
             },
             {
+                "url": "assets/Tree/TreePalmSheet_01.png",
+                "frameConfig": {
+                    "frameWidth": 128,
+                    "frameHeight": 192,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "TreePalmSheet_01"
+            },
+            {
+                "url": "assets/Tree/TreePalmSheet_02.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "TreePalmSheet_02"
+            },
+            {
+                "url": "assets/Tree/TreePalmSheet_03.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "TreePalmSheet_03"
+            },
+            {
                 "url": "assets/Tree/TreePatteren.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -1537,6 +1698,7 @@
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
         "version": 2,
-        "showAllFilesInBlocks": false
+        "showAllFilesInBlocks": false,
+        "visible": true
     }
 }

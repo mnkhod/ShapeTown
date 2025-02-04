@@ -1359,177 +1359,73 @@
             "randomFrame": false
         },
         {
-            "key": "optionsAnimation",
+            "key": "BeachTree_1",
             "type": "frame",
             "frames": [
                 {
-                    "key": "OptionMenuIcon",
+                    "key": "TreePalmSheet_01",
                     "frame": 0,
                     "duration": 0,
                     "keyframe": false
                 },
                 {
-                    "key": "OptionMenuIcon",
+                    "key": "TreePalmSheet_01",
                     "frame": 1,
                     "duration": 0,
                     "keyframe": false
                 },
                 {
-                    "key": "OptionMenuIcon",
+                    "key": "TreePalmSheet_01",
                     "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "TreePalmSheet_01",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "TreePalmSheet_01",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "TreePalmSheet_01",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "TreePalmSheet_01",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "TreePalmSheet_01",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "TreePalmSheet_01",
+                    "frame": 8,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "TreePalmSheet_01",
+                    "frame": 9,
                     "duration": 0,
                     "keyframe": false
                 }
             ],
-            "frameRate": 10,
+            "frameRate": 8,
             "skipMissedFrames": true,
             "repeat": -1,
-            "yoyo": true,
-            "randomFrame": false
-        },
-        {
-            "key": "settingsButton",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "SettingsIcon",
-                    "frame": 0,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "SettingsIcon",
-                    "frame": 1,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "SettingsIcon",
-                    "frame": 2,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 10,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "yoyo": true,
-            "randomFrame": false
-        },
-        {
-            "key": "homeButton",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "HomeButtonIcon",
-                    "frame": 0,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "HomeButtonIcon",
-                    "frame": 1,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "HomeButtonIcon",
-                    "frame": 2,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 10,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "yoyo": true,
-            "randomFrame": false
-        },
-        {
-            "key": "mailButton",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "InboxIcon",
-                    "frame": 0,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "InboxIcon",
-                    "frame": 1,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "InboxIcon",
-                    "frame": 2,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 10,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "yoyo": true,
-            "randomFrame": false
-        },
-        {
-            "key": "helpButton",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "HelpBottomIcon",
-                    "frame": 0,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "HelpBottomIcon",
-                    "frame": 1,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "HelpBottomIcon",
-                    "frame": 2,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 10,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "yoyo": true,
-            "randomFrame": false
-        },
-        {
-            "key": "logoutButton",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "LogoutIcon",
-                    "frame": 0,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "LogoutIcon",
-                    "frame": 1,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "LogoutIcon",
-                    "frame": 2,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 10,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "yoyo": true,
             "randomFrame": false
         }
     ],

@@ -1,0 +1,35 @@
+{
+    "id": "93169918-71ac-4559-bb2b-f0c83006ec31",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Sprite",
+            "id": "76c1fe25-49f2-4585-a999-473e8c7e53b9",
+            "label": "beachTree_1",
+            "texture": {
+                "key": "TreePalmSheet_01",
+                "frame": 0
+            },
+            "x": 65,
+            "y": 105,
+            "animationPlayMethod": 1,
+            "animationKey": "BeachTree_1"
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

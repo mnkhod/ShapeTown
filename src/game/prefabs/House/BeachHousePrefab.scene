@@ -1,0 +1,33 @@
+{
+    "id": "f7980c66-1efa-4178-a1ab-2857ad730e33",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "eeea24c4-19ab-4e40-ad03-aed363afdd97",
+            "label": "capitansCabin0",
+            "texture": {
+                "key": "CapitansCabin",
+                "frame": 0
+            },
+            "x": 111,
+            "y": 136
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
