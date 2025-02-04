@@ -1142,6 +1142,19 @@
                 "key": "OpenMapIcon"
             },
             {
+                "url": "assets/hud/Options/OptionMenuIcon.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "OptionMenuIcon"
+            },
+            {
                 "url": "assets/Tree/PalmTreePattern.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -1379,6 +1392,19 @@
                 },
                 "type": "spritesheet",
                 "key": "SeedBag"
+            },
+            {
+                "url": "assets/hud/Options/SettingsIcon.png",
+                "frameConfig": {
+                    "frameWidth": 48,
+                    "frameHeight": 51,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "SettingsIcon"
             },
             {
                 "url": "assets/map/ShapetownBeach.json",
@@ -1698,7 +1724,6 @@
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
         "version": 2,
-        "showAllFilesInBlocks": false,
-        "visible": true
+        "showAllFilesInBlocks": false
     }
 }

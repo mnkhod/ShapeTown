@@ -76,7 +76,7 @@ const SettingsComponent = ({ onClose }) => {
           <div className="w-64 space-y-4">
             <div className="flex items-center gap-2 justify-center">
               <div className="w-32">
-                <img 
+                <img
                   src="/assets/hud/Options/soundText.png"
                   alt="Sound"
                   className="w-full"

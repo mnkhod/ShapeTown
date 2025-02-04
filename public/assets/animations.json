@@ -1427,6 +1427,174 @@
             "skipMissedFrames": true,
             "repeat": -1,
             "randomFrame": false
+        },
+        {
+            "key": "HelpBottomIconHelpBottomIcon",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "HelpBottomIcon",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "HelpBottomIcon",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "HelpBottomIcon",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "yoyo": true,
+            "randomFrame": false
+        },
+        {
+            "key": "HelpButtonIconHelpButtonIcon",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "HelpButtonIcon",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "HelpButtonIcon",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "HelpButtonIcon",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "yoyo": true,
+            "randomFrame": false
+        },
+        {
+            "key": "HomeButtonIconHomeButtonIcon",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "HomeButtonIcon",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "HomeButtonIcon",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "HomeButtonIcon",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "yoyo": true,
+            "randomFrame": false
+        },
+        {
+            "key": "LogoutIconLogoutIcon",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "LogoutIcon",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "LogoutIcon",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "LogoutIcon",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "yoyo": true,
+            "randomFrame": false
+        },
+        {
+            "key": "TrophyIconTrophyIcon",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "TrophyIcon",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "TrophyIcon",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "TrophyIcon",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "yoyo": true,
+            "randomFrame": false
+        },
+        {
+            "key": "InboxIconInboxIcon",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "InboxIcon",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "InboxIcon",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "InboxIcon",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 10,
+            "skipMissedFrames": true,
+            "yoyo": true,
+            "randomFrame": false
         }
     ],
     "globalTimeScale": 1,
