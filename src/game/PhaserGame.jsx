@@ -49,6 +49,16 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     }, [showModal, ref])
 
     useEffect(() => {
+        const handleSettingsModal = (currentScene) => {
+            showModal("SETTINGS", currentScene);
+        };
+
+        EventBus.on('show-settings-modal', handleSettingsModal);
+        
+        return () => EventBus.removeListener('show-settings-modal', handleSettingsModal);
+    }, [showModal]);
+    
+    useEffect(() => {
         const handleInventoryModal = (modalData) => {
             console.log('PhaserGame received:', modalData);
             if (modalData && modalData.phaserInstance) {

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import Phaser from 'phaser';
 import { PhaserGame } from './game/PhaserGame';
+import SettingsComponent from './components/Settings';
 import AchievementHUD from './components/AchievementHUD';
 import InventoryHUD from './components/InventoryHUD';
 import TokenTrader from './components/TokenTrader';
@@ -18,6 +19,7 @@ function App() {
     const [showInventory, setShowInventory] = useState(false);
     const [showTrader, setShowTrader] = useState(false);
     const [showQuest, setShowQuest] = useState(false);
+    const [showSettingsModal, setShowSettingsModal] = useState(false);
     const [phaserInstance, setPhaserInstance] = useState(null);
 
     const [gameData] = useState({});
@@ -52,6 +54,9 @@ function App() {
                 break;
             case "QUEST":
                 setShowQuest(true);
+                break;
+            case "SETTINGS":
+                setShowSettingsModal(true);
                 break;
             default:
                 break;
@@ -107,6 +112,12 @@ function App() {
                <QuestComponent 
                    onClose={() => setShowQuest(false)}
                />
+            )}
+            {showSettingsModal && (
+                <SettingsComponent
+                    isOpen={showSettingsModal}
+                    onClose={() => setShowSettingsModal(false)}
+                />
             )}
         </div>
     )

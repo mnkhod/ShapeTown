@@ -113,11 +113,6 @@ export default class OptionsListPrefab extends Phaser.GameObjects.Container {
 
         this.scene.events.on('update', this.onSceneUpdate, this);
 
-        scene.input.on('pointerdown', (pointer) => {
-            if (!this.getBounds().contains(pointer.x, pointer.y) && this.isOpen) {
-                this.closeMenu();
-            }
-        });
         /* END-USER-CTR-CODE */
 	}
 
@@ -127,7 +122,7 @@ export default class OptionsListPrefab extends Phaser.GameObjects.Container {
 
     const cam = this.scene.cameras.main;
     let newX = cam.worldView.right - 40;
-    let newY = cam.worldView.top + 40;
+    let newY = cam.worldView.top + 30;
 
     this.setPosition(
         Phaser.Math.Linear(this.x, newX, 1),
