@@ -345,18 +345,6 @@
             ]
         },
         {
-            "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
-            "id": "df96cb92-d1ce-4e02-bb0f-d6b7183367e4",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "playerPrefab",
-            "scope": "CLASS",
-            "x": 1347,
-            "y": 235
-        },
-        {
             "prefabId": "f7980c66-1efa-4178-a1ab-2857ad730e33",
             "id": "dcc4a27f-6eed-488b-b5f6-51fbbe2229c7",
             "unlock": [
@@ -379,6 +367,42 @@
             "scope": "CLASS",
             "x": 1182,
             "y": 350
+        },
+        {
+            "prefabId": "4c568c69-e878-43b5-b540-202e3822612e",
+            "id": "179725f4-d6fd-4817-9e4b-8295563c2a15",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree2Prefab",
+            "scope": "CLASS",
+            "x": 1135,
+            "y": 620
+        },
+        {
+            "prefabId": "dd84e278-c9ad-4953-a3de-7c0f684a339b",
+            "id": "821480a6-17a7-4513-9897-32d9a435dab0",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree3Prefab",
+            "scope": "CLASS",
+            "x": 1665,
+            "y": 416
+        },
+        {
+            "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
+            "id": "153d1ae7-9929-46a2-a0b4-a71f3780ca77",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "playerPrefab",
+            "scope": "CLASS",
+            "x": 1257,
+            "y": 679
         }
     ],
     "plainObjects": [

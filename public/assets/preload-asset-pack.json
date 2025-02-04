@@ -1637,8 +1637,8 @@
             {
                 "url": "assets/Tree/TreePalmSheet_02.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 160,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -1650,8 +1650,8 @@
             {
                 "url": "assets/Tree/TreePalmSheet_03.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 160,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -1724,6 +1724,7 @@
         "contentType": "phasereditor2d.pack.core.AssetContentType",
         "url": "https://phasereditor2d.com",
         "version": 2,
-        "showAllFilesInBlocks": false
+        "showAllFilesInBlocks": false,
+        "visible": true
     }
 }

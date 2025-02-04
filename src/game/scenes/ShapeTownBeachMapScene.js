@@ -3,9 +3,11 @@
 
 /* START OF COMPILED CODE */
 
-import PlayerPrefab from "../prefabs/PlayerPrefab";
 import BeachHousePrefab from "../prefabs/House/BeachHousePrefab";
 import BeachTree1Prefab from "../prefabs/Trees/BeachTree1Prefab";
+import BeachTree2Prefab from "../prefabs/Trees/BeachTree2Prefab";
+import BeachTree3Prefab from "../prefabs/Trees/BeachTree3Prefab";
+import PlayerPrefab from "../prefabs/PlayerPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -82,10 +84,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		// ligthhouse_1
 		const ligthhouse_1 = shapetownBeach.createLayer("ligthhouse", ["Lighthouse_v01"], 0, 0);
 
-		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 1347, 235);
-		this.add.existing(playerPrefab);
-
 		// beachHousePrefab
 		const beachHousePrefab = new BeachHousePrefab(this, 1415, 435);
 		this.add.existing(beachHousePrefab);
@@ -93,6 +91,18 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		// beachTree1Prefab
 		const beachTree1Prefab = new BeachTree1Prefab(this, 1182, 350);
 		this.add.existing(beachTree1Prefab);
+
+		// beachTree2Prefab
+		const beachTree2Prefab = new BeachTree2Prefab(this, 1135, 620);
+		this.add.existing(beachTree2Prefab);
+
+		// beachTree3Prefab
+		const beachTree3Prefab = new BeachTree3Prefab(this, 1665, 416);
+		this.add.existing(beachTree3Prefab);
+
+		// playerPrefab
+		const playerPrefab = new PlayerPrefab(this, 1257, 679);
+		this.add.existing(playerPrefab);
 
 		this.sand_1 = sand_1;
 		this.ship_stranded_1 = ship_stranded_1;
@@ -109,9 +119,11 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.blocker_2 = blocker_2;
 		this.blocker_3 = blocker_3;
 		this.ligthhouse_1 = ligthhouse_1;
-		this.playerPrefab = playerPrefab;
 		this.beachHousePrefab = beachHousePrefab;
 		this.beachTree1Prefab = beachTree1Prefab;
+		this.beachTree2Prefab = beachTree2Prefab;
+		this.beachTree3Prefab = beachTree3Prefab;
+		this.playerPrefab = playerPrefab;
 		this.shapetownBeach = shapetownBeach;
 
 		this.events.emit("scene-awake");
@@ -147,12 +159,16 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	blocker_3;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	ligthhouse_1;
-	/** @type {PlayerPrefab} */
-	playerPrefab;
 	/** @type {BeachHousePrefab} */
 	beachHousePrefab;
 	/** @type {BeachTree1Prefab} */
 	beachTree1Prefab;
+	/** @type {BeachTree2Prefab} */
+	beachTree2Prefab;
+	/** @type {BeachTree3Prefab} */
+	beachTree3Prefab;
+	/** @type {PlayerPrefab} */
+	playerPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownBeach;
 
@@ -160,12 +176,27 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 	// Write your code here
 
+	
+
 	create() {
+
+	const TILE_IDS = {
+    BeachWaterCenter: 13
+    };
+
+	this.anims.create({
+    key: 'harvest_ground',
+    frames: this.anims.generateFrameNumbers('BeachWaterCenter', { start: 0, end: 3 }),
+    frameRate: 8,
+    repeat: -1
+    });
 
 		this.editorCreate();
 
 		this.beachHousePrefab.setupCollision(this.playerPrefab)
 		this.beachTree1Prefab.setupCollision(this.playerPrefab)
+		this.beachTree2Prefab.setupCollision(this.playerPrefab)
+		this.beachTree3Prefab.setupCollision(this.playerPrefab)
 
 		this.cameras.main.setBounds(0, 0, 2560, 1650);
         this.physics.world.bounds.width = 1000;
@@ -176,6 +207,10 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	    this.physics.add.collider(this.playerPrefab, this.tree_1);
 	    this.tree_1.setCollisionBetween(0,1592);
 	    // this.tree_1.renderDebug(this.add.graphics());
+
+		 this.physics.add.collider(this.playerPrefab, this.sand_1);
+	    this.sand_1.setCollisionBetween(0,13);
+	    // this.sand_1.renderDebug(this.add.graphics());
 
 
 

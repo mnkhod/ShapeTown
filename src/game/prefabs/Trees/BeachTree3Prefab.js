@@ -5,40 +5,39 @@
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class BeachTree1Prefab extends Phaser.GameObjects.Sprite {
+export default class BeachTree3Prefab extends Phaser.GameObjects.Sprite {
 
-	constructor(scene, x, y, texture, frame) {
-		super(scene, x ?? 65, y ?? 105, texture || "TreePalmSheet_01", frame ?? 0);
+    constructor(scene, x, y, texture, frame) {
+        super(scene, x ?? 48, y ?? 80, texture || "TreePalmSheet_03", frame ?? 0);
 
-		this.play("BeachTree_1");
+        this.play("BeachTree_3");
 
-		/* START-USER-CTR-CODE */
+        /* START-USER-CTR-CODE */
         // Setup physics
         scene.add.existing(this);
         scene.physics.add.existing(this, false);
 
         this.body.allowGravity = false;
-        this.body.setSize(30, 15);  
-        this.body.setOffset(70, 135); 
+        this.body.setSize(20, 15);  
+        this.body.setOffset(40, 105);  
+        this.body.moves = false;
         this.body.immovable = true;
 
-   
         this.isTreeInvisible = false;
         this.isPlayerInvisible = false;
 
-     
-        this.treeTop = this.y - 125;  
-        this.treeBottom = this.y + 10; 
+        this.treeTop = this.y - 125;    
+        this.treeBottom = this.y + 3;   
 
         scene.events.on('update', () => {
             if (!this.player) return;
 
-            const playerNearTreeX = Math.abs(this.player.x - (this.x + this.body.offset.x - 85)) < 45;
-
+            const playerNearTreeX = Math.abs(this.player.x - (this.x + this.body.offset.x - 50)) < 45;
 
             const playerBehindTree = this.player.y > this.treeTop && 
                                    this.player.y < this.treeBottom - 20 && 
                                    playerNearTreeX;
+
             if (playerBehindTree) {
                 if (!this.isTreeInvisible) {
                     scene.tweens.add({
@@ -63,7 +62,6 @@ export default class BeachTree1Prefab extends Phaser.GameObjects.Sprite {
                     });
                 }
             } else {
-           
                 if (this.isTreeInvisible) {
                     scene.tweens.add({
                         targets: this,
@@ -89,12 +87,12 @@ export default class BeachTree1Prefab extends Phaser.GameObjects.Sprite {
             }
         });
         /* END-USER-CTR-CODE */
-	}
+    }
 
-	/* START-USER-CODE */
+    /* START-USER-CODE */
     setupCollision(player) {
         if (!this.scene || !player) return;
-
+        
         this.scene.physics.add.collider(player, this, null, null, this);
         this.player = player;
     }
