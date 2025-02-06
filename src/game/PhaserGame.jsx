@@ -80,6 +80,43 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
 
         return () => EventBus.removeListener('show-market-modal');
     }, [showModal, ref])
+
+    useEffect(() => {
+        EventBus.on('show-navigate-modal', (currentScene) => {
+            showModal("NAVIGATE", currentScene);
+        });
+
+        return () => EventBus.removeListener('show-navigate-modal');
+
+    }, [showModal]);
+
+    useEffect(() => {
+        EventBus.on('show-mail-modal', (currentScene) => {
+            showModal("MAIL", currentScene);
+        });
+
+        return () => EventBus.removeListener('show-mail-modal');
+
+    }, [showModal]);
+
+    useEffect(() => {
+        EventBus.on('show-help-modal', (currentScene) => {
+            showModal("HELP", currentScene);
+        });
+
+        return () => EventBus.removeListener('show-help-modal');
+
+    }, [showModal]);
+
+    useEffect(() => {
+        EventBus.on('show-signout-modal', (currentScene) => {
+            showModal("SIGNOUT", currentScene);
+        });
+
+        return () => EventBus.removeListener('show-signout-modal');
+
+    }, [showModal]);
+
     useEffect(() => {
     
         EventBus.on('show-quest-modal', (currentScene) => {
@@ -88,6 +125,17 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     
         return () => EventBus.removeListener('show-quest-modal');
     }, [showModal]);
+
+    useEffect(() => {
+    
+        EventBus.on('show-leaderboard-modal', (currentScene) => {
+            showModal("LEADERBOARD", currentScene);
+        });
+    
+        return () => EventBus.removeListener('show-leaderboard-modal');
+    }, [showModal]);
+
+
     return (
         <div id="game-container" className="h-screen"></div>
     );

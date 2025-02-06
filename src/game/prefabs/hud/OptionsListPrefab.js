@@ -156,23 +156,48 @@ handleSettings() {
 }
 
 handleHome() {
-    console.log('Home clicked');
+    if (this.scene.reactEvent) {
+        
+        this.scene.time.delayedCall(10, () => {
+            this.scene.reactEvent.emit("show-navigate-modal");
+        });
+    }
 }
-
 handleInbox() {
-    console.log('Inbox clicked');
+    if (this.scene.reactEvent) {
+        
+        this.scene.time.delayedCall(10, () => {
+            this.scene.reactEvent.emit("show-mail-modal");
+        });
+    }
 }
 
 handleHelp() {
-    console.log('Help clicked');
+    
+    if (this.scene.reactEvent) {
+        
+        this.scene.time.delayedCall(10, () => {
+            this.scene.reactEvent.emit("show-help-modal");
+        });
+    }
 }
 
 handleLogout() {
-    console.log('Logout clicked');
+    if (this.scene.reactEvent) {
+        
+        this.scene.time.delayedCall(10, () => {
+            this.scene.reactEvent.emit("show-signout-modal");
+        });
+    }
 }
 
 handleTrophy() {
-    console.log('Trophy clicked');
+    if (this.scene.reactEvent) {
+        
+        this.scene.time.delayedCall(10, () => {
+            this.scene.reactEvent.emit("show-leaderboard-modal");
+        });
+    }
 }
 
 destroy() {

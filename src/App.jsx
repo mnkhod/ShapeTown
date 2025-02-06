@@ -7,6 +7,11 @@ import AchievementHUD from './components/AchievementHUD';
 import InventoryHUD from './components/InventoryHUD';
 import TokenTrader from './components/TokenTrader';
 import QuestComponent from './components/QuestComponent';
+import NavigateBack from './components/NavigateBack';
+import MailInterface from './components/MailComponent';
+import HelpInterface from './components/HelpAndSupport';
+import SignOutModal from './components/LogoutComponent';
+import LeaderboardComponent from './components/LeaderBoard';
 import { ethers } from "ethers";
 import { EventBus } from "./game/EventBus";
 
@@ -21,6 +26,11 @@ function App() {
     const [showQuest, setShowQuest] = useState(false);
     const [showSettingsModal, setShowSettingsModal] = useState(false);
     const [phaserInstance, setPhaserInstance] = useState(null);
+    const [showNavigateBack, setShowNavigateBack] = useState(false);
+    const [showMail, setShowMail] = useState(false);
+    const [showHelpSupport, setShowHelpSupport] = useState(false);
+    const [showSignOutModal, setShowSignOutModal] = useState(false);
+    const [showLeaderboard, setShowLeaderboard] = useState(false);
 
     const [gameData] = useState({});
 
@@ -35,6 +45,15 @@ function App() {
 
     const showModal = (id, modalData) => {
         console.log('App showModal received:', { id, modalData });
+        setShowAchievements(false);
+        setShowInventory(false);
+        setShowTrader(false);
+        setShowQuest(false);
+        setShowSettingsModal(false);
+        setShowNavigateBack(false);
+        setShowMail(false);
+        setShowHelpSupport(false);
+        setShowLeaderboard(false);
     
         switch (id) {
             case "ACHIVEMENTS":
@@ -45,8 +64,6 @@ function App() {
                 if (modalData && modalData.phaserInstance) {
                     setPhaserInstance(modalData.phaserInstance);
                     setShowInventory(true);
-                } else {
-                    console.error('Missing phaserInstance in modalData:', modalData);
                 }
                 break;
             case "MARKET":
@@ -58,6 +75,22 @@ function App() {
             case "SETTINGS":
                 setShowSettingsModal(true);
                 break;
+            case "NAVIGATE":
+                setShowNavigateBack(true);
+                break;
+            case "MAIL":
+                setShowMail(true);
+                break;
+            case "HELP":
+                setShowHelpSupport(true);
+                break;
+            case "SIGNOUT":
+                setShowSignOutModal(true);
+                break;
+            case "LEADERBOARD":
+                setShowLeaderboard(true);
+                break;
+                
             default:
                 break;
         }
@@ -119,6 +152,37 @@ function App() {
                     onClose={() => setShowSettingsModal(false)}
                 />
             )}
+            {showNavigateBack && (
+                <NavigateBack
+                    onClose={() => setShowNavigateBack(false)}
+                    isOpen={showNavigateBack}
+                />
+            )}
+            {showMail && (
+                <MailInterface
+                    onClose={() => setShowMail(false)}
+                    isOpen={showMail}
+                />
+            )}
+            {showHelpSupport && (
+                <HelpInterface
+                  onClose={() => setShowHelpSupport(false)}
+                  isOpen={showHelpSupport}
+                />
+            )}
+            {showSignOutModal && (
+                <SignOutModal
+                    onClose={() => setShowSignOutModal(false)}
+                    isOpen={showSignOutModal}
+                />
+            )}
+            {showLeaderboard && (
+                <LeaderboardComponent
+                    onClose={() => setShowLeaderboard(false)}
+                    isOpen={showLeaderboard}
+                />
+            )}
+
         </div>
     )
 }
