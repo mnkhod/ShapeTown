@@ -826,16 +826,34 @@
             "y": 480
         },
         {
+            "prefabId": "2e844f73-6bf0-4cf6-98c7-64322f7616d0",
+            "id": "1b55c2ea-8ac7-4eba-896a-9f6e571883d8",
+            "unlock": [
+                "x",
+                "y",
+                "scaleX",
+                "scaleY",
+                "visible"
+            ],
+            "label": "minimapPrefab",
+            "scope": "CLASS",
+            "x": 65,
+            "y": 73,
+            "scaleX": 1,
+            "scaleY": 1,
+            "visible": false
+        },
+        {
             "prefabId": "e1ab5904-77e5-46c1-9532-c3d7be0e73be",
-            "id": "c9a5c53b-410c-46c9-936e-a81737f92fb0",
+            "id": "56a9200e-60cc-4bdc-b249-ef3200d60a6e",
             "unlock": [
                 "x",
                 "y"
             ],
             "label": "optionsListPrefab",
             "scope": "CLASS",
-            "x": 971,
-            "y": 47
+            "x": 967,
+            "y": 30
         }
     ],
     "plainObjects": [

@@ -81,16 +81,22 @@ export default class OpenMapPrefab extends Phaser.GameObjects.Container {
 
     handleMapOpen() {
         if (!this.scene.reactEvent) return;
-
         this.isMapOpen = true;
         this.scene.reactEvent.emit("show-map-modal");
+        
+        if (this.scene.minimapPrefab) {
+            this.scene.minimapPrefab.toggle();
+        }
     }
 
     handleMapClose() {
         if (!this.scene.reactEvent) return;
-
         this.isMapOpen = false;
         this.scene.reactEvent.emit("close-map-modal");
+        
+        if (this.scene.minimapPrefab && this.scene.minimapPrefab.visible) {
+            this.scene.minimapPrefab.toggle();
+        }
     }
 
     onSceneUpdate() {

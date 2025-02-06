@@ -17,6 +17,7 @@ import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import OpenInventory from "../prefabs/hud/OpenInventory";
 import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
+import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 /* START-USER-IMPORTS */
 import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
@@ -214,8 +215,15 @@ export default class TutorialScene extends Phaser.Scene {
 		const openMapPrefab = new OpenMapPrefab(this, 346, 480);
 		this.add.existing(openMapPrefab);
 
+		// minimapPrefab
+		const minimapPrefab = new MinimapPrefab(this, 65, 73);
+		this.add.existing(minimapPrefab);
+		minimapPrefab.scaleX = 1;
+		minimapPrefab.scaleY = 1;
+		minimapPrefab.visible = false;
+
 		// optionsListPrefab
-		const optionsListPrefab = new OptionsListPrefab(this, 971, 47);
+		const optionsListPrefab = new OptionsListPrefab(this, 967, 30);
 		this.add.existing(optionsListPrefab);
 
 		// oldManJackNpcPrefab (prefab fields)
@@ -250,6 +258,8 @@ export default class TutorialScene extends Phaser.Scene {
 		this.newItemHudPrefab = newItemHudPrefab;
 		this.openInventory = openInventory;
 		this.openMapPrefab = openMapPrefab;
+		this.minimapPrefab = minimapPrefab;
+		this.optionsListPrefab = optionsListPrefab;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -307,6 +317,10 @@ export default class TutorialScene extends Phaser.Scene {
 	openInventory;
 	/** @type {OpenMapPrefab} */
 	openMapPrefab;
+	/** @type {MinimapPrefab} */
+	minimapPrefab;
+	/** @type {OptionsListPrefab} */
+	optionsListPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 
@@ -318,7 +332,6 @@ export default class TutorialScene extends Phaser.Scene {
 
 	create() {
 		this.editorCreate();
-
 		this.cameras.main.setBounds(-120, -130, 1344, 1792);
         this.physics.world.bounds.width = 1000;
         this.physics.world.bounds.height = 800;
@@ -394,9 +407,14 @@ export default class TutorialScene extends Phaser.Scene {
 			this.playerPrefab.x -= 50
         	this.cameras.main.fadeIn(2000, 0, 0, 0);
         });
-		if (this.optionsListPrefab){
-			this.optionsListPrefab.visible = false;
-		}
+
+		if (this.minimapPrefab && this.playerPrefab) {
+            this.minimapPrefab.setPlayer(this.playerPrefab);
+            this.minimapPrefab.visible = false;
+            if (this.minimapPrefab.minimapCamera) {
+                this.minimapPrefab.minimapCamera.visible = false;
+            }
+        }
 		if (this.questBookPrefab) {
             this.questBookPrefab.visible = false;
         }
