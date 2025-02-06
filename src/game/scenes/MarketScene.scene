@@ -956,10 +956,34 @@
             ],
             "label": "openInventory",
             "scope": "CLASS",
-            "x": 975,
-            "y": 720,
+            "x": 929,
+            "y": 718,
             "scaleX": 1,
             "scaleY": 1
+        },
+        {
+            "prefabId": "511211d3-4280-4710-b0e3-c823277bb8e4",
+            "id": "3a6fa514-81f9-46d3-bc24-268424280dfb",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "openMapPrefab",
+            "scope": "CLASS",
+            "x": 969,
+            "y": 719
+        },
+        {
+            "prefabId": "e1ab5904-77e5-46c1-9532-c3d7be0e73be",
+            "id": "f30938b9-3dd9-49db-a033-acca8426b8ee",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "optionsListPrefab",
+            "scope": "CLASS",
+            "x": 982,
+            "y": 28
         }
     ],
     "plainObjects": [

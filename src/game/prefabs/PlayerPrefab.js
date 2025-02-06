@@ -14,7 +14,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 		scene.physics.add.existing(this, false);
 		this.body.allowGravity = false;
 		this.body.setSize(24, 12, false);
-        this.body.setOffset(0, 40);
+        this.body.setOffset(0, 36);
       
 
         this.setDepth(1);

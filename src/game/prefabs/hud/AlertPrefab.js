@@ -71,7 +71,7 @@ export default class AlertPrefab extends Phaser.GameObjects.Container {
 			let fullWidth = Math.floor(this.getBounds().width)
 			let fullHeight = Math.floor(this.getBounds().height)
 
-			let newX = cam.worldView.right - fullWidth - 35
+			let newX = cam.worldView.right - fullWidth - 60
 			let newY = cam.worldView.top + 10
 
 			this.setPosition(

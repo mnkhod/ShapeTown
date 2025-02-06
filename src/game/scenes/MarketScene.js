@@ -22,6 +22,8 @@ import SoldierNolanPrefab from "../prefabs/npcs/SoldierNolanPrefab";
 import SoldierWillemPrefab from "../prefabs/npcs/SoldierWillemPrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import OpenInventory from "../prefabs/hud/OpenInventory";
+import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
+import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -218,10 +220,18 @@ export default class MarketScene extends Phaser.Scene {
 		newItemHudPrefab.scaleY = 1;
 
 		// openInventory
-		const openInventory = new OpenInventory(this, 975, 720);
+		const openInventory = new OpenInventory(this, 929, 718);
 		this.add.existing(openInventory);
 		openInventory.scaleX = 1;
 		openInventory.scaleY = 1;
+
+		// openMapPrefab
+		const openMapPrefab = new OpenMapPrefab(this, 969, 719);
+		this.add.existing(openMapPrefab);
+
+		// optionsListPrefab
+		const optionsListPrefab = new OptionsListPrefab(this, 982, 28);
+		this.add.existing(optionsListPrefab);
 
 		this.must_Background_grass_1 = must_Background_grass_1;
 		this.must_Background_DecorationOnGrass_1 = must_Background_DecorationOnGrass_1;
@@ -263,6 +273,8 @@ export default class MarketScene extends Phaser.Scene {
 		this.soldierWillemPrefab = soldierWillemPrefab;
 		this.newItemHudPrefab = newItemHudPrefab;
 		this.openInventory = openInventory;
+		this.openMapPrefab = openMapPrefab;
+		this.optionsListPrefab = optionsListPrefab;
 		this.marketMap = marketMap;
 
 		this.events.emit("scene-awake");
@@ -348,6 +360,10 @@ export default class MarketScene extends Phaser.Scene {
 	newItemHudPrefab;
 	/** @type {OpenInventory} */
 	openInventory;
+	/** @type {OpenMapPrefab} */
+	openMapPrefab;
+	/** @type {OptionsListPrefab} */
+	optionsListPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	marketMap;
 
@@ -358,6 +374,8 @@ export default class MarketScene extends Phaser.Scene {
 	create() {
 		this.editorCreate();
 
+		this.optionsListPrefab.setDepth(100);
+		this.openMapPrefab.setDepth(100);
 		this.newItemHudPrefab.setDepth(100);
 		this.questBookPrefab.setDepth(100);
 		this.playerPrefab.setDepth(50);

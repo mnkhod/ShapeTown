@@ -235,6 +235,30 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 		text8.setStyle({ "align": "right", "color": "#000", "fontFamily": "Little Malio 8-Bit", "fontSize": "10px" });
 		itemBox8.add(text8);
 
+		// keyboard_1
+		const keyboard_1 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ONE);
+
+		// keyboard_2
+		const keyboard_2 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.TWO);
+
+		// keyboard_3
+		const keyboard_3 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.THREE);
+
+		// keyboard_4
+		const keyboard_4 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FOUR);
+
+		// keyboard_5
+		const keyboard_5 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.FIVE);
+
+		// keyboard_6
+		const keyboard_6 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SIX);
+
+		// keyboard_7
+		const keyboard_7 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SEVEN);
+
+		// keyboard_8
+		const keyboard_8 = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.EIGHT);
+
 		// lists
 		const items = [item1, item2, item3, item4, item5, item6, item7, item8];
 		const itemCounters = [text1, text2, text3, text4, text5, text6, text7, text8];
@@ -274,6 +298,14 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 		this.activeSlot_8 = activeSlot_8;
 		this.item8 = item8;
 		this.text8 = text8;
+		this.keyboard_1 = keyboard_1;
+		this.keyboard_2 = keyboard_2;
+		this.keyboard_3 = keyboard_3;
+		this.keyboard_4 = keyboard_4;
+		this.keyboard_5 = keyboard_5;
+		this.keyboard_6 = keyboard_6;
+		this.keyboard_7 = keyboard_7;
+		this.keyboard_8 = keyboard_8;
 		this.items = items;
 		this.itemCounters = itemCounters;
 		this.activeItemSlots = activeItemSlots;
@@ -361,6 +393,22 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	item8;
 	/** @type {Phaser.GameObjects.Text} */
 	text8;
+	/** @type {Phaser.Input.Keyboard.Key} */
+	keyboard_1;
+	/** @type {Phaser.Input.Keyboard.Key} */
+	keyboard_2;
+	/** @type {Phaser.Input.Keyboard.Key} */
+	keyboard_3;
+	/** @type {Phaser.Input.Keyboard.Key} */
+	keyboard_4;
+	/** @type {Phaser.Input.Keyboard.Key} */
+	keyboard_5;
+	/** @type {Phaser.Input.Keyboard.Key} */
+	keyboard_6;
+	/** @type {Phaser.Input.Keyboard.Key} */
+	keyboard_7;
+	/** @type {Phaser.Input.Keyboard.Key} */
+	keyboard_8;
 	/** @type {Phaser.GameObjects.Sprite[]} */
 	items;
 	/** @type {Phaser.GameObjects.Text[]} */
@@ -409,6 +457,39 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 
 	onSceneUpdate() {
 	    if (!this.visible) return;
+
+		const hotkeyMap = [
+	        this.keyboard_1,
+	        this.keyboard_2,
+	        this.keyboard_3,
+	        this.keyboard_4,
+	        this.keyboard_5,
+	        this.keyboard_6,
+	        this.keyboard_7,
+	        this.keyboard_8
+	    ];
+
+		hotkeyMap.forEach((key, index) => {
+	        if (Phaser.Input.Keyboard.JustDown(key)) {
+	            // Deactivate all slots
+	            this.activeItemSlots.forEach(activeSlot => activeSlot.visible = false);
+	            
+	            // Activate selected slot
+	            this.activeItemSlots[index].visible = true;
+	            
+	            // Update selected item and index
+	            this.selectedItem = this.itemData[index];
+	            this.activeIndex = index;
+	            
+	            // Emit event for React integration if needed
+	            if (this.scene.reactEvent) {
+	                this.scene.reactEvent.emit('inventory-slot-selected', {
+	                    index,
+	                    item: this.selectedItem
+	                });
+	            }
+	        }
+	    });
 
 	    const cam = this.scene.cameras.main;
 

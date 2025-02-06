@@ -51,8 +51,6 @@ export default class ProfilePrefab extends Phaser.GameObjects.Container {
     }
 
 onSceneCreate() {
-    this.visible = false;
-
     this.setInteractive({ 
         useHandCursor: true,
         hitArea: new Phaser.Geom.Rectangle(-60, -20, 120, 70),

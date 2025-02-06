@@ -24,7 +24,7 @@ const HelpInterface = ({ onClose }) => {
             <img 
               src="/assets/files/image%2035.png" 
               alt="Close"
-              className="w-8 h-8 hover:opacity-80 transition-opacity"
+              className="w-12 h-12 hover:opacity-80 transition-opacity"
             />
           </div>
 

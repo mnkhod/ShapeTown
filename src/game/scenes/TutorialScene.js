@@ -394,6 +394,9 @@ export default class TutorialScene extends Phaser.Scene {
 			this.playerPrefab.x -= 50
         	this.cameras.main.fadeIn(2000, 0, 0, 0);
         });
+		if (this.optionsListPrefab){
+			this.optionsListPrefab.visible = false;
+		}
 		if (this.questBookPrefab) {
             this.questBookPrefab.visible = false;
         }
@@ -403,24 +406,6 @@ export default class TutorialScene extends Phaser.Scene {
         if (this.profilePrefab) {
             this.profilePrefab.visible = false;
         }
-
-		// this.time.delayedCall(100, () => {
-		// 	this.questBookPrefab.visible = true
-		// 	this.newItemHudPrefab.visible = true;
-		// 	this.profilePrefab.visible = true;
-
-		// 	this.newItemHudPrefab.addItem("WATERING_CAN","IconBaseTools",0)
-		// 	this.newItemHudPrefab.addItem("HOE","IconBaseTools",1)
-		// 	this.newItemHudPrefab.addItem("PICK_AXE","IconBaseTools",2)
-		// 	this.newItemHudPrefab.addItem("CARROT_SEED","SeedBag",0,5)
-		// 	// this.newItemHudPrefab.addItem("CARROT","FarmingCropsVer2",6,1)
-
-		// 	this.newItemHudPrefab.addItem("FISH","FishIcon",0,1,true)
-		// }, {}, this)
-
-		// this.reactEvent.on('blockchain-account', (address) => {
-        //     console.log(address);
-        // });
 
         let bounds = this.fishingArea.getBounds()
         let newX = bounds.x + bounds.width
@@ -445,6 +430,7 @@ export default class TutorialScene extends Phaser.Scene {
 			this.questBookPrefab.visible = true
 			this.newItemHudPrefab.visible = true;
 			this.profilePrefab.visible = true;
+			this.optionsListPrefab.visible = true;
 		}
 
 		if(this.achievements.giftFromNatureAchievement){

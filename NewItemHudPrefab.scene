@@ -497,7 +497,56 @@
             ]
         }
     ],
-    "plainObjects": [],
+    "plainObjects": [
+        {
+            "id": "2c9700cb-6116-4a74-a267-0e3f1f9a0a7c",
+            "type": "Keyboard.Key",
+            "label": "keyboard_1",
+            "keyCode": "ONE"
+        },
+        {
+            "id": "427d60f6-0f2b-48d0-9176-c21fd9024f26",
+            "type": "Keyboard.Key",
+            "label": "keyboard_2",
+            "keyCode": "TWO"
+        },
+        {
+            "id": "e035da19-3f4b-40ff-b611-2c50836b06a3",
+            "type": "Keyboard.Key",
+            "label": "keyboard_3",
+            "keyCode": "THREE"
+        },
+        {
+            "id": "fbf469ef-460a-4d75-a1b2-f3f1e8cac5ba",
+            "type": "Keyboard.Key",
+            "label": "keyboard_4",
+            "keyCode": "FOUR"
+        },
+        {
+            "id": "8198f2a5-a430-4f10-af49-47630d3a24da",
+            "type": "Keyboard.Key",
+            "label": "keyboard_5",
+            "keyCode": "FIVE"
+        },
+        {
+            "id": "72295da0-5c4e-4741-85c1-786ffbe5820f",
+            "type": "Keyboard.Key",
+            "label": "keyboard_6",
+            "keyCode": "SIX"
+        },
+        {
+            "id": "f27da0f0-2d30-4b74-a098-9a52307cb80c",
+            "type": "Keyboard.Key",
+            "label": "keyboard_7",
+            "keyCode": "SEVEN"
+        },
+        {
+            "id": "a6d1d288-b21b-40c1-8f82-dad757a90c35",
+            "type": "Keyboard.Key",
+            "label": "keyboard_8",
+            "keyCode": "EIGHT"
+        }
+    ],
     "meta": {
         "app": "Phaser Editor - Scene Editor",
         "url": "https://phaser.io/editor",
