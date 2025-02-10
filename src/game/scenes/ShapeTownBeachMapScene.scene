@@ -45,8 +45,8 @@
             ],
             "label": "beachDeckPrefab",
             "scope": "CLASS",
-            "x": 1494,
-            "y": 960
+            "x": 1508,
+            "y": 952
         },
         {
             "type": "TilemapLayer",

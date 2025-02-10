@@ -1329,6 +1329,58 @@
                 "key": "RoadStone"
             },
             {
+                "url": "assets/Mob/Enemies/DungenLVL1/RockMonster/Attak/RockAttack_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockAttack_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/RockMonster/Death/RockDeath_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockDeath_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/RockMonster/Damage taken/RockHurt_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockHurt_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/RockMonster/Idle/RockIdle_v01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockIdle_v01"
+            },
+            {
                 "url": "assets/Decoration/RockOnGrass_V02.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -1366,6 +1418,19 @@
                 },
                 "type": "spritesheet",
                 "key": "RocksOnGrass_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/RockMonster/Walk/RockWalking_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockWalking_V01"
             },
             {
                 "url": "assets/Building/SeaLevelBuildingLighthouse_v01.png",

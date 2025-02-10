@@ -45,7 +45,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		const sand_1 = shapetownBeach.createLayer("Sand", ["BeachWaterSheet_v01"], 0, 0);
 
 		// beachDeckPrefab
-		const beachDeckPrefab = new BeachDeckPrefab(this, 1494, 960);
+		const beachDeckPrefab = new BeachDeckPrefab(this, 1508, 952);
 		this.add.existing(beachDeckPrefab);
 
 		// ship_stranded_1
