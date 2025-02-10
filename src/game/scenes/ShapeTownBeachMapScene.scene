@@ -280,6 +280,28 @@
         },
         {
             "type": "TilemapLayer",
+            "id": "550a970c-b17a-4cd3-a52a-7a1b509aa6a2",
+            "label": "deck_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "deck",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
             "id": "81fbd3aa-fce1-46d2-95d1-a9496f16e5d1",
             "label": "blocker_3",
             "scope": "CLASS",

@@ -75,6 +75,9 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		// blocker_2
 		const blocker_2 = shapetownBeach.createLayer("blocker3", ["RockOnSand_V01"], 0, 0);
 
+		// deck_1
+		const deck_1 = shapetownBeach.createLayer("deck", ["BeachDeckSheet","CapitansCabin"], 0, 0);
+
 		// blocker_3
 		const blocker_3 = shapetownBeach.createLayer("blocker4", ["RockOnSand_V01"], 0, 0);
 
@@ -110,6 +113,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.blocker = blocker;
 		this.blocker_1 = blocker_1;
 		this.blocker_2 = blocker_2;
+		this.deck_1 = deck_1;
 		this.blocker_3 = blocker_3;
 		this.beachHousePrefab = beachHousePrefab;
 		this.beachTree1Prefab = beachTree1Prefab;
@@ -145,6 +149,8 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	blocker_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	blocker_2;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	deck_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	blocker_3;
 	/** @type {BeachHousePrefab} */
@@ -207,6 +213,11 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	    this.sand_1.setCollision([172, 173, 137, 174, 141, 107]);
 	    // this.sand_1.renderDebug(this.add.graphics());
 
+
+
+		this.physics.add.collider(this.playerPrefab, this.deck_1);
+	    this.deck_1.setCollision([799, 802, 831, 834, 650, 652, 589, 590, 1088, 1089,1063, 1059, 1090, 1091, 1092, 1059, 1060, 1027, 1028, 1000, 1001, 617, 750, 678, 685, 618, 586, 554, 553, 553, 524]);
+	    // this.deck_1.renderDebug(this.add.graphics());
 
 
 	}
