@@ -1451,7 +1451,7 @@
                     "keyframe": false
                 }
             ],
-            "frameRate": 10,
+            "frameRate": 20,
             "skipMissedFrames": true,
             "yoyo": true,
             "randomFrame": false
@@ -1479,7 +1479,7 @@
                     "keyframe": false
                 }
             ],
-            "frameRate": 10,
+            "frameRate": 20,
             "skipMissedFrames": true,
             "yoyo": true,
             "randomFrame": false
@@ -1507,7 +1507,7 @@
                     "keyframe": false
                 }
             ],
-            "frameRate": 10,
+            "frameRate": 20,
             "skipMissedFrames": true,
             "yoyo": true,
             "randomFrame": false
@@ -1535,7 +1535,7 @@
                     "keyframe": false
                 }
             ],
-            "frameRate": 10,
+            "frameRate": 20,
             "skipMissedFrames": true,
             "yoyo": true,
             "randomFrame": false
@@ -1563,7 +1563,7 @@
                     "keyframe": false
                 }
             ],
-            "frameRate": 10,
+            "frameRate": 20,
             "skipMissedFrames": true,
             "yoyo": true,
             "randomFrame": false
@@ -1591,7 +1591,7 @@
                     "keyframe": false
                 }
             ],
-            "frameRate": 10,
+            "frameRate": 20,
             "skipMissedFrames": true,
             "yoyo": true,
             "randomFrame": false
@@ -1619,7 +1619,7 @@
                     "keyframe": false
                 }
             ],
-            "frameRate": 10,
+            "frameRate": 20,
             "skipMissedFrames": true,
             "yoyo": true,
             "randomFrame": false
@@ -1647,7 +1647,7 @@
                     "keyframe": false
                 }
             ],
-            "frameRate": 10,
+            "frameRate": 20,
             "skipMissedFrames": true,
             "yoyo": true,
             "randomFrame": false
@@ -1783,6 +1783,64 @@
                 {
                     "key": "TreePalmSheet_03",
                     "frame": 9,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "BeachWaterCenter",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 12,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 13,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 14,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 15,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 16,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 17,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 18,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 19,
                     "duration": 0,
                     "keyframe": false
                 }

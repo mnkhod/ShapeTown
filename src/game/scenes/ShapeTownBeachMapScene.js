@@ -60,9 +60,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		// stonesoad_1
 		const stonesoad_1 = shapetownBeach.createLayer("stonesoad", ["BeachDeckSheet"], 0, 0);
 
-		// deck_1
-		const deck_1 = shapetownBeach.createLayer("deck", ["BeachDeckSheet","CapitansCabin"], 0, 0);
-
 		// rock_decor_1
 		const rock_decor_1 = shapetownBeach.createLayer("Rock decor", ["RockOnSand_V01"], 0, 0);
 
@@ -80,9 +77,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 		// blocker_3
 		const blocker_3 = shapetownBeach.createLayer("blocker4", ["RockOnSand_V01"], 0, 0);
-
-		// ligthhouse_1
-		const ligthhouse_1 = shapetownBeach.createLayer("ligthhouse", ["Lighthouse_v01"], 0, 0);
 
 		// beachHousePrefab
 		const beachHousePrefab = new BeachHousePrefab(this, 1415, 435);
@@ -111,14 +105,12 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.cabin_1 = cabin_1;
 		this.tree_1 = tree_1;
 		this.stonesoad_1 = stonesoad_1;
-		this.deck_1 = deck_1;
 		this.rock_decor_1 = rock_decor_1;
 		this.shell_Decor_1 = shell_Decor_1;
 		this.blocker = blocker;
 		this.blocker_1 = blocker_1;
 		this.blocker_2 = blocker_2;
 		this.blocker_3 = blocker_3;
-		this.ligthhouse_1 = ligthhouse_1;
 		this.beachHousePrefab = beachHousePrefab;
 		this.beachTree1Prefab = beachTree1Prefab;
 		this.beachTree2Prefab = beachTree2Prefab;
@@ -144,8 +136,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	stonesoad_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	deck_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	rock_decor_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	shell_Decor_1;
@@ -157,8 +147,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	blocker_2;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	blocker_3;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	ligthhouse_1;
 	/** @type {BeachHousePrefab} */
 	beachHousePrefab;
 	/** @type {BeachTree1Prefab} */
@@ -176,20 +164,9 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 	// Write your code here
 
-	
+
 
 	create() {
-
-	const TILE_IDS = {
-    BeachWaterCenter: 13
-    };
-
-	this.anims.create({
-    key: 'harvest_ground',
-    frames: this.anims.generateFrameNumbers('BeachWaterCenter', { start: 0, end: 3 }),
-    frameRate: 8,
-    repeat: -1
-    });
 
 		this.editorCreate();
 
@@ -197,6 +174,24 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.beachTree1Prefab.setupCollision(this.playerPrefab)
 		this.beachTree2Prefab.setupCollision(this.playerPrefab)
 		this.beachTree3Prefab.setupCollision(this.playerPrefab)
+
+	    // this.anims.create({
+        // key: 'BeachWaterCenter',  
+        // frames: [
+        //     { key: 'sand_1', frame: 13 }
+        // ],
+        // frameRate: 8,
+        // repeat: -1 
+        // });
+
+        // this.animatedTiles.init(this.sand_1);
+        // this.sand_1.setAnimation([
+        // {
+        //     tileId: 13,
+        //     frameRate: 8,
+        //     frames: [13, 14, 15]
+        // }
+        // ]);
 
 		this.cameras.main.setBounds(0, 0, 2560, 1650);
         this.physics.world.bounds.width = 1000;
@@ -208,8 +203,8 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	    this.tree_1.setCollisionBetween(0,1592);
 	    // this.tree_1.renderDebug(this.add.graphics());
 
-		 this.physics.add.collider(this.playerPrefab, this.sand_1);
-	    this.sand_1.setCollisionBetween(0,13);
+		this.physics.add.collider(this.playerPrefab, this.sand_1);
+	    this.sand_1.setCollision([172, 173, 137, 174, 141, 107]);
 	    // this.sand_1.renderDebug(this.add.graphics());
 
 
