@@ -854,6 +854,18 @@
             "scope": "CLASS",
             "x": 967,
             "y": 30
+        },
+        {
+            "prefabId": "26b6b331-5847-4e61-b92e-748a6600902e",
+            "id": "77489e75-b776-4df8-b299-6b9131e43f5b",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "rockMonster",
+            "scope": "CLASS",
+            "x": 767,
+            "y": 153
         }
     ],
     "plainObjects": [

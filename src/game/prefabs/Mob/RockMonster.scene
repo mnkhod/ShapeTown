@@ -1,25 +1,33 @@
 {
     "id": "26b6b331-5847-4e61-b92e-748a6600902e",
+    "sceneType": "PREFAB",
     "settings": {
-        "createMethodName": "",
-        "preloadMethodName": "",
-        "compilerOutputLanguage": "JAVA_SCRIPT",
         "exportClass": true,
         "autoImport": true,
-        "importFileExtension": false,
-        "generateAwakeHandler": false,
-        "compilerInsertSpaces": false,
-        "compilerTabSize": 4,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
         "borderWidth": 1024,
-        "borderHeight": 768,
-        "borderX": 0,
-        "borderY": 0
+        "borderHeight": 768
     },
-    "sceneType": "PREFAB",
-    "displayList": [],
+    "displayList": [
+        {
+            "type": "Sprite",
+            "id": "ae770d73-28ff-4771-96fc-dd6a90c4b171",
+            "label": "sprite_1",
+            "texture": {
+                "key": "RockIdle_v01",
+                "frame": 0
+            },
+            "x": 32,
+            "y": 32
+        }
+    ],
+    "plainObjects": [],
     "meta": {
-        "app": "Phaser Editor 2D - Scene Editor",
-        "url": "https://phasereditor2d.com",
-        "contentType": "phasereditor2d.core.scene.SceneContentType"
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
     }
 }
