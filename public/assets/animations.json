@@ -1849,6 +1849,606 @@
             "skipMissedFrames": true,
             "repeat": -1,
             "randomFrame": false
+        },
+        {
+            "key": "BeachWater_1",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 74,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 75,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 76,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 77,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 78,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 79,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 80,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 81,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 82,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 83,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 84,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 85,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 86,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 87,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 88,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "BeachWater_3",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 323,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 324,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 325,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 326,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 327,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 328,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 329,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 330,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 331,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 332,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 333,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 334,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 335,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 336,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 337,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "BeachWater_4",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 391,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 392,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 393,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 394,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 395,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 396,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 397,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 398,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 399,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 400,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 401,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 402,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 403,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 404,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 405,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "BeachWater_2",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 289,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 290,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 291,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 292,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 293,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 294,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 295,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 296,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 297,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 298,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 299,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 300,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 301,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 302,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 303,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "BeachWater_5",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 40,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 41,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 42,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 43,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 44,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 45,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 46,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 47,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 48,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 49,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 50,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 51,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 52,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 53,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 54,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "BeachWater_6",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 142,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 143,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 144,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 145,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 146,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 147,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 148,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 149,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 150,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 151,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 152,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 153,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 154,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 155,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "BeachWaterSheet_v01",
+                    "frame": 156,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
         }
     ],
     "globalTimeScale": 1,

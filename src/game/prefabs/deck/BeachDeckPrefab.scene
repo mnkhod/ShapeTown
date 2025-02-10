@@ -1,0 +1,33 @@
+{
+    "id": "252c8648-7f44-40d2-9f1b-c2286de3897e",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "9d233ce6-2dcb-47dd-b1b0-4e56227bb39a",
+            "label": "shapetownBeach_10",
+            "texture": {
+                "key": "ShapetownBeach_1",
+                "frame": 0
+            },
+            "x": 224,
+            "y": 206
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

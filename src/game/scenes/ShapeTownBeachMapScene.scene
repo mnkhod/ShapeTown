@@ -37,6 +37,18 @@
             ]
         },
         {
+            "prefabId": "252c8648-7f44-40d2-9f1b-c2286de3897e",
+            "id": "471b0736-eac9-4207-af58-867d37bb1ccb",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachDeckPrefab",
+            "scope": "CLASS",
+            "x": 1494,
+            "y": 960
+        },
+        {
             "type": "TilemapLayer",
             "id": "59ca3227-8458-48a6-b34c-880c290061be",
             "label": "ship_stranded_1",
@@ -82,11 +94,11 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "03653e9c-d04c-48f9-9d7d-6fe49a7edbc4",
-            "label": "grass_1",
+            "id": "4296f0a5-cbfc-46a6-8be8-34e475d16d49",
+            "label": "cabin_1",
             "scope": "CLASS",
             "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
-            "layerName": "grass",
+            "layerName": "Cabin",
             "tilesets": [
                 "BeachWaterSheet_v01",
                 "BeachDeckSheet",
@@ -104,11 +116,11 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "4296f0a5-cbfc-46a6-8be8-34e475d16d49",
-            "label": "cabin_1",
+            "id": "bd813595-4209-4512-b2b1-8b8dec9d532f",
+            "label": "grass_1",
             "scope": "CLASS",
             "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
-            "layerName": "Cabin",
+            "layerName": "grass",
             "tilesets": [
                 "BeachWaterSheet_v01",
                 "BeachDeckSheet",
@@ -280,28 +292,6 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "550a970c-b17a-4cd3-a52a-7a1b509aa6a2",
-            "label": "deck_1",
-            "scope": "CLASS",
-            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
-            "layerName": "deck",
-            "tilesets": [
-                "BeachWaterSheet_v01",
-                "BeachDeckSheet",
-                "Lighthouse_v01",
-                "ShipStranded_01",
-                "BoatStranded",
-                "PalmTreePattern",
-                "TreePalmSheet_01",
-                "TreePalmSheet_03",
-                "TreePalmSheet_02",
-                "CapitansCabin",
-                "RockOnSand_V01",
-                "ShellBeach_V01"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
             "id": "81fbd3aa-fce1-46d2-95d1-a9496f16e5d1",
             "label": "blocker_3",
             "scope": "CLASS",
@@ -381,6 +371,18 @@
             "scope": "CLASS",
             "x": 1257,
             "y": 679
+        },
+        {
+            "prefabId": "5aebe3a1-c3ca-4c4d-8c06-25a73ca34ef3",
+            "id": "3244d574-d21f-4afa-8444-dc673d3e2935",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "seaLevelBuildingLighthousePrefab",
+            "scope": "CLASS",
+            "x": 800,
+            "y": 1130
         }
     ],
     "plainObjects": [

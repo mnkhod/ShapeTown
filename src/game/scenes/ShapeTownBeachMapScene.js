@@ -3,11 +3,13 @@
 
 /* START OF COMPILED CODE */
 
+import BeachDeckPrefab from "../prefabs/deck/BeachDeckPrefab";
 import BeachHousePrefab from "../prefabs/House/BeachHousePrefab";
 import BeachTree1Prefab from "../prefabs/Trees/BeachTree1Prefab";
 import BeachTree2Prefab from "../prefabs/Trees/BeachTree2Prefab";
 import BeachTree3Prefab from "../prefabs/Trees/BeachTree3Prefab";
 import PlayerPrefab from "../prefabs/PlayerPrefab";
+import SeaLevelBuildingLighthousePrefab from "../prefabs/House/SeaLevelBuildingLighthousePrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -42,17 +44,21 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		// sand_1
 		const sand_1 = shapetownBeach.createLayer("Sand", ["BeachWaterSheet_v01"], 0, 0);
 
+		// beachDeckPrefab
+		const beachDeckPrefab = new BeachDeckPrefab(this, 1494, 960);
+		this.add.existing(beachDeckPrefab);
+
 		// ship_stranded_1
 		const ship_stranded_1 = shapetownBeach.createLayer("ship stranded", ["ShipStranded_01"], 0, 0);
 
 		// boat_stranded_1
 		const boat_stranded_1 = shapetownBeach.createLayer("boat stranded", ["BoatStranded"], 0, 0);
 
-		// grass_1
-		const grass_1 = shapetownBeach.createLayer("grass", ["BeachDeckSheet"], 0, 0);
-
 		// cabin_1
 		const cabin_1 = shapetownBeach.createLayer("Cabin", [], 0, 0);
+
+		// grass_1
+		const grass_1 = shapetownBeach.createLayer("grass", ["BeachDeckSheet"], 0, 0);
 
 		// tree_1
 		const tree_1 = shapetownBeach.createLayer("tree", ["PalmTreePattern"], 0, 0);
@@ -74,9 +80,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 		// blocker_2
 		const blocker_2 = shapetownBeach.createLayer("blocker3", ["RockOnSand_V01"], 0, 0);
-
-		// deck_1
-		const deck_1 = shapetownBeach.createLayer("deck", ["BeachDeckSheet","CapitansCabin"], 0, 0);
 
 		// blocker_3
 		const blocker_3 = shapetownBeach.createLayer("blocker4", ["RockOnSand_V01"], 0, 0);
@@ -101,11 +104,16 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		const playerPrefab = new PlayerPrefab(this, 1257, 679);
 		this.add.existing(playerPrefab);
 
+		// seaLevelBuildingLighthousePrefab
+		const seaLevelBuildingLighthousePrefab = new SeaLevelBuildingLighthousePrefab(this, 800, 1130);
+		this.add.existing(seaLevelBuildingLighthousePrefab);
+
 		this.sand_1 = sand_1;
+		this.beachDeckPrefab = beachDeckPrefab;
 		this.ship_stranded_1 = ship_stranded_1;
 		this.boat_stranded_1 = boat_stranded_1;
-		this.grass_1 = grass_1;
 		this.cabin_1 = cabin_1;
+		this.grass_1 = grass_1;
 		this.tree_1 = tree_1;
 		this.stonesoad_1 = stonesoad_1;
 		this.rock_decor_1 = rock_decor_1;
@@ -113,13 +121,13 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.blocker = blocker;
 		this.blocker_1 = blocker_1;
 		this.blocker_2 = blocker_2;
-		this.deck_1 = deck_1;
 		this.blocker_3 = blocker_3;
 		this.beachHousePrefab = beachHousePrefab;
 		this.beachTree1Prefab = beachTree1Prefab;
 		this.beachTree2Prefab = beachTree2Prefab;
 		this.beachTree3Prefab = beachTree3Prefab;
 		this.playerPrefab = playerPrefab;
+		this.seaLevelBuildingLighthousePrefab = seaLevelBuildingLighthousePrefab;
 		this.shapetownBeach = shapetownBeach;
 
 		this.events.emit("scene-awake");
@@ -127,14 +135,16 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	sand_1;
+	/** @type {BeachDeckPrefab} */
+	beachDeckPrefab;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	ship_stranded_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	boat_stranded_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	grass_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	cabin_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	grass_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -150,8 +160,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	blocker_2;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	deck_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	blocker_3;
 	/** @type {BeachHousePrefab} */
 	beachHousePrefab;
@@ -163,14 +171,14 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	beachTree3Prefab;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
+	/** @type {SeaLevelBuildingLighthousePrefab} */
+	seaLevelBuildingLighthousePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownBeach;
 
 	/* START-USER-CODE */
 
 	// Write your code here
-
-
 
 	create() {
 
@@ -180,30 +188,45 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.beachTree1Prefab.setupCollision(this.playerPrefab)
 		this.beachTree2Prefab.setupCollision(this.playerPrefab)
 		this.beachTree3Prefab.setupCollision(this.playerPrefab)
-
-	    // this.anims.create({
-        // key: 'BeachWaterCenter',  
-        // frames: [
-        //     { key: 'sand_1', frame: 13 }
-        // ],
-        // frameRate: 8,
-        // repeat: -1 
-        // });
-
-        // this.animatedTiles.init(this.sand_1);
-        // this.sand_1.setAnimation([
-        // {
-        //     tileId: 13,
-        //     frameRate: 8,
-        //     frames: [13, 14, 15]
-        // }
-        // ]);
-
 		this.cameras.main.setBounds(0, 0, 2560, 1650);
         this.physics.world.bounds.width = 1000;
         this.physics.world.bounds.height = 800;
+		this.beachDeckPrefab.setDepth(1)
+		this.seaLevelBuildingLighthousePrefab.setDepth(2)
 
 	    // this.shapeFarmingHousePrefab.setupCollision(this.playerPrefab)
+
+		const waterTiles = this.sand_1.getTilesWithin();
+        waterTiles.forEach(tile => {
+        if (tile && tile.index === 13) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWaterCenter');
+        }
+		if (tile && tile.index === 140) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_1');
+        }
+		if ([137, 172].includes(tile.index)) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_2');
+        }
+		if (tile && tile.index === 138) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_3');
+        }
+		if (tile && tile.index === 173) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_4');
+        }
+		if ([141, 174].includes(tile.index)) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_5');
+        }
+		if (tile && tile.index === 107) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_6');
+        }
+        });
 
 	    this.physics.add.collider(this.playerPrefab, this.tree_1);
 	    this.tree_1.setCollisionBetween(0,1592);
@@ -213,11 +236,13 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	    this.sand_1.setCollision([172, 173, 137, 174, 141, 107]);
 	    // this.sand_1.renderDebug(this.add.graphics());
 
+		this.physics.add.collider(this.playerPrefab, this.sand_1);
+	    this.sand_1.setCollision(13);
+		//  this.sand_1.renderDebug(this.add.graphics())
 
-
-		this.physics.add.collider(this.playerPrefab, this.deck_1);
-	    this.deck_1.setCollision([799, 802, 831, 834, 650, 652, 589, 590, 1088, 1089,1063, 1059, 1090, 1091, 1092, 1059, 1060, 1027, 1028, 1000, 1001, 617, 750, 678, 685, 618, 586, 554, 553, 553, 524]);
-	    // this.deck_1.renderDebug(this.add.graphics());
+		// this.physics.add.collider(this.playerPrefab, this.beachDeckPrefab);
+	    // this.beachDeckPrefab.setCollision([799, 802, 831, 834, 650, 652, 589, 590, 1088, 1089,1063, 1059, 1090, 1091, 1092, 1059, 1060, 1027, 1028, 1000, 1001, 617, 750, 678, 685, 618, 586, 554, 553, 553, 524]);
+	    // // this.beachDeckPrefab.renderDebug(this.add.graphics());
 
 
 	}

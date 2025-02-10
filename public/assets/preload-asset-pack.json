@@ -1412,6 +1412,19 @@
                 "key": "ShapetownBeach"
             },
             {
+                "url": "assets/Decoration/ShapetownBeach.png",
+                "frameConfig": {
+                    "frameWidth": 448,
+                    "frameHeight": 416,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "ShapetownBeach_1"
+            },
+            {
                 "url": "assets/map/ShapetownFarming.json",
                 "type": "tilemapTiledJSON",
                 "key": "ShapetownFarming"
