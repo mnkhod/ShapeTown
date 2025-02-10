@@ -19,7 +19,7 @@ export default class SeaLevelBuildingLighthousePrefab extends Phaser.GameObjects
         this.isPlayerInvisible = false;
 
         // Define lighthouse's visible area - much taller than other objects
-        this.lighthouseTop = this.y - 250;    // Adjusted for lighthouse height
+        this.lighthouseTop = this.y - 340;    // Adjusted for lighthouse height
         this.lighthouseBottom = this.y + 150;   // Adjusted for lighthouse base
 
         // Add update listener for transparency

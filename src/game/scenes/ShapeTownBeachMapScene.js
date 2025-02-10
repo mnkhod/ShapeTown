@@ -101,7 +101,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.add.existing(beachTree3Prefab);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 1257, 679);
+		const playerPrefab = new PlayerPrefab(this, 800, 879);
 		this.add.existing(playerPrefab);
 
 		// seaLevelBuildingLighthousePrefab
@@ -188,6 +188,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.beachTree1Prefab.setupCollision(this.playerPrefab)
 		this.beachTree2Prefab.setupCollision(this.playerPrefab)
 		this.beachTree3Prefab.setupCollision(this.playerPrefab)
+		this.seaLevelBuildingLighthousePrefab.setupCollision(this.playerPrefab)
 		this.cameras.main.setBounds(0, 0, 2560, 1650);
         this.physics.world.bounds.width = 1000;
         this.physics.world.bounds.height = 800;
@@ -226,6 +227,34 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
         const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
         sprite.play('BeachWater_6');
         }
+		if (tile && tile.index === 37) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_7');
+        }
+		if (tile && tile.index === 103) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_8');
+        }
+		if (tile && tile.index === 69) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_9');
+        }
+		if (tile && tile.index === 38) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_10');
+        }
+		if (tile && tile.index === 70) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_13');
+        }
+		if (tile && tile.index === 72) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_12');
+        }
+		if (tile && tile.index === 73) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+        sprite.play('BeachWater_15');
+        }
         });
 
 	    this.physics.add.collider(this.playerPrefab, this.tree_1);
@@ -239,12 +268,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.physics.add.collider(this.playerPrefab, this.sand_1);
 	    this.sand_1.setCollision(13);
 		//  this.sand_1.renderDebug(this.add.graphics())
-
-		// this.physics.add.collider(this.playerPrefab, this.beachDeckPrefab);
-	    // this.beachDeckPrefab.setCollision([799, 802, 831, 834, 650, 652, 589, 590, 1088, 1089,1063, 1059, 1090, 1091, 1092, 1059, 1060, 1027, 1028, 1000, 1001, 617, 750, 678, 685, 618, 586, 554, 553, 553, 524]);
-	    // // this.beachDeckPrefab.renderDebug(this.add.graphics());
-
-
 	}
 
 	/* END-USER-CODE */
