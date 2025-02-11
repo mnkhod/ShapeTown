@@ -1,0 +1,55 @@
+{
+    "id": "6afb5af4-e78c-4182-a71c-50a7f5d83136",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "b80ef19a-ae81-4a32-a7ac-47bf37685924",
+            "label": "container_1",
+            "blendMode": -1,
+            "x": 270,
+            "y": 302,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "c5fdb046-ba18-4467-8046-8bca11eabbc7",
+                    "label": "torchBowlRegular_V010",
+                    "texture": {
+                        "key": "TorchBowlRegular_V01",
+                        "frame": 0
+                    },
+                    "y": 7
+                },
+                {
+                    "type": "Sprite",
+                    "id": "578657eb-4e2e-4033-bd29-7bbc60129de9",
+                    "label": "mineFire",
+                    "texture": {
+                        "key": "CampFireFireSheet_V02",
+                        "frame": 0
+                    },
+                    "x": 17,
+                    "y": 20,
+                    "animationPlayMethod": 1,
+                    "animationKey": "MineFire"
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

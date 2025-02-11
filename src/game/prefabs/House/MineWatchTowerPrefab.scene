@@ -1,0 +1,33 @@
+{
+    "id": "60e802b7-6682-45b4-9c02-e5009905dda3",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "dfcd7bf2-17e7-4498-a51c-48bbf62d94f2",
+            "label": "watchtowerBack_010",
+            "texture": {
+                "key": "WatchtowerBack_01",
+                "frame": 0
+            },
+            "x": 282,
+            "y": 247
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

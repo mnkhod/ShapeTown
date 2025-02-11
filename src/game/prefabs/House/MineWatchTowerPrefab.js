@@ -5,44 +5,43 @@
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class BeachHousePrefab extends Phaser.GameObjects.Image {
+export default class MineWatchTowerPrefab extends Phaser.GameObjects.Image {
     constructor(scene, x, y, texture, frame) {
-        super(scene, x ?? 111, y ?? 136, texture || "CapitansCabin", frame ?? 0);
+        super(scene, x ?? 282, y ?? 247, texture || "WatchtowerBack_01", frame ?? 0);
 
         /* START-USER-CTR-CODE */
         scene.add.existing(this);
         scene.physics.add.existing(this, false);
 
-        this.body.allowGravity = false;
-        this.body.setSize(170, 100);  
-        this.body.setOffset(25, 180); 
+        this.body.setSize(80, 80); 
+        this.body.setOffset(45, 180);
         this.body.moves = false;
         this.body.immovable = true;
 
-        this.isHouseInvisible = false;
+        this.isWatchtowerInvisible = false;
         this.isPlayerInvisible = false;
 
-        this.houseTop = this.y - 180;   
-        this.houseBottom = this.y -10;
+    
+        this.towerTop = this.y - 132;   
+        this.towerBottom = this.y - 10;
 
         scene.events.on('update', () => {
             if (!this.player) return;
-            
-            const playerNearHouseX = Math.abs(this.player.x - (this.x + this.body.offset.x - 45)) < 110;
-            
-            const playerBehindHouse = this.player.y > this.houseTop && 
-                                    this.player.y < this.houseBottom &&
-                                    playerNearHouseX;
-
-            if (playerBehindHouse) {
-                if (!this.isHouseInvisible) {
+   
+            const playerNearTowerX = Math.abs(this.player.x - (this.x + this.body.offset.x - 62)) < 65;
+ 
+            const playerBehindTower = this.player.y > this.towerTop && 
+                                    this.player.y < this.towerBottom && 
+                                    playerNearTowerX;
+            if (playerBehindTower) {
+                if (!this.isWatchtowerInvisible) {
                     scene.tweens.add({
                         targets: this,
                         alpha: 0.4,
                         duration: 200,
                         ease: 'Power1',
                         onComplete: () => {
-                            this.isHouseInvisible = true;
+                            this.isWatchtowerInvisible = true;
                         }
                     });
                 }
@@ -58,14 +57,14 @@ export default class BeachHousePrefab extends Phaser.GameObjects.Image {
                     });
                 }
             } else {
-                if (this.isHouseInvisible) {
+                if (this.isWatchtowerInvisible) {
                     scene.tweens.add({
                         targets: this,
                         alpha: 1,
                         duration: 200,
                         ease: 'Power1',
                         onComplete: () => {
-                            this.isHouseInvisible = false;
+                            this.isWatchtowerInvisible = false;
                         }
                     });
                 }

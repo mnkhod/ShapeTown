@@ -49,6 +49,19 @@
                 "key": "ActiveSlot8"
             },
             {
+                "url": "assets/Decoration/AncientScript_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "AncientScript_V01"
+            },
+            {
                 "url": "assets/animations.json",
                 "type": "animation",
                 "key": "animations"
@@ -210,6 +223,19 @@
                 "key": "Book"
             },
             {
+                "url": "assets/Building/BridgeRobe.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "BridgeRobe"
+            },
+            {
                 "url": "assets/Building/Building_5_Door_32x32_2.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -247,6 +273,58 @@
                 },
                 "type": "spritesheet",
                 "key": "Campfire_32x32"
+            },
+            {
+                "url": "assets/Decoration/Campfire_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Campfire_V01"
+            },
+            {
+                "url": "assets/Decoration/CampFireFireSheet.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "CampFireFireSheet"
+            },
+            {
+                "url": "assets/Decoration/CampFireFireSheet_V02.png",
+                "frameConfig": {
+                    "frameWidth": 160,
+                    "frameHeight": 160,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "CampFireFireSheet_V02"
+            },
+            {
+                "url": "assets/Decoration/CampfireSmoke.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "CampfireSmoke"
             },
             {
                 "url": "assets/Building/CapitansCabin.png",
@@ -711,6 +789,19 @@
                 }
             },
             {
+                "url": "assets/Building/GuardPostTower_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "GuardPostTower_V01"
+            },
+            {
                 "url": "assets/hud/Options/HelpBottomIcon.png",
                 "frameConfig": {
                     "frameWidth": 48,
@@ -1016,6 +1107,32 @@
                 "url": "assets/hud/MessageBox3.png",
                 "type": "image",
                 "key": "MessageBox3"
+            },
+            {
+                "url": "assets/Ground tileset/MineEntrance.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "MineEntrance"
+            },
+            {
+                "url": "assets/Building/Miner'stower.png",
+                "frameConfig": {
+                    "frameWidth": 160,
+                    "frameHeight": 256,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Miner'stower"
             },
             {
                 "url": "assets/NPC/NpcBlaksmith.png",
@@ -1381,6 +1498,19 @@
                 "key": "RockIdle_v01"
             },
             {
+                "url": "assets/Decoration/RockOnEmpty_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnEmpty_V01"
+            },
+            {
                 "url": "assets/Decoration/RockOnGrass_V02.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -1500,6 +1630,11 @@
                 "key": "ShapetownFarmingMap"
             },
             {
+                "url": "assets/map/ShapetownMineEntrance.json",
+                "type": "tilemapTiledJSON",
+                "key": "ShapetownMineEntrance"
+            },
+            {
                 "url": "assets/Decoration/ShellBeach_V01.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -1609,6 +1744,32 @@
                 "key": "Tent"
             },
             {
+                "url": "assets/Decoration/TorchBowl_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "TorchBowl_V01"
+            },
+            {
+                "url": "assets/Decoration/TorchBowlRegular_V01.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "TorchBowlRegular_V01"
+            },
+            {
                 "url": "assets/Tree/Tree_v04.png",
                 "frameConfig": {
                     "frameWidth": 256,
@@ -1700,6 +1861,45 @@
                 "key": "TreeHouse"
             },
             {
+                "url": "assets/Tree/TreeNaked_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "TreeNaked_V01"
+            },
+            {
+                "url": "assets/Tree/TreeNaked_V02.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "TreeNaked_V02"
+            },
+            {
+                "url": "assets/Tree/TreeNaked_V03.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "TreeNaked_V03"
+            },
+            {
                 "url": "assets/Tree/TreePalmSheet_01.png",
                 "frameConfig": {
                     "frameWidth": 128,
@@ -1781,6 +1981,58 @@
                 },
                 "type": "spritesheet",
                 "key": "TutorliarNPCHouse"
+            },
+            {
+                "url": "assets/Building/WatchtowerBack_01.png",
+                "frameConfig": {
+                    "frameWidth": 128,
+                    "frameHeight": 224,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "WatchtowerBack_01"
+            },
+            {
+                "url": "assets/Building/WatchtowerBackRegular_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "WatchtowerBackRegular_V01"
+            },
+            {
+                "url": "assets/Building/WatchtowerFront_01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "WatchtowerFront_01"
+            },
+            {
+                "url": "assets/Building/WatchtowerFrontRegular_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "WatchtowerFrontRegular_V01"
             },
             {
                 "url": "assets/Ground tileset/Waterfall_V01.png",

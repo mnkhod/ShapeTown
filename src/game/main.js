@@ -11,6 +11,8 @@ import MarketScene from "./scenes/MarketScene";
 import ShapeFarmingScene from "./scenes/ShapeFarmingScene"
 import ShapeTownFarmingMapScene from "./scenes/ShapeTownFarmingMapScene"
 import ShapeTownBeachMapScene from "./scenes/ShapeTownBeachMapScene"
+import ShapeTownMineMapScene from "./scenes/ShapeTownMineMapScene"
+
 
 
 // Find out more information about the Game Config at:
@@ -57,7 +59,8 @@ const config = {
         MarketScene,
         ShapeFarmingScene,
         ShapeTownFarmingMapScene,
-        ShapeTownBeachMapScene
+        ShapeTownBeachMapScene,
+        ShapeTownMineMapScene
     ]
 };
 

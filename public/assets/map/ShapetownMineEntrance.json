@@ -988,13 +988,13 @@
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.2",
+ "tiledversion":"1.11.0",
  "tileheight":32,
  "tilesets":[
         {
          "columns":55,
          "firstgid":1,
-         "image":"..\/assets\/Ground tileset\/GroundTileset_V02.png",
+         "image":"..\/Ground tileset\/GroundTileset_V02.png",
          "imageheight":2304,
          "imagewidth":1760,
          "margin":0,
@@ -1139,7 +1139,7 @@
         {
          "columns":16,
          "firstgid":3961,
-         "image":"..\/assets\/Tree\/TreePatteren.png",
+         "image":"..\/Tree\/TreePatteren.png",
          "imageheight":992,
          "imagewidth":512,
          "margin":0,
@@ -1152,7 +1152,7 @@
         {
          "columns":6,
          "firstgid":4457,
-         "image":"..\/assets\/Decoration\/RockOnEmpty_V01.png",
+         "image":"..\/Decoration\/RockOnEmpty_V01.png",
          "imageheight":320,
          "imagewidth":192,
          "margin":0,
@@ -1165,7 +1165,7 @@
         {
          "columns":28,
          "firstgid":4517,
-         "image":"..\/assets\/Building\/GuardPostTower_V01.png",
+         "image":"..\/Building\/GuardPostTower_V01.png",
          "imageheight":608,
          "imagewidth":896,
          "margin":0,
@@ -1178,7 +1178,7 @@
         {
          "columns":15,
          "firstgid":5049,
-         "image":"..\/assets\/Building\/BridgeRobe.png",
+         "image":"..\/Building\/BridgeRobe.png",
          "imageheight":160,
          "imagewidth":480,
          "margin":0,
@@ -1191,7 +1191,7 @@
         {
          "columns":5,
          "firstgid":5124,
-         "image":"..\/assets\/Ground tileset\/MineEntrance.png",
+         "image":"..\/Ground tileset\/MineEntrance.png",
          "imageheight":96,
          "imagewidth":160,
          "margin":0,
@@ -1204,7 +1204,7 @@
         {
          "columns":4,
          "firstgid":5139,
-         "image":"..\/assets\/Building\/WatchtowerFrontRegular_V01.png",
+         "image":"..\/Building\/WatchtowerBackRegular_V01.png",
          "imageheight":64,
          "imagewidth":128,
          "margin":0,
@@ -1217,7 +1217,7 @@
         {
          "columns":4,
          "firstgid":5147,
-         "image":"..\/assets\/Building\/WatchtowerFront_01.png",
+         "image":"..\/Building\/WatchtowerFront_01.png",
          "imageheight":224,
          "imagewidth":128,
          "margin":0,
@@ -1230,7 +1230,7 @@
         {
          "columns":5,
          "firstgid":5175,
-         "image":"..\/assets\/Building\/Miner'stower.png",
+         "image":"..\/Building\/Miner'stower.png",
          "imageheight":256,
          "imagewidth":160,
          "margin":0,
@@ -1243,7 +1243,7 @@
         {
          "columns":3,
          "firstgid":5215,
-         "image":"..\/assets\/Tree\/TreeNaked_V03.png",
+         "image":"..\/Tree\/TreeNaked_V03.png",
          "imageheight":192,
          "imagewidth":96,
          "margin":0,
@@ -1256,7 +1256,7 @@
         {
          "columns":5,
          "firstgid":5233,
-         "image":"..\/assets\/Tree\/TreeNaked_V01.png",
+         "image":"..\/Tree\/TreeNaked_V01.png",
          "imageheight":192,
          "imagewidth":160,
          "margin":0,
@@ -1269,7 +1269,7 @@
         {
          "columns":3,
          "firstgid":5263,
-         "image":"..\/assets\/Tree\/TreeNaked_V02.png",
+         "image":"..\/Tree\/TreeNaked_V02.png",
          "imageheight":192,
          "imagewidth":96,
          "margin":0,
@@ -1282,7 +1282,7 @@
         {
          "columns":2,
          "firstgid":5281,
-         "image":"..\/assets\/Decoration\/TorchBowlRegular_V01.png",
+         "image":"..\/Decoration\/TorchBowlRegular_V01.png",
          "imageheight":64,
          "imagewidth":64,
          "margin":0,
@@ -1295,7 +1295,7 @@
         {
          "columns":12,
          "firstgid":5285,
-         "image":"..\/assets\/Decoration\/AncientScript_V01.png",
+         "image":"..\/Decoration\/AncientScript_V01.png",
          "imageheight":256,
          "imagewidth":384,
          "margin":0,
@@ -1308,7 +1308,7 @@
         {
          "columns":40,
          "firstgid":5381,
-         "image":"..\/assets\/Decoration\/CampFireFireSheet_V02.png",
+         "image":"..\/Decoration\/CampFireFireSheet_V02.png",
          "imageheight":160,
          "imagewidth":1280,
          "margin":0,

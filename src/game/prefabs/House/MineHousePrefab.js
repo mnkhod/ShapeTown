@@ -5,33 +5,34 @@
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class BeachHousePrefab extends Phaser.GameObjects.Image {
+export default class MineHousePrefab extends Phaser.GameObjects.Image {
     constructor(scene, x, y, texture, frame) {
-        super(scene, x ?? 111, y ?? 136, texture || "CapitansCabin", frame ?? 0);
+        super(scene, x ?? 77, y ?? 128, texture || "Miner'stower", frame ?? 0);
 
         /* START-USER-CTR-CODE */
+
         scene.add.existing(this);
         scene.physics.add.existing(this, false);
 
         this.body.allowGravity = false;
-        this.body.setSize(170, 100);  
-        this.body.setOffset(25, 180); 
+        this.body.setSize(130, 90); 
+        this.body.setOffset(15, 165);
         this.body.moves = false;
         this.body.immovable = true;
 
         this.isHouseInvisible = false;
         this.isPlayerInvisible = false;
 
-        this.houseTop = this.y - 180;   
-        this.houseBottom = this.y -10;
+        this.houseTop = this.y - 160;   
+        this.houseBottom = this.y - 10;
 
         scene.events.on('update', () => {
             if (!this.player) return;
-            
-            const playerNearHouseX = Math.abs(this.player.x - (this.x + this.body.offset.x - 45)) < 110;
-            
+
+            const playerNearHouseX = Math.abs(this.player.x - (this.x + this.body.offset.x - 45)) < 90;
+
             const playerBehindHouse = this.player.y > this.houseTop && 
-                                    this.player.y < this.houseBottom &&
+                                    this.player.y < this.houseBottom && 
                                     playerNearHouseX;
 
             if (playerBehindHouse) {

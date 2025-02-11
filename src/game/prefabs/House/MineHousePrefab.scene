@@ -1,0 +1,33 @@
+{
+    "id": "13aee786-3021-4a3b-a0bb-46b7134f1979",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "96bf7c7e-5b14-49f7-84d8-ae31ef15486c",
+            "label": "miner_stower0",
+            "texture": {
+                "key": "Miner'stower",
+                "frame": 0
+            },
+            "x": 77,
+            "y": 128
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

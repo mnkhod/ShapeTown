@@ -1,0 +1,489 @@
+{
+    "id": "d3185963-3bce-4354-9885-a4229b953e5a",
+    "sceneType": "SCENE",
+    "settings": {
+        "snapEnabled": true,
+        "snapWidth": 96,
+        "snapHeight": 96,
+        "exportClass": true,
+        "autoImport": true,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "ShapeTownMineMapScene",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "TilemapLayer",
+            "id": "886f6d73-403a-439e-a82e-1c346f99be63",
+            "label": "bg_1",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "bg",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "23048d3d-0d88-41c1-82bd-0a747cd93883",
+            "label": "cliffs_1",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "cliffs",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "47c2b93c-793e-4512-9d9e-557deda05072",
+            "label": "mine_entrance_1",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "Mine entrance",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "dcea2f81-eb61-4e17-a9eb-46a2f8dd1a1f",
+            "label": "rocks_1",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "rocks",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "37551eec-2db8-4ddd-ba54-4e8b35d32d87",
+            "label": "hole_Bridge_Hole_1",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "Hole Bridge/Hole",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "ba1911a3-b88e-4904-9074-64a0cc9f4215",
+            "label": "hole_Bridge_Brigde_1",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "Hole Bridge/Brigde",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "a2539098-bdfc-464f-8bf1-5f8ab05c7a5c",
+            "label": "hole_Bridge_Bridge",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "Hole Bridge/Bridge2",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "96f4871e-a5dd-4d24-ae52-bedf302257ee",
+            "label": "hole_Bridge_Bridge_1",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "Hole Bridge/Bridge3",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "88695949-89b4-475e-a02e-d3763e0b2334",
+            "label": "tree_1",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "Tree",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "99fa3b12-5f4a-47fe-8d34-338c0dfbf228",
+            "label": "guard_post_Post_1",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "Guard post/Post",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "beb873c1-5dc8-4fa0-ac7d-cfc0e8c71b32",
+            "label": "guard_post_Post_L",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "Guard post/Post L2",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "88c94a84-da14-4f1d-b024-ae5e82c93963",
+            "label": "decoration_1",
+            "scope": "CLASS",
+            "tilemapId": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "layerName": "Decoration",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "RockOnEmpty_V01",
+                "GuardPostTower_V01",
+                "BridgeRobe",
+                "MineEntrance",
+                "WatchtowerFrontRegular_V01",
+                "WatchtowerFront_01",
+                "Miner'stower",
+                "TreeNaked_V03",
+                "TreeNaked_V01",
+                "TreeNaked_V02",
+                "TorchBowlRegular_V01",
+                "AncientScript_V01",
+                "CampFireFireSheet_V02"
+            ]
+        },
+        {
+            "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
+            "id": "d6f72e12-c5e0-4a78-b57f-9b4f2439b993",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "playerPrefab",
+            "scope": "CLASS",
+            "x": 990,
+            "y": 793
+        },
+        {
+            "prefabId": "13aee786-3021-4a3b-a0bb-46b7134f1979",
+            "id": "18276a2f-d870-4c7d-a876-ddf5abf667ab",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "mineHousePrefab",
+            "scope": "CLASS",
+            "x": 1680,
+            "y": 607
+        },
+        {
+            "prefabId": "6afb5af4-e78c-4182-a71c-50a7f5d83136",
+            "id": "b9d2580a-a693-4615-9a39-42de8b58db3f",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "mineTorchPrefab",
+            "scope": "CLASS",
+            "x": 1118,
+            "y": 477
+        },
+        {
+            "prefabId": "6afb5af4-e78c-4182-a71c-50a7f5d83136",
+            "id": "e61608b6-bf37-4e6a-b19e-190507c123fa",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "mineTorchPrefab_1",
+            "scope": "CLASS",
+            "x": 1215,
+            "y": 477
+        },
+        {
+            "prefabId": "6afb5af4-e78c-4182-a71c-50a7f5d83136",
+            "id": "96822a24-539a-43b0-bca7-774ef4763b65",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "mineTorchPrefab_2",
+            "scope": "CLASS",
+            "x": 573,
+            "y": 408
+        },
+        {
+            "prefabId": "6afb5af4-e78c-4182-a71c-50a7f5d83136",
+            "id": "9040ec3c-7eea-4b49-b301-94b083e32f4e",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "mineTorchPrefab_3",
+            "scope": "CLASS",
+            "x": 576,
+            "y": 911
+        },
+        {
+            "prefabId": "6afb5af4-e78c-4182-a71c-50a7f5d83136",
+            "id": "670d83d7-e513-4c42-b36e-e1d66cbbd2d1",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "mineTorchPrefab_4",
+            "x": 1134,
+            "y": 991
+        },
+        {
+            "prefabId": "60e802b7-6682-45b4-9c02-e5009905dda3",
+            "id": "57f7f29c-41db-4844-8b7c-e65db8863dae",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "mineWatchTowerPrefab",
+            "scope": "CLASS",
+            "x": 1002,
+            "y": 940
+        }
+    ],
+    "plainObjects": [
+        {
+            "id": "fe82685d-4c83-4926-b5e5-508bab5a4c31",
+            "type": "Tilemap",
+            "label": "shapetownMineEntrance",
+            "key": "ShapetownMineEntrance",
+            "tilesets": [
+                {
+                    "name": "GroundTileset_V02",
+                    "imageKey": "GroundTileset_V02"
+                },
+                {
+                    "name": "TreePatteren",
+                    "imageKey": "TreePatteren"
+                },
+                {
+                    "name": "RockOnEmpty_V01",
+                    "imageKey": "RockOnEmpty_V01"
+                },
+                {
+                    "name": "GuardPostTower_V01",
+                    "imageKey": "GuardPostTower_V01"
+                },
+                {
+                    "name": "BridgeRobe",
+                    "imageKey": "BridgeRobe"
+                },
+                {
+                    "name": "MineEntrance",
+                    "imageKey": "MineEntrance"
+                },
+                {
+                    "name": "WatchtowerFrontRegular_V01",
+                    "imageKey": "WatchtowerBackRegular_V01"
+                },
+                {
+                    "name": "WatchtowerFront_01",
+                    "imageKey": "WatchtowerFront_01"
+                },
+                {
+                    "name": "Miner'stower",
+                    "imageKey": "Miner'stower"
+                },
+                {
+                    "name": "TreeNaked_V03",
+                    "imageKey": "TreeNaked_V03"
+                },
+                {
+                    "name": "TreeNaked_V01",
+                    "imageKey": "TreeNaked_V01"
+                },
+                {
+                    "name": "TreeNaked_V02",
+                    "imageKey": "TreeNaked_V02"
+                },
+                {
+                    "name": "TorchBowlRegular_V01",
+                    "imageKey": "TorchBowlRegular_V01"
+                },
+                {
+                    "name": "AncientScript_V01",
+                    "imageKey": "AncientScript_V01"
+                },
+                {
+                    "name": "CampFireFireSheet_V02",
+                    "imageKey": "CampFireFireSheet_V02"
+                }
+            ]
+        }
+    ],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
