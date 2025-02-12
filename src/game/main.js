@@ -12,6 +12,7 @@ import ShapeFarmingScene from "./scenes/ShapeFarmingScene"
 import ShapeTownFarmingMapScene from "./scenes/ShapeTownFarmingMapScene"
 import ShapeTownBeachMapScene from "./scenes/ShapeTownBeachMapScene"
 import ShapeTownMineMapScene from "./scenes/ShapeTownMineMapScene"
+import ShapeTownSquareMapScene from "./scenes/ShapeTownSquareMapScene"
 
 
 
@@ -60,7 +61,8 @@ const config = {
         ShapeFarmingScene,
         ShapeTownFarmingMapScene,
         ShapeTownBeachMapScene,
-        ShapeTownMineMapScene
+        ShapeTownMineMapScene,
+        ShapeTownSquareMapScene
     ]
 };
 

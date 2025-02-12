@@ -47,7 +47,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 		const cam = scene.cameras.main;
 
 		cam.startFollow(this, true, 0.1, 0.1);
-		cam.setZoom(2);
+		cam.setZoom(0.8);
 		cam.fadeIn(1000);
 
 		this.player = this;
