@@ -13,8 +13,8 @@ export default class MineWatchTowerPrefab extends Phaser.GameObjects.Image {
         scene.add.existing(this);
         scene.physics.add.existing(this, false);
 
-        this.body.setSize(80, 80); 
-        this.body.setOffset(45, 180);
+        this.body.setSize(100, 80); 
+        this.body.setOffset(15, 140);
         this.body.moves = false;
         this.body.immovable = true;
 
@@ -28,7 +28,7 @@ export default class MineWatchTowerPrefab extends Phaser.GameObjects.Image {
         scene.events.on('update', () => {
             if (!this.player) return;
    
-            const playerNearTowerX = Math.abs(this.player.x - (this.x + this.body.offset.x - 62)) < 65;
+            const playerNearTowerX = Math.abs(this.player.x - (this.x + this.body.offset.x - 20)) < 65;
  
             const playerBehindTower = this.player.y > this.towerTop && 
                                     this.player.y < this.towerBottom && 

@@ -1,0 +1,35 @@
+{
+    "id": "1ad7756a-6fd7-4db7-ae0b-533d58fee4d3",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Sprite",
+            "id": "abc93970-025c-466c-bf01-b7e52838c394",
+            "label": "squareFountan",
+            "texture": {
+                "key": "WaterFountain",
+                "frame": 0
+            },
+            "x": 63,
+            "y": 81,
+            "animationPlayMethod": 1,
+            "animationKey": "SquareFountan"
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

@@ -3851,6 +3851,626 @@
             "skipMissedFrames": true,
             "repeat": -1,
             "randomFrame": false
+        },
+        {
+            "key": "SquareCampFire",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "CampFireFireSheet",
+                    "frame": 0,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "CampFireFireSheet",
+                    "frame": 1,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "CampFireFireSheet",
+                    "frame": 2,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "CampFireFireSheet",
+                    "frame": 3,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "CampFireFireSheet",
+                    "frame": 4,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "CampFireFireSheet",
+                    "frame": 5,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "CampFireFireSheet",
+                    "frame": 6,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "CampFireFireSheet",
+                    "frame": 7,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverMiddle",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 471,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 472,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 473,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 474,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 475,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 476,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 477,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 478,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverMiddle_1",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 501,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 502,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 503,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 504,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 505,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 506,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 507,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 508,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverMiddle_2",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 531,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 532,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 533,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 534,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 535,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 536,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 537,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 538,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverMiddle_3",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 561,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 562,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 563,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 564,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 565,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 566,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 567,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 568,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverLeft_1",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 333,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 334,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 335,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 336,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 337,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 338,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 339,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 340,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverRight_1",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 193,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 194,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 195,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 196,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 197,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 198,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 199,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverLeftDown_1",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 65,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 66,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 67,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 68,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 69,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 70,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 71,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverLeft_2",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 95,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 96,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 97,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 98,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 99,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 100,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 101,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverDown",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 261,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 262,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 263,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 264,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 265,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 266,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 267,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 268,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverUp",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 312,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 313,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 314,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 315,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 316,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 317,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 318,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 319,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
         }
     ],
     "globalTimeScale": 1,

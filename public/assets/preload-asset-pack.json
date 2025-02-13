@@ -368,8 +368,8 @@
             {
                 "url": "assets/Decoration/Campfire_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 96,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -381,8 +381,8 @@
             {
                 "url": "assets/Decoration/CampFireFireSheet.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 160,
+                    "frameHeight": 160,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -2128,8 +2128,8 @@
             {
                 "url": "assets/Decoration/TorchBowl_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,

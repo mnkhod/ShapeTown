@@ -4,6 +4,10 @@
 /* START OF COMPILED CODE */
 
 import PlayerPrefab from "../prefabs/PlayerPrefab";
+import SquareFountanPrefab from "../prefabs/Fountan/SquareFountanPrefab";
+import SquareCampFirePrefab from "../prefabs/Lightning/SquareCampFirePrefab";
+import SquareFirePrefab from "../prefabs/Lightning/SquareFirePrefab";
+import MineWatchTowerPrefab from "../prefabs/House/MineWatchTowerPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -150,9 +154,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// forager_home_smoke_1
 		const forager_home_smoke_1 = shapetownSquare.createLayer("Forager home/smoke", ["CampfireSmoke"], 0, 0);
 
-		// barracks_Tents_1
-		const barracks_Tents_1 = shapetownSquare.createLayer("Barracks/Tents", ["Tent_V04","Tent_V03"], 0, 0);
-
 		// forager_home_Baket_of_mushrooms_1
 		const forager_home_Baket_of_mushrooms_1 = shapetownSquare.createLayer("Forager home/Baket of mushrooms", ["Apple"], 0, 0);
 
@@ -216,34 +217,47 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// barracks_Barricade_2
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["Barricade_V01","BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
-		// barracks_TorchBowl_1
-		const barracks_TorchBowl_1 = shapetownSquare.createLayer("Barracks/TorchBowl", ["TorchBowl_V01"], 0, 0);
-
-		// barracks_Campfire_1
-		const barracks_Campfire_1 = shapetownSquare.createLayer("Barracks/Campfire", ["Campfire_V01"], 0, 0);
-
-		// barracks_fire_1
-		const barracks_fire_1 = shapetownSquare.createLayer("Barracks/fire", ["CampFireFireSheet"], 0, 0);
-
-		// barracks_Tents
-		const barracks_Tents = shapetownSquare.createLayer("Barracks/Tents", ["Tent_V04","Tent_V03"], 0, 0);
-
-		// barracks_Tents_2
-		const barracks_Tents_2 = shapetownSquare.createLayer("Barracks/Tents", ["Tent_V04","Tent_V03"], 0, 0);
-
-		// barracks_Torch_Fire_1
-		const barracks_Torch_Fire_1 = shapetownSquare.createLayer("Barracks/Torch Fire", ["CampFireFireSheet"], 0, 0);
-
-		// barracks_watchtower_1
-		const barracks_watchtower_1 = shapetownSquare.createLayer("Barracks/watchtower", ["WatchtowerFront_01","WatchtowerBack_01"], 0, 0);
-
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 1886, 1832);
+		const playerPrefab = new PlayerPrefab(this, 3100, 2302);
 		this.add.existing(playerPrefab);
 
-		// squareFountan
-		const squareFountan = this.add.sprite(2229, 1802, "WaterFountain", 0);
-		squareFountan.play("SquareFountan");
+		// squareFountanPrefab
+		const squareFountanPrefab = new SquareFountanPrefab(this, 2256, 1800);
+		this.add.existing(squareFountanPrefab);
+
+		// squareCampFirePrefab
+		const squareCampFirePrefab = new SquareCampFirePrefab(this, 2440, 420);
+		this.add.existing(squareCampFirePrefab);
+
+		// squareCampFirePrefab_1
+		const squareCampFirePrefab_1 = new SquareCampFirePrefab(this, 1910, 420);
+		this.add.existing(squareCampFirePrefab_1);
+
+		// squareCampFirePrefab_2
+		const squareCampFirePrefab_2 = new SquareCampFirePrefab(this, 2190, 220);
+		this.add.existing(squareCampFirePrefab_2);
+
+		// squareFirePrefab
+		const squareFirePrefab = new SquareFirePrefab(this, 2723, 742);
+		this.add.existing(squareFirePrefab);
+
+		// squareFirePrefab_1
+		const squareFirePrefab_1 = new SquareFirePrefab(this, 2630, 742);
+		this.add.existing(squareFirePrefab_1);
+
+		// barracks_Tents_3
+		const barracks_Tents_3 = shapetownSquare.createLayer("Barracks/Tents1", ["Tent_V04"], 0, 0);
+
+		// mineWatchTowerPrefab
+		const mineWatchTowerPrefab = new MineWatchTowerPrefab(this, 2565, 655);
+		this.add.existing(mineWatchTowerPrefab);
+
+		// mineWatchTowerPrefab_1
+		const mineWatchTowerPrefab_1 = new MineWatchTowerPrefab(this, 1609, 130);
+		this.add.existing(mineWatchTowerPrefab_1);
+
+		// barracks_Tents_1
+		const barracks_Tents_1 = shapetownSquare.createLayer("Barracks/Tents", ["Tent_V04","Tent_V03"], 0, 0);
 
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
@@ -272,7 +286,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.forager_home_Campfire_1 = forager_home_Campfire_1;
 		this.forager_home_Fire_animation_1 = forager_home_Fire_animation_1;
 		this.forager_home_smoke_1 = forager_home_smoke_1;
-		this.barracks_Tents_1 = barracks_Tents_1;
 		this.forager_home_Baket_of_mushrooms_1 = forager_home_Baket_of_mushrooms_1;
 		this.forager_home_Basket_of_apple_1 = forager_home_Basket_of_apple_1;
 		this.foodStand_FoodstandStall_1 = foodStand_FoodstandStall_1;
@@ -294,15 +307,17 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.barracks_Barricade = barracks_Barricade;
 		this.barracks_Barricade_1 = barracks_Barricade_1;
 		this.barracks_Barricade_2 = barracks_Barricade_2;
-		this.barracks_TorchBowl_1 = barracks_TorchBowl_1;
-		this.barracks_Campfire_1 = barracks_Campfire_1;
-		this.barracks_fire_1 = barracks_fire_1;
-		this.barracks_Tents = barracks_Tents;
-		this.barracks_Tents_2 = barracks_Tents_2;
-		this.barracks_Torch_Fire_1 = barracks_Torch_Fire_1;
-		this.barracks_watchtower_1 = barracks_watchtower_1;
 		this.playerPrefab = playerPrefab;
-		this.squareFountan = squareFountan;
+		this.squareFountanPrefab = squareFountanPrefab;
+		this.squareCampFirePrefab = squareCampFirePrefab;
+		this.squareCampFirePrefab_1 = squareCampFirePrefab_1;
+		this.squareCampFirePrefab_2 = squareCampFirePrefab_2;
+		this.squareFirePrefab = squareFirePrefab;
+		this.squareFirePrefab_1 = squareFirePrefab_1;
+		this.barracks_Tents_3 = barracks_Tents_3;
+		this.mineWatchTowerPrefab = mineWatchTowerPrefab;
+		this.mineWatchTowerPrefab_1 = mineWatchTowerPrefab_1;
+		this.barracks_Tents_1 = barracks_Tents_1;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -363,8 +378,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	forager_home_smoke_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	barracks_Tents_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	forager_home_Baket_of_mushrooms_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	forager_home_Basket_of_apple_1;
@@ -406,24 +419,28 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	barracks_Barricade_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	barracks_Barricade_2;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	barracks_TorchBowl_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	barracks_Campfire_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	barracks_fire_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	barracks_Tents;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	barracks_Tents_2;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	barracks_Torch_Fire_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	barracks_watchtower_1;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
-	/** @type {Phaser.GameObjects.Sprite} */
-	squareFountan;
+	/** @type {SquareFountanPrefab} */
+	squareFountanPrefab;
+	/** @type {SquareCampFirePrefab} */
+	squareCampFirePrefab;
+	/** @type {SquareCampFirePrefab} */
+	squareCampFirePrefab_1;
+	/** @type {SquareCampFirePrefab} */
+	squareCampFirePrefab_2;
+	/** @type {SquareFirePrefab} */
+	squareFirePrefab;
+	/** @type {SquareFirePrefab} */
+	squareFirePrefab_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	barracks_Tents_3;
+	/** @type {MineWatchTowerPrefab} */
+	mineWatchTowerPrefab;
+	/** @type {MineWatchTowerPrefab} */
+	mineWatchTowerPrefab_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	barracks_Tents_1;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -437,6 +454,12 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.cameras.main.setBounds(0, 0, 3840, 2880);
         this.physics.world.bounds.width = 1000;
         this.physics.world.bounds.height = 800;
+
+		this.squareFountanPrefab.setupCollision(this.playerPrefab)
+		this.squareCampFirePrefab_1.setupCollision(this.playerPrefab)
+		this.squareCampFirePrefab_2.setupCollision(this.playerPrefab)
+		this.squareCampFirePrefab.setupCollision(this.playerPrefab)
+		this.mineWatchTowerPrefab.setupCollision(this.playerPrefab)
 
 		this.physics.add.collider(this.playerPrefab, this.collution_WoodenFence_1);
 	    this.collution_WoodenFence_1.setCollisionBetween(0,10000);
@@ -465,6 +488,74 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.physics.add.collider(this.playerPrefab, this.tree_left_side);
 	    this.tree_left_side.setCollisionBetween(0,10000);
 	    // this.tree_left_side.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.river_River_1);
+	    this.river_River_1.setCollisionBetween(0,10000);
+	    // this.river_River_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.collution_Cliff_1);
+	    this.collution_Cliff_1.setCollisionBetween(0,10000);
+	    // this.collution_Cliff_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.barracks_Barricade_2);
+	    this.barracks_Barricade_2.setCollisionBetween(0,10000);
+	    // this.barracks_Barricade_2.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.decoration_Log_1);
+	    this.decoration_Log_1.setCollisionBetween(0,10000);
+	    // this.decoration_Log_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.barracks_Tents_3);
+	    this.barracks_Tents_3.setCollisionBetween(0,10000);
+	    // this.barracks_Tents_3.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.barracks_Tents_1);
+	    this.barracks_Tents_1.setCollisionBetween(0,10000);
+	    // this.barracks_Tents_1.renderDebug(this.add.graphics());
+
+		const waterTiles = this.river_River_1.getTilesWithin();
+        waterTiles.forEach(tile => {
+        if (tile && tile.index === 5573) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverMiddle');
+        }
+		  if (tile && tile.index === 5603) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverMiddle_1');
+        }
+		  if (tile && tile.index === 5693) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverMiddle_2');
+        }
+		if (tile && tile.index === 5663) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverMiddle_3');
+        }
+		if (tile && tile.index === 5196) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverLeft_1');
+        }
+		if (tile && tile.index === 5192) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverRight_1');
+        }
+		if (tile && tile.index === 5225) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverLeftDown_1');
+        }
+		if (tile && tile.index === 5255) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverLeft_2');
+        }
+		if (tile && tile.index === 5254) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverDown');
+        }
+		if (tile && tile.index === 0) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverUp');
+        }
+        });
 
 	}
 

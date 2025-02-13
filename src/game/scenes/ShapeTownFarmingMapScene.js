@@ -170,6 +170,8 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 
 	/* START-USER-CODE */
 
+	
+
 	// Write your code here
 
 	create() {
