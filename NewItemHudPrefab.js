@@ -421,7 +421,6 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	player;
 
 	/* START-USER-CODE */
-	// Write your code here.
 	activeIndex = -1;
 	selectedItem = null;
 	itemData = [null, null, null, null, null, null, null, null];
@@ -458,7 +457,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	                    this.cursorIcon.destroy();
 	                }
 	                this.cursorIcon = this.scene.add.sprite(0, 0, selectedTexture, selectedFrame);
-	                this.cursorIcon.setScale(2.3);
+	                this.cursorIcon.setScale(0.6);
 	                this.cursorIcon.setDepth(1000);
 	                this.cursorIcon.setScrollFactor(0);
 	            } else if (this.cursorIcon) {
@@ -478,13 +477,12 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	    this.scene.events.on('update', () => {
 	        if (this.cursorIcon) {
 	            const pointer = this.scene.input.activePointer;
-	            const camera = this.scene.cameras.main;
+	            const scale = 0.5;
+	            const offsetX = 500; 
+	            const offsetY = 300; 
 	
-	            if (camera) {
-	                const worldPoint = camera.getWorldPoint(pointer.x, pointer.y);
-	                this.cursorIcon.x = worldPoint.x + 630;
-	                this.cursorIcon.y = worldPoint.y + 334;
-	            }
+	            this.cursorIcon.x = (pointer.x * scale) + offsetX;
+	            this.cursorIcon.y = (pointer.y * scale) + offsetY;
 	        }
 	    });
 	}
