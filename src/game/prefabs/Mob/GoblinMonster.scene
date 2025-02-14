@@ -1,5 +1,5 @@
 {
-    "id": "26b6b331-5847-4e61-b92e-748a6600902e",
+    "id": "f9c739bf-7f2e-42e5-b25c-8f419c415c02",
     "sceneType": "PREFAB",
     "settings": {
         "exportClass": true,
@@ -13,14 +13,14 @@
     "displayList": [
         {
             "type": "Sprite",
-            "id": "ae770d73-28ff-4771-96fc-dd6a90c4b171",
+            "id": "07faed7a-4074-4dd7-9225-9ad676ebd0ee",
             "label": "sprite_1",
             "texture": {
-                "key": "RockIdle_v01",
+                "key": "GoblinWalking96x96_V01",
                 "frame": 0
             },
-            "x": 35,
-            "y": 43
+            "x": 48,
+            "y": 48
         }
     ],
     "plainObjects": [],

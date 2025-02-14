@@ -24,6 +24,7 @@ import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import OpenInventory from "../prefabs/hud/OpenInventory";
 import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
+import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -233,6 +234,10 @@ export default class MarketScene extends Phaser.Scene {
 		const optionsListPrefab = new OptionsListPrefab(this, 982, 28);
 		this.add.existing(optionsListPrefab);
 
+		// minimapPrefab
+		const minimapPrefab = new MinimapPrefab(this, 844, 370);
+		this.add.existing(minimapPrefab);
+
 		this.must_Background_grass_1 = must_Background_grass_1;
 		this.must_Background_DecorationOnGrass_1 = must_Background_DecorationOnGrass_1;
 		this.must_Background_Beach_1 = must_Background_Beach_1;
@@ -275,6 +280,7 @@ export default class MarketScene extends Phaser.Scene {
 		this.openInventory = openInventory;
 		this.openMapPrefab = openMapPrefab;
 		this.optionsListPrefab = optionsListPrefab;
+		this.minimapPrefab = minimapPrefab;
 		this.marketMap = marketMap;
 
 		this.events.emit("scene-awake");
@@ -364,6 +370,8 @@ export default class MarketScene extends Phaser.Scene {
 	openMapPrefab;
 	/** @type {OptionsListPrefab} */
 	optionsListPrefab;
+	/** @type {MinimapPrefab} */
+	minimapPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	marketMap;
 
@@ -515,6 +523,14 @@ export default class MarketScene extends Phaser.Scene {
     	this.physics.add.collider(this.playerPrefab, this.decoration_DecorationBeachside_1);
     	this.decoration_DecorationBeachside_1.setCollisionBetween(0, 10000);
 		// this.decoration_DecorationBeachside_1.renderDebug(this.add.graphics());
+
+		if (this.minimapPrefab && this.playerPrefab) {
+            this.minimapPrefab.setPlayer(this.playerPrefab);
+            this.minimapPrefab.visible = false;
+            if (this.minimapPrefab.minimapCamera) {
+                this.minimapPrefab.minimapCamera.visible = false;
+            }
+        }
 
 		this.blackSmithPrefab.player = this.playerPrefab;
 	    this.blackSmithPrefab.msgPrefab = this.messagePrefab;

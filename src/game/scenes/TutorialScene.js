@@ -20,6 +20,7 @@ import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
 import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import RockMonster from "../prefabs/Mob/RockMonster";
+import GoblinMonster from "../prefabs/Mob/GoblinMonster";
 /* START-USER-IMPORTS */
 import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
 import { EventBus } from '../EventBus';
@@ -231,6 +232,10 @@ export default class TutorialScene extends Phaser.Scene {
 		const rockMonster = new RockMonster(this, 767, 153);
 		this.add.existing(rockMonster);
 
+		// goblinMonster
+		const goblinMonster = new GoblinMonster(this, 809, 382);
+		this.add.existing(goblinMonster);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
@@ -266,6 +271,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.minimapPrefab = minimapPrefab;
 		this.optionsListPrefab = optionsListPrefab;
 		this.rockMonster = rockMonster;
+		this.goblinMonster = goblinMonster;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -329,6 +335,8 @@ export default class TutorialScene extends Phaser.Scene {
 	optionsListPrefab;
 	/** @type {RockMonster} */
 	rockMonster;
+	/** @type {GoblinMonster} */
+	goblinMonster;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 

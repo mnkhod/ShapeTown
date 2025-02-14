@@ -919,6 +919,58 @@
                 "key": "GameNpcs1"
             },
             {
+                "url": "assets/Mob/Enemies/DungenLVL1/Goblin/Attack/GoblinAttack128x96_V01.png",
+                "frameConfig": {
+                    "frameWidth": 128,
+                    "frameHeight": 96,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "GoblinAttack128x96_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/Goblin/Hurt/GoblinHurt96x96_V01.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 96,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "GoblinHurt96x96_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/Goblin/Idle/GoblinIdle96x96_V01.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 96,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "GoblinIdle96x96_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/Goblin/Walk/GoblinWalking96x96_V01.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 96,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "GoblinWalking96x96_V01"
+            },
+            {
                 "url": "assets/mapAssets/GroundAccessor.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -1543,6 +1595,71 @@
                 },
                 "type": "spritesheet",
                 "key": "OptionMenuIcon"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/Orc/Attack/OrcAttack_V01.png",
+                "frameConfig": {
+                    "frameWidth": 100,
+                    "frameHeight": 96,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "OrcAttack_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/Orc/Death/OrcDeath_V01.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 96,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "OrcDeath_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/Orc/Hurt/OrcHurt_V01.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 96,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "OrcHurt_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/Orc/Idle/OrcIdle_V01.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 96,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "OrcIdle_V01"
+            },
+            {
+                "url": "assets/Mob/Enemies/DungenLVL1/Orc/Walking/OrcWalking_V01.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 96,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "OrcWalking_V01"
             },
             {
                 "url": "assets/Tree/PalmTreePattern.png",

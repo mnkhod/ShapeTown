@@ -83,41 +83,68 @@ const CharacterCustomizer = () => {
   );
 
   const CustomizationOption = ({ category, value }) => (
-    <div className="flex items-center justify-between w-full mb-4">
+    <div className="flex items-center justify-between w-full mb-4 font-malio text-xs">
       <button 
         onClick={() => cycleOption(category, false)}
-        className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold"
+        className="w-8 h-8 flex items-center justify-center"
       >
-        &#9664;
+        <img src="/assets/hud/Customize/leftArrow.png" alt="Previous" className="w-full h-full" />
       </button>
-      <div className="px-6 py-2 bg-yellow-400 rounded-xl font-bold text-black min-w-48 text-center">
+      <div 
+        className="px-6 py-2 font-bold text-black min-w-48 text-center bg-center bg-no-repeat bg-contain"
+        style={{
+          backgroundImage: "url('/assets/hud/Customize/selectionBackground.png')",
+          minHeight: "60px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
         {category === 'skin' ? `SKIN ${options[category].indexOf(value) + 1}` : 
          category === 'hair' ? `HAIR STYLE ${options[category].indexOf(value) + 1}` :
          `OUTFIT ${options[category].indexOf(value) + 1}`}
       </div>
       <button 
         onClick={() => cycleOption(category, true)}
-        className="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold"
+        className="w-8 h-8 flex items-center justify-center"
       >
-        &#9654;
+        <img src="/assets/hud/Customize/rightArrow.png" alt="Next" className="w-full h-full" />
       </button>
     </div>
   );
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
-      <div className="flex gap-8 p-8 bg-gray-800 rounded-lg">
+    <div 
+      className="min-h-screen flex items-center justify-center font-malio"
+      style={{
+        backgroundImage: "url('/assets/hud/Customize/CharacterSelectFrame.png')",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundColor: "#2d2d2d"
+      }}
+    >
+      <div className="flex gap-8 p-8">
         <div className="flex flex-col w-64">
           <div className="mb-4">
             <div className="text-white font-bold mb-2 text-center">NAME</div>
-            <input
-              type="text"
-              value={playerName}
-              onChange={handleNameChange}
-              className="w-full px-4 py-2 bg-yellow-400 rounded-xl font-bold text-black text-center"
-              placeholder="Enter name..."
-              maxLength={12}
-            />
+            <div 
+              className="relative"
+              style={{
+                backgroundImage: "url('/assets/hud/Customize/selectionBackground.png')",
+                backgroundSize: "100% 100%",
+                backgroundRepeat: "no-repeat",
+                padding: "2px"
+              }}
+            >
+              <input
+                type="text"
+                value={playerName}
+                onChange={handleNameChange}
+                className="w-full px-4 py-2 bg-transparent font-bold text-black text-center"
+                placeholder="Enter name..."
+                maxLength={12}
+              />
+            </div>
           </div>
           <div className="text-white font-bold mb-2 text-center">SKIN</div>
           <CustomizationOption 
@@ -137,7 +164,7 @@ const CharacterCustomizer = () => {
         </div>
 
         <div className="flex flex-col items-center">
-          <div className="relative w-[200px] h-[200px] bg-blue-500 rounded-lg mb-4 flex items-center justify-center">
+          <div className="relative w-[200px] h-[200px] rounded-lg mb-4 flex items-center justify-center">
             <div className="absolute transform translate-x-4 translate-y-4" style={{ 
               width: `${SPRITE_SIZE * SPRITE_SCALE}px`, 
               height: `${SPRITE_SIZE * SPRITE_SCALE}px`
@@ -149,15 +176,15 @@ const CharacterCustomizer = () => {
             
             <button 
               onClick={() => rotateCharacter(false)}
-              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full hover:bg-gray-200 flex items-center justify-center"
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center"
             >
-              &#8635;
+              <img src="/assets/hud/Customize/leftArrow.png" alt="Rotate Left" className="w-full h-full" />
             </button>
             <button 
               onClick={() => rotateCharacter(true)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full hover:bg-gray-200 flex items-center justify-center"
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center"
             >
-              &#8634;
+              <img src="/assets/hud/Customize/rightArrow.png" alt="Rotate Right" className="w-full h-full" />
             </button>
           </div>
 

@@ -7,6 +7,7 @@ import PlayerPrefab from "../prefabs/PlayerPrefab";
 import MineHousePrefab from "../prefabs/House/MineHousePrefab";
 import MineTorchPrefab from "../prefabs/Lightning/MineTorchPrefab";
 import MineWatchTowerPrefab from "../prefabs/House/MineWatchTowerPrefab";
+import RockMonster from "../prefabs/Mob/RockMonster";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -109,6 +110,10 @@ export default class ShapeTownMineMapScene extends Phaser.Scene {
 		const mineWatchTowerPrefab = new MineWatchTowerPrefab(this, 1002, 940);
 		this.add.existing(mineWatchTowerPrefab);
 
+		// rockMonster
+		const rockMonster = new RockMonster(this, 1110, 480);
+		this.add.existing(rockMonster);
+
 		this.bg_1 = bg_1;
 		this.cliffs_1 = cliffs_1;
 		this.mine_entrance_1 = mine_entrance_1;
@@ -128,6 +133,7 @@ export default class ShapeTownMineMapScene extends Phaser.Scene {
 		this.mineTorchPrefab_2 = mineTorchPrefab_2;
 		this.mineTorchPrefab_3 = mineTorchPrefab_3;
 		this.mineWatchTowerPrefab = mineWatchTowerPrefab;
+		this.rockMonster = rockMonster;
 		this.shapetownMineEntrance = shapetownMineEntrance;
 
 		this.events.emit("scene-awake");
@@ -171,6 +177,8 @@ export default class ShapeTownMineMapScene extends Phaser.Scene {
 	mineTorchPrefab_3;
 	/** @type {MineWatchTowerPrefab} */
 	mineWatchTowerPrefab;
+	/** @type {RockMonster} */
+	rockMonster;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownMineEntrance;
 

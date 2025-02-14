@@ -866,6 +866,18 @@
             "scope": "CLASS",
             "x": 767,
             "y": 153
+        },
+        {
+            "prefabId": "f9c739bf-7f2e-42e5-b25c-8f419c415c02",
+            "id": "d6e00520-4ca9-4b88-81ec-4e26373b2b62",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "goblinMonster",
+            "scope": "CLASS",
+            "x": 809,
+            "y": 382
         }
     ],
     "plainObjects": [

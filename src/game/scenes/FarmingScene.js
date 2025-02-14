@@ -12,6 +12,7 @@ import OpenInventory from "../prefabs/hud/OpenInventory";
 import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
+import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 /* START-USER-IMPORTS */
 import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
 import { EventBus } from '../EventBus';
@@ -160,6 +161,10 @@ export default class FarmingScene extends Phaser.Scene {
 		const profilePrefab = new ProfilePrefab(this, 77, 27);
 		this.add.existing(profilePrefab);
 
+		// minimapPrefab
+		const minimapPrefab = new MinimapPrefab(this, 591, 367);
+		this.add.existing(minimapPrefab);
+
 		this.render_BackGround_1 = render_BackGround_1;
 		this.render_RoadStone_JustRender__1 = render_RoadStone_JustRender__1;
 		this.render_FenceWooden_Make_a_Collider__1 = render_FenceWooden_Make_a_Collider__1;
@@ -187,6 +192,7 @@ export default class FarmingScene extends Phaser.Scene {
 		this.openMapPrefab = openMapPrefab;
 		this.optionsListPrefab = optionsListPrefab;
 		this.profilePrefab = profilePrefab;
+		this.minimapPrefab = minimapPrefab;
 		this.farmingMap = farmingMap;
 
 		this.events.emit("scene-awake");
@@ -246,6 +252,8 @@ export default class FarmingScene extends Phaser.Scene {
 	optionsListPrefab;
 	/** @type {ProfilePrefab} */
 	profilePrefab;
+	/** @type {MinimapPrefab} */
+	minimapPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	farmingMap;
 
@@ -350,6 +358,14 @@ export default class FarmingScene extends Phaser.Scene {
     	    this.newItemHudPrefab.addItem("CARROT_SEED", "SeedBag", 0, 5);
     	}
 		}, {}, this);
+
+		if (this.minimapPrefab && this.playerPrefab) {
+            this.minimapPrefab.setPlayer(this.playerPrefab);
+            this.minimapPrefab.visible = false;
+            if (this.minimapPrefab.minimapCamera) {
+                this.minimapPrefab.minimapCamera.visible = false;
+            }
+        }
 
     	this.physics.add.collider(this.playerPrefab, this.merchant_shopStand_1);
     	this.merchant_shopStand_1.setCollisionBetween(0, 10000);
