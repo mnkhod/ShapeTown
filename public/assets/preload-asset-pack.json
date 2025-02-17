@@ -1688,6 +1688,32 @@
                 "key": "PlayerAniFarming_V01"
             },
             {
+                "url": "assets/Character/Farming/BaseModel/PlayerAniFarmingWatering_V01.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "PlayerAniFarmingWatering_V"
+            },
+            {
+                "url": "assets/Character/Farming/FullSet/PlayerAniFarmingWatering_V01.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "PlayerAniFarmingWatering_V01"
+            },
+            {
                 "url": "assets/Character/Farming/Clothing/PlayerClothingFarming_V01.png",
                 "frameConfig": {
                     "frameWidth": 32,
