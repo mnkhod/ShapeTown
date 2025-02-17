@@ -644,6 +644,19 @@
                 "key": "FarmingMap"
             },
             {
+                "url": "assets/Character/Farming/Tool/FarmingToolsWatering.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "FarmingToolsWatering"
+            },
+            {
                 "url": "assets/Ground tileset/Fence_V01.png",
                 "frameConfig": {
                     "frameWidth": 32,
