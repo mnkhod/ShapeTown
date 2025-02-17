@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { characterConfig } from "./CharacterConfig";
 const CharacterCustomizer = () => {
   const navigate = useNavigate();
   const [playerName, setPlayerName] = useState('Player');
   
   const options = {
-    skin: ['PlayerWalking_V01.png', 'PlayerWalking_V02.png', 'PlayerWalking_V03.png'],
-    hair: ['PlayerHairWalking_01.png', 'PlayerHairWalking_02.png', 'PlayerHairWalking_03.png'],
-    clothing: ['CharacterOutfit_1.png', 'CharacterOutfit_2.png', 'CharacterOutfit_3.png']
+    skin: characterConfig.skin.getOptions(),
+    hair: characterConfig.hair.getOptions(),
+    clothing: characterConfig.clothing.getOptions()
   };
 
   const [customization, setCustomization] = useState({
@@ -17,6 +17,9 @@ const CharacterCustomizer = () => {
     clothing: options.clothing[0]
   });
   
+  // Original sprite sheet order: down=0, up=1, right=2, left=3
+  // Desired order: down=0, right=1, up=2, left=3
+  const spriteSheetMap = [0, 2, 1, 3]; // Maps our desired order to sprite sheet rows
   const [direction, setDirection] = useState(0);
 
   const SPRITE_SIZE = 24;
@@ -74,7 +77,7 @@ const CharacterCustomizer = () => {
           background: `url(/assets/Character/Walking/${src === 'PlayerWalking_V01.png' || src === 'PlayerWalking_V02.png' || src === 'PlayerWalking_V03.png' ? 
             'BaseModel/' : src.startsWith('PlayerHairWalking') ? 
             'Hair/' : 'Clothing/'}${src})`,
-          backgroundPosition: `0 -${direction * SPRITE_SIZE}px`,
+          backgroundPosition: `0 -${spriteSheetMap[direction] * SPRITE_SIZE}px`,
           backgroundSize: '100% 100%',
           imageRendering: 'pixelated'
         }}
@@ -191,9 +194,9 @@ const CharacterCustomizer = () => {
           <button 
             onClick={() => {
               const savedData = {
-                skin: customization.skin.split('.')[0],
-                hair: customization.hair.split('.')[0],
-                clothing: customization.clothing.split('.')[0],
+                skin: customization.skin.replace('PlayerWalking_', '').split('.')[0],
+                hair: customization.hair.replace('PlayerHairWalking_', '').split('.')[0],
+                clothing: customization.clothing.replace('CharacterOutfit_', '').split('.')[0],
                 playerName: playerName.trim() || 'Player'
               };
               localStorage.setItem('playerCustomization', JSON.stringify(savedData));
