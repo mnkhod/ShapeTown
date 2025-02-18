@@ -1,4 +1,3 @@
-// You can write more code here
 import { mintFirstHarvestAchievement, mintGiftFromNatureAchievement, mintFirstFishAchievement } from "../../utility";
 
 /* START OF COMPILED CODE */
@@ -22,7 +21,6 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 		npc.play("npcHarvestStandingAnim");
 		this.add(npc);
 
-         // Add nameBox sprite with debug options
         const nameBox = scene.add.sprite(0, 33, "OldManJackName");
         nameBox.setVisible(true); 
         nameBox.setOrigin(0.5, 0.5);  
@@ -88,7 +86,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         {
             msg: "Here are your platform passes.",
             onComplete: () => {
-                this.itemHud.addItem("CARROT_SEED", "SeedBag", 0, 5)
+                this.itemHud.addItem("CARROT_SEED", "crops-seed bags-carrot", 0, 5)
+                this.itemHud.addItem("RADISH_SEED", "crops-seed bags-radish", 0, 2);
             }
         },
         {

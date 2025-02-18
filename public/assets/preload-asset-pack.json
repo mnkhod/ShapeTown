@@ -509,6 +509,531 @@
                 "key": "CityHouses_v02"
             },
             {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_BokChok.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_BokChok"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Broccoli.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Broccoli"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Carrot.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Carrot"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Cauliflower.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Cauliflower"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Chili.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Chili"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Corn.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Corn"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_EggPlant.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_EggPlant"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Garlic.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Garlic"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Greenbean.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Greenbean"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Parsnip.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Parsnip"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Potato.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Potato"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Pumpkin.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Pumpkin"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Radish.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Radish"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_RedCabagge.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_RedCabagge"
+            },
+            {
+                "url": "assets/Crops/Crops Growt Cycle/Crop_Cycle_Wheat.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Crop_Cycle_Wheat"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Fruit/crops-artichoke.png",
+                "type": "image",
+                "key": "crops-artichoke"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Fruit/crops-artichoke_01.png",
+                "type": "image",
+                "key": "crops-artichoke_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Fruit/crops-blueberry.png",
+                "type": "image",
+                "key": "crops-blueberry"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Fruit/crops-blueberry_01.png",
+                "type": "image",
+                "key": "crops-blueberry_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-bok chok.png",
+                "type": "image",
+                "key": "crops-bok chok"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-bok chok_01.png",
+                "type": "image",
+                "key": "crops-bok chok_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-broccoli.png",
+                "type": "image",
+                "key": "crops-broccoli"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-broccoli_01.png",
+                "type": "image",
+                "key": "crops-broccoli_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-carrot.png",
+                "type": "image",
+                "key": "crops-carrot"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-carrot_01.png",
+                "type": "image",
+                "key": "crops-carrot_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-cauliflower.png",
+                "type": "image",
+                "key": "crops-cauliflower"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-cauliflower_01.png",
+                "type": "image",
+                "key": "crops-cauliflower_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-chili.png",
+                "type": "image",
+                "key": "crops-chili"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-chili_01.png",
+                "type": "image",
+                "key": "crops-chili_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Fruit/crops-coffee bean.png",
+                "type": "image",
+                "key": "crops-coffee bean"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Fruit/crops-coffee bean_01.png",
+                "type": "image",
+                "key": "crops-coffee bean_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-corn.png",
+                "type": "image",
+                "key": "crops-corn"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-corn_01.png",
+                "type": "image",
+                "key": "crops-corn_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-eggplant.png",
+                "type": "image",
+                "key": "crops-eggplant"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-eggplant_01.png",
+                "type": "image",
+                "key": "crops-eggplant_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-garlic.png",
+                "type": "image",
+                "key": "crops-garlic"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-garlic_01.png",
+                "type": "image",
+                "key": "crops-garlic_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Fruit/crops-grape.png",
+                "type": "image",
+                "key": "crops-grape"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Fruit/crops-grape_01.png",
+                "type": "image",
+                "key": "crops-grape_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-green bean.png",
+                "type": "image",
+                "key": "crops-green bean"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-green bean_01.png",
+                "type": "image",
+                "key": "crops-green bean_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Fruit/crops-melon.png",
+                "type": "image",
+                "key": "crops-melon"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Fruit/crops-melon_01.png",
+                "type": "image",
+                "key": "crops-melon_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-parsnip.png",
+                "type": "image",
+                "key": "crops-parsnip"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-parsnip_01.png",
+                "type": "image",
+                "key": "crops-parsnip_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-potato.png",
+                "type": "image",
+                "key": "crops-potato"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-potato_01.png",
+                "type": "image",
+                "key": "crops-potato_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-pumpkin.png",
+                "type": "image",
+                "key": "crops-pumpkin"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-pumpkin_01.png",
+                "type": "image",
+                "key": "crops-pumpkin_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-radish.png",
+                "type": "image",
+                "key": "crops-radish"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-radish_01.png",
+                "type": "image",
+                "key": "crops-radish_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-red cabagge.png",
+                "type": "image",
+                "key": "crops-red cabagge"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-red cabagge_01.png",
+                "type": "image",
+                "key": "crops-red cabagge_01"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/Fruit/crops-seed bags-artichoke.png",
+                "type": "image",
+                "key": "crops-seed bags-artichoke"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/Fruit/crops-seed bags-blueberry.png",
+                "type": "image",
+                "key": "crops-seed bags-blueberry"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-bok choy.png",
+                "type": "image",
+                "key": "crops-seed bags-bok choy"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-broccoli.png",
+                "type": "image",
+                "key": "crops-seed bags-broccoli"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-carrot.png",
+                "type": "image",
+                "key": "crops-seed bags-carrot"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-cauliflower.png",
+                "type": "image",
+                "key": "crops-seed bags-cauliflower"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-chili.png",
+                "type": "image",
+                "key": "crops-seed bags-chili"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/Fruit/crops-seed bags-coffee bean.png",
+                "type": "image",
+                "key": "crops-seed bags-coffee bean"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-corn.png",
+                "type": "image",
+                "key": "crops-seed bags-corn"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-eggplant.png",
+                "type": "image",
+                "key": "crops-seed bags-eggplant"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-garlic.png",
+                "type": "image",
+                "key": "crops-seed bags-garlic"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/Fruit/crops-seed bags-grape.png",
+                "type": "image",
+                "key": "crops-seed bags-grape"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-green bean.png",
+                "type": "image",
+                "key": "crops-seed bags-green bean"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/Fruit/crops-seed bags-melon.png",
+                "type": "image",
+                "key": "crops-seed bags-melon"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-parsnip.png",
+                "type": "image",
+                "key": "crops-seed bags-parsnip"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-potato.png",
+                "type": "image",
+                "key": "crops-seed bags-potato"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-pumpkin.png",
+                "type": "image",
+                "key": "crops-seed bags-pumpkin"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-radish.png",
+                "type": "image",
+                "key": "crops-seed bags-radish"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-red cabagge.png",
+                "type": "image",
+                "key": "crops-seed bags-red cabagge"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/Fruit/crops-seed bags-strawberry.png",
+                "type": "image",
+                "key": "crops-seed bags-strawberry"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/Fruit/crops-seed bags-tomato.png",
+                "type": "image",
+                "key": "crops-seed bags-tomato"
+            },
+            {
+                "url": "assets/Crops/Icons/seed sack/crops/crops-seed bags-wheat.png",
+                "type": "image",
+                "key": "crops-seed bags-wheat"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Fruit/crops-strawberry.png",
+                "type": "image",
+                "key": "crops-strawberry"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Fruit/crops-strawberry_01.png",
+                "type": "image",
+                "key": "crops-strawberry_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Fruit/crops-tomato.png",
+                "type": "image",
+                "key": "crops-tomato"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Fruit/crops-tomato_01.png",
+                "type": "image",
+                "key": "crops-tomato_01"
+            },
+            {
+                "url": "assets/Crops/Icons/Normal Icon/Crops/crops-wheat.png",
+                "type": "image",
+                "key": "crops-wheat"
+            },
+            {
+                "url": "assets/Crops/Icons/Highlighted/Crops/crops-wheat_01.png",
+                "type": "image",
+                "key": "crops-wheat_01"
+            },
+            {
                 "url": "assets/Ground tileset/DeckOnTheBeach.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -891,6 +1416,97 @@
                 },
                 "type": "spritesheet",
                 "key": "ForrestLadge"
+            },
+            {
+                "url": "assets/Crops/Fruit Growt Cycle/Fruit_Cycle_Artichoke.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Fruit_Cycle_Artichoke"
+            },
+            {
+                "url": "assets/Crops/Fruit Growt Cycle/Fruit_Cycle_Blueberry.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Fruit_Cycle_Blueberry"
+            },
+            {
+                "url": "assets/Crops/Fruit Growt Cycle/Fruit_Cycle_Coffee.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Fruit_Cycle_Coffee"
+            },
+            {
+                "url": "assets/Crops/Fruit Growt Cycle/Fruit_Cycle_Grape.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Fruit_Cycle_Grape"
+            },
+            {
+                "url": "assets/Crops/Fruit Growt Cycle/Fruit_Cycle_Melon.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Fruit_Cycle_Melon"
+            },
+            {
+                "url": "assets/Crops/Fruit Growt Cycle/Fruit_Cycle_Strawberry.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Fruit_Cycle_Strawberry"
+            },
+            {
+                "url": "assets/Crops/Fruit Growt Cycle/Fruit_Cycle_Tomato.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Fruit_Cycle_Tomato"
             },
             {
                 "url": "assets/Crops/Fruitbushes_V01.png",
