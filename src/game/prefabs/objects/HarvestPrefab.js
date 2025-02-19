@@ -3,7 +3,6 @@
 /* START OF COMPILED CODE */
 
 /* START-USER-IMPORTS */
-// Define crop data structure based on your table and file structure
 const CROP_DATA = {
     "CARROT": {
         type: "Vegetable",
@@ -12,12 +11,12 @@ const CROP_DATA = {
         growthDays: 2,
         growthMinutes: 32,
         tier: "common",
-        spritesheet: "Crop_Cycle_Carrot", // Growth cycle spritesheet
+        spritesheet: "Crop_Cycle_Carrot",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
-        harvestAsset: "crops-carrot", // Harvested item asset
-        seedAsset: "crops-seed bags-carrot", // Seed bag asset
+        harvestFrame: 6,
+        harvestAsset: "crops-carrot",
+        seedAsset: "crops-seed bags-carrot",
         displayName: "Carrot"
     },
     "BOK_CHOK": {
@@ -30,7 +29,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_BokChok",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-bokchok",
         seedAsset: "crops-seed bags-bokchok",
         displayName: "Bok Chok"
@@ -45,7 +44,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Broccoli",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-broccoli",
         seedAsset: "crops-seed bags-broccoli",
         displayName: "Broccoli"
@@ -60,7 +59,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Wheat",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-wheat",
         seedAsset: "crops-seed bags-wheat",
         displayName: "Wheat"
@@ -75,7 +74,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Potato",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-potato",
         seedAsset: "crops-seed bags-potato",
         displayName: "Potato"
@@ -90,7 +89,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Cauliflower",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-cauliflower",
         seedAsset: "crops-seed bags-cauliflower",
         displayName: "Cauliflower"
@@ -105,7 +104,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Chili",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-chili",
         seedAsset: "crops-seed bags-chili",
         displayName: "Chili"
@@ -120,7 +119,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Corn",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-corn",
         seedAsset: "crops-seed bags-corn",
         displayName: "Corn"
@@ -135,7 +134,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Eggplant",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-eggplant",
         seedAsset: "crops-seed bags-eggplant",
         displayName: "Eggplant"
@@ -150,7 +149,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Greenbean",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-greenbean",
         seedAsset: "crops-seed bags-greenbean",
         displayName: "Green Bean"
@@ -165,7 +164,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Parsnip",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-parsnip",
         seedAsset: "crops-seed bags-parsnip",
         displayName: "Parsnip"
@@ -180,7 +179,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Pumpkin",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-pumpkin",
         seedAsset: "crops-seed bags-pumpkin",
         displayName: "Pumpkin"
@@ -195,7 +194,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_Radish",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-radish",
         seedAsset: "crops-seed bags-radish",
         displayName: "Radish"
@@ -210,7 +209,7 @@ const CROP_DATA = {
         spritesheet: "Crop_Cycle_RedCabbage",
         seedFrame: 0,
         growthFrames: [1, 2, 3, 4],
-        harvestFrame: 5,
+        harvestFrame: 6,
         harvestAsset: "crops-redcabbage",
         seedAsset: "crops-seed bags-redcabbage",
         displayName: "Red Cabbage"
@@ -242,7 +241,6 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
         this.growthStartTime = null;
         this.growthText = null;
         
-        // Add a destroy listener to clean up any remaining text
         this.on('destroy', () => {
             if (this.growthText && this.growthText.destroy) {
                 this.growthText.destroy();
@@ -288,17 +286,13 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
             }
 
             if (this.isReadyForHarvest) {
-                // Use the proper harvest asset from crop data
                 const cropData = CROP_DATA[this.seed];
                 const harvestAsset = cropData ? cropData.harvestAsset : `crops-${this.seed.toLowerCase()}`;
                 
-                // Hide growth info before destroying
                 this.hideGrowthInfo();
                 
-                // Add item to inventory using the correct asset
                 this.scene.newItemHudPrefab.addItem(this.seed, harvestAsset, 0, 1, true);
                 
-                // Reset to soil state instead of destroying
                 this.isReadyForHarvest = false;
                 this.isWatered = false;
                 this.growthStage = 0;
@@ -354,11 +348,9 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 this.setTexture("GroundTilestSoil", 3);
                 break;
             case "PLANTED":
-                // Set texture to seed frame based on seed type
                 if (CROP_DATA[this.seed]) {
                     this.setTexture(CROP_DATA[this.seed].spritesheet, CROP_DATA[this.seed].seedFrame);
                 } else {
-                    // Fallback to carrot if seed not found
                     this.setTexture("FarmingCropsVer2", 0);
                 }
                 break;
@@ -367,23 +359,18 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 this.growthStartTime = Date.now();
                 this.growthStage = 0;
                 
-                // Calculate total growth time based on crop data
                 let growthTimeMs = this.calculateGrowthTimeMs();
                 
-                // Schedule growth stages
-                const stageTime = growthTimeMs / 4; // 4 growth stages
+                const stageTime = growthTimeMs / 4;
                 
-                // Growth logic implemented with timers
                 this.scheduleGrowthStages(stageTime);
                 break;
             default:
-                // Handle growth states dynamically
                 if (this.state.startsWith(this.seed + "_LEVEL_")) {
                     const level = parseInt(this.state.split("_").pop());
                     const cropData = CROP_DATA[this.seed];
                     
                     if (cropData) {
-                        // Calculate the frame based on level (1-4)
                         if (level <= 4) {
                             this.setTexture(cropData.spritesheet, cropData.growthFrames[level-1]);
                             
@@ -439,17 +426,14 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
     }
 
     showGrowthInfo() {
-        // Remove existing text if it exists
         this.hideGrowthInfo();
         
-        // Get crop data and display name
         const cropData = CROP_DATA[this.seed];
         if (!cropData && this.state !== "SOIL") return;
         
         const displayName = cropData ? cropData.displayName || this.seed : "";
         
         if (this.isWatered && !this.isReadyForHarvest && this.growthStartTime) {
-            // Calculate remaining time
             const currentTime = Date.now();
             const elapsedTime = currentTime - this.growthStartTime;
             const totalGrowthTime = this.calculateGrowthTimeMs();
@@ -473,7 +457,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
             
             const displayText = `${displayName}\n${progressPercent}% grown\n${timeDisplay} remaining`;
             
-            // Create text object with growth info
+            //growth info
             this.growthText = this.scene.add.text(this.x, this.y - 40, displayText, {
                 fontSize: '12px',
                 color: '#ffffff',
@@ -482,7 +466,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 align: 'center'
             }).setOrigin(0.5, 1);
         } else if (this.isReadyForHarvest) {
-            // Show "Ready to harvest" text with tier color
+            //Ready to harvest
             const tierColors = {
                 'common': '#ffffff',
                 'Common': '#ffffff',
@@ -502,7 +486,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 align: 'center'
             }).setOrigin(0.5, 1);
         } else if (this.state === "PLANTED") {
-            // Show "Needs water" text
+            // Needs water
             this.growthText = this.scene.add.text(this.x, this.y - 40, `${displayName}\nNeeds water`, {
                 fontSize: '12px',
                 color: '#87cefa',
@@ -511,7 +495,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 align: 'center'
             }).setOrigin(0.5, 1);
         } else if (this.state === "SOIL") {
-            // Show "Ready for planting" text
+            // Ready for planting
             this.growthText = this.scene.add.text(this.x, this.y - 40, `Tilled Soil\nReady for planting`, {
                 fontSize: '12px',
                 color: '#8B4513',
@@ -559,22 +543,18 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 this.setupBasedOnState();
                 break;
             case "SOIL":
-                // Check if the item is a seed
                 if (!item.endsWith("_SEED")) {
                     this.scene.alertPrefab.alert("Select Seed");
                     break;
                 }
                 
-                // Extract crop name from seed (e.g., CARROT_SEED -> CARROT)
                 const seedType = item.replace("_SEED", "");
                 
-                // Verify this is a valid crop
                 if (!CROP_DATA[seedType]) {
                     this.scene.alertPrefab.alert("Unknown Seed Type");
                     break;
                 }
                 
-                // Update seed type
                 this.seed = seedType;
                 this.scene.newItemHudPrefab.useItem(item);
 

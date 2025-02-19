@@ -23,7 +23,7 @@ import RockMonster from "../prefabs/Mob/RockMonster";
 import GoblinMonster from "../prefabs/Mob/GoblinMonster";
 /* START-USER-IMPORTS */
 import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
-import { EventBus } from '../EventBus';
+import { EventBus } from '../../game/EventBus';
 /* END-USER-IMPORTS */
 
 export default class TutorialScene extends Phaser.Scene {
@@ -346,12 +346,103 @@ export default class TutorialScene extends Phaser.Scene {
 	achievements = {};
 
 
+	initInventorySystem() {
+	  	if (!this.newItemHudPrefab) return;
+
+	  	this.newItemHudPrefab.visible = true;
+
+	  	this.time.delayedCall(100, () => {
+	  	  	import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+	  	  	  	this.newItemHudPrefab.syncWithGlobalInventory = function() {
+	  	  	  	  	globalInventory.quickItems.forEach((itemData, index) => {
+	  	  	  	    	if (!itemData) return;
+
+	  	  	  	    	this.itemData[index] = itemData.id;
+
+	  	  	  	    	if (this.items[index]) {
+	  	  	  	    	  	this.items[index].visible = true;
+	  	  	  	    	  	this.items[index].setTexture(itemData.textureKey || itemData.icon);
+	  	  	  	    	  	if (itemData.frameName !== undefined) {
+	  	  	  	    	  	  	this.items[index].setFrame(itemData.frameName);
+	  	  	  	    	  	}
+	  	  	  	    	}
+
+	  	  	  	    	if (this.itemCounters[index]) {
+	  	  	  	    	  	this.itemCounters[index].visible = true;
+	  	  	  	    	  	this.itemCounters[index].text = itemData.quantity.toString();
+	  	  	  	    	}
+	  	  	  	  	});
+
+	  	  	  	 	this.mainInventoryData = [...globalInventory.mainItems];
+	  	  	  	};
+
+	  	  	  	this.newItemHudPrefab.updateGlobalInventory = function() {
+	  	  	  	  	const updatedQuickItems = this.itemData.map((id, index) => {
+	  	  	  	    	if (!id) return null;
+
+	  	  	  	    	const item = this.items[index];
+	  	  	  	    	if (!item || !item.visible) return null;
+
+	  	  	  	    	return {
+	  	  	  	    	  	id: id,
+	  	  	  	    	  	icon: item.texture.key,
+	  	  	  	    	  	frame: item.frame.name,
+	  	  	  	    	  	textureKey: item.texture.key,
+	  	  	  	    	  	frameName: item.frame.name,
+	  	  	  	    	  	quantity: parseInt(this.itemCounters[index].text) || 1,
+	  	  	  	    	  	name: id
+	  	  	  	    	};
+	  	  	  	  	});
+
+	  	  	  	  	globalInventory.quickItems = updatedQuickItems;
+	  	  	  	  	globalInventory.mainItems = [...this.mainInventoryData];
+
+	  	  	  	  	if (this.reactEvent) {
+	  	  	  	  	  	this.reactEvent.emit('global-inventory-changed', globalInventory);
+	  	  	  	  	}
+	  	  	  	};
+
+	  	  	  	this.newItemHudPrefab.syncWithGlobalInventory();
+
+	  	  	  	if (globalInventory.quickItems.every(item => item === null) && 
+	  	  	  	    globalInventory.mainItems.every(item => item === null)) {
+	  	  	  	  	this.setupStartingItems();
+	  	  	  	}
+
+	  	  	  	this.reactEvent.emit('scene-switched', this);
+	  	  	});
+	  	});
+
+	  	this.events.on('shutdown', this.onSceneShutdown, this);
+	}
+	onSceneShutdown() {
+	  if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+		this.newItemHudPrefab.updateGlobalInventory();
+	  }
+	}
+	setupStartingItems() {
+	  if (!this.newItemHudPrefab) return;
+	
+	  if (this.newItemHudPrefab.updateGlobalInventory) {
+	    this.newItemHudPrefab.updateGlobalInventory();
+	  }
+	}
 	create() {
 		this.editorCreate();
 		this.cameras.main.setBounds(-120, -130, 1344, 1792);
         this.physics.world.bounds.width = 1000;
         this.physics.world.bounds.height = 800;
 
+    	this.initInventorySystem();
+
+		this.events.on('wake', (sys, data) => {
+		  console.log(`[${this.scene.key}] Scene woken up, syncing inventory`);
+		  if (this.newItemHudPrefab) {
+		    import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+		      globalInventory.syncInventoryToScene(this);
+		    });
+		  }
+		});
 
 		this.fishingArea.setInteractive({ useHandCursor: true });
 		this.fishingArea.on('pointerdown', function (_pointer) {
@@ -419,10 +510,14 @@ export default class TutorialScene extends Phaser.Scene {
 		// this.farmingAreaFarmingTile.renderDebug(this.add.graphics());
 
 		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-            this.scene.switch("FarmingScene");
-			this.playerPrefab.x -= 50
-        	this.cameras.main.fadeIn(2000, 0, 0, 0);
-        });
+		    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+			this.newItemHudPrefab.updateGlobalInventory();
+			}
+
+		    this.scene.switch("FarmingScene");
+		    this.playerPrefab.x -= 50;
+		    this.cameras.main.fadeIn(2000, 0, 0, 0);
+		});
 
 		if (this.minimapPrefab && this.playerPrefab) {
             this.minimapPrefab.setPlayer(this.playerPrefab);

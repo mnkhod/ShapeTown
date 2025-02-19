@@ -28,6 +28,8 @@ const InventorySlot = ({
   };
 
   const handleDragStart = (e) => {
+    if (!item) return;
+    
     e.dataTransfer.setData('text/plain', JSON.stringify({
       index: slotIndex,
       isQuickAccess,
@@ -37,12 +39,12 @@ const InventorySlot = ({
 
   return (
     <div 
-      className={`relative cursor-pointer ${isDragOver ? 'bg-gray-500/20' : ''}`}
+      className={`relative cursor-pointer ${isDragOver ? 'bg-gray-500/20' : ''} ${isActive && isQuickAccess ? 'ring-2 ring-yellow-500' : ''}`}
       style={{
         width: '50px',
         height: '50px',
       }}
-      onClick={() => onItemClick(item, slotIndex)}
+      onClick={() => onItemClick(item, slotIndex, isQuickAccess)}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
@@ -76,20 +78,47 @@ const PhaserInventory = ({ onClose, phaserInstance }) => {
   const [mainItems, setMainItems] = useState(Array(24).fill(null));
   const [quickItems, setQuickItems] = useState(Array(8).fill(null));
   const [activeQuickSlot, setActiveQuickSlot] = useState(0);
-
+  const [inventoryFull, setInventoryFull] = useState(false);
+  
   useEffect(() => {
     if (!phaserInstance) return;
 
+    if (!phaserInstance.mainInventoryData) {
+      phaserInstance.mainInventoryData = Array(24).fill(null);
+    }
+
+    refreshInventoryFromPhaser();
+
+    const hasSpace = phaserInstance.itemData.includes(null) || 
+                     phaserInstance.mainInventoryData.some(item => item === null);
+    setInventoryFull(!hasSpace);
+    
+    const handleInventoryChange = () => {
+      refreshInventoryFromPhaser();
+    };
+    
+    phaserInstance.scene.events.on('inventory-changed', handleInventoryChange);
+    
+    return () => {
+      phaserInstance.scene.events.off('inventory-changed', handleInventoryChange);
+    };
+  }, [phaserInstance]);
+
+  const refreshInventoryFromPhaser = () => {
+    if (!phaserInstance) return;
+    
     const mappedQuickItems = phaserInstance.itemData.map((key, index) => {
-      if (!key || !phaserInstance.items?.[index]?.visible) return null;
+      if (!key) return null;
 
       const phaserItem = phaserInstance.items[index];
+      if (!phaserItem?.visible) return null;
+      
       return {
         id: key,
         icon: phaserItem.texture.key,
-        frame: phaserItem.frame.name,
+        frame: phaserItem.frame.name || 0,
         textureKey: phaserItem.texture.key,
-        frameName: phaserItem.frame.name,
+        frameName: phaserItem.frame.name || 0,
         quantity: parseInt(phaserInstance.itemCounters[index].text) || 1,
         name: key
       };
@@ -106,31 +135,69 @@ const PhaserInventory = ({ onClose, phaserInstance }) => {
 
     setQuickItems(mappedQuickItems);
     setMainItems(mappedMainItems);
-  }, [phaserInstance]);
+    setActiveQuickSlot(phaserInstance.activeIndex !== -1 ? phaserInstance.activeIndex : 0);
+    
+    const hasSpace = phaserInstance.itemData.includes(null) || 
+                     phaserInstance.mainInventoryData.some(item => item === null);
+    setInventoryFull(!hasSpace);
+  };
 
   const handleItemClick = (item, slotIndex, isQuickAccess) => {
-    if (!isQuickAccess || !phaserInstance) return;
+    if (!phaserInstance) return;
 
-    const quickIndex = slotIndex - 24;
-    setActiveQuickSlot(quickIndex);
-    phaserInstance.activeIndex = quickIndex;
-    phaserInstance.selectedItem = item?.id || null;
+    if (isQuickAccess) {
+      const quickIndex = slotIndex - 24;
+      setActiveQuickSlot(quickIndex);
+      phaserInstance.activeIndex = quickIndex;
+      phaserInstance.selectedItem = item?.id || null;
 
-    if (phaserInstance.activeItemSlots) {
-      phaserInstance.activeItemSlots.forEach((slot, i) => {
-        if (slot) {
-          slot.visible = i === quickIndex;
+      if (phaserInstance.activeItemSlots) {
+        phaserInstance.activeItemSlots.forEach((slot, i) => {
+          if (slot) {
+            slot.visible = i === quickIndex;
+          }
+        });
+      }
+    } else {
+      if (item) {
+        const emptyQuickIndex = phaserInstance.itemData.findIndex(i => i === null);
+        if (emptyQuickIndex !== -1) {
+          const mainIndex = slotIndex;
+          
+          phaserInstance.itemData[emptyQuickIndex] = item.id;
+          if (phaserInstance.items[emptyQuickIndex]) {
+            phaserInstance.items[emptyQuickIndex].visible = true;
+            phaserInstance.items[emptyQuickIndex].setTexture(item.textureKey || item.icon);
+            if (item.frameName !== undefined) {
+              phaserInstance.items[emptyQuickIndex].setFrame(item.frameName);
+            }
+          }
+          
+          if (phaserInstance.itemCounters?.[emptyQuickIndex]) {
+            phaserInstance.itemCounters[emptyQuickIndex].visible = true;
+            phaserInstance.itemCounters[emptyQuickIndex].text = item.quantity.toString();
+          }
+          
+          phaserInstance.mainInventoryData[mainIndex] = null;
+          
+          refreshInventoryFromPhaser();
         }
-      });
+      }
     }
   };
 
   const handleItemDrop = (fromData, toIndex) => {
+    if (!phaserInstance) return;
+    
     const { index: fromIndex, isQuickAccess: fromQuickAccess, item: draggedItem } = fromData;
     
     const isToQuickAccess = toIndex >= 24;
     const toActualIndex = isToQuickAccess ? toIndex - 24 : toIndex;
     const fromActualIndex = fromQuickAccess ? fromIndex - 24 : fromIndex;
+    
+    if (fromIndex === toIndex) {
+      return;
+    }
     
     const newQuickItems = [...quickItems];
     const newMainItems = [...mainItems];
@@ -141,35 +208,101 @@ const PhaserInventory = ({ onClose, phaserInstance }) => {
         targetItem.id === draggedItem.id && 
         targetItem.icon === draggedItem.icon &&
         targetItem.frame === draggedItem.frame) {
+      
       const combinedItem = {
         ...targetItem,
         quantity: (targetItem.quantity || 1) + (draggedItem.quantity || 1)
       };
       
       if (isToQuickAccess) {
+        phaserInstance.itemData[toActualIndex] = combinedItem.id;
+        if (phaserInstance.itemCounters?.[toActualIndex]) {
+          phaserInstance.itemCounters[toActualIndex].text = combinedItem.quantity.toString();
+        }
         newQuickItems[toActualIndex] = combinedItem;
       } else {
+        phaserInstance.mainInventoryData[toActualIndex] = combinedItem;
         newMainItems[toActualIndex] = combinedItem;
       }
       
       if (fromQuickAccess) {
+        phaserInstance.itemData[fromActualIndex] = null;
+        if (phaserInstance.items?.[fromActualIndex]) {
+          phaserInstance.items[fromActualIndex].visible = false;
+        }
+        if (phaserInstance.itemCounters?.[fromActualIndex]) {
+          phaserInstance.itemCounters[fromActualIndex].visible = false;
+        }
         newQuickItems[fromActualIndex] = null;
       } else {
+        phaserInstance.mainInventoryData[fromActualIndex] = null;
         newMainItems[fromActualIndex] = null;
       }
     } else {
       if (fromQuickAccess) {
+        phaserInstance.itemData[fromActualIndex] = targetItem?.id || null;
+        
+        if (targetItem) {
+          if (phaserInstance.items?.[fromActualIndex]) {
+            phaserInstance.items[fromActualIndex].visible = true;
+            phaserInstance.items[fromActualIndex].setTexture(targetItem.textureKey || targetItem.icon);
+            if (targetItem.frameName !== undefined) {
+              phaserInstance.items[fromActualIndex].setFrame(targetItem.frameName);
+            }
+          }
+          if (phaserInstance.itemCounters?.[fromActualIndex]) {
+            phaserInstance.itemCounters[fromActualIndex].visible = true;
+            phaserInstance.itemCounters[fromActualIndex].text = targetItem.quantity.toString();
+          }
+        } else {
+          if (phaserInstance.items?.[fromActualIndex]) {
+            phaserInstance.items[fromActualIndex].visible = false;
+          }
+          if (phaserInstance.itemCounters?.[fromActualIndex]) {
+            phaserInstance.itemCounters[fromActualIndex].visible = false;
+          }
+        }
+        
         newQuickItems[fromActualIndex] = targetItem;
+        
         if (isToQuickAccess) {
+          phaserInstance.itemData[toActualIndex] = draggedItem.id;
+          if (phaserInstance.items?.[toActualIndex]) {
+            phaserInstance.items[toActualIndex].visible = true;
+            phaserInstance.items[toActualIndex].setTexture(draggedItem.textureKey || draggedItem.icon);
+            if (draggedItem.frameName !== undefined) {
+              phaserInstance.items[toActualIndex].setFrame(draggedItem.frameName);
+            }
+          }
+          if (phaserInstance.itemCounters?.[toActualIndex]) {
+            phaserInstance.itemCounters[toActualIndex].visible = true;
+            phaserInstance.itemCounters[toActualIndex].text = draggedItem.quantity.toString();
+          }
           newQuickItems[toActualIndex] = draggedItem;
         } else {
+          phaserInstance.mainInventoryData[toActualIndex] = draggedItem;
           newMainItems[toActualIndex] = draggedItem;
         }
       } else {
+        phaserInstance.mainInventoryData[fromActualIndex] = targetItem;
         newMainItems[fromActualIndex] = targetItem;
+        
         if (isToQuickAccess) {
+          phaserInstance.itemData[toActualIndex] = draggedItem.id;
+          if (phaserInstance.items?.[toActualIndex]) {
+            phaserInstance.items[toActualIndex].visible = true;
+            phaserInstance.items[toActualIndex].setTexture(draggedItem.textureKey || draggedItem.icon);
+            if (draggedItem.frameName !== undefined) {
+              phaserInstance.items[toActualIndex].setFrame(draggedItem.frameName);
+            }
+          }
+          if (phaserInstance.itemCounters?.[toActualIndex]) {
+            phaserInstance.itemCounters[toActualIndex].visible = true;
+            phaserInstance.itemCounters[toActualIndex].text = draggedItem.quantity.toString();
+          }
           newQuickItems[toActualIndex] = draggedItem;
         } else {
+          phaserInstance.mainInventoryData[toActualIndex] = draggedItem;
           newMainItems[toActualIndex] = draggedItem;
         }
       }
@@ -177,41 +310,13 @@ const PhaserInventory = ({ onClose, phaserInstance }) => {
 
     setMainItems(newMainItems);
     setQuickItems(newQuickItems);
-
-    if (phaserInstance && phaserInstance.items) {
-      phaserInstance.itemData = newQuickItems.map(item => item?.id || null);
-      phaserInstance.mainInventoryData = newMainItems.map(item => item ? {
-        id: item.id,
-        icon: item.icon,
-        frame: item.frame,
-        textureKey: item.textureKey || item.icon,
-        frameName: item.frameName || item.frame,
-        quantity: item.quantity,
-        name: item.name
-      } : null);
-      
-      newQuickItems.forEach((item, index) => {
-        if (!phaserInstance.items[index]) return;
-        
-        if (item) {
-          phaserInstance.items[index].visible = true;
-          phaserInstance.items[index].setTexture(item.textureKey || item.icon);
-          if (item.frameName !== undefined) {
-            phaserInstance.items[index].setFrame(item.frameName);
-          }
-          
-          if (phaserInstance.itemCounters?.[index]) {
-            phaserInstance.itemCounters[index].visible = true;
-            phaserInstance.itemCounters[index].text = item.quantity.toString();
-          }
-        } else {
-          phaserInstance.items[index].visible = false;
-          if (phaserInstance.itemCounters?.[index]) {
-            phaserInstance.itemCounters[index].visible = false;
-          }
-        }
-      });
-    }
+    
+    const hasSpace = phaserInstance.itemData.includes(null) || 
+                     phaserInstance.mainInventoryData.some(item => item === null);
+    setInventoryFull(!hasSpace);
+    
+    phaserInstance.cleanupInventory?.();
+    phaserInstance.scene.events.emit('inventory-changed');
   };
 
   return (
@@ -316,6 +421,12 @@ const PhaserInventory = ({ onClose, phaserInstance }) => {
             style={{ imageRendering: 'pixelated' }}
           />
         </button>
+        
+        {inventoryFull && (
+          <div className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-red-600/80 text-white px-4 py-1 rounded text-sm">
+            Inventory Full
+          </div>
+        )}
       </div>
     </div>
   );
@@ -327,7 +438,7 @@ InventorySlot.propTypes = {
     icon: PropTypes.string,
     name: PropTypes.string,
     quantity: PropTypes.number,
-    frame: PropTypes.number
+    frame: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   }),
   onItemClick: PropTypes.func.isRequired,
   slotIndex: PropTypes.number.isRequired,

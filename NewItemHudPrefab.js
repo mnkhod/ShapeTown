@@ -424,6 +424,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	activeIndex = -1;
 	selectedItem = null;
 	itemData = [null, null, null, null, null, null, null, null];
+	mainInventoryData = Array(24).fill(null);
 
 	onSceneCreate() {
 	    this.items.forEach(item => {
@@ -436,7 +437,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 
 	    this.passiveItemSlots.forEach((slot, index) => {
 	        if (!slot) return;
-	
+
 	        slot.setInteractive();
 	        slot.on('pointerdown', () => {
 	            this.activeItemSlots.forEach(activeSlot => {
@@ -452,7 +453,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	            if (this.selectedItem && this.items[index] && this.items[index].visible) {
 	                const selectedTexture = this.items[index].texture.key;
 	                const selectedFrame = this.items[index].frame.name;
-	
+
 	                if (this.cursorIcon) {
 	                    this.cursorIcon.destroy();
 	                }
@@ -480,7 +481,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	            const scale = 0.5;
 	            const offsetX = 500; 
 	            const offsetY = 300; 
-	
+
 	            this.cursorIcon.x = (pointer.x * scale) + offsetX;
 	            this.cursorIcon.y = (pointer.y * scale) + offsetY;
 	        }
@@ -509,14 +510,14 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	            if (this.activeItemSlots[index]) {
 	                this.activeItemSlots[index].visible = true;
 	            }
-	
+
 	            this.selectedItem = this.itemData[index];
 	            this.activeIndex = index;
-	
+
 	            if (this.selectedItem && this.items[index] && this.items[index].visible) {
 	                const selectedTexture = this.items[index].texture.key;
 	                const selectedFrame = this.items[index].frame.name;
-	
+
 	                if (this.cursorIcon) {
 	                    this.cursorIcon.destroy();
 	                }
@@ -554,92 +555,201 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	}
 
 	checkItem(key) {
-	    return this.itemData.includes(key);
+	    return this.itemData.includes(key) || this.mainInventoryData.some(item => item && item.id === key);
 	}
 
 	getItemCount(key) {
 	    if (!key) return 0;
-	    const index = this.itemData.findIndex(item => item === key);
-	    if (index === -1) return 0;
-	    return parseInt(this.itemCounters[index].text || '0');
+	
+	    let totalCount = 0;
+	
+	    const quickIndex = this.itemData.findIndex(item => item === key);
+	    if (quickIndex !== -1) {
+	        totalCount += parseInt(this.itemCounters[quickIndex].text || '0');
+	    }
+	
+	    this.mainInventoryData.forEach(item => {
+	        if (item && item.id === key) {
+	            totalCount += item.quantity || 0;
+	        }
+	    });
+	
+	    return totalCount;
 	}
 
-	addItem(key, textureName, textureId, amount = 1, isAddable = false) {
-	    if (!isAddable) {
-	        const hasEmptySlot = this.itemData.includes(null);
-	        if (!hasEmptySlot) {
-	            this.scene.alertPrefab?.alert("No Empty Slot");
-	            return;
-	        }
-	    }
+	findEmptyMainSlot() {
+	    return this.mainInventoryData.findIndex(item => item === null);
+	}
 
+	hasInventorySpace() {
+	    const hasQuickSlotSpace = this.itemData.includes(null);
+	    const hasMainSlotSpace = this.mainInventoryData.includes(null);
+	    return hasQuickSlotSpace || hasMainSlotSpace;
+	}
+	syncWithGlobalInventory() {
+	  // This will be dynamically implemented by the scene
+	  console.log('Base syncWithGlobalInventory called - should be overridden');
+	}
+	
+	updateGlobalInventory() {
+	  // This will be dynamically implemented by the scene
+	  console.log('Base updateGlobalInventory called - should be overridden');
+	}
+	cleanupInventory() {
+	  	this.itemData.forEach((itemId, index) => {
+	  	  if (!itemId && this.items[index]) {
+	  	    this.items[index].visible = false;
+	  	    if (this.itemCounters[index]) {
+	  	      this.itemCounters[index].visible = false;
+	  	    }
+	  	  }
+	  	});
+		
+	  	if (typeof this.updateGlobalInventory === 'function') {
+	  	  this.updateGlobalInventory();
+	  	}
+		
+	  	if (this.scene.reactEvent) {
+	  	  this.scene.reactEvent.emit('inventory-changed', this.scene);
+	  	}
+	}
+
+	addItem(key, textureName, textureId, amount = 1, isAddable = true) {
 	    const existingItemIndex = this.itemData.findIndex(id => id === key);
-	    if (existingItemIndex !== -1) {
-	        if (!isAddable) {
-	            this.scene.alertPrefab?.alert("Already Has Item");
-	            return;
-	        }
-
+	    if (existingItemIndex !== -1 && isAddable) {
 	        const currentAmount = parseInt(this.itemCounters[existingItemIndex].text);
 	        this.itemCounters[existingItemIndex].text = (currentAmount + amount).toString();
 	        this.itemCounters[existingItemIndex].visible = true;
-	        return;
+	        return true;
 	    }
-
+	
+	    const existingMainIndex = this.mainInventoryData.findIndex(item => item && item.id === key);
+	    if (existingMainIndex !== -1 && isAddable) {
+	        const currentItem = this.mainInventoryData[existingMainIndex];
+	        this.mainInventoryData[existingMainIndex] = {
+	            ...currentItem,
+	            quantity: (currentItem.quantity || 1) + amount
+	        };
+	        return true;
+	    }
+	
 	    const emptySlotIndex = this.itemData.findIndex(x => x === null);
-	    if (emptySlotIndex === -1) return;
-
-	    this.itemData[emptySlotIndex] = key;
-
-	    this.items[emptySlotIndex].visible = true;
-	    this.items[emptySlotIndex].setTexture(textureName, textureId);
-
-	    this.itemCounters[emptySlotIndex].visible = true;
-	    this.itemCounters[emptySlotIndex].text = amount.toString();
+	    if (emptySlotIndex !== -1) {
+	        this.itemData[emptySlotIndex] = key;
+	        this.items[emptySlotIndex].visible = true;
+	        this.items[emptySlotIndex].setTexture(textureName, textureId);
+	        this.itemCounters[emptySlotIndex].visible = true;
+	        this.itemCounters[emptySlotIndex].text = amount.toString();
+	        return true;
+	    }
+	
+	    const emptyMainIndex = this.findEmptyMainSlot();
+	    if (emptyMainIndex !== -1) {
+	        this.mainInventoryData[emptyMainIndex] = {
+	            id: key,
+	            icon: textureName,
+	            frame: textureId,
+	            textureKey: textureName,
+	            frameName: textureId,
+	            quantity: amount,
+	            name: key
+	        };
+	        return true;
+	    }
+	
+	    this.scene.alertPrefab?.alert("Inventory Full");
+	    return false;
 	}
 
 	useItem(key) {
 	    const itemIndex = this.itemData.findIndex(id => id === key);
-	    if (itemIndex === -1) {
-	        this.scene.alertPrefab?.alert("Doesn't Have Item");
-	        return;
+	    if (itemIndex !== -1) {
+	        const amount = parseInt(this.itemCounters[itemIndex].text);
+	        if (amount <= 1) {
+	            this.removeItemByKey(key);
+	        } else {
+	            this.itemCounters[itemIndex].text = (amount - 1).toString();
+	        }
+	        return true;
 	    }
-
-	    const amount = parseInt(this.itemCounters[itemIndex].text);
-	    if (amount <= 1) {
-	        this.removeItemByKey(key);
-	    } else {
-	        this.itemCounters[itemIndex].text = (amount - 1).toString();
+	
+	    const mainIndex = this.mainInventoryData.findIndex(item => item && item.id === key);
+	    if (mainIndex !== -1) {
+	        const item = this.mainInventoryData[mainIndex];
+	        if (item.quantity <= 1) {
+	            this.mainInventoryData[mainIndex] = null;
+	        } else {
+	            this.mainInventoryData[mainIndex] = {
+	                ...item,
+	                quantity: item.quantity - 1
+	            };
+	        }
+	        return true;
 	    }
+	
+	    this.scene.alertPrefab?.alert("Doesn't Have Item");
+	    return false;
 	}
 
 	removeItemByKey(key) {
 	    const index = this.itemData.findIndex(item => item === key);
-	    if (index === -1) return;
-
-	    this.itemData[index] = null;
+	    if (index !== -1) {
+	        this.itemData[index] = null;
 	
-	    if (this.items[index]) {
-	        this.items[index].visible = false;
-	        this.items[index].setTexture("_MISSING");
-	    }
-	
-	    if (this.itemCounters[index]) {
-	        this.itemCounters[index].text = "0";
-	        this.itemCounters[index].visible = false;
-	    }
-	
-	    if (this.activeItemSlots[index]) {
-	        this.activeItemSlots[index].visible = false;
-	    }
-
-	    if (index === this.activeIndex) {
-	        if (this.cursorIcon) {
-	            this.cursorIcon.destroy();
-	            this.cursorIcon = null;
+	        if (this.items[index]) {
+	            this.items[index].visible = false;
+	            this.items[index].setTexture("_MISSING");
 	        }
-	        this.selectedItem = null;
+	
+	        if (this.itemCounters[index]) {
+	            this.itemCounters[index].text = "0";
+	            this.itemCounters[index].visible = false;
+	        }
+	
+	        if (this.activeItemSlots[index]) {
+	            this.activeItemSlots[index].visible = false;
+	        }
+
+	        if (index === this.activeIndex) {
+	            if (this.cursorIcon) {
+	                this.cursorIcon.destroy();
+	                this.cursorIcon = null;
+	            }
+	            this.selectedItem = null;
+	        }
 	    }
+	
+	    const mainIndices = [];
+	    this.mainInventoryData.forEach((item, idx) => {
+	        if (item && item.id === key) {
+	            mainIndices.push(idx);
+	        }
+	    });
+	
+	    mainIndices.forEach(idx => {
+	        this.mainInventoryData[idx] = null;
+	    });
+	}
+
+	moveToQuickSlot(mainIndex) {
+	    const item = this.mainInventoryData[mainIndex];
+	    if (!item) return false;
+	
+	    const emptyQuickIndex = this.itemData.findIndex(x => x === null);
+	    if (emptyQuickIndex === -1) return false;
+	
+	    this.itemData[emptyQuickIndex] = item.id;
+	    this.items[emptyQuickIndex].visible = true;
+	    this.items[emptyQuickIndex].setTexture(item.textureKey || item.icon);
+	    if (item.frameName !== undefined) {
+	        this.items[emptyQuickIndex].setFrame(item.frameName);
+	    }
+	    this.itemCounters[emptyQuickIndex].visible = true;
+	    this.itemCounters[emptyQuickIndex].text = item.quantity.toString();
+	
+	    this.mainInventoryData[mainIndex] = null;
+	
+	    return true;
 	}
 	/* END-USER-CODE */
 }
