@@ -15,7 +15,8 @@
             this.body.allowGravity = false;
             this.body.setSize(24, 12, false);
             this.body.setOffset(0, 36);
-        
+            this.isWatering = false;
+            this.wateringKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
             this.setDepth(1);
 
@@ -194,6 +195,7 @@
                 console.warn(`Failed to play animations for direction ${direction}: ${error}`);
             }
         }
+
 
         settingUpAnimations() {
             if (!this.scene || !this.scene.anims) return;
