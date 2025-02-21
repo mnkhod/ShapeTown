@@ -56,7 +56,7 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         this.npc.on('pointerdown', function (_pointer) {
             let distance = this.getDistance(this.player, this);
 
-            if (distance > 60) {
+            if (distance > 100) {
                 this.scene.alertPrefab.alert("Too Far");
                 return;
             }

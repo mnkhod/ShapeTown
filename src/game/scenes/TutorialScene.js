@@ -21,6 +21,7 @@ import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import RockMonster from "../prefabs/Mob/RockMonster";
 import GoblinMonster from "../prefabs/Mob/GoblinMonster";
+import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
 /* START-USER-IMPORTS */
 import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
 import { EventBus } from '../../game/EventBus';
@@ -236,6 +237,11 @@ export default class TutorialScene extends Phaser.Scene {
 		const goblinMonster = new GoblinMonster(this, 809, 382);
 		this.add.existing(goblinMonster);
 
+		// merchantPrefab
+		const merchantPrefab = new MerchantPrefab(this, 539, 438);
+		this.add.existing(merchantPrefab);
+		
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
@@ -272,6 +278,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.optionsListPrefab = optionsListPrefab;
 		this.rockMonster = rockMonster;
 		this.goblinMonster = goblinMonster;
+		this.merchantPrefab = merchantPrefab;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -337,6 +344,8 @@ export default class TutorialScene extends Phaser.Scene {
 	rockMonster;
 	/** @type {GoblinMonster} */
 	goblinMonster;
+	/** @type {MerchantPrefab} */
+	merchantPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 
@@ -422,7 +431,7 @@ export default class TutorialScene extends Phaser.Scene {
 	}
 	setupStartingItems() {
 	  if (!this.newItemHudPrefab) return;
-	
+
 	  if (this.newItemHudPrefab.updateGlobalInventory) {
 	    this.newItemHudPrefab.updateGlobalInventory();
 	  }
@@ -434,6 +443,9 @@ export default class TutorialScene extends Phaser.Scene {
         this.physics.world.bounds.height = 800;
 
     	this.initInventorySystem();
+
+		this.merchantPrefab.player = this.playerPrefab;
+    	this.merchantPrefab.msgPrefab = this.messagePrefab;
 
 		this.events.on('wake', (sys, data) => {
 		  console.log(`[${this.scene.key}] Scene woken up, syncing inventory`);

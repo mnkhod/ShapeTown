@@ -878,6 +878,18 @@
             "scope": "CLASS",
             "x": 809,
             "y": 382
+        },
+        {
+            "prefabId": "1b05c2d1-47c3-45c5-a53b-1f1d6c4bb7c5",
+            "id": "c896143d-5f13-4549-9a09-464da3ae7978",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "merchantPrefab",
+            "scope": "CLASS",
+            "x": 539,
+            "y": 438
         }
     ],
     "plainObjects": [

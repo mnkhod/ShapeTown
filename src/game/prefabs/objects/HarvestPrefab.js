@@ -240,6 +240,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
         this.growthStage = 0;
         this.growthStartTime = null;
         this.growthText = null;
+        this.textBackground = null;
         
         this.on('destroy', () => {
             if (this.growthText && this.growthText.destroy) {
@@ -429,9 +430,12 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
         this.hideGrowthInfo();
         
         const cropData = CROP_DATA[this.seed];
+        
         if (!cropData && this.state !== "SOIL") return;
         
         const displayName = cropData ? cropData.displayName || this.seed : "";
+        let textContent = '';
+        let textColor = '#ffffff';
         
         if (this.isWatered && !this.isReadyForHarvest && this.growthStartTime) {
             const currentTime = Date.now();
@@ -439,13 +443,9 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
             const totalGrowthTime = this.calculateGrowthTimeMs();
             const remainingTime = Math.max(0, totalGrowthTime - elapsedTime);
             
-            // Format time for display
             const remainingSeconds = Math.ceil(remainingTime / 1000);
-            
-            // Calculate progress percent
             const progressPercent = Math.min(100, Math.floor((elapsedTime / totalGrowthTime) * 100));
             
-            // Time formatting
             let timeDisplay;
             if (remainingSeconds > 60) {
                 const minutes = Math.floor(remainingSeconds / 60);
@@ -455,18 +455,9 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 timeDisplay = `${remainingSeconds}s`;
             }
             
-            const displayText = `${displayName}\n${progressPercent}% grown\n${timeDisplay} remaining`;
-            
-            //growth info
-            this.growthText = this.scene.add.text(this.x, this.y - 40, displayText, {
-                fontSize: '12px',
-                color: '#ffffff',
-                stroke: '#000000',
-                strokeThickness: 3,
-                align: 'center'
-            }).setOrigin(0.5, 1);
+            textContent = `${displayName}\n${progressPercent}% grown\n${timeDisplay} remaining`;
+            textColor = '#ffffff';
         } else if (this.isReadyForHarvest) {
-            //Ready to harvest
             const tierColors = {
                 'common': '#ffffff',
                 'Common': '#ffffff',
@@ -476,37 +467,59 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 'Special': '#ff8000'
             };
             
-            const color = tierColors[cropData.tier] || '#00ff00';
-            
-            this.growthText = this.scene.add.text(this.x, this.y - 40, `${displayName}\nReady to harvest!\n(${cropData.tier})`, {
-                fontSize: '12px',
-                color: color,
-                stroke: '#000000',
-                strokeThickness: 3,
-                align: 'center'
-            }).setOrigin(0.5, 1);
+            textColor = tierColors[cropData.tier] || '#00ff00';
+            textContent = `${displayName}\nReady to harvest!\n(${cropData.tier})`;
         } else if (this.state === "PLANTED") {
-            // Needs water
-            this.growthText = this.scene.add.text(this.x, this.y - 40, `${displayName}\nNeeds water`, {
+            textContent = `${displayName}\nNeeds water`;
+            textColor = '#87cefa';
+        }
+
+        if (textContent) {
+            this.textBackground = this.scene.add.graphics();
+            this.textBackground.setDepth(100);
+            
+            this.growthText = this.scene.add.text(this.x, this.y - 40, textContent, {
                 fontSize: '12px',
-                color: '#87cefa',
+                color: textColor,
                 stroke: '#000000',
-                strokeThickness: 3,
-                align: 'center'
-            }).setOrigin(0.5, 1);
-        } else if (this.state === "SOIL") {
-            // Ready for planting
-            this.growthText = this.scene.add.text(this.x, this.y - 40, `Tilled Soil\nReady for planting`, {
-                fontSize: '12px',
-                color: '#8B4513',
-                stroke: '#000000',
-                strokeThickness: 3,
-                align: 'center'
-            }).setOrigin(0.5, 1);
+                strokeThickness: 0.5,
+                align: 'left',
+                padding: { x: 6, y: 4 }
+            });
+            this.growthText.setDepth(101);
+            this.growthText.setOrigin(0.5, 1);
+
+            const bounds = this.growthText.getBounds();
+            const padding = 10;
+            const cornerRadius = 8;
+
+            this.textBackground.clear();
+            this.textBackground.fillStyle(0x000000, 0.6);
+            this.textBackground.lineStyle(1, 0xffffff, 0.2);
+            
+            this.textBackground.fillRoundedRect(
+                bounds.x - padding,
+                bounds.y - padding,
+                bounds.width + (padding * 2),
+                bounds.height + (padding * 2),
+                cornerRadius
+            );
+            
+            this.textBackground.strokeRoundedRect(
+                bounds.x - padding,
+                bounds.y - padding,
+                bounds.width + (padding * 2),
+                bounds.height + (padding * 2),
+                cornerRadius
+            );
         }
     }
 
     hideGrowthInfo() {
+        if (this.textBackground) {
+            this.textBackground.destroy();
+            this.textBackground = null;
+        }
         if (this.growthText) {
             this.growthText.destroy();
             this.growthText = null;
