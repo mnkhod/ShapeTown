@@ -1169,6 +1169,32 @@
                 "key": "FarmingMap"
             },
             {
+                "url": "assets/Character/Farming/Tool/FarmingToolsHoe.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "FarmingToolsHoe"
+            },
+            {
+                "url": "assets/Character/Farming/Clothing/Tool/FarmingToolsHoe.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "FarmingToolsHoe_1"
+            },
+            {
                 "url": "assets/Character/Farming/Tool/FarmingToolsWatering.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -1691,6 +1717,19 @@
                 "key": "GuardPostTower_V01"
             },
             {
+                "url": "assets/Character/Farming/Tool/HarvestingToolAxe_V01.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "HarvestingToolAxe_V01"
+            },
+            {
                 "url": "assets/hud/Options/HelpBottomIcon.png",
                 "frameConfig": {
                     "frameWidth": 48,
@@ -2087,6 +2126,19 @@
                 },
                 "type": "spritesheet",
                 "key": "Miner'stower"
+            },
+            {
+                "url": "assets/Character/Farming/Tool/MiningToolPickaxe_V01.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "MiningToolPickaxe_V01"
             },
             {
                 "url": "assets/NPC/NpcBlaksmith.png",
