@@ -12,6 +12,9 @@ import MailInterface from './components/MailComponent';
 import HelpInterface from './components/HelpAndSupport';
 import SignOutModal from './components/LogoutComponent';
 import LeaderboardComponent from './components/LeaderBoard';
+import MerchantSellScreen from './components/TradingSell';
+import MerchantBuyScreen from './components/TradingBuy';
+
 import { ethers } from "ethers";
 import { EventBus } from "./game/EventBus";
 
@@ -31,6 +34,8 @@ function App() {
     const [showHelpSupport, setShowHelpSupport] = useState(false);
     const [showSignOutModal, setShowSignOutModal] = useState(false);
     const [showLeaderboard, setShowLeaderboard] = useState(false);
+    const [showShopSell, setShowShopSell] = useState(false);
+    const [showShopBuy, setShowShopBuy] = useState(false);
 
     const [gameData] = useState({});
 
@@ -54,6 +59,8 @@ function App() {
         setShowMail(false);
         setShowHelpSupport(false);
         setShowLeaderboard(false);
+        setShowShopSell(false);
+        setShowShopBuy(false);
     
         switch (id) {
             case "ACHIVEMENTS":
@@ -90,7 +97,13 @@ function App() {
             case "LEADERBOARD":
                 setShowLeaderboard(true);
                 break;
-                
+            case "SHOPSELL":
+                setShowShopSell(true);
+                break;
+            case "SHOPBUY":
+                setShowShopBuy(true);
+                break;
+
             default:
                 break;
         }
@@ -180,6 +193,18 @@ function App() {
                 <LeaderboardComponent
                     onClose={() => setShowLeaderboard(false)}
                     isOpen={showLeaderboard}
+                />
+            )}
+            {showShopSell && (
+                <MerchantSellScreen
+                    onClose={() => setShowShopSell(false)}
+                    isOpen={showShopSell}
+                />
+            )}
+            {showShopBuy && (
+                <MerchantBuyScreen
+                    onClose={() => setShowShopBuy(false)}
+                    isOpen={showShopBuy}
                 />
             )}
 

@@ -42,7 +42,14 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
         this.isConversationStarted = false;
         this.conversationIndex = 0;
         this.conversationMaxIndex = 0;
+        this.optionsContainer = scene.add.container(150, 0);
+        this.add(this.optionsContainer);
+        this.optionTexts = [];
+        this.currentSelectedOption = -1;
+        this.hasOptions = false;
 
+        this.setDepth(1000);
+        
         this.visible = false;
         this.scene.events.on('update', this.onSceneUpdate, this);
         bg.setInteractive({ useHandCursor: true });
@@ -52,6 +59,24 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
         this.scene.input.keyboard.on('keydown-SPACE', () => {
             if (this.isTyping) {
                 this.skipTyping();
+            }
+        });
+        
+        this.scene.input.keyboard.on('keydown-DOWN', () => {
+            if (this.hasOptions) {
+                this.selectNextOption();
+            }
+        });
+
+        this.scene.input.keyboard.on('keydown-UP', () => {
+            if (this.hasOptions) {
+                this.selectPreviousOption();
+            }
+        });
+
+        this.scene.input.keyboard.on('keydown-ENTER', () => {
+            if (this.hasOptions && this.currentSelectedOption >= 0) {
+                this.selectOption(this.currentSelectedOption);
             }
         });
         /* END-USER-CTR-CODE */
@@ -65,15 +90,16 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 	/* START-USER-CODE */
 
     handlePointerDown(_pointer) {
-        if (this.isConversationStarted == false) return;
-        if (this.dialogue == null) return;
+        if (!this.isConversationStarted || !this.dialogue) return;
 
         if (this.isTyping) {
             this.skipTyping();
             return;
         }
+        
+        if (this.hasOptions) return;
 
-        this.conversationIndex += 1;
+        this.conversationIndex++;
         if (this.conversationIndex >= this.conversationMaxIndex) {
             this.hide();
             return;
@@ -81,7 +107,10 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
 
         let dialogue = this.dialogue[this.conversationIndex];
         this.typeText(dialogue.msg, () => {
-            if (dialogue.onComplete != null) {
+            if (dialogue.options) {
+                this.showOptions(dialogue.options);
+            }
+            if (dialogue.onComplete) {
                 dialogue.onComplete();
             }
         });
@@ -91,9 +120,8 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
         if (this.visible) {
             const cam = this.scene.cameras.main;
             let fullWidth = Math.floor(this.getBounds().width);
-            let fullHeight = Math.floor(this.getBounds().height);
             let newX = cam.worldView.centerX - (fullWidth / 2) + 10;
-            let newY = cam.worldView.centerY + fullHeight-10;
+            let newY = cam.worldView.centerY + 80;
 
             this.setPosition(
                 Phaser.Math.Linear(this.x, newX, 0.08),
@@ -105,9 +133,30 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
     typeText(text, onComplete) {
         this.isTyping = true;
         this.msg.setText('');
+        
+        if (text.length > 100) {
+            this.msg.setStyle({ 
+                "align": "center", 
+                "color": "#000", 
+                "fixedWidth": 200, 
+                "fontFamily": "Little Malio 8-Bit", 
+                "fontSize": "16px", 
+                "maxLines": 5, 
+                "stroke": "#000" 
+            });
+        } else {
+            this.msg.setStyle({ 
+                "align": "center", 
+                "color": "#000", 
+                "fixedWidth": 200, 
+                "fontFamily": "Little Malio 8-Bit", 
+                "fontSize": "20px", 
+                "maxLines": 3, 
+                "stroke": "#000" 
+            });
+        }
 
         let currentChar = 0;
-
         this.typeTimer = this.scene.time.addEvent({
             delay: this.typingSpeed,
             callback: () => {
@@ -129,8 +178,13 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
             this.typeTimer.destroy();
             this.msg.setText(this.dialogue[this.conversationIndex].msg);
             this.isTyping = false;
-            if (this.dialogue[this.conversationIndex].onComplete) {
-                this.dialogue[this.conversationIndex].onComplete();
+            
+            const dialogue = this.dialogue[this.conversationIndex];
+            if (dialogue.options) {
+                this.showOptions(dialogue.options);
+            }
+            if (dialogue.onComplete) {
+                dialogue.onComplete();
             }
         }
     }
@@ -145,11 +199,171 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
         this.conversationIndex = 0;
 
         let dialogue = conversationData[this.conversationIndex];
-        this.typeText(dialogue.msg, () => {
-            if (dialogue.onComplete != null) {
-                dialogue.onComplete();
+        
+        if (dialogue.msg === "" && dialogue.options) {
+            this.msg.setText("");
+            this.showOptions(dialogue.options);
+            if (dialogue.onComplete) dialogue.onComplete();
+        } else {
+            this.typeText(dialogue.msg, () => {
+                if (dialogue.options) {
+                    this.showOptions(dialogue.options);
+                }
+                if (dialogue.onComplete) {
+                    dialogue.onComplete();
+                }
+            });
+        }
+    }
+
+    showOptions(options) {
+        this.clearOptions();
+        this.hasOptions = true;
+
+        this.msg.setY(20);
+        
+        const optionStartY = 40;
+        const spacing = 16;
+        
+        options.forEach((option, index) => {
+            const optionText = this.scene.add.text(0, optionStartY + (index * spacing), `  ${option.text}`, {
+                fontFamily: "Little Malio 8-Bit",
+                fontSize: "14px", 
+                color: "#fff",
+                stroke: "#000",
+                strokeThickness: 2,
+                align: "center"
+            });
+            
+            optionText.setOrigin(0.5, 0.5);
+            optionText.setInteractive({ useHandCursor: true });
+            
+            optionText.on('pointerover', () => {
+                this.highlightOption(index);
+            });
+            
+            optionText.on('pointerout', () => {
+                if (this.currentSelectedOption !== index) {
+                    this.unhighlightOption(index);
+                }
+            });
+            
+            optionText.on('pointerdown', () => {
+                this.selectOption(index);
+            });
+            
+            optionText.optionData = option;
+            
+            this.optionsContainer.add(optionText);
+            this.optionTexts.push({
+                text: optionText,
+                originalText: option.text
+            });
+        });
+        
+        if (this.optionTexts.length > 0) {
+            this.currentSelectedOption = 0;
+            this.highlightOption(0);
+        }
+    }
+    
+    clearOptions() {
+        this.hasOptions = false;
+        this.currentSelectedOption = -1;
+        
+        this.msg.setY(45);
+        
+        this.optionTexts.forEach(option => {
+            if (option.text) {
+                option.text.destroy();
             }
         });
+        
+        this.optionTexts = [];
+        this.optionsContainer.removeAll();
+    }
+    
+    highlightOption(index) {
+        if (index >= 0 && index < this.optionTexts.length) {
+            const option = this.optionTexts[index];
+            if (option && option.text) {
+                option.text.setText(`> ${option.originalText}`);
+                option.text.setColor("#ffff00");
+            }
+        }
+    }
+    
+    unhighlightOption(index) {
+        if (index >= 0 && index < this.optionTexts.length) {
+            const option = this.optionTexts[index];
+            if (option && option.text) {
+                option.text.setText(`  ${option.originalText}`);
+                option.text.setColor("#fff");
+            }
+        }
+    }
+    
+    selectNextOption() {
+        if (this.optionTexts.length === 0) return;
+        
+        if (this.currentSelectedOption >= 0) {
+            this.unhighlightOption(this.currentSelectedOption);
+        }
+        
+        this.currentSelectedOption = (this.currentSelectedOption + 1) % this.optionTexts.length;
+        this.highlightOption(this.currentSelectedOption);
+    }
+    
+    selectPreviousOption() {
+        if (this.optionTexts.length === 0) return;
+        
+        if (this.currentSelectedOption >= 0) {
+            this.unhighlightOption(this.currentSelectedOption);
+        }
+        
+        this.currentSelectedOption = (this.currentSelectedOption - 1 + this.optionTexts.length) % this.optionTexts.length;
+        this.highlightOption(this.currentSelectedOption);
+    }
+    
+    selectOption(index) {
+        if (index >= 0 && index < this.optionTexts.length) {
+            const option = this.optionTexts[index];
+            
+            option.text.setColor("#ffffff");
+            
+            this.scene.time.delayedCall(150, () => {
+                const optionData = option.text.optionData;
+                
+                this.clearOptions();
+                this.msg.setY(45);
+                
+                if (optionData.onSelect) {
+                    optionData.onSelect();
+                }
+                
+                if (optionData.nextDialogue !== undefined) {
+                    if (typeof optionData.nextDialogue === 'number') {
+                        this.conversationIndex = optionData.nextDialogue - 1;
+                        this.handlePointerDown(null);
+                    } 
+                    else if (Array.isArray(optionData.nextDialogue)) {
+                        this.dialogue = optionData.nextDialogue;
+                        this.conversationMaxIndex = this.dialogue.length;
+                        this.conversationIndex = 0;
+                        
+                        const dialogue = this.dialogue[this.conversationIndex];
+                        this.typeText(dialogue.msg, () => {
+                            if (dialogue.options) {
+                                this.showOptions(dialogue.options);
+                            }
+                            if (dialogue.onComplete) {
+                                dialogue.onComplete();
+                            }
+                        });
+                    }
+                }
+            });
+        }
     }
 
     show() {
@@ -160,13 +374,13 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
         if (this.typeTimer) {
             this.typeTimer.destroy();
         }
+        this.clearOptions();
         this.visible = false;
         this.isConversationStarted = false;
         this.conversationIndex = 0;
         this.dialogue = null;
         this.isTyping = false;
     }
-
     /* END-USER-CODE */
 }
 

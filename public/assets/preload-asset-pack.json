@@ -1794,6 +1794,11 @@
                 "key": "HoveredOpenMapIcon"
             },
             {
+                "url": "assets/hud/Merchant/Hud_SellArea_GoldPrice_BackGround_3.png",
+                "type": "image",
+                "key": "Hud_SellArea_GoldPrice_BackGround_3"
+            },
+            {
                 "url": "assets/hud/HudItemSlot.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -1818,6 +1823,11 @@
                 },
                 "type": "spritesheet",
                 "key": "IconBaseTools"
+            },
+            {
+                "url": "assets/TradeIcons/Merchant/IconGold.png",
+                "type": "image",
+                "key": "IconGold"
             },
             {
                 "url": "assets/hud/Inventory/InactiveSlot1.png",

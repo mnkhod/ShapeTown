@@ -44,7 +44,35 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
     /* START-USER-CODE */
 
     dialogueLines = [
-        { msg: "Hello, sir/ma'am. How can I help you?" },
+        { 
+            msg: "Hello, sir/ma'am. How can I help you?",
+            options: [
+                { 
+                    text: "I want to buy something", 
+                    onSelect: () => {
+                        if (this.scene.reactEvent) {
+                            this.scene.reactEvent.emit("show-shop-buy-modal", this);
+                        }
+                    },
+                    nextDialogue: 1
+                },
+                { 
+                    text: "I want to sell something", 
+                    onSelect: () => {
+                        if (this.scene.reactEvent) {
+                            this.scene.reactEvent.emit("show-shop-sell-modal", this);
+                        }
+                    },
+                    nextDialogue: 1
+                },
+                { 
+                    text: "Just browsing", 
+                    nextDialogue: [
+                        { msg: "Feel free to look around. Let me know if you need anything." }
+                    ]
+                }
+            ]
+        },
         { msg: "Thank you. Have a nice day!" }
     ];
 

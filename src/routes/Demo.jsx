@@ -9,7 +9,8 @@ import MailInterface from '../components/MailComponent';
 import HelpInterface from '../components/HelpAndSupport';
 import SignOutModal from '../components/LogoutComponent';
 import LeaderboardComponent from '../components/LeaderBoard';
-import ShopInterface from '../components/TradingComponent';
+import MerchantBuyScreen from '../components/TradingBuy';
+import MerchantSellScreen from '../components/TradingSell';
 
 function Demo() {
     const [showTrader, setShowTrader] = useState(false);
@@ -22,7 +23,8 @@ function Demo() {
     const [showHelpSupport, setShowHelpSupport] = useState(false);
     const [showLogout, setShowLogOut] = useState(false);
     const [showLeaderboard, setShowLeaderboard] = useState(false);
-    const [showShop, setShowShop] = useState(false);
+    const [showShopSell, setShowShopSell] = useState(false);
+    const [showShopBuy, setShowShopBuy] = useState(false);
     const handleTrade = ({ fromAmount, fromToken, toToken }) => {
         console.log('Trading:', { fromAmount, fromToken, toToken });
     };
@@ -94,7 +96,13 @@ function Demo() {
                 Leaderboard
             </button>
             <button 
-                onClick={() => setShowShop(true)}
+                onClick={() => setShowShopSell(true)}
+                className="px-4 py-2 bg-orange-300 border-2 border-yellow-900 rounded text-yellow-900"
+            >
+                Open Shop(Sell)
+            </button>
+            <button 
+                onClick={() => setShowShopBuy(true)}
                 className="px-4 py-2 bg-orange-300 border-2 border-yellow-900 rounded text-yellow-900"
             >
                 Open Shop(Buy)
@@ -166,10 +174,17 @@ function Demo() {
                 />
             )}
 
-            {showShop && (
-                <ShopInterface
-                    onClose={() => setShowShop(false)}
-                    isOpen={showShop}
+            {showShopSell && (
+                <MerchantSellScreen
+                    onClose={() => setShowShopSell(false)}
+                    isOpen={showShopSell}
+                />
+            )}
+
+            {showShopBuy && (
+                <MerchantBuyScreen
+                    onClose={() => setShowShopBuy(false)}
+                    isOpen={showShopBuy}
                 />
             )}
         </div>
