@@ -6,7 +6,6 @@ import { EventBus } from './EventBus';
 export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, showModal,gameData }, ref) {
     const game = useRef();
 
-    // Create the game inside a useLayoutEffect hook to avoid the game being created outside the DOM
     useLayoutEffect(() => {
 
         if (game.current === undefined) {
@@ -136,15 +135,37 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     }, [showModal]);
 
     useEffect(() => {
-        EventBus.on('show-shop-sell-modal', (currentScene) => {
-            showModal("SHOPSELL", currentScene)
-        });
+        const handleShopSellModal = (merchantPrefab) => {
+            const inventoryInstance = merchantPrefab.itemHud || 
+                                     merchantPrefab.scene?.newItemHudPrefab;
+            
+            if (!inventoryInstance) {
+                console.error('No inventory instance found for merchant');
+                return;
+            }
+            
+            const modalData = {
+                phaserInstance: inventoryInstance
+            };
+            showModal("SHOPSELL", modalData);
+        };
+        
+        EventBus.on('show-shop-sell-modal', handleShopSellModal);
+        
+        return () => EventBus.removeListener('show-shop-sell-modal', handleShopSellModal);
     }, [showModal]);
-
+    
     useEffect(() => {
-        EventBus.on('show-shop-buy-modal', (currentScene) => {
-            showModal("SHOPBUY", currentScene)
-        });
+        const handleShopBuyModal = (merchantPrefab) => {
+            const modalData = {
+                phaserInstance: merchantPrefab.scene.newItemHudPrefab
+            };
+            showModal("SHOPBUY", modalData);
+        };
+        
+        EventBus.on('show-shop-buy-modal', handleShopBuyModal);
+        
+        return () => EventBus.removeListener('show-shop-buy-modal', handleShopBuyModal);
     }, [showModal]);
 
 
@@ -153,8 +174,6 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     );
 
 });
-
-// Props definitions
 
 PhaserGame.propTypes = {
     currentActiveScene: PropTypes.func,

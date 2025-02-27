@@ -25,6 +25,7 @@ import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
 /* START-USER-IMPORTS */
 import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
 import { EventBus } from '../../game/EventBus';
+import initInventoryBridge from "../../components/phaser-react-bridge";
 /* END-USER-IMPORTS */
 
 export default class TutorialScene extends Phaser.Scene {
@@ -356,73 +357,79 @@ export default class TutorialScene extends Phaser.Scene {
 
 
 	initInventorySystem() {
-	  	if (!this.newItemHudPrefab) return;
-
-	  	this.newItemHudPrefab.visible = true;
-
-	  	this.time.delayedCall(100, () => {
-	  	  	import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
-	  	  	  	this.newItemHudPrefab.syncWithGlobalInventory = function() {
-	  	  	  	  	globalInventory.quickItems.forEach((itemData, index) => {
-	  	  	  	    	if (!itemData) return;
-
-	  	  	  	    	this.itemData[index] = itemData.id;
-
-	  	  	  	    	if (this.items[index]) {
-	  	  	  	    	  	this.items[index].visible = true;
-	  	  	  	    	  	this.items[index].setTexture(itemData.textureKey || itemData.icon);
-	  	  	  	    	  	if (itemData.frameName !== undefined) {
-	  	  	  	    	  	  	this.items[index].setFrame(itemData.frameName);
-	  	  	  	    	  	}
-	  	  	  	    	}
-
-	  	  	  	    	if (this.itemCounters[index]) {
-	  	  	  	    	  	this.itemCounters[index].visible = true;
-	  	  	  	    	  	this.itemCounters[index].text = itemData.quantity.toString();
-	  	  	  	    	}
-	  	  	  	  	});
-
-	  	  	  	 	this.mainInventoryData = [...globalInventory.mainItems];
-	  	  	  	};
-
-	  	  	  	this.newItemHudPrefab.updateGlobalInventory = function() {
-	  	  	  	  	const updatedQuickItems = this.itemData.map((id, index) => {
-	  	  	  	    	if (!id) return null;
-
-	  	  	  	    	const item = this.items[index];
-	  	  	  	    	if (!item || !item.visible) return null;
-
-	  	  	  	    	return {
-	  	  	  	    	  	id: id,
-	  	  	  	    	  	icon: item.texture.key,
-	  	  	  	    	  	frame: item.frame.name,
-	  	  	  	    	  	textureKey: item.texture.key,
-	  	  	  	    	  	frameName: item.frame.name,
-	  	  	  	    	  	quantity: parseInt(this.itemCounters[index].text) || 1,
-	  	  	  	    	  	name: id
-	  	  	  	    	};
-	  	  	  	  	});
-
-	  	  	  	  	globalInventory.quickItems = updatedQuickItems;
-	  	  	  	  	globalInventory.mainItems = [...this.mainInventoryData];
-
-	  	  	  	  	if (this.reactEvent) {
-	  	  	  	  	  	this.reactEvent.emit('global-inventory-changed', globalInventory);
-	  	  	  	  	}
-	  	  	  	};
-
-	  	  	  	this.newItemHudPrefab.syncWithGlobalInventory();
-
-	  	  	  	if (globalInventory.quickItems.every(item => item === null) && 
-	  	  	  	    globalInventory.mainItems.every(item => item === null)) {
-	  	  	  	  	this.setupStartingItems();
-	  	  	  	}
-
-	  	  	  	this.reactEvent.emit('scene-switched', this);
-	  	  	});
-	  	});
-
-	  	this.events.on('shutdown', this.onSceneShutdown, this);
+		if (!this.newItemHudPrefab) return;
+		
+		this.newItemHudPrefab.visible = true;
+		
+		initInventoryBridge(this.newItemHudPrefab, this.reactEvent);
+		
+		this.time.delayedCall(100, () => {
+		  import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+		    this.newItemHudPrefab.syncWithGlobalInventory = function() {
+		      globalInventory.quickItems.forEach((itemData, index) => {
+		        if (!itemData) return;
+			
+		        this.itemData[index] = itemData.id;
+			
+		        if (this.items[index]) {
+		          this.items[index].visible = true;
+		          this.items[index].setTexture(itemData.textureKey || itemData.icon);
+		          if (itemData.frameName !== undefined) {
+		            this.items[index].setFrame(itemData.frameName);
+		          }
+		        }
+			
+		        if (this.itemCounters[index]) {
+		          this.itemCounters[index].visible = true;
+		          this.itemCounters[index].text = itemData.quantity.toString();
+		        }
+		      });
+		  
+		      this.mainInventoryData = [...globalInventory.mainItems];
+		  
+		      if (this.reactEvent) {
+		        this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
+		      }
+		    };
+		
+		    this.newItemHudPrefab.updateGlobalInventory = function() {
+		      const updatedQuickItems = this.itemData.map((id, index) => {
+		        if (!id) return null;
+			
+		        const item = this.items[index];
+		        if (!item || !item.visible) return null;
+			
+		        return {
+		          id: id,
+		          icon: item.texture.key,
+		          frame: item.frame.name,
+		          textureKey: item.texture.key,
+		          frameName: item.frame.name,
+		          quantity: parseInt(this.itemCounters[index].text) || 1,
+		          name: id
+		        };
+		      });
+		  
+		      globalInventory.quickItems = updatedQuickItems;
+		      globalInventory.mainItems = [...this.mainInventoryData];
+		  
+		      if (this.reactEvent) {
+		        this.reactEvent.emit('global-inventory-changed', globalInventory);
+		      }
+		    };
+		
+		    this.newItemHudPrefab.syncWithGlobalInventory();
+		
+		    if (globalInventory.quickItems.every(item => item === null) && 
+		        globalInventory.mainItems.every(item => item === null)) {
+		      this.setupStartingItems();
+		    }
+		
+		    this.reactEvent.emit('scene-switched', this);
+		  });
+		});
+	
+		this.events.on('shutdown', this.onSceneShutdown, this);
 	}
 	onSceneShutdown() {
 	  if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
@@ -445,7 +452,9 @@ export default class TutorialScene extends Phaser.Scene {
     	this.initInventorySystem();
 
 		this.merchantPrefab.player = this.playerPrefab;
+		this.merchantPrefab.inventoryHud = this.newItemHudPrefab;
     	this.merchantPrefab.msgPrefab = this.messagePrefab;
+		this.merchantPrefab.itemHud = this.newItemHudPrefab;
 
 		this.events.on('wake', (sys, data) => {
 		  console.log(`[${this.scene.key}] Scene woken up, syncing inventory`);

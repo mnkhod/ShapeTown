@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useInventorySync } from './inventory-sync';
 
 const InventoryItem = ({ item, onClick, isSelected }) => {
   if (!item) return (
@@ -48,136 +49,50 @@ const InventoryItem = ({ item, onClick, isSelected }) => {
 };
 
 const MerchantSellScreen = ({ onClose, phaserInstance }) => {
-  const [inventory, setInventory] = useState([]);
+  const { inventory, sellItem, refreshInventory } = useInventorySync(phaserInstance);
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [totalGold, setTotalGold] = useState(0);
+  const [buttonState, setButtonState] = useState('default');
   const maxInventorySlots = 32;
   
-  const [buttonState, setButtonState] = useState('default');
-
-  const SAMPLE_ITEMS = [
-    {
-      id: 'seed',
-      name: 'Bok choy seeds',
-      icon: 'items/seed',
-      iconPath: '/assets/Crops/Icons/seed sack/crops/crops-seed bags-bok choy.png',
-      quantity: 2,
-      sellPrice: 25,
-      description: 'Crop Seed'
-    },
-    {
-      id: 'seed',
-      name: 'Broccoli seeds',
-      icon: 'items/seed',
-      iconPath: '/assets/Crops/Icons/seed sack/crops/crops-seed bags-broccoli.png',
-      quantity: 3,
-      sellPrice: 30,
-      description: 'Crop Seed'
-    },
-    {
-      id: 'seed',
-      name: 'Carrot seeds',
-      icon: 'items/seed',
-      iconPath: '/assets/Crops/Icons/seed sack/crops/crops-seed bags-carrot.png',
-      quantity: 5,
-      sellPrice: 120,
-      description: 'Crop Seed'
-    },
-  ];
-
   useEffect(() => {
-    console.log("Loading inventory and gold...");
+    refreshInventory();
     
-    const loadPlayerInventory = () => {
-      if (phaserInstance) {
-        console.log("PhaserInstance:", phaserInstance);
-        
-        if (phaserInstance.gold !== undefined) {
-          setTotalGold(phaserInstance.gold);
-        } else {
-          setTotalGold(100);
-        }
-        
-        const quickItems = Array.isArray(phaserInstance.itemData) ? phaserInstance.itemData : [];
-        const mainItems = Array.isArray(phaserInstance.mainInventoryData) ? phaserInstance.mainInventoryData : [];
-        
-        console.log("Quick items:", quickItems);
-        console.log("Main items:", mainItems);
-        
-        const allItems = [...quickItems, ...mainItems]
-          .filter(item => item !== null)
-          .map(item => {
-            if (typeof item === 'string') {
-              return {
-                id: item,
-                name: item,
-                icon: 'items/default',
-                iconPath: '/assets/items/default.png',
-                quantity: 1,
-                sellPrice: 10
-              };
-            }
-            return {
-              ...item,
-              iconPath: item.iconPath || `/assets/${item.icon || 'items/default'}.png`,
-              sellPrice: item.sellPrice || calculateItemValue(item)
-            };
-          });
-        
-        console.log("Processed player items:", allItems);
-        
-        if (allItems.length > 0) {
-          setInventory(allItems);
-          return;
-        }
-      }
-      
-      console.log("Using sample items");
-      setInventory(SAMPLE_ITEMS);
-      setTotalGold(100);
-    };
-
-    loadPlayerInventory();
-
     const handleInventoryChange = () => {
-      loadPlayerInventory();
-    };
-
-    const handleGoldChange = () => {
-      if (phaserInstance && phaserInstance.gold !== undefined) {
-        setTotalGold(phaserInstance.gold);
+      refreshInventory();
+      
+      if (selectedItem) {
+        const allItems = [
+          ...inventory.quickItems.filter(item => item !== null),
+          ...inventory.mainItems.filter(item => item !== null)
+        ];
+        
+        const updatedItem = allItems.find(item => item && item.id === selectedItem.id);
+        
+        if (!updatedItem) {
+          setSelectedItem(null);
+          setQuantity(1);
+        } else if (updatedItem.quantity < quantity) {
+          setQuantity(updatedItem.quantity);
+        }
       }
     };
-
-    if (phaserInstance?.scene?.events) {
+    
+    if (phaserInstance && phaserInstance.scene?.events) {
       phaserInstance.scene.events.on('inventory-changed', handleInventoryChange);
-      phaserInstance.scene.events.on('gold-earned', handleGoldChange);
-      phaserInstance.scene.events.on('gold-spent', handleGoldChange);
       
       return () => {
         phaserInstance.scene.events.off('inventory-changed', handleInventoryChange);
-        phaserInstance.scene.events.off('gold-earned', handleGoldChange);
-        phaserInstance.scene.events.off('gold-spent', handleGoldChange);
       };
     }
-  }, [phaserInstance]);
+  }, [phaserInstance, refreshInventory, inventory, selectedItem, quantity]);
 
-  const calculateItemValue = (item) => {
-    const baseValue = 10;
-    const rarityMultiplier = item.rarity ? {
-      common: 1,
-      uncommon: 2,
-      rare: 5,
-      epic: 10,
-      legendary: 25
-    }[item.rarity] : 1;
-    
-    return baseValue * rarityMultiplier;
-  };
+  const allInventoryItems = [
+    ...inventory.quickItems.filter(item => item !== null),
+    ...inventory.mainItems.filter(item => item !== null)
+  ];
 
   const handleItemSelect = (item) => {
-    console.log("Selected item:", item);
     setSelectedItem(item);
     setQuantity(1);
   };
@@ -192,89 +107,12 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
   const handleSell = () => {
     if (!selectedItem) return;
     
-    console.log("Selling item:", selectedItem);
-    console.log("Quantity:", quantity);
+    const success = sellItem(selectedItem, quantity);
     
-    const totalValue = selectedItem.sellPrice * quantity;
-    
-    if (phaserInstance) {
-      phaserInstance.gold = (phaserInstance.gold || 0) + totalValue;
-      
-      if (phaserInstance.TotalGoldPrefab && phaserInstance.TotalGoldPrefab.TotalGold !== undefined) {
-        phaserInstance.TotalGoldPrefab.TotalGold = phaserInstance.gold;
-        if (phaserInstance.TotalGoldPrefab.totalGoldAmountText) {
-          phaserInstance.TotalGoldPrefab.totalGoldAmountText.setText(phaserInstance.gold.toString());
-        }
-      }
-      
-      if (quantity >= selectedItem.quantity) {
-        if (phaserInstance.itemData) {
-          const quickIndex = phaserInstance.itemData.findIndex(id => 
-            id === selectedItem.id || (typeof id === 'object' && id?.id === selectedItem.id)
-          );
-          
-          if (quickIndex !== -1) {
-            phaserInstance.itemData[quickIndex] = null;
-            if (phaserInstance.items?.[quickIndex]) {
-              phaserInstance.items[quickIndex].visible = false;
-            }
-            if (phaserInstance.itemCounters?.[quickIndex]) {
-              phaserInstance.itemCounters[quickIndex].visible = false;
-            }
-          } else {
-            const mainIndex = phaserInstance.mainInventoryData?.findIndex(item => 
-              item && (item.id === selectedItem.id)
-            );
-            
-            if (mainIndex !== -1) {
-              phaserInstance.mainInventoryData[mainIndex] = null;
-            }
-          }
-        }
-      } else {
-        const quickIndex = phaserInstance.itemData?.findIndex(id => 
-          id === selectedItem.id || (typeof id === 'object' && id?.id === selectedItem.id)
-        );
-        
-        if (quickIndex !== -1 && phaserInstance.itemCounters?.[quickIndex]) {
-          const newQuantity = selectedItem.quantity - quantity;
-          phaserInstance.itemCounters[quickIndex].text = newQuantity.toString();
-          
-          if (typeof phaserInstance.itemData[quickIndex] === 'object') {
-            phaserInstance.itemData[quickIndex].quantity = newQuantity;
-          }
-        } else {
-          const mainIndex = phaserInstance.mainInventoryData?.findIndex(item => 
-            item && (item.id === selectedItem.id)
-          );
-          
-          if (mainIndex !== -1) {
-            phaserInstance.mainInventoryData[mainIndex].quantity -= quantity;
-          }
-        }
-      }
-      
-      if (phaserInstance.scene && phaserInstance.scene.events) {
-        phaserInstance.scene.events.emit('inventory-changed');
-        phaserInstance.scene.events.emit('gold-earned', totalValue);
-      }
+    if (success) {
+      setSelectedItem(null);
+      setQuantity(1);
     }
-    
-    const updatedInventory = inventory.filter(item => 
-      item.id !== selectedItem.id || 
-      (item.id === selectedItem.id && item.quantity > quantity)
-    ).map(item => {
-      if (item.id === selectedItem.id) {
-        return { ...item, quantity: item.quantity - quantity };
-      }
-      return item;
-    });
-    
-    setInventory(updatedInventory);
-    setTotalGold(prev => prev + totalValue);
-    
-    setSelectedItem(null);
-    setQuantity(1);
   };
 
   return (
@@ -300,7 +138,7 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
                 className="w-10 h-10 mr-2"
                 style={{ imageRendering: 'pixelated' }}
               />
-              <span className="text-yellow-300 font-medium">{totalGold}</span>
+              <span className="text-yellow-300 font-medium">{inventory.totalGold}</span>
             </div>
           </div>
 
@@ -426,7 +264,6 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
                     +
                   </button>
                 </div>
-
               </div>
 
               <div className="flex justify-center">
@@ -489,8 +326,8 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
                 }}
               >
                 <div className="grid grid-cols-4 gap-6">
-                  {inventory.length > 0 ? (
-                    inventory.map((item, index) => (
+                  {allInventoryItems.length > 0 ? (
+                    allInventoryItems.map((item, index) => (
                       <InventoryItem
                         key={`item-${index}`}
                         item={item}
@@ -509,8 +346,8 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
                     ))
                   )}
                   
-                  {inventory.length > 0 && inventory.length < maxInventorySlots && (
-                    Array(maxInventorySlots - inventory.length).fill(null).map((_, index) => (
+                  {allInventoryItems.length > 0 && allInventoryItems.length < maxInventorySlots && (
+                    Array(maxInventorySlots - allInventoryItems.length).fill(null).map((_, index) => (
                       <InventoryItem 
                         key={`fill-${index}`} 
                         item={null} 

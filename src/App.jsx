@@ -98,9 +98,15 @@ function App() {
                 setShowLeaderboard(true);
                 break;
             case "SHOPSELL":
+                if (modalData && modalData.phaserInstance) {
+                    setPhaserInstance(modalData.phaserInstance);
+                }
                 setShowShopSell(true);
                 break;
             case "SHOPBUY":
+                if (modalData && modalData.phaserInstance) {
+                    setPhaserInstance(modalData.phaserInstance);
+                }
                 setShowShopBuy(true);
                 break;
 
@@ -197,13 +203,20 @@ function App() {
             )}
             {showShopSell && (
                 <MerchantSellScreen
-                    onClose={() => setShowShopSell(false)}
+                    phaserInstance={phaserInstance}
+                    onClose={() => {
+                        setShowShopSell(false);
+                    }}
                     isOpen={showShopSell}
                 />
             )}
+
             {showShopBuy && (
                 <MerchantBuyScreen
-                    onClose={() => setShowShopBuy(false)}
+                    phaserInstance={phaserInstance}
+                    onClose={() => {
+                        setShowShopBuy(false);
+                    }}
                     isOpen={showShopBuy}
                 />
             )}
