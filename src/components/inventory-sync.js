@@ -140,9 +140,95 @@ export const useInventorySync = (phaserInstance) => {
    * @param {Object|string} item - Item to calculate value for
    * @returns {number} - Calculated value
    */
+  const ITEM_PRICES = {
+    // Crops
+    "apple": 15,
+    "crops-artichoke": 50,
+    "crops-blueberry": 35,
+    "crops-bok chok": 18,
+    "crops-broccoli": 25,
+    "crops-carrot": 15,
+    "crops-cauliflower": 30,
+    "crops-chili": 22,
+    "crops-coffee bean": 40,
+    "crops-corn": 20,
+    "crops-eggplant": 30,
+    "crops-garlic": 22,
+    "crops-grape": 32,
+    "crops-green bean": 16,
+    "crops-melon": 65,
+    "crops-parsnip": 14,
+    "crops-potato": 12,
+    "crops-pumpkin": 45,
+    "crops-radish": 14,
+    "crops-red cabagge": 25,
+    "crops-strawberry": 40,
+    "crops-tomato": 18,
+    "crops-wheat": 10,
+    
+    // Seeds (sell prices)
+    "crops-seed bags-artichoke": 20,
+    "crops-seed bags-blueberry": 15,
+    "crops-seed bags-bok choy": 8,
+    "crops-seed bags-broccoli": 10,
+    "crops-seed bags-carrot": 6,
+    "crops-seed bags-cauliflower": 12,
+    "crops-seed bags-chili": 9,
+    "crops-seed bags-coffee bean": 18,
+    "crops-seed bags-corn": 8,
+    "crops-seed bags-eggplant": 12,
+    "crops-seed bags-garlic": 9,
+    "crops-seed bags-grape": 14,
+    "crops-seed bags-green bean": 7,
+    "crops-seed bags-melon": 25,
+    "crops-seed bags-parsnip": 6,
+    "crops-seed bags-potato": 5,
+    "crops-seed bags-pumpkin": 18,
+    "crops-seed bags-radish": 6,
+    "crops-seed bags-red cabagge": 10,
+    "crops-seed bags-strawberry": 16,
+    "crops-seed bags-tomato": 8,
+    "crops-seed bags-wheat": 4,
+    
+    // Fish and other items
+    "FISH": 28,
+    "IconGoldCoin": 100,
+    "IconIronIngot": 45,
+    "IconIronSword": 150,
+    "IconToolAxe": 80,
+    "IconToolFishingRod": 120,
+    "IconToolHoe": 75,
+    "IconToolPickaxe": 85,
+    "Mushroom": 25,
+    "maplesyrup": 40,
+    "octopus": 65,
+    "pinenuts": 18,
+    "Salmon": 45,
+    "sunfish": 35,
+    "truffle": 150,
+    "WateringCan": 70
+  };
   const calculateItemValue = (item) => {
     if (!item) return 10;
     
+    // Get item ID
+    let itemId = typeof item === 'string' ? item : item.id;
+    
+    // Clean up item ID by removing file extension and path
+    if (itemId) {
+      // Remove file extension if present
+      itemId = itemId.replace(/\.(png|jpg|gif)$/, '');
+      
+      // Remove path if present
+      itemId = itemId.split('/').pop();
+    }
+    
+    // Check if we have a defined price for this item
+    if (itemId && ITEM_PRICES[itemId]) {
+      return ITEM_PRICES[itemId];
+    }
+    
+    // Fall back to rarity-based calculation if no price is defined
     const baseValue = 10;
     let rarityMultiplier = 1;
     

@@ -80,6 +80,11 @@
                 "key": "animations"
             },
             {
+                "url": "assets/InventoryIcons/apple.png",
+                "type": "image",
+                "key": "apple"
+            },
+            {
                 "url": "assets/mapAssets/Apple.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -714,6 +719,19 @@
                 "key": "crops-artichoke_01"
             },
             {
+                "url": "assets/InventoryIcons/crops-artichoke.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "crops-artichoke_1"
+            },
+            {
                 "url": "assets/Crops/Icons/Normal Icon/Fruit/crops-blueberry.png",
                 "type": "image",
                 "key": "crops-blueberry"
@@ -722,6 +740,11 @@
                 "url": "assets/Crops/Icons/Highlighted/Fruit/crops-blueberry_01.png",
                 "type": "image",
                 "key": "crops-blueberry_01"
+            },
+            {
+                "url": "assets/InventoryIcons/crops-blueberry.png",
+                "type": "image",
+                "key": "crops-blueberry_1"
             },
             {
                 "url": "assets/Crops/Icons/Normal Icon/Crops/crops-bok chok.png",
@@ -1014,6 +1037,11 @@
                 "key": "crops-strawberry_01"
             },
             {
+                "url": "assets/InventoryIcons/crops-strawberry.png",
+                "type": "image",
+                "key": "crops-strawberry_1"
+            },
+            {
                 "url": "assets/Crops/Icons/Normal Icon/Fruit/crops-tomato.png",
                 "type": "image",
                 "key": "crops-tomato"
@@ -1022,6 +1050,11 @@
                 "url": "assets/Crops/Icons/Highlighted/Fruit/crops-tomato_01.png",
                 "type": "image",
                 "key": "crops-tomato_01"
+            },
+            {
+                "url": "assets/InventoryIcons/crops-tomato.png",
+                "type": "image",
+                "key": "crops-tomato_1"
             },
             {
                 "url": "assets/Crops/Icons/Normal Icon/Crops/crops-wheat.png",
@@ -1830,6 +1863,46 @@
                 "key": "IconGold"
             },
             {
+                "url": "assets/InventoryIcons/IconGoldCoin.png",
+                "type": "image",
+                "key": "IconGoldCoin"
+            },
+            {
+                "url": "assets/InventoryIcons/IconIronIngot_v01.png",
+                "type": "image",
+                "key": "IconIronIngot_v01"
+            },
+            {
+                "url": "assets/InventoryIcons/IconIronSword.png",
+                "type": "image",
+                "key": "IconIronSword"
+            },
+            {
+                "url": "assets/InventoryIcons/IconToolAxe.png",
+                "type": "image",
+                "key": "IconToolAxe"
+            },
+            {
+                "url": "assets/InventoryIcons/IconToolFishingRod.png",
+                "type": "image",
+                "key": "IconToolFishingRod"
+            },
+            {
+                "url": "assets/InventoryIcons/IconToolHoe.png",
+                "type": "image",
+                "key": "IconToolHoe"
+            },
+            {
+                "url": "assets/InventoryIcons/IconToolPickaxe.png",
+                "type": "image",
+                "key": "IconToolPickaxe"
+            },
+            {
+                "url": "assets/InventoryIcons/IconToolWateringCan.png",
+                "type": "image",
+                "key": "IconToolWateringCan"
+            },
+            {
                 "url": "assets/hud/Inventory/InactiveSlot1.png",
                 "type": "image",
                 "key": "InactiveSlot1"
@@ -2260,6 +2333,11 @@
                 "key": "NPCShopStandMaerchant_1"
             },
             {
+                "url": "assets/InventoryIcons/octopus.png",
+                "type": "image",
+                "key": "octopus"
+            },
+            {
                 "url": "assets/files/OldManJackName.png",
                 "type": "image",
                 "key": "OldManJackName"
@@ -2364,6 +2442,11 @@
                 },
                 "type": "spritesheet",
                 "key": "PalmTreePattern"
+            },
+            {
+                "url": "assets/InventoryIcons/pinenuts.png",
+                "type": "image",
+                "key": "pinenuts"
             },
             {
                 "url": "assets/Character/Farming/BaseModel/PlayerAniFarming_V01.png",
@@ -2683,6 +2766,11 @@
                 "key": "RockWalking_V01"
             },
             {
+                "url": "assets/InventoryIcons/Salmon.png",
+                "type": "image",
+                "key": "Salmon"
+            },
+            {
                 "url": "assets/Building/SeaLevelBuildingLighthouse_v01.png",
                 "frameConfig": {
                     "frameWidth": 256,
@@ -2880,6 +2968,11 @@
                 },
                 "type": "spritesheet",
                 "key": "StoneFance."
+            },
+            {
+                "url": "assets/InventoryIcons/sunfish.png",
+                "type": "image",
+                "key": "sunfish"
             },
             {
                 "url": "assets/mapAssets/Tent.png",
@@ -3296,6 +3389,16 @@
                 },
                 "type": "spritesheet",
                 "key": "TrophyIcon"
+            },
+            {
+                "url": "assets/InventoryIcons/truffile.png",
+                "type": "image",
+                "key": "truffile"
+            },
+            {
+                "url": "assets/InventoryIcons/Tune.png",
+                "type": "image",
+                "key": "Tune"
             },
             {
                 "url": "assets/map/TutorialMap.json",

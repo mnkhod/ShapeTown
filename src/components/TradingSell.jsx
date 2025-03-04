@@ -28,7 +28,7 @@ const InventoryItem = ({ item, onClick, isSelected }) => {
     >
       <div className="absolute inset-0 flex items-center justify-center">
         <img
-          src={item.iconPath || `/assets/${item.icon || 'items/default'}.png`}
+          src={item.iconPath || `/assets/InventoryIcons/${item.icon || 'items/default'}.png`}
           alt={item.name}
           className="max-w-full max-h-full scale-90" 
           style={{ 
@@ -164,9 +164,9 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
                   {selectedItem && (
                     <div className="absolute inset-0 flex items-center justify-center p-2">
                       <img 
-                        src={selectedItem.iconPath || `/assets/${selectedItem.icon || 'items/default'}.png`}
+                        src={selectedItem.iconPath || `/assets/InventoryIcons/${selectedItem.icon || 'items/default'}.png`}
                         alt={selectedItem.name}
-                        className="max-w-full max-h-full"
+                        className="max-w-full max-h-full scale-150"
                         style={{ imageRendering: 'pixelated' }}
                       />
                     </div>

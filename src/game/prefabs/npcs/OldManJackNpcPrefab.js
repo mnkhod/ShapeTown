@@ -68,9 +68,10 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
             msg: "Those will be handy soon.",
             onComplete: () => {
                 this.itemHud.visible = true;
-                this.itemHud.addItem("WATERING_CAN", "IconBaseTools", 0)
-                this.itemHud.addItem("HOE", "IconBaseTools", 1)
-                this.itemHud.addItem("PICK_AXE", "IconBaseTools", 2)
+                this.itemHud.addItem("PICK_AXE", "IconToolPickaxe", 0);
+                this.itemHud.addItem("HOE", "IconToolHoe", 0);
+                this.itemHud.addItem("WATERING_CAN", "IconToolWateringCan", 0);
+                this.itemHud.addItem("IRON_SWORD", "IconIronSword", 0);
             }
         },
         { msg: "Alright, I am giving you a Quest. Therefore, you may be spot on your Quest Book." },
@@ -86,7 +87,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         {
             msg: "Here are your platform passes.",
             onComplete: () => {
-                this.itemHud.addItem("CARROT_SEED", "crops-seed bags-carrot", 0, 5)
+                this.itemHud.addItem("CARROT_SEED", "crops-seed bags-carrot", 0, 5);
                 this.itemHud.addItem("RADISH_SEED", "crops-seed bags-radish", 0, 2);
             }
         },

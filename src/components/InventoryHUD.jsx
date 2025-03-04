@@ -45,7 +45,7 @@ const InventorySlot = ({
       {item && (
         <div className="absolute inset-0 flex items-center justify-center">
           <img 
-            src={item.iconPath || `/assets/${item.icon}.png`}
+            src={item.iconPath || `/assets/InventoryIcons/${item.icon}.png`}
             alt={item.name}
             className="w-[32px] h-[48px]"
             style={{ 
