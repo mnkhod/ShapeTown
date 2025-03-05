@@ -499,52 +499,66 @@
             ]
         },
         {
+            "type": "Sprite",
+            "id": "9b1f3075-af98-4b2d-a38b-7c526ef0af55",
+            "label": "sceneTile",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Fruitbushes_V01",
+                "frame": 23
+            },
+            "x": 2470,
+            "y": 1112,
+            "scaleX": 1.3069946364802347,
+            "scaleY": 10.586085054631967,
+            "ArcadeComponent.active": true,
+            "allowGravity": false,
+            "body.width": 32,
+            "body.height": 200
+        },
+        {
             "prefabId": "c5295ea5-b7f5-4391-9fc6-8c5495a42d18",
-            "id": "b5463128-88a9-454f-b256-ff39e53dec18",
+            "id": "53b74c58-a36e-4eeb-b6fb-3277f43c6043",
             "unlock": [
                 "x",
-                "y"
+                "y",
+                "player",
+                "msgPrefab",
+                "itemHud",
+                "bookHud"
             ],
             "label": "oldManJackNpcPrefab",
             "scope": "CLASS",
-            "x": 615,
-            "y": 622
+            "player": "playerPrefab",
+            "msgPrefab": "messagePrefab",
+            "itemHud": "itemHudPrefab",
+            "bookHud": "questBookPrefab",
+            "x": 650,
+            "y": 660
         },
         {
             "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
-            "id": "34baa8e5-a848-4997-a229-f2e882a29fc2",
+            "id": "cb4b9f51-6560-4ab5-9849-0d37f31b36dd",
             "unlock": [
                 "x",
                 "y"
             ],
             "label": "messagePrefab",
             "scope": "CLASS",
-            "x": 0,
-            "y": 0
-        },
-        {
-            "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
-            "id": "3c64734a-36cd-4394-aa52-ad7d04a1149e",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "alertPrefab",
-            "scope": "CLASS",
-            "x": 0,
+            "x": 2260,
             "y": 0
         },
         {
             "prefabId": "9be122bc-3a2e-4c06-a98e-b5754929a6d2",
-            "id": "722257d1-2a2a-4e88-9650-98bb2e7664ad",
+            "id": "d82e8b28-040a-4b51-b099-503ace4c7708",
             "unlock": [
                 "x",
                 "y"
             ],
             "label": "newItemHudPrefab",
             "scope": "CLASS",
-            "x": 0,
-            "y": 1920
+            "x": 422,
+            "y": 205
         }
     ],
     "plainObjects": [

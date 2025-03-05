@@ -18,7 +18,7 @@ import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import OpenInventory from "../prefabs/hud/OpenInventory";
 import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
 import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
-import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
+// import optionsListPrefab from "../prefabs/hud/optionsListPrefab";
 import RockMonster from "../prefabs/Mob/RockMonster";
 import GoblinMonster from "../prefabs/Mob/GoblinMonster";
 import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
@@ -117,7 +117,7 @@ export default class TutorialScene extends Phaser.Scene {
 
 		// sceneTile
 		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
-		const sceneTile = this.add.sprite(1259, 382, "Fruitbushes_V01", 23);
+		const sceneTile = this.add.sprite(1242, 382, "Fruitbushes_V01", 23);
 		sceneTile.scaleX = 1.3069946364802347;
 		sceneTile.scaleY = 10.586085054631967;
 		this.physics.add.existing(sceneTile, false);
@@ -227,7 +227,7 @@ export default class TutorialScene extends Phaser.Scene {
 		minimapPrefab.visible = false;
 
 		// optionsListPrefab
-		const optionsListPrefab = new OptionsListPrefab(this, 967, 30);
+		const optionsListPrefab = new optionsListPrefab(this, 967, 30);
 		this.add.existing(optionsListPrefab);
 
 		// rockMonster
@@ -241,12 +241,11 @@ export default class TutorialScene extends Phaser.Scene {
 		// merchantPrefab
 		const merchantPrefab = new MerchantPrefab(this, 539, 438);
 		this.add.existing(merchantPrefab);
-		
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
-		oldManJackNpcPrefab.itemHud = newItemHudPrefab;
+		oldManJackNpcPrefab.itemHud = itemHudPrefab;
 		oldManJackNpcPrefab.bookHud = questBookPrefab;
 
 		this.map_environment_Ground_just_render__1 = map_environment_Ground_just_render__1;
@@ -339,7 +338,7 @@ export default class TutorialScene extends Phaser.Scene {
 	openMapPrefab;
 	/** @type {MinimapPrefab} */
 	minimapPrefab;
-	/** @type {OptionsListPrefab} */
+	/** @type {optionsListPrefab} */
 	optionsListPrefab;
 	/** @type {RockMonster} */
 	rockMonster;
@@ -358,19 +357,19 @@ export default class TutorialScene extends Phaser.Scene {
 
 	initInventorySystem() {
 		if (!this.newItemHudPrefab) return;
-		
+
 		this.newItemHudPrefab.visible = true;
-		
+
 		initInventoryBridge(this.newItemHudPrefab, this.reactEvent);
-		
+
 		this.time.delayedCall(100, () => {
 		  import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
 			this.newItemHudPrefab.syncWithGlobalInventory = function() {
 			  globalInventory.quickItems.forEach((itemData, index) => {
 				if (!itemData) return;
-			
+
 				this.itemData[index] = itemData.id;
-			
+
 				if (this.items[index]) {
 				  this.items[index].visible = true;
 				  this.items[index].setTexture(itemData.textureKey || itemData.icon);
@@ -378,27 +377,27 @@ export default class TutorialScene extends Phaser.Scene {
 					this.items[index].setFrame(itemData.frameName);
 				  }
 				}
-			
+
 				if (this.itemCounters[index]) {
 				  this.itemCounters[index].visible = true;
 				  this.itemCounters[index].text = itemData.quantity.toString();
 				}
 			  });
-		  
+
 			  this.mainInventoryData = [...globalInventory.mainItems];
-		  
+
 			  if (this.reactEvent) {
 				this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
 			  }
 			};
-		
+
 			this.newItemHudPrefab.updateGlobalInventory = function() {
 			  const updatedQuickItems = this.itemData.map((id, index) => {
 				if (!id) return null;
-			
+
 				const item = this.items[index];
 				if (!item || !item.visible) return null;
-			
+
 				return {
 				  id: id,
 				  icon: item.texture.key,
@@ -409,24 +408,24 @@ export default class TutorialScene extends Phaser.Scene {
 				  name: id
 				};
 			  });
-		  
+
 			  globalInventory.quickItems = updatedQuickItems;
 			  globalInventory.mainItems = [...this.mainInventoryData];
-		  
+
 			  if (this.reactEvent) {
 				this.reactEvent.emit('global-inventory-changed', globalInventory);
 			  }
 			};
-		
+
 			this.newItemHudPrefab.syncWithGlobalInventory();
-		
+
 			if (globalInventory.quickItems.every(item => item === null) && 
 				globalInventory.mainItems.every(item => item === null)) {
 			  this.setupStartingItems();
 			}
-		
+
 			this.reactEvent.emit('scene-switched', this);
-			
+
 			// Add this timer to make sure an item is selected
 			this.time.delayedCall(500, () => {
 			  // Check if there's no selected item but there are items in the inventory
@@ -437,7 +436,7 @@ export default class TutorialScene extends Phaser.Scene {
 					// Set this item as selected
 					this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[i];
 					this.newItemHudPrefab.activeIndex = i;
-					
+
 					// Update UI to show selection
 					if (this.newItemHudPrefab.activeItemSlots) {
 					  this.newItemHudPrefab.activeItemSlots.forEach(slot => {
@@ -447,7 +446,7 @@ export default class TutorialScene extends Phaser.Scene {
 						this.newItemHudPrefab.activeItemSlots[i].visible = true;
 					  }
 					}
-					
+
 					console.log("Auto-selected item:", this.newItemHudPrefab.selectedItem, "at index:", i);
 					break;
 				  }
@@ -456,7 +455,7 @@ export default class TutorialScene extends Phaser.Scene {
 			});
 		  });
 		});
-	  
+
 		this.events.on('shutdown', this.onSceneShutdown, this);
 	  }
 	onSceneShutdown() {

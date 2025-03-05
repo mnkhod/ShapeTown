@@ -8,7 +8,6 @@ import ShapeFarmingHousePrefab from "../prefabs/House/ShapeFarmingHousePrefab";
 import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
-import AlertPrefab from "../prefabs/hud/AlertPrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
@@ -107,21 +106,32 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// tree_border_7
 		const tree_border_7 = shapetownFarmingMap.createLayer("tree border/7", ["TreePatteren"], 0, 0);
 
+		// sceneTile
+		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
+		const sceneTile = this.add.sprite(2470, 1112, "Fruitbushes_V01", 23);
+		sceneTile.scaleX = 1.3069946364802347;
+		sceneTile.scaleY = 10.586085054631967;
+		this.physics.add.existing(sceneTile, false);
+		sceneTile.body.allowGravity = false;
+		sceneTile.body.setSize(32, 200, false);
+
 		// oldManJackNpcPrefab
-		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 615, 622);
+		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 650, 660);
 		this.add.existing(oldManJackNpcPrefab);
 
 		// messagePrefab
-		const messagePrefab = new MessagePrefab(this, 0, 0);
+		const messagePrefab = new MessagePrefab(this, 2260, 0);
 		this.add.existing(messagePrefab);
 
-		// alertPrefab
-		const alertPrefab = new AlertPrefab(this, 0, 0);
-		this.add.existing(alertPrefab);
-
 		// newItemHudPrefab
-		const newItemHudPrefab = new NewItemHudPrefab(this, 0, 1920);
+		const newItemHudPrefab = new NewItemHudPrefab(this, 422, 205);
 		this.add.existing(newItemHudPrefab);
+
+		// oldManJackNpcPrefab (prefab fields)
+		oldManJackNpcPrefab.player = playerPrefab;
+		oldManJackNpcPrefab.msgPrefab = messagePrefab;
+		oldManJackNpcPrefab.itemHud = newItemHudPrefab;
+		// oldManJackNpcPrefab.bookHud = questBookPrefab;
 
 		this.bG_Grass_1 = bG_Grass_1;
 		this.bG_Cliff_1 = bG_Cliff_1;
@@ -142,9 +152,9 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.shapeFarmingHousePrefab = shapeFarmingHousePrefab;
 		this.appleTreePrefab = appleTreePrefab;
 		this.tree_border_7 = tree_border_7;
+		this.sceneTile = sceneTile;
 		this.oldManJackNpcPrefab = oldManJackNpcPrefab;
 		this.messagePrefab = messagePrefab;
-		this.alertPrefab = alertPrefab;
 		this.newItemHudPrefab = newItemHudPrefab;
 		this.shapetownFarmingMap = shapetownFarmingMap;
 
@@ -189,12 +199,12 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	appleTreePrefab;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_border_7;
+	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
+	sceneTile;
 	/** @type {OldManJackNpcPrefab} */
 	oldManJackNpcPrefab;
 	/** @type {MessagePrefab} */
 	messagePrefab;
-	/** @type {AlertPrefab} */
-	alertPrefab;
 	/** @type {NewItemHudPrefab} */
 	newItemHudPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
@@ -266,6 +276,16 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	  	this.appleTreePrefab.setupCollision(this.playerPrefab);
 	  	this.physics.add.collider(this.playerPrefab, this.appleTreePrefab);
 	  	// this.appleTreePrefab.renderDebug(this.add.graphics());
+
+				this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
+		    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+			this.newItemHudPrefab.updateGlobalInventory();
+			}
+
+		    this.scene.switch("ShapeTownSquareMapScene");
+		    this.playerPrefab.x -= 50;
+		    this.cameras.main.fadeIn(2000, 0, 0, 0);
+		});
 	}
 
 	/* END-USER-CODE */
