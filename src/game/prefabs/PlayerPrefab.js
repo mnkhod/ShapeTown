@@ -327,7 +327,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         }
         
         // Duration of animation
-        this.scene.time.delayedCall(900, () => {
+        this.scene.time.delayedCall(400, () => {
             this.stopToolAnimation(toolSprite);
         });
     }
@@ -409,8 +409,8 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         
         // Tool sprite sheet keys
         const toolSpriteSheets = {
-            watering: "PlayerAniFarmingWatering_V01",
-            axe: "HarvestingToolAxe_V01",
+            watering: "FarmingToolsWatering",
+            axe: "FarmingToolsHoe_1",
             pickaxe: "MiningToolPickaxe_V01"
         };
         
