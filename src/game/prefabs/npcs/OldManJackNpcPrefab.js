@@ -68,10 +68,11 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
             msg: "Those will be handy soon.",
             onComplete: () => {
                 this.itemHud.visible = true;
-                this.itemHud.addItem("PICK_AXE", "IconToolPickaxe", 0);
-                this.itemHud.addItem("HOE", "IconToolHoe", 0);
-                this.itemHud.addItem("WATERING_CAN", "IconToolWateringCan", 0);
-                this.itemHud.addItem("IRON_SWORD", "IconIronSword", 0);
+                this.itemHud.addItem("ToolPickaxe", "IconToolPickaxe", 0);
+                this.itemHud.addItem("ToolHoe", "IconToolHoe", 0);
+                this.itemHud.addItem("ToolWateringCan", "IconToolWateringCan", 0);
+                this.itemHud.addItem("ToolIronSword", "IconIronSword", 0);
+                this.itemHud.forceSelectTool("ToolPickaxe");
             }
         },
         { msg: "Alright, I am giving you a Quest. Therefore, you may be spot on your Quest Book." },
@@ -87,8 +88,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         {
             msg: "Here are your platform passes.",
             onComplete: () => {
-                this.itemHud.addItem("CARROT_SEED", "crops-seed bags-carrot", 0, 5);
-                this.itemHud.addItem("RADISH_SEED", "crops-seed bags-radish", 0, 2);
+                this.itemHud.addItem("seed_carrot", "crops-seed bags-carrot", 0, 5);
+                this.itemHud.addItem("seed_radish", "crops-seed bags-radish", 0, 2);
             }
         },
         {
@@ -122,17 +123,14 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
     // Write your code here.
 
     prefabCreateCycle() {
-        // Log when the cycle starts
         console.log('Prefab create cycle started');
 
-        // Mouse over event - Show name and glow
         this.npc.on('pointerover', function (_pointer) {
             console.log('Mouse over NPC');  // Debug log
             this.preFX.addGlow(16777215, 4, 0, false);
             this.parentContainer.nameBox.setVisible(true);
         });
 
-        // Mouse out event - Hide name and remove glow
         this.npc.on('pointerout', function (_pointer) {
             console.log('Mouse out of NPC');  // Debug log
             this.preFX.clear();

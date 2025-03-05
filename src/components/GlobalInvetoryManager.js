@@ -10,6 +10,7 @@ class GlobalInventoryManager {
     
     this.quickItems = Array(8).fill(null);
     this.mainItems = Array(24).fill(null);
+    this.activeIndex = 0;
     
     EventBus.on('inventory-changed', this.onInventoryChanged, this);
     EventBus.on('scene-switched', this.syncInventoryToScene, this);
@@ -66,12 +67,25 @@ class GlobalInventoryManager {
     
     hudPrefab.mainInventoryData = JSON.parse(JSON.stringify(this.mainItems));
     
-    if (this.activeIndex >= 0 && this.activeIndex < hudPrefab.activeItemSlots.length) {
+    if (this.activeIndex >= 0 && this.activeIndex < hudPrefab.activeItemSlots.length && 
+        hudPrefab.itemData[this.activeIndex]) {
       hudPrefab.activeIndex = this.activeIndex;
       hudPrefab.selectedItem = hudPrefab.itemData[this.activeIndex];
       
       if (hudPrefab.activeItemSlots[this.activeIndex]) {
         hudPrefab.activeItemSlots[this.activeIndex].visible = true;
+      }
+    } else {
+      const firstItemIndex = hudPrefab.itemData.findIndex(item => item !== null);
+      if (firstItemIndex !== -1) {
+        hudPrefab.activeIndex = firstItemIndex;
+        hudPrefab.selectedItem = hudPrefab.itemData[firstItemIndex];
+        
+        if (hudPrefab.activeItemSlots[firstItemIndex]) {
+          hudPrefab.activeItemSlots[firstItemIndex].visible = true;
+        }
+        
+        this.activeIndex = firstItemIndex;
       }
     }
     
@@ -104,6 +118,7 @@ class GlobalInventoryManager {
       this.mainItems = [...hudPrefab.mainInventoryData];
     }
     
+    this.activeIndex = hudPrefab.activeIndex;
     EventBus.emit('global-inventory-changed', this);
   }
   

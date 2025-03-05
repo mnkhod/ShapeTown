@@ -74,17 +74,24 @@ const PhaserInventory = ({ onClose, phaserInstance }) => {
 
   const handleItemClick = (item, slotIndex, isQuickAccess) => {
     if (!phaserInstance) return;
-
+  
     if (isQuickAccess) {
       const quickIndex = slotIndex - 24;
       phaserInstance.activeIndex = quickIndex;
       phaserInstance.selectedItem = item?.id || null;
-
+  
       if (phaserInstance.activeItemSlots) {
         phaserInstance.activeItemSlots.forEach((slot, i) => {
           if (slot) {
             slot.visible = i === quickIndex;
           }
+        });
+      }
+      
+      if (phaserInstance.reactEvent) {
+        phaserInstance.reactEvent.emit('inventory-slot-selected', {
+          index: quickIndex,
+          item: item
         });
       }
       
@@ -115,7 +122,7 @@ const PhaserInventory = ({ onClose, phaserInstance }) => {
 
   return (
     <div 
-      className="fixed inset-0 flex items-center justify-center bg-black/50"
+    className="fixed inset-0 flex items-center justify-center bg-black/50"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();

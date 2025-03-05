@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { getGoldManager } from './gold-manager';
 
 const ShopItem = ({ item, onClick, isSelected }) => {
   if (!item) return (
@@ -27,7 +28,7 @@ const ShopItem = ({ item, onClick, isSelected }) => {
     >
       <div className="absolute left-2 top-0 bottom-0 flex items-center justify-center w-12">
         <img
-          src={item.iconPath || `/assets/${item.icon || 'items/default'}.png`}
+          src={item.iconPath || `/assets/InventoryIcons/${item.icon || 'items/default'}.png`}
           alt={item.name}
           className="w-10 h-10" 
           style={{ 
@@ -61,98 +62,128 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
   const [quantity, setQuantity] = useState(1);
   const [totalGold, setTotalGold] = useState(0);
   const [buttonState, setButtonState] = useState('default');
+  const [purchaseSuccess, setPurchaseSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const goldManager = getGoldManager(phaserInstance);
   
   const SHOP_ITEMS = [
     {
-      id: 'seed',
+      id: 'seed_bok-choy',
       name: 'Bok choy seeds',
-      icon: 'items/seed',
-      iconPath: '/assets/Crops/Icons/seed sack/crops/crops-seed bags-bok choy.png',
+      icon: 'crops-seed bags-bok choy',
+      iconPath: '/assets/InventoryIcons/crops-seed bags-bok choy.png',
       quantity: 999,
       buyPrice: 25,
+      sellPrice: 8,
       description: 'Crop Seed'
     },
     {
-      id: 'seed',
+      id: 'seed_broccoli',
       name: 'Broccoli seeds',
-      icon: 'items/seed',
-      iconPath: '/assets/Crops/Icons/seed sack/crops/crops-seed bags-broccoli.png',
+      icon: 'crops-seed bags-broccoli',
+      iconPath: '/assets/InventoryIcons/crops-seed bags-broccoli.png',
       quantity: 999,
       buyPrice: 30,
+      sellPrice: 10,
       description: 'Crop Seed'
     },
     {
-      id: 'seed',
+      id: 'seed_carrot',
       name: 'Carrot seeds',
-      icon: 'items/seed',
-      iconPath: '/assets/Crops/Icons/seed sack/crops/crops-seed bags-carrot.png',
+      icon: 'crops-seed bags-carrot',
+      iconPath: '/assets/InventoryIcons/crops-seed bags-carrot.png',
       quantity: 5,
       buyPrice: 120,
+      sellPrice: 6,
       description: 'Crop Seed'
     },
     {
-      id: 'seed',
+      id: 'seed_cauliflower',
       name: 'Cauliflower seeds',
-      icon: 'items/seed',
-      iconPath: '/assets/Crops/Icons/seed sack/crops/crops-seed bags-cauliflower.png',
+      icon: 'crops-seed bags-cauliflower',
+      iconPath: '/assets/InventoryIcons/crops-seed bags-cauliflower.png',
       quantity: 5,
       buyPrice: 80,
+      sellPrice: 12,
       description: 'Crop Seed'
     },
     {
-      id: 'seed',
+      id: 'seed_chili',
       name: 'Chili seeds',
-      icon: 'items/seed',
-      iconPath: '/assets/Crops/Icons/seed sack/crops/crops-seed bags-chili.png',
+      icon: 'crops-seed bags-chili',
+      iconPath: '/assets/InventoryIcons/crops-seed bags-chili.png',
       quantity: 3,
       buyPrice: 150,
+      sellPrice: 9,
       description: 'Crop Seed'
     },
     {
-      id: 'seed',
+      id: 'seed_corn',
       name: 'Corn seeds',
-      icon: 'items/seed',
-      iconPath: '/assets/Crops/Icons/seed sack/crops/crops-seed bags-corn.png',
+      icon: 'crops-seed bags-corn',
+      iconPath: '/assets/InventoryIcons/crops-seed bags-corn.png',
       quantity: 2,
       buyPrice: 200,
+      sellPrice: 8,
       description: 'Crop Seed'
     },
   ];
 
   useEffect(() => {
-    console.log("Loading shop inventory and player gold...");
-    
     const loadShopAndGold = () => {
       setShopItems(SHOP_ITEMS);
 
-      if (phaserInstance && phaserInstance.gold !== undefined) {
-        setTotalGold(phaserInstance.gold);
+      if (goldManager) {
+        setTotalGold(goldManager.getGold());
+        
+        goldManager.addListener((newGoldAmount) => {
+          setTotalGold(newGoldAmount);
+        });
       } else {
-        setTotalGold(100);
+        if (phaserInstance && phaserInstance.gold !== undefined) {
+          setTotalGold(phaserInstance.gold);
+        } else {
+          setTotalGold(100);
+        }
       }
     };
 
     loadShopAndGold();
 
-    const handleGoldChange = () => {
-      if (phaserInstance && phaserInstance.gold !== undefined) {
-        setTotalGold(phaserInstance.gold);
-      }
-    };
-
-    if (phaserInstance?.scene?.events) {
+    if (!goldManager && phaserInstance?.scene?.events) {
+      const handleGoldChange = () => {
+        if (phaserInstance && phaserInstance.gold !== undefined) {
+          setTotalGold(phaserInstance.gold);
+        }
+      };
+      
       phaserInstance.scene.events.on('gold-earned', handleGoldChange);
       phaserInstance.scene.events.on('gold-spent', handleGoldChange);
       
       return () => {
         phaserInstance.scene.events.off('gold-earned', handleGoldChange);
         phaserInstance.scene.events.off('gold-spent', handleGoldChange);
+        
+        if (goldManager) {
+          goldManager.removeListener(setTotalGold);
+        }
       };
     }
-  }, [phaserInstance]);
+  }, [phaserInstance, goldManager]);
+
+  useEffect(() => {
+    if (purchaseSuccess || errorMessage) {
+      const timer = setTimeout(() => {
+        setPurchaseSuccess(false);
+        setErrorMessage("");
+      }, 3000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [purchaseSuccess, errorMessage]);
 
   const handleItemSelect = (item) => {
-    console.log("Selected item:", item);
     setSelectedItem(item);
     setQuantity(1);
   };
@@ -173,22 +204,21 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
     const totalCost = selectedItem.buyPrice * quantity;
     
     if (totalGold < totalCost) {
-      console.log("Not enough gold!");
+      setErrorMessage("Not enough gold!");
       return;
     }
     
-    console.log("Buying item:", selectedItem);
-    console.log("Quantity:", quantity);
-    console.log("Total cost:", totalCost);
-    
-    // Update player gold
-    if (phaserInstance) {
-      phaserInstance.gold = (phaserInstance.gold || 0) - totalCost;
-      
-      if (phaserInstance.TotalGoldPrefab && phaserInstance.TotalGoldPrefab.TotalGold !== undefined) {
-        phaserInstance.TotalGoldPrefab.TotalGold = phaserInstance.gold;
-        if (phaserInstance.TotalGoldPrefab.totalGoldAmountText) {
-          phaserInstance.TotalGoldPrefab.totalGoldAmountText.setText(phaserInstance.gold.toString());
+    try {
+      if (goldManager) {
+        goldManager.spendGold(totalCost);
+      } else if (phaserInstance) {
+        phaserInstance.gold = (phaserInstance.gold || 0) - totalCost;
+        
+        if (phaserInstance.TotalGoldPrefab && phaserInstance.TotalGoldPrefab.TotalGold !== undefined) {
+          phaserInstance.TotalGoldPrefab.TotalGold = phaserInstance.gold;
+          if (phaserInstance.TotalGoldPrefab.totalGoldAmountText) {
+            phaserInstance.TotalGoldPrefab.totalGoldAmountText.setText(phaserInstance.gold.toString());
+          }
         }
       }
       
@@ -227,14 +257,30 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
       
       if (!addedToExisting) {
         const newItem = {
-          ...selectedItem,
-          quantity: quantity
+          id: selectedItem.id,
+          name: selectedItem.name,
+          icon: selectedItem.icon,
+          iconPath: selectedItem.iconPath,
+          textureKey: selectedItem.icon,
+          frame: selectedItem.frame || 0,
+          frameName: selectedItem.frame || 0,
+          quantity: quantity,
+          sellPrice: selectedItem.sellPrice || Math.floor(selectedItem.buyPrice * 0.4),
+          description: selectedItem.description
         };
         
         if (phaserInstance.mainInventoryData) {
           const emptySlot = phaserInstance.mainInventoryData.findIndex(item => item === null);
           if (emptySlot !== -1) {
             phaserInstance.mainInventoryData[emptySlot] = newItem;
+          } else {
+            setErrorMessage("Inventory is full!");
+            if (goldManager) {
+              goldManager.addGold(totalCost);
+            } else if (phaserInstance) {
+              phaserInstance.gold += totalCost;
+            }
+            return;
           }
         }
       }
@@ -242,12 +288,24 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
       if (phaserInstance.scene && phaserInstance.scene.events) {
         phaserInstance.scene.events.emit('inventory-changed');
         phaserInstance.scene.events.emit('gold-spent', totalCost);
+        phaserInstance.scene.events.emit('item-purchased', selectedItem);
+      }
+      
+      if (!goldManager) {
+        setTotalGold(prev => prev - totalCost);
+      }
+      
+      setPurchaseSuccess(true);
+      setQuantity(1);
+    } catch (error) {
+      setErrorMessage("Failed to purchase item!");
+      
+      if (goldManager) {
+        goldManager.addGold(totalCost);
+      } else if (phaserInstance) {
+        phaserInstance.gold += totalCost;
       }
     }
-    
-    setTotalGold(prev => prev - totalCost);
-    
-    setQuantity(1);
   };
 
   const canAfford = selectedItem ? totalGold >= selectedItem.buyPrice * quantity : false;
@@ -278,6 +336,18 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
               <span className="text-yellow-300 font-medium">{totalGold}</span>
             </div>
           </div>
+
+          {purchaseSuccess && (
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-600/80 text-white px-4 py-2 rounded text-sm animate-bounce">
+              Item purchased successfully!
+            </div>
+          )}
+          
+          {errorMessage && (
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-600/80 text-white px-4 py-2 rounded text-sm animate-bounce">
+              {errorMessage}
+            </div>
+          )}
 
           <div className="flex w-full h-full p-4">
             <div className="w-[390px] p-16 flex flex-col"

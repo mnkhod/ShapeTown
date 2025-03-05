@@ -157,15 +157,15 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     updateToolFromInventory() {
         if (this.scene.newItemHudPrefab && this.scene.newItemHudPrefab.selectedItem) {
             const item = this.scene.newItemHudPrefab.selectedItem;
-            if (item === "WATERING_CAN") {
+            if (item === "ToolWateringCan") {
                 if (this.selectedTool !== 'watering') {
                     this.selectTool('watering');
                 }
-            } else if (item === "HOE") {
+            } else if (item === "ToolHoe") {
                 if (this.selectedTool !== 'axe') {
                     this.selectTool('axe');
                 }
-            } else if (item === "PICK_AXE") {
+            } else if (item === "ToolPickaxe") {
                 if (this.selectedTool !== 'pickaxe') {
                     this.selectTool('pickaxe');
                 }

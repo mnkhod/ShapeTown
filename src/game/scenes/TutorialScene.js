@@ -365,72 +365,100 @@ export default class TutorialScene extends Phaser.Scene {
 		
 		this.time.delayedCall(100, () => {
 		  import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
-		    this.newItemHudPrefab.syncWithGlobalInventory = function() {
-		      globalInventory.quickItems.forEach((itemData, index) => {
-		        if (!itemData) return;
+			this.newItemHudPrefab.syncWithGlobalInventory = function() {
+			  globalInventory.quickItems.forEach((itemData, index) => {
+				if (!itemData) return;
 			
-		        this.itemData[index] = itemData.id;
+				this.itemData[index] = itemData.id;
 			
-		        if (this.items[index]) {
-		          this.items[index].visible = true;
-		          this.items[index].setTexture(itemData.textureKey || itemData.icon);
-		          if (itemData.frameName !== undefined) {
-		            this.items[index].setFrame(itemData.frameName);
-		          }
-		        }
+				if (this.items[index]) {
+				  this.items[index].visible = true;
+				  this.items[index].setTexture(itemData.textureKey || itemData.icon);
+				  if (itemData.frameName !== undefined) {
+					this.items[index].setFrame(itemData.frameName);
+				  }
+				}
 			
-		        if (this.itemCounters[index]) {
-		          this.itemCounters[index].visible = true;
-		          this.itemCounters[index].text = itemData.quantity.toString();
-		        }
-		      });
+				if (this.itemCounters[index]) {
+				  this.itemCounters[index].visible = true;
+				  this.itemCounters[index].text = itemData.quantity.toString();
+				}
+			  });
 		  
-		      this.mainInventoryData = [...globalInventory.mainItems];
+			  this.mainInventoryData = [...globalInventory.mainItems];
 		  
-		      if (this.reactEvent) {
-		        this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
-		      }
-		    };
+			  if (this.reactEvent) {
+				this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
+			  }
+			};
 		
-		    this.newItemHudPrefab.updateGlobalInventory = function() {
-		      const updatedQuickItems = this.itemData.map((id, index) => {
-		        if (!id) return null;
+			this.newItemHudPrefab.updateGlobalInventory = function() {
+			  const updatedQuickItems = this.itemData.map((id, index) => {
+				if (!id) return null;
 			
-		        const item = this.items[index];
-		        if (!item || !item.visible) return null;
+				const item = this.items[index];
+				if (!item || !item.visible) return null;
 			
-		        return {
-		          id: id,
-		          icon: item.texture.key,
-		          frame: item.frame.name,
-		          textureKey: item.texture.key,
-		          frameName: item.frame.name,
-		          quantity: parseInt(this.itemCounters[index].text) || 1,
-		          name: id
-		        };
-		      });
+				return {
+				  id: id,
+				  icon: item.texture.key,
+				  frame: item.frame.name,
+				  textureKey: item.texture.key,
+				  frameName: item.frame.name,
+				  quantity: parseInt(this.itemCounters[index].text) || 1,
+				  name: id
+				};
+			  });
 		  
-		      globalInventory.quickItems = updatedQuickItems;
-		      globalInventory.mainItems = [...this.mainInventoryData];
+			  globalInventory.quickItems = updatedQuickItems;
+			  globalInventory.mainItems = [...this.mainInventoryData];
 		  
-		      if (this.reactEvent) {
-		        this.reactEvent.emit('global-inventory-changed', globalInventory);
-		      }
-		    };
+			  if (this.reactEvent) {
+				this.reactEvent.emit('global-inventory-changed', globalInventory);
+			  }
+			};
 		
-		    this.newItemHudPrefab.syncWithGlobalInventory();
+			this.newItemHudPrefab.syncWithGlobalInventory();
 		
-		    if (globalInventory.quickItems.every(item => item === null) && 
-		        globalInventory.mainItems.every(item => item === null)) {
-		      this.setupStartingItems();
-		    }
+			if (globalInventory.quickItems.every(item => item === null) && 
+				globalInventory.mainItems.every(item => item === null)) {
+			  this.setupStartingItems();
+			}
 		
-		    this.reactEvent.emit('scene-switched', this);
+			this.reactEvent.emit('scene-switched', this);
+			
+			// Add this timer to make sure an item is selected
+			this.time.delayedCall(500, () => {
+			  // Check if there's no selected item but there are items in the inventory
+			  if (this.newItemHudPrefab.selectedItem === null) {
+				// Find the first non-null item in the inventory
+				for (let i = 0; i < this.newItemHudPrefab.itemData.length; i++) {
+				  if (this.newItemHudPrefab.itemData[i]) {
+					// Set this item as selected
+					this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[i];
+					this.newItemHudPrefab.activeIndex = i;
+					
+					// Update UI to show selection
+					if (this.newItemHudPrefab.activeItemSlots) {
+					  this.newItemHudPrefab.activeItemSlots.forEach(slot => {
+						if (slot) slot.visible = false;
+					  });
+					  if (this.newItemHudPrefab.activeItemSlots[i]) {
+						this.newItemHudPrefab.activeItemSlots[i].visible = true;
+					  }
+					}
+					
+					console.log("Auto-selected item:", this.newItemHudPrefab.selectedItem, "at index:", i);
+					break;
+				  }
+				}
+			  }
+			});
 		  });
 		});
-	
+	  
 		this.events.on('shutdown', this.onSceneShutdown, this);
-	}
+	  }
 	onSceneShutdown() {
 	  if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
 		this.newItemHudPrefab.updateGlobalInventory();

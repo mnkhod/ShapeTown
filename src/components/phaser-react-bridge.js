@@ -336,6 +336,57 @@ export function initInventoryBridge(phaserInstance, reactEvents) {
     if (phaserInstance.syncWithGlobalInventory) {
       phaserInstance.syncWithGlobalInventory();
     }
+    let checkItemSelection = () => {
+      if (isUpdating) return;
+      isUpdating = true;
+      
+      try {
+        if (!phaserInstance.selectedItem) {
+          for (let i = 0; i < phaserInstance.items.length; i++) {
+            if (phaserInstance.items[i] && phaserInstance.items[i].visible) {
+              const textureName = phaserInstance.items[i].texture.key;
+              let itemId;
+              
+              if (phaserInstance.itemData[i]) {
+                itemId = phaserInstance.itemData[i];
+              } else {
+                if (textureName.includes("Hoe") || textureName.includes("hoe")) {
+                  itemId = "ToolHoe";
+                } else if (textureName.includes("Water") || textureName.includes("water")) {
+                  itemId = "ToolWateringCan";
+                } else if (textureName.includes("Pick") || textureName.includes("pick")) {
+                  itemId = "ToolPickaxe";
+                } else {
+                  itemId = textureName.toUpperCase().replace(/[^A-Z0-9_]/g, "_");
+                }
+                
+                phaserInstance.itemData[i] = itemId;
+              }
+              
+              phaserInstance.selectedItem = itemId;
+              phaserInstance.activeIndex = i;
+              
+              phaserInstance.activeItemSlots.forEach((slot, idx) => {
+                if (slot) slot.visible = idx === i;
+              });
+              
+              console.log("Fixed inventory selection:", itemId);
+              break;
+            }
+          }
+        }
+      } finally {
+        isUpdating = false;
+      }
+    };
+    
+    setTimeout(checkItemSelection, 500);
+    
+    if (reactEvents) {
+      reactEvents.on('inventory-changed', () => {
+        setTimeout(checkItemSelection, 100);
+      });
+    }
   }
   
   export default initInventoryBridge;

@@ -24,7 +24,6 @@ export const useInventorySync = (phaserInstance) => {
   // Helper function to get inventory data without setting state
   const getInventoryData = (instance) => {
     if (!instance) return inventoryRef.current;
-    
     // Process quick access items
     const quickItems = Array(8).fill(null);
     
@@ -93,7 +92,6 @@ export const useInventorySync = (phaserInstance) => {
   // Initial sync from Phaser to React
   useEffect(() => {
     if (!phaserInstance) return;
-    
     // Set up event listeners
     const handleInventoryChange = () => {
       if (isUpdatingRef.current) return;
@@ -126,11 +124,17 @@ export const useInventorySync = (phaserInstance) => {
       phaserInstance.scene.events.on('inventory-changed', handleInventoryChange);
       phaserInstance.scene.events.on('gold-earned', handleInventoryChange);
       phaserInstance.scene.events.on('gold-spent', handleInventoryChange);
+      phaserInstance.scene.events.on('gold-changed', handleInventoryChange);
+      phaserInstance.scene.events.on('item-purchased', () => {
+        handleInventoryChange();
+      });
       
       return () => {
         phaserInstance.scene.events.off('inventory-changed', handleInventoryChange);
         phaserInstance.scene.events.off('gold-earned', handleInventoryChange);
         phaserInstance.scene.events.off('gold-spent', handleInventoryChange);
+        phaserInstance.scene.events.off('gold-changed', handleInventoryChange);
+        phaserInstance.scene.events.off('item-purchased');
       };
     }
   }, [phaserInstance]);
@@ -167,38 +171,39 @@ export const useInventorySync = (phaserInstance) => {
     "crops-wheat": 10,
     
     // Seeds (sell prices)
-    "crops-seed bags-artichoke": 20,
-    "crops-seed bags-blueberry": 15,
-    "crops-seed bags-bok choy": 8,
-    "crops-seed bags-broccoli": 10,
-    "crops-seed bags-carrot": 6,
-    "crops-seed bags-cauliflower": 12,
-    "crops-seed bags-chili": 9,
-    "crops-seed bags-coffee bean": 18,
-    "crops-seed bags-corn": 8,
-    "crops-seed bags-eggplant": 12,
-    "crops-seed bags-garlic": 9,
-    "crops-seed bags-grape": 14,
-    "crops-seed bags-green bean": 7,
-    "crops-seed bags-melon": 25,
-    "crops-seed bags-parsnip": 6,
-    "crops-seed bags-potato": 5,
-    "crops-seed bags-pumpkin": 18,
-    "crops-seed bags-radish": 6,
-    "crops-seed bags-red cabagge": 10,
-    "crops-seed bags-strawberry": 16,
-    "crops-seed bags-tomato": 8,
-    "crops-seed bags-wheat": 4,
+    "seed_artichoke": 20,
+    "seed_blueberry": 15,
+    "seed_bok-choy": 8,
+    "seed_broccoli": 10,
+    "seed_carrot": 6,
+    "seed_cauliflower": 12,
+    "seed_chili": 9,
+    "seed_coffee-bean": 18,
+    "seed_corn": 8,
+    "seed_eggplant": 12,
+    "seed_garlic": 9,
+    "seed_grape": 14,
+    "seed_green-bean": 7,
+    "seed_melon": 25,
+    "seed_parsnip": 6,
+    "seed_potato": 5,
+    "seed_pumpkin": 18,
+    "seed_radish": 6,
+    "seed_red-cabagge": 10,
+    "seed_strawberry": 16,
+    "seed_tomato": 8,
+    "seed_wheat": 4,
     
     // Fish and other items
     "FISH": 28,
-    "IconGoldCoin": 100,
-    "IconIronIngot": 45,
-    "IconIronSword": 150,
-    "IconToolAxe": 80,
-    "IconToolFishingRod": 120,
-    "IconToolHoe": 75,
-    "IconToolPickaxe": 85,
+    "GoldCoin": 100,
+    "IronIngot": 45,
+    "ToolIronSword": 150,
+    "ToolAxe": 80,
+    "ToolFishingRod": 120,
+    "ToolHoe": 75,
+    "ToolWateringCan": 70,
+    "ToolPickaxe": 85,
     "Mushroom": 25,
     "maplesyrup": 40,
     "octopus": 65,
@@ -206,8 +211,8 @@ export const useInventorySync = (phaserInstance) => {
     "Salmon": 45,
     "sunfish": 35,
     "truffle": 150,
-    "WateringCan": 70
   };
+  
   const calculateItemValue = (item) => {
     if (!item) return 10;
     
@@ -217,7 +222,7 @@ export const useInventorySync = (phaserInstance) => {
     // Clean up item ID by removing file extension and path
     if (itemId) {
       // Remove file extension if present
-      itemId = itemId.replace(/\.(png|jpg|gif)$/, '');
+      itemId = itemId.replace(/\.(png)$/, '');
       
       // Remove path if present
       itemId = itemId.split('/').pop();
@@ -234,11 +239,11 @@ export const useInventorySync = (phaserInstance) => {
     
     if (typeof item === 'object' && item.rarity) {
       const rarityValues = {
-        common: 1,
-        uncommon: 2,
-        rare: 5,
-        epic: 10,
-        legendary: 25
+        common: 10,
+        uncommon: 20,
+        rare: 50,
+        epic: 100,
+        legendary: 250
       };
       rarityMultiplier = rarityValues[item.rarity] || 1;
     }
@@ -261,34 +266,35 @@ export const useInventorySync = (phaserInstance) => {
     try {
       const totalValue = item.sellPrice * quantity;
       
-      // Try to use reactEvent's sell-item event if available
-      if (phaserInstance.reactEvent) {
-        phaserInstance.reactEvent.emit('sell-item', { item, quantity });
-        
-        // Emit the event but wait a brief moment before updating state 
-        // to allow Phaser to process the event
-        setTimeout(() => {
-          isUpdatingRef.current = false;
-          setInventory(getInventoryData(phaserInstance));
-        }, 50);
-        
-        return true;
-      }
-      
-      // Fall back to direct inventory modification if reactEvent not available
-      
-      // Update gold - look for gold in different possible locations
+      // Get current gold value before updating
+      let currentGold = 0;
       if (phaserInstance.gold !== undefined) {
-        phaserInstance.gold = (phaserInstance.gold || 0) + totalValue;
+        currentGold = phaserInstance.gold || 0;
       } else if (phaserInstance.scene && phaserInstance.scene.gold !== undefined) {
-        phaserInstance.scene.gold = (phaserInstance.scene.gold || 0) + totalValue;
+        currentGold = phaserInstance.scene.gold || 0;
+      } else if (phaserInstance.TotalGoldPrefab?.TotalGold !== undefined) {
+        currentGold = phaserInstance.TotalGoldPrefab.TotalGold || 0;
       }
       
-      // Update gold display if TotalGoldPrefab exists
-      if (phaserInstance.TotalGoldPrefab?.TotalGold !== undefined) {
-        phaserInstance.TotalGoldPrefab.TotalGold = phaserInstance.gold || phaserInstance.scene?.gold || 0;
+      // Calculate new gold amount
+      const newGoldAmount = currentGold + totalValue;
+      
+      // Update gold in all locations
+      if (phaserInstance.gold !== undefined) {
+        phaserInstance.gold = newGoldAmount;
+      }
+      
+      if (phaserInstance.scene && phaserInstance.scene.gold !== undefined) {
+        phaserInstance.scene.gold = newGoldAmount;
+      }
+      
+      if (phaserInstance.TotalGoldPrefab) {
+        if (phaserInstance.TotalGoldPrefab.TotalGold !== undefined) {
+          phaserInstance.TotalGoldPrefab.TotalGold = newGoldAmount;
+        }
+        
         if (phaserInstance.TotalGoldPrefab.totalGoldAmountText) {
-          phaserInstance.TotalGoldPrefab.totalGoldAmountText.setText(phaserInstance.TotalGoldPrefab.TotalGold.toString());
+          phaserInstance.TotalGoldPrefab.totalGoldAmountText.setText(newGoldAmount.toString());
         }
       }
       
@@ -334,17 +340,16 @@ export const useInventorySync = (phaserInstance) => {
       if (phaserInstance.scene?.events) {
         phaserInstance.scene.events.emit('inventory-changed');
         phaserInstance.scene.events.emit('gold-earned', totalValue);
-      }
-      
-      // Update GlobalInventory if available
-      if (phaserInstance.updateGlobalInventory) {
-        phaserInstance.updateGlobalInventory();
+        phaserInstance.scene.events.emit('gold-changed', newGoldAmount);
       }
       
       // Update React state
       setTimeout(() => {
         isUpdatingRef.current = false;
-        setInventory(getInventoryData(phaserInstance));
+        const newData = getInventoryData(phaserInstance);
+        // Force the gold amount to ensure it's accurate
+        newData.totalGold = newGoldAmount; 
+        setInventory(newData);
       }, 50);
       
       return true;
@@ -367,31 +372,112 @@ export const useInventorySync = (phaserInstance) => {
     isUpdatingRef.current = true;
     
     try {
-      // Use the built-in addItem function from the HUD prefab
-      const result = phaserInstance.addItem(
-        item.id,
-        item.textureKey || item.icon,
-        item.frameName !== undefined ? item.frameName : (item.frame || 0),
-        item.quantity || 1,
-        true
-      );
+      // First check if a similar item already exists in quick access slots
+      let addedToExisting = false;
       
-      if (result) {
-        // Update GlobalInventory if available
-        if (phaserInstance.updateGlobalInventory) {
-          phaserInstance.updateGlobalInventory();
-        }
+      if (phaserInstance.itemData) {
+        const quickIndex = phaserInstance.itemData.findIndex(id => 
+          id && (id === item.id || (typeof id === 'object' && id?.id === item.id))
+        );
         
-        // Update React state
-        setTimeout(() => {
-          isUpdatingRef.current = false;
-          setInventory(getInventoryData(phaserInstance));
-        }, 50);
-      } else {
-        isUpdatingRef.current = false;
+        if (quickIndex !== -1) {
+          if (typeof phaserInstance.itemData[quickIndex] === 'object') {
+            phaserInstance.itemData[quickIndex].quantity = 
+              (phaserInstance.itemData[quickIndex].quantity || 1) + (item.quantity || 1);
+              
+            if (phaserInstance.itemCounters?.[quickIndex]) {
+              phaserInstance.itemCounters[quickIndex].text = 
+                phaserInstance.itemData[quickIndex].quantity.toString();
+            }
+            
+            addedToExisting = true;
+          }
+        }
       }
       
-      return result;
+      // Check if we can add to existing item in main inventory
+      if (!addedToExisting && phaserInstance.mainInventoryData) {
+        const mainIndex = phaserInstance.mainInventoryData.findIndex(existingItem => 
+          existingItem && existingItem.id === item.id
+        );
+        
+        if (mainIndex !== -1) {
+          phaserInstance.mainInventoryData[mainIndex].quantity += (item.quantity || 1);
+          addedToExisting = true;
+        }
+      }
+      
+      // If not added to existing item, find empty slot
+      if (!addedToExisting) {
+        // Try to use the built-in addItem function from the HUD prefab
+        if (typeof phaserInstance.addItem === 'function') {
+          const result = phaserInstance.addItem(
+            item.id,
+            item.textureKey || item.icon,
+            item.frameName !== undefined ? item.frameName : (item.frame || 0),
+            item.quantity || 1,
+            true
+          );
+          
+          if (!result) {
+            // If built-in function fails, add item directly to mainInventoryData
+            if (phaserInstance.mainInventoryData) {
+              const emptySlot = phaserInstance.mainInventoryData.findIndex(slot => slot === null);
+              if (emptySlot !== -1) {
+                phaserInstance.mainInventoryData[emptySlot] = {
+                  ...item,
+                  id: item.id,
+                  icon: item.icon || 'items/default',
+                  textureKey: item.textureKey || item.icon || 'items/default',
+                  frame: item.frame !== undefined ? item.frame : 0,
+                  frameName: item.frameName !== undefined ? item.frameName : 0,
+                  quantity: item.quantity || 1,
+                  name: item.name || item.id,
+                  sellPrice: item.sellPrice || (item.buyPrice ? Math.floor(item.buyPrice * 0.4) : 10)
+                };
+              } else {
+                isUpdatingRef.current = false;
+                return false;
+              }
+            }
+          }
+        } else {
+          // If no addItem function, add to mainInventoryData directly
+          if (phaserInstance.mainInventoryData) {
+            const emptySlot = phaserInstance.mainInventoryData.findIndex(slot => slot === null);
+            if (emptySlot !== -1) {
+              phaserInstance.mainInventoryData[emptySlot] = {
+                ...item,
+                id: item.id,
+                icon: item.icon || 'items/default',
+                textureKey: item.textureKey || item.icon || 'items/default',
+                frame: item.frame !== undefined ? item.frame : 0,
+                frameName: item.frameName !== undefined ? item.frameName : 0,
+                quantity: item.quantity || 1,
+                name: item.name || item.id,
+                sellPrice: item.sellPrice || (item.buyPrice ? Math.floor(item.buyPrice * 0.4) : 10)
+              };
+            } else {
+              isUpdatingRef.current = false;
+              return false;
+            }
+          }
+        }
+      }
+      
+      // Emit events
+      if (phaserInstance.scene?.events) {
+        phaserInstance.scene.events.emit('inventory-changed');
+      }
+      
+      // Update React state
+      setTimeout(() => {
+        isUpdatingRef.current = false;
+        const newInventory = getInventoryData(phaserInstance);
+        setInventory(newInventory);
+      }, 50);
+      
+      return true;
     } catch (err) {
       console.error('Error in addItem:', err);
       isUpdatingRef.current = false;
@@ -412,24 +498,7 @@ export const useInventorySync = (phaserInstance) => {
     isUpdatingRef.current = true;
     
     try {
-      // Try to use reactEvent's move-item event if available
-      if (phaserInstance.reactEvent) {
-        phaserInstance.reactEvent.emit('move-item', { 
-          ...fromData, 
-          toIndex 
-        });
-        
-        // Emit the event but wait a brief moment before updating state 
-        // to allow Phaser to process the event
-        setTimeout(() => {
-          isUpdatingRef.current = false;
-          setInventory(getInventoryData(phaserInstance));
-        }, 50);
-        
-        return true;
-      }
-      
-      // Fall back to direct inventory modification
+      // Get source and destination details
       const { index: fromIndex, isQuickAccess: fromQuickAccess, item: draggedItem } = fromData;
       
       const isToQuickAccess = toIndex >= 24;
@@ -543,6 +612,7 @@ export const useInventorySync = (phaserInstance) => {
           } else {
             phaserInstance.mainInventoryData[toActualIndex] = {
               id: draggedItem.id,
+              name: draggedItem.name,
               icon: draggedItem.icon || draggedItem.textureKey,
               textureKey: draggedItem.textureKey || draggedItem.icon,
               frame: draggedItem.frame !== undefined ? draggedItem.frame : draggedItem.frameName,
@@ -578,11 +648,6 @@ export const useInventorySync = (phaserInstance) => {
         }
       }
       
-      // Update GlobalInventory if available
-      if (phaserInstance.updateGlobalInventory) {
-        phaserInstance.updateGlobalInventory();
-      }
-      
       // Emit events
       if (phaserInstance.scene?.events) {
         phaserInstance.scene.events.emit('inventory-changed');
@@ -610,11 +675,6 @@ export const useInventorySync = (phaserInstance) => {
     isUpdatingRef.current = true;
     
     try {
-      // First try to sync with global inventory if available
-      if (phaserInstance.syncWithGlobalInventory) {
-        phaserInstance.syncWithGlobalInventory();
-      }
-      
       // Update React state
       setTimeout(() => {
         isUpdatingRef.current = false;

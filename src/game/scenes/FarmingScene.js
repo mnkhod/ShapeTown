@@ -444,10 +444,10 @@ export default class FarmingScene extends Phaser.Scene {
     	        }, this);
     	    });
 
-    	    this.newItemHudPrefab.addItem("WATERING_CAN", "IconBaseTools", 0);
-    	    this.newItemHudPrefab.addItem("HOE", "IconBaseTools", 1);
-    	    this.newItemHudPrefab.addItem("PICK_AXE", "IconBaseTools", 2);
-    	    this.newItemHudPrefab.addItem("CARROT_SEED", "SeedBag", 0, 5);
+    	    this.newItemHudPrefab.addItem("ToolWateringCan", "IconBaseTools", 0);
+    	    this.newItemHudPrefab.addItem("ToolHoe", "IconBaseTools", 1);
+    	    this.newItemHudPrefab.addItem("ToolPickaxe", "IconBaseTools", 2);
+    	    this.newItemHudPrefab.addItem("", "SeedBag", 0, 5);
     	}
 		}, {}, this);
 

@@ -528,14 +528,23 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 
     changeState() {
         let item = this.scene.newItemHudPrefab.selectedItem;
+        let activeIndex = this.scene.newItemHudPrefab.activeIndex;
+        
+        console.log(`Harvest action - selected slot: ${activeIndex}, item: ${item || 'none'}`);
+        
+        if (activeIndex >= 0 && item === null) {
+            this.scene.alertPrefab.alert("Empty Slot Selected");
+            return;
+        }
+        
         if (item == null) {
             this.scene.alertPrefab.alert("No Selected Item");
             return;
         }
-
+    
         switch (this.state) {
             case "ROCK":
-                if (item != "PICK_AXE") {
+                if (item != "ToolPickaxe") {
                     this.scene.alertPrefab.alert("Select Pick Axe");
                     break;
                 }
@@ -544,7 +553,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 this.setupBasedOnState();
                 break;
             case "GROUND":
-                if (item != "HOE") {
+                if (item != "ToolHoe") {
                     this.scene.alertPrefab.alert("Select Hoe");
                     break;
                 }
@@ -556,13 +565,16 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 this.setupBasedOnState();
                 break;
             case "SOIL":
-                if (!item.endsWith("_SEED")) {
+                if (!item.endsWith("_SEED") && !item.startsWith("seed_")) {
                     this.scene.alertPrefab.alert("Select Seed");
                     break;
                 }
-                
-                const seedType = item.replace("_SEED", "");
-                
+                let seedType;
+                if (item.endsWith("_SEED")) {
+                    seedType = item.replace("_SEED", "");
+                } else if (item.startsWith("seed_")) {
+                    seedType = item.replace("seed_", "").replace(/-/g, "_").toUpperCase();
+                }
                 if (!CROP_DATA[seedType]) {
                     this.scene.alertPrefab.alert("Unknown Seed Type");
                     break;
@@ -570,16 +582,16 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 
                 this.seed = seedType;
                 this.scene.newItemHudPrefab.useItem(item);
-
+    
                 this.state = "PLANTED";
                 this.setupBasedOnState();
                 break;
             case "PLANTED":
-                if (item != "WATERING_CAN") {
+                if (item != "ToolWateringCan") {
                     this.scene.alertPrefab.alert("Select Watering Can");
                     break;
                 }
-
+    
                 this.state = "WATERED";
                 this.setupBasedOnState();
                 break;

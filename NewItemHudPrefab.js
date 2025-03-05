@@ -427,6 +427,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	mainInventoryData = Array(24).fill(null);
 
 	onSceneCreate() {
+	
 	    this.items.forEach(item => {
 	        if (item) item.visible = false;
 	    });
@@ -434,63 +435,56 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	    this.itemCounters.forEach(counter => {
 	        if (counter) counter.visible = false;
 	    });
-
-	    this.passiveItemSlots.forEach((slot, index) => {
-	        if (!slot) return;
-
-	        slot.setInteractive();
-	        slot.on('pointerdown', () => {
-	            this.activeItemSlots.forEach(activeSlot => {
-	                if (activeSlot) activeSlot.visible = false;
-	            });
-	            if (this.activeItemSlots[index]) {
-	                this.activeItemSlots[index].visible = true;
-	            }
-
-	            this.selectedItem = this.itemData[index];
-	            this.activeIndex = index;
-
-	            if (this.selectedItem && this.items[index] && this.items[index].visible) {
-	                const selectedTexture = this.items[index].texture.key;
-	                const selectedFrame = this.items[index].frame.name;
-
-	                if (this.cursorIcon) {
-	                    this.cursorIcon.destroy();
-	                }
-	                this.cursorIcon = this.scene.add.sprite(0, 0, selectedTexture, selectedFrame);
-	                this.cursorIcon.setScale(0.6);
-	                this.cursorIcon.setDepth(1000);
-	                this.cursorIcon.setScrollFactor(0);
-	            } else if (this.cursorIcon) {
-	                this.cursorIcon.destroy();
-	                this.cursorIcon = null;
-	            }
-
-	            if (this.scene.reactEvent) {
-	                this.scene.reactEvent.emit('inventory-slot-selected', {
-	                    index,
-	                    item: this.selectedItem
-	                });
-	            }
-	        });
-	    });
-
-	    this.scene.events.on('update', () => {
-	        if (this.cursorIcon) {
-	            const pointer = this.scene.input.activePointer;
-	            const scale = 0.5;
-	            const offsetX = 500; 
-	            const offsetY = 300; 
-
-	            this.cursorIcon.x = (pointer.x * scale) + offsetX;
-	            this.cursorIcon.y = (pointer.y * scale) + offsetY;
-	        }
-	    });
+	
+	    this.setupSlotHandlers();
+	    
+	    this.setupKeyboardHandlers();
+	    
+	    this.scene.events.on('update', this.validateSelectionState, this);
+	    
 	}
 
-	onSceneUpdate() {
-	    if (!this.visible) return;
+	setupSlotHandlers() {
+		this.passiveItemSlots.forEach((slot, index) => {
+			if (!slot) return;
+	
+			slot.setInteractive({ useHandCursor: true });
+			
+			slot.off('pointerdown');
+			
+			slot.on('pointerdown', () => {
+				this.activeIndex = index;
+				
+				this.selectedItem = this.itemData[index];
+				
+				this.activeItemSlots.forEach((activeSlot, i) => {
+					if (activeSlot) {
+						activeSlot.visible = (i === index);
+					}
+				});
+				
+				if (this.cursorIcon) {
+					this.cursorIcon.destroy();
+					this.cursorIcon = null;
+				}
+				
+				if (this.itemData[index] && this.items[index].visible) {
+					const texture = this.items[index].texture.key;
+					const frame = this.items[index].frame.name;
+					
+					this.cursorIcon = this.scene.add.sprite(0, 0, texture, frame);
+					this.cursorIcon.setScale(0.6);
+					this.cursorIcon.setDepth(1000);
+					this.cursorIcon.setScrollFactor(0);
+				}
+				
+				console.log(`Selection state: activeIndex=${this.activeIndex}, selectedItem=${this.selectedItem}`);
+			});
+		});
+	}
+	
 
+	setupKeyboardHandlers() {
 	    const hotkeyMap = [
 	        this.keyboard_1,
 	        this.keyboard_2,
@@ -501,57 +495,153 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	        this.keyboard_7,
 	        this.keyboard_8
 	    ];
-
+	    
 	    hotkeyMap.forEach((key, index) => {
-	        if (key && Phaser.Input.Keyboard.JustDown(key)) {
-	            this.activeItemSlots.forEach(activeSlot => {
-	                if (activeSlot) activeSlot.visible = false;
-	            });
-	            if (this.activeItemSlots[index]) {
-	                this.activeItemSlots[index].visible = true;
-	            }
-
-	            this.selectedItem = this.itemData[index];
-	            this.activeIndex = index;
-
-	            if (this.selectedItem && this.items[index] && this.items[index].visible) {
-	                const selectedTexture = this.items[index].texture.key;
-	                const selectedFrame = this.items[index].frame.name;
-
-	                if (this.cursorIcon) {
-	                    this.cursorIcon.destroy();
-	                }
-	                this.cursorIcon = this.scene.add.sprite(0, 0, selectedTexture, selectedFrame);
-	                this.cursorIcon.setScale(0.6);
-	                this.cursorIcon.setDepth(1000);
-	                this.cursorIcon.setScrollFactor(0);
-	            } else if (this.cursorIcon) {
-	                this.cursorIcon.destroy();
-	                this.cursorIcon = null;
-	            }
-
-	            if (this.scene.reactEvent) {
-	                this.scene.reactEvent.emit('inventory-slot-selected', {
-	                    index,
-	                    item: this.selectedItem
+	        if (!key) return;
+	        
+	        key.removeAllListeners();
+	        
+	        key.on('down', () => {
+	            
+	            if (this.itemData[index]) {
+	                this.activeIndex = index;
+	                this.selectedItem = this.itemData[index];
+	                
+	                this.activeItemSlots.forEach((activeSlot, i) => {
+	                    if (activeSlot) activeSlot.visible = (i === index);
 	                });
+	                
+	                if (this.items[index] && this.items[index].visible) {
+	                    this.updateCursorIcon(index);
+	                } else if (this.cursorIcon) {
+	                    this.cursorIcon.destroy();
+	                    this.cursorIcon = null;
+	                }
+	                
+	                if (this.scene.reactEvent) {
+	                    this.scene.reactEvent.emit('inventory-slot-selected', {
+	                        index,
+	                        item: this.selectedItem
+	                    });
+	                }
 	            }
-	        }
+	        });
 	    });
+	}
 
-	    const cam = this.scene.cameras.main;
-	    if (!cam) return;
+	updateCursorIcon(slotIndex) {
+	    const selectedTexture = this.items[slotIndex].texture.key;
+	    const selectedFrame = this.items[slotIndex].frame.name;
+	    
+	    if (this.cursorIcon) {
+	        this.cursorIcon.destroy();
+	    }
+	    
+	    this.cursorIcon = this.scene.add.sprite(0, 0, selectedTexture, selectedFrame);
+	    this.cursorIcon.setScale(0.6);
+	    this.cursorIcon.setDepth(1000);
+	    this.cursorIcon.setScrollFactor(0);
+	}
 
-	    let fullWidth = Math.floor(this.getBounds().width);
-	    let fullHeight = Math.floor(this.getBounds().height);
+	validateSelectionState() {
+	    if (this.activeIndex >= 0 && this.activeIndex < 8 && !this.selectedItem && this.itemData[this.activeIndex]) {
+	        this.selectedItem = this.itemData[this.activeIndex];
+	    }
+	    
+	    if (this.selectedItem && this.activeIndex === -1) {
+	        const index = this.itemData.indexOf(this.selectedItem);
+	        if (index !== -1) {
+	            this.activeIndex = index;
+	        }
+	    }
+	    
+	    if (this.activeIndex >= 0 && this.activeIndex < 8) {
+	        this.activeItemSlots.forEach((slot, i) => {
+	            if (slot && slot.visible !== (i === this.activeIndex)) {
+	                slot.visible = (i === this.activeIndex);
+	            }
+	        });
+	    }
+	    
+	    if (this.cursorIcon) {
+	        const pointer = this.scene.input.activePointer;
+	        const scale = 0.5;
+	        const offsetX = 500; 
+	        const offsetY = 300; 
 
-	    let newX = cam.midPoint.x - (fullWidth / 2);
-	    let newY = cam.worldView.bottom - fullHeight - 20;
+	        this.cursorIcon.x = (pointer.x * scale) + offsetX;
+	        this.cursorIcon.y = (pointer.y * scale) + offsetY;
+	    }
+	}
 
-	    this.setPosition(
-	        Phaser.Math.Linear(this.x, newX, 1),
-	        Phaser.Math.Linear(this.y, newY, 1)
-	    );
+	onSceneUpdate() {
+		if (!this.visible) return;
+	
+		const hotkeyMap = [
+			this.keyboard_1,
+			this.keyboard_2,
+			this.keyboard_3,
+			this.keyboard_4,
+			this.keyboard_5,
+			this.keyboard_6,
+			this.keyboard_7,
+			this.keyboard_8
+		];
+	
+		hotkeyMap.forEach((key, index) => {
+			if (key && Phaser.Input.Keyboard.JustDown(key)) {
+				this.activeIndex = index;
+				
+				this.selectedItem = this.itemData[index];
+				
+				this.activeItemSlots.forEach((activeSlot, i) => {
+					if (activeSlot) {
+						activeSlot.visible = (i === index);
+					}
+				});
+				
+				if (this.cursorIcon) {
+					this.cursorIcon.destroy();
+					this.cursorIcon = null;
+				}
+				
+				if (this.itemData[index] && this.items[index].visible) {
+					const texture = this.items[index].texture.key;
+					const frame = this.items[index].frame.name;
+					
+					this.cursorIcon = this.scene.add.sprite(0, 0, texture, frame);
+					this.cursorIcon.setScale(0.6);
+					this.cursorIcon.setDepth(1000);
+					this.cursorIcon.setScrollFactor(0);
+				}
+				
+				console.log(`Hotkey ${index+1} - Selection: activeIndex=${this.activeIndex}, selectedItem=${this.selectedItem}`);
+			}
+		});
+	
+		const cam = this.scene.cameras.main;
+		if (!cam) return;
+	
+		let fullWidth = Math.floor(this.getBounds().width);
+		let fullHeight = Math.floor(this.getBounds().height);
+	
+		let newX = cam.midPoint.x - (fullWidth / 2);
+		let newY = cam.worldView.bottom - fullHeight - 20;
+	
+		this.setPosition(
+			Phaser.Math.Linear(this.x, newX, 1),
+			Phaser.Math.Linear(this.y, newY, 1)
+		);
+		
+		if (this.cursorIcon) {
+			const pointer = this.scene.input.activePointer;
+			const scale = 0.5;
+			const offsetX = 500; 
+			const offsetY = 300; 
+	
+			this.cursorIcon.x = (pointer.x * scale) + offsetX;
+			this.cursorIcon.y = (pointer.y * scale) + offsetY;
+		}
 	}
 
 	checkItem(key) {
@@ -586,15 +676,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	    const hasMainSlotSpace = this.mainInventoryData.includes(null);
 	    return hasQuickSlotSpace || hasMainSlotSpace;
 	}
-	syncWithGlobalInventory() {
-	  // This will be dynamically implemented by the scene
-	  console.log('Base syncWithGlobalInventory called - should be overridden');
-	}
-	
-	updateGlobalInventory() {
-	  // This will be dynamically implemented by the scene
-	  console.log('Base updateGlobalInventory called - should be overridden');
-	}
+
 	cleanupInventory() {
 	  	this.itemData.forEach((itemId, index) => {
 	  	  if (!itemId && this.items[index]) {
@@ -617,9 +699,12 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	addItem(key, textureName, textureId, amount = 1, isAddable = true) {
 	    const existingItemIndex = this.itemData.findIndex(id => id === key);
 	    if (existingItemIndex !== -1 && isAddable) {
-	        const currentAmount = parseInt(this.itemCounters[existingItemIndex].text);
+	        const currentAmount = parseInt(this.itemCounters[existingItemIndex].text || "0");
 	        this.itemCounters[existingItemIndex].text = (currentAmount + amount).toString();
 	        this.itemCounters[existingItemIndex].visible = true;
+	        
+	        this.items[existingItemIndex].visible = true;
+	        
 	        return true;
 	    }
 	
@@ -630,6 +715,7 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	            ...currentItem,
 	            quantity: (currentItem.quantity || 1) + amount
 	        };
+	        
 	        return true;
 	    }
 	
@@ -640,6 +726,13 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	        this.items[emptySlotIndex].setTexture(textureName, textureId);
 	        this.itemCounters[emptySlotIndex].visible = true;
 	        this.itemCounters[emptySlotIndex].text = amount.toString();
+	        
+	        if (this.selectedItem === null && this.activeIndex === -1) {
+	            this.selectedItem = key;
+	            this.activeIndex = emptySlotIndex;
+	            this.activeItemSlots[emptySlotIndex].visible = true;
+	        }
+	        
 	        return true;
 	    }
 	
@@ -654,22 +747,29 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	            quantity: amount,
 	            name: key
 	        };
+	        
 	        return true;
 	    }
 	
 	    this.scene.alertPrefab?.alert("Inventory Full");
+	    console.warn(`Failed to add ${key} - inventory full`);
 	    return false;
 	}
 
 	useItem(key) {
 	    const itemIndex = this.itemData.findIndex(id => id === key);
 	    if (itemIndex !== -1) {
-	        const amount = parseInt(this.itemCounters[itemIndex].text);
+	        const amount = parseInt(this.itemCounters[itemIndex].text || "0");
 	        if (amount <= 1) {
 	            this.removeItemByKey(key);
 	        } else {
 	            this.itemCounters[itemIndex].text = (amount - 1).toString();
 	        }
+	        
+	        if (this.scene.reactEvent) {
+	            this.scene.reactEvent.emit('inventory-changed', this.scene);
+	        }
+	        
 	        return true;
 	    }
 	
@@ -684,10 +784,16 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	                quantity: item.quantity - 1
 	            };
 	        }
+	        
+	        if (this.scene.reactEvent) {
+	            this.scene.reactEvent.emit('inventory-changed', this.scene);
+	        }
+	        
 	        return true;
 	    }
 	
 	    this.scene.alertPrefab?.alert("Doesn't Have Item");
+	    console.warn(`Failed to use ${key} - item not found`);
 	    return false;
 	}
 
@@ -716,6 +822,14 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	                this.cursorIcon = null;
 	            }
 	            this.selectedItem = null;
+	            this.activeIndex = -1;
+	            
+	            const nextItemIndex = this.itemData.findIndex(item => item !== null);
+	            if (nextItemIndex !== -1) {
+	                this.selectedItem = this.itemData[nextItemIndex];
+	                this.activeIndex = nextItemIndex;
+	                this.activeItemSlots[nextItemIndex].visible = true;
+	            }
 	        }
 	    }
 	
@@ -729,14 +843,24 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	    mainIndices.forEach(idx => {
 	        this.mainInventoryData[idx] = null;
 	    });
+	    
+	    if (this.scene.reactEvent) {
+	        this.scene.reactEvent.emit('inventory-changed', this.scene);
+	    }
 	}
 
 	moveToQuickSlot(mainIndex) {
 	    const item = this.mainInventoryData[mainIndex];
-	    if (!item) return false;
+	    if (!item) {
+	        console.warn(`No item in main inventory slot ${mainIndex} to move`);
+	        return false;
+	    }
 	
 	    const emptyQuickIndex = this.itemData.findIndex(x => x === null);
-	    if (emptyQuickIndex === -1) return false;
+	    if (emptyQuickIndex === -1) {
+	        console.warn(`No empty quick slot available for item from main inventory slot ${mainIndex}`);
+	        return false;
+	    }
 	
 	    this.itemData[emptyQuickIndex] = item.id;
 	    this.items[emptyQuickIndex].visible = true;
@@ -748,7 +872,40 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	    this.itemCounters[emptyQuickIndex].text = item.quantity.toString();
 	
 	    this.mainInventoryData[mainIndex] = null;
+	    
+	    if (this.scene.reactEvent) {
+	        this.scene.reactEvent.emit('inventory-changed', this.scene);
+	    }
+	    return true;
+	}
 	
+	forceSelectTool(toolId) {
+	    const toolIndex = this.itemData.findIndex(id => id === toolId);
+	    if (toolIndex === -1) {
+	        console.warn(`Tool ${toolId} not found in inventory`);
+	        return false;
+	    }
+	    
+	    this.activeIndex = toolIndex;
+	    this.selectedItem = toolId;
+	    
+	    this.activeItemSlots.forEach((slot, i) => {
+	        if (slot) {
+	            slot.visible = i === toolIndex;
+	        }
+	    });
+	    
+	    if (this.items[toolIndex] && this.items[toolIndex].visible) {
+	        this.updateCursorIcon(toolIndex);
+	    }
+	    
+	    if (this.scene.reactEvent) {
+	        this.scene.reactEvent.emit('inventory-slot-selected', {
+	            index: toolIndex,
+	            item: toolId
+	        });
+	    }
+	    
 	    return true;
 	}
 	/* END-USER-CODE */

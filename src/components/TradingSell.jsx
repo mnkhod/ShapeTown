@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useInventorySync } from './inventory-sync';
+import { getGoldManager } from './gold-manager';
 
 const InventoryItem = ({ item, onClick, isSelected }) => {
   if (!item) return (
     <div 
-      className="w-14 h-14 cursor-pointer flex-shrink-0"
+      className="w-16 h-16 ml-2 mt-2 cursor-pointer flex-shrink-0"
       style={{
         backgroundImage: 'url("/assets/hud/Merchant/Hud_Inventory_Item_BackGround_3.png")',
         backgroundSize: 'contain',
@@ -17,7 +18,7 @@ const InventoryItem = ({ item, onClick, isSelected }) => {
 
   return (
     <div 
-      className={`w-14 h-14 cursor-pointer relative flex-shrink-0 ${isSelected ? 'ring-2 ring-yellow-500' : ''}`}
+      className={`w-16 h-16 ml-2 mt-2 cursor-pointer relative flex-shrink-0 ${isSelected ? 'ring-4 ring-yellow-500' : ''}`}
       onClick={() => onClick(item)}
       style={{
         backgroundImage: 'url("/assets/hud/Merchant/Hud_Inventory_Item_BackGround_3.png")',
@@ -30,7 +31,7 @@ const InventoryItem = ({ item, onClick, isSelected }) => {
         <img
           src={item.iconPath || `/assets/InventoryIcons/${item.icon || 'items/default'}.png`}
           alt={item.name}
-          className="max-w-full max-h-full scale-90" 
+          className="max-w-full max-h-full scale-100" 
           style={{ 
             imageRendering: 'pixelated',
             objectFit: item.frame !== undefined ? 'none' : 'contain',
@@ -40,7 +41,7 @@ const InventoryItem = ({ item, onClick, isSelected }) => {
       </div>
       
       {item.quantity > 1 && (
-        <span className="absolute bottom-1 right-1 text-xs text-white drop-shadow-md">
+        <span className="absolute bottom-2 right-2 text-xs text-white drop-shadow-md">
           {item.quantity}
         </span>
       )}
@@ -49,16 +50,30 @@ const InventoryItem = ({ item, onClick, isSelected }) => {
 };
 
 const MerchantSellScreen = ({ onClose, phaserInstance }) => {
-  const { inventory, sellItem, refreshInventory } = useInventorySync(phaserInstance);
+  const { inventory, refreshInventory } = useInventorySync(phaserInstance);
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [buttonState, setButtonState] = useState('default');
+  const [lastSoldGold, setLastSoldGold] = useState(0);
+  const [currentGold, setCurrentGold] = useState(0);
   const maxInventorySlots = 32;
+  
+  const goldManager = getGoldManager(phaserInstance);
   
   useEffect(() => {
     refreshInventory();
     
+    if (goldManager) {
+      setCurrentGold(goldManager.getGold());
+      
+      goldManager.addListener((newGoldAmount) => {
+        console.log(`MerchantSellScreen: Gold changed to ${newGoldAmount}`);
+        setCurrentGold(newGoldAmount);
+      });
+    }
+    
     const handleInventoryChange = () => {
+      console.log("MerchantSellScreen: Inventory changed");
       refreshInventory();
       
       if (selectedItem) {
@@ -83,9 +98,12 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
       
       return () => {
         phaserInstance.scene.events.off('inventory-changed', handleInventoryChange);
+        if (goldManager) {
+          goldManager.removeListener(setCurrentGold);
+        }
       };
     }
-  }, [phaserInstance, refreshInventory, inventory, selectedItem, quantity]);
+  }, [phaserInstance, refreshInventory, inventory, selectedItem, quantity, goldManager]);
 
   const allInventoryItems = [
     ...inventory.quickItems.filter(item => item !== null),
@@ -93,6 +111,7 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
   ];
 
   const handleItemSelect = (item) => {
+    console.log("Selected item for selling:", item);
     setSelectedItem(item);
     setQuantity(1);
   };
@@ -104,13 +123,80 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
     setQuantity(newQuantity);
   };
 
+  const removeItemFromInventory = (item, quantity) => {
+    if (!phaserInstance || !item) return false;
+    
+    try {
+      const isInQuickAccess = phaserInstance.itemData?.findIndex(id => 
+        id === item.id || (typeof id === 'object' && id?.id === item.id)
+      );
+      
+      if (isInQuickAccess !== -1 && isInQuickAccess !== undefined) {
+        if (quantity >= item.quantity) {
+          phaserInstance.itemData[isInQuickAccess] = null;
+          if (phaserInstance.items?.[isInQuickAccess]) {
+            phaserInstance.items[isInQuickAccess].visible = false;
+          }
+          if (phaserInstance.itemCounters?.[isInQuickAccess]) {
+            phaserInstance.itemCounters[isInQuickAccess].visible = false;
+          }
+        } else {
+          const newQuantity = item.quantity - quantity;
+          if (phaserInstance.itemCounters?.[isInQuickAccess]) {
+            phaserInstance.itemCounters[isInQuickAccess].text = newQuantity.toString();
+          }
+          if (typeof phaserInstance.itemData[isInQuickAccess] === 'object') {
+            phaserInstance.itemData[isInQuickAccess].quantity = newQuantity;
+          }
+        }
+      } else {
+        const mainIndex = phaserInstance.mainInventoryData?.findIndex(mainItem => 
+          mainItem && (mainItem.id === item.id)
+        );
+        
+        if (mainIndex !== -1 && mainIndex !== undefined) {
+          if (quantity >= item.quantity) {
+            phaserInstance.mainInventoryData[mainIndex] = null;
+          } else {
+            phaserInstance.mainInventoryData[mainIndex].quantity -= quantity;
+          }
+        }
+      }
+      
+      if (phaserInstance.scene?.events) {
+        phaserInstance.scene.events.emit('inventory-changed');
+      }
+      
+      return true;
+    } catch (err) {
+      console.error('Error removing item from inventory:', err);
+      return false;
+    }
+  };
+
   const handleSell = () => {
-    if (!selectedItem) return;
+    if (!selectedItem || !goldManager) return;
     
-    const success = sellItem(selectedItem, quantity);
+    const saleValue = selectedItem.sellPrice * quantity;
+    console.log(`Selling ${quantity}x ${selectedItem.name} for ${saleValue} gold`);
     
-    if (success) {
-      setSelectedItem(null);
+    const itemRemoved = removeItemFromInventory(selectedItem, quantity);
+    
+    if (itemRemoved) {
+      goldManager.addGold(saleValue);
+      
+      setLastSoldGold(saleValue);
+      
+      setTimeout(() => {
+        setLastSoldGold(0);
+      }, 3000);
+  
+      refreshInventory();
+  
+      if (quantity >= selectedItem.quantity) {
+        setSelectedItem(null);
+      }
+  
       setQuantity(1);
     }
   };
@@ -138,7 +224,13 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
                 className="w-10 h-10 mr-2"
                 style={{ imageRendering: 'pixelated' }}
               />
-              <span className="text-yellow-300 font-medium">{inventory.totalGold}</span>
+              <span className="text-yellow-300 font-medium">{currentGold}</span>
+              
+              {lastSoldGold > 0 && (
+                <span className="ml-2 text-green-400 font-medium animate-pulse">
+                  +{lastSoldGold}
+                </span>
+              )}
             </div>
           </div>
 
