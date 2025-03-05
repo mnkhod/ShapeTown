@@ -6,6 +6,10 @@
 import PlayerPrefab from "../prefabs/PlayerPrefab";
 import ShapeFarmingHousePrefab from "../prefabs/House/ShapeFarmingHousePrefab";
 import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
+import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
+import MessagePrefab from "../prefabs/hud/MessagePrefab";
+import AlertPrefab from "../prefabs/hud/AlertPrefab";
+import NewItemHudPrefab from "../../../NewItemHudPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -103,6 +107,22 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// tree_border_7
 		const tree_border_7 = shapetownFarmingMap.createLayer("tree border/7", ["TreePatteren"], 0, 0);
 
+		// oldManJackNpcPrefab
+		const oldManJackNpcPrefab = new OldManJackNpcPrefab(this, 615, 622);
+		this.add.existing(oldManJackNpcPrefab);
+
+		// messagePrefab
+		const messagePrefab = new MessagePrefab(this, 0, 0);
+		this.add.existing(messagePrefab);
+
+		// alertPrefab
+		const alertPrefab = new AlertPrefab(this, 0, 0);
+		this.add.existing(alertPrefab);
+
+		// newItemHudPrefab
+		const newItemHudPrefab = new NewItemHudPrefab(this, 0, 1920);
+		this.add.existing(newItemHudPrefab);
+
 		this.bG_Grass_1 = bG_Grass_1;
 		this.bG_Cliff_1 = bG_Cliff_1;
 		this.bG_Rock_On_Cliff_1 = bG_Rock_On_Cliff_1;
@@ -122,6 +142,10 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.shapeFarmingHousePrefab = shapeFarmingHousePrefab;
 		this.appleTreePrefab = appleTreePrefab;
 		this.tree_border_7 = tree_border_7;
+		this.oldManJackNpcPrefab = oldManJackNpcPrefab;
+		this.messagePrefab = messagePrefab;
+		this.alertPrefab = alertPrefab;
+		this.newItemHudPrefab = newItemHudPrefab;
 		this.shapetownFarmingMap = shapetownFarmingMap;
 
 		this.events.emit("scene-awake");
@@ -165,65 +189,83 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	appleTreePrefab;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_border_7;
+	/** @type {OldManJackNpcPrefab} */
+	oldManJackNpcPrefab;
+	/** @type {MessagePrefab} */
+	messagePrefab;
+	/** @type {AlertPrefab} */
+	alertPrefab;
+	/** @type {NewItemHudPrefab} */
+	newItemHudPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownFarmingMap;
 
 	/* START-USER-CODE */
 
-	
-
 	// Write your code here
 
 	create() {
+	  	this.editorCreate();
 
-	this.editorCreate();
+	  	this.cameras.main.setBounds(0, 0, 2550, 1920);
+	  	this.physics.world.bounds.width = 1000;
+	  	this.physics.world.bounds.height = 800;
 
-	this.cameras.main.setBounds(0, 0, 2550, 1920);
-    this.physics.world.bounds.width = 1000;
-    this.physics.world.bounds.height = 800;
+	  	this.achievements = {
+	  	  	firstHarvestAchievement: false,
+	  	  	giftFromNatureAchievement: false,
+	  	  	firstFishAchievement: false
+	  	};
 
+	  	this.oldManJackNpcPrefab.player = this.playerPrefab;
+	  	this.oldManJackNpcPrefab.msgPrefab = this.messagePrefab;
+	  	this.oldManJackNpcPrefab.alertPrefab = this.alertPrefab;
+	  	this.oldManJackNpcPrefab.itemHud = this.newItemHudPrefab;
+	  	this.oldManJackNpcPrefab.profilePrefab = null;
 
-	this.shapeFarmingHousePrefab.setupCollision(this.playerPrefab)
+	  	this.newItemHudPrefab.visible = true;
 
-	this.physics.add.collider(this.playerPrefab, this.lake_lake_1);
-	this.lake_lake_1.setCollisionBetween(0,10000);
-	// this.lake_lake_1.renderDebug(this.add.graphics());
+	  	this.shapeFarmingHousePrefab.setupCollision(this.playerPrefab);
 
-	this.physics.add.collider(this.playerPrefab, this.tree_border);
-	this.tree_border.setCollisionBetween(0,10000);
-	// this.tree_border.renderDebug(this.add.graphics());
+	  	this.physics.add.collider(this.playerPrefab, this.lake_lake_1);
+	  	this.lake_lake_1.setCollisionBetween(0, 10000);
+	  	// this.lake_lake_1.renderDebug(this.add.graphics());
 
-	this.physics.add.collider(this.playerPrefab, this.tree_border_1);
-	this.tree_border_1.setCollisionBetween(0,10000);
-	// this.tree_border_1.renderDebug(this.add.graphics());
+	  	this.physics.add.collider(this.playerPrefab, this.tree_border);
+	  	this.tree_border.setCollisionBetween(0, 10000);
+	  	// this.tree_border.renderDebug(this.add.graphics());
 
-	this.physics.add.collider(this.playerPrefab, this.tree_border_2);
-	this.tree_border_2.setCollisionBetween(0,10000);
-	// this.tree_border_2.renderDebug(this.add.graphics());
+	  	this.physics.add.collider(this.playerPrefab, this.tree_border_1);
+	  	this.tree_border_1.setCollisionBetween(0, 10000);
+	  	// this.tree_border_1.renderDebug(this.add.graphics());
 
-	this.physics.add.collider(this.playerPrefab, this.tree_border_3);
-	this.tree_border_3.setCollisionBetween(0,10000);
-	// this.tree_border_3.renderDebug(this.add.graphics());
+	  	this.physics.add.collider(this.playerPrefab, this.tree_border_2);
+	  	this.tree_border_2.setCollisionBetween(0, 10000);
+	  	// this.tree_border_2.renderDebug(this.add.graphics());
 
-	this.physics.add.collider(this.playerPrefab, this.tree_border_4);
-	this.tree_border_4.setCollisionBetween(0,10000);
-	// this.tree_border_4.renderDebug(this.add.graphics());
+	  	this.physics.add.collider(this.playerPrefab, this.tree_border_3);
+	  	this.tree_border_3.setCollisionBetween(0, 10000);
+	  	// this.tree_border_3.renderDebug(this.add.graphics());
 
-	this.physics.add.collider(this.playerPrefab, this.tree_border_5);
-	this.tree_border_5.setCollisionBetween(0,10000);
-	// this.tree_border_5.renderDebug(this.add.graphics());
+	  	this.physics.add.collider(this.playerPrefab, this.tree_border_4);
+	  	this.tree_border_4.setCollisionBetween(0, 10000);
+	  	// this.tree_border_4.renderDebug(this.add.graphics());
 
-	this.physics.add.collider(this.playerPrefab, this.tree_border_6);
-	this.tree_border_6.setCollisionBetween(0,10000);
-	// this.tree_border_6.renderDebug(this.add.graphics());
+	  	this.physics.add.collider(this.playerPrefab, this.tree_border_5);
+	  	this.tree_border_5.setCollisionBetween(0, 10000);
+	  	// this.tree_border_5.renderDebug(this.add.graphics());
 
-	this.physics.add.collider(this.playerPrefab, this.bG_Cliff_1);
-	this.bG_Cliff_1.setCollisionBetween(0,10000);
-	// this.bG_Cliff_1.renderDebug(this.add.graphics());
+	  	this.physics.add.collider(this.playerPrefab, this.tree_border_6);
+	  	this.tree_border_6.setCollisionBetween(0, 10000);
+	  	// this.tree_border_6.renderDebug(this.add.graphics());
 
-	this.appleTreePrefab.setupCollision(this.playerPrefab)
-	this.physics.add.collider(this.playerPrefab, this.appleTreePrefab);
-	// // this.appleTreePrefab.renderDebug(this.add.graphics());
+	  	this.physics.add.collider(this.playerPrefab, this.bG_Cliff_1);
+	  	this.bG_Cliff_1.setCollisionBetween(0, 10000);
+	  	// this.bG_Cliff_1.renderDebug(this.add.graphics());
+
+	  	this.appleTreePrefab.setupCollision(this.playerPrefab);
+	  	this.physics.add.collider(this.playerPrefab, this.appleTreePrefab);
+	  	// this.appleTreePrefab.renderDebug(this.add.graphics());
 	}
 
 	/* END-USER-CODE */

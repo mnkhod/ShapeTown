@@ -497,6 +497,54 @@
                 "RockOnGrass_V02",
                 "RoadStone"
             ]
+        },
+        {
+            "prefabId": "c5295ea5-b7f5-4391-9fc6-8c5495a42d18",
+            "id": "b5463128-88a9-454f-b256-ff39e53dec18",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "oldManJackNpcPrefab",
+            "scope": "CLASS",
+            "x": 615,
+            "y": 622
+        },
+        {
+            "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
+            "id": "34baa8e5-a848-4997-a229-f2e882a29fc2",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "messagePrefab",
+            "scope": "CLASS",
+            "x": 0,
+            "y": 0
+        },
+        {
+            "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
+            "id": "3c64734a-36cd-4394-aa52-ad7d04a1149e",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "alertPrefab",
+            "scope": "CLASS",
+            "x": 0,
+            "y": 0
+        },
+        {
+            "prefabId": "9be122bc-3a2e-4c06-a98e-b5754929a6d2",
+            "id": "722257d1-2a2a-4e88-9650-98bb2e7664ad",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "newItemHudPrefab",
+            "scope": "CLASS",
+            "x": 0,
+            "y": 1920
         }
     ],
     "plainObjects": [

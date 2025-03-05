@@ -496,7 +496,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.fishingArea.setInteractive({ useHandCursor: true });
 		this.fishingArea.on('pointerdown', function (_pointer) {
 			this.fishingComponentPrefab.play(() => {
-				this.newItemHudPrefab.addItem("FISH","FishIcon",0,1,true)
+				this.newItemHudPrefab.addItem("FISH","Salmon",1)
 			})
 		},this)
 
