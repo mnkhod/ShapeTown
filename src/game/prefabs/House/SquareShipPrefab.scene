@@ -1,0 +1,33 @@
+{
+    "id": "6b56ea8b-4416-462d-9fae-6c7092aca651",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "f7a9cb56-5e66-486b-aa0c-762e5d5fed04",
+            "label": "shipStranded_010",
+            "texture": {
+                "key": "ShipStranded_01",
+                "frame": 0
+            },
+            "x": 459,
+            "y": 266
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

@@ -28,7 +28,7 @@ export default class BeachTree1Prefab extends Phaser.GameObjects.Sprite {
 
      
         this.treeTop = this.y - 125;  
-        this.treeBottom = this.y + 10; 
+        this.treeBottom = this.y + 15; 
 
         scene.events.on('update', () => {
             if (!this.player) return;

@@ -50,28 +50,6 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "59ca3227-8458-48a6-b34c-880c290061be",
-            "label": "ship_stranded_1",
-            "scope": "CLASS",
-            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
-            "layerName": "ship stranded",
-            "tilesets": [
-                "BeachWaterSheet_v01",
-                "BeachDeckSheet",
-                "Lighthouse_v01",
-                "ShipStranded_01",
-                "BoatStranded",
-                "PalmTreePattern",
-                "TreePalmSheet_01",
-                "TreePalmSheet_03",
-                "TreePalmSheet_02",
-                "CapitansCabin",
-                "RockOnSand_V01",
-                "ShellBeach_V01"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
             "id": "bbc992a7-e8e2-4485-81cc-72f723cfc7f8",
             "label": "boat_stranded_1",
             "scope": "CLASS",
@@ -325,42 +303,6 @@
             "y": 435
         },
         {
-            "prefabId": "93169918-71ac-4559-bb2b-f0c83006ec31",
-            "id": "f0b20148-6c7a-4b4e-ac09-ab17f49f384c",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "beachTree1Prefab",
-            "scope": "CLASS",
-            "x": 1182,
-            "y": 350
-        },
-        {
-            "prefabId": "4c568c69-e878-43b5-b540-202e3822612e",
-            "id": "179725f4-d6fd-4817-9e4b-8295563c2a15",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "beachTree2Prefab",
-            "scope": "CLASS",
-            "x": 1135,
-            "y": 620
-        },
-        {
-            "prefabId": "dd84e278-c9ad-4953-a3de-7c0f684a339b",
-            "id": "821480a6-17a7-4513-9897-32d9a435dab0",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "beachTree3Prefab",
-            "scope": "CLASS",
-            "x": 1665,
-            "y": 416
-        },
-        {
             "prefabId": "69dcb358-e67d-4ee2-9f1e-98cc490b6341",
             "id": "153d1ae7-9929-46a2-a0b4-a71f3780ca77",
             "unlock": [
@@ -369,8 +311,8 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": 800,
-            "y": 1079
+            "x": 400,
+            "y": 229
         },
         {
             "prefabId": "5aebe3a1-c3ca-4c4d-8c06-25a73ca34ef3",
@@ -383,6 +325,174 @@
             "scope": "CLASS",
             "x": 800,
             "y": 1130
+        },
+        {
+            "prefabId": "93169918-71ac-4559-bb2b-f0c83006ec31",
+            "id": "e1ed3916-9a83-4ac1-8b11-1c8cff708976",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree1Prefab_1",
+            "scope": "CLASS",
+            "x": 636,
+            "y": 138
+        },
+        {
+            "prefabId": "93169918-71ac-4559-bb2b-f0c83006ec31",
+            "id": "55be7891-e12c-4b05-91be-b0ffc818174a",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree1Prefab_2",
+            "scope": "CLASS",
+            "x": 1049,
+            "y": 123
+        },
+        {
+            "prefabId": "93169918-71ac-4559-bb2b-f0c83006ec31",
+            "id": "d2364e6a-44b9-48ae-9d9b-0b037a234a66",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree1Prefab_3",
+            "scope": "CLASS",
+            "x": 2044,
+            "y": 116
+        },
+        {
+            "prefabId": "dd84e278-c9ad-4953-a3de-7c0f684a339b",
+            "id": "4a905c01-055c-4fa7-a7a3-fa8ce86e7ae6",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree3Prefab_1",
+            "scope": "CLASS",
+            "x": 1874,
+            "y": 155
+        },
+        {
+            "prefabId": "dd84e278-c9ad-4953-a3de-7c0f684a339b",
+            "id": "17863e2e-cbe9-4970-9447-c49669313f48",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree3Prefab_2",
+            "scope": "CLASS",
+            "x": 2184,
+            "y": 144
+        },
+        {
+            "prefabId": "dd84e278-c9ad-4953-a3de-7c0f684a339b",
+            "id": "3283628d-406c-4bff-9d87-0b8a5931c741",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree3Prefab_3",
+            "scope": "CLASS",
+            "x": 1399,
+            "y": 165
+        },
+        {
+            "prefabId": "4c568c69-e878-43b5-b540-202e3822612e",
+            "id": "26064a97-4626-48fe-b4a2-7d1262983a01",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree2Prefab_1",
+            "scope": "CLASS",
+            "x": 423,
+            "y": 110
+        },
+        {
+            "prefabId": "4c568c69-e878-43b5-b540-202e3822612e",
+            "id": "88d79076-2ca4-4c90-8a1d-3ef285d45f11",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree2Prefab_2",
+            "scope": "CLASS",
+            "x": 502,
+            "y": 180
+        },
+        {
+            "prefabId": "4c568c69-e878-43b5-b540-202e3822612e",
+            "id": "d0c6ba4f-5f10-45ac-a557-0c6613b2ea0f",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree2Prefab_3",
+            "scope": "CLASS",
+            "x": 706,
+            "y": 131
+        },
+        {
+            "prefabId": "4c568c69-e878-43b5-b540-202e3822612e",
+            "id": "a1a3f16f-3b57-4408-85dc-32eac4d9f0fa",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree2Prefab_4",
+            "scope": "CLASS",
+            "x": 1208,
+            "y": 150
+        },
+        {
+            "prefabId": "4c568c69-e878-43b5-b540-202e3822612e",
+            "id": "432f3108-06b4-4e75-92c4-f35d40ae960e",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree2Prefab_5",
+            "scope": "CLASS",
+            "x": 922,
+            "y": 161
+        },
+        {
+            "prefabId": "4c568c69-e878-43b5-b540-202e3822612e",
+            "id": "85af5c14-c21c-4ab1-b4f8-e4377754d510",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree2Prefab_6",
+            "scope": "CLASS",
+            "x": 774,
+            "y": 158
+        },
+        {
+            "prefabId": "93169918-71ac-4559-bb2b-f0c83006ec31",
+            "id": "1611449a-61ed-4839-9853-271bfa873b98",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "beachTree1Prefab_4",
+            "scope": "CLASS",
+            "x": 851,
+            "y": 176
+        },
+        {
+            "prefabId": "6b56ea8b-4416-462d-9fae-6c7092aca651",
+            "id": "e72f7e83-5d51-4eaa-94e7-8ee1fcb393dc",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "squareShipPrefab",
+            "scope": "CLASS",
+            "x": 300,
+            "y": 389
         }
     ],
     "plainObjects": [
