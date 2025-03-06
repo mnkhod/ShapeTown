@@ -137,12 +137,14 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const alertPrefab = new AlertPrefab(this, 2560, 0);
 		this.add.existing(alertPrefab);
 
+		// rockMonster_1
+		const rockMonster_1 = new RockMonster(this, 1013, 420);
+		this.add.existing(rockMonster_1);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
-		// oldManJackNpcPrefab.bookHud = questBookPrefab;
 		oldManJackNpcPrefab.newItemHud = newItemHudPrefab;
-		// oldManJackNpcPrefab.bookHud = questBookPrefab;
 
 		this.bG_Grass_1 = bG_Grass_1;
 		this.bG_Cliff_1 = bG_Cliff_1;

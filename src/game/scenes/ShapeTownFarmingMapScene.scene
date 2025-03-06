@@ -525,13 +525,13 @@
                 "player",
                 "msgPrefab",
                 "itemHud",
-                "bookHud"
+                "newItemHud"
             ],
             "label": "oldManJackNpcPrefab",
             "scope": "CLASS",
             "player": "playerPrefab",
             "msgPrefab": "messagePrefab",
-            "bookHud": "questBookPrefab",
+            "newItemHud": "newItemHudPrefab",
             "x": 650,
             "y": 660
         },
@@ -581,6 +581,17 @@
             "scope": "CLASS",
             "x": 2560,
             "y": 0
+        },
+        {
+            "prefabId": "26b6b331-5847-4e61-b92e-748a6600902e",
+            "id": "c23224d0-7e72-436b-be40-d74978e4e3e2",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "rockMonster_1",
+            "x": 1013,
+            "y": 420
         }
     ],
     "plainObjects": [
