@@ -203,9 +203,59 @@ export default class RockMonster extends Phaser.GameObjects.Sprite {
         if (deathAnim) {
             deathAnim.repeat = 0; 
         }
+
+        this.generateDrops();
+
         this.once('animationcomplete', () => {
             if (this.active && this.state === 'dead') {
                 this.destroy();
+            }
+        });
+    }
+
+    generateDrops() {
+        const possibleDrops = [
+            { id: "Stone", icon: "Icon_Stone", chance: 0.30, quantity: 1 },
+            { id: "Iron ore", icon: "Icon_Iron_Ore", chance: 0.01, quantity: 1 },
+            { id: "Coal", icon: "Icon_Coal", chance: 0.19, quantity: 1 }
+        ];
+
+        possibleDrops.forEach(item => {
+            if (Math.random() <= item.chance) {
+                this.dropItem(item);
+             }
+        });
+    }
+
+    dropItem(item) {
+        if (!this.scene || !this.scene.newItemHudPrefab) {
+            console.warn('Cannot drop item: missing scene or inventory component');
+            return;
+        }
+
+        this.scene.newItemHudPrefab.addItem(item.id, item.icon, 0, item.quantity);
+
+        this.scene.alertPrefab.alert(`Got ${item.quantity} ${item.id}!`);
+
+        this.createFloatingItemEffect(item);
+    }
+
+
+    createFloatingItemEffect(item) {
+        const player = this.scene.playerPrefab;
+        if (!player) return;
+        const floatingItem = this.scene.add.sprite(this.x, this.y, item.icon);
+        floatingItem.setScale(0.5);
+        floatingItem.setDepth(100);
+
+        this.scene.tweens.add({
+            targets: floatingItem,
+            x: player.x,
+            y: player.y,
+            duration: 800,
+            ease: 'Cubic.easeOut',
+            onComplete: () => {
+                floatingItem.destroy();
             }
         });
     }

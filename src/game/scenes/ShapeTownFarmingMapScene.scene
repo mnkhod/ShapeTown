@@ -531,7 +531,6 @@
             "scope": "CLASS",
             "player": "playerPrefab",
             "msgPrefab": "messagePrefab",
-            "itemHud": "itemHudPrefab",
             "bookHud": "questBookPrefab",
             "x": 650,
             "y": 660
@@ -559,6 +558,29 @@
             "scope": "CLASS",
             "x": 422,
             "y": 205
+        },
+        {
+            "prefabId": "26b6b331-5847-4e61-b92e-748a6600902e",
+            "id": "37df0743-6f5f-47f7-961c-338ff989c778",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "rockMonster",
+            "x": 0,
+            "y": 0
+        },
+        {
+            "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
+            "id": "3b3726e7-e44b-45b5-884e-e7800b29c60e",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "alertPrefab",
+            "scope": "CLASS",
+            "x": 2560,
+            "y": 0
         }
     ],
     "plainObjects": [

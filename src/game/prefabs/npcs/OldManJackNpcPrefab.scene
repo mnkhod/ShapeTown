@@ -71,8 +71,8 @@
             }
         },
         {
-            "name": "itemHud",
-            "label": "Item Hud",
+            "name": "newItemHud",
+            "label": "New Item Hud",
             "tooltip": "",
             "defValue": "",
             "customDefinition": false,

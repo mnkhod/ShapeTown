@@ -9,6 +9,8 @@ import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
+import RockMonster from "../prefabs/Mob/RockMonster";
+import AlertPrefab from "../prefabs/hud/AlertPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -127,10 +129,17 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const newItemHudPrefab = new NewItemHudPrefab(this, 422, 205);
 		this.add.existing(newItemHudPrefab);
 
+		// rockMonster
+		const rockMonster = new RockMonster(this, 0, 0);
+		this.add.existing(rockMonster);
+
+		// alertPrefab
+		const alertPrefab = new AlertPrefab(this, 2560, 0);
+		this.add.existing(alertPrefab);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
-		oldManJackNpcPrefab.itemHud = newItemHudPrefab;
 		// oldManJackNpcPrefab.bookHud = questBookPrefab;
 
 		this.bG_Grass_1 = bG_Grass_1;
@@ -156,6 +165,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.oldManJackNpcPrefab = oldManJackNpcPrefab;
 		this.messagePrefab = messagePrefab;
 		this.newItemHudPrefab = newItemHudPrefab;
+		this.alertPrefab = alertPrefab;
 		this.shapetownFarmingMap = shapetownFarmingMap;
 
 		this.events.emit("scene-awake");
@@ -207,6 +217,8 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	messagePrefab;
 	/** @type {NewItemHudPrefab} */
 	newItemHudPrefab;
+	/** @type {AlertPrefab} */
+	alertPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownFarmingMap;
 
@@ -216,7 +228,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 
 	create() {
 	  	this.editorCreate();
-
+		window.questBookPrefab = null;
 	  	this.cameras.main.setBounds(0, 0, 2550, 1920);
 	  	this.physics.world.bounds.width = 1000;
 	  	this.physics.world.bounds.height = 800;

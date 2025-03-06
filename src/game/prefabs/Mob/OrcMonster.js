@@ -5,28 +5,28 @@
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
-export default class GoblinMonster extends Phaser.GameObjects.Sprite {
+export default class OrcMonster extends Phaser.GameObjects.Sprite {
 
 	constructor(scene, x, y, texture, frame) {
-		super(scene, x ?? 48, y ?? 48, texture || "GoblinWalking96x96_V01", frame ?? 0);
+		super(scene, x ?? 48, y ?? 48, texture || "OrcIdle_V01", frame ?? 0);
 
 		/* START-USER-CTR-CODE */
 		scene.physics.add.existing(this);
         this.body.setSize(32, 32);
         
-        this.moveSpeed = 100;
-        this.chaseSpeed = 150;
+        this.moveSpeed = 80;
+        this.chaseSpeed = 130;
         this.detectionRange = 200;
-        this.attackRange = 35;
+        this.attackRange = 40;
         this.direction = 1;
         this.patrolTimer = 0;
-        this.patrolDuration = 1500;
+        this.patrolDuration = 1800;
         this.lastAttackTime = 0;
-        this.attackCooldown = 1200;
+        this.attackCooldown = 1500;
 		this.patrolStartX = x;
 		this.patrolEndX = x + 200;
         this.state = 'patrol';
-        this.health = 100;
+        this.health = 150;
 		this.isAttacking = false;
 
 		this.setInteractive();
@@ -49,7 +49,7 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 
 		scene.events.once('update', () => {
 		    this.createAnimations();
-		    this.play('goblin-walking');
+		    this.play('orc-walking');
 		    scene.events.on('update', this.updateAI, this);
 		});
 		/* END-USER-CTR-CODE */
@@ -58,21 +58,21 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 	/* START-USER-CODE */
 
 	createAnimations() {
-	    if (this.scene.anims.exists('goblin-idle')) return;
+	    if (this.scene.anims.exists('orc-idle')) return;
 	
 	    const animations = [
-	        { key: 'idle', frames: 6, frameRate: 8, texture: 'GoblinIdle96x96_V01', repeat: -1 },
-	        { key: 'attack', frames: 6, frameRate: 10, texture: 'GoblinAttack128x96_V01', repeat: 0 },
-	        { key: 'hurt', frames: 8, frameRate: 8, texture: 'GoblinHurt96x96_V01', repeat: 0 },
-	        { key: 'walking', frames: 6, frameRate: 8, texture: 'GoblinWalking96x96_V01', repeat: -1 },
-			{ key: 'death', frames: 10, frameRate: 10, texture: 'Goblin_Death96x96', repeat: 0, hideOnComplete: true }
+	        { key: 'idle', frames: 8, frameRate: 8, texture: 'OrcIdle_V01', repeat: -1 },
+	        { key: 'attack', frames: 16, frameRate: 10, texture: 'OrcAttack_V01', repeat: 0 },
+	        { key: 'hurt', frames: 7, frameRate: 8, texture: 'OrcHurt_V01', repeat: 0 },
+	        { key: 'walking', frames: 8, frameRate: 8, texture: 'OrcWalking_V01', repeat: -1 },
+			{ key: 'death', frames: 11, frameRate: 10, texture: 'OrcDeath_V01', repeat: 0, hideOnComplete: true }
 	    ];
 	
 	    animations.forEach(({ key, frames, frameRate, texture, repeat, hideOnComplete }) => {
 	        if (this.scene.textures.exists(texture)) {
 	            try {
 	                this.scene.anims.create({
-	                    key: `goblin-${key}`,
+	                    key: `orc-${key}`,
 	                    frames: this.scene.anims.generateFrameNumbers(texture, { 
 	                        start: 0, 
 	                        end: frames - 1 
@@ -81,7 +81,7 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 	                    repeat,
                         hideOnComplete
 	                });
-	                console.log(`Created animation: goblin-${key} using texture ${texture}`);
+	                console.log(`Created animation: orc-${key} using texture ${texture}`);
 	            } catch (error) {
 	                console.warn(`Failed to create animation for ${key}:`, error);
 	            }
@@ -120,16 +120,16 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 			
 	        this.isChangingDirection = true;
 	        this.body.setVelocity(0, 0);
-	        this.play('goblin-idle');
+	        this.play('orc-idle');
 	
 	        this.scene.time.delayedCall(1500, () => {
 	            if (this.active) {
 	                this.direction *= -1;
 	                this.isChangingDirection = false;
-	                this.play('goblin-walking');
+	                this.play('orc-walking');
 	            }
 	        });
-	    } else if (!this.isChangingDirection && this.anims.currentAnim && this.anims.currentAnim.key !== 'goblin-idle') {
+	    } else if (!this.isChangingDirection && this.anims.currentAnim && this.anims.currentAnim.key !== 'orc-idle') {
 	        this.body.setVelocityX(this.moveSpeed * this.direction);
 	        this.body.setVelocityY(0);
 	        this.flipX = this.direction < 0;
@@ -138,8 +138,8 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 
 	handleChase(player) {
 	    if (this.anims.currentAnim && 
-	        (this.anims.currentAnim.key === 'goblin-hurt' || 
-	         this.anims.currentAnim.key === 'goblin-attack')) {
+	        (this.anims.currentAnim.key === 'orc-hurt' || 
+	         this.anims.currentAnim.key === 'orc-attack')) {
 	        return;
 	    }
 
@@ -152,6 +152,7 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 	        this.state = 'attack';
 	        return;
 	    }
+	    
 	    const angle = Phaser.Math.Angle.Between(this.x, this.y, player.x, player.y);
 	    this.body.setVelocityX(Math.cos(angle) * this.chaseSpeed);
 	
@@ -161,7 +162,11 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 	        this.body.setVelocityY(0);
 	    }
 
-	    this.play('goblin-walking');
+	    if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'orc-walking') {
+	        this.play('orc-walking');
+	        console.log("Playing orc walking animation during chase");
+	    }
+	    
 	    this.flipX = this.body.velocity.x < 0;
 	}
 
@@ -173,25 +178,26 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 	        this.body.setVelocity(0, 0);
 	        this.lastAttackTime = this.scene.time.now;
 	
-	        this.play('goblin-attack');
+	        this.play('orc-attack');
 	
 	        if (typeof player.takeDamage === 'function') {
-	            player.takeDamage(7);
+	            player.takeDamage(12);
 	        }
 	
 	        this.once('animationcomplete', () => {
 	            if (this.active) {
 	                this.isAttacking = false;
-	                this.play('goblin-idle');
+	                this.play('orc-idle');
 	            }
 	        });
 	    } else if (!this.isAttacking) {
-	        this.play('goblin-idle');
+	        this.play('orc-idle');
 	    }
 	}
 	
 	takeDamage(amount) {
         this.health -= amount;
+        console.log("Orc health:", this.health);
 
         this.body.setVelocity(0, 0);
 
@@ -201,7 +207,7 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
         }
 
         this.isHurt = true;
-        this.play('goblin-hurt');
+        this.play('orc-hurt');
 
         this.once('animationcomplete', () => {
             if (this.active) {
@@ -213,29 +219,28 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 
     die() {
         if (this.state === 'dead') return;
-        
         this.state = 'dead';
         this.body.setVelocity(0, 0);
         this.disableInteractive();
-        
         this.scene.events.off('update', this.updateAI, this);
-        this.createDrops();
+        
+        this.createDrops();;
         this.anims.stop();
-        
-        this.setTexture('Goblin_Death96x96', 0);
-        
+        console.log("Setting texture to OrcDeath_V01");
+        this.setTexture('OrcDeath_V01', 0);
         this.removeAllListeners('animationcomplete');
-        
-        const deathAnim = this.play('goblin-death');
+        const deathAnim = this.play('orc-death');
         
         this.once('animationcomplete', () => {
             if (this.active && this.state === 'dead') {
+                console.log("Destroying orc");
                 this.destroy();
             }
         });
         
         this.scene.time.delayedCall(2000, () => {
             if (this.active && this.state === 'dead') {
+                console.log("Backup timer: destroying orc");
                 this.destroy();
             }
         });
@@ -243,8 +248,8 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 
     createDrops() {
         const possibleDrops = [
-            { id: "Goblin ear", icon: "Icon_Goblin_Ear", chance: 0.50, quantity: 1 },
-            { id: "Goblin eye ball", icon: "Icon_Goblin_Eye", chance: 0.02, quantity: 1 }
+            { id: "Orc Tooth", icon: "Icon_Orc_teeth", chance: 0.30, quantity: 1 },
+            { id: "Orc Potion", icon: "Icon_Orc_Potion", chance: 0.01, quantity: 1 }
         ];
         
         possibleDrops.forEach(item => {
@@ -256,6 +261,7 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 
     dropItem(item) {
         if (!this.scene || !this.scene.newItemHudPrefab) {
+            console.warn('Cannot drop item: missing scene or inventory component');
             return;
         }
 

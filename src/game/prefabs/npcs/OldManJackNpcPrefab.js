@@ -52,7 +52,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 	/** @type {Phaser.GameObjects.GameObject} */
 	msgPrefab;
 	/** @type {Phaser.GameObjects.GameObject} */
-	itemHud;
+	newItemHud;
 	/** @type {Phaser.GameObjects.GameObject} */
 	bookHud;
 	/** @type {Phaser.GameObjects.GameObject} */
@@ -67,12 +67,12 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         {
             msg: "Those will be handy soon.",
             onComplete: () => {
-                this.itemHud.visible = true;
-                this.itemHud.addItem("ToolPickaxe", "IconToolPickaxe", 0);
-                this.itemHud.addItem("ToolHoe", "IconToolHoe", 0);
-                this.itemHud.addItem("ToolWateringCan", "IconToolWateringCan", 0);
-                this.itemHud.addItem("ToolIronSword", "IconIronSword", 0);
-                this.itemHud.forceSelectTool("ToolPickaxe");
+                this.newItemHud.visible = true;
+                this.newItemHud.addItem("ToolPickaxe", "IconToolPickaxe", 0);
+                this.newItemHud.addItem("ToolHoe", "IconToolHoe", 0);
+                this.newItemHud.addItem("ToolWateringCan", "IconToolWateringCan", 0);
+                this.newItemHud.addItem("ToolIronSword", "IconIronSword", 0);
+                this.newItemHud.forceSelectTool("ToolPickaxe");
             }
         },
         { msg: "Alright, I am giving you a Quest. Therefore, you may be spot on your Quest Book." },
@@ -88,8 +88,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         {
             msg: "Here are your platform passes.",
             onComplete: () => {
-                this.itemHud.addItem("seed_carrot", "crops-seed bags-carrot", 0, 5);
-                this.itemHud.addItem("seed_radish", "crops-seed bags-radish", 0, 2);
+                this.newItemHud.addItem("seed_carrot", "crops-seed bags-carrot", 0, 5);
+                this.newItemHud.addItem("seed_radish", "crops-seed bags-radish", 0, 2);
             }
         },
         {
@@ -161,7 +161,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
             let hasGiftFromNatureNFT = this.scene.achievements.giftFromNatureAchievement
             if (hasGiftFromNatureNFT) {
-                if (this.itemHud.checkItem("FISH")) {
+                if (this.newItemHud.checkItem("FISH")) {
                     this.questMark.play("AfterQuest");
 
                     let hasNFT = this.scene.achievements.firstFishAchievement
@@ -175,7 +175,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
                                 this.scene.alertPrefab.alert("First Fish Achievement")
                                 this.scene.achievements.firstFishAchievement = true;
 
-                                this.itemHud.removeItemByKey("FISH")
+                                this.newItemHud.removeItemByKey("FISH")
                             },
                             onError: () => this.scene.alertPrefab.alert("Contract Error Occurred"),
                         })
@@ -191,7 +191,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
             let hasFirstHarvestNFT = this.scene.achievements.firstHarvestAchievement
             if (hasFirstHarvestNFT) {
-                if (this.itemHud.checkItem("APPLE")) {
+                if (this.newItemHud.checkItem("APPLE")) {
                     this.questMark.play("AfterQuest");
 
                     let hasNFT = this.scene.achievements.giftFromNatureAchievement
@@ -205,7 +205,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
                                 this.scene.alertPrefab.alert("Gift From Nature Achievement")
                                 this.scene.achievements.giftFromNatureAchievement = true;
 
-                                this.itemHud.removeItemByKey("APPLE")
+                                this.newItemHud.removeItemByKey("APPLE")
                             },
                             onError: () => this.scene.alertPrefab.alert("Contract Error Occurred"),
                         })
@@ -219,7 +219,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
                 return;
             }
 
-            if (this.itemHud.checkItem("CARROT")) {
+            if (this.newItemHud.checkItem("CARROT")) {
                 this.questMark.play("AfterQuest");
 
                 let hasNFT = this.scene.achievements.firstHarvestAchievement
@@ -233,7 +233,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
                             this.scene.alertPrefab.alert("First Harvest Achievement")
 
                             this.scene.achievements.firstHarvestAchievement = true;
-                            this.itemHud.removeItemByKey("CARROT")
+                            this.newItemHud.removeItemByKey("CARROT")
                         },
                         onError: () => this.scene.alertPrefab.alert("Contract Error Occurred"),
                     })
@@ -259,7 +259,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
     typeText(text) {
         this.isTyping = true;
         this.dialogueText.setText('');
-        
+
         let currentChar = 0;
         const typingSpeed = 30;
         this.typeTimer = this.time.addEvent({

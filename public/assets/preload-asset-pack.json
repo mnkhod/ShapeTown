@@ -1607,6 +1607,19 @@
                 "key": "GameNpcs1"
             },
             {
+                "url": "assets/Mob/Enemies/DungenLVL1/Goblin/Death/Goblin_Death96x96.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 96,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Goblin_Death96x96"
+            },
+            {
                 "url": "assets/Mob/Enemies/DungenLVL1/Goblin/Attack/GoblinAttack128x96_V01.png",
                 "frameConfig": {
                     "frameWidth": 128,
@@ -1843,6 +1856,46 @@
                 },
                 "type": "spritesheet",
                 "key": "HudItemSlot"
+            },
+            {
+                "url": "assets/InventoryIcons/Icon_Coal.png",
+                "type": "image",
+                "key": "Icon_Coal"
+            },
+            {
+                "url": "assets/InventoryIcons/Icon_Goblin_Ear.png",
+                "type": "image",
+                "key": "Icon_Goblin_Ear"
+            },
+            {
+                "url": "assets/InventoryIcons/Icon_Goblin_Eye.png",
+                "type": "image",
+                "key": "Icon_Goblin_Eye"
+            },
+            {
+                "url": "assets/InventoryIcons/Icon_Iron_Ore.png",
+                "type": "image",
+                "key": "Icon_Iron_Ore"
+            },
+            {
+                "url": "assets/InventoryIcons/Icon_IronBar.png",
+                "type": "image",
+                "key": "Icon_IronBar"
+            },
+            {
+                "url": "assets/InventoryIcons/Icon_Orc_Potion.png",
+                "type": "image",
+                "key": "Icon_Orc_Potion"
+            },
+            {
+                "url": "assets/InventoryIcons/Icon_Orc_teeth.png",
+                "type": "image",
+                "key": "Icon_Orc_teeth"
+            },
+            {
+                "url": "assets/InventoryIcons/Icon_Stone.png",
+                "type": "image",
+                "key": "Icon_Stone"
             },
             {
                 "url": "assets/IconBaseTools.png",
@@ -2368,7 +2421,7 @@
             {
                 "url": "assets/Mob/Enemies/DungenLVL1/Orc/Attack/OrcAttack_V01.png",
                 "frameConfig": {
-                    "frameWidth": 100,
+                    "frameWidth": 96,
                     "frameHeight": 96,
                     "startFrame": 0,
                     "endFrame": -1,

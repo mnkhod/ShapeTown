@@ -598,9 +598,9 @@
                 "bookHud"
             ],
             "label": "oldManJackNpcPrefab",
+            "scope": "CLASS",
             "player": "playerPrefab",
             "msgPrefab": "messagePrefab",
-            "itemHud": "itemHudPrefab",
             "bookHud": "questBookPrefab",
             "x": 375,
             "y": 234
@@ -628,18 +628,6 @@
             "scope": "CLASS",
             "x": 32,
             "y": 736
-        },
-        {
-            "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
-            "id": "7b9adc16-f2ab-470c-9c10-934f5c83d56d",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "messagePrefab",
-            "scope": "CLASS",
-            "x": 0.706304947792546,
-            "y": 0.8045771466410088
         },
         {
             "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
@@ -782,6 +770,18 @@
             "y": 24
         },
         {
+            "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
+            "id": "7b9adc16-f2ab-470c-9c10-934f5c83d56d",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "messagePrefab",
+            "scope": "CLASS",
+            "x": 0.706304947792546,
+            "y": 0.8045771466410088
+        },
+        {
             "prefabId": "9be122bc-3a2e-4c06-a98e-b5754929a6d2",
             "id": "e25d9758-788a-4801-b579-3e492d7162a2",
             "unlock": [
@@ -850,7 +850,7 @@
                 "x",
                 "y"
             ],
-            "label": "optionsListPrefab",
+            "label": "OptionsListPrefab",
             "scope": "CLASS",
             "x": 967,
             "y": 30
@@ -890,6 +890,30 @@
             "scope": "CLASS",
             "x": 539,
             "y": 438
+        },
+        {
+            "prefabId": "26b6b331-5847-4e61-b92e-748a6600902e",
+            "id": "5fa3ff74-67f6-4f4b-8a7b-57dde6bcfd54",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "rockMonster_1",
+            "scope": "CLASS",
+            "x": 792,
+            "y": 238
+        },
+        {
+            "prefabId": "f0a2c67c-9012-4001-be77-4d3c66eeec5a",
+            "id": "8b211181-a8d1-40e9-8aa9-57cb57415cb7",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "orcMonster",
+            "scope": "CLASS",
+            "x": 719,
+            "y": 270
         }
     ],
     "plainObjects": [

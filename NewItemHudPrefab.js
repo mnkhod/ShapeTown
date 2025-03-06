@@ -477,8 +477,6 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 					this.cursorIcon.setDepth(1000);
 					this.cursorIcon.setScrollFactor(0);
 				}
-				
-				console.log(`Selection state: activeIndex=${this.activeIndex}, selectedItem=${this.selectedItem}`);
 			});
 		});
 	}
@@ -614,8 +612,6 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 					this.cursorIcon.setDepth(1000);
 					this.cursorIcon.setScrollFactor(0);
 				}
-				
-				console.log(`Hotkey ${index+1} - Selection: activeIndex=${this.activeIndex}, selectedItem=${this.selectedItem}`);
 			}
 		});
 	
@@ -752,7 +748,6 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	    }
 	
 	    this.scene.alertPrefab?.alert("Inventory Full");
-	    console.warn(`Failed to add ${key} - inventory full`);
 	    return false;
 	}
 
@@ -793,7 +788,6 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	    }
 	
 	    this.scene.alertPrefab?.alert("Doesn't Have Item");
-	    console.warn(`Failed to use ${key} - item not found`);
 	    return false;
 	}
 
@@ -852,13 +846,11 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	moveToQuickSlot(mainIndex) {
 	    const item = this.mainInventoryData[mainIndex];
 	    if (!item) {
-	        console.warn(`No item in main inventory slot ${mainIndex} to move`);
 	        return false;
 	    }
 	
 	    const emptyQuickIndex = this.itemData.findIndex(x => x === null);
 	    if (emptyQuickIndex === -1) {
-	        console.warn(`No empty quick slot available for item from main inventory slot ${mainIndex}`);
 	        return false;
 	    }
 	
@@ -882,7 +874,6 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 	forceSelectTool(toolId) {
 	    const toolIndex = this.itemData.findIndex(id => id === toolId);
 	    if (toolIndex === -1) {
-	        console.warn(`Tool ${toolId} not found in inventory`);
 	        return false;
 	    }
 	    

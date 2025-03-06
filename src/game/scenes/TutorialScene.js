@@ -6,7 +6,6 @@ import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import PlayerPrefab from "../prefabs/PlayerPrefab";
 import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
-import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
 import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
 import PineTreePrefab from "../prefabs/Trees/PineTreePrefab";
@@ -14,14 +13,16 @@ import MapleTreePrefab from "../prefabs/Trees/MapleTreePrefab";
 import TutorealHousePrefab from "../prefabs/House/TutorealHousePrefab";
 import FishingComponentPrefab from "../prefabs/hud/FishingComponentPrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
+import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import OpenInventory from "../prefabs/hud/OpenInventory";
 import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
 import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
-// import optionsListPrefab from "../prefabs/hud/optionsListPrefab";
+import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import RockMonster from "../prefabs/Mob/RockMonster";
 import GoblinMonster from "../prefabs/Mob/GoblinMonster";
 import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
+import OrcMonster from "../prefabs/Mob/OrcMonster";
 /* START-USER-IMPORTS */
 import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
 import { EventBus } from '../../game/EventBus';
@@ -152,10 +153,6 @@ export default class TutorialScene extends Phaser.Scene {
 		const questBookPrefab = new QuestBookPrefab(this, 32, 736);
 		this.add.existing(questBookPrefab);
 
-		// messagePrefab
-		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 0.8045771466410088);
-		this.add.existing(messagePrefab);
-
 		// alertPrefab
 		const alertPrefab = new AlertPrefab(this, 721.70328457044, 0.0215605880291605);
 		this.add.existing(alertPrefab);
@@ -203,6 +200,10 @@ export default class TutorialScene extends Phaser.Scene {
 		const profilePrefab = new ProfilePrefab(this, 57, 24);
 		this.add.existing(profilePrefab);
 
+		// messagePrefab
+		const messagePrefab = new MessagePrefab(this, 0.706304947792546, 0.8045771466410088);
+		this.add.existing(messagePrefab);
+
 		// newItemHudPrefab
 		const newItemHudPrefab = new NewItemHudPrefab(this, 0, 0);
 		this.add.existing(newItemHudPrefab);
@@ -226,8 +227,8 @@ export default class TutorialScene extends Phaser.Scene {
 		minimapPrefab.scaleY = 1;
 		minimapPrefab.visible = false;
 
-		// optionsListPrefab
-		const optionsListPrefab = new optionsListPrefab(this, 967, 30);
+		// OptionsListPrefab
+		const optionsListPrefab = new OptionsListPrefab(this, 967, 30);
 		this.add.existing(optionsListPrefab);
 
 		// rockMonster
@@ -242,11 +243,19 @@ export default class TutorialScene extends Phaser.Scene {
 		const merchantPrefab = new MerchantPrefab(this, 539, 438);
 		this.add.existing(merchantPrefab);
 
+		// rockMonster_1
+		const rockMonster_1 = new RockMonster(this, 792, 238);
+		this.add.existing(rockMonster_1);
+
+		// orcMonster
+		const orcMonster = new OrcMonster(this, 719, 270);
+		this.add.existing(orcMonster);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
-		oldManJackNpcPrefab.itemHud = itemHudPrefab;
 		oldManJackNpcPrefab.bookHud = questBookPrefab;
+		oldManJackNpcPrefab.newItemHud = newItemHudPrefab;
 
 		this.map_environment_Ground_just_render__1 = map_environment_Ground_just_render__1;
 		this.layerFence = layerFence;
@@ -260,9 +269,9 @@ export default class TutorialScene extends Phaser.Scene {
 		this.farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1 = farming_Area_Crops_Make_it_Collision_popup_to_not_able_to_HARVET__1;
 		this.farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1 = farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1;
 		this.sceneTile = sceneTile;
+		this.oldManJackNpcPrefab = oldManJackNpcPrefab;
 		this.playerPrefab = playerPrefab;
 		this.questBookPrefab = questBookPrefab;
-		this.messagePrefab = messagePrefab;
 		this.alertPrefab = alertPrefab;
 		this.appleTreePrefab = appleTreePrefab;
 		this.pineTreePrefab = pineTreePrefab;
@@ -271,6 +280,7 @@ export default class TutorialScene extends Phaser.Scene {
 		this.fishingArea = fishingArea;
 		this.fishingComponentPrefab = fishingComponentPrefab;
 		this.profilePrefab = profilePrefab;
+		this.messagePrefab = messagePrefab;
 		this.newItemHudPrefab = newItemHudPrefab;
 		this.openInventory = openInventory;
 		this.openMapPrefab = openMapPrefab;
@@ -279,6 +289,8 @@ export default class TutorialScene extends Phaser.Scene {
 		this.rockMonster = rockMonster;
 		this.goblinMonster = goblinMonster;
 		this.merchantPrefab = merchantPrefab;
+		this.rockMonster_1 = rockMonster_1;
+		this.orcMonster = orcMonster;
 		this.tutorialMap = tutorialMap;
 
 		this.events.emit("scene-awake");
@@ -308,12 +320,12 @@ export default class TutorialScene extends Phaser.Scene {
 	farming_Area_DeadCrops_Make_it_Collision_Can_be_HARVEST_but_noting_drops__1;
 	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
 	sceneTile;
+	/** @type {OldManJackNpcPrefab} */
+	oldManJackNpcPrefab;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
 	/** @type {QuestBookPrefab} */
 	questBookPrefab;
-	/** @type {MessagePrefab} */
-	messagePrefab;
 	/** @type {AlertPrefab} */
 	alertPrefab;
 	/** @type {AppleTreePrefab} */
@@ -330,6 +342,8 @@ export default class TutorialScene extends Phaser.Scene {
 	fishingComponentPrefab;
 	/** @type {ProfilePrefab} */
 	profilePrefab;
+	/** @type {MessagePrefab} */
+	messagePrefab;
 	/** @type {NewItemHudPrefab} */
 	newItemHudPrefab;
 	/** @type {OpenInventory} */
@@ -338,7 +352,7 @@ export default class TutorialScene extends Phaser.Scene {
 	openMapPrefab;
 	/** @type {MinimapPrefab} */
 	minimapPrefab;
-	/** @type {optionsListPrefab} */
+	/** @type {OptionsListPrefab} */
 	optionsListPrefab;
 	/** @type {RockMonster} */
 	rockMonster;
@@ -346,6 +360,10 @@ export default class TutorialScene extends Phaser.Scene {
 	goblinMonster;
 	/** @type {MerchantPrefab} */
 	merchantPrefab;
+	/** @type {RockMonster} */
+	rockMonster_1;
+	/** @type {OrcMonster} */
+	orcMonster;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	tutorialMap;
 
