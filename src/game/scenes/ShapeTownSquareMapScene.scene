@@ -2600,7 +2600,7 @@
             "label": "playerPrefab",
             "scope": "CLASS",
             "x": 2420,
-            "y": 1552
+            "y": 2652
         },
         {
             "prefabId": "1ad7756a-6fd7-4db7-ae0b-533d58fee4d3",
@@ -2833,6 +2833,24 @@
             "scope": "CLASS",
             "x": 2240,
             "y": 1425
+        },
+        {
+            "type": "Sprite",
+            "id": "d3ed6f22-e831-45d1-a6dc-ef01f3d87c35",
+            "label": "sceneTile",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Fruitbushes_V01",
+                "frame": 23
+            },
+            "x": 2440,
+            "y": 2820,
+            "scaleX": 10.306994636480235,
+            "scaleY": 1.586085054631967,
+            "ArcadeComponent.active": true,
+            "allowGravity": false,
+            "body.width": 32,
+            "body.height": 200
         }
     ],
     "plainObjects": [

@@ -214,7 +214,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["Barricade_V01","BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 2420, 1552);
+		const playerPrefab = new PlayerPrefab(this, 2420, 2652);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -262,6 +262,15 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// squareTownPrefab
 		const squareTownPrefab = new SquareTownPrefab(this, 2240, 1425);
 		this.add.existing(squareTownPrefab);
+
+		// sceneTile
+		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
+		const sceneTile = this.add.sprite(2440, 2820, "Fruitbushes_V01", 23);
+		sceneTile.scaleX = 10.306994636480235;
+		sceneTile.scaleY = 1.586085054631967;
+		this.physics.add.existing(sceneTile, false);
+		sceneTile.body.allowGravity = false;
+		sceneTile.body.setSize(32, 50, false);
 
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
@@ -322,6 +331,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.barracks_Tents_1 = barracks_Tents_1;
 		this.squareDragonHousePrefab = squareDragonHousePrefab;
 		this.squareTownPrefab = squareTownPrefab;
+		this.sceneTile = sceneTile;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -445,6 +455,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	squareDragonHousePrefab;
 	/** @type {SquareTownPrefab} */
 	squareTownPrefab;
+	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
+	sceneTile;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -563,6 +575,16 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         }
 
         });
+
+		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
+		    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+			this.newItemHudPrefab.updateGlobalInventory();
+			}
+
+		    this.scene.switch("ShapeTownBeachMapScene");
+		    this.playerPrefab.y -= 30;
+		    this.cameras.main.fadeIn(2000, 0, 0, 0);
+		});
 
 	}
 
