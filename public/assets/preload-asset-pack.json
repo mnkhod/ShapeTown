@@ -51,8 +51,8 @@
             {
                 "url": "assets/Building/AdventureGuildBuilding.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 480,
+                    "frameHeight": 384,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3134,8 +3134,8 @@
             {
                 "url": "assets/Building/TownHall.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 384,
+                    "frameHeight": 384,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,

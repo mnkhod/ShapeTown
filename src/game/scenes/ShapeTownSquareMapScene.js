@@ -8,6 +8,8 @@ import SquareFountanPrefab from "../prefabs/Fountan/SquareFountanPrefab";
 import SquareCampFirePrefab from "../prefabs/Lightning/SquareCampFirePrefab";
 import SquareFirePrefab from "../prefabs/Lightning/SquareFirePrefab";
 import MineWatchTowerPrefab from "../prefabs/House/MineWatchTowerPrefab";
+import SquareDragonHousePrefab from "../prefabs/House/SquareDragonHousePrefab";
+import SquareTownPrefab from "../prefabs/House/SquareTownPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -193,9 +195,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// blacksmith_Blacksmith_stall_1
 		const blacksmith_Blacksmith_stall_1 = shapetownSquare.createLayer("Blacksmith/Blacksmith stall", ["Blacksmith"], 0, 0);
 
-		// adventure_Guild_1
-		const adventure_Guild_1 = shapetownSquare.createLayer("Adventure Guild", ["AdventureGuildBuilding"], 0, 0);
-
 		// mechant_merchant_1
 		const mechant_merchant_1 = shapetownSquare.createLayer("Mechant/merchant", ["MerchantCabin_v01"], 0, 0);
 
@@ -204,9 +203,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 
 		// mechant_Merchant_logo_1
 		const mechant_Merchant_logo_1 = shapetownSquare.createLayer("Mechant/Merchant logo", ["MerchantIcon"], 0, 0);
-
-		// hQ_1
-		const hQ_1 = shapetownSquare.createLayer("HQ", ["TownHall"], 0, 0);
 
 		// barracks_Barricade
 		const barracks_Barricade = shapetownSquare.createLayer("Barracks/Barricade3", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
@@ -218,7 +214,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["Barricade_V01","BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 3100, 2302);
+		const playerPrefab = new PlayerPrefab(this, 2420, 1552);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -258,6 +254,14 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 
 		// barracks_Tents_1
 		const barracks_Tents_1 = shapetownSquare.createLayer("Barracks/Tents", ["Tent_V04","Tent_V03"], 0, 0);
+
+		// squareDragonHousePrefab
+		const squareDragonHousePrefab = new SquareDragonHousePrefab(this, 2800, 1269);
+		this.add.existing(squareDragonHousePrefab);
+
+		// squareTownPrefab
+		const squareTownPrefab = new SquareTownPrefab(this, 2240, 1425);
+		this.add.existing(squareTownPrefab);
 
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
@@ -299,11 +303,9 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.foodStand_Basket_1 = foodStand_Basket_1;
 		this.blacksmith_Blacksmith_1 = blacksmith_Blacksmith_1;
 		this.blacksmith_Blacksmith_stall_1 = blacksmith_Blacksmith_stall_1;
-		this.adventure_Guild_1 = adventure_Guild_1;
 		this.mechant_merchant_1 = mechant_merchant_1;
 		this.mechant_MerchantCarriage_1 = mechant_MerchantCarriage_1;
 		this.mechant_Merchant_logo_1 = mechant_Merchant_logo_1;
-		this.hQ_1 = hQ_1;
 		this.barracks_Barricade = barracks_Barricade;
 		this.barracks_Barricade_1 = barracks_Barricade_1;
 		this.barracks_Barricade_2 = barracks_Barricade_2;
@@ -318,6 +320,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.mineWatchTowerPrefab = mineWatchTowerPrefab;
 		this.mineWatchTowerPrefab_1 = mineWatchTowerPrefab_1;
 		this.barracks_Tents_1 = barracks_Tents_1;
+		this.squareDragonHousePrefab = squareDragonHousePrefab;
+		this.squareTownPrefab = squareTownPrefab;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -404,15 +408,11 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	blacksmith_Blacksmith_stall_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	adventure_Guild_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	mechant_merchant_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	mechant_MerchantCarriage_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	mechant_Merchant_logo_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	hQ_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	barracks_Barricade;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -441,6 +441,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	mineWatchTowerPrefab_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	barracks_Tents_1;
+	/** @type {SquareDragonHousePrefab} */
+	squareDragonHousePrefab;
+	/** @type {SquareTownPrefab} */
+	squareTownPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -460,10 +464,12 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.squareCampFirePrefab_2.setupCollision(this.playerPrefab)
 		this.squareCampFirePrefab.setupCollision(this.playerPrefab)
 		this.mineWatchTowerPrefab.setupCollision(this.playerPrefab)
+		this.squareDragonHousePrefab.setupCollision(this.playerPrefab)
+		this.squareTownPrefab.setupCollision(this.playerPrefab)
 
 		this.physics.add.collider(this.playerPrefab, this.collution_WoodenFence_1);
 	    this.collution_WoodenFence_1.setCollisionBetween(0,10000);
-	    // this.collution_WoodenFence_1.renderDebug(this.add.graphics());
+	    // this.collution_WoodenFence_1.renderDebug(this.add.graphics())
 
 		this.physics.add.collider(this.playerPrefab, this.collution_StoneFence_1);
 	    this.collution_StoneFence_1.setCollisionBetween(0,10000);
@@ -551,10 +557,11 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
         sprite.play('RiverDown');
         }
-		if (tile && tile.index === 0) {
+		if (tile && tile.index === 5134) {
         const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
         sprite.play('RiverUp');
         }
+
         });
 
 	}

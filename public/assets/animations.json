@@ -4415,64 +4415,6 @@
             "randomFrame": false
         },
         {
-            "key": "RiverUp",
-            "type": "frame",
-            "frames": [
-                {
-                    "key": "RiverShallowSheet_v01",
-                    "frame": 312,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "RiverShallowSheet_v01",
-                    "frame": 313,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "RiverShallowSheet_v01",
-                    "frame": 314,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "RiverShallowSheet_v01",
-                    "frame": 315,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "RiverShallowSheet_v01",
-                    "frame": 316,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "RiverShallowSheet_v01",
-                    "frame": 317,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "RiverShallowSheet_v01",
-                    "frame": 318,
-                    "duration": 0,
-                    "keyframe": false
-                },
-                {
-                    "key": "RiverShallowSheet_v01",
-                    "frame": 319,
-                    "duration": 0,
-                    "keyframe": false
-                }
-            ],
-            "frameRate": 8,
-            "skipMissedFrames": true,
-            "repeat": -1,
-            "randomFrame": false
-        },
-        {
             "key": "GoblinAttack",
             "type": "frame",
             "frames": [
@@ -4664,6 +4606,64 @@
                 }
             ],
             "frameRate": 10,
+            "skipMissedFrames": true,
+            "repeat": -1,
+            "randomFrame": false
+        },
+        {
+            "key": "RiverUp",
+            "type": "frame",
+            "frames": [
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 252,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 253,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 254,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 255,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 256,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 257,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 258,
+                    "duration": 0,
+                    "keyframe": false
+                },
+                {
+                    "key": "RiverShallowSheet_v01",
+                    "frame": 259,
+                    "duration": 0,
+                    "keyframe": false
+                }
+            ],
+            "frameRate": 8,
             "skipMissedFrames": true,
             "repeat": -1,
             "randomFrame": false

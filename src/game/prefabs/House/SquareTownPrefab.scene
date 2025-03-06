@@ -1,0 +1,33 @@
+{
+    "id": "a9dc4206-ed03-46f0-8af8-0af5e3c7cd4b",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "1db87b71-47d4-4428-8eed-236f3dfdb869",
+            "label": "townHall0",
+            "texture": {
+                "key": "TownHall",
+                "frame": 0
+            },
+            "x": 418,
+            "y": 307
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

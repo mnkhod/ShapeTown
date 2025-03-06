@@ -1,0 +1,33 @@
+{
+    "id": "be9d5c27-97da-415e-8a97-c59ae040ceb7",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "46751c17-4a74-4589-a752-a5882520947c",
+            "label": "adventureGuildBuilding0",
+            "texture": {
+                "key": "AdventureGuildBuilding",
+                "frame": 0
+            },
+            "x": 362,
+            "y": 401
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
