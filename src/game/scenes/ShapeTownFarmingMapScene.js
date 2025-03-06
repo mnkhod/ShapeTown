@@ -141,6 +141,8 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
 		// oldManJackNpcPrefab.bookHud = questBookPrefab;
+		oldManJackNpcPrefab.newItemHud = newItemHudPrefab;
+		// oldManJackNpcPrefab.bookHud = questBookPrefab;
 
 		this.bG_Grass_1 = bG_Grass_1;
 		this.bG_Cliff_1 = bG_Cliff_1;
