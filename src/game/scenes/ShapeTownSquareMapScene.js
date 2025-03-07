@@ -147,15 +147,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// tree_left_side_6
 		const tree_left_side_6 = shapetownSquare.createLayer("Tree left side/1", ["TreePatteren"], 0, 0);
 
-		// forager_home_Campfire_1
-		const forager_home_Campfire_1 = shapetownSquare.createLayer("Forager home/Campfire", ["Campfire_V01"], 0, 0);
-
-		// forager_home_Fire_animation_1
-		const forager_home_Fire_animation_1 = shapetownSquare.createLayer("Forager home/Fire animation", ["CampFireFireSheet"], 0, 0);
-
-		// forager_home_smoke_1
-		const forager_home_smoke_1 = shapetownSquare.createLayer("Forager home/smoke", ["CampfireSmoke"], 0, 0);
-
 		// forager_home_Baket_of_mushrooms_1
 		const forager_home_Baket_of_mushrooms_1 = shapetownSquare.createLayer("Forager home/Baket of mushrooms", ["Apple"], 0, 0);
 
@@ -270,7 +261,11 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		sceneTile.scaleY = 1.586085054631967;
 		this.physics.add.existing(sceneTile, false);
 		sceneTile.body.allowGravity = false;
-		sceneTile.body.setSize(32, 50, false);
+		sceneTile.body.setSize(32, 200, false);
+
+		// squareCampFirePrefab_3
+		const squareCampFirePrefab_3 = new SquareCampFirePrefab(this, 2800, 2700);
+		this.add.existing(squareCampFirePrefab_3);
 
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
@@ -296,9 +291,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.tree_left_side_4 = tree_left_side_4;
 		this.tree_left_side_5 = tree_left_side_5;
 		this.tree_left_side_6 = tree_left_side_6;
-		this.forager_home_Campfire_1 = forager_home_Campfire_1;
-		this.forager_home_Fire_animation_1 = forager_home_Fire_animation_1;
-		this.forager_home_smoke_1 = forager_home_smoke_1;
 		this.forager_home_Baket_of_mushrooms_1 = forager_home_Baket_of_mushrooms_1;
 		this.forager_home_Basket_of_apple_1 = forager_home_Basket_of_apple_1;
 		this.foodStand_FoodstandStall_1 = foodStand_FoodstandStall_1;
@@ -332,6 +324,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.squareDragonHousePrefab = squareDragonHousePrefab;
 		this.squareTownPrefab = squareTownPrefab;
 		this.sceneTile = sceneTile;
+		this.squareCampFirePrefab_3 = squareCampFirePrefab_3;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -385,12 +378,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	tree_left_side_5;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_left_side_6;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	forager_home_Campfire_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	forager_home_Fire_animation_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	forager_home_smoke_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	forager_home_Baket_of_mushrooms_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -457,6 +444,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	squareTownPrefab;
 	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
 	sceneTile;
+	/** @type {SquareCampFirePrefab} */
+	squareCampFirePrefab_3;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -474,6 +463,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.squareFountanPrefab.setupCollision(this.playerPrefab)
 		this.squareCampFirePrefab_1.setupCollision(this.playerPrefab)
 		this.squareCampFirePrefab_2.setupCollision(this.playerPrefab)
+		this.squareCampFirePrefab_3.setupCollision(this.playerPrefab)
 		this.squareCampFirePrefab.setupCollision(this.playerPrefab)
 		this.mineWatchTowerPrefab.setupCollision(this.playerPrefab)
 		this.squareDragonHousePrefab.setupCollision(this.playerPrefab)
@@ -522,6 +512,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.physics.add.collider(this.playerPrefab, this.decoration_Log_1);
 	    this.decoration_Log_1.setCollisionBetween(0,10000);
 	    // this.decoration_Log_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.forager_home_Basket_of_apple_1);
+        this.forager_home_Basket_of_apple_1.setCollisionBetween(0, 10000);
+		// this.forager_home_Basket_of_apple_1.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.barracks_Tents_3);
 	    this.barracks_Tents_3.setCollisionBetween(0,10000);
