@@ -11,6 +11,9 @@ import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import RockMonster from "../prefabs/Mob/RockMonster";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
+import StonePrefab_4 from "../prefabs/stone/StonePrefab_4";
+import StonePrefab_3 from "../prefabs/stone/StonePrefab_3";
+import StonePrefab_1 from "../prefabs/stone/StonePrefab_1";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -30,7 +33,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// shapetownFarmingMap
 		const shapetownFarmingMap = this.add.tilemap("ShapetownFarmingMap");
 		shapetownFarmingMap.addTilesetImage("GroundTileset", "GroundTileset");
-		shapetownFarmingMap.addTilesetImage("ForrestLadge", "ForrestLadge");
 		shapetownFarmingMap.addTilesetImage("TreePatteren", "TreePatteren");
 		shapetownFarmingMap.addTilesetImage("CityHouses_v02", "CityHouses_v02");
 		shapetownFarmingMap.addTilesetImage("Building_5_Door_32x32_2", "Building_5_Door_32x32_2");
@@ -41,7 +43,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		shapetownFarmingMap.addTilesetImage("LakeFloatingRock_V03", "LakeFloatingRock_V03");
 		shapetownFarmingMap.addTilesetImage("LakeFloatingRock_V01", "LakeFloatingRock_V01");
 		shapetownFarmingMap.addTilesetImage("LakeFloatingRock_V02", "LakeFloatingRock_V02");
-		shapetownFarmingMap.addTilesetImage("GroundAccessor", "GroundAccessor");
 		shapetownFarmingMap.addTilesetImage("GroundTileset_V02", "GroundTileset_V02");
 		shapetownFarmingMap.addTilesetImage("SoilCorner_v02", "SoilCorner_v02");
 		shapetownFarmingMap.addTilesetImage("RocksOnGrass_V01", "RocksOnGrass_V01");
@@ -110,7 +111,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 
 		// sceneTile
 		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
-		const sceneTile = this.add.sprite(2470, 1112, "Fruitbushes_V01", 23);
+		const sceneTile = this.add.sprite(2520, 1112, "Fruitbushes_V01", 23);
 		sceneTile.scaleX = 1.3069946364802347;
 		sceneTile.scaleY = 10.586085054631967;
 		this.physics.add.existing(sceneTile, false);
@@ -141,6 +142,22 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const rockMonster_1 = new RockMonster(this, 1013, 420);
 		this.add.existing(rockMonster_1);
 
+		// stonePrefab_4
+		const stonePrefab_4 = new StonePrefab_4(this, 1289, 130);
+		this.add.existing(stonePrefab_4);
+
+		// stonePrefab_3
+		const stonePrefab_3 = new StonePrefab_3(this, 1323, 100);
+		this.add.existing(stonePrefab_3);
+
+		// stonePrefab_1
+		const stonePrefab_1 = new StonePrefab_1(this, 1385, 136);
+		this.add.existing(stonePrefab_1);
+
+		// stonePrefab
+		const stonePrefab = new StonePrefab_3(this, 1375, 98);
+		this.add.existing(stonePrefab);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
@@ -170,6 +187,10 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.messagePrefab = messagePrefab;
 		this.newItemHudPrefab = newItemHudPrefab;
 		this.alertPrefab = alertPrefab;
+		this.stonePrefab_4 = stonePrefab_4;
+		this.stonePrefab_3 = stonePrefab_3;
+		this.stonePrefab_1 = stonePrefab_1;
+		this.stonePrefab = stonePrefab;
 		this.shapetownFarmingMap = shapetownFarmingMap;
 
 		this.events.emit("scene-awake");
@@ -223,6 +244,14 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	newItemHudPrefab;
 	/** @type {AlertPrefab} */
 	alertPrefab;
+	/** @type {StonePrefab_4} */
+	stonePrefab_4;
+	/** @type {StonePrefab_3} */
+	stonePrefab_3;
+	/** @type {StonePrefab_1} */
+	stonePrefab_1;
+	/** @type {StonePrefab_3} */
+	stonePrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownFarmingMap;
 
@@ -302,6 +331,17 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		    this.playerPrefab.x -= 50;
 		    this.cameras.main.fadeIn(2000, 0, 0, 0);
 		});
+
+		this.physics.add.existing(this.stonePrefab, true);
+        this.physics.add.existing(this.stonePrefab_1, true);	
+        this.physics.add.existing(this.stonePrefab_3, true);
+		this.physics.add.existing(this.stonePrefab_4, true);
+
+
+        this.physics.add.collider(this.playerPrefab, this.stonePrefab);
+        this.physics.add.collider(this.playerPrefab, this.stonePrefab_1);
+        this.physics.add.collider(this.playerPrefab, this.stonePrefab_3);
+		this.physics.add.collider(this.playerPrefab, this.stonePrefab_4);
 	}
 
 	/* END-USER-CODE */

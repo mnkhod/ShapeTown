@@ -2689,8 +2689,8 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": 1520,
-            "y": 752
+            "x": 2450,
+            "y": 2752
         },
         {
             "prefabId": "1ad7756a-6fd7-4db7-ae0b-533d58fee4d3",
@@ -2889,10 +2889,9 @@
                 "key": "Fruitbushes_V01",
                 "frame": 23
             },
-            "x": 2440,
-            "y": 2820,
-            "scaleX": 10.306994636480235,
-            "scaleY": 1.586085054631967,
+            "x": 2400,
+            "y": 2860,
+            "scaleX": 6,
             "ArcadeComponent.active": true,
             "allowGravity": false,
             "body.width": 32,
@@ -3275,74 +3274,6 @@
             ]
         },
         {
-            "type": "TilemapLayer",
-            "id": "8466af43-17a9-49d7-8f52-e7940eea6705",
-            "label": "nPC_NPC_Soilder_1",
-            "scope": "CLASS",
-            "tilemapId": "1c545fee-869a-4a91-9651-61b46088fe2c",
-            "layerName": "NPC/NPC Soilder",
-            "tilesets": [
-                "GroundTileset_V02",
-                "TreePatteren",
-                "Fence_V01",
-                "Blacksmith",
-                "NpcBlaksmith",
-                "Foodstand_Busket",
-                "FoodstandBarrel_V01",
-                "FoodstandStall_V01",
-                "Foodstand",
-                "MerchantCabin_v01",
-                "MerchentanCarriege",
-                "WaterwellRoof",
-                "Waterwell",
-                "WaterFountain",
-                "RiverShallowSheet_v01",
-                "StoneBridgeHorizontal_V01",
-                "StoneBridgeVertical_V01",
-                "Tent_V02",
-                "CampfireSmoke",
-                "Campfire_V01",
-                "CampFireFireSheet",
-                "Apple",
-                "CarriageBroken_01",
-                "bush",
-                "BarricadeSpikes_V03",
-                "BarricadeSpikes_V01",
-                "BarricadeSpikes_V02",
-                "Tent_V03",
-                "Tent_V04",
-                "Tree_v014",
-                "Tree_v02",
-                "Tree_v09",
-                "Tree_v08",
-                "Tree_v01",
-                "Tree_v03",
-                "Tree_v05",
-                "Tree_v06",
-                "MerchantIcon",
-                "FoodstandIcon",
-                "Log_V01",
-                "DecorationWeaponStand",
-                "TorchBowl_V01",
-                "WatchtowerBack_01",
-                "WatchtowerFront_01",
-                "Barricade_V01",
-                "AdventureGuildBuilding",
-                "NPCSoilderSpearAttack_V01",
-                "NPCGuardian_V01",
-                "NPCSoildersFullsetWalking_V01",
-                "TownHall",
-                "RockOnGrass_V04",
-                "RockOnGrass_V01",
-                "RockOnGrass_V02",
-                "RockOnGrass_V03",
-                "NPCMarcus_Mining_Fullset",
-                "NPCRowan_Fullset_Walk_V01",
-                "NPCShopStandMaerchant",
-                "NPCGuardian_V01"
-            ]
-        },
-        {
             "type": "Sprite",
             "id": "dce8c94a-57cd-408c-84b6-ab885d067181",
             "label": "npcmarcus",
@@ -3471,6 +3402,232 @@
             },
             "x": 1375,
             "y": 426
+        },
+        {
+            "type": "Sprite",
+            "id": "e6d3b5a6-37d2-4b10-8760-ef5a73b62162",
+            "label": "npcRowan",
+            "texture": {
+                "key": "NPCRowan_Fullset_Attack",
+                "frame": 0
+            },
+            "x": 2000,
+            "y": 592,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcRowan"
+        },
+        {
+            "type": "Sprite",
+            "id": "2d8e3d1c-d1d3-4a21-8db5-8ad099f4027d",
+            "label": "npcRowan_1",
+            "texture": {
+                "key": "NPCRowan_Fullset_Attack",
+                "frame": 0
+            },
+            "x": 1999,
+            "y": 658,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcRowan"
+        },
+        {
+            "type": "Sprite",
+            "id": "91dc0fa0-e6eb-481a-8ac8-02d19339e4d7",
+            "label": "npcRowan_2",
+            "texture": {
+                "key": "NPCRowan_Fullset_Attack",
+                "frame": 0
+            },
+            "x": 1998,
+            "y": 720,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcRowan"
+        },
+        {
+            "type": "Sprite",
+            "id": "fe9590af-7bb3-4236-bf22-a37f79c44d8c",
+            "label": "npcRowan_3",
+            "texture": {
+                "key": "NPCRowan_Fullset_Attack",
+                "frame": 0
+            },
+            "x": 2064,
+            "y": 720,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcRowan"
+        },
+        {
+            "type": "Sprite",
+            "id": "82a11c32-0c70-4018-b40d-56ccabad7e08",
+            "label": "npcRowan_4",
+            "texture": {
+                "key": "NPCRowan_Fullset_Attack",
+                "frame": 0
+            },
+            "x": 2064,
+            "y": 656,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcRowan"
+        },
+        {
+            "type": "Sprite",
+            "id": "62f91c42-7b79-4b8f-a8f9-80dda0acae15",
+            "label": "npcRowan_5",
+            "texture": {
+                "key": "NPCRowan_Fullset_Attack",
+                "frame": 0
+            },
+            "x": 2064,
+            "y": 592,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcRowan"
+        },
+        {
+            "type": "Sprite",
+            "id": "14ddbd05-15ee-4731-ad8f-8a801531d0b9",
+            "label": "npcRowan_6",
+            "texture": {
+                "key": "NPCRowan_Fullset_Attack",
+                "frame": 0
+            },
+            "x": 2128,
+            "y": 717,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcRowan"
+        },
+        {
+            "type": "Sprite",
+            "id": "2cb29986-44e4-4a89-bead-c2e4a3ed0036",
+            "label": "npcRowan_7",
+            "texture": {
+                "key": "NPCRowan_Fullset_Attack",
+                "frame": 0
+            },
+            "x": 2129,
+            "y": 654,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcRowan"
+        },
+        {
+            "type": "Sprite",
+            "id": "012fe658-02c0-4a25-a21c-b7931c9584ca",
+            "label": "npcRowan_8",
+            "texture": {
+                "key": "NPCRowan_Fullset_Attack",
+                "frame": 0
+            },
+            "x": 2127,
+            "y": 591,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcRowan"
+        },
+        {
+            "type": "Sprite",
+            "id": "f7a635ca-21ba-486f-b468-514c23981c4b",
+            "label": "npcRowan_9",
+            "texture": {
+                "key": "NPCRowan_Fullset_Attack",
+                "frame": 0
+            },
+            "x": 2191,
+            "y": 656,
+            "animationPlayMethod": 1,
+            "animationKey": "NpcRowan"
+        },
+        {
+            "type": "Image",
+            "id": "68296cef-9d03-4120-af63-46bb751ac5cd",
+            "label": "barricade_V_3",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Barricade_V01",
+                "frame": 0
+            },
+            "x": 2677.604054921068,
+            "y": 742.8488833372835
+        },
+        {
+            "type": "Sprite",
+            "id": "ef733643-6cd7-49d3-a9f1-dfaebbeb88e5",
+            "label": "sceneTile_1",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Fruitbushes_V01",
+                "frame": 23
+            },
+            "x": 240.4704012575195,
+            "y": 1552.3873203812645,
+            "scaleY": 3.586085054631967,
+            "ArcadeComponent.active": true,
+            "allowGravity": false,
+            "body.width": 32,
+            "body.height": 200
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "224d1d12-c3fd-49de-bb05-6672ca0ceaf3",
+            "label": "nPC_NPC_Soilder_1",
+            "tilemapId": "1c545fee-869a-4a91-9651-61b46088fe2c",
+            "layerName": "NPC/NPC Soilder",
+            "tilesets": [
+                "GroundTileset_V02",
+                "TreePatteren",
+                "Fence_V01",
+                "Blacksmith",
+                "NpcBlaksmith",
+                "Foodstand_Busket",
+                "FoodstandBarrel_V01",
+                "FoodstandStall_V01",
+                "Foodstand",
+                "MerchantCabin_v01",
+                "MerchentanCarriege",
+                "WaterwellRoof",
+                "Waterwell",
+                "WaterFountain",
+                "RiverShallowSheet_v01",
+                "StoneBridgeHorizontal_V01",
+                "StoneBridgeVertical_V01",
+                "Tent_V02",
+                "CampfireSmoke",
+                "Campfire_V01",
+                "CampFireFireSheet",
+                "Apple",
+                "CarriageBroken_01",
+                "bush",
+                "BarricadeSpikes_V03",
+                "BarricadeSpikes_V01",
+                "BarricadeSpikes_V02",
+                "Tent_V03",
+                "Tent_V04",
+                "Tree_v014",
+                "Tree_v02",
+                "Tree_v09",
+                "Tree_v08",
+                "Tree_v01",
+                "Tree_v03",
+                "Tree_v05",
+                "Tree_v06",
+                "MerchantIcon",
+                "FoodstandIcon",
+                "Log_V01",
+                "DecorationWeaponStand",
+                "TorchBowl_V01",
+                "WatchtowerBack_01",
+                "WatchtowerFront_01",
+                "Barricade_V01",
+                "AdventureGuildBuilding",
+                "NPCSoilderSpearAttack_V01",
+                "NPCGuardian_V01",
+                "NPCSoildersFullsetWalking_V01",
+                "TownHall",
+                "RockOnGrass_V04",
+                "RockOnGrass_V01",
+                "RockOnGrass_V02",
+                "RockOnGrass_V03",
+                "NPCMarcus_Mining_Fullset",
+                "NPCRowan_Fullset_Walk_V01",
+                "NPCShopStandMaerchant",
+                "NPCGuardian_V01"
+            ]
         }
     ],
     "plainObjects": [

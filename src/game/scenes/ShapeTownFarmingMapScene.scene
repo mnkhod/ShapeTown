@@ -23,7 +23,6 @@
             "layerName": "BG/Grass",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -34,7 +33,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -51,7 +49,6 @@
             "layerName": "BG/Cliff",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -62,7 +59,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -79,7 +75,6 @@
             "layerName": "BG/Rock On Cliff",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -90,7 +85,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -107,7 +101,6 @@
             "layerName": "BG/ramp",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -118,7 +111,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -135,7 +127,6 @@
             "layerName": "Lake/lake",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -146,7 +137,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -163,7 +153,6 @@
             "layerName": "Lake/Lake Decoration",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -174,7 +163,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -191,7 +179,6 @@
             "layerName": "tree border/Fence",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -202,7 +189,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -219,7 +205,6 @@
             "layerName": "tree border/7",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -230,7 +215,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -247,7 +231,6 @@
             "layerName": "tree border/6",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -258,7 +241,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -275,7 +257,6 @@
             "layerName": "tree border/5",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -286,7 +267,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -303,7 +283,6 @@
             "layerName": "tree border/4",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -314,7 +293,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -331,7 +309,6 @@
             "layerName": "tree border/3",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -342,7 +319,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -359,7 +335,6 @@
             "layerName": "tree border/2",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -370,7 +345,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -387,7 +361,6 @@
             "layerName": "tree border/1",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -398,7 +371,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -415,7 +387,6 @@
             "layerName": "tree border/0",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -426,7 +397,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -479,7 +449,6 @@
             "layerName": "tree border/7",
             "tilesets": [
                 "GroundTileset",
-                "ForrestLadge",
                 "TreePatteren",
                 "CityHouses_v02",
                 "Building_5_Door_32x32_2",
@@ -490,7 +459,6 @@
                 "LakeFloatingRock_V03",
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
-                "GroundAccessor",
                 "GroundTileset_V02",
                 "SoilCorner_v02",
                 "RocksOnGrass_V01",
@@ -507,7 +475,7 @@
                 "key": "Fruitbushes_V01",
                 "frame": 23
             },
-            "x": 2470,
+            "x": 2520,
             "y": 1112,
             "scaleX": 1.3069946364802347,
             "scaleY": 10.586085054631967,
@@ -592,6 +560,54 @@
             "label": "rockMonster_1",
             "x": 1013,
             "y": 420
+        },
+        {
+            "prefabId": "ec253479-a01f-428a-acd6-f3f27648354c",
+            "id": "3b043967-0c8e-49c2-9190-a1a97a2d0f52",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "stonePrefab_4",
+            "scope": "CLASS",
+            "x": 1289,
+            "y": 130
+        },
+        {
+            "prefabId": "b4e83410-d4f3-4f07-a0bf-946f72fba283",
+            "id": "511679c6-bc27-48ec-ade9-039618aa4aa9",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "stonePrefab_3",
+            "scope": "CLASS",
+            "x": 1323,
+            "y": 100
+        },
+        {
+            "prefabId": "571e7db8-49e4-420c-b7c4-9602e696521a",
+            "id": "51b41f37-a52e-4203-839d-e14e6fbb2d0f",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "stonePrefab_1",
+            "scope": "CLASS",
+            "x": 1385,
+            "y": 136
+        },
+        {
+            "prefabId": "b4e83410-d4f3-4f07-a0bf-946f72fba283",
+            "id": "8b0b753d-f4a9-4356-9b91-4d28db1c1933",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "stonePrefab",
+            "scope": "CLASS",
+            "x": 1375,
+            "y": 98
         }
     ],
     "plainObjects": [
@@ -604,10 +620,6 @@
                 {
                     "name": "GroundTileset",
                     "imageKey": "GroundTileset"
-                },
-                {
-                    "name": "ForrestLadge",
-                    "imageKey": "ForrestLadge"
                 },
                 {
                     "name": "TreePatteren",
@@ -648,10 +660,6 @@
                 {
                     "name": "LakeFloatingRock_V02",
                     "imageKey": "LakeFloatingRock_V02"
-                },
-                {
-                    "name": "GroundAccessor",
-                    "imageKey": "GroundAccessor"
                 },
                 {
                     "name": "GroundTileset_V02",

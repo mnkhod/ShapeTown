@@ -312,7 +312,7 @@
             "label": "playerPrefab",
             "scope": "CLASS",
             "x": 1500,
-            "y": 429
+            "y": 229
         },
         {
             "prefabId": "5aebe3a1-c3ca-4c4d-8c06-25a73ca34ef3",
@@ -504,9 +504,8 @@
                 "frame": 23
             },
             "x": 1600,
-            "y": 100,
+            "y": 20,
             "scaleX": 10.306994636480235,
-            "scaleY": 1.586085054631967,
             "ArcadeComponent.active": true,
             "allowGravity": false,
             "body.width": 32,

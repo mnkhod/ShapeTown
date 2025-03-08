@@ -2386,6 +2386,19 @@
                 "key": "NPCOldManJack"
             },
             {
+                "url": "assets/NPC/NPC Captan Rowan/Walk&Idle/Full set/NPCRowan_Fullset_Attack.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCRowan_Fullset_Attack"
+            },
+            {
                 "url": "assets/NPC/NPC Captan Rowan/Walk&Idle/Full set/NPCRowan_Fullset_Walk_V01.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -2427,8 +2440,8 @@
             {
                 "url": "assets/NPC/NPC Soilders/Walk/NPCSoildersFullsetWalking_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -2453,8 +2466,8 @@
             {
                 "url": "assets/NPC/NPC Soilders/Walk/NPC with spear/Attack/NPCSoilderSpearAttack_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -2462,6 +2475,32 @@
                 },
                 "type": "spritesheet",
                 "key": "NPCSoilderSpearAttack_V01"
+            },
+            {
+                "url": "assets/NPC/NPC Soilders/Walk/NPC with spear/Attack/NPCSoilderSpearFullsetAttack_V01.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCSoilderSpearFullsetAttack_V01"
+            },
+            {
+                "url": "assets/NPC/NPC Soilders/Walk/NPC with spear/Walk/NPCSoilderSpearFullsetWalking_V01.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCSoilderSpearFullsetWalking_V01"
             },
             {
                 "url": "assets/InventoryIcons/octopus.png",

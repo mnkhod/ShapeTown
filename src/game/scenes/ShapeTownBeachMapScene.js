@@ -86,7 +86,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.add.existing(beachHousePrefab);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 1500, 429);
+		const playerPrefab = new PlayerPrefab(this, 1500, 229);
 		this.add.existing(playerPrefab);
 
 		// seaLevelBuildingLighthousePrefab
@@ -151,12 +151,12 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 		// sceneTile
 		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
-		const sceneTile = this.add.sprite(1600, 100, "Fruitbushes_V01", 23);
+		const sceneTile = this.add.sprite(1600, 20, "Fruitbushes_V01", 23);
 		sceneTile.scaleX = 10.306994636480235;
-		sceneTile.scaleY = 1.586085054631967;
+		sceneTile.scaleY = 1;
 		this.physics.add.existing(sceneTile, false);
 		sceneTile.body.allowGravity = false;
-		sceneTile.body.setSize(32, 10, false);
+		sceneTile.body.setSize(32, 200, false);
 
 		this.sand_1 = sand_1;
 		this.beachDeckPrefab = beachDeckPrefab;

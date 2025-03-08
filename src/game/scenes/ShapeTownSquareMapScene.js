@@ -211,7 +211,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 1520, 752);
+		const playerPrefab = new PlayerPrefab(this, 2450, 2752);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -259,9 +259,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 
 		// sceneTile
 		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
-		const sceneTile = this.add.sprite(2440, 2820, "Fruitbushes_V01", 23);
-		sceneTile.scaleX = 10.306994636480235;
-		sceneTile.scaleY = 1.586085054631967;
+		const sceneTile = this.add.sprite(2400, 2860, "Fruitbushes_V01", 23);
+		sceneTile.scaleX = 6;
 		this.physics.add.existing(sceneTile, false);
 		sceneTile.body.allowGravity = false;
 		sceneTile.body.setSize(32, 200, false);
@@ -293,9 +292,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// nPC_NPC_Rowan_Capitian_1
 		const nPC_NPC_Rowan_Capitian_1 = shapetownSquare.createLayer("NPC/NPC Rowan Capitian", ["NPCRowan_Fullset_Walk_V01"], 0, 0);
 
-		// nPC_NPC_Soilder_1
-		const nPC_NPC_Soilder_1 = shapetownSquare.createLayer("NPC/NPC Soilder", ["NPCSoilderSpearAttack_V01","NPCGuardian_V01"], 0, 0);
-
 		// npcmarcus
 		const npcmarcus = this.add.sprite(3695, 1150, "NPCMarcus_Mining_Fullset", 8);
 		npcmarcus.play("npcmarcus");
@@ -314,6 +310,60 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 
 		// barricade_V_2
 		const barricade_V_2 = this.add.image(1375, 426, "Barricade_V01", 0);
+
+		// npcRowan
+		const npcRowan = this.add.sprite(2000, 592, "NPCRowan_Fullset_Attack", 0);
+		npcRowan.play("NpcRowan");
+
+		// npcRowan_1
+		const npcRowan_1 = this.add.sprite(1999, 658, "NPCRowan_Fullset_Attack", 0);
+		npcRowan_1.play("NpcRowan");
+
+		// npcRowan_2
+		const npcRowan_2 = this.add.sprite(1998, 720, "NPCRowan_Fullset_Attack", 0);
+		npcRowan_2.play("NpcRowan");
+
+		// npcRowan_3
+		const npcRowan_3 = this.add.sprite(2064, 720, "NPCRowan_Fullset_Attack", 0);
+		npcRowan_3.play("NpcRowan");
+
+		// npcRowan_4
+		const npcRowan_4 = this.add.sprite(2064, 656, "NPCRowan_Fullset_Attack", 0);
+		npcRowan_4.play("NpcRowan");
+
+		// npcRowan_5
+		const npcRowan_5 = this.add.sprite(2064, 592, "NPCRowan_Fullset_Attack", 0);
+		npcRowan_5.play("NpcRowan");
+
+		// npcRowan_6
+		const npcRowan_6 = this.add.sprite(2128, 717, "NPCRowan_Fullset_Attack", 0);
+		npcRowan_6.play("NpcRowan");
+
+		// npcRowan_7
+		const npcRowan_7 = this.add.sprite(2129, 654, "NPCRowan_Fullset_Attack", 0);
+		npcRowan_7.play("NpcRowan");
+
+		// npcRowan_8
+		const npcRowan_8 = this.add.sprite(2127, 591, "NPCRowan_Fullset_Attack", 0);
+		npcRowan_8.play("NpcRowan");
+
+		// npcRowan_9
+		const npcRowan_9 = this.add.sprite(2191, 656, "NPCRowan_Fullset_Attack", 0);
+		npcRowan_9.play("NpcRowan");
+
+		// barricade_V_3
+		const barricade_V_3 = this.add.image(2677.604054921068, 742.8488833372835, "Barricade_V01", 0);
+
+		// sceneTile_1
+		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
+		const sceneTile_1 = this.add.sprite(240.4704012575195, 1552.3873203812645, "Fruitbushes_V01", 23);
+		sceneTile_1.scaleY = 3.586085054631967;
+		this.physics.add.existing(sceneTile_1, false);
+		sceneTile_1.body.allowGravity = false;
+		sceneTile_1.body.setSize(32, 200, false);
+
+		// nPC_NPC_Soilder_1
+		shapetownSquare.createLayer("NPC/NPC Soilder", ["NPCSoilderSpearAttack_V01","NPCGuardian_V01"], 0, 0);
 
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
@@ -376,13 +426,14 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.decoration_Rock_2 = decoration_Rock_2;
 		this.decoration_Rock_3 = decoration_Rock_3;
 		this.nPC_NPC_Rowan_Capitian_1 = nPC_NPC_Rowan_Capitian_1;
-		this.nPC_NPC_Soilder_1 = nPC_NPC_Soilder_1;
 		this.npcmarcus = npcmarcus;
 		this.tree_left_side = tree_left_side;
 		this.barricade_V010 = barricade_V010;
 		this.barricade_V = barricade_V;
 		this.barricade_V_1 = barricade_V_1;
 		this.barricade_V_2 = barricade_V_2;
+		this.barricade_V_3 = barricade_V_3;
+		this.sceneTile_1 = sceneTile_1;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -510,8 +561,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	decoration_Rock_3;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	nPC_NPC_Rowan_Capitian_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	nPC_NPC_Soilder_1;
 	/** @type {Phaser.GameObjects.Sprite} */
 	npcmarcus;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -524,6 +573,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	barricade_V_1;
 	/** @type {Phaser.GameObjects.Image} */
 	barricade_V_2;
+	/** @type {Phaser.GameObjects.Image} */
+	barricade_V_3;
+	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
+	sceneTile_1;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -663,11 +716,15 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         this.physics.add.existing(this.barricade_V_1, true);
         this.physics.add.existing(this.barricade_V, true);
         this.physics.add.existing(this.barricade_V010, true);
+		this.physics.add.existing(this.barricade_V_3, true);
+
 
         this.physics.add.collider(this.playerPrefab, this.barricade_V_2);
         this.physics.add.collider(this.playerPrefab, this.barricade_V_1);
         this.physics.add.collider(this.playerPrefab, this.barricade_V);
         this.physics.add.collider(this.playerPrefab, this.barricade_V010);
+		this.physics.add.collider(this.playerPrefab, this.barricade_V_3);
+
 
 		const waterTiles = this.river_River_1.getTilesWithin();
         waterTiles.forEach(tile => {
@@ -725,6 +782,16 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 
 		    this.scene.switch("ShapeTownBeachMapScene");
 		    this.playerPrefab.y -= 30;
+		    this.cameras.main.fadeIn(2000, 0, 0, 0);
+		});
+
+		this.physics.add.overlap(this.sceneTile_1, this.playerPrefab, () => {
+		    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+			this.newItemHudPrefab.updateGlobalInventory();
+			}
+
+		    this.scene.switch("ShapeTownFarmingMapScene");
+		    this.playerPrefab.x += 30;
 		    this.cameras.main.fadeIn(2000, 0, 0, 0);
 		});
 
