@@ -294,6 +294,14 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 
                 this.scene.newItemHudPrefab.addItem(this.seed, harvestAsset, 0, 1, true);
                 
+                console.log("Harvesting crop:", this.seed);
+                if (this.scene.triggerQuestEvent) {
+                    console.log("Triggering harvest quest event");
+                    this.scene.triggerQuestEvent('harvest:cropHarvested', { crop: this.seed, harvest: this });
+                } else {
+                    console.log("triggerQuestEvent not available");
+                }
+                
                 this.isReadyForHarvest = false;
                 this.isWatered = false;
                 this.growthStage = 0;

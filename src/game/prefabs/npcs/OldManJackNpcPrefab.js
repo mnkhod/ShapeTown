@@ -138,8 +138,17 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         });
 
         this.npc.on('pointerdown', async function (_pointer) {
+            console.log("Jack NPC clicked");
+            
+            if (this.scene.triggerQuestEvent) {
+                console.log("Triggering Jack interaction quest event");
+                this.scene.triggerQuestEvent('npc:jackInteraction', { npc: this });
+            } else {
+                console.log("triggerQuestEvent not available on scene");
+            }
+            
             let distance = this.getDistance(this.player, this)
-
+        
             if (distance > 60) {
                 this.scene.alertPrefab.alert("Too Far")
                 return;

@@ -24,11 +24,13 @@ import GoblinMonster from "../prefabs/Mob/GoblinMonster";
 import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
 import OrcMonster from "../prefabs/Mob/OrcMonster";
 /* START-USER-IMPORTS */
-import { checkFirstHarvestAchievement,checkGiftFromNatureAchievement,checkFirstFishAchievement } from "../utility";
+import questSystem from "../../components/QuestSystem";
+import { extendSceneWithQuests } from "../../components/QuestSystem"; 
+import { extendHarvestPrefab } from "../../components/QuestSystem";
+import { extendJackNpc } from "../../components/QuestSystem";
 import { EventBus } from '../../game/EventBus';
 import initInventoryBridge from "../../components/phaser-react-bridge";
 /* END-USER-IMPORTS */
-
 export default class TutorialScene extends Phaser.Scene {
 
 	constructor() {
@@ -444,18 +446,13 @@ export default class TutorialScene extends Phaser.Scene {
 
 			this.reactEvent.emit('scene-switched', this);
 
-			// Add this timer to make sure an item is selected
 			this.time.delayedCall(500, () => {
-			  // Check if there's no selected item but there are items in the inventory
 			  if (this.newItemHudPrefab.selectedItem === null) {
-				// Find the first non-null item in the inventory
 				for (let i = 0; i < this.newItemHudPrefab.itemData.length; i++) {
 				  if (this.newItemHudPrefab.itemData[i]) {
-					// Set this item as selected
 					this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[i];
 					this.newItemHudPrefab.activeIndex = i;
 
-					// Update UI to show selection
 					if (this.newItemHudPrefab.activeItemSlots) {
 					  this.newItemHudPrefab.activeItemSlots.forEach(slot => {
 						if (slot) slot.visible = false;
@@ -465,7 +462,6 @@ export default class TutorialScene extends Phaser.Scene {
 					  }
 					}
 
-					console.log("Auto-selected item:", this.newItemHudPrefab.selectedItem, "at index:", i);
 					break;
 				  }
 				}
@@ -475,7 +471,7 @@ export default class TutorialScene extends Phaser.Scene {
 		});
 
 		this.events.on('shutdown', this.onSceneShutdown, this);
-	  }
+	}
 	onSceneShutdown() {
 	  if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
 		this.newItemHudPrefab.updateGlobalInventory();
@@ -493,6 +489,8 @@ export default class TutorialScene extends Phaser.Scene {
 		this.cameras.main.setBounds(-120, -130, 1344, 1792);
         this.physics.world.bounds.width = 1000;
         this.physics.world.bounds.height = 800;
+		extendSceneWithQuests(this);
+
 
     	this.initInventorySystem();
 
@@ -502,10 +500,9 @@ export default class TutorialScene extends Phaser.Scene {
 		this.merchantPrefab.itemHud = this.newItemHudPrefab;
 
 		this.events.on('wake', (sys, data) => {
-		  console.log(`[${this.scene.key}] Scene woken up, syncing inventory`);
 		  if (this.newItemHudPrefab) {
 		    import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
-		      globalInventory.syncInventoryToScene(this);
+		      	globalInventory.syncInventoryToScene(this);
 		    });
 		  }
 		});
@@ -602,6 +599,33 @@ export default class TutorialScene extends Phaser.Scene {
             this.profilePrefab.visible = false;
         }
 
+		if (!this.game.questSystem) {
+			this.game.questSystem = questSystem;
+		}
+
+		window.getQuestProgress = () => {
+			const progress = this.game.questSystem.getQuestProgress();
+			return progress;
+		};
+
+		window.updateQuestProgress = (update) => {
+			this.game.questSystem.updateQuestProgress(update);
+		};
+
+		extendSceneWithQuests(this);
+
+		setTimeout(() => {
+			this.questSystem.updateSubtask("001", "001-1", true);
+		}, 2000);
+
+		extendHarvestPrefab(HarvestPrefab);
+
+		extendJackNpc(OldManJackNpcPrefab);
+		
+		extendHarvestPrefab(HarvestPrefab);
+		
+		extendJackNpc(OldManJackNpcPrefab);
+		
         let bounds = this.fishingArea.getBounds()
         let newX = bounds.x + bounds.width
         let newY = bounds.y - 10

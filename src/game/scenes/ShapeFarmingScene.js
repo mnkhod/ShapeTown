@@ -6,9 +6,11 @@
 import PlayerPrefab from "../prefabs/PlayerPrefab";
 import ShapeFarmingHousePrefab from "../prefabs/House/ShapeFarmingHousePrefab";
 /* START-USER-IMPORTS */
+import { extendSceneWithQuests } from '../../components/QuestSystem';
+import { extendHarvestPrefab } from "../../components/QuestSystem";
 /* END-USER-IMPORTS */
 
-export default class ShapeFarmingScene extends Phaser.Scene {
+class ShapeFarmingScene extends Phaser.Scene {
 
 	constructor() {
 		super("ShapeFarmingScene");
@@ -154,21 +156,81 @@ export default class ShapeFarmingScene extends Phaser.Scene {
 	// Write your code here
 
 	create() {
+		this.editorCreate();
 
-	this.editorCreate();
+		this.cameras.main.setBounds(-768, -568, 2540, 1880);
+		this.physics.world.bounds.width = 1000;
+		this.physics.world.bounds.height = 800;
 
-	this.cameras.main.setBounds(-768, -568, 2540, 1880);
-    this.physics.world.bounds.width = 1000;
-    this.physics.world.bounds.height = 800;
+		this.shapeFarmingHousePrefab.setupCollision(this.playerPrefab);
 
+		this.setupSimpleAlertSystem();
+		
+		this.triggerQuestEvent('player:enteredFarm');
+		
+		this.createFarmingPlots();
+	}
 	
-	this.shapeFarmingHousePrefab.setupCollision(this.playerPrefab)
-
-	// this.tile_Layer.setupCollision(this.playerPrefab)
+	setupSimpleAlertSystem() {
+		this.alertPrefab = {
+			alert: (message) => {
+				const alertText = this.add.text(
+					this.cameras.main.centerX, 
+					100, 
+					message, 
+					{ 
+						backgroundColor: '#000000', 
+						padding: { x: 15, y: 10 }, 
+						borderRadius: 5,
+						color: '#ffffff',
+						fontSize: '20px'
+					}
+				).setOrigin(0.5);
+				
+				alertText.setDepth(1000);
+				
+				this.tweens.add({
+					targets: alertText,
+					alpha: 0,
+					duration: 2000,
+					delay: 2000,
+					onComplete: () => alertText.destroy()
+				});
+			}
+		};
+	}
+	
+	createFarmingPlots() {
+		if (typeof HarvestPrefab !== 'undefined') {
+			extendHarvestPrefab(HarvestPrefab);
+			
+			this.farmingPlots = [];
+			
+			const farmStartX = -300;
+			const farmStartY = -100;
+			const plotSize = 32;
+			
+			for (let y = 0; y < 4; y++) {
+				for (let x = 0; x < 5; x++) {
+					const plot = new HarvestPrefab(
+						this, 
+						farmStartX + (x * plotSize), 
+						farmStartY + (y * plotSize)
+					);
+					
+					plot.state = "ROCK";
+					plot.setupBasedOnState();
+					
+					this.farmingPlots.push(plot);
+				}
+			}
+		}
 	}
 
 	/* END-USER-CODE */
 }
+
+export default extendSceneWithQuests(ShapeFarmingScene);
 
 /* END OF COMPILED CODE */
 

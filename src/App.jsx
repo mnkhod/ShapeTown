@@ -27,6 +27,7 @@ function App() {
     const [showInventory, setShowInventory] = useState(false);
     const [showTrader, setShowTrader] = useState(false);
     const [showQuest, setShowQuest] = useState(false);
+    const [questProgress, setQuestProgress] = useState({});
     const [showSettingsModal, setShowSettingsModal] = useState(false);
     const [phaserInstance, setPhaserInstance] = useState(null);
     const [showNavigateBack, setShowNavigateBack] = useState(false);
@@ -118,7 +119,19 @@ function App() {
     useEffect(() => {
         getMetamaskAccount()
     }, [])
-
+    useEffect(() => {
+        if (showQuest && window.getQuestProgress) {
+            const progress = window.getQuestProgress();
+            setQuestProgress(progress);
+        
+            const intervalId = setInterval(() => {
+                const updatedProgress = window.getQuestProgress();
+                setQuestProgress(updatedProgress);
+            }, 1000);
+            
+            return () => clearInterval(intervalId);
+        }
+    }, [showQuest]);
     async function getMetamaskAccount() {
         let signer = null;
 
@@ -161,9 +174,16 @@ function App() {
                 />
             )}
             {showQuest && (
-               <QuestComponent 
-                   onClose={() => setShowQuest(false)}
-               />
+                <QuestComponent 
+                    onClose={() => setShowQuest(false)}
+                    playerProgress={questProgress}
+                    onQuestUpdate={(update) => {
+                        if (window.updateQuestProgress) {
+                            window.updateQuestProgress(update);
+                            setQuestProgress(window.getQuestProgress());
+                        }
+                    }}
+                />
             )}
             {showSettingsModal && (
                 <SettingsComponent
