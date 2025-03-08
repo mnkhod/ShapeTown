@@ -1,0 +1,33 @@
+{
+    "id": "ec253479-a01f-428a-acd6-f3f27648354c",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "ceab7d8f-e971-41c4-9c90-a6863e48cd4a",
+            "label": "rockOnGrass_V040",
+            "texture": {
+                "key": "RockOnGrass_V04",
+                "frame": 0
+            },
+            "x": 458,
+            "y": 323
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

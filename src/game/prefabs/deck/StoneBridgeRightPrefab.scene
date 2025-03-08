@@ -1,0 +1,33 @@
+{
+    "id": "9ac0a875-1cc6-458b-9626-7e79a73831ca",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "b89d6d08-bf83-4a62-ba75-ae2a59deecea",
+            "label": "stoneBridgeHorizontal_Prefab_V010",
+            "texture": {
+                "key": "StoneBridgeHorizontal_Prefab_V01",
+                "frame": 0
+            },
+            "x": 314,
+            "y": 313
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

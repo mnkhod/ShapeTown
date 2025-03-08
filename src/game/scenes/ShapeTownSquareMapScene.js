@@ -10,6 +10,8 @@ import SquareFirePrefab from "../prefabs/Lightning/SquareFirePrefab";
 import MineWatchTowerPrefab from "../prefabs/House/MineWatchTowerPrefab";
 import SquareDragonHousePrefab from "../prefabs/House/SquareDragonHousePrefab";
 import SquareTownPrefab from "../prefabs/House/SquareTownPrefab";
+import StoneBridgeDownPrefab from "../prefabs/deck/StoneBridgeDownPrefab";
+import StoneBridgeRightPrefab from "../prefabs/deck/StoneBridgeRightPrefab";
 /* START-USER-IMPORTS */
 /* END-USER-IMPORTS */
 
@@ -31,7 +33,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		shapetownSquare.addTilesetImage("GroundTileset_V02", "GroundTileset_V02");
 		shapetownSquare.addTilesetImage("TreePatteren", "TreePatteren");
 		shapetownSquare.addTilesetImage("Fence_V01", "Fence_V01");
-		shapetownSquare.addTilesetImage("TownHall", "TownHall");
 		shapetownSquare.addTilesetImage("Blacksmith", "Blacksmith");
 		shapetownSquare.addTilesetImage("NpcBlaksmith", "NpcBlaksmith");
 		shapetownSquare.addTilesetImage("Foodstand_Busket", "Foodstand_Busket");
@@ -62,6 +63,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		shapetownSquare.addTilesetImage("Tree_v02", "Tree_v02");
 		shapetownSquare.addTilesetImage("Tree_v09", "Tree_v09");
 		shapetownSquare.addTilesetImage("Tree_v08", "Tree_v08");
+		shapetownSquare.addTilesetImage("Tree_v01");
 		shapetownSquare.addTilesetImage("Tree_v03", "Tree_v03");
 		shapetownSquare.addTilesetImage("Tree_v05", "Tree_v05");
 		shapetownSquare.addTilesetImage("Tree_v06", "Tree_v06");
@@ -74,6 +76,18 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		shapetownSquare.addTilesetImage("WatchtowerFront_01", "WatchtowerFront_01");
 		shapetownSquare.addTilesetImage("Barricade_V01", "BarricadeSpikes_V01");
 		shapetownSquare.addTilesetImage("AdventureGuildBuilding", "AdventureGuildBuilding");
+		shapetownSquare.addTilesetImage("NPCSoilderSpearAttack_V01");
+		shapetownSquare.addTilesetImage("NPCGuardian_V01");
+		shapetownSquare.addTilesetImage("NPCSoildersFullsetWalking_V01");
+		shapetownSquare.addTilesetImage("TownHall", "TownHall");
+		shapetownSquare.addTilesetImage("RockOnGrass_V04");
+		shapetownSquare.addTilesetImage("RockOnGrass_V01");
+		shapetownSquare.addTilesetImage("RockOnGrass_V02");
+		shapetownSquare.addTilesetImage("RockOnGrass_V03");
+		shapetownSquare.addTilesetImage("NPCMarcus_Mining_Fullset");
+		shapetownSquare.addTilesetImage("NPCRowan_Fullset_Walk_V01");
+		shapetownSquare.addTilesetImage("NPCShopStandMaerchant");
+		shapetownSquare.addTilesetImage("NPCGuardian_V01");
 
 		// bG_grass_1
 		const bG_grass_1 = shapetownSquare.createLayer("BG/grass", ["GroundTileset_V02"], 0, 0);
@@ -95,12 +109,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 
 		// river_River_1
 		const river_River_1 = shapetownSquare.createLayer("River/River", ["RiverShallowSheet_v01","GroundTileset_V02"], 0, 0);
-
-		// river_Bridge
-		const river_Bridge = shapetownSquare.createLayer("River/Bridge1", ["StoneBridgeHorizontal_V01"], 0, 0);
-
-		// river_Bridge_1
-		const river_Bridge_1 = shapetownSquare.createLayer("River/Bridge 2", ["StoneBridgeVertical_V01"], 0, 0);
 
 		// decoration_
 		const decoration_ = shapetownSquare.createLayer("Decoration/9", ["TreePatteren"], 0, 0);
@@ -205,7 +213,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["Barricade_V01","BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 2420, 2652);
+		const playerPrefab = new PlayerPrefab(this, 3020, 1752);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -232,9 +240,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const squareFirePrefab_1 = new SquareFirePrefab(this, 2630, 742);
 		this.add.existing(squareFirePrefab_1);
 
-		// barracks_Tents_3
-		const barracks_Tents_3 = shapetownSquare.createLayer("Barracks/Tents1", ["Tent_V04"], 0, 0);
-
 		// mineWatchTowerPrefab
 		const mineWatchTowerPrefab = new MineWatchTowerPrefab(this, 2565, 655);
 		this.add.existing(mineWatchTowerPrefab);
@@ -251,7 +256,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.add.existing(squareDragonHousePrefab);
 
 		// squareTownPrefab
-		const squareTownPrefab = new SquareTownPrefab(this, 2240, 1425);
+		const squareTownPrefab = new SquareTownPrefab(this, 2270, 1424);
 		this.add.existing(squareTownPrefab);
 
 		// sceneTile
@@ -267,6 +272,14 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const squareCampFirePrefab_3 = new SquareCampFirePrefab(this, 2800, 2700);
 		this.add.existing(squareCampFirePrefab_3);
 
+		// stoneBridgeDownPrefab
+		const stoneBridgeDownPrefab = new StoneBridgeDownPrefab(this, 2434, 2536);
+		this.add.existing(stoneBridgeDownPrefab);
+
+		// stoneBridgeRightPrefab
+		const stoneBridgeRightPrefab = new StoneBridgeRightPrefab(this, 3183, 1731);
+		this.add.existing(stoneBridgeRightPrefab);
+
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
 		this.bG_tallgrass_1 = bG_tallgrass_1;
@@ -274,8 +287,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.collution_WoodenFence_1 = collution_WoodenFence_1;
 		this.collution_StoneFence_1 = collution_StoneFence_1;
 		this.river_River_1 = river_River_1;
-		this.river_Bridge = river_Bridge;
-		this.river_Bridge_1 = river_Bridge_1;
 		this.decoration_ = decoration_;
 		this.decoration_Waterwell_1 = decoration_Waterwell_1;
 		this.decoration_WaterwellRoof_1 = decoration_WaterwellRoof_1;
@@ -317,7 +328,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.squareCampFirePrefab_2 = squareCampFirePrefab_2;
 		this.squareFirePrefab = squareFirePrefab;
 		this.squareFirePrefab_1 = squareFirePrefab_1;
-		this.barracks_Tents_3 = barracks_Tents_3;
 		this.mineWatchTowerPrefab = mineWatchTowerPrefab;
 		this.mineWatchTowerPrefab_1 = mineWatchTowerPrefab_1;
 		this.barracks_Tents_1 = barracks_Tents_1;
@@ -325,6 +335,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.squareTownPrefab = squareTownPrefab;
 		this.sceneTile = sceneTile;
 		this.squareCampFirePrefab_3 = squareCampFirePrefab_3;
+		this.stoneBridgeDownPrefab = stoneBridgeDownPrefab;
+		this.stoneBridgeRightPrefab = stoneBridgeRightPrefab;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -344,10 +356,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	collution_StoneFence_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	river_River_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	river_Bridge;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	river_Bridge_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	decoration_;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -430,8 +438,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	squareFirePrefab;
 	/** @type {SquareFirePrefab} */
 	squareFirePrefab_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	barracks_Tents_3;
 	/** @type {MineWatchTowerPrefab} */
 	mineWatchTowerPrefab;
 	/** @type {MineWatchTowerPrefab} */
@@ -446,6 +452,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	sceneTile;
 	/** @type {SquareCampFirePrefab} */
 	squareCampFirePrefab_3;
+	/** @type {StoneBridgeDownPrefab} */
+	stoneBridgeDownPrefab;
+	/** @type {StoneBridgeRightPrefab} */
+	stoneBridgeRightPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -468,6 +478,9 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.mineWatchTowerPrefab.setupCollision(this.playerPrefab)
 		this.squareDragonHousePrefab.setupCollision(this.playerPrefab)
 		this.squareTownPrefab.setupCollision(this.playerPrefab)
+		this.stoneBridgeDownPrefab.setDepth(10)
+		this.stoneBridgeRightPrefab.setDepth(10)
+		this.playerPrefab.setDepth(100)
 
 		this.physics.add.collider(this.playerPrefab, this.collution_WoodenFence_1);
 	    this.collution_WoodenFence_1.setCollisionBetween(0,10000);
@@ -517,13 +530,21 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         this.forager_home_Basket_of_apple_1.setCollisionBetween(0, 10000);
 		// this.forager_home_Basket_of_apple_1.renderDebug(this.add.graphics());
 
-		this.physics.add.collider(this.playerPrefab, this.barracks_Tents_3);
-	    this.barracks_Tents_3.setCollisionBetween(0,10000);
-	    // this.barracks_Tents_3.renderDebug(this.add.graphics());
+		// this.physics.add.collider(this.playerPrefab, this.barracks_Tents_3);
+	    // this.barracks_Tents_3.setCollisionBetween(0,10000);
+	    // // this.barracks_Tents_3.renderDebug(this.add.graphics());
 
 		this.physics.add.collider(this.playerPrefab, this.barracks_Tents_1);
 	    this.barracks_Tents_1.setCollisionBetween(0,10000);
 	    // this.barracks_Tents_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.tree_left_side_1);
+	    this.tree_left_side_1.setCollisionBetween(0,10000);
+	    // this.tree_left_side_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.tree_left_side);
+	    this.tree_left_side.setCollisionBetween(0,10000);
+	    // this.tree_left_side.renderDebug(this.add.graphics());
 
 		const waterTiles = this.river_River_1.getTilesWithin();
         waterTiles.forEach(tile => {
@@ -531,42 +552,46 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
         sprite.play('RiverMiddle');
         }
-		  if (tile && tile.index === 5603) {
+		if (tile && tile.index === 5459) {
+        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        sprite.play('RiverMiddle');
+        }
+		  if (tile && tile.index === 5429) {
         const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
         sprite.play('RiverMiddle_1');
         }
-		  if (tile && tile.index === 5693) {
+		  if (tile && tile.index === 5519) {
         const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
         sprite.play('RiverMiddle_2');
         }
-		if (tile && tile.index === 5663) {
+		if (tile && tile.index === 5549) {
         const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
         sprite.play('RiverMiddle_3');
         }
-		if (tile && tile.index === 5196) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverLeft_1');
-        }
-		if (tile && tile.index === 5192) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverRight_1');
-        }
-		if (tile && tile.index === 5225) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverLeftDown_1');
-        }
-		if (tile && tile.index === 5255) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverLeft_2');
-        }
-		if (tile && tile.index === 5254) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverDown');
-        }
-		if (tile && tile.index === 5134) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverUp');
-        }
+		// if (tile && tile.index === 0) {
+        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        // sprite.play('RiverLeft_1');
+        // }
+		// if (tile && tile.index === 5192) {
+        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        // sprite.play('RiverRight_1');
+        // }
+		// if (tile && tile.index === 5225) {
+        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        // sprite.play('RiverLeftDown_1');
+        // }
+		// if (tile && tile.index === 5255) {
+        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        // sprite.play('RiverLeft_2');
+        // }
+		// if (tile && tile.index === 5254) {
+        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        // sprite.play('RiverDown');
+        // }
+		// if (tile && tile.index === 5134) {
+        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+        // sprite.play('RiverUp');
+        // }
 
         });
 

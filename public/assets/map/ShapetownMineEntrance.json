@@ -833,20 +833,20 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5281, 5282, 0, 0, 0, 5281, 5282, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5283, 5284, 0, 0, 0, 5283, 5284, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5581, 5582, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5597, 5598, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5613, 5614, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5629, 5630, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5369, 5370, 0, 0, 0, 0, 0, 0, 0, 0, 5379, 5380, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5281, 5282, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5613, 5614, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5281, 5282, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5629, 5630, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5283, 5284, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5281, 5282, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5283, 5284, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -988,13 +988,13 @@
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.0",
+ "tiledversion":"1.11.2",
  "tileheight":32,
  "tilesets":[
         {
          "columns":55,
          "firstgid":1,
-         "image":"..\/Ground tileset\/GroundTileset_V02.png",
+         "image":"..\/assets\/Ground tileset\/GroundTileset_V02.png",
          "imageheight":2304,
          "imagewidth":1760,
          "margin":0,
@@ -1139,7 +1139,7 @@
         {
          "columns":16,
          "firstgid":3961,
-         "image":"..\/Tree\/TreePatteren.png",
+         "image":"..\/assets\/Tree\/TreePatteren.png",
          "imageheight":992,
          "imagewidth":512,
          "margin":0,
@@ -1152,7 +1152,7 @@
         {
          "columns":6,
          "firstgid":4457,
-         "image":"..\/Decoration\/RockOnEmpty_V01.png",
+         "image":"..\/assets\/Decoration\/RockOnEmpty_V01.png",
          "imageheight":320,
          "imagewidth":192,
          "margin":0,
@@ -1165,7 +1165,7 @@
         {
          "columns":28,
          "firstgid":4517,
-         "image":"..\/Building\/GuardPostTower_V01.png",
+         "image":"..\/assets\/Building\/GuardPostTower_V01.png",
          "imageheight":608,
          "imagewidth":896,
          "margin":0,
@@ -1178,7 +1178,7 @@
         {
          "columns":15,
          "firstgid":5049,
-         "image":"..\/Building\/BridgeRobe.png",
+         "image":"..\/assets\/Building\/BridgeRobe.png",
          "imageheight":160,
          "imagewidth":480,
          "margin":0,
@@ -1191,7 +1191,7 @@
         {
          "columns":5,
          "firstgid":5124,
-         "image":"..\/Ground tileset\/MineEntrance.png",
+         "image":"..\/assets\/Ground tileset\/MineEntrance.png",
          "imageheight":96,
          "imagewidth":160,
          "margin":0,
@@ -1204,7 +1204,7 @@
         {
          "columns":4,
          "firstgid":5139,
-         "image":"..\/Building\/WatchtowerBackRegular_V01.png",
+         "image":"..\/assets\/Building\/WatchtowerFrontRegular_V01.png",
          "imageheight":64,
          "imagewidth":128,
          "margin":0,
@@ -1217,7 +1217,7 @@
         {
          "columns":4,
          "firstgid":5147,
-         "image":"..\/Building\/WatchtowerFront_01.png",
+         "image":"..\/assets\/Building\/WatchtowerFront_01.png",
          "imageheight":224,
          "imagewidth":128,
          "margin":0,
@@ -1230,7 +1230,7 @@
         {
          "columns":5,
          "firstgid":5175,
-         "image":"..\/Building\/Miner'stower.png",
+         "image":"..\/assets\/Building\/Miner'stower.png",
          "imageheight":256,
          "imagewidth":160,
          "margin":0,
@@ -1243,7 +1243,7 @@
         {
          "columns":3,
          "firstgid":5215,
-         "image":"..\/Tree\/TreeNaked_V03.png",
+         "image":"..\/assets\/Tree\/TreeNaked_V03.png",
          "imageheight":192,
          "imagewidth":96,
          "margin":0,
@@ -1256,7 +1256,7 @@
         {
          "columns":5,
          "firstgid":5233,
-         "image":"..\/Tree\/TreeNaked_V01.png",
+         "image":"..\/assets\/Tree\/TreeNaked_V01.png",
          "imageheight":192,
          "imagewidth":160,
          "margin":0,
@@ -1269,7 +1269,7 @@
         {
          "columns":3,
          "firstgid":5263,
-         "image":"..\/Tree\/TreeNaked_V02.png",
+         "image":"..\/assets\/Tree\/TreeNaked_V02.png",
          "imageheight":192,
          "imagewidth":96,
          "margin":0,
@@ -1282,7 +1282,7 @@
         {
          "columns":2,
          "firstgid":5281,
-         "image":"..\/Decoration\/TorchBowlRegular_V01.png",
+         "image":"..\/assets\/Decoration\/TorchBowlRegular_V01.png",
          "imageheight":64,
          "imagewidth":64,
          "margin":0,
@@ -1295,7 +1295,7 @@
         {
          "columns":12,
          "firstgid":5285,
-         "image":"..\/Decoration\/AncientScript_V01.png",
+         "image":"..\/assets\/Decoration\/AncientScript_V01.png",
          "imageheight":256,
          "imagewidth":384,
          "margin":0,
@@ -1308,7 +1308,7 @@
         {
          "columns":40,
          "firstgid":5381,
-         "image":"..\/Decoration\/CampFireFireSheet_V02.png",
+         "image":"..\/assets\/Decoration\/CampFireFireSheet_V02.png",
          "imageheight":160,
          "imagewidth":1280,
          "margin":0,
@@ -1460,6 +1460,660 @@
                          "tileid":77
                         }],
                  "id":42
+                }],
+         "tilewidth":32
+        }, 
+        {
+         "columns":16,
+         "firstgid":5581,
+         "image":"..\/assets\/NPC\/NPC Soilders\/Walk\/NPC with spear\/Walk\/NPCSoilderSpearFullsetWalking_V01.png",
+         "imageheight":256,
+         "imagewidth":512,
+         "margin":0,
+         "name":"NPCSoilderSpearFullsetWalking_V01",
+         "spacing":0,
+         "tilecount":128,
+         "tileheight":32,
+         "tiles":[
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":0
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":2
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":4
+                        }],
+                 "id":0
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":1
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":3
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":5
+                        }],
+                 "id":1
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":6
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":8
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":10
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":12
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":14
+                        }],
+                 "id":6
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":7
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":9
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":11
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":13
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":15
+                        }],
+                 "id":7
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":16
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":18
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":20
+                        }],
+                 "id":16
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":17
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":19
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":21
+                        }],
+                 "id":17
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":22
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":24
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":26
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":28
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":30
+                        }],
+                 "id":22
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":23
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":25
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":27
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":29
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":31
+                        }],
+                 "id":23
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":32
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":34
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":36
+                        }],
+                 "id":32
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":33
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":35
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":37
+                        }],
+                 "id":33
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":38
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":40
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":42
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":44
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":46
+                        }],
+                 "id":38
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":39
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":41
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":43
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":45
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":47
+                        }],
+                 "id":39
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":48
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":50
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":52
+                        }],
+                 "id":48
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":49
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":51
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":53
+                        }],
+                 "id":49
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":54
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":56
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":58
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":60
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":62
+                        }],
+                 "id":54
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":55
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":57
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":59
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":61
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":63
+                        }],
+                 "id":55
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":64
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":66
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":68
+                        }],
+                 "id":64
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":65
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":67
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":69
+                        }],
+                 "id":65
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":70
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":72
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":74
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":76
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":78
+                        }],
+                 "id":70
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":71
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":73
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":75
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":77
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":79
+                        }],
+                 "id":71
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":80
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":82
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":84
+                        }],
+                 "id":80
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":81
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":83
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":85
+                        }],
+                 "id":81
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":86
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":88
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":90
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":92
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":94
+                        }],
+                 "id":86
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":87
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":89
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":91
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":93
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":95
+                        }],
+                 "id":87
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":96
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":98
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":100
+                        }],
+                 "id":96
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":97
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":99
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":101
+                        }],
+                 "id":97
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":102
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":104
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":106
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":108
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":110
+                        }],
+                 "id":102
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":103
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":105
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":107
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":109
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":111
+                        }],
+                 "id":103
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":112
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":114
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":116
+                        }],
+                 "id":112
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":200,
+                         "tileid":113
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":115
+                        }, 
+                        {
+                         "duration":200,
+                         "tileid":117
+                        }],
+                 "id":113
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":118
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":120
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":122
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":124
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":126
+                        }],
+                 "id":118
+                }, 
+                {
+                 "animation":[
+                        {
+                         "duration":100,
+                         "tileid":119
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":121
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":123
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":125
+                        }, 
+                        {
+                         "duration":100,
+                         "tileid":127
+                        }],
+                 "id":119
                 }],
          "tilewidth":32
         }],

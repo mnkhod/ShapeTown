@@ -16,8 +16,8 @@ export default class SquareTownPrefab extends Phaser.GameObjects.Image {
 		scene.physics.add.existing(this, false);
 		
 		this.body.allowGravity = false;
-		this.body.setSize(346, 170);
-		this.body.setOffset(15, 155);
+		this.body.setSize(365, 170);
+		this.body.setOffset(10, 155);
 		this.body.moves = false;
 		this.body.immovable = true;
 		

@@ -2334,6 +2334,32 @@
                 "key": "NPCGuardian_V01"
             },
             {
+                "url": "assets/NPC/NPC Marcus miner/NPCMarcus_Mining_Fullset.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCMarcus_Mining_Fullset"
+            },
+            {
+                "url": "assets/NPC/NPC Marcus miner/NPCMarcus_Walking_Fullset.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCMarcus_Walking_Fullset"
+            },
+            {
                 "url": "assets/NPC/NPCMerchant.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -2360,6 +2386,19 @@
                 "key": "NPCOldManJack"
             },
             {
+                "url": "assets/NPC/NPC Captan Rowan/Walk&Idle/Full set/NPCRowan_Fullset_Walk_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCRowan_Fullset_Walk_V01"
+            },
+            {
                 "url": "assets/mapAssets/NPCShopStandMaerchant.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -2384,6 +2423,45 @@
                 },
                 "type": "spritesheet",
                 "key": "NPCShopStandMaerchant_1"
+            },
+            {
+                "url": "assets/NPC/NPC Soilders/Walk/NPCSoildersFullsetWalking_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCSoildersFullsetWalking_V01"
+            },
+            {
+                "url": "assets/NPC/NPC Soilders/Walk/NPCSoildersFullWalking_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCSoildersFullWalking_V01"
+            },
+            {
+                "url": "assets/NPC/NPC Soilders/Walk/NPC with spear/Attack/NPCSoilderSpearAttack_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCSoilderSpearAttack_V01"
             },
             {
                 "url": "assets/InventoryIcons/octopus.png",
@@ -2767,10 +2845,23 @@
                 "key": "RockOnEmpty_V01"
             },
             {
+                "url": "assets/Decoration/RockOnGrass_V01.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnGrass_V01"
+            },
+            {
                 "url": "assets/Decoration/RockOnGrass_V02.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -2778,6 +2869,32 @@
                 },
                 "type": "spritesheet",
                 "key": "RockOnGrass_V02"
+            },
+            {
+                "url": "assets/Decoration/RockOnGrass_V03.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnGrass_V03"
+            },
+            {
+                "url": "assets/Decoration/RockOnGrass_V04.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnGrass_V04"
             },
             {
                 "url": "assets/Decoration/RockOnSand_V01.png",
@@ -2984,6 +3101,19 @@
                 "key": "star"
             },
             {
+                "url": "assets/Ground tileset/StoneBridgeHorizontal_Prefab_V01.png",
+                "frameConfig": {
+                    "frameWidth": 160,
+                    "frameHeight": 128,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "StoneBridgeHorizontal_Prefab_V01"
+            },
+            {
                 "url": "assets/Ground tileset/StoneBridgeHorizontal_V01.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -2997,10 +3127,23 @@
                 "key": "StoneBridgeHorizontal_V01"
             },
             {
+                "url": "assets/Ground tileset/StoneBridgeVertical_Prefab_V01.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 160,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "StoneBridgeVertical_Prefab_V01"
+            },
+            {
                 "url": "assets/Ground tileset/StoneBridgeVertical_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 224,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3208,6 +3351,19 @@
                 },
                 "type": "spritesheet",
                 "key": "Tree_v_4"
+            },
+            {
+                "url": "assets/Tree/Tree_v01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Tree_v01"
             },
             {
                 "url": "assets/mapAssets/Tree_v014.png",
