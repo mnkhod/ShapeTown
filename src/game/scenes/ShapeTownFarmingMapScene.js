@@ -1,4 +1,3 @@
-
 // You can write more code here
 
 /* START OF COMPILED CODE */
@@ -48,6 +47,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		shapetownFarmingMap.addTilesetImage("RocksOnGrass_V01", "RocksOnGrass_V01");
 		shapetownFarmingMap.addTilesetImage("RockOnGrass_V02", "RockOnGrass_V02");
 		shapetownFarmingMap.addTilesetImage("RoadStone", "RoadStone");
+		shapetownFarmingMap.addTilesetImage("Fence_V01", "Fence_V01");
 
 		// bG_Grass_1
 		const bG_Grass_1 = shapetownFarmingMap.createLayer("BG/Grass", ["GroundTileset_V02"], 0, 0);
@@ -87,6 +87,9 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 
 		// tree_border_4
 		const tree_border_4 = shapetownFarmingMap.createLayer("tree border/2", ["TreePatteren"], 0, 0);
+
+		// farm_Fence_1
+		const farm_Fence_1 = shapetownFarmingMap.createLayer("Farm Fence", ["Fence_V01"], 0, 0);
 
 		// tree_border_5
 		const tree_border_5 = shapetownFarmingMap.createLayer("tree border/1", ["TreePatteren"], 0, 0);
@@ -176,6 +179,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.tree_border_2 = tree_border_2;
 		this.tree_border_3 = tree_border_3;
 		this.tree_border_4 = tree_border_4;
+		this.farm_Fence_1 = farm_Fence_1;
 		this.tree_border_5 = tree_border_5;
 		this.tree_border_6 = tree_border_6;
 		this.playerPrefab = playerPrefab;
@@ -222,6 +226,8 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	tree_border_3;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_border_4;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	farm_Fence_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_border_5;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -322,26 +328,30 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	  	this.physics.add.collider(this.playerPrefab, this.appleTreePrefab);
 	  	// this.appleTreePrefab.renderDebug(this.add.graphics());
 
-				this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-		    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-			this.newItemHudPrefab.updateGlobalInventory();
-			}
+      // Fixed: Using the proper method for tilemap layer collisions instead of setupCollision
+	  	this.physics.add.collider(this.playerPrefab, this.farm_Fence_1);
+	  	this.farm_Fence_1.setCollisionBetween(0, 10000);
+	  	// this.farm_Fence_1.renderDebug(this.add.graphics());
 
-		    this.scene.switch("ShapeTownSquareMapScene");
-		    this.playerPrefab.x -= 50;
-		    this.cameras.main.fadeIn(2000, 0, 0, 0);
-		});
+      this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
+        if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+          this.newItemHudPrefab.updateGlobalInventory();
+        }
 
-		this.physics.add.existing(this.stonePrefab, true);
-        this.physics.add.existing(this.stonePrefab_1, true);	
-        this.physics.add.existing(this.stonePrefab_3, true);
-		this.physics.add.existing(this.stonePrefab_4, true);
+        this.scene.switch("ShapeTownSquareMapScene");
+        this.playerPrefab.x -= 50;
+        this.cameras.main.fadeIn(2000, 0, 0, 0);
+      });
 
+      this.physics.add.existing(this.stonePrefab, true);
+      this.physics.add.existing(this.stonePrefab_1, true);	
+      this.physics.add.existing(this.stonePrefab_3, true);
+      this.physics.add.existing(this.stonePrefab_4, true);
 
-        this.physics.add.collider(this.playerPrefab, this.stonePrefab);
-        this.physics.add.collider(this.playerPrefab, this.stonePrefab_1);
-        this.physics.add.collider(this.playerPrefab, this.stonePrefab_3);
-		this.physics.add.collider(this.playerPrefab, this.stonePrefab_4);
+      this.physics.add.collider(this.playerPrefab, this.stonePrefab);
+      this.physics.add.collider(this.playerPrefab, this.stonePrefab_1);
+      this.physics.add.collider(this.playerPrefab, this.stonePrefab_3);
+      this.physics.add.collider(this.playerPrefab, this.stonePrefab_4);
 	}
 
 	/* END-USER-CODE */
