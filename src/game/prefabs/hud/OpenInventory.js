@@ -15,21 +15,15 @@ export default class OpenInventory extends Phaser.GameObjects.Container {
 
 		// openInventory
 		const openInventory = scene.add.image(24, 24, "OpenInventory");
-		openInventory.scaleX = 0.5;
-		openInventory.scaleY = 0.5;
 		this.add(openInventory);
 
 		// hoveredOpenInventory
 		const hoveredOpenInventory = scene.add.image(24, 24, "HoveredOpenInventory");
-		hoveredOpenInventory.scaleX = 0.5;
-		hoveredOpenInventory.scaleY = 0.5;
 		hoveredOpenInventory.visible = false;
 		this.add(hoveredOpenInventory);
 
 		// hotkey
-		const hotkey = scene.add.image(37, 35, "HotkeyTab");
-		hotkey.scaleX = 0.5;
-		hotkey.scaleY = 0.5;
+		const hotkey = scene.add.image(49, 46, "HotkeyTab");
 		this.add(hotkey);
 
 		// key_tab
@@ -131,8 +125,8 @@ export default class OpenInventory extends Phaser.GameObjects.Container {
         if (!this.visible) return;
 
         const cam = this.scene.cameras.main;
-        let newX = cam.worldView.right - 100; 
-        let newY = cam.worldView.bottom - 60;
+        let newX = cam.worldView.right - 90; 
+        let newY = cam.worldView.bottom - 48;
 
         this.setPosition(
             Phaser.Math.Linear(this.x, newX, 1),

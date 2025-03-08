@@ -8,12 +8,25 @@ import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
-import RockMonster from "../prefabs/Mob/RockMonster";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
+import RockMonster from "../prefabs/Mob/RockMonster";
 import StonePrefab_4 from "../prefabs/stone/StonePrefab_4";
 import StonePrefab_3 from "../prefabs/stone/StonePrefab_3";
 import StonePrefab_1 from "../prefabs/stone/StonePrefab_1";
+import OpenInventory from "../prefabs/hud/OpenInventory";
+import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
+import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
+import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
+import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
+import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 /* START-USER-IMPORTS */
+import questSystem from "../../components/QuestSystem";
+import { extendSceneWithQuests } from "../../components/QuestSystem"; 
+import { extendHarvestPrefab } from "../../components/QuestSystem";
+import { extendJackNpc } from "../../components/QuestSystem";
+import initInventoryBridge from "../../components/phaser-react-bridge";
+import { EventBus } from '../../game/EventBus';
+import HarvestPrefab from "../prefabs/objects/HarvestPrefab";
 /* END-USER-IMPORTS */
 
 export default class ShapeTownFarmingMapScene extends Phaser.Scene {
@@ -23,6 +36,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+		this.reactEvent = EventBus
 		/* END-USER-CTR-CODE */
 	}
 
@@ -133,10 +147,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const newItemHudPrefab = new NewItemHudPrefab(this, 422, 205);
 		this.add.existing(newItemHudPrefab);
 
-		// rockMonster
-		const rockMonster = new RockMonster(this, 0, 0);
-		this.add.existing(rockMonster);
-
 		// alertPrefab
 		const alertPrefab = new AlertPrefab(this, 2560, 0);
 		this.add.existing(alertPrefab);
@@ -160,6 +170,33 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// stonePrefab
 		const stonePrefab = new StonePrefab_3(this, 1375, 98);
 		this.add.existing(stonePrefab);
+
+		// openInventory
+		const openInventory = new OpenInventory(this, 2337, 1617);
+		this.add.existing(openInventory);
+
+		// openMapPrefab
+		const openMapPrefab = new OpenMapPrefab(this, 2293, 1612);
+		this.add.existing(openMapPrefab);
+
+		// profilePrefab
+		const profilePrefab = new ProfilePrefab(this, 1188, 901);
+		this.add.existing(profilePrefab);
+
+		// optionsListPrefab
+		const optionsListPrefab = new OptionsListPrefab(this, 2398, 758);
+		this.add.existing(optionsListPrefab);
+
+		// questBookPrefab
+		const questBookPrefab = new QuestBookPrefab(this, 478, 1439);
+		this.add.existing(questBookPrefab);
+
+		// minimapPrefab
+		const minimapPrefab = new MinimapPrefab(this, 926, 934);
+		this.add.existing(minimapPrefab);
+
+		// plantingArea_1
+		const plantingArea_1 = shapetownFarmingMap.createLayer("PlantingArea", ["GroundTileset_V02"], 0, 0);
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
@@ -195,6 +232,13 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.stonePrefab_3 = stonePrefab_3;
 		this.stonePrefab_1 = stonePrefab_1;
 		this.stonePrefab = stonePrefab;
+		this.openInventory = openInventory;
+		this.openMapPrefab = openMapPrefab;
+		this.profilePrefab = profilePrefab;
+		this.optionsListPrefab = optionsListPrefab;
+		this.questBookPrefab = questBookPrefab;
+		this.minimapPrefab = minimapPrefab;
+		this.plantingArea_1 = plantingArea_1;
 		this.shapetownFarmingMap = shapetownFarmingMap;
 
 		this.events.emit("scene-awake");
@@ -258,13 +302,64 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	stonePrefab_1;
 	/** @type {StonePrefab_3} */
 	stonePrefab;
+	/** @type {OpenInventory} */
+	openInventory;
+	/** @type {OpenMapPrefab} */
+	openMapPrefab;
+	/** @type {ProfilePrefab} */
+	profilePrefab;
+	/** @type {OptionsListPrefab} */
+	optionsListPrefab;
+	/** @type {QuestBookPrefab} */
+	questBookPrefab;
+	/** @type {MinimapPrefab} */
+	minimapPrefab;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	plantingArea_1;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownFarmingMap;
 
 	/* START-USER-CODE */
 
 	// Write your code here
+	setupHarvestTiles() {
+		const soilLayer = this.plantingArea_1;
+		const width = soilLayer.width;
+		const height = soilLayer.height;
+	
+		for (let y = 0; y < height; y++) {
+			for (let x = 0; x < width; x++) {
+				const tile = soilLayer.getTileAt(x, y);
+	
+				if (tile && tile.index === 2401) {
+					const worldX = tile.pixelX + soilLayer.x + (tile.width / 2);
+					const worldY = tile.pixelY + soilLayer.y + (tile.height / 2);
+	
+					const harvestTile = new HarvestPrefab(this, worldX, worldY);
+					this.add.existing(harvestTile);
+					harvestTile.state = "GROUND"; 
+					harvestTile.setupBasedOnState();
+					harvestTile.setDepth(5);
+					if (!this.harvestTiles) {
+						this.harvestTiles = [];
+					}
+					this.harvestTiles.push(harvestTile);
+				}
+			}
+		}
+	}
 
+	setupLayerDepths() {
+		this.profilePrefab?.setDepth(90);
+		this.openInventory?.setDepth(90);
+	    this.questBookPrefab?.setDepth(90);
+	    this.newItemHudPrefab?.setDepth(90);
+	    this.messagePrefab?.setDepth(90);
+	    this.alertPrefab?.setDepth(90);
+		this.openMapPrefab?.setDepth(90);
+		this.optionsListPrefab?.setDepth(90);
+		this.playerPrefab?.setDepth(90);
+	}
 	create() {
 	  	this.editorCreate();
 		window.questBookPrefab = null;
@@ -272,6 +367,8 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	  	this.physics.world.bounds.width = 1000;
 	  	this.physics.world.bounds.height = 800;
 
+		this.setupHarvestTiles();
+		this.setupLayerDepths();
 	  	this.achievements = {
 	  	  	firstHarvestAchievement: false,
 	  	  	giftFromNatureAchievement: false,
@@ -353,7 +450,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
       this.physics.add.collider(this.playerPrefab, this.stonePrefab_3);
       this.physics.add.collider(this.playerPrefab, this.stonePrefab_4);
 	}
-
 	/* END-USER-CODE */
 }
 

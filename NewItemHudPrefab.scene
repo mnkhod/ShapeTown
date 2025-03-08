@@ -16,8 +16,6 @@
             "type": "Container",
             "id": "c5a4fc72-2015-4507-ada4-fe1c6b43965a",
             "label": "container_1",
-            "scaleX": 0.5,
-            "scaleY": 0.5,
             "list": [
                 {
                     "type": "Image",
@@ -27,10 +25,11 @@
                     "texture": {
                         "key": "InGameInventoryBackground"
                     },
-                    "x": 155.25,
+                    "x": 310.5,
                     "y": 24.75,
                     "scaleX": 0.5,
-                    "scaleY": 0.5
+                    "scaleY": 0.5,
+                    "originX": 1
                 },
                 {
                     "type": "Container",

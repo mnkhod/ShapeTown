@@ -571,17 +571,6 @@
             "y": 205
         },
         {
-            "prefabId": "26b6b331-5847-4e61-b92e-748a6600902e",
-            "id": "37df0743-6f5f-47f7-961c-338ff989c778",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "rockMonster",
-            "x": 0,
-            "y": 0
-        },
-        {
             "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
             "id": "3b3726e7-e44b-45b5-884e-e7800b29c60e",
             "unlock": [
@@ -651,6 +640,105 @@
             "scope": "CLASS",
             "x": 1375,
             "y": 98
+        },
+        {
+            "prefabId": "d9cd0bbb-a8fc-4188-bf3b-a1043ac8444d",
+            "id": "aa679e37-4c4c-4128-ae66-61d810da4ddc",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "openInventory",
+            "scope": "CLASS",
+            "x": 2337,
+            "y": 1617
+        },
+        {
+            "prefabId": "511211d3-4280-4710-b0e3-c823277bb8e4",
+            "id": "d88a69d8-d941-47c8-8da7-c7bc1e8309f8",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "openMapPrefab",
+            "scope": "CLASS",
+            "x": 2293,
+            "y": 1612
+        },
+        {
+            "prefabId": "05640e95-1b2a-411d-bbb2-3af441962740",
+            "id": "d2c6a16a-e9fe-4e79-8545-e45860f3a6ee",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "profilePrefab",
+            "scope": "CLASS",
+            "x": 1188,
+            "y": 901
+        },
+        {
+            "prefabId": "e1ab5904-77e5-46c1-9532-c3d7be0e73be",
+            "id": "b40ab7f7-4710-42b5-926d-99a24e421e42",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "optionsListPrefab",
+            "scope": "CLASS",
+            "x": 2398,
+            "y": 758
+        },
+        {
+            "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
+            "id": "758f9d31-0240-4bd2-8ca0-908aa709ca6c",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "questBookPrefab",
+            "scope": "CLASS",
+            "x": 478,
+            "y": 1439
+        },
+        {
+            "prefabId": "2e844f73-6bf0-4cf6-98c7-64322f7616d0",
+            "id": "8fc2a3d0-f08f-4d51-bb52-e4e7687c9dfe",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "minimapPrefab",
+            "scope": "CLASS",
+            "x": 926,
+            "y": 934
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "ba4f5d78-d4b5-44a7-b4bd-0a9777e13544",
+            "label": "plantingArea_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "PlantingArea",
+            "tilesets": [
+                "GroundTileset",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundTileset_V02",
+                "SoilCorner_v02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone",
+                "Fence_V01"
+            ]
         }
     ],
     "plainObjects": [

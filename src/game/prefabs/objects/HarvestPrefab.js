@@ -348,19 +348,21 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                     }
                 }
                 
-                this.setTexture("RoadStone", this.tileId);
+                this.setTexture("GroundTileset_V02", this.tileId);
                 if (this.physicsBody) {
                     this.physicsBody.enable = false;
                 }
                 break;
             case "SOIL":
                 this.setTexture("GroundTilestSoil", 3);
+                this.tileId = null;
+                this.preFX.clear();
                 break;
             case "PLANTED":
                 if (CROP_DATA[this.seed]) {
                     this.setTexture(CROP_DATA[this.seed].spritesheet, CROP_DATA[this.seed].seedFrame);
                 } else {
-                    this.setTexture("FarmingCropsVer2", 0);
+                    this.setTexture("GroundTilestSoil", 3);
                 }
                 break;
             case "WATERED":
@@ -565,10 +567,10 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                     this.scene.alertPrefab.alert("Select Hoe");
                     break;
                 }
-                if (this.tileId !== 83) {
-                    this.scene.alertPrefab.alert("Can't sow this ground!");
-                    break;
-                }
+                // if (this.tileId !== 83) {
+                //     this.scene.alertPrefab.alert("Can't sow this ground!");
+                //     break;
+                // }
                 this.state = "SOIL";
                 this.setupBasedOnState();
                 break;

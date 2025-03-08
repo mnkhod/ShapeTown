@@ -26,9 +26,7 @@
                         "key": "OpenInventory"
                     },
                     "x": 24,
-                    "y": 24,
-                    "scaleX": 0.5,
-                    "scaleY": 0.5
+                    "y": 24
                 },
                 {
                     "type": "Image",
@@ -39,8 +37,6 @@
                     },
                     "x": 24,
                     "y": 24,
-                    "scaleX": 0.5,
-                    "scaleY": 0.5,
                     "visible": false
                 },
                 {
@@ -50,10 +46,8 @@
                     "texture": {
                         "key": "HotkeyTab"
                     },
-                    "x": 37,
-                    "y": 35,
-                    "scaleX": 0.5,
-                    "scaleY": 0.5
+                    "x": 49,
+                    "y": 46
                 }
             ]
         }
