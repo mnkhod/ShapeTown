@@ -63,7 +63,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		shapetownSquare.addTilesetImage("Tree_v02", "Tree_v02");
 		shapetownSquare.addTilesetImage("Tree_v09", "Tree_v09");
 		shapetownSquare.addTilesetImage("Tree_v08", "Tree_v08");
-		shapetownSquare.addTilesetImage("Tree_v01");
+		shapetownSquare.addTilesetImage("Tree_v01", "Tree_v01");
 		shapetownSquare.addTilesetImage("Tree_v03", "Tree_v03");
 		shapetownSquare.addTilesetImage("Tree_v05", "Tree_v05");
 		shapetownSquare.addTilesetImage("Tree_v06", "Tree_v06");
@@ -76,18 +76,18 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		shapetownSquare.addTilesetImage("WatchtowerFront_01", "WatchtowerFront_01");
 		shapetownSquare.addTilesetImage("Barricade_V01", "BarricadeSpikes_V01");
 		shapetownSquare.addTilesetImage("AdventureGuildBuilding", "AdventureGuildBuilding");
-		shapetownSquare.addTilesetImage("NPCSoilderSpearAttack_V01");
-		shapetownSquare.addTilesetImage("NPCGuardian_V01");
-		shapetownSquare.addTilesetImage("NPCSoildersFullsetWalking_V01");
+		shapetownSquare.addTilesetImage("NPCSoilderSpearAttack_V01", "NPCSoilderSpearAttack_V01");
+		shapetownSquare.addTilesetImage("NPCGuardian_V01", "NPCGuardian_V01");
+		shapetownSquare.addTilesetImage("NPCSoildersFullsetWalking_V01", "NPCSoildersFullsetWalking_V01");
 		shapetownSquare.addTilesetImage("TownHall", "TownHall");
-		shapetownSquare.addTilesetImage("RockOnGrass_V04");
-		shapetownSquare.addTilesetImage("RockOnGrass_V01");
-		shapetownSquare.addTilesetImage("RockOnGrass_V02");
-		shapetownSquare.addTilesetImage("RockOnGrass_V03");
-		shapetownSquare.addTilesetImage("NPCMarcus_Mining_Fullset");
-		shapetownSquare.addTilesetImage("NPCRowan_Fullset_Walk_V01");
-		shapetownSquare.addTilesetImage("NPCShopStandMaerchant");
-		shapetownSquare.addTilesetImage("NPCGuardian_V01");
+		shapetownSquare.addTilesetImage("RockOnGrass_V04", "RockOnGrass_V04");
+		shapetownSquare.addTilesetImage("RockOnGrass_V01", "RockOnGrass_V01");
+		shapetownSquare.addTilesetImage("RockOnGrass_V02", "RockOnGrass_V02");
+		shapetownSquare.addTilesetImage("RockOnGrass_V03", "RockOnGrass_V03");
+		shapetownSquare.addTilesetImage("NPCMarcus_Mining_Fullset", "NPCMarcus_Mining_Fullset");
+		shapetownSquare.addTilesetImage("NPCRowan_Fullset_Walk_V01", "NPCRowan_Fullset_Walk_V01");
+		shapetownSquare.addTilesetImage("NPCShopStandMaerchant", "NPCShopStandMaerchant");
+		shapetownSquare.addTilesetImage("NPCGuardian_V01", "NPCGuardian_V01");
 
 		// bG_grass_1
 		const bG_grass_1 = shapetownSquare.createLayer("BG/grass", ["GroundTileset_V02"], 0, 0);
@@ -97,6 +97,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 
 		// bG_tallgrass_1
 		const bG_tallgrass_1 = shapetownSquare.createLayer("BG/tallgrass", ["GroundTileset_V02"], 0, 0);
+
+		// npcBlackSmithRight
+		const npcBlackSmithRight = this.add.sprite(1662, 1920, "NpcBlaksmith", 0);
+		npcBlackSmithRight.play("NpcBlackSmithRight");
 
 		// collution_Cliff_1
 		const collution_Cliff_1 = shapetownSquare.createLayer("Collution/Cliff", ["GroundTileset_V02"], 0, 0);
@@ -108,7 +112,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const collution_StoneFence_1 = shapetownSquare.createLayer("Collution/StoneFence", ["GroundTileset_V02"], 0, 0);
 
 		// river_River_1
-		const river_River_1 = shapetownSquare.createLayer("River/River", ["RiverShallowSheet_v01","GroundTileset_V02"], 0, 0);
+		const river_River_1 = shapetownSquare.createLayer("River/River", ["RiverShallowSheet_v01"], 0, 0);
 
 		// decoration_
 		const decoration_ = shapetownSquare.createLayer("Decoration/9", ["TreePatteren"], 0, 0);
@@ -134,9 +138,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// tree_left_side_
 		const tree_left_side_ = shapetownSquare.createLayer("Tree left side/8", ["TreePatteren"], 0, 0);
 
-		// tree_left_side
-		const tree_left_side = shapetownSquare.createLayer("Tree left side/7", ["TreePatteren"], 0, 0);
-
 		// tree_left_side_1
 		const tree_left_side_1 = shapetownSquare.createLayer("Tree left side/6", ["TreePatteren"], 0, 0);
 
@@ -152,6 +153,9 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// tree_left_side_5
 		const tree_left_side_5 = shapetownSquare.createLayer("Tree left side/2", ["TreePatteren"], 0, 0);
 
+		// forager_home_Tent_1
+		const forager_home_Tent_1 = shapetownSquare.createLayer("Forager home/Tent", ["Tent_V02"], 0, 0);
+
 		// tree_left_side_6
 		const tree_left_side_6 = shapetownSquare.createLayer("Tree left side/1", ["TreePatteren"], 0, 0);
 
@@ -161,11 +165,11 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// forager_home_Basket_of_apple_1
 		const forager_home_Basket_of_apple_1 = shapetownSquare.createLayer("Forager home/Basket of apple", ["Apple"], 0, 0);
 
-		// foodStand_FoodstandStall_1
-		const foodStand_FoodstandStall_1 = shapetownSquare.createLayer("FoodStand/FoodstandStall", ["Foodstand"], 0, 0);
-
 		// foodStand_Foodstand_1
 		const foodStand_Foodstand_1 = shapetownSquare.createLayer("FoodStand/Foodstand", [], 0, 0);
+
+		// nPC_NPC_Lily_1
+		const nPC_NPC_Lily_1 = shapetownSquare.createLayer("NPC/NPC Lily", ["NPCShopStandMaerchant"], 0, 0);
 
 		// foodStand_Fishbarrel_1
 		const foodStand_Fishbarrel_1 = shapetownSquare.createLayer("FoodStand/Fishbarrel", ["FoodstandBarrel_V01"], 0, 0);
@@ -180,16 +184,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const foodStand_Fishbarrel = shapetownSquare.createLayer("FoodStand/Fishbarrel", ["FoodstandBarrel_V01"], 0, 0);
 
 		// foodStand_stall
-		const foodStand_stall = shapetownSquare.createLayer("FoodStand/stall", ["FoodstandStall_V01"], 0, 0);
-
-		// foodStand_Logo_Foodstand_1
-		const foodStand_Logo_Foodstand_1 = shapetownSquare.createLayer("FoodStand/Logo Foodstand", ["FoodstandIcon"], 0, 0);
+		const foodStand_stall = shapetownSquare.createLayer("FoodStand/stall", ["FoodstandStall_V01"], 0, 2);
 
 		// foodStand_Basket_1
 		const foodStand_Basket_1 = shapetownSquare.createLayer("FoodStand/Basket", ["Foodstand_Busket"], 0, 0);
-
-		// blacksmith_Blacksmith_1
-		const blacksmith_Blacksmith_1 = shapetownSquare.createLayer("Blacksmith/Blacksmith", ["NpcBlaksmith"], 0, 0);
 
 		// blacksmith_Blacksmith_stall_1
 		const blacksmith_Blacksmith_stall_1 = shapetownSquare.createLayer("Blacksmith/Blacksmith stall", ["Blacksmith"], 0, 0);
@@ -210,10 +208,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_1 = shapetownSquare.createLayer("Barracks/Barricade2", ["BarricadeSpikes_V03","BarricadeSpikes_V02","BarricadeSpikes_V01"], 0, 0);
 
 		// barracks_Barricade_2
-		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["Barricade_V01","BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
+		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 3020, 1752);
+		const playerPrefab = new PlayerPrefab(this, 1520, 752);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -280,9 +278,47 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const stoneBridgeRightPrefab = new StoneBridgeRightPrefab(this, 3183, 1731);
 		this.add.existing(stoneBridgeRightPrefab);
 
+		// decoration_Rock
+		const decoration_Rock = shapetownSquare.createLayer("Decoration/Rock1", ["RockOnGrass_V02"], 0, 0);
+
+		// decoration_Rock_1
+		const decoration_Rock_1 = shapetownSquare.createLayer("Decoration/Rock4", ["RockOnGrass_V04"], 0, 0);
+
+		// decoration_Rock_2
+		const decoration_Rock_2 = shapetownSquare.createLayer("Decoration/Rock3", ["RockOnGrass_V04","RockOnGrass_V03"], 0, 0);
+
+		// decoration_Rock_3
+		const decoration_Rock_3 = shapetownSquare.createLayer("Decoration/Rock2", ["RockOnGrass_V01","RockOnGrass_V04","RockOnGrass_V03","RockOnGrass_V02"], 0, 0);
+
+		// nPC_NPC_Rowan_Capitian_1
+		const nPC_NPC_Rowan_Capitian_1 = shapetownSquare.createLayer("NPC/NPC Rowan Capitian", ["NPCRowan_Fullset_Walk_V01"], 0, 0);
+
+		// nPC_NPC_Soilder_1
+		const nPC_NPC_Soilder_1 = shapetownSquare.createLayer("NPC/NPC Soilder", ["NPCSoilderSpearAttack_V01","NPCGuardian_V01"], 0, 0);
+
+		// npcmarcus
+		const npcmarcus = this.add.sprite(3695, 1150, "NPCMarcus_Mining_Fullset", 8);
+		npcmarcus.play("npcmarcus");
+
+		// tree_left_side
+		const tree_left_side = shapetownSquare.createLayer("Tree left side/7", ["TreePatteren"], 0, 0);
+
+		// barricade_V010
+		const barricade_V010 = this.add.image(1183, 426, "Barricade_V01", 0);
+
+		// barricade_V
+		const barricade_V = this.add.image(1248, 426, "Barricade_V01", 0);
+
+		// barricade_V_1
+		const barricade_V_1 = this.add.image(1312, 426, "Barricade_V01", 0);
+
+		// barricade_V_2
+		const barricade_V_2 = this.add.image(1375, 426, "Barricade_V01", 0);
+
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
 		this.bG_tallgrass_1 = bG_tallgrass_1;
+		this.npcBlackSmithRight = npcBlackSmithRight;
 		this.collution_Cliff_1 = collution_Cliff_1;
 		this.collution_WoodenFence_1 = collution_WoodenFence_1;
 		this.collution_StoneFence_1 = collution_StoneFence_1;
@@ -295,25 +331,23 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.decoration_Log_1 = decoration_Log_1;
 		this.decoration_bush_1 = decoration_bush_1;
 		this.tree_left_side_ = tree_left_side_;
-		this.tree_left_side = tree_left_side;
 		this.tree_left_side_1 = tree_left_side_1;
 		this.tree_left_side_2 = tree_left_side_2;
 		this.tree_left_side_3 = tree_left_side_3;
 		this.tree_left_side_4 = tree_left_side_4;
 		this.tree_left_side_5 = tree_left_side_5;
+		this.forager_home_Tent_1 = forager_home_Tent_1;
 		this.tree_left_side_6 = tree_left_side_6;
 		this.forager_home_Baket_of_mushrooms_1 = forager_home_Baket_of_mushrooms_1;
 		this.forager_home_Basket_of_apple_1 = forager_home_Basket_of_apple_1;
-		this.foodStand_FoodstandStall_1 = foodStand_FoodstandStall_1;
 		this.foodStand_Foodstand_1 = foodStand_Foodstand_1;
+		this.nPC_NPC_Lily_1 = nPC_NPC_Lily_1;
 		this.foodStand_Fishbarrel_1 = foodStand_Fishbarrel_1;
 		this.foodStand_stall_1 = foodStand_stall_1;
 		this.foodStand_Foodstand = foodStand_Foodstand;
 		this.foodStand_Fishbarrel = foodStand_Fishbarrel;
 		this.foodStand_stall = foodStand_stall;
-		this.foodStand_Logo_Foodstand_1 = foodStand_Logo_Foodstand_1;
 		this.foodStand_Basket_1 = foodStand_Basket_1;
-		this.blacksmith_Blacksmith_1 = blacksmith_Blacksmith_1;
 		this.blacksmith_Blacksmith_stall_1 = blacksmith_Blacksmith_stall_1;
 		this.mechant_merchant_1 = mechant_merchant_1;
 		this.mechant_MerchantCarriage_1 = mechant_MerchantCarriage_1;
@@ -337,6 +371,18 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.squareCampFirePrefab_3 = squareCampFirePrefab_3;
 		this.stoneBridgeDownPrefab = stoneBridgeDownPrefab;
 		this.stoneBridgeRightPrefab = stoneBridgeRightPrefab;
+		this.decoration_Rock = decoration_Rock;
+		this.decoration_Rock_1 = decoration_Rock_1;
+		this.decoration_Rock_2 = decoration_Rock_2;
+		this.decoration_Rock_3 = decoration_Rock_3;
+		this.nPC_NPC_Rowan_Capitian_1 = nPC_NPC_Rowan_Capitian_1;
+		this.nPC_NPC_Soilder_1 = nPC_NPC_Soilder_1;
+		this.npcmarcus = npcmarcus;
+		this.tree_left_side = tree_left_side;
+		this.barricade_V010 = barricade_V010;
+		this.barricade_V = barricade_V;
+		this.barricade_V_1 = barricade_V_1;
+		this.barricade_V_2 = barricade_V_2;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -348,6 +394,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	bG_stone_road_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	bG_tallgrass_1;
+	/** @type {Phaser.GameObjects.Sprite} */
+	npcBlackSmithRight;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	collution_Cliff_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -373,8 +421,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_left_side_;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	tree_left_side;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_left_side_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_left_side_2;
@@ -385,15 +431,17 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_left_side_5;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	forager_home_Tent_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_left_side_6;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	forager_home_Baket_of_mushrooms_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	forager_home_Basket_of_apple_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	foodStand_FoodstandStall_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	foodStand_Foodstand_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	nPC_NPC_Lily_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	foodStand_Fishbarrel_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -405,11 +453,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	foodStand_stall;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	foodStand_Logo_Foodstand_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	foodStand_Basket_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	blacksmith_Blacksmith_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	blacksmith_Blacksmith_stall_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -456,6 +500,30 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	stoneBridgeDownPrefab;
 	/** @type {StoneBridgeRightPrefab} */
 	stoneBridgeRightPrefab;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	decoration_Rock;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	decoration_Rock_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	decoration_Rock_2;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	decoration_Rock_3;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	nPC_NPC_Rowan_Capitian_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	nPC_NPC_Soilder_1;
+	/** @type {Phaser.GameObjects.Sprite} */
+	npcmarcus;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	tree_left_side;
+	/** @type {Phaser.GameObjects.Image} */
+	barricade_V010;
+	/** @type {Phaser.GameObjects.Image} */
+	barricade_V;
+	/** @type {Phaser.GameObjects.Image} */
+	barricade_V_1;
+	/** @type {Phaser.GameObjects.Image} */
+	barricade_V_2;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -480,11 +548,16 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.squareTownPrefab.setupCollision(this.playerPrefab)
 		this.stoneBridgeDownPrefab.setDepth(10)
 		this.stoneBridgeRightPrefab.setDepth(10)
+		this.tree_left_side.setDepth(10)
 		this.playerPrefab.setDepth(100)
 
 		this.physics.add.collider(this.playerPrefab, this.collution_WoodenFence_1);
 	    this.collution_WoodenFence_1.setCollisionBetween(0,10000);
 	    // this.collution_WoodenFence_1.renderDebug(this.add.graphics())
+
+		this.physics.add.collider(this.playerPrefab, this.tree_left_side_3);
+	    this.tree_left_side_3.setCollisionBetween(0,10000);
+	    // this.tree_left_side_3.renderDebug(this.add.graphics())
 
 		this.physics.add.collider(this.playerPrefab, this.collution_StoneFence_1);
 	    this.collution_StoneFence_1.setCollisionBetween(0,10000);
@@ -530,10 +603,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         this.forager_home_Basket_of_apple_1.setCollisionBetween(0, 10000);
 		// this.forager_home_Basket_of_apple_1.renderDebug(this.add.graphics());
 
-		// this.physics.add.collider(this.playerPrefab, this.barracks_Tents_3);
-	    // this.barracks_Tents_3.setCollisionBetween(0,10000);
-	    // // this.barracks_Tents_3.renderDebug(this.add.graphics());
-
 		this.physics.add.collider(this.playerPrefab, this.barracks_Tents_1);
 	    this.barracks_Tents_1.setCollisionBetween(0,10000);
 	    // this.barracks_Tents_1.renderDebug(this.add.graphics());
@@ -545,6 +614,60 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.physics.add.collider(this.playerPrefab, this.tree_left_side);
 	    this.tree_left_side.setCollisionBetween(0,10000);
 	    // this.tree_left_side.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.decoration_Rock_2);
+	    this.decoration_Rock_2.setCollisionBetween(0,10000);
+	    // this.decoration_Rock_2.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.decoration_Rock_1);
+	    this.decoration_Rock_1.setCollisionBetween(0,10000);
+	    // this.decoration_Rock_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.mechant_merchant_1);
+	    this.mechant_merchant_1.setCollisionBetween(0,10000);
+	    // this.mechant_merchant_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.mechant_MerchantCarriage_1);
+	    this.mechant_MerchantCarriage_1.setCollisionBetween(0,10000);
+	    // this.mechant_MerchantCarriage_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.foodStand_Basket_1);
+	    this.foodStand_Basket_1.setCollisionBetween(0,10000);
+	    // this.foodStand_Basket_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.foodStand_stall_1);
+	    this.foodStand_stall_1.setCollisionBetween(0,10000);
+	    // this.foodStand_stall_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.foodStand_Fishbarrel_1);
+	    this.foodStand_Fishbarrel_1.setCollisionBetween(0,10000);
+	    // this.foodStand_Fishbarrel_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.decoration_Rock_3);
+	    this.decoration_Rock_3.setCollisionBetween(0,10000);
+	    // this.decoration_Rock_3.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.forager_home_Baket_of_mushrooms_1);
+	    this.forager_home_Baket_of_mushrooms_1.setCollisionBetween(0,10000);
+	    // this.forager_home_Baket_of_mushrooms_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.forager_home_Tent_1);
+	    this.forager_home_Tent_1.setCollisionBetween(0,10000);
+	    // this.forager_home_Tent_1.renderDebug(this.add.graphics());
+
+		this.physics.add.collider(this.playerPrefab, this.blacksmith_Blacksmith_stall_1);
+	    this.blacksmith_Blacksmith_stall_1.setCollisionBetween(0,10000);
+	    // this.blacksmith_Blacksmith_stall_1.renderDebug(this.add.graphics());
+
+        this.physics.add.existing(this.barricade_V_2, true);
+        this.physics.add.existing(this.barricade_V_1, true);
+        this.physics.add.existing(this.barricade_V, true);
+        this.physics.add.existing(this.barricade_V010, true);
+
+        this.physics.add.collider(this.playerPrefab, this.barricade_V_2);
+        this.physics.add.collider(this.playerPrefab, this.barricade_V_1);
+        this.physics.add.collider(this.playerPrefab, this.barricade_V);
+        this.physics.add.collider(this.playerPrefab, this.barricade_V010);
 
 		const waterTiles = this.river_River_1.getTilesWithin();
         waterTiles.forEach(tile => {

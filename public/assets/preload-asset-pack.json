@@ -126,8 +126,8 @@
             {
                 "url": "assets/Building/Barricade_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -2336,8 +2336,8 @@
             {
                 "url": "assets/NPC/NPC Marcus miner/NPCMarcus_Mining_Fullset.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
