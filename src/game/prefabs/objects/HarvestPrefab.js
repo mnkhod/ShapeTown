@@ -241,10 +241,14 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
         this.growthStartTime = null;
         this.growthText = null;
         this.textBackground = null;
+        this.plantSprite = null;
         
         this.on('destroy', () => {
             if (this.growthText && this.growthText.destroy) {
                 this.growthText.destroy();
+            }
+            if (this.plantSprite && this.plantSprite.destroy) {
+                this.plantSprite.destroy();
             }
         });
         /* END-USER-CTR-CODE */
@@ -329,7 +333,12 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                         this.hasPlayerCollider = true;
                     }
                 }
+                // Clean up plant sprite if it exists
+                if (this.plantSprite) {
+                    this.plantSprite.setVisible(false);
+                }
                 break;
+                
             case "GROUND":
                 if (this.previousState === "ROCK") {
                     this.tileId = 83;
@@ -352,42 +361,97 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 if (this.physicsBody) {
                     this.physicsBody.enable = false;
                 }
-                break;
-            case "SOIL":
-                this.setTexture("GroundTilestSoil", 3);
-                this.tileId = null;
-                this.preFX.clear();
-                break;
-            case "PLANTED":
-                if (CROP_DATA[this.seed]) {
-                    this.setTexture(CROP_DATA[this.seed].spritesheet, CROP_DATA[this.seed].seedFrame);
-                } else {
-                    this.setTexture("GroundTilestSoil", 3);
+                // Clean up plant sprite if it exists
+                if (this.plantSprite) {
+                    this.plantSprite.setVisible(false);
                 }
                 break;
+                
+            case "SOIL":
+                this.setTexture("Farming_Soil_Tile_V01", 0);
+                this.tileId = null;
+                this.preFX.clear();
+                // Ensure no plant is showing
+                if (this.plantSprite) {
+                    this.plantSprite.setVisible(false);
+                }
+                break;
+                
+            case "PLANTED":
+                // Set soil texture as the base
+                this.setTexture("Farming_Soil_Tile_V01", 0);
+                
+                if (CROP_DATA[this.seed]) {
+                    // Create or update the plant sprite with seed frame
+                    if (!this.plantSprite) {
+                        this.plantSprite = this.scene.add.sprite(this.x, this.y, 
+                            CROP_DATA[this.seed].spritesheet, 
+                            CROP_DATA[this.seed].seedFrame);
+                        this.plantSprite.setDepth(this.depth + 1);
+                    } else {
+                        this.plantSprite.setTexture(
+                            CROP_DATA[this.seed].spritesheet, 
+                            CROP_DATA[this.seed].seedFrame);
+                        this.plantSprite.setVisible(true);
+                    }
+                } else if (this.plantSprite) {
+                    this.plantSprite.setVisible(false);
+                }
+                break;
+                
             case "WATERED":
+                // Set soil texture as the base
+                this.setTexture("Farming_Soil_Tile_V01", 0);
+                
+                // Show the seed sprite initially when watered
+                if (CROP_DATA[this.seed]) {
+                    if (!this.plantSprite) {
+                        this.plantSprite = this.scene.add.sprite(this.x, this.y, 
+                            CROP_DATA[this.seed].spritesheet, CROP_DATA[this.seed].seedFrame);
+                        this.plantSprite.setDepth(this.depth + 1);
+                    } else {
+                        this.plantSprite.setTexture(CROP_DATA[this.seed].spritesheet, CROP_DATA[this.seed].seedFrame);
+                        this.plantSprite.setVisible(true);
+                    }
+                }
+                
+                // Set growth tracking variables
                 this.isWatered = true;
                 this.growthStartTime = Date.now();
                 this.growthStage = 0;
                 
                 let growthTimeMs = this.calculateGrowthTimeMs();
-                
                 const stageTime = growthTimeMs / 4;
                 
+                // Schedule growth stages
                 this.scheduleGrowthStages(stageTime);
                 break;
+                
             default:
-                if (this.state.startsWith(this.seed + "_LEVEL_")) {
-                    const level = parseInt(this.state.split("_").pop());
-                    const cropData = CROP_DATA[this.seed];
+                // Handle custom growth states (SEED_LEVEL_X)
+                if (this.state.includes("_LEVEL_")) {
+                    // Always set soil texture as the base
+                    this.setTexture("Farming_Soil_Tile_V01", 0);
                     
+                    const cropData = CROP_DATA[this.seed];
                     if (cropData) {
-                        if (level <= 4) {
-                            this.setTexture(cropData.spritesheet, cropData.growthFrames[level-1]);
-                            
-                            if (level === 4) {
-                                this.isReadyForHarvest = true;
-                            }
+                        const level = parseInt(this.state.split("_").pop());
+                        
+                        // Create or update the plant sprite
+                        if (!this.plantSprite) {
+                            this.plantSprite = this.scene.add.sprite(this.x, this.y, 
+                                cropData.spritesheet, 
+                                level <= 4 ? cropData.growthFrames[level-1] : cropData.harvestFrame);
+                            this.plantSprite.setDepth(this.depth + 1);
+                        } else {
+                            this.plantSprite.setTexture(
+                                cropData.spritesheet, 
+                                level <= 4 ? cropData.growthFrames[level-1] : cropData.harvestFrame);
+                            this.plantSprite.setVisible(true);
+                        }
+                        
+                        if (level === 4) {
+                            this.isReadyForHarvest = true;
                         }
                     }
                 }

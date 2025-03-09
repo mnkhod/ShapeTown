@@ -12,13 +12,13 @@ import BeachTree2Prefab from "../prefabs/Trees/BeachTree2Prefab";
 import SquareShipPrefab from "../prefabs/House/SquareShipPrefab";
 import OpenInventory from "../prefabs/hud/OpenInventory";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
-import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
+import OpenQuest from "../prefabs/hud/OpenQuest";
 /* START-USER-IMPORTS */
 import { EventBus } from '../../game/EventBus';
 import initInventoryBridge from "../../components/phaser-react-bridge";
@@ -180,10 +180,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		const alertPrefab = new AlertPrefab(this, 87, 54);
 		this.add.existing(alertPrefab);
 
-		// questBookPrefab
-		const questBookPrefab = new QuestBookPrefab(this, 251, 1615);
-		this.add.existing(questBookPrefab);
-
 		// openMapPrefab
 		const openMapPrefab = new OpenMapPrefab(this, 1897, 1397);
 		this.add.existing(openMapPrefab);
@@ -207,6 +203,10 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		// optionsListPrefab
 		const optionsListPrefab = new OptionsListPrefab(this, 2408, 156);
 		this.add.existing(optionsListPrefab);
+
+		// openQuest
+		const openQuest = new OpenQuest(this, 504, 1460);
+		this.add.existing(openQuest);
 
 		this.sand_1 = sand_1;
 		this.beachDeckPrefab = beachDeckPrefab;
@@ -241,13 +241,13 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.sceneTile = sceneTile;
 		this.openInventory = openInventory;
 		this.alertPrefab = alertPrefab;
-		this.questBookPrefab = questBookPrefab;
 		this.openMapPrefab = openMapPrefab;
 		this.messagePrefab = messagePrefab;
 		this.profilePrefab = profilePrefab;
 		this.newItemHudPrefab = newItemHudPrefab;
 		this.minimapPrefab = minimapPrefab;
 		this.optionsListPrefab = optionsListPrefab;
+		this.openQuest = openQuest;
 		this.shapetownBeach = shapetownBeach;
 
 		this.events.emit("scene-awake");
@@ -319,8 +319,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	openInventory;
 	/** @type {AlertPrefab} */
 	alertPrefab;
-	/** @type {QuestBookPrefab} */
-	questBookPrefab;
 	/** @type {OpenMapPrefab} */
 	openMapPrefab;
 	/** @type {MessagePrefab} */
@@ -333,6 +331,8 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	minimapPrefab;
 	/** @type {OptionsListPrefab} */
 	optionsListPrefab;
+	/** @type {OpenQuest} */
+	openQuest;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownBeach;
 

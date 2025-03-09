@@ -535,18 +535,6 @@
             "y": 54
         },
         {
-            "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
-            "id": "a00a71d1-401a-4ed0-8979-49d9616310d0",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "questBookPrefab",
-            "scope": "CLASS",
-            "x": 251,
-            "y": 1615
-        },
-        {
             "prefabId": "511211d3-4280-4710-b0e3-c823277bb8e4",
             "id": "0ffffc03-1646-4ffe-9393-e4ea667a8ab7",
             "unlock": [
@@ -617,6 +605,18 @@
             "scope": "CLASS",
             "x": 2408,
             "y": 156
+        },
+        {
+            "prefabId": "2c30c124-0411-4631-af99-2308825ee3ac",
+            "id": "9b11f269-bf08-49f1-a06d-e760c707e16b",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "openQuest",
+            "scope": "CLASS",
+            "x": 504,
+            "y": 1460
         }
     ],
     "plainObjects": [

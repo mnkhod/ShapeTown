@@ -1184,6 +1184,11 @@
                 "key": "FarmHorseStable"
             },
             {
+                "url": "assets/Ground tileset/Farming_Soil_Tile_V01.png",
+                "type": "image",
+                "key": "Farming_Soil_Tile_V01"
+            },
+            {
                 "url": "assets/mapAssets/FarmingCropsVer2.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -2791,6 +2796,21 @@
                 "url": "assets/hud/ProfileBackground.png",
                 "type": "image",
                 "key": "ProfileBackground"
+            },
+            {
+                "url": "assets/hud/Quest/Q_ShortKeyLabel.png",
+                "type": "image",
+                "key": "Q_ShortKeyLabel"
+            },
+            {
+                "url": "assets/hud/Quest/Quest_Book_Highligthed_V01.Png",
+                "type": "image",
+                "key": "Quest_Book_Highligthed_V01"
+            },
+            {
+                "url": "assets/hud/Quest/Quest_Book_V01.png",
+                "type": "image",
+                "key": "Quest_Book_V01"
             },
             {
                 "url": "assets/Ground tileset/RiverShallowSheet_v01.png",

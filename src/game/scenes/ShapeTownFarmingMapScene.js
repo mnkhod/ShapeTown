@@ -17,8 +17,8 @@ import OpenInventory from "../prefabs/hud/OpenInventory";
 import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
-import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
+import OpenQuest from "../prefabs/hud/OpenQuest";
 /* START-USER-IMPORTS */
 import questSystem from "../../components/QuestSystem";
 import { extendSceneWithQuests } from "../../components/QuestSystem"; 
@@ -188,16 +188,16 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const optionsListPrefab = new OptionsListPrefab(this, 2398, 758);
 		this.add.existing(optionsListPrefab);
 
-		// questBookPrefab
-		const questBookPrefab = new QuestBookPrefab(this, 478, 1439);
-		this.add.existing(questBookPrefab);
-
 		// minimapPrefab
 		const minimapPrefab = new MinimapPrefab(this, 926, 934);
 		this.add.existing(minimapPrefab);
 
 		// plantingArea_1
 		const plantingArea_1 = shapetownFarmingMap.createLayer("PlantingArea", ["GroundTileset_V02"], 0, 0);
+
+		// openQuest
+		const openQuest = new OpenQuest(this, 307, 1317);
+		this.add.existing(openQuest);
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
@@ -237,7 +237,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.openMapPrefab = openMapPrefab;
 		this.profilePrefab = profilePrefab;
 		this.optionsListPrefab = optionsListPrefab;
-		this.questBookPrefab = questBookPrefab;
 		this.minimapPrefab = minimapPrefab;
 		this.plantingArea_1 = plantingArea_1;
 		this.shapetownFarmingMap = shapetownFarmingMap;
@@ -311,8 +310,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	profilePrefab;
 	/** @type {OptionsListPrefab} */
 	optionsListPrefab;
-	/** @type {QuestBookPrefab} */
-	questBookPrefab;
 	/** @type {MinimapPrefab} */
 	minimapPrefab;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -327,15 +324,15 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const soilLayer = this.plantingArea_1;
 		const width = soilLayer.width;
 		const height = soilLayer.height;
-	
+
 		for (let y = 0; y < height; y++) {
 			for (let x = 0; x < width; x++) {
 				const tile = soilLayer.getTileAt(x, y);
-	
+
 				if (tile && tile.index === 2401) {
 					const worldX = tile.pixelX + soilLayer.x + (tile.width / 2);
 					const worldY = tile.pixelY + soilLayer.y + (tile.height / 2);
-	
+
 					const harvestTile = new HarvestPrefab(this, worldX, worldY);
 					this.add.existing(harvestTile);
 					harvestTile.state = "GROUND"; 
@@ -351,19 +348,19 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	}
 initInventorySystem() {
 	if (!this.newItemHudPrefab) return;
-	
+
 	this.newItemHudPrefab.visible = true;
-	
+
 	const inventoryBridge = initInventoryBridge(this.newItemHudPrefab, this.reactEvent);
-	
+
 	this.inventoryBridge = inventoryBridge;
-	
+
 	this.time.delayedCall(200, () => {
 	  import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
 		if (globalInventory.quickItems.every(item => item === null) && 
 			globalInventory.mainItems.every(item => item === null)) {
 				this.setupStartingItems();
-		  
+
 		  		if (this.newItemHudPrefab.updateGlobalInventory) {
 					this.newItemHudPrefab.updateGlobalInventory();
 		  		}
@@ -371,40 +368,40 @@ initInventorySystem() {
 			if (this.inventoryBridge) {
 			  this.inventoryBridge.fixSelection();
 			}
-		
+
 			this.reactEvent.emit('scene-switched', this);
 	  	});
 	});
 	this.events.on('shutdown', this.onSceneShutdown, this);
 	this.events.on('sleep', this.onSceneShutdown, this);
   }
-  
+
   onSceneShutdown() {
 	console.log(`${this.scene.key} shutting down, saving inventory`);
-	
+
 	if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
 	  this.newItemHudPrefab.updateGlobalInventory();
 	}
-	
+
 	if (this.inventoryBridge) {
 	  this.inventoryBridge.update();
 	}
   }
-  
+
   setupStartingItems() {
 	if (!this.newItemHudPrefab) return;
-	
+
 	console.log(`Setting up starting items for ${this.scene.key}`);
-	
+
 	this.newItemHudPrefab.visible = true;
 	if (this.questBookPrefab) this.questBookPrefab.visible = true;
-	
+
 	if (this.newItemHudPrefab.itemBoxs) {
 	  	this.newItemHudPrefab.itemBoxs.forEach((box, index) => {
 			if (!box.input || !box.input.enabled) {
 		  		box.setInteractive({ useHandCursor: true });
 		  		box.on('pointerdown', () => {
-					if (box.frame.name === 0) {
+					if 	(box.frame.name === 0) {
 			  			this.newItemHudPrefab.itemBoxs.forEach((otherBox) => {
 							if (otherBox !== box) {
 				  				otherBox.setTexture("HudItemSlot", 0);
@@ -424,7 +421,7 @@ initInventorySystem() {
 			}
 	  	});
 	}
-	
+
 	if (this.newItemHudPrefab.activeItemSlots && this.newItemHudPrefab.activeItemSlots[0]) {
 	  	this.newItemHudPrefab.activeItemSlots[0].visible = true;
 	  	this.newItemHudPrefab.activeIndex = 0;
@@ -449,7 +446,7 @@ initInventorySystem() {
 		this.cameras.main.setBounds(0, 0, 2550, 1920);
 		this.physics.world.bounds.width = 1000;
 		this.physics.world.bounds.height = 800;
-	
+
 		if (!this.game.questSystem) {
 			this.game.questSystem = questSystem;
 		}
@@ -457,33 +454,33 @@ initInventorySystem() {
 			if (this.newItemHudPrefab) {
 			  import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
 				if (globalInventory.syncInventoryToScene) {
-				  globalInventory.syncInventoryToScene(this);
+				  	globalInventory.syncInventoryToScene(this);
 				}
 			  });
 			}
-			
+
 			this.cameras.main.fadeIn(500, 0, 0, 0);
-		  });
+		});
 		extendSceneWithQuests(this);
 		extendHarvestPrefab(HarvestPrefab);
 		extendJackNpc(OldManJackNpcPrefab);
-		
+
 		window.getQuestProgress = () => {
 			if (this.game && this.game.questSystem) {
 				return this.game.questSystem.getQuestProgress();
 			}
 			return {};
 		};
-	
+
 		window.updateQuestProgress = (update) => {
 			if (this.game && this.game.questSystem) {
 				this.game.questSystem.updateQuestProgress(update);
 			}
 		};
-		
+
 		this.events.on('wake', () => {
 			this.cameras.main.fadeIn(300);
-			
+
 			if (this.newItemHudPrefab) {
 				this.time.delayedCall(200, () => {
 					import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
@@ -499,7 +496,7 @@ initInventorySystem() {
 				this.newItemHudPrefab.updateGlobalInventory();
 			}
 		});
-		
+
 		this.events.on('sleep', () => {
 			if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
 				this.newItemHudPrefab.updateGlobalInventory();
@@ -513,7 +510,13 @@ initInventorySystem() {
 			giftFromNatureAchievement: false,
 			firstFishAchievement: false
 		};
-
+		if (this.minimapPrefab && this.playerPrefab) {
+            this.minimapPrefab.setPlayer(this.playerPrefab);
+            this.minimapPrefab.visible = false;
+            if (this.minimapPrefab.minimapCamera) {
+                this.minimapPrefab.minimapCamera.visible = false;
+            }
+        }
 	  	this.oldManJackNpcPrefab.player = this.playerPrefab;
 	  	this.oldManJackNpcPrefab.msgPrefab = this.messagePrefab;
 	  	this.oldManJackNpcPrefab.alertPrefab = this.alertPrefab;
@@ -572,20 +575,20 @@ initInventorySystem() {
 			if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
 				this.newItemHudPrefab.updateGlobalInventory();
 			}
-		
+
 			const playerX = this.playerPrefab.x;
-			
+
 			this.scene.switch("ShapeTownSquareMapScene");
-			
+
 			const targetScene = this.scene.get("ShapeTownSquareMapScene");
 			if (targetScene && targetScene.playerPrefab) {
 				targetScene.playerPrefab.x = 304;
 			}
-			
+
 			this.cameras.main.fadeIn(2000, 0, 0, 0);
 		});
 		this.initInventorySystem();
-		  
+
       this.physics.add.existing(this.stonePrefab, true);
       this.physics.add.existing(this.stonePrefab_1, true);	
       this.physics.add.existing(this.stonePrefab_3, true);

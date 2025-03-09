@@ -14,7 +14,6 @@ import StoneBridgeRightPrefab from "../prefabs/deck/StoneBridgeRightPrefab";
 import BlackSmithPrefab from "../prefabs/npcs/BlackSmithPrefab";
 import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
 import OpenInventory from "../prefabs/hud/OpenInventory";
-import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
 import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
@@ -24,6 +23,7 @@ import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import FoodMerchant from "../prefabs/npcs/FoodMerchant";
 import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
 import WaterwellPrefab from "../prefabs/Fountan/WaterwellPrefab";
+import OpenQuest from "../prefabs/hud/OpenQuest";
 /* START-USER-IMPORTS */
 import questSystem from "../../components/QuestSystem";
 import { extendSceneWithQuests } from "../../components/QuestSystem";
@@ -217,7 +217,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 2730, 1568);
+		const playerPrefab = new PlayerPrefab(this, 363, 1542);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -380,10 +380,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const openInventory = new OpenInventory(this, 3595, 2710);
 		this.add.existing(openInventory);
 
-		// questBookPrefab
-		const questBookPrefab = new QuestBookPrefab(this, 3221, 2787);
-		this.add.existing(questBookPrefab);
-
 		// profilePrefab
 		const profilePrefab = new ProfilePrefab(this, 92, 1248);
 		this.add.existing(profilePrefab);
@@ -419,6 +415,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// waterwellPrefab
 		const waterwellPrefab = new WaterwellPrefab(this, 2801, 1640);
 		this.add.existing(waterwellPrefab);
+		
+		// openQuest
+		const openQuest = new OpenQuest(this, 3007, 2582);
+		this.add.existing(openQuest);
 
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
@@ -488,7 +488,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.blackSmithPrefab = blackSmithPrefab;
 		this.openMapPrefab = openMapPrefab;
 		this.openInventory = openInventory;
-		this.questBookPrefab = questBookPrefab;
 		this.profilePrefab = profilePrefab;
 		this.messagePrefab = messagePrefab;
 		this.alertPrefab = alertPrefab;
@@ -498,6 +497,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.foodMerchant = foodMerchant;
 		this.merchantPrefab = merchantPrefab;
 		this.waterwellPrefab = waterwellPrefab;
+		this.openQuest = openQuest;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -639,8 +639,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	openMapPrefab;
 	/** @type {OpenInventory} */
 	openInventory;
-	/** @type {QuestBookPrefab} */
-	questBookPrefab;
 	/** @type {ProfilePrefab} */
 	profilePrefab;
 	/** @type {MessagePrefab} */
@@ -659,6 +657,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	merchantPrefab;
 	/** @type {WaterwellPrefab} */
 	waterwellPrefab;
+	/** @type {OpenQuest} */
+	openQuest;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -780,6 +780,266 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 
 		this.events.on('shutdown', this.onSceneShutdown, this);
 	}
+	setupTownDetection() {
+		this.townCenterX = this.squareTownPrefab?.x || 2270;
+		this.townCenterY = this.squareTownPrefab?.y || 1424;
+
+		const townZone = this.add.zone(
+		  this.townCenterX,
+		  this.townCenterY,
+		  1600,
+		  2200 
+		);
+
+		this.physics.world.enable(townZone);
+		townZone.body.setAllowGravity(false);
+		townZone.body.moves = false;
+
+		this.physics.add.overlap(
+		  this.playerPrefab, 
+		  townZone, 
+		  () => {
+			if (!this.playerEnteredTown) {
+			  this.playerEnteredTown = true;
+
+			  if (this.triggerQuestEvent) {
+				console.log("Player entered town - triggering quest event");
+				this.triggerQuestEvent('player:enteredTown');
+
+				if (this.alertPrefab) {
+				  this.alertPrefab.alert("Quest Updated: Entered Town");
+				}
+			  } else {
+				console.warn("triggerQuestEvent not available on scene");
+			  }
+			}
+		  },
+		  null,
+		  this
+		);
+
+		// Store the zone for reference
+		this.townZone = townZone;
+
+		// Debug visualization - only enable during development
+		// if (process.env.NODE_ENV !== 'production') {
+		//   const debugGraphics = this.add.graphics().setAlpha(0.3);
+		//   debugGraphics.lineStyle(2, 0x00ff00);
+		//   debugGraphics.strokeRect(
+		//     townZone.x - townZone.width / 2, 
+		//     townZone.y - townZone.height / 2, 
+		//     townZone.width, 
+		//     townZone.height
+		//   );
+		// }
+
+		return townZone;
+	  }
+
+	  // Add this function to ShapeTownSquareMapScene
+
+setupQuestSystem() {
+	// Make sure questSystem is available
+	if (!this.questSystem) {
+	  console.warn("Quest system not available");
+	  return;
+	}
+
+	// Set up the quest event handler if not already present
+	if (!this.triggerQuestEvent) {
+	  this.triggerQuestEvent = function(eventName, params = {}) {
+		console.log(`Triggering quest event: ${eventName}`, params);
+
+		// Add scene reference to params
+		params.scene = this;
+
+		// Call quest system's event handler
+		if (this.questSystem && this.questSystem.handleEvent) {
+		  this.questSystem.handleEvent(eventName, params);
+		} else {
+		  console.warn("questSystem or handleEvent not available");
+		}
+	  };
+	}
+
+	// Add quest UI setup if not already present
+	if (!this.showQuestNotification) {
+	  this.showQuestNotification = function(message, duration = 3000) {
+		console.log(`QUEST NOTIFICATION: ${message}`);
+
+		if (this.alertPrefab && this.alertPrefab.alert) {
+		  this.alertPrefab.alert(message);
+
+		  // Auto-hide after duration
+		  this.time.delayedCall(duration, () => {
+			this.alertPrefab.hide();
+		  });
+		}
+	  };
+	}
+
+	// Register NPCs with quest system
+	this.setupQuestNPCs();
+
+	// Check for quest progress window methods
+	if (!window.getQuestProgress || !window.updateQuestProgress) {
+	  window.getQuestProgress = () => {
+		if (this.questSystem) {
+		  return this.questSystem.getQuestProgress();
+		}
+		return {};
+	  };
+
+	  window.updateQuestProgress = (update) => {
+		if (this.questSystem) {
+		  this.questSystem.updateQuestProgress(update);
+		  return true;
+		}
+		return false;
+	  };
+	}
+
+	// Log active quests for debugging
+	console.log("Active quests:", this.questSystem.getActiveQuests());
+
+	// Set up town detection for quest #002
+	this.setupTownDetection();
+
+	// Set up NPC greeting tracking for quest #003
+	this.setupNPCGreetingTracking();
+  }
+
+  // Add this function to handle NPC greeting tracking for Quest #003
+  setupNPCGreetingTracking() {
+	// List of NPCs that need to be greeted
+	const npcsToGreet = [
+	  "Jack", "Lydia", "Victoria", "Rowan", "Lily" 
+	];
+
+	// Track which NPCs have been greeted
+	this.greetedNPCs = new Set();
+
+	// Method to check if all NPCs have been greeted
+	this.checkAllNPCsGreeted = function() {
+	  if (npcsToGreet.every(npc => this.greetedNPCs.has(npc))) {
+		// All NPCs have been greeted
+		if (this.triggerQuestEvent) {
+		  this.triggerQuestEvent('npc:allGreeted');
+
+		  // Show notification
+		  if (this.alertPrefab) {
+			this.alertPrefab.alert("Quest Completed: Good Invitation");
+		  }
+		}
+		return true;
+	  }
+	  return false;
+	};
+
+	// Method to mark an NPC as greeted
+	this.markNPCGreeted = function(npcName) {
+	  if (this.greetedNPCs.has(npcName)) return;
+
+	  this.greetedNPCs.add(npcName);
+
+	  // Show notification
+	  if (this.alertPrefab) {
+		this.alertPrefab.alert(`Greeted ${npcName}`);
+	  }
+
+	  // Check if all NPCs have been greeted
+	  this.checkAllNPCsGreeted();
+	};
+  }
+
+  // Method to set up NPCs for quest interactions
+  setupQuestNPCs() {
+	// Set up Lydia (Merchant) for Quest #002 and #007
+	if (this.merchantPrefab) {
+	  // Make sure Lydia triggers the quest event when interacted with
+	  const originalPointerDown = this.merchantPrefab.npc.listeners('pointerdown')[0];
+
+	  if (originalPointerDown) {
+		this.merchantPrefab.npc.off('pointerdown', originalPointerDown);
+
+		this.merchantPrefab.npc.on('pointerdown', function (_pointer) {
+		  let distance = this.getDistance(this.player, this);
+
+		  if (distance > 100) {
+			this.scene.alertPrefab.alert("Too Far");
+			return;
+		  }
+
+		  // Mark Lydia as greeted for Quest #003
+		  if (this.scene.markNPCGreeted) {
+			this.scene.markNPCGreeted("Lydia");
+		  }
+
+		  // Trigger quest event for meeting Lydia
+		  if (this.scene.triggerQuestEvent) {
+			this.scene.triggerQuestEvent('npc:lydiaInteraction', { npc: this });
+		  }
+
+		  this.msgPrefab.conversation(this.dialogueLines);
+		}, this.merchantPrefab);
+	  }
+	}
+
+	// Set up Food Merchant for greeting (for Quest #003)
+	if (this.foodMerchant) {
+	  const originalFoodMerchantPointerDown = this.foodMerchant.npc.listeners('pointerdown')[0];
+
+	  if (originalFoodMerchantPointerDown) {
+		this.foodMerchant.npc.off('pointerdown', originalFoodMerchantPointerDown);
+
+		this.foodMerchant.npc.on('pointerdown', function (_pointer) {
+		  // Distance check
+		  let distance = this.getDistance(this.player, this);
+
+		  if (distance > 100) {
+			this.scene.alertPrefab.alert("Too Far");
+			return;
+		  }
+
+		  // Mark as greeted for Quest #003
+		  if (this.scene.markNPCGreeted) {
+			this.scene.markNPCGreeted("Lily");
+		  }
+
+		  // Continue with original handler
+		  originalFoodMerchantPointerDown.call(this, _pointer);
+		}, this.foodMerchant);
+	  }
+	}
+
+	// Set up Blacksmith for greeting (for Quest #003)
+	if (this.blackSmithPrefab) {
+	  const originalBlacksmithPointerDown = this.blackSmithPrefab.npc.listeners('pointerdown')[0];
+
+	  if (originalBlacksmithPointerDown) {
+		this.blackSmithPrefab.npc.off('pointerdown', originalBlacksmithPointerDown);
+
+		this.blackSmithPrefab.npc.on('pointerdown', function (_pointer) {
+		  // Distance check
+		  let distance = this.getDistance(this.player, this);
+
+		  if (distance > 100) {
+			this.scene.alertPrefab.alert("Too Far");
+			return;
+		  }
+
+		  // Mark as greeted for Quest #003
+		  if (this.scene.markNPCGreeted) {
+			this.scene.markNPCGreeted("Rowan");
+		  }
+
+		  // Continue with original handler
+		  originalBlacksmithPointerDown.call(this, _pointer);
+		}, this.blackSmithPrefab);
+	  }
+	}
+  }
+
   setupStartingItems() {
 	if (!this.newItemHudPrefab || !this.newItemHudPrefab.itemBoxs) return;
 
@@ -854,69 +1114,88 @@ create() {
     this.editorCreate();
 
     window.questBookPrefab = null;
-	initMerchantBridge(this);
+    initMerchantBridge(this);
     this.cameras.main.setBounds(0, 0, 3840, 2880);
     this.physics.world.bounds.width = 3840;
     this.physics.world.bounds.height = 2880;
 
-	this.merchantPrefab.player = this.playerPrefab;
-	this.merchantPrefab.inventoryHud = this.newItemHudPrefab;
-	this.merchantPrefab.msgPrefab = this.messagePrefab;
-	this.merchantPrefab.itemHud = this.newItemHudPrefab;
-	this.merchantPrefab.merchantType = MERCHANT_TYPES.FARMER;
+    // Set up merchant references
+    this.merchantPrefab.player = this.playerPrefab;
+    this.merchantPrefab.inventoryHud = this.newItemHudPrefab;
+    this.merchantPrefab.msgPrefab = this.messagePrefab;
+    this.merchantPrefab.itemHud = this.newItemHudPrefab;
+    this.merchantPrefab.merchantType = MERCHANT_TYPES.FARMER;
 
-	this.foodMerchant.player = this.playerPrefab;
-	this.foodMerchant.inventoryHud = this.newItemHudPrefab;
-	this.foodMerchant.msgPrefab = this.messagePrefab;
-	this.foodMerchant.merchantType = MERCHANT_TYPES.FOOD;
+    this.foodMerchant.player = this.playerPrefab;
+    this.foodMerchant.inventoryHud = this.newItemHudPrefab;
+    this.foodMerchant.msgPrefab = this.messagePrefab;
+    this.foodMerchant.merchantType = MERCHANT_TYPES.FOOD;
 
-	this.blackSmithPrefab.player = this.playerPrefab;
-	this.blackSmithPrefab.inventoryHud = this.newItemHudPrefab;
-	this.blackSmithPrefab.msgPrefab = this.messagePrefab;
-	this.blackSmithPrefab.itemHud = this.newItemHudPrefab;
-	this.blackSmithPrefab.merchantType = MERCHANT_TYPES.BLACKSMITH;
+    this.blackSmithPrefab.player = this.playerPrefab;
+    this.blackSmithPrefab.inventoryHud = this.newItemHudPrefab;
+    this.blackSmithPrefab.msgPrefab = this.messagePrefab;
+    this.blackSmithPrefab.itemHud = this.newItemHudPrefab;
+    this.blackSmithPrefab.merchantType = MERCHANT_TYPES.BLACKSMITH;
 
+    // Initialize quest system
     if (!this.game.questSystem) {
         this.game.questSystem = questSystem;
     }
 
+    // Use the existing questSystem from your imports
+    this.questSystem = questSystem;
+
+    // Set up quest system with extended functionality
     extendSceneWithQuests(this);
 
+    // Set up town detection and quest functionality
+    this.setupQuestSystem();
+
+    // Initialize window methods for quest tracking if not already present
     window.getQuestProgress = () => {
-        if (this.game && this.game.questSystem) {
-            return this.game.questSystem.getQuestProgress();
+        if (this.questSystem) {
+            return this.questSystem.getQuestProgress();
         }
         return {};
     };
 
     window.updateQuestProgress = (update) => {
-        if (this.game && this.game.questSystem) {
-            this.game.questSystem.updateQuestProgress(update);
+        if (this.questSystem) {
+            this.questSystem.updateQuestProgress(update);
+            return true;
         }
+        return false;
     };
+
+    // Set up achievements tracking
     this.achievements = {
         firstMarketVisit: false,
         townSquareExplorer: false,
-        meetTheBlacksmith: false
+        meetTheBlacksmith: false,
+        firstHarvestAchievement: false,
+        giftFromNatureAchievement: false,
+        firstFishAchievement: false
     };
 
     this.initInventorySystem();
-
     this.setupLayerDepths();
 
+    // Handle scene wake events
     this.events.on('wake', () => {
-		this.cameras.main.fadeIn(300);
+        this.cameras.main.fadeIn(300);
 
-		if (this.newItemHudPrefab) {
-			this.time.delayedCall(200, () => {
-				import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
-					if (globalInventory.syncInventoryToScene) {
-						globalInventory.syncInventoryToScene(this);
-					}
-				});
-			});
-		}
-	});
+        if (this.newItemHudPrefab) {
+            this.time.delayedCall(200, () => {
+                import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+                    if (globalInventory.syncInventoryToScene) {
+                        globalInventory.syncInventoryToScene(this);
+                    }
+                });
+            });
+        }
+    });
+
+    // Set up references between components
     if (this.blackSmithPrefab) {
         this.blackSmithPrefab.msgPrefab = this.messagePrefab;
         this.blackSmithPrefab.alertPrefab = this.alertPrefab;
@@ -931,7 +1210,9 @@ create() {
         }
     }
 
-    this.squareFountanPrefab.setupCollision(this.playerPrefab);
+    this.setupInteractionZones();
+
+	this.squareFountanPrefab.setupCollision(this.playerPrefab);
     this.squareCampFirePrefab_1.setupCollision(this.playerPrefab);
     this.squareCampFirePrefab_2.setupCollision(this.playerPrefab);
     this.squareCampFirePrefab_3.setupCollision(this.playerPrefab);
@@ -1083,8 +1364,6 @@ create() {
 
 		this.cameras.main.fadeIn(2000, 0, 0, 0);
 	});
-
-    this.setupInteractionZones();
 }
 
 /* END-USER-CODE */

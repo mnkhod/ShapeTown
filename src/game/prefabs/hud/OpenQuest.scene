@@ -1,0 +1,89 @@
+{
+    "id": "2c30c124-0411-4631-af99-2308825ee3ac",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 70,
+        "borderHeight": 70
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "bb6acbc1-ac71-45de-8e3b-ffce97f6dc3f",
+            "label": "container_1",
+            "blendMode": -1,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "48f4ad20-aea4-4408-b79a-5dfa5a8dcba3",
+                    "label": "quest_Book_Highligthed_V01",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "Quest_Book_Highligthed_V01"
+                    },
+                    "x": 12,
+                    "y": 12,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
+                },
+                {
+                    "type": "Image",
+                    "id": "9548da8c-5bff-4339-bf7d-02adc6559953",
+                    "label": "quest_Book_V01",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "Quest_Book_V01"
+                    },
+                    "x": 12,
+                    "y": 12,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
+                },
+                {
+                    "type": "Image",
+                    "id": "911752ce-8003-45ad-9c4b-61d5da08b8c4",
+                    "label": "q_ShortKeyLabel",
+                    "scope": "CLASS",
+                    "texture": {
+                        "key": "Q_ShortKeyLabel"
+                    },
+                    "x": 23,
+                    "y": 23,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
+                }
+            ]
+        }
+    ],
+    "plainObjects": [
+        {
+            "id": "843e0d52-7952-4abb-8b47-b3e129f72d5b",
+            "type": "Keyboard.Key",
+            "label": "keyboard_q",
+            "keyCode": "Q"
+        }
+    ],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    },
+    "prefabProperties": [
+        {
+            "name": "player",
+            "label": "Player",
+            "tooltip": "",
+            "defValue": "",
+            "customDefinition": false,
+            "type": {
+                "id": "object-var",
+                "expressionType": "Phaser.GameObjects.GameObject"
+            }
+        }
+    ]
+}

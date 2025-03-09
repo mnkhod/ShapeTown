@@ -2471,8 +2471,8 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": 2730,
-            "y": 1568
+            "x": 363,
+            "y": 1542
         },
         {
             "prefabId": "1ad7756a-6fd7-4db7-ae0b-533d58fee4d3",
@@ -3381,18 +3381,6 @@
             "y": 2710
         },
         {
-            "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
-            "id": "40ba3902-61a7-433a-87d9-10233033a31c",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "questBookPrefab",
-            "scope": "CLASS",
-            "x": 3221,
-            "y": 2787
-        },
-        {
             "prefabId": "05640e95-1b2a-411d-bbb2-3af441962740",
             "id": "98691aa0-6838-493c-83a0-871c3dfd1a9e",
             "unlock": [
@@ -3489,8 +3477,8 @@
             "y": 2178
         },
         {
-            "prefabId": "08042514-f3c4-4223-8b25-466bc7345f63",
-            "id": "a38aea85-e017-41e0-ab81-c5510dbb629a",
+            "prefabId": "2c30c124-0411-4631-af99-2308825ee3ac",
+            "id": "8cf93aa3-35d1-4434-a150-c9b8774e7416",
             "unlock": [
                 "x",
                 "y"

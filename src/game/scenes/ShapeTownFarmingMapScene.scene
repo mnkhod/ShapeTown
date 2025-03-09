@@ -690,18 +690,6 @@
             "y": 758
         },
         {
-            "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
-            "id": "758f9d31-0240-4bd2-8ca0-908aa709ca6c",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "questBookPrefab",
-            "scope": "CLASS",
-            "x": 478,
-            "y": 1439
-        },
-        {
             "prefabId": "2e844f73-6bf0-4cf6-98c7-64322f7616d0",
             "id": "8fc2a3d0-f08f-4d51-bb52-e4e7687c9dfe",
             "unlock": [
@@ -739,6 +727,17 @@
                 "RoadStone",
                 "Fence_V01"
             ]
+        },
+        {
+            "prefabId": "2c30c124-0411-4631-af99-2308825ee3ac",
+            "id": "b40b8210-7148-46ed-85a9-24302df89035",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "openQuest",
+            "x": 307,
+            "y": 1317
         }
     ],
     "plainObjects": [

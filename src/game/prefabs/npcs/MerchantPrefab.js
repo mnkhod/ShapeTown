@@ -23,13 +23,22 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         questMark.play("BeforeQuest");
         this.add(questMark);
         
+        // Add name box for Lydia
+        const nameBox = scene.add.sprite(0, 33, "MerchantLydiaName");
+        nameBox.setVisible(false); 
+        nameBox.setOrigin(0.5, 0.5);  
+        nameBox.setScale(0.4); 
+        this.add(nameBox);
+
         this.npc = npc;
         this.questMark = questMark;
+        this.nameBox = nameBox;
 
         /* START-USER-CTR-CODE */
         scene.events.on('create', this.prefabCreateCycle, this);
         npc.setInteractive({ useHandCursor: true });
         this.merchantType = MERCHANT_TYPES.FARMER;
+        this.hasCompletedSellQuest = false;
         /* END-USER-CTR-CODE */
     }
 
@@ -43,14 +52,16 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
     msgPrefab;
     /** @type {string} */
     merchantType;
+    /** @type {boolean} */
+    hasCompletedSellQuest;
 
     /* START-USER-CODE */
 
     dialogueLines = [
-        { 
-            msg: "Hello, sir/ma'am. How can I help you?",
+        {
+            msg: "Hello, I'm Lydia. How can I help you today?",
             options: [
-                { 
+                {
                     text: "I want to buy seeds and supplies", 
                     onSelect: () => {
                         if (this.scene.reactEvent) {
@@ -59,20 +70,71 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
                     },
                     nextDialogue: 1
                 },
-                { 
-                    text: "I want to sell items", 
+                {
+                    text: "I want to sell items",
                     onSelect: () => {
-                        if (this.scene.reactEvent) {
-                            this.scene.reactEvent.emit("show-shop-sell-modal", this);
+                      if (this.scene.reactEvent) {
+                        // Check if the player has iron bars and Quest #002 is active
+                        const hasIronBars = this.scene.newItemHudPrefab && 
+                                           this.scene.newItemHudPrefab.checkItem("Ironbar");
+                        const isQuestActive = this.scene.questSystem && 
+                                            this.scene.questSystem.isQuestActive("002");
+                        
+                        if (hasIronBars && isQuestActive) {
+                          // Special dialogue for the quest
+                          this.msgPrefab.conversation([
+                            { msg: "Ah, those iron bars from Jack! I can definitely buy those from you." },
+                            { 
+                              msg: "Here's your payment - 1000 gold! Jack will be pleased with your trading skills.",
+                              onComplete: () => {
+                                // Remove iron bars from inventory
+                                this.scene.newItemHudPrefab.removeItemByKey("Ironbar");
+                                
+                                // Trigger quest completion
+                                if (this.scene.triggerQuestEvent) {
+                                  console.log("Triggering quest:sold-items-to-lydia event");
+                                  this.scene.triggerQuestEvent('quest:sold-items-to-lydia', { npc: this });
+                                  
+                                  // Show notification
+                                  if (this.scene.alertPrefab) {
+                                    this.scene.alertPrefab.alert("Quest Completed: Taste of Gold");
+                                  }
+                                }
+                              }
+                            }
+                          ]);
+                        } else {
+                          // Regular selling
+                          this.scene.reactEvent.emit("show-shop-sell-modal", this);
                         }
+                      }
                     },
-                    nextDialogue: 1
+                    nextDialogue: 1,
                 },
-                { 
-                    text: "Just browsing", 
+                {
+                    text: "Jack sent me here",
+                    nextDialogue: [
+                        { 
+                            msg: "Ah, Jack! He's a good friend. Welcome to my shop! Feel free to browse my goods or sell your items. I offer fair prices for quality goods.",
+                            onComplete: () => {
+                                // Trigger quest event for meeting Lydia
+                                if (this.scene.triggerQuestEvent) {
+                                    this.scene.triggerQuestEvent('npc:lydiaInteraction', { npc: this });
+                                    
+                                    // Show notification
+                                    if (this.scene.alertPrefab) {
+                                        this.scene.alertPrefab.alert("Quest Updated: Met Lady Lydia");
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    text: "Just browsing",
                     nextDialogue: [
                         { msg: "Feel free to look around. Let me know if you need anything." }
-                    ]
+                    ],
                 }
             ]
         },
@@ -82,6 +144,9 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
     prefabCreateCycle() {
         this.npc.on('pointerover', function (_pointer) {
             this.preFX.addGlow(16777215, 4, 0, false);
+            if (this.parentContainer && this.parentContainer.nameBox) {
+                this.parentContainer.nameBox.setVisible(true);
+            }
         });
 
         this.npc.on('pointerdown', function (_pointer) {
@@ -93,11 +158,19 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
             }
 
             this.msgPrefab.conversation(this.dialogueLines);
+            
+            // Trigger quest event for meeting Lydia
+            if (this.scene.triggerQuestEvent) {
+                this.scene.triggerQuestEvent('npc:lydiaInteraction', { npc: this });
+            }
 
         }, this);
 
         this.npc.on('pointerout', function (_pointer) {
             this.preFX.clear();
+            if (this.parentContainer && this.parentContainer.nameBox) {
+                this.parentContainer.nameBox.setVisible(false);
+            }
         });
     }
 
