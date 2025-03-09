@@ -109,7 +109,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     player;
 
     lastDirection = 'down';
-    moveSpeed = 150;
+    moveSpeed = 500;
 
     prefabCreateCycle() {
         this.loadCustomization();
