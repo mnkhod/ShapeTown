@@ -10,7 +10,20 @@ import BeachTree1Prefab from "../prefabs/Trees/BeachTree1Prefab";
 import BeachTree3Prefab from "../prefabs/Trees/BeachTree3Prefab";
 import BeachTree2Prefab from "../prefabs/Trees/BeachTree2Prefab";
 import SquareShipPrefab from "../prefabs/House/SquareShipPrefab";
+import OpenInventory from "../prefabs/hud/OpenInventory";
+import AlertPrefab from "../prefabs/hud/AlertPrefab";
+import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
+import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
+import MessagePrefab from "../prefabs/hud/MessagePrefab";
+import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
+import NewItemHudPrefab from "../../../NewItemHudPrefab";
+import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
+import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 /* START-USER-IMPORTS */
+import { EventBus } from '../../game/EventBus';
+import initInventoryBridge from "../../components/phaser-react-bridge";
+import questSystem from "../../components/QuestSystem";
+import { extendSceneWithQuests } from "../../components/QuestSystem";
 /* END-USER-IMPORTS */
 
 export default class ShapeTownBeachMapScene extends Phaser.Scene {
@@ -20,6 +33,8 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+		this.reactEvent = EventBus;
+    	this.achievements = {};
 		/* END-USER-CTR-CODE */
 	}
 
@@ -151,12 +166,47 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 		// sceneTile
 		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
-		const sceneTile = this.add.sprite(1600, 20, "Fruitbushes_V01", 23);
+		const sceneTile = this.add.sprite(1600, 0, "Fruitbushes_V01", 23);
 		sceneTile.scaleX = 10.306994636480235;
-		sceneTile.scaleY = 1;
 		this.physics.add.existing(sceneTile, false);
 		sceneTile.body.allowGravity = false;
 		sceneTile.body.setSize(32, 200, false);
+
+		// openInventory
+		const openInventory = new OpenInventory(this, 1837, 1405);
+		this.add.existing(openInventory);
+
+		// alertPrefab
+		const alertPrefab = new AlertPrefab(this, 87, 54);
+		this.add.existing(alertPrefab);
+
+		// questBookPrefab
+		const questBookPrefab = new QuestBookPrefab(this, 251, 1615);
+		this.add.existing(questBookPrefab);
+
+		// openMapPrefab
+		const openMapPrefab = new OpenMapPrefab(this, 1897, 1397);
+		this.add.existing(openMapPrefab);
+
+		// messagePrefab
+		const messagePrefab = new MessagePrefab(this, 183, 145);
+		this.add.existing(messagePrefab);
+
+		// profilePrefab
+		const profilePrefab = new ProfilePrefab(this, 110, 148);
+		this.add.existing(profilePrefab);
+
+		// newItemHudPrefab
+		const newItemHudPrefab = new NewItemHudPrefab(this, 1266, 1636);
+		this.add.existing(newItemHudPrefab);
+
+		// minimapPrefab
+		const minimapPrefab = new MinimapPrefab(this, 2338, 211);
+		this.add.existing(minimapPrefab);
+
+		// optionsListPrefab
+		const optionsListPrefab = new OptionsListPrefab(this, 2408, 156);
+		this.add.existing(optionsListPrefab);
 
 		this.sand_1 = sand_1;
 		this.beachDeckPrefab = beachDeckPrefab;
@@ -189,6 +239,15 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.beachTree1Prefab_4 = beachTree1Prefab_4;
 		this.squareShipPrefab = squareShipPrefab;
 		this.sceneTile = sceneTile;
+		this.openInventory = openInventory;
+		this.alertPrefab = alertPrefab;
+		this.questBookPrefab = questBookPrefab;
+		this.openMapPrefab = openMapPrefab;
+		this.messagePrefab = messagePrefab;
+		this.profilePrefab = profilePrefab;
+		this.newItemHudPrefab = newItemHudPrefab;
+		this.minimapPrefab = minimapPrefab;
+		this.optionsListPrefab = optionsListPrefab;
 		this.shapetownBeach = shapetownBeach;
 
 		this.events.emit("scene-awake");
@@ -256,6 +315,24 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	squareShipPrefab;
 	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
 	sceneTile;
+	/** @type {OpenInventory} */
+	openInventory;
+	/** @type {AlertPrefab} */
+	alertPrefab;
+	/** @type {QuestBookPrefab} */
+	questBookPrefab;
+	/** @type {OpenMapPrefab} */
+	openMapPrefab;
+	/** @type {MessagePrefab} */
+	messagePrefab;
+	/** @type {ProfilePrefab} */
+	profilePrefab;
+	/** @type {NewItemHudPrefab} */
+	newItemHudPrefab;
+	/** @type {MinimapPrefab} */
+	minimapPrefab;
+	/** @type {OptionsListPrefab} */
+	optionsListPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownBeach;
 
@@ -263,129 +340,268 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 	// Write your code here
 
+	initInventorySystem() {
+	    if (!this.newItemHudPrefab) return;
+
+	    this.newItemHudPrefab.visible = true;
+
+	    const inventoryBridge = initInventoryBridge(this.newItemHudPrefab, this.reactEvent);
+	    this.inventoryBridge = inventoryBridge;
+
+	    this.time.delayedCall(200, () => {
+	        import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+	            if (globalInventory.quickItems.every(item => item === null) && 
+	                globalInventory.mainItems.every(item => item === null)) {
+	                this.setupStartingItems();
+
+	                if (this.newItemHudPrefab.updateGlobalInventory) {
+	                    this.newItemHudPrefab.updateGlobalInventory();
+	                }
+	            }
+
+	            if (this.inventoryBridge) {
+	                this.inventoryBridge.fixSelection();
+	            }
+
+	            this.reactEvent.emit('scene-switched', this);
+	        });
+	    });
+
+	    this.events.on('shutdown', this.onSceneShutdown, this);
+	    this.events.on('sleep', this.onSceneShutdown, this);
+	}
+
+	onSceneShutdown() {
+	    console.log(`${this.scene.key} shutting down, saving inventory`);
+
+	    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+	        this.newItemHudPrefab.updateGlobalInventory();
+	    }
+
+	    if (this.inventoryBridge) {
+	        this.inventoryBridge.update();
+	    }
+	}
+
+	setupStartingItems() {
+	    if (!this.newItemHudPrefab) return;
+
+	    console.log(`Setting up starting items for ${this.scene.key}`);
+
+	    this.newItemHudPrefab.visible = true;
+	    if (this.questBookPrefab) this.questBookPrefab.visible = true;
+
+	    if (this.newItemHudPrefab.itemBoxs) {
+	        this.newItemHudPrefab.itemBoxs.forEach((box, index) => {
+	            if (!box.input || !box.input.enabled) {
+	                box.setInteractive({ useHandCursor: true });
+	                box.on('pointerdown', () => {
+	                    if (box.frame.name === 0) {
+	                        this.newItemHudPrefab.itemBoxs.forEach((otherBox) => {
+	                            if (otherBox !== box) {
+	                                otherBox.setTexture("HudItemSlot", 0);
+	                            }
+	                        });
+
+	                        box.setTexture("HudItemSlot", 1);
+	                        this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[index];
+	                        this.newItemHudPrefab.activeIndex = index;
+	                    }
+	                }, this);
+	            }
+	        });
+	    }
+	}
+
+	setupLayerDepths() {
+	    this.profilePrefab?.setDepth(90);
+	    this.openInventory?.setDepth(90);
+	    this.questBookPrefab?.setDepth(90);
+	    this.newItemHudPrefab?.setDepth(90);
+	    this.messagePrefab?.setDepth(90);
+	    this.alertPrefab?.setDepth(90);
+	    this.openMapPrefab?.setDepth(90);
+	    this.optionsListPrefab?.setDepth(90);
+	    this.minimapPrefab?.setDepth(90);
+
+	    this.playerPrefab?.setDepth(90);
+	}
+
 	create() {
+	    this.editorCreate();
 
-		this.editorCreate();
+	    window.questBookPrefab = null;
 
-		this.beachTree1Prefab_1.setupCollision(this.playerPrefab)
-		this.beachTree1Prefab_2.setupCollision(this.playerPrefab)
-		this.beachTree1Prefab_3.setupCollision(this.playerPrefab)
-		this.beachTree1Prefab_4.setupCollision(this.playerPrefab)
-		this.beachTree2Prefab_1.setupCollision(this.playerPrefab)
-		this.beachTree2Prefab_2.setupCollision(this.playerPrefab)
-		this.beachTree2Prefab_3.setupCollision(this.playerPrefab)
-		this.beachTree2Prefab_4.setupCollision(this.playerPrefab)
-		this.beachTree2Prefab_5.setupCollision(this.playerPrefab)
-		this.beachTree2Prefab_6.setupCollision(this.playerPrefab)
-		this.beachTree3Prefab_2.setupCollision(this.playerPrefab)
-		this.beachTree3Prefab_1.setupCollision(this.playerPrefab)
-		this.beachTree3Prefab_3.setupCollision(this.playerPrefab)    
-		this.beachHousePrefab.setupCollision(this.playerPrefab)
-		this.squareShipPrefab.setupCollision(this.playerPrefab)
+	    this.cameras.main.setBounds(0, 0, 2560, 1650);
+	    this.physics.world.bounds.width = 2560;
+	    this.physics.world.bounds.height = 1650;
 
-		this.seaLevelBuildingLighthousePrefab.setupCollision(this.playerPrefab)
-		this.cameras.main.setBounds(0, 0, 2560, 1650);
-        this.physics.world.bounds.width = 1000;
-        this.physics.world.bounds.height = 800;
-		this.beachDeckPrefab.setDepth(1)
-		this.seaLevelBuildingLighthousePrefab.setDepth(2)
+	    if (!this.game.questSystem) {
+	        this.game.questSystem = questSystem;
+	    }
 
-		const waterTiles = this.sand_1.getTilesWithin();
-        waterTiles.forEach(tile => {
-        if (tile && tile.index === 13) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWaterCenter');
-        }
-		if (tile && tile.index === 140) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_1');
-        }
-		if ([137, 172].includes(tile.index)) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_2');
-        }
-		if (tile && tile.index === 138) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_3');
-        }
-		if (tile && tile.index === 173) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_4');
-        }
-		if ([141, 174].includes(tile.index)) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_5');
-        }
-		if (tile && tile.index === 107) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_6');
-        }
-		if (tile && tile.index === 37) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_7');
-        }
-		if (tile && tile.index === 103) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_8');
-        }
-		if (tile && tile.index === 69) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_9');
-        }
-		if (tile && tile.index === 38) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_10');
-        }
-		if (tile && tile.index === 70) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_13');
-        }
-		if (tile && tile.index === 72) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_12');
-        }
-		if (tile && tile.index === 73) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
-        sprite.play('BeachWater_15');
-        }
-        });
+	    extendSceneWithQuests(this);
 
-		this.physics.add.collider(this.playerPrefab, this.blocker);
-        this.blocker.setCollisionBetween(0, 10000);
+	    window.getQuestProgress = () => {
+	        if (this.game && this.game.questSystem) {
+	            return this.game.questSystem.getQuestProgress();
+	        }
+	        return {};
+	    };
 
-        this.physics.add.collider(this.playerPrefab, this.blocker_1);
-        this.blocker_1.setCollisionBetween(0, 10000);
+	    window.updateQuestProgress = (update) => {
+	        if (this.game && this.game.questSystem) {
+	            this.game.questSystem.updateQuestProgress(update);
+	        }
+	    };
 
-        this.physics.add.collider(this.playerPrefab, this.blocker_2);
-        this.blocker_2.setCollisionBetween(0, 10000);
+	    this.initInventorySystem();
 
-        this.physics.add.collider(this.playerPrefab, this.blocker_3);
-        this.blocker_3.setCollisionBetween(0, 10000);
+	    this.setupLayerDepths();
+
+	    this.events.on('wake', () => {
+	        this.cameras.main.fadeIn(300);
+
+	        if (this.newItemHudPrefab) {
+	            this.time.delayedCall(200, () => {
+	                import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+	                    if (globalInventory.syncInventoryToScene) {
+	                        globalInventory.syncInventoryToScene(this);
+	                    }
+	                });
+	            });
+	        }
+	    });
+
+	    if (this.minimapPrefab && this.playerPrefab) {
+	        this.minimapPrefab.setPlayer(this.playerPrefab);
+	        this.minimapPrefab.visible = false;
+	        if (this.minimapPrefab.minimapCamera) {
+	            this.minimapPrefab.minimapCamera.visible = false;
+	        }
+	    }
+
+	    this.beachTree1Prefab_1.setupCollision(this.playerPrefab)
+	    this.beachTree1Prefab_2.setupCollision(this.playerPrefab)
+	    this.beachTree1Prefab_3.setupCollision(this.playerPrefab)
+	    this.beachTree1Prefab_4.setupCollision(this.playerPrefab)
+	    this.beachTree2Prefab_1.setupCollision(this.playerPrefab)
+	    this.beachTree2Prefab_2.setupCollision(this.playerPrefab)
+	    this.beachTree2Prefab_3.setupCollision(this.playerPrefab)
+	    this.beachTree2Prefab_4.setupCollision(this.playerPrefab)
+	    this.beachTree2Prefab_5.setupCollision(this.playerPrefab)
+	    this.beachTree2Prefab_6.setupCollision(this.playerPrefab)
+	    this.beachTree3Prefab_2.setupCollision(this.playerPrefab)
+	    this.beachTree3Prefab_1.setupCollision(this.playerPrefab)
+	    this.beachTree3Prefab_3.setupCollision(this.playerPrefab)    
+	    this.beachHousePrefab.setupCollision(this.playerPrefab)
+	    this.squareShipPrefab.setupCollision(this.playerPrefab)
+
+	    this.seaLevelBuildingLighthousePrefab.setupCollision(this.playerPrefab)
+	    this.beachDeckPrefab.setDepth(1)
+	    this.seaLevelBuildingLighthousePrefab.setDepth(2)
+
+	    const waterTiles = this.sand_1.getTilesWithin();
+	    waterTiles.forEach(tile => {
+	    if (tile && tile.index === 13) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWaterCenter');
+	    }
+	    if (tile && tile.index === 140) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_1');
+	    }
+	    if ([137, 172].includes(tile.index)) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_2');
+	    }
+	    if (tile && tile.index === 138) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_3');
+	    }
+	    if (tile && tile.index === 173) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_4');
+	    }
+	    if ([141, 174].includes(tile.index)) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_5');
+	    }
+	    if (tile && tile.index === 107) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_6');
+	    }
+	    if (tile && tile.index === 37) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_7');
+	    }
+	    if (tile && tile.index === 103) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_8');
+	    }
+	    if (tile && tile.index === 69) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_9');
+	    }
+	    if (tile && tile.index === 38) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_10');
+	    }
+	    if (tile && tile.index === 70) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_13');
+	    }
+	    if (tile && tile.index === 72) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_12');
+	    }
+	    if (tile && tile.index === 73) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'BeachWaterSheet_v01');
+	    	sprite.play('BeachWater_15');
+	    }
+	});
+
+	    this.physics.add.collider(this.playerPrefab, this.blocker);
+	    this.blocker.setCollisionBetween(0, 10000);
+
+	    this.physics.add.collider(this.playerPrefab, this.blocker_1);
+	    this.blocker_1.setCollisionBetween(0, 10000);
+
+	    this.physics.add.collider(this.playerPrefab, this.blocker_2);
+	    this.blocker_2.setCollisionBetween(0, 10000);
+
+	    this.physics.add.collider(this.playerPrefab, this.blocker_3);
+	    this.blocker_3.setCollisionBetween(0, 10000);
 
 	    this.physics.add.collider(this.playerPrefab, this.tree_1);
 	    this.tree_1.setCollisionBetween(0,1592);
 	    // this.tree_1.renderDebug(this.add.graphics());
 
-		this.physics.add.collider(this.playerPrefab, this.sand_1);
+	    this.physics.add.collider(this.playerPrefab, this.sand_1);
 	    this.sand_1.setCollision([172, 173, 137, 174, 141, 107]);
 	    // this.sand_1.renderDebug(this.add.graphics());
 
-		this.physics.add.collider(this.playerPrefab, this.sand_1);
+	    this.physics.add.collider(this.playerPrefab, this.sand_1);
 	    this.sand_1.setCollision(13);
-		//  this.sand_1.renderDebug(this.add.graphics())
+	    //  this.sand_1.renderDebug(this.add.graphics())
 
-		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-		    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-			this.newItemHudPrefab.updateGlobalInventory();
-			}
+	    this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
+	        if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+	            this.newItemHudPrefab.updateGlobalInventory();
+	        }
 
-		    this.scene.switch("ShapeTownSquareMapScene");
-		    this.playerPrefab.y += 30;
-		    this.cameras.main.fadeIn(2000, 0, 0, 0);
+	        this.scene.switch("ShapeTownSquareMapScene");
+
+	        const targetScene = this.scene.get("ShapeTownSquareMapScene");
+	        if (targetScene && targetScene.playerPrefab) {
+	            targetScene.playerPrefab.y -= 80;
+	        }
+
+			this.cameras.main.fadeIn(2000, 0, 0, 0);
 		});
 	}
 
-	/* END-USER-CODE */
+/* END-USER-CODE */
 }
 
 /* END OF COMPILED CODE */

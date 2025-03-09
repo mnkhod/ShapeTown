@@ -349,46 +349,32 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 			}
 		}
 	}
-
-	// Step 1: Add initInventorySystem to ShapeTownFarmingMapScene
-
-// For ShapeTownFarmingMapScene
 initInventorySystem() {
 	if (!this.newItemHudPrefab) return;
 	
 	this.newItemHudPrefab.visible = true;
 	
-	// Use the phaser-react-bridge to initialize connection between Phaser and React
 	const inventoryBridge = initInventoryBridge(this.newItemHudPrefab, this.reactEvent);
 	
-	// Store reference to bridge controls
 	this.inventoryBridge = inventoryBridge;
 	
-	// Setup starting items if needed
 	this.time.delayedCall(200, () => {
 	  import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
-		// Set up starting items if global inventory is empty
 		if (globalInventory.quickItems.every(item => item === null) && 
 			globalInventory.mainItems.every(item => item === null)) {
-		  this.setupStartingItems();
+				this.setupStartingItems();
 		  
-		  // Update global inventory after setting up starting items
-		  if (this.newItemHudPrefab.updateGlobalInventory) {
-			this.newItemHudPrefab.updateGlobalInventory();
-		  }
-		}
+		  		if (this.newItemHudPrefab.updateGlobalInventory) {
+					this.newItemHudPrefab.updateGlobalInventory();
+		  		}
+			}
+			if (this.inventoryBridge) {
+			  this.inventoryBridge.fixSelection();
+			}
 		
-		// Fix item selection in case no item is selected
-		if (this.inventoryBridge) {
-		  this.inventoryBridge.fixSelection();
-		}
-		
-		// Notify React components that inventory is ready
-		this.reactEvent.emit('scene-switched', this);
-	  });
+			this.reactEvent.emit('scene-switched', this);
+	  	});
 	});
-	
-	// Ensure we save inventory on scene transitions
 	this.events.on('shutdown', this.onSceneShutdown, this);
 	this.events.on('sleep', this.onSceneShutdown, this);
   }
@@ -396,12 +382,10 @@ initInventorySystem() {
   onSceneShutdown() {
 	console.log(`${this.scene.key} shutting down, saving inventory`);
 	
-	// First, update the global inventory from current state
 	if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
 	  this.newItemHudPrefab.updateGlobalInventory();
 	}
 	
-	// Also save directly through the bridge if available
 	if (this.inventoryBridge) {
 	  this.inventoryBridge.update();
 	}
@@ -412,46 +396,39 @@ initInventorySystem() {
 	
 	console.log(`Setting up starting items for ${this.scene.key}`);
 	
-	// Show required UI elements
 	this.newItemHudPrefab.visible = true;
 	if (this.questBookPrefab) this.questBookPrefab.visible = true;
 	
-	// Setup item box interactions if available
 	if (this.newItemHudPrefab.itemBoxs) {
-	  this.newItemHudPrefab.itemBoxs.forEach((box, index) => {
-		if (!box.input || !box.input.enabled) {
-		  box.setInteractive({ useHandCursor: true });
-		  box.on('pointerdown', () => {
-			if (box.frame.name === 0) {
-			  // Reset all other boxes
-			  this.newItemHudPrefab.itemBoxs.forEach((otherBox) => {
-				if (otherBox !== box) {
-				  otherBox.setTexture("HudItemSlot", 0);
-				}
-			  });
-			  
-			  // Set this box as active
-			  box.setTexture("HudItemSlot", 1);
-			  this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[index];
-			  this.newItemHudPrefab.activeIndex = index;
-			  
-			  // Notify React UI about selection change
-			  if (this.reactEvent) {
-				this.reactEvent.emit('inventory-slot-selected', { 
-				  index, 
-				  item: this.newItemHudPrefab.itemData[index] 
-				});
-			  }
+	  	this.newItemHudPrefab.itemBoxs.forEach((box, index) => {
+			if (!box.input || !box.input.enabled) {
+		  		box.setInteractive({ useHandCursor: true });
+		  		box.on('pointerdown', () => {
+					if (box.frame.name === 0) {
+			  			this.newItemHudPrefab.itemBoxs.forEach((otherBox) => {
+							if (otherBox !== box) {
+				  				otherBox.setTexture("HudItemSlot", 0);
+							}
+			  			});
+			  			box.setTexture("HudItemSlot", 1);
+			  			this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[index];
+			  			this.newItemHudPrefab.activeIndex = index;
+			  			if (this.reactEvent) {
+							this.reactEvent.emit('inventory-slot-selected', { 
+				 				index, 
+				  				item: this.newItemHudPrefab.itemData[index] 
+							});
+			  			}
+					}
+		  		}, this);
 			}
-		  }, this);
-		}
-	  });
+	  	});
 	}
 	
 	if (this.newItemHudPrefab.activeItemSlots && this.newItemHudPrefab.activeItemSlots[0]) {
-	  this.newItemHudPrefab.activeItemSlots[0].visible = true;
-	  this.newItemHudPrefab.activeIndex = 0;
-	  this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[0];
+	  	this.newItemHudPrefab.activeItemSlots[0].visible = true;
+	  	this.newItemHudPrefab.activeIndex = 0;
+	  	this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[0];
 	}
   }
 
@@ -470,8 +447,8 @@ initInventorySystem() {
 		this.editorCreate();
 		window.questBookPrefab = null;
 		this.cameras.main.setBounds(0, 0, 2550, 1920);
-		// this.physics.world.bounds.width = 1000;
-		// this.physics.world.bounds.height = 800;
+		this.physics.world.bounds.width = 1000;
+		this.physics.world.bounds.height = 800;
 	
 		if (!this.game.questSystem) {
 			this.game.questSystem = questSystem;

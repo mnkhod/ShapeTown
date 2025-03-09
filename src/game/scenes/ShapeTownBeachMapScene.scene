@@ -504,12 +504,119 @@
                 "frame": 23
             },
             "x": 1600,
-            "y": 20,
             "scaleX": 10.306994636480235,
             "ArcadeComponent.active": true,
             "allowGravity": false,
             "body.width": 32,
             "body.height": 200
+        },
+        {
+            "prefabId": "d9cd0bbb-a8fc-4188-bf3b-a1043ac8444d",
+            "id": "61f50387-70c9-451d-b6f5-02e7727e9ea5",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "openInventory",
+            "scope": "CLASS",
+            "x": 1837,
+            "y": 1405
+        },
+        {
+            "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
+            "id": "3a134502-dc9c-48d3-897d-fa889ec5e2f7",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "alertPrefab",
+            "scope": "CLASS",
+            "x": 87,
+            "y": 54
+        },
+        {
+            "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
+            "id": "a00a71d1-401a-4ed0-8979-49d9616310d0",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "questBookPrefab",
+            "scope": "CLASS",
+            "x": 251,
+            "y": 1615
+        },
+        {
+            "prefabId": "511211d3-4280-4710-b0e3-c823277bb8e4",
+            "id": "0ffffc03-1646-4ffe-9393-e4ea667a8ab7",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "openMapPrefab",
+            "scope": "CLASS",
+            "x": 1897,
+            "y": 1397
+        },
+        {
+            "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
+            "id": "35560a91-8dcc-4455-8590-50908532b76c",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "messagePrefab",
+            "scope": "CLASS",
+            "x": 183,
+            "y": 145
+        },
+        {
+            "prefabId": "05640e95-1b2a-411d-bbb2-3af441962740",
+            "id": "705ffa3c-2076-4a02-a4a0-bfb3ea917da2",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "profilePrefab",
+            "scope": "CLASS",
+            "x": 110,
+            "y": 148
+        },
+        {
+            "prefabId": "9be122bc-3a2e-4c06-a98e-b5754929a6d2",
+            "id": "dfab6cc0-5de8-4b33-992d-5828df426eee",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "newItemHudPrefab",
+            "scope": "CLASS",
+            "x": 1266,
+            "y": 1636
+        },
+        {
+            "prefabId": "2e844f73-6bf0-4cf6-98c7-64322f7616d0",
+            "id": "1abb6d51-1f7f-40a7-ab33-0f849573c985",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "minimapPrefab",
+            "scope": "CLASS",
+            "x": 2338,
+            "y": 211
+        },
+        {
+            "prefabId": "e1ab5904-77e5-46c1-9532-c3d7be0e73be",
+            "id": "7f0e3b75-ea2a-4a4d-9ec0-3b9c341bcb3e",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "optionsListPrefab",
+            "scope": "CLASS",
+            "x": 2408,
+            "y": 156
         }
     ],
     "plainObjects": [

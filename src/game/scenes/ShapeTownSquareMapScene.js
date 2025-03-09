@@ -222,7 +222,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 510, 1536);
+		const playerPrefab = new PlayerPrefab(this, 2435, 2468);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -789,10 +789,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	}
   setupStartingItems() {
 	if (!this.newItemHudPrefab || !this.newItemHudPrefab.itemBoxs) return;
-	
+
 	this.newItemHudPrefab.visible = true;
 	this.questBookPrefab.visible = true;
-	
+
 	this.newItemHudPrefab.itemBoxs.forEach((box, index) => {
 	  box.setInteractive({ useHandCursor: true });
 	  box.on('pointerdown', () => {
@@ -804,7 +804,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 			  otherBox.setTexture("HudItemSlot", 0);
 			}
 		  });
-		  
+
 		  // Set this box as active
 		  box.setTexture("HudItemSlot", 1);
 		  this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[index];
@@ -917,7 +917,7 @@ create() {
 
     this.events.on('wake', () => {
 		this.cameras.main.fadeIn(300);
-		
+
 		if (this.newItemHudPrefab) {
 			this.time.delayedCall(200, () => {
 				import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
@@ -1066,27 +1066,31 @@ create() {
     });
 
     this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-        if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-            this.newItemHudPrefab.updateGlobalInventory();
-        }
-
-        this.scene.switch("ShapeTownBeachMapScene");
-        this.playerPrefab.y -= 30;
-        this.cameras.main.fadeIn(2000, 0, 0, 0);
-    });
-
-    this.physics.add.overlap(this.sceneTile_1, this.playerPrefab, () => {
 		if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
 			this.newItemHudPrefab.updateGlobalInventory();
 		}
-		
+
+		this.scene.switch("ShapeTownBeachMapScene");
+
+		const targetScene_1 = this.scene.get("ShapeTownBeachMapScene");
+		if (targetScene_1 && targetScene_1.playerPrefab) {
+			targetScene_1.playerPrefab.y += 40;
+		}
+
+		this.cameras.main.fadeIn(2000, 0, 0, 0);
+	});
+	this.physics.add.overlap(this.sceneTile_1, this.playerPrefab, () => {
+		if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+			this.newItemHudPrefab.updateGlobalInventory();
+		}
+
 		this.scene.switch("ShapeTownFarmingMapScene");
-		
+
 		const targetScene = this.scene.get("ShapeTownFarmingMapScene");
 		if (targetScene && targetScene.playerPrefab) {
 			targetScene.playerPrefab.x -= 40;
 		}
-		
+
 		this.cameras.main.fadeIn(2000, 0, 0, 0);
 	});
 
