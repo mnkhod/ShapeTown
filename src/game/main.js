@@ -20,8 +20,8 @@ import ShapeTownSquareMapScene from "./scenes/ShapeTownSquareMapScene"
 // https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config = {
     type: Phaser.AUTO,
-    width: 1920,
-    height: 1080,
+    // width: 1920,
+    // height: 1080,
     parent: 'game-container',
     backgroundColor: '#028af8',
     physics: {
@@ -37,16 +37,18 @@ const config = {
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1920,
-        height: 1080,
-        min: {
-            width: 800,
-            height: 450
-        },
-        max: {
-            width: 3480,
-            height: 2160
-        }
+        width: "100%",
+        height: "100%",
+        // width: 1920,
+        // height: 1080,
+        // min: {
+        //     width: 800,
+        //     height: 450
+        // },
+        // max: {
+        //     width: 3480,
+        //     height: 2160
+        // }
     },
     scene: [
         Boot,
