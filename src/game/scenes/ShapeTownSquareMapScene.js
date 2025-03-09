@@ -24,6 +24,8 @@ import FoodMerchant from "../prefabs/npcs/FoodMerchant";
 import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
 import WaterwellPrefab from "../prefabs/Fountan/WaterwellPrefab";
 import OpenQuest from "../prefabs/hud/OpenQuest";
+
+import MerchantCabinPrefab from "../prefabs/House/MerchantCabinPrefab";
 /* START-USER-IMPORTS */
 import questSystem from "../../components/QuestSystem";
 import { extendSceneWithQuests } from "../../components/QuestSystem";
@@ -198,14 +200,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// blacksmith_Blacksmith_stall_1
 		const blacksmith_Blacksmith_stall_1 = shapetownSquare.createLayer("Blacksmith/Blacksmith stall", ["Blacksmith"], 0, 0);
 
-		// mechant_merchant_1
-		const mechant_merchant_1 = shapetownSquare.createLayer("Mechant/merchant", ["MerchantCabin_v01"], 0, 0);
-
 		// mechant_MerchantCarriage_1
 		const mechant_MerchantCarriage_1 = shapetownSquare.createLayer("Mechant/MerchantCarriage", ["MerchentanCarriege"], 0, 0);
-
-		// mechant_Merchant_logo_1
-		const mechant_Merchant_logo_1 = shapetownSquare.createLayer("Mechant/Merchant logo", ["MerchantIcon"], 0, 0);
 
 		// barracks_Barricade
 		const barracks_Barricade = shapetownSquare.createLayer("Barracks/Barricade3", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
@@ -217,7 +213,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 363, 1542);
+		const playerPrefab = new PlayerPrefab(this, 2030, 2168);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -420,6 +416,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const openQuest = new OpenQuest(this, 3007, 2582);
 		this.add.existing(openQuest);
 
+		// merchantCabinPrefab
+		const merchantCabinPrefab = new MerchantCabinPrefab(this, 1936, 2070);
+		this.add.existing(merchantCabinPrefab);
+
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
 		this.bG_tallgrass_1 = bG_tallgrass_1;
@@ -450,9 +450,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.foodStand_stall = foodStand_stall;
 		this.foodStand_Basket_1 = foodStand_Basket_1;
 		this.blacksmith_Blacksmith_stall_1 = blacksmith_Blacksmith_stall_1;
-		this.mechant_merchant_1 = mechant_merchant_1;
 		this.mechant_MerchantCarriage_1 = mechant_MerchantCarriage_1;
-		this.mechant_Merchant_logo_1 = mechant_Merchant_logo_1;
 		this.barracks_Barricade = barracks_Barricade;
 		this.barracks_Barricade_1 = barracks_Barricade_1;
 		this.barracks_Barricade_2 = barracks_Barricade_2;
@@ -498,6 +496,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.merchantPrefab = merchantPrefab;
 		this.waterwellPrefab = waterwellPrefab;
 		this.openQuest = openQuest;
+		this.merchantCabinPrefab = merchantCabinPrefab;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -564,11 +563,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	blacksmith_Blacksmith_stall_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	mechant_merchant_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	mechant_MerchantCarriage_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	mechant_Merchant_logo_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	barracks_Barricade;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -659,6 +654,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	waterwellPrefab;
 	/** @type {OpenQuest} */
 	openQuest;
+	/** @type {MerchantCabinPrefab} */
+	merchantCabinPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -1221,6 +1218,7 @@ create() {
     this.squareDragonHousePrefab.setupCollision(this.playerPrefab);
     this.squareTownPrefab.setupCollision(this.playerPrefab);
 	this.waterwellPrefab.setupCollision(this.playerPrefab);
+	this.merchantCabinPrefab.setupCollision(this.playerPrefab)
 
     this.physics.add.collider(this.playerPrefab, this.collution_WoodenFence_1);
     this.collution_WoodenFence_1.setCollisionBetween(0, 10000);
@@ -1272,9 +1270,6 @@ create() {
 
     this.physics.add.collider(this.playerPrefab, this.decoration_Rock_1);
     this.decoration_Rock_1.setCollisionBetween(0, 10000);
-
-    this.physics.add.collider(this.playerPrefab, this.mechant_merchant_1);
-    this.mechant_merchant_1.setCollisionBetween(0, 10000);
 
     this.physics.add.collider(this.playerPrefab, this.mechant_MerchantCarriage_1);
     this.mechant_MerchantCarriage_1.setCollisionBetween(0, 10000);

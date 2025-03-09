@@ -1,0 +1,52 @@
+{
+    "id": "d8425afc-b2e5-4aca-bfd1-b05243318ef1",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "a03f6290-0fbd-428d-9dc5-61ea007e2a90",
+            "label": "container_1",
+            "blendMode": -1,
+            "x": 275,
+            "y": 198,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "3ccee8e9-5bfd-498d-87ac-347edf788576",
+                    "label": "merchantCabin_v010",
+                    "texture": {
+                        "key": "MerchantCabin_v01",
+                        "frame": 0
+                    }
+                },
+                {
+                    "type": "Image",
+                    "id": "91cea970-97ac-45c1-a506-df5bc9fb4c7f",
+                    "label": "foodstandIcon0",
+                    "texture": {
+                        "key": "FoodstandIcon",
+                        "frame": 0
+                    },
+                    "x": 10,
+                    "y": 21
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
