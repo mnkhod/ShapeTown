@@ -22,10 +22,10 @@ import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import FoodMerchant from "../prefabs/npcs/FoodMerchant";
 import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
-import WaterwellPrefab from "../prefabs/Fountan/WaterwellPrefab";
 import OpenQuest from "../prefabs/hud/OpenQuest";
-
 import MerchantCabinPrefab from "../prefabs/House/MerchantCabinPrefab";
+import BlacksmithPrefab from "../prefabs/House/BlacksmithPrefab";
+import WaterwellPrefab from "../prefabs/Fountan/WaterwellPrefab";
 /* START-USER-IMPORTS */
 import questSystem from "../../components/QuestSystem";
 import { extendSceneWithQuests } from "../../components/QuestSystem";
@@ -197,9 +197,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// foodStand_Basket_1
 		const foodStand_Basket_1 = shapetownSquare.createLayer("FoodStand/Basket", ["Foodstand_Busket"], 0, 0);
 
-		// blacksmith_Blacksmith_stall_1
-		const blacksmith_Blacksmith_stall_1 = shapetownSquare.createLayer("Blacksmith/Blacksmith stall", ["Blacksmith"], 0, 0);
-
 		// mechant_MerchantCarriage_1
 		const mechant_MerchantCarriage_1 = shapetownSquare.createLayer("Mechant/MerchantCarriage", ["MerchentanCarriege"], 0, 0);
 
@@ -213,7 +210,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 2030, 2168);
+		const playerPrefab = new PlayerPrefab(this, 1630, 1988);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -365,7 +362,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		sceneTile_1.body.setSize(32, 200, false);
 
 		// blackSmithPrefab
-		const blackSmithPrefab = new BlackSmithPrefab(this, 1734, 1918);
+		const blackSmithPrefab = new BlackSmithPrefab(this, 1648, 1944);
 		this.add.existing(blackSmithPrefab);
 
 		// openMapPrefab
@@ -409,16 +406,20 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.add.existing(merchantPrefab);
 
 		// waterwellPrefab
-		const waterwellPrefab = new WaterwellPrefab(this, 2801, 1640);
+		const waterwellPrefab = new OpenQuest(this, 2801, 1640);
 		this.add.existing(waterwellPrefab);
-		
-		// openQuest
-		const openQuest = new OpenQuest(this, 3007, 2582);
-		this.add.existing(openQuest);
 
 		// merchantCabinPrefab
 		const merchantCabinPrefab = new MerchantCabinPrefab(this, 1936, 2070);
 		this.add.existing(merchantCabinPrefab);
+
+		// blacksmithPrefab
+		const blacksmithPrefab = new BlacksmithPrefab(this, 1590, 1860);
+		this.add.existing(blacksmithPrefab);
+
+		// waterwellPrefab_1
+		const waterwellPrefab_1 = new WaterwellPrefab(this, 2778, 1545);
+		this.add.existing(waterwellPrefab_1);
 
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
@@ -449,7 +450,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.foodStand_Fishbarrel = foodStand_Fishbarrel;
 		this.foodStand_stall = foodStand_stall;
 		this.foodStand_Basket_1 = foodStand_Basket_1;
-		this.blacksmith_Blacksmith_stall_1 = blacksmith_Blacksmith_stall_1;
 		this.mechant_MerchantCarriage_1 = mechant_MerchantCarriage_1;
 		this.barracks_Barricade = barracks_Barricade;
 		this.barracks_Barricade_1 = barracks_Barricade_1;
@@ -495,8 +495,9 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.foodMerchant = foodMerchant;
 		this.merchantPrefab = merchantPrefab;
 		this.waterwellPrefab = waterwellPrefab;
-		this.openQuest = openQuest;
 		this.merchantCabinPrefab = merchantCabinPrefab;
+		this.blacksmithPrefab = blacksmithPrefab;
+		this.waterwellPrefab_1 = waterwellPrefab_1;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -560,8 +561,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	foodStand_stall;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	foodStand_Basket_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	blacksmith_Blacksmith_stall_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	mechant_MerchantCarriage_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -650,12 +649,14 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	foodMerchant;
 	/** @type {MerchantPrefab} */
 	merchantPrefab;
-	/** @type {WaterwellPrefab} */
-	waterwellPrefab;
 	/** @type {OpenQuest} */
-	openQuest;
+	waterwellPrefab;
 	/** @type {MerchantCabinPrefab} */
 	merchantCabinPrefab;
+	/** @type {BlacksmithPrefab} */
+	blacksmithPrefab;
+	/** @type {WaterwellPrefab} */
+	waterwellPrefab_1;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -672,6 +673,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	    this.openMapPrefab?.setDepth(90);
 	    this.optionsListPrefab?.setDepth(90);
 	    this.minimapPrefab?.setDepth(90);
+		this.blackSmithPrefab.setDepth(2)
 
 	    this.playerPrefab?.setDepth(90);
 
@@ -1217,8 +1219,9 @@ create() {
     this.mineWatchTowerPrefab.setupCollision(this.playerPrefab);
     this.squareDragonHousePrefab.setupCollision(this.playerPrefab);
     this.squareTownPrefab.setupCollision(this.playerPrefab);
-	this.waterwellPrefab.setupCollision(this.playerPrefab);
+	this.waterwellPrefab_1.setupCollision(this.playerPrefab);
 	this.merchantCabinPrefab.setupCollision(this.playerPrefab)
+	this.blacksmithPrefab.setupCollision(this.playerPrefab)
 
     this.physics.add.collider(this.playerPrefab, this.collution_WoodenFence_1);
     this.collution_WoodenFence_1.setCollisionBetween(0, 10000);
@@ -1291,9 +1294,6 @@ create() {
 
     this.physics.add.collider(this.playerPrefab, this.forager_home_Tent_1);
     this.forager_home_Tent_1.setCollisionBetween(0, 10000);
-
-    this.physics.add.collider(this.playerPrefab, this.blacksmith_Blacksmith_stall_1);
-    this.blacksmith_Blacksmith_stall_1.setCollisionBetween(0, 10000);
 
     this.physics.add.existing(this.barricade_V_2, true);
     this.physics.add.existing(this.barricade_V_1, true);

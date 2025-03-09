@@ -1988,74 +1988,6 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "1b3b957b-b442-44ae-bf14-00e6b35864cf",
-            "label": "blacksmith_Blacksmith_stall_1",
-            "scope": "CLASS",
-            "tilemapId": "1c545fee-869a-4a91-9651-61b46088fe2c",
-            "layerName": "Blacksmith/Blacksmith stall",
-            "tilesets": [
-                "GroundTileset_V02",
-                "TreePatteren",
-                "Fence_V01",
-                "Blacksmith",
-                "NpcBlaksmith",
-                "Foodstand_Busket",
-                "FoodstandBarrel_V01",
-                "FoodstandStall_V01",
-                "Foodstand",
-                "MerchantCabin_v01",
-                "MerchentanCarriege",
-                "WaterwellRoof",
-                "Waterwell",
-                "WaterFountain",
-                "RiverShallowSheet_v01",
-                "StoneBridgeHorizontal_V01",
-                "StoneBridgeVertical_V01",
-                "Tent_V02",
-                "CampfireSmoke",
-                "Campfire_V01",
-                "CampFireFireSheet",
-                "Apple",
-                "CarriageBroken_01",
-                "bush",
-                "BarricadeSpikes_V03",
-                "BarricadeSpikes_V01",
-                "BarricadeSpikes_V02",
-                "Tent_V03",
-                "Tent_V04",
-                "Tree_v014",
-                "Tree_v02",
-                "Tree_v09",
-                "Tree_v08",
-                "Tree_v01",
-                "Tree_v03",
-                "Tree_v05",
-                "Tree_v06",
-                "MerchantIcon",
-                "FoodstandIcon",
-                "Log_V01",
-                "DecorationWeaponStand",
-                "TorchBowl_V01",
-                "WatchtowerBack_01",
-                "WatchtowerFront_01",
-                "Barricade_V01",
-                "AdventureGuildBuilding",
-                "NPCSoilderSpearAttack_V01",
-                "NPCGuardian_V01",
-                "NPCSoildersFullsetWalking_V01",
-                "TownHall",
-                "RockOnGrass_V04",
-                "RockOnGrass_V01",
-                "RockOnGrass_V02",
-                "RockOnGrass_V03",
-                "NPCMarcus_Mining_Fullset",
-                "NPCRowan_Fullset_Walk_V01",
-                "NPCShopStandMaerchant",
-                "NPCGuardian_V01"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
             "id": "3b75bf8f-3327-4890-95d7-5f50c11bb071",
             "label": "mechant_MerchantCarriage_1",
             "scope": "CLASS",
@@ -2335,8 +2267,8 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": 2030,
-            "y": 2168
+            "x": 1630,
+            "y": 1988
         },
         {
             "prefabId": "1ad7756a-6fd7-4db7-ae0b-533d58fee4d3",
@@ -3217,8 +3149,8 @@
             ],
             "label": "blackSmithPrefab",
             "scope": "CLASS",
-            "x": 1734,
-            "y": 1918
+            "x": 1648,
+            "y": 1944
         },
         {
             "prefabId": "511211d3-4280-4710-b0e3-c823277bb8e4",
@@ -3363,6 +3295,30 @@
             "scope": "CLASS",
             "x": 1936,
             "y": 2070
+        },
+        {
+            "prefabId": "46a99e4d-95ae-4dd7-bd24-fe81ff94fa6f",
+            "id": "26f326f6-c6fe-4c51-92ca-bcb270d57ab2",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "blacksmithPrefab",
+            "scope": "CLASS",
+            "x": 1590,
+            "y": 1860
+        },
+        {
+            "prefabId": "08042514-f3c4-4223-8b25-466bc7345f63",
+            "id": "7b6e7d75-11d6-4499-a20a-144961eff4d0",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "waterwellPrefab_1",
+            "scope": "CLASS",
+            "x": 2778,
+            "y": 1545
         }
     ],
     "plainObjects": [

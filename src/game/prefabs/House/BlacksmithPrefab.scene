@@ -1,0 +1,33 @@
+{
+    "id": "46a99e4d-95ae-4dd7-bd24-fe81ff94fa6f",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Image",
+            "id": "eb5c9b93-479a-46f3-b35c-62f7ba2454c9",
+            "label": "blacksmith0",
+            "texture": {
+                "key": "Blacksmith",
+                "frame": 0
+            },
+            "x": 500,
+            "y": 362
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}
