@@ -1,0 +1,54 @@
+{
+    "id": "08042514-f3c4-4223-8b25-466bc7345f63",
+    "sceneType": "PREFAB",
+    "settings": {
+        "exportClass": true,
+        "autoImport": true,
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1024,
+        "borderHeight": 768
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "974f8ffd-f403-41cc-99b6-2ed1f831a8b2",
+            "label": "container_1",
+            "blendMode": -1,
+            "x": 503,
+            "y": 484,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "19dd72df-36cb-4b1d-b419-5540338c4cb8",
+                    "label": "waterwell0",
+                    "texture": {
+                        "key": "Waterwell",
+                        "frame": 0
+                    },
+                    "x": 4,
+                    "y": 82
+                },
+                {
+                    "type": "Image",
+                    "id": "31c22ee3-a1af-49e8-98b4-78e646aeed32",
+                    "label": "waterwellRoof0",
+                    "texture": {
+                        "key": "WaterwellRoof",
+                        "frame": 0
+                    },
+                    "x": 4,
+                    "y": 35
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor - Scene Editor",
+        "url": "https://phaser.io/editor",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 5
+    }
+}

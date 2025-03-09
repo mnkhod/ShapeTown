@@ -23,6 +23,7 @@ import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import FoodMerchant from "../prefabs/npcs/FoodMerchant";
 import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
+import WaterwellPrefab from "../prefabs/Fountan/WaterwellPrefab";
 /* START-USER-IMPORTS */
 import questSystem from "../../components/QuestSystem";
 import { extendSceneWithQuests } from "../../components/QuestSystem";
@@ -131,12 +132,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// decoration_
 		const decoration_ = shapetownSquare.createLayer("Decoration/9", ["TreePatteren"], 0, 0);
 
-		// decoration_Waterwell_1
-		const decoration_Waterwell_1 = shapetownSquare.createLayer("Decoration/Waterwell", ["Waterwell"], 0, 0);
-
-		// decoration_WaterwellRoof_1
-		const decoration_WaterwellRoof_1 = shapetownSquare.createLayer("Decoration/WaterwellRoof", ["WaterwellRoof"], 0, 0);
-
 		// decoration_Decoration_1
 		const decoration_Decoration_1 = shapetownSquare.createLayer("Decoration/Decoration", ["CarriageBroken_01"], 0, 0);
 
@@ -222,7 +217,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 2435, 2468);
+		const playerPrefab = new PlayerPrefab(this, 2730, 1568);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -373,9 +368,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		sceneTile_1.body.allowGravity = false;
 		sceneTile_1.body.setSize(32, 200, false);
 
-		// nPC_NPC_Soilder_1
-		shapetownSquare.createLayer("NPC/NPC Soilder", ["NPCSoilderSpearAttack_V01","NPCGuardian_V01"], 0, 0);
-
 		// blackSmithPrefab
 		const blackSmithPrefab = new BlackSmithPrefab(this, 1734, 1918);
 		this.add.existing(blackSmithPrefab);
@@ -424,6 +416,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const merchantPrefab = new MerchantPrefab(this, 1821, 2178);
 		this.add.existing(merchantPrefab);
 
+		// waterwellPrefab
+		const waterwellPrefab = new WaterwellPrefab(this, 2801, 1640);
+		this.add.existing(waterwellPrefab);
+
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
 		this.bG_tallgrass_1 = bG_tallgrass_1;
@@ -432,8 +428,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.collution_StoneFence_1 = collution_StoneFence_1;
 		this.river_River_1 = river_River_1;
 		this.decoration_ = decoration_;
-		this.decoration_Waterwell_1 = decoration_Waterwell_1;
-		this.decoration_WaterwellRoof_1 = decoration_WaterwellRoof_1;
 		this.decoration_Decoration_1 = decoration_Decoration_1;
 		this.decoration_Tree_1 = decoration_Tree_1;
 		this.decoration_Log_1 = decoration_Log_1;
@@ -503,6 +497,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.optionsListPrefab = optionsListPrefab;
 		this.foodMerchant = foodMerchant;
 		this.merchantPrefab = merchantPrefab;
+		this.waterwellPrefab = waterwellPrefab;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -524,10 +519,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	river_River_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	decoration_;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	decoration_Waterwell_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	decoration_WaterwellRoof_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	decoration_Decoration_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -666,6 +657,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	foodMerchant;
 	/** @type {MerchantPrefab} */
 	merchantPrefab;
+	/** @type {WaterwellPrefab} */
+	waterwellPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
@@ -796,16 +789,12 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	this.newItemHudPrefab.itemBoxs.forEach((box, index) => {
 	  box.setInteractive({ useHandCursor: true });
 	  box.on('pointerdown', () => {
-		// Only proceed if this is an inactive box
 		if (box.frame.name === 0) {
-		  // Reset all other boxes
 		  this.newItemHudPrefab.itemBoxs.forEach((otherBox) => {
 			if (otherBox !== box) {
 			  otherBox.setTexture("HudItemSlot", 0);
 			}
 		  });
-
-		  // Set this box as active
 		  box.setTexture("HudItemSlot", 1);
 		  this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[index];
 		  this.newItemHudPrefab.activeIndex = index;
@@ -950,6 +939,7 @@ create() {
     this.mineWatchTowerPrefab.setupCollision(this.playerPrefab);
     this.squareDragonHousePrefab.setupCollision(this.playerPrefab);
     this.squareTownPrefab.setupCollision(this.playerPrefab);
+	this.waterwellPrefab.setupCollision(this.playerPrefab);
 
     this.physics.add.collider(this.playerPrefab, this.collution_WoodenFence_1);
     this.collution_WoodenFence_1.setCollisionBetween(0, 10000);

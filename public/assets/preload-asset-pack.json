@@ -3747,8 +3747,8 @@
             {
                 "url": "assets/Building/Waterwell.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 128,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3760,8 +3760,8 @@
             {
                 "url": "assets/Building/WaterwellRoof.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 96,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
