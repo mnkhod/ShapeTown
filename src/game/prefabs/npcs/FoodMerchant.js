@@ -6,17 +6,16 @@
 import { MERCHANT_TYPES, getMerchantInventory } from '../../../components/merchant-manager';
 /* END-USER-IMPORTS */
 
-export default class BlackSmithPrefab extends Phaser.GameObjects.Container {
+export default class FoodMerchant extends Phaser.GameObjects.Container {
     constructor(scene, x, y) {
         super(scene, x ?? 32, y ?? 32);
 
-        const npc = scene.add.sprite(0, 0, "NpcBlaksmith", 0);
-        npc.scaleX = 0.75;
-        npc.scaleY = 0.75;
+        const npc = scene.add.sprite(0, 0, "GameNpcs1", 18);
+        npc.scaleX = 1.5;
+        npc.scaleY = 1.5;
         scene.physics.add.existing(npc, false);
         npc.body.allowGravity = false;
         npc.body.setSize(32, 32, false);
-        npc.play("NpcBlackSmithRight");
         this.add(npc);
 
         const questMark = scene.add.sprite(0, -40, "GameNpcs1", 6);
@@ -30,8 +29,7 @@ export default class BlackSmithPrefab extends Phaser.GameObjects.Container {
         /* START-USER-CTR-CODE */
         scene.events.on('create', this.prefabCreateCycle, this);
         npc.setInteractive({ useHandCursor: true });
-        this.currentDialogueIndex = 0;
-        this.merchantType = MERCHANT_TYPES.BLACKSMITH;
+        this.merchantType = MERCHANT_TYPES.FOOD;
         /* END-USER-CTR-CODE */
     }
 
@@ -48,12 +46,6 @@ export default class BlackSmithPrefab extends Phaser.GameObjects.Container {
 
     /* START-USER-CODE */
 
-    greetings = [
-        "No gold No Blade. What do you want?",
-        "Are you Blind? I am busy here. Tell me what you want from me.",
-        "No time to chit-chat! What do you want? Name it!"
-    ];
-
     prefabCreateCycle() {
         this.npc.on('pointerover', function (_pointer) {
             this.preFX.addGlow(16777215, 4, 0, false);
@@ -62,21 +54,17 @@ export default class BlackSmithPrefab extends Phaser.GameObjects.Container {
         this.npc.on('pointerdown', function (_pointer) {
             let distance = this.getDistance(this.player, this);
 
-            if (distance > 60) {
+            if (distance > 100) {
                 this.scene.alertPrefab.alert("Too Far");
                 return;
             }
 
-            const currentGreeting = this.greetings[this.currentDialogueIndex];
-            
-            this.currentDialogueIndex = (this.currentDialogueIndex + 1) % this.greetings.length;
-            
             const dialogueLines = [
                 { 
-                    msg: currentGreeting,
+                    msg: "Welcome to my food stall! Fresh and delicious meals ready for you!",
                     options: [
                         { 
-                            text: "I want to buy weapons and tools", 
+                            text: "I want to buy food", 
                             onSelect: () => {
                                 if (this.scene.reactEvent) {
                                     this.scene.reactEvent.emit("show-shop-buy-modal", this);
@@ -94,14 +82,14 @@ export default class BlackSmithPrefab extends Phaser.GameObjects.Container {
                             nextDialogue: 1
                         },
                         { 
-                            text: "Just looking at your craftsmanship", 
+                            text: "Just looking around", 
                             nextDialogue: [
-                                { msg: "Fine, look all you want. Don't touch anything unless you're buying it!" }
+                                { msg: "Take your time! My food isn't going anywhere... well, except into someone's belly!" }
                             ]
                         }
                     ]
                 },
-                { msg: "Deal done. Now get out of my way, I have work to do!" }
+                { msg: "Enjoy your meal! Come back for seconds!" }
             ];
 
             this.msgPrefab.conversation(dialogueLines);
@@ -124,6 +112,7 @@ export default class BlackSmithPrefab extends Phaser.GameObjects.Container {
         );
     }
 
+    // Method to get merchant-specific inventory
     getInventory() {
         return getMerchantInventory(this.merchantType);
     }

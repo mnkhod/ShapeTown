@@ -20,7 +20,6 @@ import { EventBus } from "./game/EventBus";
 
 
 function App() {
-    //  References to the PhaserGame component (game and scene are exposed)
     const phaserRef = useRef();
 
     const [showAchievements, setShowAchievements] = useState(false);
@@ -37,10 +36,10 @@ function App() {
     const [showLeaderboard, setShowLeaderboard] = useState(false);
     const [showShopSell, setShowShopSell] = useState(false);
     const [showShopBuy, setShowShopBuy] = useState(false);
+    const [merchantType, setMerchantType] = useState('farmer');
 
     const [gameData] = useState({});
 
-    // Event emitted from the PhaserGame component
     const currentScene = (scene) => {
 
     }
@@ -101,12 +100,18 @@ function App() {
             case "SHOPSELL":
                 if (modalData && modalData.phaserInstance) {
                     setPhaserInstance(modalData.phaserInstance);
+                    if (modalData.merchantType) {
+                        setMerchantType(modalData.merchantType);
+                    }
                 }
                 setShowShopSell(true);
                 break;
             case "SHOPBUY":
                 if (modalData && modalData.phaserInstance) {
                     setPhaserInstance(modalData.phaserInstance);
+                    if (modalData.merchantType) {
+                        setMerchantType(modalData.merchantType);
+                    }
                 }
                 setShowShopBuy(true);
                 break;
@@ -117,8 +122,53 @@ function App() {
     };
 
     useEffect(() => {
-        getMetamaskAccount()
-    }, [])
+        getMetamaskAccount();
+        
+        const handleOpenMerchantBuy = (data) => {
+            console.log('Opening merchant buy screen with data:', data);
+            if (data && data.phaserInstance) {
+                setPhaserInstance(data.phaserInstance);
+                if (data.merchantType) {
+                    setMerchantType(data.merchantType);
+                }
+                setShowShopBuy(true);
+            }
+        };
+
+        const handleCloseMerchantBuy = () => {
+            setShowShopBuy(false);
+            setPhaserInstance(null);
+        };
+
+        const handleOpenMerchantSell = (data) => {
+            console.log('Opening merchant sell screen with data:', data);
+            if (data && data.phaserInstance) {
+                setPhaserInstance(data.phaserInstance);
+                if (data.merchantType) {
+                    setMerchantType(data.merchantType);
+                }
+                setShowShopSell(true);
+            }
+        };
+
+        const handleCloseMerchantSell = () => {
+            setShowShopSell(false);
+            setPhaserInstance(null);
+        };
+
+        EventBus.on('open-merchant-buy', handleOpenMerchantBuy);
+        EventBus.on('close-merchant-buy', handleCloseMerchantBuy);
+        EventBus.on('open-merchant-sell', handleOpenMerchantSell);
+        EventBus.on('close-merchant-sell', handleCloseMerchantSell);
+
+        return () => {
+            EventBus.off('open-merchant-buy', handleOpenMerchantBuy);
+            EventBus.off('close-merchant-buy', handleCloseMerchantBuy);
+            EventBus.off('open-merchant-sell', handleOpenMerchantSell);
+            EventBus.off('close-merchant-sell', handleCloseMerchantSell);
+        };
+    }, []);
+    
     useEffect(() => {
         if (showQuest && window.getQuestProgress) {
             const progress = window.getQuestProgress();
@@ -224,8 +274,10 @@ function App() {
             {showShopSell && (
                 <MerchantSellScreen
                     phaserInstance={phaserInstance}
+                    merchantType={merchantType}
                     onClose={() => {
                         setShowShopSell(false);
+                        setPhaserInstance(null);
                     }}
                     isOpen={showShopSell}
                 />
@@ -234,8 +286,10 @@ function App() {
             {showShopBuy && (
                 <MerchantBuyScreen
                     phaserInstance={phaserInstance}
+                    merchantType={merchantType}
                     onClose={() => {
                         setShowShopBuy(false);
+                        setPhaserInstance(null);
                     }}
                     isOpen={showShopBuy}
                 />

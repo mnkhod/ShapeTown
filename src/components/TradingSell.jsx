@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useInventorySync } from './inventory-sync';
 import { getGoldManager } from './gold-manager';
+import { MERCHANT_TYPES } from './merchant-manager';
 
 const InventoryItem = ({ item, onClick, isSelected }) => {
   if (!item) return (
@@ -49,18 +50,22 @@ const InventoryItem = ({ item, onClick, isSelected }) => {
   );
 };
 
-const MerchantSellScreen = ({ onClose, phaserInstance }) => {
+const MerchantSellScreen = ({ onClose, phaserInstance, merchantType = MERCHANT_TYPES.FARMER }) => {
   const { inventory, refreshInventory } = useInventorySync(phaserInstance);
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [buttonState, setButtonState] = useState('default');
   const [lastSoldGold, setLastSoldGold] = useState(0);
   const [currentGold, setCurrentGold] = useState(0);
+  const [merchantTitle, setMerchantTitle] = useState("Sell Items");
   const maxInventorySlots = 32;
   
   const goldManager = getGoldManager(phaserInstance);
   
   useEffect(() => {
+    // Set merchant title based on type
+    setMerchantTitle("Sell Items");
+    
     refreshInventory();
     
     if (goldManager) {
@@ -103,7 +108,7 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
         }
       };
     }
-  }, [phaserInstance, refreshInventory, inventory, selectedItem, quantity, goldManager]);
+  }, [phaserInstance, refreshInventory, inventory, selectedItem, quantity, goldManager, merchantType]);
 
   const allInventoryItems = [
     ...inventory.quickItems.filter(item => item !== null),
@@ -232,6 +237,11 @@ const MerchantSellScreen = ({ onClose, phaserInstance }) => {
                 </span>
               )}
             </div>
+          </div>
+
+          {/* Merchant Title */}
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white font-bold text-lg">
+            {merchantTitle}
           </div>
 
           <div className="flex w-full h-full p-4">
@@ -492,7 +502,8 @@ InventoryItem.propTypes = {
 
 MerchantSellScreen.propTypes = {
   onClose: PropTypes.func.isRequired,
-  phaserInstance: PropTypes.object
+  phaserInstance: PropTypes.object,
+  merchantType: PropTypes.string
 };
 
 export default MerchantSellScreen;

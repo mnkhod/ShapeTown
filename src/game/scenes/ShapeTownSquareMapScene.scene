@@ -218,20 +218,6 @@
             ]
         },
         {
-            "type": "Sprite",
-            "id": "2309b33d-f82b-4a1c-a903-d379bf80ab52",
-            "label": "npcBlackSmithRight",
-            "scope": "CLASS",
-            "texture": {
-                "key": "NpcBlaksmith",
-                "frame": 0
-            },
-            "x": 1662,
-            "y": 1920,
-            "animationPlayMethod": 1,
-            "animationKey": "NpcBlackSmithRight"
-        },
-        {
             "type": "TilemapLayer",
             "id": "6bbbeb01-855d-40d3-aaed-cb7e679dbd28",
             "label": "collution_Cliff_1",
@@ -1729,74 +1715,6 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "cec6f6ab-573a-439f-aa65-a6c1c7e5d6c9",
-            "label": "nPC_NPC_Lily_1",
-            "scope": "CLASS",
-            "tilemapId": "1c545fee-869a-4a91-9651-61b46088fe2c",
-            "layerName": "NPC/NPC Lily",
-            "tilesets": [
-                "GroundTileset_V02",
-                "TreePatteren",
-                "Fence_V01",
-                "Blacksmith",
-                "NpcBlaksmith",
-                "Foodstand_Busket",
-                "FoodstandBarrel_V01",
-                "FoodstandStall_V01",
-                "Foodstand",
-                "MerchantCabin_v01",
-                "MerchentanCarriege",
-                "WaterwellRoof",
-                "Waterwell",
-                "WaterFountain",
-                "RiverShallowSheet_v01",
-                "StoneBridgeHorizontal_V01",
-                "StoneBridgeVertical_V01",
-                "Tent_V02",
-                "CampfireSmoke",
-                "Campfire_V01",
-                "CampFireFireSheet",
-                "Apple",
-                "CarriageBroken_01",
-                "bush",
-                "BarricadeSpikes_V03",
-                "BarricadeSpikes_V01",
-                "BarricadeSpikes_V02",
-                "Tent_V03",
-                "Tent_V04",
-                "Tree_v014",
-                "Tree_v02",
-                "Tree_v09",
-                "Tree_v08",
-                "Tree_v01",
-                "Tree_v03",
-                "Tree_v05",
-                "Tree_v06",
-                "MerchantIcon",
-                "FoodstandIcon",
-                "Log_V01",
-                "DecorationWeaponStand",
-                "TorchBowl_V01",
-                "WatchtowerBack_01",
-                "WatchtowerFront_01",
-                "Barricade_V01",
-                "AdventureGuildBuilding",
-                "NPCSoilderSpearAttack_V01",
-                "NPCGuardian_V01",
-                "NPCSoildersFullsetWalking_V01",
-                "TownHall",
-                "RockOnGrass_V04",
-                "RockOnGrass_V01",
-                "RockOnGrass_V02",
-                "RockOnGrass_V03",
-                "NPCMarcus_Mining_Fullset",
-                "NPCRowan_Fullset_Walk_V01",
-                "NPCShopStandMaerchant",
-                "NPCGuardian_V01"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
             "id": "5674ae7d-6d72-4d32-9efc-38c742ddf2c9",
             "label": "foodStand_Fishbarrel_1",
             "scope": "CLASS",
@@ -2689,8 +2607,8 @@
             ],
             "label": "playerPrefab",
             "scope": "CLASS",
-            "x": 2450,
-            "y": 2752
+            "x": 510,
+            "y": 1536
         },
         {
             "prefabId": "1ad7756a-6fd7-4db7-ae0b-533d58fee4d3",
@@ -3628,6 +3546,150 @@
                 "NPCShopStandMaerchant",
                 "NPCGuardian_V01"
             ]
+        },
+        {
+            "prefabId": "3ea53c19-3795-4560-9fb7-0bf9f521f2f1",
+            "id": "0699b684-10b8-4418-9dc5-2f9a9f409909",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "blackSmithPrefab",
+            "scope": "CLASS",
+            "x": 1734,
+            "y": 1918
+        },
+        {
+            "prefabId": "511211d3-4280-4710-b0e3-c823277bb8e4",
+            "id": "73006925-918e-4b68-b411-38c51b35f3aa",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "openMapPrefab",
+            "scope": "CLASS",
+            "x": 3354,
+            "y": 2730
+        },
+        {
+            "prefabId": "d9cd0bbb-a8fc-4188-bf3b-a1043ac8444d",
+            "id": "07a6f3f0-e1b9-432c-9b2d-785d70ae94a2",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "openInventory",
+            "scope": "CLASS",
+            "x": 3595,
+            "y": 2710
+        },
+        {
+            "prefabId": "37959980-4ccd-448d-8f07-35b88a563f7c",
+            "id": "40ba3902-61a7-433a-87d9-10233033a31c",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "questBookPrefab",
+            "scope": "CLASS",
+            "x": 3221,
+            "y": 2787
+        },
+        {
+            "prefabId": "05640e95-1b2a-411d-bbb2-3af441962740",
+            "id": "98691aa0-6838-493c-83a0-871c3dfd1a9e",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "profilePrefab",
+            "scope": "CLASS",
+            "x": 92,
+            "y": 1248
+        },
+        {
+            "prefabId": "d8dc356c-86cf-4507-9edc-dbc8a481f4c0",
+            "id": "2acd2afc-330a-4cca-9d3f-a2d0bbd92576",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "messagePrefab",
+            "scope": "CLASS",
+            "x": 3334,
+            "y": 1166
+        },
+        {
+            "prefabId": "f091d24d-337a-4363-a9ac-c2e296f13378",
+            "id": "7293ccce-8667-4c9b-bda5-602de26982d5",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "alertPrefab",
+            "scope": "CLASS",
+            "x": 3370,
+            "y": 801
+        },
+        {
+            "prefabId": "2e844f73-6bf0-4cf6-98c7-64322f7616d0",
+            "id": "6522de0c-f3c4-443c-aa2a-5172b625b815",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "minimapPrefab",
+            "scope": "CLASS",
+            "x": 3457,
+            "y": 955
+        },
+        {
+            "prefabId": "9be122bc-3a2e-4c06-a98e-b5754929a6d2",
+            "id": "d403abda-dc45-407a-af72-433721924da1",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "newItemHudPrefab",
+            "scope": "CLASS",
+            "x": 3503,
+            "y": 1484
+        },
+        {
+            "prefabId": "e1ab5904-77e5-46c1-9532-c3d7be0e73be",
+            "id": "10074887-4dd1-4f61-adf4-73e0f694d470",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "optionsListPrefab",
+            "scope": "CLASS",
+            "x": 3647,
+            "y": 237
+        },
+        {
+            "prefabId": "807dd219-9ecb-44ac-ae17-2d021e8b7a11",
+            "id": "55ea3a57-1209-4445-b632-7c40727b5eca",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "foodMerchant",
+            "scope": "CLASS",
+            "x": 2808,
+            "y": 1959
+        },
+        {
+            "prefabId": "1b05c2d1-47c3-45c5-a53b-1f1d6c4bb7c5",
+            "id": "a1fa3cf8-479b-4703-9a8a-e4d4ba4bc06f",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "merchantPrefab",
+            "scope": "CLASS",
+            "x": 1821,
+            "y": 2178
         }
     ],
     "plainObjects": [

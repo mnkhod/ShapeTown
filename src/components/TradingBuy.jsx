@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getGoldManager } from './gold-manager';
+import { MERCHANT_TYPES, getMerchantInventory } from './merchant-manager';
 
 const ShopItem = ({ item, onClick, isSelected }) => {
   if (!item) return (
@@ -56,7 +57,7 @@ const ShopItem = ({ item, onClick, isSelected }) => {
   );
 };
 
-const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
+const MerchantBuyScreen = ({ onClose, phaserInstance, merchantType = MERCHANT_TYPES.FARMER }) => {
   const [shopItems, setShopItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -64,93 +65,46 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
   const [buttonState, setButtonState] = useState('default');
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [merchantTitle, setMerchantTitle] = useState("");
 
   const goldManager = getGoldManager(phaserInstance);
-  
-  const SHOP_ITEMS = [
-    {
-      id: 'seed_bok-choy',
-      name: 'Bok choy seeds',
-      icon: 'crops-seed bags-bok choy',
-      iconPath: '/assets/InventoryIcons/crops-seed bags-bok choy.png',
-      quantity: 999,
-      buyPrice: 25,
-      sellPrice: 8,
-      description: 'Crop Seed'
-    },
-    {
-      id: 'seed_broccoli',
-      name: 'Broccoli seeds',
-      icon: 'crops-seed bags-broccoli',
-      iconPath: '/assets/InventoryIcons/crops-seed bags-broccoli.png',
-      quantity: 999,
-      buyPrice: 30,
-      sellPrice: 10,
-      description: 'Crop Seed'
-    },
-    {
-      id: 'seed_carrot',
-      name: 'Carrot seeds',
-      icon: 'crops-seed bags-carrot',
-      iconPath: '/assets/InventoryIcons/crops-seed bags-carrot.png',
-      quantity: 5,
-      buyPrice: 120,
-      sellPrice: 6,
-      description: 'Crop Seed'
-    },
-    {
-      id: 'seed_cauliflower',
-      name: 'Cauliflower seeds',
-      icon: 'crops-seed bags-cauliflower',
-      iconPath: '/assets/InventoryIcons/crops-seed bags-cauliflower.png',
-      quantity: 5,
-      buyPrice: 80,
-      sellPrice: 12,
-      description: 'Crop Seed'
-    },
-    {
-      id: 'seed_chili',
-      name: 'Chili seeds',
-      icon: 'crops-seed bags-chili',
-      iconPath: '/assets/InventoryIcons/crops-seed bags-chili.png',
-      quantity: 3,
-      buyPrice: 150,
-      sellPrice: 9,
-      description: 'Crop Seed'
-    },
-    {
-      id: 'seed_corn',
-      name: 'Corn seeds',
-      icon: 'crops-seed bags-corn',
-      iconPath: '/assets/InventoryIcons/crops-seed bags-corn.png',
-      quantity: 2,
-      buyPrice: 200,
-      sellPrice: 8,
-      description: 'Crop Seed'
-    },
-  ];
 
   useEffect(() => {
-    const loadShopAndGold = () => {
-      setShopItems(SHOP_ITEMS);
+    // Set merchant title based on type
+    switch(merchantType) {
+      case MERCHANT_TYPES.FARMER:
+        setMerchantTitle("Seeds & Farming Tools");
+        break;
+      case MERCHANT_TYPES.FOOD:
+        setMerchantTitle("Fresh Food & Ingredients");
+        break;
+      case MERCHANT_TYPES.BLACKSMITH:
+        setMerchantTitle("Tools & Weapons");
+        break;
+      default:
+        setMerchantTitle("Shop");
+    }
 
-      if (goldManager) {
-        setTotalGold(goldManager.getGold());
-        
-        goldManager.addListener((newGoldAmount) => {
-          setTotalGold(newGoldAmount);
-        });
+    // Load items for this merchant type
+    const merchantInventory = getMerchantInventory(merchantType);
+    setShopItems(merchantInventory);
+
+    // Get gold amount
+    if (goldManager) {
+      setTotalGold(goldManager.getGold());
+      
+      goldManager.addListener((newGoldAmount) => {
+        setTotalGold(newGoldAmount);
+      });
+    } else {
+      if (phaserInstance && phaserInstance.gold !== undefined) {
+        setTotalGold(phaserInstance.gold);
       } else {
-        if (phaserInstance && phaserInstance.gold !== undefined) {
-          setTotalGold(phaserInstance.gold);
-        } else {
-          setTotalGold(100);
-        }
+        setTotalGold(100);
       }
-    };
+    }
 
-    loadShopAndGold();
-
+    // Set up gold change listeners if goldManager not available
     if (!goldManager && phaserInstance?.scene?.events) {
       const handleGoldChange = () => {
         if (phaserInstance && phaserInstance.gold !== undefined) {
@@ -170,8 +124,9 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
         }
       };
     }
-  }, [phaserInstance, goldManager]);
+  }, [phaserInstance, goldManager, merchantType]);
 
+  // Clear notifications after 3 seconds
   useEffect(() => {
     if (purchaseSuccess || errorMessage) {
       const timer = setTimeout(() => {
@@ -209,6 +164,7 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
     }
     
     try {
+      // Deduct gold using goldManager or direct update
       if (goldManager) {
         goldManager.spendGold(totalCost);
       } else if (phaserInstance) {
@@ -222,8 +178,25 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
         }
       }
       
+      // Create a copy of the selected item to use for inventory
+      const purchasedItem = {
+        id: selectedItem.id,
+        name: selectedItem.name,
+        icon: selectedItem.icon,
+        iconPath: selectedItem.iconPath,
+        textureKey: selectedItem.icon,
+        frame: selectedItem.frame || 0,
+        frameName: selectedItem.frame || 0,
+        quantity: quantity,
+        sellPrice: selectedItem.sellPrice || Math.floor(selectedItem.buyPrice * 0.4),
+        description: selectedItem.description,
+        category: selectedItem.category
+      };
+      
+      // Try to add to existing items first
       let addedToExisting = false;
       
+      // Check quick access inventory
       if (phaserInstance.itemData) {
         const quickIndex = phaserInstance.itemData.findIndex(id => 
           id && (id === selectedItem.id || (typeof id === 'object' && id?.id === selectedItem.id))
@@ -240,41 +213,54 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
             }
             
             addedToExisting = true;
+            console.log(`Added ${quantity}x ${selectedItem.name} to existing quick slot`);
           }
         }
       }
       
+      // Check main inventory
       if (!addedToExisting && phaserInstance.mainInventoryData) {
-        const mainIndex = phaserInstance.mainInventoryData.findIndex(item => 
+        // First, create a deep copy of the mainInventoryData array to avoid direct mutation
+        const mainInventoryCopy = [...phaserInstance.mainInventoryData];
+        
+        const mainIndex = mainInventoryCopy.findIndex(item => 
           item && item.id === selectedItem.id
         );
         
         if (mainIndex !== -1) {
-          phaserInstance.mainInventoryData[mainIndex].quantity += quantity;
+          // Create a deep copy of the existing item and update its quantity
+          const existingItem = {...mainInventoryCopy[mainIndex]};
+          existingItem.quantity += quantity;
+          
+          // Update the copy in the inventory
+          mainInventoryCopy[mainIndex] = existingItem;
+          
+          // Update the original array with our modified copy
+          phaserInstance.mainInventoryData = mainInventoryCopy;
+          
           addedToExisting = true;
+          console.log(`Added ${quantity}x ${selectedItem.name} to existing inventory item`);
         }
       }
       
+      // If not added to existing item, add as new item
       if (!addedToExisting) {
-        const newItem = {
-          id: selectedItem.id,
-          name: selectedItem.name,
-          icon: selectedItem.icon,
-          iconPath: selectedItem.iconPath,
-          textureKey: selectedItem.icon,
-          frame: selectedItem.frame || 0,
-          frameName: selectedItem.frame || 0,
-          quantity: quantity,
-          sellPrice: selectedItem.sellPrice || Math.floor(selectedItem.buyPrice * 0.4),
-          description: selectedItem.description
-        };
-        
         if (phaserInstance.mainInventoryData) {
-          const emptySlot = phaserInstance.mainInventoryData.findIndex(item => item === null);
+          // First, create a deep copy of the mainInventoryData array
+          const mainInventoryCopy = [...phaserInstance.mainInventoryData];
+          
+          const emptySlot = mainInventoryCopy.findIndex(item => item === null);
           if (emptySlot !== -1) {
-            phaserInstance.mainInventoryData[emptySlot] = newItem;
+            // Add the new item to our copy
+            mainInventoryCopy[emptySlot] = purchasedItem;
+            
+            // Update the original array with our modified copy
+            phaserInstance.mainInventoryData = mainInventoryCopy;
+            
+            console.log(`Added ${quantity}x ${selectedItem.name} to empty inventory slot ${emptySlot}`);
           } else {
             setErrorMessage("Inventory is full!");
+            // Refund gold
             if (goldManager) {
               goldManager.addGold(totalCost);
             } else if (phaserInstance) {
@@ -285,21 +271,27 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
         }
       }
       
+      // Emit events
       if (phaserInstance.scene && phaserInstance.scene.events) {
+        // Make sure to emit the event AFTER updating the inventory
         phaserInstance.scene.events.emit('inventory-changed');
         phaserInstance.scene.events.emit('gold-spent', totalCost);
         phaserInstance.scene.events.emit('item-purchased', selectedItem);
       }
       
+      // Update local state if not using goldManager
       if (!goldManager) {
         setTotalGold(prev => prev - totalCost);
       }
       
+      // Show success message
       setPurchaseSuccess(true);
       setQuantity(1);
     } catch (error) {
+      console.error("Purchase error:", error);
       setErrorMessage("Failed to purchase item!");
       
+      // Refund gold on error
       if (goldManager) {
         goldManager.addGold(totalCost);
       } else if (phaserInstance) {
@@ -337,14 +329,20 @@ const MerchantBuyScreen = ({ onClose, phaserInstance }) => {
             </div>
           </div>
 
+          {/* Merchant Title */}
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-white font-bold text-lg">
+            {merchantTitle}
+          </div>
+
+          {/* Notifications */}
           {purchaseSuccess && (
-            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-green-600/80 text-white px-4 py-2 rounded text-sm animate-bounce">
+            <div className="absolute top-12 left-1/2 transform -translate-x-1/2 bg-green-600/80 text-white px-4 py-2 rounded text-sm animate-bounce">
               Item purchased successfully!
             </div>
           )}
           
           {errorMessage && (
-            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 bg-red-600/80 text-white px-4 py-2 rounded text-sm animate-bounce">
+            <div className="absolute top-12 left-1/2 transform -translate-x-1/2 bg-red-600/80 text-white px-4 py-2 rounded text-sm animate-bounce">
               {errorMessage}
             </div>
           )}
@@ -590,7 +588,8 @@ ShopItem.propTypes = {
 
 MerchantBuyScreen.propTypes = {
   onClose: PropTypes.func.isRequired,
-  phaserInstance: PropTypes.object
+  phaserInstance: PropTypes.object,
+  merchantType: PropTypes.string
 };
 
 export default MerchantBuyScreen;

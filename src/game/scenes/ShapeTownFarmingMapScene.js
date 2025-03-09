@@ -37,6 +37,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		/* START-USER-CTR-CODE */
 		// Write your code here.
 		this.reactEvent = EventBus
+		this.achievements = {};
 		/* END-USER-CTR-CODE */
 	}
 
@@ -349,6 +350,111 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		}
 	}
 
+	// Step 1: Add initInventorySystem to ShapeTownFarmingMapScene
+
+// For ShapeTownFarmingMapScene
+initInventorySystem() {
+	if (!this.newItemHudPrefab) return;
+	
+	this.newItemHudPrefab.visible = true;
+	
+	// Use the phaser-react-bridge to initialize connection between Phaser and React
+	const inventoryBridge = initInventoryBridge(this.newItemHudPrefab, this.reactEvent);
+	
+	// Store reference to bridge controls
+	this.inventoryBridge = inventoryBridge;
+	
+	// Setup starting items if needed
+	this.time.delayedCall(200, () => {
+	  import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+		// Set up starting items if global inventory is empty
+		if (globalInventory.quickItems.every(item => item === null) && 
+			globalInventory.mainItems.every(item => item === null)) {
+		  this.setupStartingItems();
+		  
+		  // Update global inventory after setting up starting items
+		  if (this.newItemHudPrefab.updateGlobalInventory) {
+			this.newItemHudPrefab.updateGlobalInventory();
+		  }
+		}
+		
+		// Fix item selection in case no item is selected
+		if (this.inventoryBridge) {
+		  this.inventoryBridge.fixSelection();
+		}
+		
+		// Notify React components that inventory is ready
+		this.reactEvent.emit('scene-switched', this);
+	  });
+	});
+	
+	// Ensure we save inventory on scene transitions
+	this.events.on('shutdown', this.onSceneShutdown, this);
+	this.events.on('sleep', this.onSceneShutdown, this);
+  }
+  
+  onSceneShutdown() {
+	console.log(`${this.scene.key} shutting down, saving inventory`);
+	
+	// First, update the global inventory from current state
+	if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+	  this.newItemHudPrefab.updateGlobalInventory();
+	}
+	
+	// Also save directly through the bridge if available
+	if (this.inventoryBridge) {
+	  this.inventoryBridge.update();
+	}
+  }
+  
+  setupStartingItems() {
+	if (!this.newItemHudPrefab) return;
+	
+	console.log(`Setting up starting items for ${this.scene.key}`);
+	
+	// Show required UI elements
+	this.newItemHudPrefab.visible = true;
+	if (this.questBookPrefab) this.questBookPrefab.visible = true;
+	
+	// Setup item box interactions if available
+	if (this.newItemHudPrefab.itemBoxs) {
+	  this.newItemHudPrefab.itemBoxs.forEach((box, index) => {
+		if (!box.input || !box.input.enabled) {
+		  box.setInteractive({ useHandCursor: true });
+		  box.on('pointerdown', () => {
+			if (box.frame.name === 0) {
+			  // Reset all other boxes
+			  this.newItemHudPrefab.itemBoxs.forEach((otherBox) => {
+				if (otherBox !== box) {
+				  otherBox.setTexture("HudItemSlot", 0);
+				}
+			  });
+			  
+			  // Set this box as active
+			  box.setTexture("HudItemSlot", 1);
+			  this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[index];
+			  this.newItemHudPrefab.activeIndex = index;
+			  
+			  // Notify React UI about selection change
+			  if (this.reactEvent) {
+				this.reactEvent.emit('inventory-slot-selected', { 
+				  index, 
+				  item: this.newItemHudPrefab.itemData[index] 
+				});
+			  }
+			}
+		  }, this);
+		}
+	  });
+	}
+	
+	if (this.newItemHudPrefab.activeItemSlots && this.newItemHudPrefab.activeItemSlots[0]) {
+	  this.newItemHudPrefab.activeItemSlots[0].visible = true;
+	  this.newItemHudPrefab.activeIndex = 0;
+	  this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[0];
+	}
+  }
+
 	setupLayerDepths() {
 		this.profilePrefab?.setDepth(90);
 		this.openInventory?.setDepth(90);
@@ -361,19 +467,75 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.playerPrefab?.setDepth(90);
 	}
 	create() {
-	  	this.editorCreate();
+		this.editorCreate();
 		window.questBookPrefab = null;
-	  	this.cameras.main.setBounds(0, 0, 2550, 1920);
-	  	this.physics.world.bounds.width = 1000;
-	  	this.physics.world.bounds.height = 800;
+		this.cameras.main.setBounds(0, 0, 2550, 1920);
+		// this.physics.world.bounds.width = 1000;
+		// this.physics.world.bounds.height = 800;
+	
+		if (!this.game.questSystem) {
+			this.game.questSystem = questSystem;
+		}
+		this.events.on('create', () => {
+			if (this.newItemHudPrefab) {
+			  import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+				if (globalInventory.syncInventoryToScene) {
+				  globalInventory.syncInventoryToScene(this);
+				}
+			  });
+			}
+			
+			this.cameras.main.fadeIn(500, 0, 0, 0);
+		  });
+		extendSceneWithQuests(this);
+		extendHarvestPrefab(HarvestPrefab);
+		extendJackNpc(OldManJackNpcPrefab);
+		
+		window.getQuestProgress = () => {
+			if (this.game && this.game.questSystem) {
+				return this.game.questSystem.getQuestProgress();
+			}
+			return {};
+		};
+	
+		window.updateQuestProgress = (update) => {
+			if (this.game && this.game.questSystem) {
+				this.game.questSystem.updateQuestProgress(update);
+			}
+		};
+		
+		this.events.on('wake', () => {
+			this.cameras.main.fadeIn(300);
+			
+			if (this.newItemHudPrefab) {
+				this.time.delayedCall(200, () => {
+					import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+						if (globalInventory.syncInventoryToScene) {
+							globalInventory.syncInventoryToScene(this);
+						}
+					});
+				});
+			}
+		});
+		this.events.on('shutdown', () => {
+			if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+				this.newItemHudPrefab.updateGlobalInventory();
+			}
+		});
+		
+		this.events.on('sleep', () => {
+			if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+				this.newItemHudPrefab.updateGlobalInventory();
+			}
+		});
 
 		this.setupHarvestTiles();
 		this.setupLayerDepths();
-	  	this.achievements = {
-	  	  	firstHarvestAchievement: false,
-	  	  	giftFromNatureAchievement: false,
-	  	  	firstFishAchievement: false
-	  	};
+		this.achievements = {
+			firstHarvestAchievement: false,
+			giftFromNatureAchievement: false,
+			firstFishAchievement: false
+		};
 
 	  	this.oldManJackNpcPrefab.player = this.playerPrefab;
 	  	this.oldManJackNpcPrefab.msgPrefab = this.messagePrefab;
@@ -425,21 +587,28 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	  	this.physics.add.collider(this.playerPrefab, this.appleTreePrefab);
 	  	// this.appleTreePrefab.renderDebug(this.add.graphics());
 
-      // Fixed: Using the proper method for tilemap layer collisions instead of setupCollision
 	  	this.physics.add.collider(this.playerPrefab, this.farm_Fence_1);
 	  	this.farm_Fence_1.setCollisionBetween(0, 10000);
 	  	// this.farm_Fence_1.renderDebug(this.add.graphics());
 
-      this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-        if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-          this.newItemHudPrefab.updateGlobalInventory();
-        }
-
-        this.scene.switch("ShapeTownSquareMapScene");
-        this.playerPrefab.x -= 50;
-        this.cameras.main.fadeIn(2000, 0, 0, 0);
-      });
-
+		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
+			if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+				this.newItemHudPrefab.updateGlobalInventory();
+			}
+		
+			const playerX = this.playerPrefab.x;
+			
+			this.scene.switch("ShapeTownSquareMapScene");
+			
+			const targetScene = this.scene.get("ShapeTownSquareMapScene");
+			if (targetScene && targetScene.playerPrefab) {
+				targetScene.playerPrefab.x = 304;
+			}
+			
+			this.cameras.main.fadeIn(2000, 0, 0, 0);
+		});
+		this.initInventorySystem();
+		  
       this.physics.add.existing(this.stonePrefab, true);
       this.physics.add.existing(this.stonePrefab_1, true);	
       this.physics.add.existing(this.stonePrefab_3, true);

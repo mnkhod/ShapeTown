@@ -1,4 +1,3 @@
-
 // You can write more code here
 
 /* START OF COMPILED CODE */
@@ -12,7 +11,25 @@ import SquareDragonHousePrefab from "../prefabs/House/SquareDragonHousePrefab";
 import SquareTownPrefab from "../prefabs/House/SquareTownPrefab";
 import StoneBridgeDownPrefab from "../prefabs/deck/StoneBridgeDownPrefab";
 import StoneBridgeRightPrefab from "../prefabs/deck/StoneBridgeRightPrefab";
+import BlackSmithPrefab from "../prefabs/npcs/BlackSmithPrefab";
+import OpenMapPrefab from "../prefabs/hud/OpenMapPrefab";
+import OpenInventory from "../prefabs/hud/OpenInventory";
+import QuestBookPrefab from "../prefabs/hud/QuestBookPrefab";
+import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
+import MessagePrefab from "../prefabs/hud/MessagePrefab";
+import AlertPrefab from "../prefabs/hud/AlertPrefab";
+import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
+import NewItemHudPrefab from "../../../NewItemHudPrefab";
+import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
+import FoodMerchant from "../prefabs/npcs/FoodMerchant";
+import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
 /* START-USER-IMPORTS */
+import questSystem from "../../components/QuestSystem";
+import { extendSceneWithQuests } from "../../components/QuestSystem";
+import initInventoryBridge from "../../components/phaser-react-bridge";
+import { EventBus } from '../../game/EventBus';
+import { initMerchantBridge } from '../../components/merchant-bridge';
+import { MERCHANT_TYPES } from '../../components/merchant-manager';
 /* END-USER-IMPORTS */
 
 export default class ShapeTownSquareMapScene extends Phaser.Scene {
@@ -22,6 +39,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+		this.reactEvent = EventBus;
 		/* END-USER-CTR-CODE */
 	}
 
@@ -98,10 +116,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// bG_tallgrass_1
 		const bG_tallgrass_1 = shapetownSquare.createLayer("BG/tallgrass", ["GroundTileset_V02"], 0, 0);
 
-		// npcBlackSmithRight
-		const npcBlackSmithRight = this.add.sprite(1662, 1920, "NpcBlaksmith", 0);
-		npcBlackSmithRight.play("NpcBlackSmithRight");
-
 		// collution_Cliff_1
 		const collution_Cliff_1 = shapetownSquare.createLayer("Collution/Cliff", ["GroundTileset_V02"], 0, 0);
 
@@ -168,9 +182,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// foodStand_Foodstand_1
 		const foodStand_Foodstand_1 = shapetownSquare.createLayer("FoodStand/Foodstand", [], 0, 0);
 
-		// nPC_NPC_Lily_1
-		const nPC_NPC_Lily_1 = shapetownSquare.createLayer("NPC/NPC Lily", ["NPCShopStandMaerchant"], 0, 0);
-
 		// foodStand_Fishbarrel_1
 		const foodStand_Fishbarrel_1 = shapetownSquare.createLayer("FoodStand/Fishbarrel", ["FoodstandBarrel_V01"], 0, 0);
 
@@ -211,7 +222,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 2450, 2752);
+		const playerPrefab = new PlayerPrefab(this, 510, 1536);
 		this.add.existing(playerPrefab);
 
 		// squareFountanPrefab
@@ -365,10 +376,57 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// nPC_NPC_Soilder_1
 		shapetownSquare.createLayer("NPC/NPC Soilder", ["NPCSoilderSpearAttack_V01","NPCGuardian_V01"], 0, 0);
 
+		// blackSmithPrefab
+		const blackSmithPrefab = new BlackSmithPrefab(this, 1734, 1918);
+		this.add.existing(blackSmithPrefab);
+
+		// openMapPrefab
+		const openMapPrefab = new OpenMapPrefab(this, 3354, 2730);
+		this.add.existing(openMapPrefab);
+
+		// openInventory
+		const openInventory = new OpenInventory(this, 3595, 2710);
+		this.add.existing(openInventory);
+
+		// questBookPrefab
+		const questBookPrefab = new QuestBookPrefab(this, 3221, 2787);
+		this.add.existing(questBookPrefab);
+
+		// profilePrefab
+		const profilePrefab = new ProfilePrefab(this, 92, 1248);
+		this.add.existing(profilePrefab);
+
+		// messagePrefab
+		const messagePrefab = new MessagePrefab(this, 3334, 1166);
+		this.add.existing(messagePrefab);
+
+		// alertPrefab
+		const alertPrefab = new AlertPrefab(this, 3370, 801);
+		this.add.existing(alertPrefab);
+
+		// minimapPrefab
+		const minimapPrefab = new MinimapPrefab(this, 3457, 955);
+		this.add.existing(minimapPrefab);
+
+		// newItemHudPrefab
+		const newItemHudPrefab = new NewItemHudPrefab(this, 3503, 1484);
+		this.add.existing(newItemHudPrefab);
+
+		// optionsListPrefab
+		const optionsListPrefab = new OptionsListPrefab(this, 3647, 237);
+		this.add.existing(optionsListPrefab);
+
+		// foodMerchant
+		const foodMerchant = new FoodMerchant(this, 2808, 1959);
+		this.add.existing(foodMerchant);
+
+		// merchantPrefab
+		const merchantPrefab = new MerchantPrefab(this, 1821, 2178);
+		this.add.existing(merchantPrefab);
+
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
 		this.bG_tallgrass_1 = bG_tallgrass_1;
-		this.npcBlackSmithRight = npcBlackSmithRight;
 		this.collution_Cliff_1 = collution_Cliff_1;
 		this.collution_WoodenFence_1 = collution_WoodenFence_1;
 		this.collution_StoneFence_1 = collution_StoneFence_1;
@@ -391,7 +449,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.forager_home_Baket_of_mushrooms_1 = forager_home_Baket_of_mushrooms_1;
 		this.forager_home_Basket_of_apple_1 = forager_home_Basket_of_apple_1;
 		this.foodStand_Foodstand_1 = foodStand_Foodstand_1;
-		this.nPC_NPC_Lily_1 = nPC_NPC_Lily_1;
 		this.foodStand_Fishbarrel_1 = foodStand_Fishbarrel_1;
 		this.foodStand_stall_1 = foodStand_stall_1;
 		this.foodStand_Foodstand = foodStand_Foodstand;
@@ -434,6 +491,18 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.barricade_V_2 = barricade_V_2;
 		this.barricade_V_3 = barricade_V_3;
 		this.sceneTile_1 = sceneTile_1;
+		this.blackSmithPrefab = blackSmithPrefab;
+		this.openMapPrefab = openMapPrefab;
+		this.openInventory = openInventory;
+		this.questBookPrefab = questBookPrefab;
+		this.profilePrefab = profilePrefab;
+		this.messagePrefab = messagePrefab;
+		this.alertPrefab = alertPrefab;
+		this.minimapPrefab = minimapPrefab;
+		this.newItemHudPrefab = newItemHudPrefab;
+		this.optionsListPrefab = optionsListPrefab;
+		this.foodMerchant = foodMerchant;
+		this.merchantPrefab = merchantPrefab;
 		this.shapetownSquare = shapetownSquare;
 
 		this.events.emit("scene-awake");
@@ -445,8 +514,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	bG_stone_road_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	bG_tallgrass_1;
-	/** @type {Phaser.GameObjects.Sprite} */
-	npcBlackSmithRight;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	collution_Cliff_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -491,8 +558,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	forager_home_Basket_of_apple_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	foodStand_Foodstand_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	nPC_NPC_Lily_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	foodStand_Fishbarrel_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -577,227 +642,458 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 	barricade_V_3;
 	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
 	sceneTile_1;
+	/** @type {BlackSmithPrefab} */
+	blackSmithPrefab;
+	/** @type {OpenMapPrefab} */
+	openMapPrefab;
+	/** @type {OpenInventory} */
+	openInventory;
+	/** @type {QuestBookPrefab} */
+	questBookPrefab;
+	/** @type {ProfilePrefab} */
+	profilePrefab;
+	/** @type {MessagePrefab} */
+	messagePrefab;
+	/** @type {AlertPrefab} */
+	alertPrefab;
+	/** @type {MinimapPrefab} */
+	minimapPrefab;
+	/** @type {NewItemHudPrefab} */
+	newItemHudPrefab;
+	/** @type {OptionsListPrefab} */
+	optionsListPrefab;
+	/** @type {FoodMerchant} */
+	foodMerchant;
+	/** @type {MerchantPrefab} */
+	merchantPrefab;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownSquare;
 
 	/* START-USER-CODE */
 
 	// Write your code here
+	setupLayerDepths() {
+	    this.profilePrefab?.setDepth(90);
+	    this.openInventory?.setDepth(90);
+	    this.questBookPrefab?.setDepth(90);
+	    this.newItemHudPrefab?.setDepth(90);
+	    this.messagePrefab?.setDepth(90);
+	    this.alertPrefab?.setDepth(90);
+	    this.openMapPrefab?.setDepth(90);
+	    this.optionsListPrefab?.setDepth(90);
+	    this.minimapPrefab?.setDepth(90);
 
-	create() {
-		this.editorCreate();
+	    this.playerPrefab?.setDepth(90);
 
-		this.cameras.main.setBounds(0, 0, 3840, 2880);
-        this.physics.world.bounds.width = 1000;
-        this.physics.world.bounds.height = 800;
-
-		this.squareFountanPrefab.setupCollision(this.playerPrefab)
-		this.squareCampFirePrefab_1.setupCollision(this.playerPrefab)
-		this.squareCampFirePrefab_2.setupCollision(this.playerPrefab)
-		this.squareCampFirePrefab_3.setupCollision(this.playerPrefab)
-		this.squareCampFirePrefab.setupCollision(this.playerPrefab)
-		this.mineWatchTowerPrefab.setupCollision(this.playerPrefab)
-		this.squareDragonHousePrefab.setupCollision(this.playerPrefab)
-		this.squareTownPrefab.setupCollision(this.playerPrefab)
-		this.stoneBridgeDownPrefab.setDepth(10)
-		this.stoneBridgeRightPrefab.setDepth(10)
-		this.tree_left_side.setDepth(10)
-		this.playerPrefab.setDepth(100)
-
-		this.physics.add.collider(this.playerPrefab, this.collution_WoodenFence_1);
-	    this.collution_WoodenFence_1.setCollisionBetween(0,10000);
-	    // this.collution_WoodenFence_1.renderDebug(this.add.graphics())
-
-		this.physics.add.collider(this.playerPrefab, this.tree_left_side_3);
-	    this.tree_left_side_3.setCollisionBetween(0,10000);
-	    // this.tree_left_side_3.renderDebug(this.add.graphics())
-
-		this.physics.add.collider(this.playerPrefab, this.collution_StoneFence_1);
-	    this.collution_StoneFence_1.setCollisionBetween(0,10000);
-	    // this.collution_StoneFence_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.tree_left_side_4);
-	    this.tree_left_side_4.setCollisionBetween(0,10000);
-	    // this.tree_left_side_4.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.decoration_);
-	    this.decoration_.setCollisionBetween(0,10000);
-	    // this.decoration_.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.tree_left_side_2);
-	    this.tree_left_side_2.setCollisionBetween(0,10000);
-	    // this.tree_left_side_2.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.tree_left_side_);
-	    this.tree_left_side_.setCollisionBetween(0,10000);
-	    // this.tree_left_side_.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.tree_left_side);
-	    this.tree_left_side.setCollisionBetween(0,10000);
-	    // this.tree_left_side.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.river_River_1);
-	    this.river_River_1.setCollisionBetween(0,10000);
-	    // this.river_River_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.collution_Cliff_1);
-	    this.collution_Cliff_1.setCollisionBetween(0,10000);
-	    // this.collution_Cliff_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.barracks_Barricade_2);
-	    this.barracks_Barricade_2.setCollisionBetween(0,10000);
-	    // this.barracks_Barricade_2.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.decoration_Log_1);
-	    this.decoration_Log_1.setCollisionBetween(0,10000);
-	    // this.decoration_Log_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.forager_home_Basket_of_apple_1);
-        this.forager_home_Basket_of_apple_1.setCollisionBetween(0, 10000);
-		// this.forager_home_Basket_of_apple_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.barracks_Tents_1);
-	    this.barracks_Tents_1.setCollisionBetween(0,10000);
-	    // this.barracks_Tents_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.tree_left_side_1);
-	    this.tree_left_side_1.setCollisionBetween(0,10000);
-	    // this.tree_left_side_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.tree_left_side);
-	    this.tree_left_side.setCollisionBetween(0,10000);
-	    // this.tree_left_side.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.decoration_Rock_2);
-	    this.decoration_Rock_2.setCollisionBetween(0,10000);
-	    // this.decoration_Rock_2.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.decoration_Rock_1);
-	    this.decoration_Rock_1.setCollisionBetween(0,10000);
-	    // this.decoration_Rock_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.mechant_merchant_1);
-	    this.mechant_merchant_1.setCollisionBetween(0,10000);
-	    // this.mechant_merchant_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.mechant_MerchantCarriage_1);
-	    this.mechant_MerchantCarriage_1.setCollisionBetween(0,10000);
-	    // this.mechant_MerchantCarriage_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.foodStand_Basket_1);
-	    this.foodStand_Basket_1.setCollisionBetween(0,10000);
-	    // this.foodStand_Basket_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.foodStand_stall_1);
-	    this.foodStand_stall_1.setCollisionBetween(0,10000);
-	    // this.foodStand_stall_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.foodStand_Fishbarrel_1);
-	    this.foodStand_Fishbarrel_1.setCollisionBetween(0,10000);
-	    // this.foodStand_Fishbarrel_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.decoration_Rock_3);
-	    this.decoration_Rock_3.setCollisionBetween(0,10000);
-	    // this.decoration_Rock_3.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.forager_home_Baket_of_mushrooms_1);
-	    this.forager_home_Baket_of_mushrooms_1.setCollisionBetween(0,10000);
-	    // this.forager_home_Baket_of_mushrooms_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.forager_home_Tent_1);
-	    this.forager_home_Tent_1.setCollisionBetween(0,10000);
-	    // this.forager_home_Tent_1.renderDebug(this.add.graphics());
-
-		this.physics.add.collider(this.playerPrefab, this.blacksmith_Blacksmith_stall_1);
-	    this.blacksmith_Blacksmith_stall_1.setCollisionBetween(0,10000);
-	    // this.blacksmith_Blacksmith_stall_1.renderDebug(this.add.graphics());
-
-        this.physics.add.existing(this.barricade_V_2, true);
-        this.physics.add.existing(this.barricade_V_1, true);
-        this.physics.add.existing(this.barricade_V, true);
-        this.physics.add.existing(this.barricade_V010, true);
-		this.physics.add.existing(this.barricade_V_3, true);
-
-
-        this.physics.add.collider(this.playerPrefab, this.barricade_V_2);
-        this.physics.add.collider(this.playerPrefab, this.barricade_V_1);
-        this.physics.add.collider(this.playerPrefab, this.barricade_V);
-        this.physics.add.collider(this.playerPrefab, this.barricade_V010);
-		this.physics.add.collider(this.playerPrefab, this.barricade_V_3);
-
-
-		const waterTiles = this.river_River_1.getTilesWithin();
-        waterTiles.forEach(tile => {
-        if (tile && tile.index === 5573) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverMiddle');
-        }
-		if (tile && tile.index === 5459) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverMiddle');
-        }
-		  if (tile && tile.index === 5429) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverMiddle_1');
-        }
-		  if (tile && tile.index === 5519) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverMiddle_2');
-        }
-		if (tile && tile.index === 5549) {
-        const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        sprite.play('RiverMiddle_3');
-        }
-		// if (tile && tile.index === 0) {
-        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        // sprite.play('RiverLeft_1');
-        // }
-		// if (tile && tile.index === 5192) {
-        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        // sprite.play('RiverRight_1');
-        // }
-		// if (tile && tile.index === 5225) {
-        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        // sprite.play('RiverLeftDown_1');
-        // }
-		// if (tile && tile.index === 5255) {
-        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        // sprite.play('RiverLeft_2');
-        // }
-		// if (tile && tile.index === 5254) {
-        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        // sprite.play('RiverDown');
-        // }
-		// if (tile && tile.index === 5134) {
-        // const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
-        // sprite.play('RiverUp');
-        // }
-
-        });
-
-		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-		    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-			this.newItemHudPrefab.updateGlobalInventory();
-			}
-
-		    this.scene.switch("ShapeTownBeachMapScene");
-		    this.playerPrefab.y -= 30;
-		    this.cameras.main.fadeIn(2000, 0, 0, 0);
-		});
-
-		this.physics.add.overlap(this.sceneTile_1, this.playerPrefab, () => {
-		    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-			this.newItemHudPrefab.updateGlobalInventory();
-			}
-
-		    this.scene.switch("ShapeTownFarmingMapScene");
-		    this.playerPrefab.x += 30;
-		    this.cameras.main.fadeIn(2000, 0, 0, 0);
-		});
-
+	    this.stoneBridgeDownPrefab?.setDepth(10);
+	    this.stoneBridgeRightPrefab?.setDepth(10);
+	    this.tree_left_side?.setDepth(10);
 	}
 
-	/* END-USER-CODE */
+	initInventorySystem() {
+		if (!this.newItemHudPrefab) return;
+
+		this.newItemHudPrefab.visible = true;
+
+		initInventoryBridge(this.newItemHudPrefab, this.reactEvent);
+
+		this.time.delayedCall(100, () => {
+		  import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+			this.newItemHudPrefab.syncWithGlobalInventory = function() {
+			  globalInventory.quickItems.forEach((itemData, index) => {
+				if (!itemData) return;
+
+				this.itemData[index] = itemData.id;
+
+				if (this.items[index]) {
+				  this.items[index].visible = true;
+				  this.items[index].setTexture(itemData.textureKey || itemData.icon);
+				  if (itemData.frameName !== undefined) {
+					this.items[index].setFrame(itemData.frameName);
+				  }
+				}
+
+				if (this.itemCounters[index]) {
+				  this.itemCounters[index].visible = true;
+				  this.itemCounters[index].text = itemData.quantity.toString();
+				}
+			  });
+
+			  this.mainInventoryData = [...globalInventory.mainItems];
+
+			  if (this.reactEvent) {
+				this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
+			  }
+			};
+
+			this.newItemHudPrefab.updateGlobalInventory = function() {
+			  const updatedQuickItems = this.itemData.map((id, index) => {
+				if (!id) return null;
+
+				const item = this.items[index];
+				if (!item || !item.visible) return null;
+
+				return {
+				  id: id,
+				  icon: item.texture.key,
+				  frame: item.frame.name,
+				  textureKey: item.texture.key,
+				  frameName: item.frame.name,
+				  quantity: parseInt(this.itemCounters[index].text) || 1,
+				  name: id
+				};
+			  });
+
+			  globalInventory.quickItems = updatedQuickItems;
+			  globalInventory.mainItems = [...this.mainInventoryData];
+
+			  if (this.reactEvent) {
+				this.reactEvent.emit('global-inventory-changed', globalInventory);
+			  }
+			};
+
+			this.newItemHudPrefab.syncWithGlobalInventory();
+
+			if (globalInventory.quickItems.every(item => item === null) && 
+				globalInventory.mainItems.every(item => item === null)) {
+			  this.setupStartingItems();
+			}
+
+			this.reactEvent.emit('scene-switched', this);
+
+			this.time.delayedCall(500, () => {
+			  if (this.newItemHudPrefab.selectedItem === null) {
+				for (let i = 0; i < this.newItemHudPrefab.itemData.length; i++) {
+				  if (this.newItemHudPrefab.itemData[i]) {
+					this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[i];
+					this.newItemHudPrefab.activeIndex = i;
+
+					if (this.newItemHudPrefab.activeItemSlots) {
+					  this.newItemHudPrefab.activeItemSlots.forEach(slot => {
+						if (slot) slot.visible = false;
+					  });
+					  if (this.newItemHudPrefab.activeItemSlots[i]) {
+						this.newItemHudPrefab.activeItemSlots[i].visible = true;
+					  }
+					}
+
+					break;
+				  }
+				}
+			  }
+			});
+		  });
+		});
+
+		this.events.on('shutdown', this.onSceneShutdown, this);
+	}
+  setupStartingItems() {
+	if (!this.newItemHudPrefab || !this.newItemHudPrefab.itemBoxs) return;
+	
+	this.newItemHudPrefab.visible = true;
+	this.questBookPrefab.visible = true;
+	
+	this.newItemHudPrefab.itemBoxs.forEach((box, index) => {
+	  box.setInteractive({ useHandCursor: true });
+	  box.on('pointerdown', () => {
+		// Only proceed if this is an inactive box
+		if (box.frame.name === 0) {
+		  // Reset all other boxes
+		  this.newItemHudPrefab.itemBoxs.forEach((otherBox) => {
+			if (otherBox !== box) {
+			  otherBox.setTexture("HudItemSlot", 0);
+			}
+		  });
+		  
+		  // Set this box as active
+		  box.setTexture("HudItemSlot", 1);
+		  this.newItemHudPrefab.selectedItem = this.newItemHudPrefab.itemData[index];
+		  this.newItemHudPrefab.activeIndex = index;
+		}
+	  }, this);
+	});
+  }
+
+onSceneShutdown() {
+    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+        this.newItemHudPrefab.updateGlobalInventory();
+    }
+}
+
+setupInteractionZones() {
+    const blacksmithZone = this.add.zone(1736, 1932, 100, 100);
+    this.physics.world.enable(blacksmithZone);
+    this.physics.add.overlap(this.playerPrefab, blacksmithZone, this.handleBlacksmithInteraction, null, this);
+
+    const townHallZone = this.add.zone(2270, 1424, 150, 150);
+    this.physics.world.enable(townHallZone);
+    this.physics.add.overlap(this.playerPrefab, townHallZone, this.handleTownHallInteraction, null, this);
+}
+
+handleBlacksmithInteraction() {
+    if (!this.achievements.meetTheBlacksmith) {
+        this.achievements.meetTheBlacksmith = true;
+
+        if (window.updateQuestProgress) {
+            window.updateQuestProgress({
+                townExploration: {
+                    visitedBlacksmith: true
+                }
+            });
+        }
+
+        if (this.alertPrefab) {
+            this.alertPrefab.alert("You've discovered the blacksmith!");
+
+            this.time.delayedCall(3000, () => {
+                this.alertPrefab.hide();
+            });
+        }
+    }
+}
+
+handleTownHallInteraction() {
+    if (window.updateQuestProgress) {
+        window.updateQuestProgress({
+            townExploration: {
+                visitedTownHall: true
+            }
+        });
+    }
+}
+create() {
+    this.editorCreate();
+
+    window.questBookPrefab = null;
+	initMerchantBridge(this);
+    this.cameras.main.setBounds(0, 0, 3840, 2880);
+    this.physics.world.bounds.width = 3840;
+    this.physics.world.bounds.height = 2880;
+
+	this.merchantPrefab.player = this.playerPrefab;
+	this.merchantPrefab.inventoryHud = this.newItemHudPrefab;
+	this.merchantPrefab.msgPrefab = this.messagePrefab;
+	this.merchantPrefab.itemHud = this.newItemHudPrefab;
+	this.merchantPrefab.merchantType = MERCHANT_TYPES.FARMER;
+
+	this.foodMerchant.player = this.playerPrefab;
+	this.foodMerchant.inventoryHud = this.newItemHudPrefab;
+	this.foodMerchant.msgPrefab = this.messagePrefab;
+	this.foodMerchant.merchantType = MERCHANT_TYPES.FOOD;
+
+	this.blackSmithPrefab.player = this.playerPrefab;
+	this.blackSmithPrefab.inventoryHud = this.newItemHudPrefab;
+	this.blackSmithPrefab.msgPrefab = this.messagePrefab;
+	this.blackSmithPrefab.itemHud = this.newItemHudPrefab;
+	this.blackSmithPrefab.merchantType = MERCHANT_TYPES.BLACKSMITH;
+
+    if (!this.game.questSystem) {
+        this.game.questSystem = questSystem;
+    }
+
+    extendSceneWithQuests(this);
+
+    window.getQuestProgress = () => {
+        if (this.game && this.game.questSystem) {
+            return this.game.questSystem.getQuestProgress();
+        }
+        return {};
+    };
+
+    window.updateQuestProgress = (update) => {
+        if (this.game && this.game.questSystem) {
+            this.game.questSystem.updateQuestProgress(update);
+        }
+    };
+    this.achievements = {
+        firstMarketVisit: false,
+        townSquareExplorer: false,
+        meetTheBlacksmith: false
+    };
+
+    this.initInventorySystem();
+
+    this.setupLayerDepths();
+
+    this.events.on('wake', () => {
+		this.cameras.main.fadeIn(300);
+		
+		if (this.newItemHudPrefab) {
+			this.time.delayedCall(200, () => {
+				import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
+					if (globalInventory.syncInventoryToScene) {
+						globalInventory.syncInventoryToScene(this);
+					}
+				});
+			});
+		}
+	});
+    if (this.blackSmithPrefab) {
+        this.blackSmithPrefab.msgPrefab = this.messagePrefab;
+        this.blackSmithPrefab.alertPrefab = this.alertPrefab;
+        this.blackSmithPrefab.itemHud = this.newItemHudPrefab;
+    }
+
+    if (this.minimapPrefab && this.playerPrefab) {
+        this.minimapPrefab.setPlayer(this.playerPrefab);
+        this.minimapPrefab.visible = false;
+        if (this.minimapPrefab.minimapCamera) {
+            this.minimapPrefab.minimapCamera.visible = false;
+        }
+    }
+
+    this.squareFountanPrefab.setupCollision(this.playerPrefab);
+    this.squareCampFirePrefab_1.setupCollision(this.playerPrefab);
+    this.squareCampFirePrefab_2.setupCollision(this.playerPrefab);
+    this.squareCampFirePrefab_3.setupCollision(this.playerPrefab);
+    this.squareCampFirePrefab.setupCollision(this.playerPrefab);
+    this.mineWatchTowerPrefab.setupCollision(this.playerPrefab);
+    this.squareDragonHousePrefab.setupCollision(this.playerPrefab);
+    this.squareTownPrefab.setupCollision(this.playerPrefab);
+
+    this.physics.add.collider(this.playerPrefab, this.collution_WoodenFence_1);
+    this.collution_WoodenFence_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.tree_left_side_3);
+    this.tree_left_side_3.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.collution_StoneFence_1);
+    this.collution_StoneFence_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.tree_left_side_4);
+    this.tree_left_side_4.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.decoration_);
+    this.decoration_.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.tree_left_side_2);
+    this.tree_left_side_2.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.tree_left_side_);
+    this.tree_left_side_.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.tree_left_side);
+    this.tree_left_side.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.river_River_1);
+    this.river_River_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.collution_Cliff_1);
+    this.collution_Cliff_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.barracks_Barricade_2);
+    this.barracks_Barricade_2.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.decoration_Log_1);
+    this.decoration_Log_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.forager_home_Basket_of_apple_1);
+    this.forager_home_Basket_of_apple_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.barracks_Tents_1);
+    this.barracks_Tents_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.tree_left_side_1);
+    this.tree_left_side_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.decoration_Rock_2);
+    this.decoration_Rock_2.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.decoration_Rock_1);
+    this.decoration_Rock_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.mechant_merchant_1);
+    this.mechant_merchant_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.mechant_MerchantCarriage_1);
+    this.mechant_MerchantCarriage_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.foodStand_Basket_1);
+    this.foodStand_Basket_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.foodStand_stall_1);
+    this.foodStand_stall_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.foodStand_Fishbarrel_1);
+    this.foodStand_Fishbarrel_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.decoration_Rock_3);
+    this.decoration_Rock_3.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.forager_home_Baket_of_mushrooms_1);
+    this.forager_home_Baket_of_mushrooms_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.forager_home_Tent_1);
+    this.forager_home_Tent_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.collider(this.playerPrefab, this.blacksmith_Blacksmith_stall_1);
+    this.blacksmith_Blacksmith_stall_1.setCollisionBetween(0, 10000);
+
+    this.physics.add.existing(this.barricade_V_2, true);
+    this.physics.add.existing(this.barricade_V_1, true);
+    this.physics.add.existing(this.barricade_V, true);
+    this.physics.add.existing(this.barricade_V010, true);
+    this.physics.add.existing(this.barricade_V_3, true);
+
+    this.physics.add.collider(this.playerPrefab, this.barricade_V_2);
+    this.physics.add.collider(this.playerPrefab, this.barricade_V_1);
+    this.physics.add.collider(this.playerPrefab, this.barricade_V);
+    this.physics.add.collider(this.playerPrefab, this.barricade_V010);
+    this.physics.add.collider(this.playerPrefab, this.barricade_V_3);
+
+    const waterTiles = this.river_River_1.getTilesWithin();
+    waterTiles.forEach(tile => {
+        if (tile && tile.index === 5573) {
+            const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+            sprite.play('RiverMiddle');
+        }
+        if (tile && tile.index === 5459) {
+            const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+            sprite.play('RiverMiddle');
+        }
+        if (tile && tile.index === 5429) {
+            const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+            sprite.play('RiverMiddle_1');
+        }
+        if (tile && tile.index === 5519) {
+            const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+            sprite.play('RiverMiddle_2');
+        }
+        if (tile && tile.index === 5549) {
+            const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'river_River_1');
+            sprite.play('RiverMiddle_3');
+        }
+    });
+
+    this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
+        if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+            this.newItemHudPrefab.updateGlobalInventory();
+        }
+
+        this.scene.switch("ShapeTownBeachMapScene");
+        this.playerPrefab.y -= 30;
+        this.cameras.main.fadeIn(2000, 0, 0, 0);
+    });
+
+    this.physics.add.overlap(this.sceneTile_1, this.playerPrefab, () => {
+		if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+			this.newItemHudPrefab.updateGlobalInventory();
+		}
+		
+		this.scene.switch("ShapeTownFarmingMapScene");
+		
+		const targetScene = this.scene.get("ShapeTownFarmingMapScene");
+		if (targetScene && targetScene.playerPrefab) {
+			targetScene.playerPrefab.x -= 40;
+		}
+		
+		this.cameras.main.fadeIn(2000, 0, 0, 0);
+	});
+
+    this.setupInteractionZones();
+}
+
+/* END-USER-CODE */
 }
 
 /* END OF COMPILED CODE */

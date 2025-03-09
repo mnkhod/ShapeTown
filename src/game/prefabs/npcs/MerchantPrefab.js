@@ -1,9 +1,9 @@
-
 // You can write more code here
 
 /* START OF COMPILED CODE */
 
 /* START-USER-IMPORTS */
+import { MERCHANT_TYPES, getMerchantInventory } from '../../../components/merchant-manager';
 /* END-USER-IMPORTS */
 
 export default class MerchantPrefab extends Phaser.GameObjects.Container {
@@ -29,6 +29,7 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         /* START-USER-CTR-CODE */
         scene.events.on('create', this.prefabCreateCycle, this);
         npc.setInteractive({ useHandCursor: true });
+        this.merchantType = MERCHANT_TYPES.FARMER;
         /* END-USER-CTR-CODE */
     }
 
@@ -40,6 +41,8 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
     player;
     /** @type {Phaser.GameObjects.GameObject} */
     msgPrefab;
+    /** @type {string} */
+    merchantType;
 
     /* START-USER-CODE */
 
@@ -48,7 +51,7 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
             msg: "Hello, sir/ma'am. How can I help you?",
             options: [
                 { 
-                    text: "I want to buy something", 
+                    text: "I want to buy seeds and supplies", 
                     onSelect: () => {
                         if (this.scene.reactEvent) {
                             this.scene.reactEvent.emit("show-shop-buy-modal", this);
@@ -57,7 +60,7 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
                     nextDialogue: 1
                 },
                 { 
-                    text: "I want to sell something", 
+                    text: "I want to sell items", 
                     onSelect: () => {
                         if (this.scene.reactEvent) {
                             this.scene.reactEvent.emit("show-shop-sell-modal", this);
@@ -107,6 +110,10 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
             texture2.x,
             texture2.y
         );
+    }
+
+    getInventory() {
+        return getMerchantInventory(this.merchantType);
     }
 
     /* END-USER-CODE */

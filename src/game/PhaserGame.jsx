@@ -2,17 +2,33 @@ import PropTypes from 'prop-types';
 import { forwardRef, useEffect, useLayoutEffect, useRef } from 'react';
 import StartGame from './main';
 import { EventBus } from './EventBus';
+import SceneManager from '../components/SceneManager';
 
-export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, showModal,gameData }, ref) {
+export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, showModal, gameData }, ref) {
     const game = useRef();
+    const sceneManager = useRef();
 
     useLayoutEffect(() => {
-
         if (game.current === undefined) {
             game.current = StartGame("game-container");
+            
+            // Initialize SceneManager with the game instance
+            sceneManager.current = new SceneManager(game.current);
 
             if (ref !== null) {
-                ref.current = { game: game.current, scene: null };
+                ref.current = { 
+                    game: game.current, 
+                    scene: null,
+                    sceneManager: sceneManager.current,
+                    changeScene: (sceneName, data) => {
+                        if (sceneManager.current) {
+                            sceneManager.current.changeScene(sceneName, data);
+                        }
+                    },
+                    getCurrentScene: () => {
+                        return sceneManager.current ? sceneManager.current.getCurrentScene() : null;
+                    }
+                };
             }
         }
 
@@ -26,20 +42,17 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     }, [ref]);
 
     useEffect(() => {
-
         EventBus.on('current-scene-ready', (currentScene) => {
-
             if (currentActiveScene instanceof Function) {
                 currentActiveScene(currentScene);
             }
             ref.current.scene = currentScene;
         });
 
-        return () => EventBus.removeListener('show-achievements-modal');
+        return () => EventBus.removeListener('current-scene-ready');
     }, [currentActiveScene, ref])
 
     useEffect(() => {
-
         EventBus.on('show-achievements-modal', (currentScene) => {
             showModal("ACHIVEMENTS", currentScene)
         });
@@ -60,6 +73,12 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     useEffect(() => {
         const handleInventoryModal = (modalData) => {
             console.log('PhaserGame received:', modalData);
+            
+            // Save inventory state before showing modal
+            if (sceneManager.current && sceneManager.current.activeScene) {
+                sceneManager.current.saveInventoryFromScene(sceneManager.current.activeScene);
+            }
+            
             if (modalData && modalData.phaserInstance) {
                 showModal("INVENTORY", modalData);
             } else {
@@ -72,7 +91,6 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     }, [showModal]);
 
     useEffect(() => {
-
         EventBus.on('show-market-modal', (currentScene) => {
             showModal("MARKET", currentScene)
         });
@@ -86,7 +104,6 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
         });
 
         return () => EventBus.removeListener('show-navigate-modal');
-
     }, [showModal]);
 
     useEffect(() => {
@@ -95,7 +112,6 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
         });
 
         return () => EventBus.removeListener('show-mail-modal');
-
     }, [showModal]);
 
     useEffect(() => {
@@ -104,7 +120,6 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
         });
 
         return () => EventBus.removeListener('show-help-modal');
-
     }, [showModal]);
 
     useEffect(() => {
@@ -113,11 +128,9 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
         });
 
         return () => EventBus.removeListener('show-signout-modal');
-
     }, [showModal]);
 
     useEffect(() => {
-    
         EventBus.on('show-quest-modal', (currentScene) => {
             showModal("QUEST", currentScene);
         });
@@ -126,7 +139,6 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     }, [showModal]);
 
     useEffect(() => {
-    
         EventBus.on('show-leaderboard-modal', (currentScene) => {
             showModal("LEADERBOARD", currentScene);
         });
@@ -136,6 +148,11 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
 
     useEffect(() => {
         const handleShopSellModal = (merchantPrefab) => {
+            // Save inventory state before showing shop modal
+            if (sceneManager.current && sceneManager.current.activeScene) {
+                sceneManager.current.saveInventoryFromScene(sceneManager.current.activeScene);
+            }
+            
             const inventoryInstance = merchantPrefab.itemHud || 
                                      merchantPrefab.scene?.newItemHudPrefab;
             
@@ -145,8 +162,10 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
             }
             
             const modalData = {
-                phaserInstance: inventoryInstance
+                phaserInstance: inventoryInstance,
+                merchantType: merchantPrefab.merchantType
             };
+            
             showModal("SHOPSELL", modalData);
         };
         
@@ -157,9 +176,16 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
     
     useEffect(() => {
         const handleShopBuyModal = (merchantPrefab) => {
+            // Save inventory state before showing shop modal
+            if (sceneManager.current && sceneManager.current.activeScene) {
+                sceneManager.current.saveInventoryFromScene(sceneManager.current.activeScene);
+            }
+            
             const modalData = {
-                phaserInstance: merchantPrefab.scene.newItemHudPrefab
+                phaserInstance: merchantPrefab.scene.newItemHudPrefab,
+                merchantType: merchantPrefab.merchantType
             };
+            
             showModal("SHOPBUY", modalData);
         };
         
@@ -167,12 +193,33 @@ export const PhaserGame = forwardRef(function PhaserGame({ currentActiveScene, s
         
         return () => EventBus.removeListener('show-shop-buy-modal', handleShopBuyModal);
     }, [showModal]);
-
+    
+    // Add listener for scene changes to ensure inventory sync
+    useEffect(() => {
+        const handleSceneChanged = ({ from, to }) => {
+            console.log(`Scene changed from ${from} to ${to}`);
+            
+            // Wait for scene to be fully ready before syncing inventory
+            setTimeout(() => {
+                if (sceneManager.current) {
+                    const currentScene = sceneManager.current.getCurrentScene();
+                    if (currentScene && currentScene.newItemHudPrefab) {
+                        sceneManager.current.loadInventoryToScene(currentScene);
+                    }
+                }
+            }, 200);
+        };
+        
+        EventBus.on('scene-changed', handleSceneChanged);
+        
+        return () => {
+            EventBus.removeListener('scene-changed', handleSceneChanged);
+        };
+    }, []);
 
     return (
         <div id="game-container" className="h-screen"></div>
     );
-
 });
 
 PhaserGame.propTypes = {

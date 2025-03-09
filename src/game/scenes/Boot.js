@@ -17,12 +17,12 @@ export default class Boot extends Scene
     create() {
         this.game.questSystem = questSystem;
         
-        if (this.game.scene.getScene('TutorialScene')) {
-            extendSceneWithQuests(this.game.scene.getScene('TutorialScene').constructor.prototype);
+        if (this.game.scene.getScene('ShapeTownFarmingMapScene')) {
+            extendSceneWithQuests(this.game.scene.getScene('ShapeTownFarmingMapScene').constructor.prototype);
         } else {
-            const TutorialScene = this.sys.game.scene.scenes.find(s => s.key === 'TutorialScene')?.constructor;
-            if (TutorialScene) {
-                extendSceneWithQuests(TutorialScene.prototype);
+            const ShapeTownFarmingMapScene = this.sys.game.scene.scenes.find(s => s.key === 'ShapeTownFarmingMapScene')?.constructor;
+            if (ShapeTownFarmingMapScene) {
+                extendSceneWithQuests(ShapeTownFarmingMapScene.prototype);
             }
         }
         this.game.questSystem = questSystem;

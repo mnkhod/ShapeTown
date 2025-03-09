@@ -1,153 +1,329 @@
+// src/components/phaser-react-bridge.js
+import { EventBus } from "../game/EventBus";
+import { globalInventory } from "./GlobalInvetoryManager";
+
+/**
+ * Initializes the bridge between Phaser's inventory system and React components
+ * Ensures inventory data remains synchronized across scene transitions
+ * 
+ * @param {Object} phaserInstance - The inventory HUD prefab from the Phaser scene
+ * @param {Object} reactEvents - Event bus for communication with React components
+ * @returns {Object} - Bridge control methods
+ */
 export function initInventoryBridge(phaserInstance, reactEvents) {
-    if (!phaserInstance || !phaserInstance.scene) {
-      console.error('Invalid Phaser instance provided to inventory bridge');
-      return;
-    }
+  if (!phaserInstance) {
+    console.error('Invalid Phaser instance provided to inventory bridge');
+    return;
+  }
   
-    phaserInstance.reactEvent = reactEvents;
-    
-    let isUpdating = false;
-    
-    const originalSyncWithGlobalInv = phaserInstance.syncWithGlobalInventory;
-    const originalUpdateGlobalInv = phaserInstance.updateGlobalInventory;
+  // Store event bus reference on the instance for other components to use
+  phaserInstance.reactEvent = reactEvents;
   
-    phaserInstance.getFormattedInventory = function() {
-      const quickItems = this.itemData.map((key, index) => {
-        if (!key || !this.items[index] || !this.items[index].visible) {
-          return null;
-        }
-        
-        return {
-          id: key,
-          name: typeof key === 'string' ? key : key.id || 'Unknown Item',
-          icon: this.items[index].texture.key,
-          textureKey: this.items[index].texture.key,
-          frame: this.items[index].frame.name || 0,
-          frameName: this.items[index].frame.name || 0,
-          quantity: parseInt(this.itemCounters[index].text) || 1,
-          sellPrice: this.calculateItemValue ? this.calculateItemValue(key) : 10
-        };
-      });
-      
-      const mainItems = Array.isArray(this.mainInventoryData) 
-        ? this.mainInventoryData.map(item => {
-            if (!item) return null;
-            
-            return {
-              ...item,
-              id: item.id || item,
-              name: item.name || item.id || 'Unknown Item',
-              icon: item.icon || 'items/default',
-              textureKey: item.textureKey || item.icon || 'items/default',
-              frameName: item.frameName !== undefined ? item.frameName : 
-                        (item.frame !== undefined ? item.frame : 0),
-              quantity: item.quantity || 1,
-              sellPrice: item.sellPrice || (this.calculateItemValue ? this.calculateItemValue(item) : 10)
-            };
-          })
-        : Array(24).fill(null);
-      
-      let totalGold = 0;
-      if (this.gold !== undefined) {
-        totalGold = this.gold;
-      } else if (this.scene?.gold !== undefined) {
-        totalGold = this.scene.gold;
-      } else if (this.TotalGoldPrefab?.TotalGold !== undefined) {
-        totalGold = this.TotalGoldPrefab.TotalGold;
+  // Flag to prevent update loops
+  let isUpdating = false;
+  
+  // Cache original methods if they exist
+  const originalSyncWithGlobalInv = phaserInstance.syncWithGlobalInventory;
+  const originalUpdateGlobalInv = phaserInstance.updateGlobalInventory;
+  const originalCleanup = phaserInstance.cleanupInventory;
+  const originalAddItem = phaserInstance.addItem;
+  const originalRemoveItemByKey = phaserInstance.removeItemByKey;
+
+  /**
+   * Formats inventory data for React components
+   */
+  phaserInstance.getFormattedInventory = function() {
+    // Format quick items
+    const quickItems = Array.isArray(this.itemData) ? this.itemData.map((key, index) => {
+      if (!key || !this.items[index] || !this.items[index].visible) {
+        return null;
       }
       
       return {
-        quickItems,
-        mainItems,
-        activeSlot: this.activeIndex !== -1 ? this.activeIndex : 0,
-        totalGold
+        id: key,
+        name: typeof key === 'string' ? key : key.id || 'Unknown Item',
+        icon: this.items[index].texture.key,
+        textureKey: this.items[index].texture.key,
+        frame: this.items[index].frame.name || 0,
+        frameName: this.items[index].frame.name || 0,
+        quantity: parseInt(this.itemCounters[index].text) || 1,
+        sellPrice: this.calculateItemValue ? this.calculateItemValue(key) : 10
       };
+    }) : Array(8).fill(null);
+    
+    // Format main inventory
+    const mainItems = Array.isArray(this.mainInventoryData) 
+      ? this.mainInventoryData.map(item => {
+          if (!item) return null;
+          
+          return {
+            ...item,
+            id: item.id || item,
+            name: item.name || item.id || 'Unknown Item',
+            icon: item.icon || 'items/default',
+            textureKey: item.textureKey || item.icon || 'items/default',
+            frameName: item.frameName !== undefined ? item.frameName : 
+                      (item.frame !== undefined ? item.frame : 0),
+            quantity: item.quantity || 1,
+            sellPrice: item.sellPrice || (this.calculateItemValue ? this.calculateItemValue(item) : 10)
+          };
+        })
+      : Array(24).fill(null);
+    
+    // Get gold amount from various possible locations
+    let totalGold = 0;
+    if (this.gold !== undefined) {
+      totalGold = this.gold;
+    } else if (this.scene && this.scene.gold !== undefined) {
+      totalGold = this.scene.gold;
+    } else if (this.TotalGoldPrefab && this.TotalGoldPrefab.TotalGold !== undefined) {
+      totalGold = this.TotalGoldPrefab.TotalGold;
+    }
+    
+    return {
+      quickItems,
+      mainItems,
+      activeSlot: this.activeIndex !== -1 ? this.activeIndex : 0,
+      totalGold
     };
-  
-    phaserInstance.syncWithGlobalInventory = function() {
-      if (isUpdating) return;
-      isUpdating = true;
+  };
+
+  /**
+   * Syncs the HUD with the global inventory data
+   */
+  phaserInstance.syncWithGlobalInventory = function() {
+    if (isUpdating) return;
+    isUpdating = true;
+    
+    try {
+      // Clear current items first
+      this.itemData = Array(8).fill(null);
       
-      try {
-        if (typeof originalSyncWithGlobalInv === 'function') {
-          originalSyncWithGlobalInv.call(this);
-        }
-        
-        if (this.reactEvent) {
-          this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
-        }
-      } finally {
-        isUpdating = false;
+      // Hide all item sprites
+      if (this.items) {
+        this.items.forEach(item => {
+          if (item) item.visible = false;
+        });
       }
-    };
-  
-    phaserInstance.updateGlobalInventory = function() {
-      if (isUpdating) return;
-      isUpdating = true;
       
-      try {
-        if (typeof originalUpdateGlobalInv === 'function') {
-          originalUpdateGlobalInv.call(this);
-        }
-        
-        if (this.reactEvent) {
-          this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
-        }
-      } finally {
-        isUpdating = false;
+      // Hide all counter text
+      if (this.itemCounters) {
+        this.itemCounters.forEach(counter => {
+          if (counter) {
+            counter.text = "0";
+            counter.visible = false;
+          }
+        });
       }
-    };
-  
-    const originalCleanup = phaserInstance.cleanupInventory || function() {};
-    phaserInstance.cleanupInventory = function() {
-      if (isUpdating) return;
-      isUpdating = true;
       
-      try {
+      // Hide active slot indicators
+      if (this.activeItemSlots) {
+        this.activeItemSlots.forEach(slot => {
+          if (slot) slot.visible = false;
+        });
+      }
+      
+      // Populate from global inventory's quick items
+      if (Array.isArray(globalInventory.quickItems)) {
+        globalInventory.quickItems.forEach((itemData, index) => {
+          if (!itemData) return;
+          
+          this.itemData[index] = itemData.id;
+          
+          if (this.items && this.items[index]) {
+            this.items[index].visible = true;
+            this.items[index].setTexture(itemData.textureKey || itemData.icon);
+            if (itemData.frameName !== undefined) {
+              this.items[index].setFrame(itemData.frameName);
+            }
+          }
+          
+          if (this.itemCounters && this.itemCounters[index]) {
+            this.itemCounters[index].visible = true;
+            this.itemCounters[index].text = itemData.quantity.toString();
+          }
+        });
+      }
+      
+      // Set active slot
+      if (globalInventory.activeIndex >= 0 && 
+          this.activeItemSlots && 
+          globalInventory.activeIndex < this.activeItemSlots.length &&
+          this.itemData[globalInventory.activeIndex]) {
+        this.activeIndex = globalInventory.activeIndex;
+        this.selectedItem = this.itemData[globalInventory.activeIndex];
+        
+        if (this.activeItemSlots[globalInventory.activeIndex]) {
+          this.activeItemSlots[globalInventory.activeIndex].visible = true;
+        }
+      } else if (this.itemData && this.itemData.some(item => item !== null)) {
+        // Activate first non-empty slot if no active slot
+        const firstItemIndex = this.itemData.findIndex(item => item !== null);
+        this.activeIndex = firstItemIndex;
+        this.selectedItem = this.itemData[firstItemIndex];
+        
+        if (this.activeItemSlots && this.activeItemSlots[firstItemIndex]) {
+          this.activeItemSlots[firstItemIndex].visible = true;
+        }
+      }
+      
+      // Sync main inventory
+      if (Array.isArray(globalInventory.mainItems)) {
+        this.mainInventoryData = JSON.parse(JSON.stringify(globalInventory.mainItems));
+      }
+      
+      // Call original sync method if it exists
+      if (typeof originalSyncWithGlobalInv === 'function') {
+        originalSyncWithGlobalInv.call(this);
+      }
+      
+      // Notify React components
+      if (this.reactEvent) {
+        this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
+      }
+    } catch (error) {
+      console.error("Error in syncWithGlobalInventory:", error);
+    } finally {
+      isUpdating = false;
+    }
+  };
+
+  /**
+   * Updates the global inventory from the current HUD state
+   */
+  phaserInstance.updateGlobalInventory = function() {
+    if (isUpdating) return;
+    isUpdating = true;
+    
+    try {
+      // Update quick items in global inventory
+      const updatedQuickItems = Array(8).fill(null);
+      
+      if (this.itemData && this.items) {
+        this.itemData.forEach((id, index) => {
+          if (!id) return;
+          
+          const item = this.items[index];
+          if (!item || !item.visible) return;
+          
+          updatedQuickItems[index] = {
+            id: id,
+            icon: item.texture.key,
+            frame: item.frame.name,
+            textureKey: item.texture.key,
+            frameName: item.frame.name,
+            quantity: parseInt(this.itemCounters[index]?.text || '1'),
+            name: typeof id === 'string' ? id : id.id || 'Unknown Item'
+          };
+        });
+      }
+      
+      globalInventory.quickItems = updatedQuickItems;
+      
+      // Update main inventory in global inventory
+      if (this.mainInventoryData) {
+        globalInventory.mainItems = JSON.parse(JSON.stringify(this.mainInventoryData));
+      }
+      
+      // Update active index
+      globalInventory.activeIndex = this.activeIndex;
+      
+      // Call original update method if it exists
+      if (typeof originalUpdateGlobalInv === 'function') {
+        originalUpdateGlobalInv.call(this);
+      }
+      
+      // Notify React components
+      if (this.reactEvent) {
+        this.reactEvent.emit('global-inventory-changed', globalInventory);
+        this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
+      }
+    } catch (error) {
+      console.error("Error in updateGlobalInventory:", error);
+    } finally {
+      isUpdating = false;
+    }
+  };
+
+  /**
+   * Cleans up the inventory display, ensuring consistency
+   */
+  phaserInstance.cleanupInventory = function() {
+    if (isUpdating) return;
+    isUpdating = true;
+    
+    try {
+      // Call original cleanup if it exists
+      if (typeof originalCleanup === 'function') {
         originalCleanup.call(this);
-        
+      }
+      
+      // Hide items for empty slots
+      if (this.itemData && this.items) {
         this.itemData.forEach((itemId, index) => {
           if (!itemId && this.items[index]) {
             this.items[index].visible = false;
-            if (this.itemCounters[index]) {
+            if (this.itemCounters && this.itemCounters[index]) {
               this.itemCounters[index].visible = false;
             }
           }
         });
-        
-        if (this.updateGlobalInventory) {
-          this.updateGlobalInventory();
-        }
-        
-        if (this.reactEvent) {
-          this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
-        }
-      } finally {
-        isUpdating = false;
       }
-    };
-  
-    if (!phaserInstance.calculateItemValue) {
-      phaserInstance.calculateItemValue = function(item) {
-        const baseValue = 10;
-        let rarityMultiplier = 1;
-        
-        if (typeof item === 'object' && item.rarity) {
-          const rarityValues = {
-            common: 1,
-            uncommon: 2,
-            rare: 5,
-            epic: 10,
-            legendary: 25
-          };
-          rarityMultiplier = rarityValues[item.rarity] || 1;
-        }
-        
-        return baseValue * rarityMultiplier;
-      };
+      
+      // Update global inventory
+      this.updateGlobalInventory();
+      
+      // Emit inventory change event
+      if (this.reactEvent) {
+        this.reactEvent.emit('inventory-changed', this.getFormattedInventory());
+      }
+    } catch (error) {
+      console.error("Error in cleanupInventory:", error);
+    } finally {
+      isUpdating = false;
     }
-  
-    const originalAddItem = phaserInstance.addItem;
+  };
+
+  /**
+   * Calculates the value of an item for selling
+   */
+  if (!phaserInstance.calculateItemValue) {
+    phaserInstance.calculateItemValue = function(item) {
+      // Get basic item pricing data from the globalInventory or use defaults
+      const baseValue = 10;
+      let itemId = typeof item === 'string' ? item : (item && item.id ? item.id : null);
+      
+      if (!itemId) return baseValue;
+      
+      // Clean up item ID (remove extensions, paths)
+      itemId = itemId.replace(/\.(png|jpg|jpeg|gif)$/i, '').split('/').pop();
+      
+      // Check if it's a known item with predefined price
+      const ITEM_PRICES = {
+        "apple": 15,
+        "ToolHoe": 75,
+        "ToolWateringCan": 70,
+        "ToolPickaxe": 85,
+        // Add more items as needed
+      };
+      
+      if (ITEM_PRICES[itemId]) {
+        return ITEM_PRICES[itemId];
+      }
+      
+      // Determine price by item type/category
+      if (itemId.includes('seed')) return 5;
+      if (itemId.includes('crop')) return 25;
+      if (itemId.includes('Tool')) return 80;
+      
+      return baseValue;
+    };
+  }
+
+  /**
+   * Overrides the addItem method to ensure global sync
+   */
+  if (typeof originalAddItem === 'function') {
     phaserInstance.addItem = function(key, textureName, textureId, amount = 1, isAddable = true) {
       if (isUpdating) return originalAddItem.call(this, key, textureName, textureId, amount, isAddable);
       isUpdating = true;
@@ -159,14 +335,20 @@ export function initInventoryBridge(phaserInstance, reactEvents) {
         if (result && this.cleanupInventory) {
           this.cleanupInventory();
         }
+      } catch (error) {
+        console.error("Error in addItem:", error);
       } finally {
         isUpdating = false;
       }
       
       return result;
     };
-  
-    const originalRemoveItemByKey = phaserInstance.removeItemByKey;
+  }
+
+  /**
+   * Overrides the removeItemByKey method to ensure global sync
+   */
+  if (typeof originalRemoveItemByKey === 'function') {
     phaserInstance.removeItemByKey = function(key) {
       if (isUpdating) return originalRemoveItemByKey.call(this, key);
       isUpdating = true;
@@ -177,216 +359,210 @@ export function initInventoryBridge(phaserInstance, reactEvents) {
         if (this.cleanupInventory) {
           this.cleanupInventory();
         }
+      } catch (error) {
+        console.error("Error in removeItemByKey:", error);
       } finally {
         isUpdating = false;
       }
     };
-  
-    if (reactEvents) {
-      reactEvents.on('inventory-slot-selected', (data) => {
-        if (isUpdating) return;
-        isUpdating = true;
-        
-        try {
-          const { index, item } = data;
-          
-          if (index >= 0 && index < 8) {
-            phaserInstance.activeIndex = index;
-            phaserInstance.selectedItem = item?.id || null;
+  }
+
+  // Helper function to select an item if none is selected
+  const fixItemSelection = () => {
+    if (isUpdating) return;
+    isUpdating = true;
+    
+    try {
+      if (!phaserInstance.selectedItem && phaserInstance.items) {
+        // Find first visible item
+        for (let i = 0; i < phaserInstance.items.length; i++) {
+          if (phaserInstance.items[i] && phaserInstance.items[i].visible) {
+            const textureName = phaserInstance.items[i].texture.key;
+            let itemId;
             
-            phaserInstance.activeItemSlots.forEach((slot, i) => {
-              if (slot) {
-                slot.visible = i === index;
-              }
-            });
-            
-            if (phaserInstance.cleanupInventory) {
-              phaserInstance.cleanupInventory();
-            }
-          }
-        } finally {
-          isUpdating = false;
-        }
-      });
-      
-      reactEvents.on('move-item', (data) => {
-        if (isUpdating) return;
-        isUpdating = true;
-        
-        try {
-          const { fromIndex, fromQuickAccess, toIndex, toQuickAccess, item } = data;
-          
-          if (fromQuickAccess) {
-            const quickIndex = fromIndex - 24;
-            phaserInstance.itemData[quickIndex] = null;
-            if (phaserInstance.items[quickIndex]) {
-              phaserInstance.items[quickIndex].visible = false;
-            }
-            if (phaserInstance.itemCounters[quickIndex]) {
-              phaserInstance.itemCounters[quickIndex].visible = false;
-            }
-          } else {
-            phaserInstance.mainInventoryData[fromIndex] = null;
-          }
-          
-          if (toQuickAccess) {
-            const quickIndex = toIndex - 24;
-            phaserInstance.itemData[quickIndex] = item.id;
-            if (phaserInstance.items[quickIndex]) {
-              phaserInstance.items[quickIndex].visible = true;
-              phaserInstance.items[quickIndex].setTexture(
-                item.textureKey || item.icon || 'items/default'
-              );
-              if (item.frameName !== undefined) {
-                phaserInstance.items[quickIndex].setFrame(item.frameName);
-              }
-            }
-            if (phaserInstance.itemCounters[quickIndex]) {
-              phaserInstance.itemCounters[quickIndex].visible = true;
-              phaserInstance.itemCounters[quickIndex].text = (item.quantity || 1).toString();
-            }
-          } else {
-            phaserInstance.mainInventoryData[toIndex] = {
-              id: item.id,
-              icon: item.icon || item.textureKey,
-              textureKey: item.textureKey || item.icon,
-              frame: item.frame !== undefined ? item.frame : item.frameName,
-              frameName: item.frameName !== undefined ? item.frameName : item.frame,
-              quantity: item.quantity || 1,
-              name: item.name || item.id
-            };
-          }
-          
-          if (phaserInstance.cleanupInventory) {
-            phaserInstance.cleanupInventory();
-          }
-        } finally {
-          isUpdating = false;
-        }
-      });
-      
-      reactEvents.on('sell-item', (data) => {
-        if (isUpdating) return;
-        isUpdating = true;
-        
-        try {
-          const { item, quantity } = data;
-          
-          if (!item) return;
-          
-          if (phaserInstance.gold !== undefined) {
-            phaserInstance.gold = (phaserInstance.gold || 0) + (item.sellPrice * quantity);
-          } else if (phaserInstance.scene.gold !== undefined) {
-            phaserInstance.scene.gold = (phaserInstance.scene.gold || 0) + (item.sellPrice * quantity);
-          }
-          
-          if (phaserInstance.TotalGoldPrefab?.TotalGold !== undefined) {
-            phaserInstance.TotalGoldPrefab.TotalGold = phaserInstance.gold || phaserInstance.scene.gold;
-            if (phaserInstance.TotalGoldPrefab.totalGoldAmountText) {
-              phaserInstance.TotalGoldPrefab.totalGoldAmountText.setText(phaserInstance.TotalGoldPrefab.TotalGold.toString());
-            }
-          }
-          
-          const quickIndex = phaserInstance.itemData.findIndex(id => 
-            id === item.id || (typeof id === 'object' && id?.id === item.id)
-          );
-          
-          if (quickIndex !== -1) {
-            if (quantity >= item.quantity) {
-              phaserInstance.itemData[quickIndex] = null;
-              if (phaserInstance.items[quickIndex]) {
-                phaserInstance.items[quickIndex].visible = false;
-              }
-              if (phaserInstance.itemCounters[quickIndex]) {
-                phaserInstance.itemCounters[quickIndex].visible = false;
-              }
+            if (phaserInstance.itemData && phaserInstance.itemData[i]) {
+              itemId = phaserInstance.itemData[i];
             } else {
-              const newQuantity = item.quantity - quantity;
-              if (phaserInstance.itemCounters[quickIndex]) {
-                phaserInstance.itemCounters[quickIndex].text = newQuantity.toString();
-              }
-            }
-          } else {
-            const mainIndex = phaserInstance.mainInventoryData.findIndex(i => 
-              i && i.id === item.id
-            );
-            
-            if (mainIndex !== -1) {
-              if (quantity >= phaserInstance.mainInventoryData[mainIndex].quantity) {
-                phaserInstance.mainInventoryData[mainIndex] = null;
+              // Determine item type from texture
+              if (textureName.includes("Hoe") || textureName.includes("hoe")) {
+                itemId = "ToolHoe";
+              } else if (textureName.includes("Water") || textureName.includes("water")) {
+                itemId = "ToolWateringCan";
+              } else if (textureName.includes("Pick") || textureName.includes("pick")) {
+                itemId = "ToolPickaxe";
               } else {
-                phaserInstance.mainInventoryData[mainIndex].quantity -= quantity;
+                itemId = textureName.toUpperCase().replace(/[^A-Z0-9_]/g, "_");
+              }
+              
+              if (phaserInstance.itemData) {
+                phaserInstance.itemData[i] = itemId;
               }
             }
+            
+            phaserInstance.selectedItem = itemId;
+            phaserInstance.activeIndex = i;
+            
+            if (phaserInstance.activeItemSlots) {
+              phaserInstance.activeItemSlots.forEach((slot, idx) => {
+                if (slot) slot.visible = idx === i;
+              });
+            }
+            
+            break;
           }
-          
-          if (phaserInstance.scene.events) {
-            phaserInstance.scene.events.emit('gold-earned', item.sellPrice * quantity);
-          }
-          
-          if (phaserInstance.cleanupInventory) {
-            phaserInstance.cleanupInventory();
-          }
-        } finally {
-          isUpdating = false;
         }
-      });
+      }
+    } catch (error) {
+      console.error("Error in fixItemSelection:", error);
+    } finally {
+      isUpdating = false;
     }
-  
-    if (phaserInstance.syncWithGlobalInventory) {
-      phaserInstance.syncWithGlobalInventory();
-    }
-    let checkItemSelection = () => {
+  };
+
+  // Set up event handlers for React components
+  if (reactEvents) {
+    // Handle inventory slot selection from React UI
+    reactEvents.on('inventory-slot-selected', (data) => {
       if (isUpdating) return;
       isUpdating = true;
       
       try {
-        if (!phaserInstance.selectedItem) {
-          for (let i = 0; i < phaserInstance.items.length; i++) {
-            if (phaserInstance.items[i] && phaserInstance.items[i].visible) {
-              const textureName = phaserInstance.items[i].texture.key;
-              let itemId;
-              
-              if (phaserInstance.itemData[i]) {
-                itemId = phaserInstance.itemData[i];
-              } else {
-                if (textureName.includes("Hoe") || textureName.includes("hoe")) {
-                  itemId = "ToolHoe";
-                } else if (textureName.includes("Water") || textureName.includes("water")) {
-                  itemId = "ToolWateringCan";
-                } else if (textureName.includes("Pick") || textureName.includes("pick")) {
-                  itemId = "ToolPickaxe";
-                } else {
-                  itemId = textureName.toUpperCase().replace(/[^A-Z0-9_]/g, "_");
-                }
-                
-                phaserInstance.itemData[i] = itemId;
-              }
-              
-              phaserInstance.selectedItem = itemId;
-              phaserInstance.activeIndex = i;
-              
-              phaserInstance.activeItemSlots.forEach((slot, idx) => {
-                if (slot) slot.visible = idx === i;
-              });
-              
-              console.log("Fixed inventory selection:", itemId);
-              break;
+        const { index, item } = data;
+        
+        if (index >= 0 && index < 8 && phaserInstance.activeItemSlots) {
+          phaserInstance.activeIndex = index;
+          phaserInstance.selectedItem = item?.id || null;
+          
+          phaserInstance.activeItemSlots.forEach((slot, i) => {
+            if (slot) {
+              slot.visible = i === index;
             }
-          }
+          });
+          
+          phaserInstance.updateGlobalInventory();
         }
+      } catch (error) {
+        console.error("Error handling inventory-slot-selected:", error);
       } finally {
         isUpdating = false;
       }
-    };
+    });
     
-    setTimeout(checkItemSelection, 500);
+    // Handle item movement between inventory slots
+    reactEvents.on('move-item', (data) => {
+      if (isUpdating) return;
+      isUpdating = true;
+      
+      try {
+        const { fromIndex, fromQuickAccess, toIndex, toQuickAccess, item } = data;
+        
+        // Remove from source
+        if (fromQuickAccess) {
+          const quickIndex = fromIndex - 24;
+          if (phaserInstance.itemData) {
+            phaserInstance.itemData[quickIndex] = null;
+          }
+          
+          if (phaserInstance.items && phaserInstance.items[quickIndex]) {
+            phaserInstance.items[quickIndex].visible = false;
+          }
+          
+          if (phaserInstance.itemCounters && phaserInstance.itemCounters[quickIndex]) {
+            phaserInstance.itemCounters[quickIndex].visible = false;
+          }
+        } else if (phaserInstance.mainInventoryData) {
+          phaserInstance.mainInventoryData[fromIndex] = null;
+        }
+        
+        // Add to destination
+        if (toQuickAccess) {
+          const quickIndex = toIndex - 24;
+          if (phaserInstance.itemData) {
+            phaserInstance.itemData[quickIndex] = item.id;
+          }
+          
+          if (phaserInstance.items && phaserInstance.items[quickIndex]) {
+            phaserInstance.items[quickIndex].visible = true;
+            phaserInstance.items[quickIndex].setTexture(
+              item.textureKey || item.icon || 'items/default'
+            );
+            
+            if (item.frameName !== undefined) {
+              phaserInstance.items[quickIndex].setFrame(item.frameName);
+            }
+          }
+          
+          if (phaserInstance.itemCounters && phaserInstance.itemCounters[quickIndex]) {
+            phaserInstance.itemCounters[quickIndex].visible = true;
+            phaserInstance.itemCounters[quickIndex].text = (item.quantity || 1).toString();
+          }
+        } else if (phaserInstance.mainInventoryData) {
+          phaserInstance.mainInventoryData[toIndex] = {
+            id: item.id,
+            icon: item.icon || item.textureKey,
+            textureKey: item.textureKey || item.icon,
+            frame: item.frame !== undefined ? item.frame : item.frameName,
+            frameName: item.frameName !== undefined ? item.frameName : item.frame,
+            quantity: item.quantity || 1,
+            name: item.name || item.id
+          };
+        }
+        
+        phaserInstance.updateGlobalInventory();
+      } catch (error) {
+        console.error("Error handling move-item:", error);
+      } finally {
+        isUpdating = false;
+      }
+    });
     
-    if (reactEvents) {
-      reactEvents.on('inventory-changed', () => {
-        setTimeout(checkItemSelection, 100);
-      });
-    }
+    // Handle scene transitions
+    reactEvents.on('scene-switched', (scene) => {
+      if (!scene || !scene.newItemHudPrefab) return;
+      
+      // Sync the new scene's inventory with global data
+      if (scene.newItemHudPrefab.syncWithGlobalInventory) {
+        scene.newItemHudPrefab.syncWithGlobalInventory();
+      }
+    });
   }
   
-  export default initInventoryBridge;
+  // Set up event handlers for scene transitions
+  if (phaserInstance.scene) {
+    // Save inventory state when scene shuts down
+    phaserInstance.scene.events.on('shutdown', () => {
+      if (phaserInstance.updateGlobalInventory) {
+        phaserInstance.updateGlobalInventory();
+      }
+    });
+    
+    // Save inventory state when scene sleeps
+    phaserInstance.scene.events.on('sleep', () => {
+      if (phaserInstance.updateGlobalInventory) {
+        phaserInstance.updateGlobalInventory();
+      }
+    });
+  }
+  
+  // Do initial sync and selection fix
+  if (phaserInstance.syncWithGlobalInventory) {
+    phaserInstance.syncWithGlobalInventory();
+  }
+  setTimeout(fixItemSelection, 500);
+  
+  return {
+    sync: () => {
+      if (phaserInstance.syncWithGlobalInventory) {
+        phaserInstance.syncWithGlobalInventory();
+      }
+    },
+    update: () => {
+      if (phaserInstance.updateGlobalInventory) {
+        phaserInstance.updateGlobalInventory();
+      }
+    },
+    fixSelection: fixItemSelection
+  };
+}
+
+export default initInventoryBridge;
