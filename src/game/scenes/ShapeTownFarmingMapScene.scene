@@ -556,17 +556,6 @@
             "y": 0
         },
         {
-            "prefabId": "26b6b331-5847-4e61-b92e-748a6600902e",
-            "id": "c23224d0-7e72-436b-be40-d74978e4e3e2",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "rockMonster_1",
-            "x": 1013,
-            "y": 420
-        },
-        {
             "prefabId": "ec253479-a01f-428a-acd6-f3f27648354c",
             "id": "3b043967-0c8e-49c2-9190-a1a97a2d0f52",
             "unlock": [

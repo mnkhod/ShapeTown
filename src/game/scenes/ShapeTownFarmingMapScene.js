@@ -9,7 +9,6 @@ import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import AlertPrefab from "../prefabs/hud/AlertPrefab";
-import RockMonster from "../prefabs/Mob/RockMonster";
 import StonePrefab_4 from "../prefabs/stone/StonePrefab_4";
 import StonePrefab_3 from "../prefabs/stone/StonePrefab_3";
 import StonePrefab_1 from "../prefabs/stone/StonePrefab_1";
@@ -38,6 +37,8 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// Write your code here.
 		this.reactEvent = EventBus
 		this.achievements = {};
+		
+		const counter = 0;
 		/* END-USER-CTR-CODE */
 	}
 
@@ -148,10 +149,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// alertPrefab
 		const alertPrefab = new AlertPrefab(this, 2560, 0);
 		this.add.existing(alertPrefab);
-
-		// rockMonster_1
-		const rockMonster_1 = new RockMonster(this, 1013, 420);
-		this.add.existing(rockMonster_1);
 
 		// stonePrefab_4
 		const stonePrefab_4 = new StonePrefab_4(this, 1289, 130);
@@ -459,6 +456,8 @@ initInventorySystem() {
 		this.playerPrefab?.setDepth(90);
 	}
 	create() {
+		
+		var counter = 0;
 		this.editorCreate();
 		window.questBookPrefab = null;
 		this.cameras.main.setBounds(0, 0, 2550, 1920);
@@ -594,20 +593,26 @@ initInventorySystem() {
 	  	// this.tree_border_Fence_1.renderDebug(this.add.graphics());
 
 		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-			if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-				this.newItemHudPrefab.updateGlobalInventory();
+			
+			if ( this.scene.questSystem && this.scene.questSystem.isQuestCompleted("001")){
+				if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+					this.newItemHudPrefab.updateGlobalInventory();
+				}
+
+				const playerX = this.playerPrefab.x;
+
+				this.scene.switch("ShapeTownSquareMapScene");
+				const targetScene = this.scene.get("ShapeTownSquareMapScene");
+				if (targetScene && targetScene.playerPrefab) {
+					targetScene.playerPrefab.x = 304;
+				}
+
+				this.cameras.main.fadeIn(2000, 0, 0, 0);
+			}else{
+				this.playerPrefab.x -= 200;
+				this.alertPrefab.alert("First Quest is not over, please finish your quest and try again");
+				counter++;
 			}
-
-			const playerX = this.playerPrefab.x;
-
-			this.scene.switch("ShapeTownSquareMapScene");
-
-			const targetScene = this.scene.get("ShapeTownSquareMapScene");
-			if (targetScene && targetScene.playerPrefab) {
-				targetScene.playerPrefab.x = 304;
-			}
-
-			this.cameras.main.fadeIn(2000, 0, 0, 0);
 		});
 		this.initInventorySystem();
 

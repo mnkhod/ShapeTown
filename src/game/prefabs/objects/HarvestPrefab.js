@@ -9,7 +9,7 @@ const CROP_DATA = {
         seedPrice: 10,
         sellingPrice: 25,
         growthDays: 2,
-        growthMinutes: 5,
+        growthMinutes: 30,
         tier: "common",
         spritesheet: "Crop_Cycle_Carrot",
         seedFrame: 0,
