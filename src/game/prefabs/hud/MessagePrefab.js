@@ -121,7 +121,7 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
             const cam = this.scene.cameras.main;
             let fullWidth = Math.floor(this.getBounds().width);
             let newX = cam.worldView.centerX - (fullWidth / 2) + 10;
-            let newY = cam.worldView.centerY + 80;
+            let newY = cam.worldView.centerY + 60;
 
             this.setPosition(
                 Phaser.Math.Linear(this.x, newX, 0.08),

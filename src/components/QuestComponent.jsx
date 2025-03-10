@@ -125,39 +125,39 @@ const QuestComponent = ({ onClose, playerProgress = {}, onQuestUpdate }) => {
         ],
         reward: "Open next tier item on Farming"
       },
-      {
-        id: "005",
-        title: "Adventure Quest",
-        description: "Help Victoria with a monster problem",
-        category: "Daily Quest",
-        location: "Beach area",
-        prerequisites: "#002 Have to meet NPC Victoria",
-        questGiver: "NPC Victoria",
-        completed: playerProgress["005"]?.completed || false,
-        subtasks: [
-          {
-            id: "005-1",
-            text: "Meet the NPC Victoria",
-            completed: playerProgress["005"]?.subtasks?.["005-1"] || false
-          },
-          {
-            id: "005-2",
-            text: "Go to the beach",
-            completed: playerProgress["005"]?.subtasks?.["005-2"] || false
-          },
-          {
-            id: "005-3",
-            text: "Kill all of the Monsters",
-            completed: playerProgress["005"]?.subtasks?.["005-3"] || false
-          },
-          {
-            id: "005-4",
-            text: "Report Back to NPC Victoria",
-            completed: playerProgress["005"]?.subtasks?.["005-4"] || false
-          }
-        ],
-        reward: "Everyday 50g"
-      },
+      // {
+      //   id: "005",
+      //   title: "Adventure Quest",
+      //   description: "Help Victoria with a monster problem",
+      //   category: "Daily Quest",
+      //   location: "Beach area",
+      //   prerequisites: "#002 Have to meet NPC Victoria",
+      //   questGiver: "NPC Victoria",
+      //   completed: playerProgress["005"]?.completed || false,
+      //   subtasks: [
+      //     {
+      //       id: "005-1",
+      //       text: "Meet the NPC Victoria",
+      //       completed: playerProgress["005"]?.subtasks?.["005-1"] || false
+      //     },
+      //     {
+      //       id: "005-2",
+      //       text: "Go to the beach",
+      //       completed: playerProgress["005"]?.subtasks?.["005-2"] || false
+      //     },
+      //     {
+      //       id: "005-3",
+      //       text: "Kill all of the Monsters",
+      //       completed: playerProgress["005"]?.subtasks?.["005-3"] || false
+      //     },
+      //     {
+      //       id: "005-4",
+      //       text: "Report Back to NPC Victoria",
+      //       completed: playerProgress["005"]?.subtasks?.["005-4"] || false
+      //     }
+      //   ],
+      //   reward: "Everyday 50g"
+      // },
       // {
       //   id: "006",
       //   title: "Goblin Slayer",

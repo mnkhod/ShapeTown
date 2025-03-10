@@ -70,7 +70,7 @@ export default class FoodMerchant extends Phaser.GameObjects.Container {
                 this.scene.triggerQuestEvent('npc:lilyInteraction', { npc: this });
                 
                 // Check if we're in the right state for starting Quest #008
-                if (questSystem && questSystem.isQuestCompleted("002") && 
+                if (questSystem && questSystem.isQuestCompleted("001") && 
                     !questSystem.isQuestActive("008") && !questSystem.isQuestCompleted("008")) {
                     // Start the Yam, Yam quest
                     this.scene.triggerQuestEvent('npc:lilyRecipeQuest', { npc: this });
@@ -177,8 +177,8 @@ export default class FoodMerchant extends Phaser.GameObjects.Container {
                 name: 'Carrot Soup Recipe',
                 description: 'Recipe for delicious Carrot Soup. Required for Lily\'s quest.',
                 category: 'recipe',
-                buyPrice: 0,  // Make sure it has a buyable price
-                sellPrice: 0   // Can't sell it back
+                buyPrice: 50,
+                sellPrice: 0  
             };
         }
         
