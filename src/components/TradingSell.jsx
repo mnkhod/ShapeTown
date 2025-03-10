@@ -185,12 +185,34 @@ const MerchantSellScreen = ({ onClose, phaserInstance, merchantType = MERCHANT_T
     const saleValue = selectedItem.sellPrice * quantity;
     console.log(`Selling ${quantity}x ${selectedItem.name} for ${saleValue} gold`);
     
+    const isIronItem = selectedItem.id === "IronIngot";
+    const isQuestActive = phaserInstance?.scene?.questSystem?.isQuestActive("002");
+    
+    // Log quest status
+    console.log(`Selling iron item: ${isIronItem}, Quest active: ${isQuestActive}`);
+    
     const itemRemoved = removeItemFromInventory(selectedItem, quantity);
     
     if (itemRemoved) {
       goldManager.addGold(saleValue);
       
       setLastSoldGold(saleValue);
+      
+      // Trigger quest completion if selling iron items
+      if (isIronItem && isQuestActive) {
+        console.log("Triggering quest completion from sell screen");
+        if (phaserInstance.scene?.triggerQuestEvent) {
+          phaserInstance.scene.triggerQuestEvent('quest:sold-items-to-lydia', { 
+            npc: phaserInstance.scene.children.list.find(c => c.constructor.name === "MerchantPrefab")
+          });
+          
+          goldManager.addGold(1000);
+          
+          if (phaserInstance.scene.alertPrefab) {
+            phaserInstance.scene.alertPrefab.alert("Quest Complete: Taste of Gold");
+          }
+        }
+      }
       
       setTimeout(() => {
         setLastSoldGold(0);

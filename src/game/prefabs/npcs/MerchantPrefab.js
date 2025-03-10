@@ -39,6 +39,7 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         npc.setInteractive({ useHandCursor: true });
         this.merchantType = MERCHANT_TYPES.FARMER;
         this.hasCompletedSellQuest = false;
+        this.currentDialogueIndex = 0;
         /* END-USER-CTR-CODE */
     }
 
@@ -57,91 +58,15 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
 
     /* START-USER-CODE */
 
-    dialogueLines = [
-        {
-            msg: "Hello, I'm Lydia. How can I help you today?",
-            options: [
-                {
-                    text: "I want to buy seeds and supplies", 
-                    onSelect: () => {
-                        if (this.scene.reactEvent) {
-                            this.scene.reactEvent.emit("show-shop-buy-modal", this);
-                        }
-                    },
-                    nextDialogue: 1
-                },
-                {
-                    text: "I want to sell items",
-                    onSelect: () => {
-                      if (this.scene.reactEvent) {
-                        // Check if the player has iron bars and Quest #002 is active
-                        const hasIronBars = this.scene.newItemHudPrefab && 
-                                           this.scene.newItemHudPrefab.checkItem("Ironbar");
-                        const isQuestActive = this.scene.questSystem && 
-                                            this.scene.questSystem.isQuestActive("002");
-                        
-                        if (hasIronBars && isQuestActive) {
-                          // Special dialogue for the quest
-                          this.msgPrefab.conversation([
-                            { msg: "Ah, those iron bars from Jack! I can definitely buy those from you." },
-                            { 
-                              msg: "Here's your payment - 1000 gold! Jack will be pleased with your trading skills.",
-                              onComplete: () => {
-                                // Remove iron bars from inventory
-                                this.scene.newItemHudPrefab.removeItemByKey("Ironbar");
-                                
-                                // Trigger quest completion
-                                if (this.scene.triggerQuestEvent) {
-                                  console.log("Triggering quest:sold-items-to-lydia event");
-                                  this.scene.triggerQuestEvent('quest:sold-items-to-lydia', { npc: this });
-                                  
-                                  // Show notification
-                                  if (this.scene.alertPrefab) {
-                                    this.scene.alertPrefab.alert("Quest Completed: Taste of Gold");
-                                  }
-                                }
-                              }
-                            }
-                          ]);
-                        } else {
-                          // Regular selling
-                          this.scene.reactEvent.emit("show-shop-sell-modal", this);
-                        }
-                      }
-                    },
-                    nextDialogue: 1,
-                },
-                {
-                    text: "Jack sent me here",
-                    nextDialogue: [
-                        { 
-                            msg: "Ah, Jack! He's a good friend. Welcome to my shop! Feel free to browse my goods or sell your items. I offer fair prices for quality goods.",
-                            onComplete: () => {
-                                // Trigger quest event for meeting Lydia
-                                if (this.scene.triggerQuestEvent) {
-                                    this.scene.triggerQuestEvent('npc:lydiaInteraction', { npc: this });
-                                    
-                                    // Show notification
-                                    if (this.scene.alertPrefab) {
-                                        this.scene.alertPrefab.alert("Quest Updated: Met Lady Lydia");
-                                    }
-                                }
-                            }
-                        }
-                    ]
-                },
-                {
-                    text: "Just browsing",
-                    nextDialogue: [
-                        { msg: "Feel free to look around. Let me know if you need anything." }
-                    ],
-                }
-            ]
-        },
-        { msg: "Thank you. Have a nice day!" }
+    greetings = [
+        "Welcome to my shop! How can I help you today?",
+        "Hello there! Looking for farm supplies?",
+        "Good day! Need seeds or tools for your farm?"
     ];
 
     prefabCreateCycle() {
+        console.log("MerchantPrefab create cycle started");
+        
         this.npc.on('pointerover', function (_pointer) {
             this.preFX.addGlow(16777215, 4, 0, false);
             if (this.parentContainer && this.parentContainer.nameBox) {
@@ -150,6 +75,8 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         });
 
         this.npc.on('pointerdown', function (_pointer) {
+            console.log("Lydia NPC clicked");
+            
             let distance = this.getDistance(this.player, this);
 
             if (distance > 100) {
@@ -157,12 +84,121 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
                 return;
             }
 
-            this.msgPrefab.conversation(this.dialogueLines);
-            
             // Trigger quest event for meeting Lydia
             if (this.scene.triggerQuestEvent) {
+                console.log("Triggering npc:lydiaInteraction event");
                 this.scene.triggerQuestEvent('npc:lydiaInteraction', { npc: this });
+                
+                // Mark Lydia as greeted for Quest #003
+                if (this.scene.markNPCGreeted) {
+                    this.scene.markNPCGreeted("Lydia");
+                }
             }
+            
+            // Prepare dialogue
+            const currentGreeting = this.greetings[this.currentDialogueIndex];
+            this.currentDialogueIndex = (this.currentDialogueIndex + 1) % this.greetings.length;
+
+            // Check for BOTH possible item IDs
+            let hasIronBars = false;
+            let ironItemId = null;
+            let isQuestActive = false;
+            
+            try {
+                if (this.scene.newItemHudPrefab && this.scene.newItemHudPrefab.checkItem) {
+                    if (this.scene.newItemHudPrefab.checkItem("IronIngot")) {
+                        hasIronBars = true;
+                        ironItemId = "IronIngot";
+                    }
+                }
+                
+                if (this.scene.questSystem && this.scene.questSystem.isQuestActive) {
+                    isQuestActive = this.scene.questSystem.isQuestActive("002");
+                }
+                
+                console.log(`Has iron bars: ${hasIronBars} (${ironItemId}), Quest active: ${isQuestActive}`);
+            } catch (error) {
+                console.error("Error checking quest status:", error);
+            }
+            
+            // Build dialogue options - matching BlackSmith format, but handling quest items specially
+            let dialogueLines;
+            
+            if (hasIronBars && isQuestActive) {
+                // When player has iron bars for quest, show special dialogue options
+                dialogueLines = [
+                    { 
+                        msg: currentGreeting,
+                        options: [
+                            { 
+                                text: "I want to buy seeds and supplies", 
+                                onSelect: () => {
+                                    console.log("Emitting show-shop-buy-modal event");
+                                    if (this.scene.reactEvent) {
+                                        this.scene.reactEvent.emit("show-shop-buy-modal", this);
+                                    }
+                                },
+                                nextDialogue: 1
+                            },
+                            { 
+                                text: "I need to sell some items", 
+                                onSelect: () => {
+                                    console.log("Opening sell UI for regular items");
+                                    if (this.scene.reactEvent) {
+                                        this.scene.reactEvent.emit("show-shop-sell-modal", this);
+                                    }
+                                },
+                                nextDialogue: 1
+                            },
+                            { 
+                                text: "Just browsing", 
+                                nextDialogue: [
+                                    { msg: "Feel free to look around. Let me know if you need anything." }
+                                ]
+                            }
+                        ]
+                    },
+                    { msg: "Thank you for your business! Come back soon!" }
+                ];
+            } else {
+                // Regular dialogue without quest options
+                dialogueLines = [
+                    { 
+                        msg: currentGreeting,
+                        options: [
+                            { 
+                                text: "I want to buy seeds and supplies", 
+                                onSelect: () => {
+                                    console.log("Emitting show-shop-buy-modal event");
+                                    if (this.scene.reactEvent) {
+                                        this.scene.reactEvent.emit("show-shop-buy-modal", this);
+                                    }
+                                },
+                                nextDialogue: 1
+                            },
+                            { 
+                                text: "I want to sell items", 
+                                onSelect: () => {
+                                    console.log("Emitting show-shop-sell-modal event");
+                                    if (this.scene.reactEvent) {
+                                        this.scene.reactEvent.emit("show-shop-sell-modal", this);
+                                    }
+                                },
+                                nextDialogue: 1
+                            },
+                            { 
+                                text: "Just browsing", 
+                                nextDialogue: [
+                                    { msg: "Feel free to look around. Let me know if you need anything." }
+                                ]
+                            }
+                        ]
+                    },
+                    { msg: "Thank you for your business! Come back soon!" }
+                ];
+            }
+            
+            this.msgPrefab.conversation(dialogueLines);
 
         }, this);
 

@@ -105,11 +105,6 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         { 
             msg: "I have some iron bars that need to be sold. Could you take them to Lydia for me?",
             onComplete: () => {
-                // Check if iron bars were already given
-                if (!this.newItemHud.checkItem("Ironbar")) {
-                    this.newItemHud.addItem("Ironbar", "Icon_IronBar", 0, 3);
-                }
-                
                 if (this.scene.alertPrefab) {
                     this.scene.alertPrefab.alert("New Quest: Taste of Gold");
                 }
@@ -331,7 +326,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
                         setTimeout(() => {
                             console.log("Showing Taste of Gold dialogue");
                             // Give the player iron bars for the quest
-                            prefab.newItemHud.addItem("Ironbar", "Icon_IronBar", 0, 3);
+                            this.newItemHud.addItem("IronIngot", "Icon_IronBar", 0, 3);
                             
                             // Show the Taste of Gold dialogue
                             prefab.msgPrefab.conversation(prefab.tasteOfGoldDialogueLifeCycle);
