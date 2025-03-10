@@ -151,33 +151,6 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "43aefa57-97fb-4944-a795-dddde74aaac5",
-            "label": "lake_Lake_Decoration_1",
-            "scope": "CLASS",
-            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
-            "layerName": "Lake/Lake Decoration",
-            "tilesets": [
-                "GroundTileset",
-                "TreePatteren",
-                "CityHouses_v02",
-                "Building_5_Door_32x32_2",
-                "LakeBorderCornerAni",
-                "LakeBorderAni",
-                "Fishes_3_32x32",
-                "LakeDecoration",
-                "LakeFloatingRock_V03",
-                "LakeFloatingRock_V01",
-                "LakeFloatingRock_V02",
-                "GroundTileset_V02",
-                "SoilCorner_v02",
-                "RocksOnGrass_V01",
-                "RockOnGrass_V02",
-                "RoadStone",
-                "Fence_V01"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
             "id": "bf581fcc-bbf4-44c1-be6c-c95063842ab2",
             "label": "tree_border_Fence_1",
             "scope": "CLASS",
@@ -738,6 +711,97 @@
             "label": "openQuest",
             "x": 307,
             "y": 1317
+        },
+        {
+            "type": "Sprite",
+            "id": "7252c300-1313-40a1-aa07-61f7f7296dd4",
+            "label": "farmingLakeStone_1LakeFloatingRock",
+            "texture": {
+                "key": "LakeFloatingRock_V01",
+                "frame": 0
+            },
+            "x": 491,
+            "y": 1790,
+            "animationPlayMethod": 1,
+            "animationKey": "FarmingLakeStone_1LakeFloatingRock"
+        },
+        {
+            "type": "Sprite",
+            "id": "2dfd25ab-b56e-4afd-82d9-1415116df43c",
+            "label": "farmingLakeStone_2LakeFloatingRock",
+            "texture": {
+                "key": "LakeFloatingRock_V02",
+                "frame": 0
+            },
+            "x": 322,
+            "y": 1712,
+            "animationPlayMethod": 1,
+            "animationKey": "FarmingLakeStone_2LakeFloatingRock"
+        },
+        {
+            "type": "Sprite",
+            "id": "7810c46c-ef54-45c8-bd62-f1e14e90f931",
+            "label": "farmingLakeStone_1LakeFloatingRock_1",
+            "texture": {
+                "key": "LakeFloatingRock_V01",
+                "frame": 0
+            },
+            "x": 233,
+            "y": 1773,
+            "animationPlayMethod": 1,
+            "animationKey": "FarmingLakeStone_1LakeFloatingRock"
+        },
+        {
+            "type": "Sprite",
+            "id": "ac4e5d67-2807-47b2-8ba1-8daf3b45d5b8",
+            "label": "farmingLakeStone_2LakeFloatingRock_1",
+            "texture": {
+                "key": "LakeFloatingRock_V02",
+                "frame": 0
+            },
+            "x": 593,
+            "y": 1592,
+            "animationPlayMethod": 1,
+            "animationKey": "FarmingLakeStone_2LakeFloatingRock"
+        },
+        {
+            "type": "Sprite",
+            "id": "ccdfdb36-168f-48a3-aaed-34ef937082e7",
+            "label": "farmingLakeStone_3LakeFloatingRock",
+            "texture": {
+                "key": "LakeFloatingRock_V03",
+                "frame": 0
+            },
+            "x": 435,
+            "y": 1677,
+            "animationPlayMethod": 1,
+            "animationKey": "FarmingLakeStone_3LakeFloatingRock"
+        },
+        {
+            "type": "Sprite",
+            "id": "036c5c52-b7e7-4526-bba6-837c7ec3d14d",
+            "label": "farmingLakeFishFishes_3_32x",
+            "texture": {
+                "key": "Fishes_3_32x32",
+                "frame": 0
+            },
+            "x": 611,
+            "y": 1682,
+            "animationPlayMethod": 1,
+            "animationKey": "FarmingLakeFishFishes_3_32x"
+        },
+        {
+            "type": "Sprite",
+            "id": "31cca3d0-7416-4f08-8741-118072a75f61",
+            "label": "farmingLakeFish_1Fishes_1_32x32gif",
+            "texture": {
+                "key": "Fishes_1_32x32gif",
+                "frame": 0
+            },
+            "x": 297,
+            "y": 1624,
+            "animationPlayMethod": 1,
+            "animationKey": "FarmingLakeFish_1Fishes_1_32x32gif"
         }
     ],
     "plainObjects": [

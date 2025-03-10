@@ -79,9 +79,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// lake_lake_1
 		const lake_lake_1 = shapetownFarmingMap.createLayer("Lake/lake", ["LakeBorderAni","LakeBorderCornerAni","Fishes_3_32x32"], 0, 0);
 
-		// lake_Lake_Decoration_1
-		const lake_Lake_Decoration_1 = shapetownFarmingMap.createLayer("Lake/Lake Decoration", ["LakeFloatingRock_V03","LakeDecoration","LakeFloatingRock_V01","LakeFloatingRock_V02"], 0, 0);
-
 		// tree_border_Fence_1
 		const tree_border_Fence_1 = shapetownFarmingMap.createLayer("tree border/Fence", ["RoadStone"], 0, 0);
 
@@ -199,6 +196,34 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const openQuest = new OpenQuest(this, 307, 1317);
 		this.add.existing(openQuest);
 
+		// farmingLakeStone_1LakeFloatingRock
+		const farmingLakeStone_1LakeFloatingRock = this.add.sprite(491, 1790, "LakeFloatingRock_V01", 0);
+		farmingLakeStone_1LakeFloatingRock.play("FarmingLakeStone_1LakeFloatingRock");
+
+		// farmingLakeStone_2LakeFloatingRock
+		const farmingLakeStone_2LakeFloatingRock = this.add.sprite(322, 1712, "LakeFloatingRock_V02", 0);
+		farmingLakeStone_2LakeFloatingRock.play("FarmingLakeStone_2LakeFloatingRock");
+
+		// farmingLakeStone_1LakeFloatingRock_1
+		const farmingLakeStone_1LakeFloatingRock_1 = this.add.sprite(233, 1773, "LakeFloatingRock_V01", 0);
+		farmingLakeStone_1LakeFloatingRock_1.play("FarmingLakeStone_1LakeFloatingRock");
+
+		// farmingLakeStone_2LakeFloatingRock_1
+		const farmingLakeStone_2LakeFloatingRock_1 = this.add.sprite(593, 1592, "LakeFloatingRock_V02", 0);
+		farmingLakeStone_2LakeFloatingRock_1.play("FarmingLakeStone_2LakeFloatingRock");
+
+		// farmingLakeStone_3LakeFloatingRock
+		const farmingLakeStone_3LakeFloatingRock = this.add.sprite(435, 1677, "LakeFloatingRock_V03", 0);
+		farmingLakeStone_3LakeFloatingRock.play("FarmingLakeStone_3LakeFloatingRock");
+
+		// farmingLakeFishFishes_3_32x
+		const farmingLakeFishFishes_3_32x = this.add.sprite(611, 1682, "Fishes_3_32x32", 0);
+		farmingLakeFishFishes_3_32x.play("FarmingLakeFishFishes_3_32x");
+
+		// farmingLakeFish_1Fishes_1_32x32gif
+		const farmingLakeFish_1Fishes_1_32x32gif = this.add.sprite(297, 1624, "Fishes_1_32x32gif", 0);
+		farmingLakeFish_1Fishes_1_32x32gif.play("FarmingLakeFish_1Fishes_1_32x32gif");
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
@@ -209,7 +234,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.bG_Rock_On_Cliff_1 = bG_Rock_On_Cliff_1;
 		this.bG_ramp_1 = bG_ramp_1;
 		this.lake_lake_1 = lake_lake_1;
-		this.lake_Lake_Decoration_1 = lake_Lake_Decoration_1;
 		this.tree_border_Fence_1 = tree_border_Fence_1;
 		this.tree_border_ = tree_border_;
 		this.tree_border = tree_border;
@@ -254,8 +278,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	bG_ramp_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	lake_lake_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	lake_Lake_Decoration_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_border_Fence_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -388,7 +410,7 @@ initInventorySystem() {
 
   setupStartingItems() {
 	if (!this.newItemHudPrefab) return;
-	
+
 	this.newItemHudPrefab.visible = true;
 	if (this.questBookPrefab) this.questBookPrefab.visible = true;
 
@@ -567,6 +589,10 @@ initInventorySystem() {
 	  	this.farm_Fence_1.setCollisionBetween(0, 10000);
 	  	// this.farm_Fence_1.renderDebug(this.add.graphics());
 
+		this.physics.add.collider(this.playerPrefab, this.tree_border_Fence_1);
+	  	this.tree_border_Fence_1.setCollisionBetween(0, 10000);
+	  	// this.tree_border_Fence_1.renderDebug(this.add.graphics());
+
 		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
 			if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
 				this.newItemHudPrefab.updateGlobalInventory();
@@ -584,6 +610,34 @@ initInventorySystem() {
 			this.cameras.main.fadeIn(2000, 0, 0, 0);
 		});
 		this.initInventorySystem();
+
+	const waterTile = this.lake_lake_1.getTilesWithin();
+	    waterTile.forEach(tile => {
+	    if (tile && tile.index === 1909) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'LakeBorderAni');
+	    	sprite.play('FarmingMapWaterAniRightUp');
+	    } 
+		if (tile && tile.index === 1910) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'LakeBorderAni');
+	    	sprite.play('FarmingMapWaterAniUp');
+	    } 
+		if (tile && tile.index === 1894 ) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'LakeBorderAni');
+	    	sprite.play('FarmingMapWaterAniLeftUp');
+		}
+		if (tile && tile.index === 1935) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'LakeBorderAni');
+	    	sprite.play('FarmingMapWaterAniRight');
+	    } 
+		if (tile && tile.index === 1911) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'LakeBorderAni');
+	    	sprite.play('FarmingMapWaterAniRUp');
+	    } 
+		if (tile && tile.index === 1893) {
+	    	const sprite = this.add.sprite(tile.pixelX + tile.width/2, tile.pixelY + tile.height/2, 'LakeBorderAni');
+	    	sprite.play('FarmingMapWaterAniRDown');
+	    }
+	});
 
       this.physics.add.existing(this.stonePrefab, true);
       this.physics.add.existing(this.stonePrefab_1, true);	
