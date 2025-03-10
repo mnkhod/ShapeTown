@@ -1101,13 +1101,13 @@
  "nextobjectid":1,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.11.1",
+ "tiledversion":"1.11.0",
  "tileheight":32,
  "tilesets":[
         {
          "columns":12,
          "firstgid":1,
-         "image":"..\/assets\/Ground tileset\/GroundTileset.png",
+         "image":"..\/Ground tileset\/GroundTileset.png",
          "imageheight":3328,
          "imagewidth":384,
          "margin":0,
@@ -1204,7 +1204,7 @@
         {
          "columns":6,
          "firstgid":1249,
-         "image":"..\/assets\/Ground tileset\/ForrestLadge.png",
+         "image":"..\/Ground tileset\/ForrestLadge.png",
          "imageheight":256,
          "imagewidth":192,
          "margin":0,
@@ -1217,7 +1217,7 @@
         {
          "columns":16,
          "firstgid":1297,
-         "image":"..\/assets\/Tree\/TreePatteren.png",
+         "image":"..\/Tree\/TreePatteren.png",
          "imageheight":992,
          "imagewidth":512,
          "margin":0,
@@ -1230,7 +1230,7 @@
         {
          "columns":8,
          "firstgid":1793,
-         "image":"..\/assets\/Building\/CityHouses_v02.png",
+         "image":"..\/Building\/CityHouses_v02.png",
          "imageheight":416,
          "imagewidth":256,
          "margin":0,
@@ -1243,7 +1243,7 @@
         {
          "columns":14,
          "firstgid":1897,
-         "image":"..\/assets\/Building\/Building_5_Door_32x32_2.png",
+         "image":"..\/Building\/Building_5_Door_32x32_2.png",
          "imageheight":64,
          "imagewidth":448,
          "margin":0,
@@ -1321,7 +1321,7 @@
         {
          "columns":16,
          "firstgid":1925,
-         "image":"..\/assets\/Ground tileset\/LakeBorderCornerAni.png",
+         "image":"..\/Ground tileset\/LakeBorderCornerAni.png",
          "imageheight":64,
          "imagewidth":512,
          "margin":0,
@@ -1479,7 +1479,7 @@
         {
          "columns":24,
          "firstgid":1957,
-         "image":"..\/assets\/Ground tileset\/LakeBorderAni.png",
+         "image":"..\/Ground tileset\/LakeBorderAni.png",
          "imageheight":96,
          "imagewidth":768,
          "margin":0,
@@ -1781,7 +1781,7 @@
         {
          "columns":14,
          "firstgid":2029,
-         "image":"..\/assets\/Ground tileset\/Fishes_3_32x32.png",
+         "image":"..\/Ground tileset\/Fishes_3_32x32.png",
          "imageheight":32,
          "imagewidth":448,
          "margin":0,
@@ -1855,7 +1855,7 @@
         {
          "columns":5,
          "firstgid":2043,
-         "image":"..\/assets\/Decoration\/LakeDecoration.png",
+         "image":"..\/Decoration\/LakeDecoration.png",
          "imageheight":224,
          "imagewidth":160,
          "margin":0,
@@ -1868,7 +1868,7 @@
         {
          "columns":32,
          "firstgid":2078,
-         "image":"..\/assets\/Ground tileset\/LakeFloatingRock_V03.png",
+         "image":"..\/Ground tileset\/LakeFloatingRock_V03.png",
          "imageheight":128,
          "imagewidth":1024,
          "margin":0,
@@ -2098,7 +2098,7 @@
         {
          "columns":8,
          "firstgid":2206,
-         "image":"..\/assets\/Ground tileset\/LakeFloatingRock_V01.png",
+         "image":"..\/Ground tileset\/LakeFloatingRock_V01.png",
          "imageheight":32,
          "imagewidth":256,
          "margin":0,
@@ -2148,7 +2148,7 @@
         {
          "columns":8,
          "firstgid":2214,
-         "image":"..\/assets\/Ground tileset\/LakeFloatingRock_V02.png",
+         "image":"..\/Ground tileset\/LakeFloatingRock_V02.png",
          "imageheight":32,
          "imagewidth":256,
          "margin":0,
@@ -2198,7 +2198,7 @@
         {
          "columns":3,
          "firstgid":2222,
-         "image":"..\/assets\/Ground tileset\/GroundAccessor.png",
+         "image":"..\/Ground tileset\/GroundAccessor.png",
          "imageheight":224,
          "imagewidth":96,
          "margin":0,

@@ -2417,6 +2417,19 @@
                 "key": "NPCRowan_Fullset_Walk_V01"
             },
             {
+                "url": "assets/NPC/NPC Captan Rowan/Draw/NPCRowan_Sword_Draw.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPCRowan_Sword_Draw"
+            },
+            {
                 "url": "assets/mapAssets/NPCShopStandMaerchant.png",
                 "frameConfig": {
                     "frameWidth": 64,
@@ -2622,6 +2635,19 @@
                 "url": "assets/InventoryIcons/pinenuts.png",
                 "type": "image",
                 "key": "pinenuts"
+            },
+            {
+                "url": "assets/Character/Fighting/Weapon/Player_Weapon_Sword_Fighting_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Player_Weapon_Sword_Fighting_V01"
             },
             {
                 "url": "assets/Character/Farming/BaseModel/PlayerAniFarming_V01.png",
@@ -2958,6 +2984,58 @@
             {
                 "url": "assets/Decoration/RockOnSand_V01.png",
                 "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnSand_V01"
+            },
+            {
+                "url": "assets/Decoration/RockOnSand_V02.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnSand_V02"
+            },
+            {
+                "url": "assets/Decoration/RockOnSand_V03.png",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnSand_V03"
+            },
+            {
+                "url": "assets/Decoration/RockOnSand_V04.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnSand_V04"
+            },
+            {
+                "url": "assets/Decoration/RockOnSand_V05.png",
+                "frameConfig": {
                     "frameWidth": 32,
                     "frameHeight": 32,
                     "startFrame": 0,
@@ -2966,7 +3044,46 @@
                     "margin": 0
                 },
                 "type": "spritesheet",
-                "key": "RockOnSand_V01"
+                "key": "RockOnSand_V05"
+            },
+            {
+                "url": "assets/Decoration/RockOnSand_V06.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnSand_V06"
+            },
+            {
+                "url": "assets/Decoration/RockOnSand_V07.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnSand_V07"
+            },
+            {
+                "url": "assets/Decoration/RockOnSand_V09.png",
+                "frameConfig": {
+                    "frameWidth": 96,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "RockOnSand_V09"
             },
             {
                 "url": "assets/Decoration/RocksOnGrass_V01.png",

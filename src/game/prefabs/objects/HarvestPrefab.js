@@ -256,6 +256,7 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
 
     /** @type {string} */
     state = "ROCK";
+    state = "SHELL"
     seed = "CARROT";
     isReadyForHarvest = false;
     isWatered = false;
@@ -338,6 +339,22 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                     this.plantSprite.setVisible(false);
                 }
                 break;
+
+            case "SHELL":
+                this.setTexture("ShellBeach_V01", this.getRandomInt(0, 1));
+                if (this.physicsBody) {
+                    this.physicsBody.enable = true;
+                    this.physicsBody.setSize(32, 32);
+                    if (this.scene.playerPrefab && !this.hasPlayerCollider) {
+                        this.scene.physics.add.collider(this, this.scene.playerPrefab);
+                        this.hasPlayerCollider = true;
+                    }
+                }
+                // Clean up plant sprite if it exists
+                if (this.plantSprite) {
+                    this.plantSprite.setVisible(false);
+                }
+                break;
                 
             case "GROUND":
                 if (this.previousState === "ROCK") {
@@ -358,6 +375,34 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 }
                 
                 this.setTexture("GroundTileset_V02", this.tileId);
+                if (this.physicsBody) {
+                    this.physicsBody.enable = false;
+                }
+                // Clean up plant sprite if it exists
+                if (this.plantSprite) {
+                    this.plantSprite.setVisible(false);
+                }
+                break;
+
+            case "GROUND_1":
+                if (this.previousState === "SHELL") {
+                    this.tileId = 175;
+                } else {
+                    const roll = Phaser.Math.RND.frac();
+                    if (roll < 0.05) {
+                        this.state = "SHELL";
+                        this.setupBasedOnState();
+                        return;
+                    } else if (roll < 0.7) {
+                        this.tileId = 34;
+                    } else if (roll < 0.9) {
+                        this.tileId = 83;
+                    } else {
+                        this.tileId = 89;
+                    }
+                }
+                
+                this.setTexture("BeachWaterSheet_v01", this.tileId);
                 if (this.physicsBody) {
                     this.physicsBody.enable = false;
                 }
@@ -623,6 +668,15 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                     break;
                 }
                 this.previousState = "ROCK";
+                this.state = "GROUND";
+                this.setupBasedOnState();
+                break;
+            case "SHELL":
+                if (item != "ToolPickaxe") {
+                    this.scene.alertPrefab.alert("Select Pick Axe");
+                    break;
+                }
+                this.previousState = "SHELL";
                 this.state = "GROUND";
                 this.setupBasedOnState();
                 break;

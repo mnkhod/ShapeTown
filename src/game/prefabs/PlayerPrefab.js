@@ -16,7 +16,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         this.body.setSize(24, 12, false);
         this.body.setOffset(0, 36);
         this.isUsingTool = false;
-        this.selectedTool = null; // Track the selected tool
+        this.selectedTool = null;
 
         this.setDepth(1);
 
@@ -59,12 +59,20 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         pickaxeTool.visible = false;
         this.add(pickaxeTool);
 
+        // Sword tool
+        const swordTool = scene.add.sprite(14, 27, "NPCRowan_Sword_Draw", 0);
+        swordTool.scaleX = 1.5;
+        swordTool.scaleY = 1.5;
+        swordTool.visible = false;
+        this.add(swordTool);
+
         this.skin = skin;
         this.hair = hair;
         this.outfit = outfit;
         this.wateringTool = wateringTool;
         this.axeTool = axeTool;
         this.pickaxeTool = pickaxeTool;
+        this.swordTool = swordTool
 
         /* START-USER-CTR-CODE */
         // Write your code here.
@@ -100,6 +108,8 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     axeTool;
     /** @type {Phaser.GameObjects.Sprite} */
     pickaxeTool;
+    /** @type {Phaser.GameObjects.Sprite} */
+    swordTool;
 
     /* START-USER-CODE */
 
@@ -169,7 +179,12 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
                 if (this.selectedTool !== 'pickaxe') {
                     this.selectTool('pickaxe');
                 }
-            } else {
+            } else if (item === "ToolIronSword") {
+                if (this.selectedTool !== 'Sword') {
+                    this.selectTool('sword');
+                }
+            }
+             else {
                 if (this.selectedTool !== null) {
                     this.selectTool(null);
                 }
@@ -275,6 +290,9 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
             case 'pickaxe':
                 this.startPickaxe();
                 break;
+            case 'sword':
+                this.startSword();
+                break;
             default:
                 console.log(`Tool ${this.selectedTool} has no action`);
                 break;
@@ -300,6 +318,13 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         if (this.isUsingTool) return;
         this.isUsingTool = true;
         this.playToolAnimation(this.pickaxeTool, 'pickaxe');
+    }
+
+    // SWORD TOOL FUNCTIONS
+    startSword() {
+        if (this.isUsingTool) return;
+        this.isUsingTool = true;
+        this.playToolAnimation(this.swordTool, 'sword');
     }
 
     // Generic method to play tool animations
@@ -358,7 +383,8 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         const baseFrame = {
             'watering': 0,
             'axe': 0,
-            'pickaxe': 0
+            'pickaxe': 0,
+            'sword': 0
         }[toolType] || 0;
         
         const offset = {
@@ -404,6 +430,12 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
                 up: { start: 4, end: 7 },
                 right: { start: 8, end: 11 },
                 left: { start: 12, end: 15 }
+            },
+            sword: {
+                down: { start: 0, end: 2 },
+                up: { start: 3, end: 5 },
+                right: { start: 6, end: 8 },
+                left: { start: 9, end: 11 }
             }
         };
         
@@ -411,7 +443,8 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         const toolSpriteSheets = {
             watering: "FarmingToolsWatering",
             axe: "FarmingToolsHoe_1",
-            pickaxe: "MiningToolPickaxe_V01"
+            pickaxe: "MiningToolPickaxe_V01",
+            sword: "NPCRowan_Sword_Draw"
         };
         
         // Create animations for each tool and direction
@@ -431,7 +464,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
                             end: toolAnimFrames[tool][direction].end
                         }),
                         frameRate: 10,
-                        repeat: 0  // Play once
+                        repeat: 0 
                     });
                 } catch (error) {
                     console.warn(`Failed to create ${tool} animation ${animKey}: ${error}`);
