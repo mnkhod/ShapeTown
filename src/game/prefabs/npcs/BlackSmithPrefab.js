@@ -66,7 +66,9 @@ export default class BlackSmithPrefab extends Phaser.GameObjects.Container {
                 this.scene.alertPrefab.alert("Too Far");
                 return;
             }
-
+            if (this.scene.markNPCGreeted) {
+                this.scene.markNPCGreeted("Rowan");
+            }
             const currentGreeting = this.greetings[this.currentDialogueIndex];
             
             this.currentDialogueIndex = (this.currentDialogueIndex + 1) % this.greetings.length;

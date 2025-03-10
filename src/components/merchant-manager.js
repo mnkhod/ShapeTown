@@ -93,7 +93,18 @@ export const MERCHANT_TYPES = {
         iconPath: '/assets/InventoryIcons/Icon_Bottle_Of_Wine.png',
         quantity: 5,
         buyPrice: 50,
-        sellPrice: 15,
+        sellPrice: 0,
+        description: 'OH YAM YAM YAM YAM...',
+        category: 'recipe'
+      },
+      {
+        id: 'recipe_carrot_soup',
+        name: 'Carrot Soup Recipe',
+        icon: 'recipe_carrot_soup',
+        iconPath: '/assets/InventoryIcons/Icon_Recipe_V01.png',
+        quantity: 5,
+        buyPrice: 0,
+        sellPrice: 1,
         description: 'Bottle Of fine wine',
         category: 'drink'
       },

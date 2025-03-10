@@ -23,7 +23,7 @@
                     "scope": "CLASS",
                     "texture": {
                         "key": "NPCMerchant",
-                        "frame": 3
+                        "frame": 0
                     },
                     "x": 32,
                     "y": 32,

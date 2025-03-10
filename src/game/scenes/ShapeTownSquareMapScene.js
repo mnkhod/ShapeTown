@@ -26,6 +26,7 @@ import OpenQuest from "../prefabs/hud/OpenQuest";
 import MerchantCabinPrefab from "../prefabs/House/MerchantCabinPrefab";
 import BlacksmithPrefab from "../prefabs/House/BlacksmithPrefab";
 import WaterwellPrefab from "../prefabs/Fountan/WaterwellPrefab";
+import NPCVictoria from "../prefabs/npcs/NPCVictoria";
 /* START-USER-IMPORTS */
 import questSystem from "../../components/QuestSystem";
 import { extendSceneWithQuests } from "../../components/QuestSystem";
@@ -402,7 +403,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.add.existing(foodMerchant);
 
 		// merchantPrefab
-		const merchantPrefab = new MerchantPrefab(this, 1821, 2178);
+		const merchantPrefab = new MerchantPrefab(this, 1795, 2163);
 		this.add.existing(merchantPrefab);
 
 		// waterwellPrefab
@@ -420,6 +421,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		// waterwellPrefab_1
 		const waterwellPrefab_1 = new WaterwellPrefab(this, 2778, 1545);
 		this.add.existing(waterwellPrefab_1);
+
+		// nPCVictoria
+		const nPCVictoria = new NPCVictoria(this, 2733, 1457);
+		this.add.existing(nPCVictoria);
 
 		this.bG_grass_1 = bG_grass_1;
 		this.bG_stone_road_1 = bG_stone_road_1;
@@ -910,21 +915,55 @@ setupQuestSystem() {
 
   // Add this function to handle NPC greeting tracking for Quest #003
   setupNPCGreetingTracking() {
+	console.log("Setting up NPC greeting tracking for Quest #003");
+	
 	// List of NPCs that need to be greeted
 	const npcsToGreet = [
-	  "Jack", "Lydia", "Victoria", "Rowan", "Lily" 
+	  "Lydia", "Victoria", "Rowan", "Lily" 
 	];
-
-	// Track which NPCs have been greeted
+  
+	// Create a Set to track which NPCs have been greeted
 	this.greetedNPCs = new Set();
-
+  
+	// Method to mark an NPC as greeted
+	this.markNPCGreeted = function(npcName) {
+	  console.log(`Attempting to mark ${npcName} as greeted`);
+	  
+	  // Make sure the NPC name is one we care about
+	  if (!npcsToGreet.includes(npcName)) {
+		console.warn(`${npcName} is not in the list of required NPCs`);
+		return false;
+	  }
+	  
+	  // Add to the Set
+	  this.greetedNPCs.add(npcName);
+	  console.log(`Successfully marked ${npcName} as greeted`);
+	  console.log(`Progress: ${this.greetedNPCs.size}/${npcsToGreet.length} NPCs greeted`);
+	  
+	  // Show notification
+	  if (this.alertPrefab) {
+		this.alertPrefab.alert(`Greeted ${npcName} (${this.greetedNPCs.size}/${npcsToGreet.length})`);
+	  }
+	  
+	  // Check if all NPCs have been greeted
+	  this.checkAllNPCsGreeted();
+	  
+	  return true;
+	};
+  
 	// Method to check if all NPCs have been greeted
 	this.checkAllNPCsGreeted = function() {
+	  console.log("Checking if all NPCs have been greeted");
+	  console.log("Currently greeted NPCs:", Array.from(this.greetedNPCs));
+	  
+	  // Check if all required NPCs have been greeted
 	  if (npcsToGreet.every(npc => this.greetedNPCs.has(npc))) {
-		// All NPCs have been greeted
+		console.log("All NPCs have been greeted! Completing Quest #003");
+		
+		// All NPCs have been greeted, trigger quest completion
 		if (this.triggerQuestEvent) {
 		  this.triggerQuestEvent('npc:allGreeted');
-
+		  
 		  // Show notification
 		  if (this.alertPrefab) {
 			this.alertPrefab.alert("Quest Completed: Good Invitation");
@@ -932,109 +971,136 @@ setupQuestSystem() {
 		}
 		return true;
 	  }
+	  
 	  return false;
 	};
-
-	// Method to mark an NPC as greeted
-	this.markNPCGreeted = function(npcName) {
-	  if (this.greetedNPCs.has(npcName)) return;
-
-	  this.greetedNPCs.add(npcName);
-
-	  // Show notification
-	  if (this.alertPrefab) {
-		this.alertPrefab.alert(`Greeted ${npcName}`);
-	  }
-
-	  // Check if all NPCs have been greeted
-	  this.checkAllNPCsGreeted();
-	};
+	
   }
 
   // Method to set up NPCs for quest interactions
   setupQuestNPCs() {
-	// Set up Lydia (Merchant) for Quest #002 and #007
-	if (this.merchantPrefab) {
-	  // Make sure Lydia triggers the quest event when interacted with
-	  const originalPointerDown = this.merchantPrefab.npc.listeners('pointerdown')[0];
-
-	  if (originalPointerDown) {
-		this.merchantPrefab.npc.off('pointerdown', originalPointerDown);
-
+	console.log("Setting up NPCs for quest interactions");
+  
+	// Set up Victoria for Quest #003 and #005
+	if (this.nPCVictoria) {
+	  console.log("Setting up Victoria NPC for quest interactions");
+	  
+	  // Make sure Victoria is marked as greeted for Quest #003 when clicked
+	  const originalVictoriaPointerDown = this.nPCVictoria.listeners('pointerdown')[0];
+	  
+	  if (originalVictoriaPointerDown) {
+		this.nPCVictoria.off('pointerdown', originalVictoriaPointerDown);
+		
+		this.nPCVictoria.on('pointerdown', function (_pointer) {
+		  console.log("Victoria NPC clicked directly");
+		  
+		  // Mark Victoria as greeted for Quest #003
+		  if (this.scene.markNPCGreeted) {
+			console.log("Marking Victoria as greeted");
+			this.scene.markNPCGreeted("Victoria");
+		  }
+		  
+		  // Call the original handler to maintain other functionality
+		  originalVictoriaPointerDown.call(this, _pointer);
+		}, this.nPCVictoria);
+	  }
+	}
+	
+	// Set up Lydia (Merchant) for Quest #002, #003, and #007
+	if (this.merchantPrefab && this.merchantPrefab.npc) {
+	  console.log("Setting up Lydia (Merchant) for quest interactions");
+	  
+	  // Make sure Lydia triggers the quest event and is marked as greeted
+	  const originalLydiaPointerDown = this.merchantPrefab.npc.listeners('pointerdown')[0];
+	  
+	  if (originalLydiaPointerDown) {
+		this.merchantPrefab.npc.off('pointerdown', originalLydiaPointerDown);
+		
 		this.merchantPrefab.npc.on('pointerdown', function (_pointer) {
+		  console.log("Lydia NPC clicked directly");
+		  
 		  let distance = this.getDistance(this.player, this);
-
 		  if (distance > 100) {
 			this.scene.alertPrefab.alert("Too Far");
 			return;
 		  }
-
+		  
 		  // Mark Lydia as greeted for Quest #003
 		  if (this.scene.markNPCGreeted) {
+			console.log("Marking Lydia as greeted");
 			this.scene.markNPCGreeted("Lydia");
 		  }
-
+		  
 		  // Trigger quest event for meeting Lydia
 		  if (this.scene.triggerQuestEvent) {
 			this.scene.triggerQuestEvent('npc:lydiaInteraction', { npc: this });
 		  }
-
-		  this.msgPrefab.conversation(this.dialogueLines);
-		}, this.merchantPrefab);
+		  
+		  // Call the original handler to maintain other functionality
+		  originalLydiaPointerDown.call(this, _pointer);
+		}, this.merchantPrefab.npc);
 	  }
 	}
-
-	// Set up Food Merchant for greeting (for Quest #003)
-	if (this.foodMerchant) {
+	
+	// Set up Food Merchant (Lily) for Quest #003 and #008
+	if (this.foodMerchant && this.foodMerchant.npc) {
+	  console.log("Setting up Lily (Food Merchant) for quest interactions");
+	  
 	  const originalFoodMerchantPointerDown = this.foodMerchant.npc.listeners('pointerdown')[0];
-
+	  
 	  if (originalFoodMerchantPointerDown) {
 		this.foodMerchant.npc.off('pointerdown', originalFoodMerchantPointerDown);
-
+		
 		this.foodMerchant.npc.on('pointerdown', function (_pointer) {
+		  console.log("Lily NPC clicked directly");
+		  
 		  // Distance check
 		  let distance = this.getDistance(this.player, this);
-
 		  if (distance > 100) {
 			this.scene.alertPrefab.alert("Too Far");
 			return;
 		  }
-
+		  
 		  // Mark as greeted for Quest #003
 		  if (this.scene.markNPCGreeted) {
+			console.log("Marking Lily as greeted");
 			this.scene.markNPCGreeted("Lily");
 		  }
-
+		  
 		  // Continue with original handler
 		  originalFoodMerchantPointerDown.call(this, _pointer);
-		}, this.foodMerchant);
+		}, this.foodMerchant.npc);
 	  }
 	}
-
-	// Set up Blacksmith for greeting (for Quest #003)
-	if (this.blackSmithPrefab) {
+	
+	// Set up Blacksmith (Rowan) for Quest #003 and #006
+	if (this.blackSmithPrefab && this.blackSmithPrefab.npc) {
+	  console.log("Setting up Rowan (Blacksmith) for quest interactions");
+	  
 	  const originalBlacksmithPointerDown = this.blackSmithPrefab.npc.listeners('pointerdown')[0];
-
+	  
 	  if (originalBlacksmithPointerDown) {
 		this.blackSmithPrefab.npc.off('pointerdown', originalBlacksmithPointerDown);
-
+		
 		this.blackSmithPrefab.npc.on('pointerdown', function (_pointer) {
+		  console.log("Rowan NPC clicked directly");
+		  
 		  // Distance check
 		  let distance = this.getDistance(this.player, this);
-
 		  if (distance > 100) {
 			this.scene.alertPrefab.alert("Too Far");
 			return;
 		  }
-
+		  
 		  // Mark as greeted for Quest #003
 		  if (this.scene.markNPCGreeted) {
+			console.log("Marking Rowan as greeted");
 			this.scene.markNPCGreeted("Rowan");
 		  }
-
+		  
 		  // Continue with original handler
 		  originalBlacksmithPointerDown.call(this, _pointer);
-		}, this.blackSmithPrefab);
+		}, this.blackSmithPrefab.npc);
 	  }
 	}
   }

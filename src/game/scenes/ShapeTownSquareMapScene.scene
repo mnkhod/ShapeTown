@@ -3269,8 +3269,8 @@
             ],
             "label": "merchantPrefab",
             "scope": "CLASS",
-            "x": 1821,
-            "y": 2178
+            "x": 1795,
+            "y": 2163
         },
         {
             "prefabId": "2c30c124-0411-4631-af99-2308825ee3ac",
@@ -3319,6 +3319,17 @@
             "scope": "CLASS",
             "x": 2778,
             "y": 1545
+        },
+        {
+            "prefabId": "f39ea625-85fd-48b3-8eae-b11b12d8da41",
+            "id": "5027e873-6127-4503-bfe4-9555b064c2f9",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "nPCVictoria",
+            "x": 2733,
+            "y": 1457
         }
     ],
     "plainObjects": [

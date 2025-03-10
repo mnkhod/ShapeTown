@@ -17,8 +17,6 @@ export default class AppleTreePrefab extends Phaser.GameObjects.Image {
         scene.physics.add.existing(this, false);
 
         this.isHarvastable = false
-
-        console.log();
         
         let bounds = this.getBounds()
         let newX = bounds.x + bounds.width - 15

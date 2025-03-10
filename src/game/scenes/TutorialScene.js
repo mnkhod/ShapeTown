@@ -26,7 +26,6 @@ import OrcMonster from "../prefabs/Mob/OrcMonster";
 /* START-USER-IMPORTS */
 import questSystem from "../../components/QuestSystem";
 import { extendSceneWithQuests } from "../../components/QuestSystem"; 
-import { extendHarvestPrefab } from "../../components/QuestSystem";
 import { extendJackNpc } from "../../components/QuestSystem";
 import { EventBus } from '../../game/EventBus';
 import initInventoryBridge from "../../components/phaser-react-bridge";
@@ -656,7 +655,6 @@ export default class TutorialScene extends Phaser.Scene {
         	this.questMark.visible = true;
 		}
 
-		console.log(this.achievements);
 	}
 
 	/* END-USER-CODE */

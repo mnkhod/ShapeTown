@@ -1898,6 +1898,11 @@
                 "key": "Icon_Orc_teeth"
             },
             {
+                "url": "assets/InventoryIcons/Icon_Recipe_V01.png",
+                "type": "image",
+                "key": "Icon_Recipe_V01"
+            },
+            {
                 "url": "assets/InventoryIcons/Icon_Stone.png",
                 "type": "image",
                 "key": "Icon_Stone"
@@ -2280,6 +2285,19 @@
                 },
                 "type": "spritesheet",
                 "key": "MiningToolPickaxe_V01"
+            },
+            {
+                "url": "assets/NPC/NPC Victoria.PNG",
+                "frameConfig": {
+                    "frameWidth": 64,
+                    "frameHeight": 64,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "NPC Victoria"
             },
             {
                 "url": "assets/NPC/NpcBlaksmith.png",

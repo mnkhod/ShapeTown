@@ -158,72 +158,72 @@ const QuestComponent = ({ onClose, playerProgress = {}, onQuestUpdate }) => {
         ],
         reward: "Everyday 50g"
       },
-      {
-        id: "006",
-        title: "Goblin Slayer",
-        description: "Clear the South Hill of goblins",
-        category: "Daily Quest",
-        location: "South Hill",
-        prerequisites: "#002 Have to meet NPC Commander Rowan",
-        questGiver: "NPC Rowan",
-        completed: playerProgress["006"]?.completed || false,
-        subtasks: [
-          {
-            id: "006-1",
-            text: "Meet the NPC Commander Rowan",
-            completed: playerProgress["006"]?.subtasks?.["006-1"] || false
-          },
-          {
-            id: "006-2",
-            text: "Go to the South Hill",
-            completed: playerProgress["006"]?.subtasks?.["006-2"] || false
-          },
-          {
-            id: "006-3",
-            text: "Kill all of the Goblins",
-            completed: playerProgress["006"]?.subtasks?.["006-3"] || false
-          },
-          {
-            id: "006-4",
-            text: "Report Back to NPC Commander Rowan",
-            completed: playerProgress["006"]?.subtasks?.["006-4"] || false
-          }
-        ],
-        reward: "15g each Goblin ear"
-      },
-      {
-        id: "007",
-        title: "Treasure From Sea",
-        description: "Collect seashells for Lydia",
-        category: "Daily Quest",
-        location: "Beach area",
-        prerequisites: "#002 Have to meet NPC Lydia",
-        questGiver: "NPC Lydia",
-        completed: playerProgress["007"]?.completed || false,
-        subtasks: [
-          {
-            id: "007-1",
-            text: "Meet the NPC Lydia",
-            completed: playerProgress["007"]?.subtasks?.["007-1"] || false
-          },
-          {
-            id: "007-2",
-            text: "Go to the beach",
-            completed: playerProgress["007"]?.subtasks?.["007-2"] || false
-          },
-          {
-            id: "007-3",
-            text: "Collect the seashells from the beach",
-            completed: playerProgress["007"]?.subtasks?.["007-3"] || false
-          },
-          {
-            id: "007-4",
-            text: "Back to meet NPC Lydia",
-            completed: playerProgress["007"]?.subtasks?.["007-4"] || false
-          }
-        ],
-        reward: "15g each seashell"
-      },
+      // {
+      //   id: "006",
+      //   title: "Goblin Slayer",
+      //   description: "Clear the South Hill of goblins",
+      //   category: "Daily Quest",
+      //   location: "South Hill",
+      //   prerequisites: "#002 Have to meet NPC Commander Rowan",
+      //   questGiver: "NPC Rowan",
+      //   completed: playerProgress["006"]?.completed || false,
+      //   subtasks: [
+      //     {
+      //       id: "006-1",
+      //       text: "Meet the NPC Commander Rowan",
+      //       completed: playerProgress["006"]?.subtasks?.["006-1"] || false
+      //     },
+      //     {
+      //       id: "006-2",
+      //       text: "Go to the South Hill",
+      //       completed: playerProgress["006"]?.subtasks?.["006-2"] || false
+      //     },
+      //     {
+      //       id: "006-3",
+      //       text: "Kill all of the Goblins",
+      //       completed: playerProgress["006"]?.subtasks?.["006-3"] || false
+      //     },
+      //     {
+      //       id: "006-4",
+      //       text: "Report Back to NPC Commander Rowan",
+      //       completed: playerProgress["006"]?.subtasks?.["006-4"] || false
+      //     }
+      //   ],
+      //   reward: "15g each Goblin ear"
+      // },
+      // {
+      //   id: "007",
+      //   title: "Treasure From Sea",
+      //   description: "Collect seashells for Lydia",
+      //   category: "Daily Quest",
+      //   location: "Beach area",
+      //   prerequisites: "#002 Have to meet NPC Lydia",
+      //   questGiver: "NPC Lydia",
+      //   completed: playerProgress["007"]?.completed || false,
+      //   subtasks: [
+      //     {
+      //       id: "007-1",
+      //       text: "Meet the NPC Lydia",
+      //       completed: playerProgress["007"]?.subtasks?.["007-1"] || false
+      //     },
+      //     {
+      //       id: "007-2",
+      //       text: "Go to the beach",
+      //       completed: playerProgress["007"]?.subtasks?.["007-2"] || false
+      //     },
+      //     {
+      //       id: "007-3",
+      //       text: "Collect the seashells from the beach",
+      //       completed: playerProgress["007"]?.subtasks?.["007-3"] || false
+      //     },
+      //     {
+      //       id: "007-4",
+      //       text: "Back to meet NPC Lydia",
+      //       completed: playerProgress["007"]?.subtasks?.["007-4"] || false
+      //     }
+      //   ],
+      //   reward: "15g each seashell"
+      // },
       {
         id: "008",
         title: "Yam, Yam",
@@ -241,6 +241,24 @@ const QuestComponent = ({ onClose, playerProgress = {}, onQuestUpdate }) => {
           }
         ],
         reward: "Yam, Yam achievement, Recipe: Steamed Carrot"
+      },
+      {
+        id: "012",
+        title: "Every Day!",
+        description: "Give 5 carrots to NPC Jack",
+        category: "Daily Quest",
+        location: "Farm area",
+        prerequisites: "none",
+        questGiver: "NPC Jack",
+        completed: playerProgress["012"]?.completed || false,
+        subtasks: [
+          {
+            id: "012-1",
+            text: "Give 5 carrots to NPC Jack",
+            completed: playerProgress["012"]?.subtasks?.["012-1"] || false
+          }
+        ],
+        reward: "5 carrot seeds"
       }
     ];
 

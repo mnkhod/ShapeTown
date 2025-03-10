@@ -4,6 +4,7 @@
 
 /* START-USER-IMPORTS */
 import { MERCHANT_TYPES, getMerchantInventory } from '../../../components/merchant-manager';
+import questSystem from '../../../components/QuestSystem';
 /* END-USER-IMPORTS */
 
 export default class FoodMerchant extends Phaser.GameObjects.Container {
@@ -58,7 +59,39 @@ export default class FoodMerchant extends Phaser.GameObjects.Container {
                 this.scene.alertPrefab.alert("Too Far");
                 return;
             }
-
+            
+            // Mark Lily as greeted for Quest #003
+            if (this.scene.markNPCGreeted) {
+                this.scene.markNPCGreeted("Lily");
+            }
+            
+            // Trigger Lily interaction for Quest #008
+            if (this.scene.triggerQuestEvent) {
+                this.scene.triggerQuestEvent('npc:lilyInteraction', { npc: this });
+                
+                // Check if we're in the right state for starting Quest #008
+                if (questSystem && questSystem.isQuestCompleted("002") && 
+                    !questSystem.isQuestActive("008") && !questSystem.isQuestCompleted("008")) {
+                    // Start the Yam, Yam quest
+                    this.scene.triggerQuestEvent('npc:lilyRecipeQuest', { npc: this });
+                }
+                
+                // Check if we have cooked Carrot Soup for Quest #008
+                if (questSystem && questSystem.isQuestActive("008") && 
+                    this.scene.registry.get('carrotSoupCooked')) {
+                    // Complete the quest
+                    this.scene.triggerQuestEvent('cooking:recipeCooked', { 
+                        recipeName: 'Carrot Soup',
+                        success: true,
+                        npc: this
+                    });
+                    
+                    // Reset the flag
+                    this.scene.registry.set('carrotSoupCooked', false);
+                }
+            }
+            
+            // Standard dialogue
             const dialogueLines = [
                 { 
                     msg: "Welcome to my food stall! Fresh and delicious meals ready for you!",
@@ -93,12 +126,29 @@ export default class FoodMerchant extends Phaser.GameObjects.Container {
             ];
 
             this.msgPrefab.conversation(dialogueLines);
-
         }, this);
 
         this.npc.on('pointerout', function (_pointer) {
             this.preFX.clear();
         });
+        
+        // Set up listener for cooking events
+        if (this.scene.events) {
+            this.scene.events.on('carrot-soup-cooked', this.handleCarrotSoupCooked, this);
+        }
+    }
+    
+    // Handler for when Carrot Soup is cooked
+    handleCarrotSoupCooked() {
+        console.log("Carrot Soup cooked event received");
+        
+        // Set a flag that can be checked when talking to Lily
+        this.scene.registry.set('carrotSoupCooked', true);
+        
+        // Show notification
+        if (this.scene.alertPrefab) {
+            this.scene.alertPrefab.alert("You've cooked Carrot Soup! Return to Lily to complete the quest.");
+        }
     }
 
     getDistance(texture1, texture2) {
@@ -114,7 +164,25 @@ export default class FoodMerchant extends Phaser.GameObjects.Container {
 
     // Method to get merchant-specific inventory
     getInventory() {
-        return getMerchantInventory(this.merchantType);
+        // Get base inventory
+        const inventory = getMerchantInventory(this.merchantType);
+        
+        // Make sure the Carrot Soup Recipe is properly set up for Quest #008
+        const carrotSoupRecipeIndex = inventory.findIndex(item => item.id === 'recipe_carrot_soup');
+        
+        if (carrotSoupRecipeIndex >= 0) {
+            // Update the item
+            inventory[carrotSoupRecipeIndex] = {
+                ...inventory[carrotSoupRecipeIndex],
+                name: 'Carrot Soup Recipe',
+                description: 'Recipe for delicious Carrot Soup. Required for Lily\'s quest.',
+                category: 'recipe',
+                buyPrice: 0,  // Make sure it has a buyable price
+                sellPrice: 0   // Can't sell it back
+            };
+        }
+        
+        return inventory;
     }
 
     /* END-USER-CODE */

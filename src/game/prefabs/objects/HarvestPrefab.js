@@ -649,8 +649,6 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
         let item = this.scene.newItemHudPrefab.selectedItem;
         let activeIndex = this.scene.newItemHudPrefab.activeIndex;
         
-        console.log(`Harvest action - selected slot: ${activeIndex}, item: ${item || 'none'}`);
-        
         if (activeIndex >= 0 && item === null) {
             this.scene.alertPrefab.alert("Empty Slot Selected");
             return;

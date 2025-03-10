@@ -276,7 +276,52 @@ const MerchantBuyScreen = ({ onClose, phaserInstance, merchantType = MERCHANT_TY
         // Make sure to emit the event AFTER updating the inventory
         phaserInstance.scene.events.emit('inventory-changed');
         phaserInstance.scene.events.emit('gold-spent', totalCost);
-        phaserInstance.scene.events.emit('item-purchased', selectedItem);
+        
+        // Find the current merchant instance (FoodMerchant for Lily)
+        const currentMerchant = phaserInstance.scene.children?.list.find(
+          child => (merchantType === MERCHANT_TYPES.FOOD && child.constructor.name === "FoodMerchant") ||
+                   (merchantType === MERCHANT_TYPES.FARMER && child.constructor.name === "MerchantPrefab") ||
+                   (merchantType === MERCHANT_TYPES.BLACKSMITH && child.constructor.name === "BlackSmithPrefab")
+        );
+        
+        // Emit with merchant reference
+        phaserInstance.scene.events.emit('item-purchased', selectedItem, currentMerchant);
+        
+        // Specific handling for Quest #8 (Yam, Yam)
+        const isCarrotSoupRecipe = selectedItem.id === "recipe_carrot_soup";
+        const isQuest8Active = phaserInstance.scene.questSystem?.isQuestActive("008");
+        
+        console.log(`Buying carrot soup recipe: ${isCarrotSoupRecipe}, Quest #8 active: ${isQuest8Active}`);
+        
+        if (isCarrotSoupRecipe && isQuest8Active) {
+          console.log("Triggering Quest #8 completion from buy screen");
+          
+          // Update quest progress directly
+          if (phaserInstance.scene.questSystem && phaserInstance.scene.questSystem.updateQuestProgress) {
+            phaserInstance.scene.questSystem.updateQuestProgress({
+              "008": {
+                completed: true,
+                subtasks: {
+                  "008-1": true
+                }
+              }
+            });
+          }
+          
+          // Also trigger the quest event for completeness
+          if (phaserInstance.scene.triggerQuestEvent) {
+            phaserInstance.scene.triggerQuestEvent('cooking:recipeCooked', { 
+              recipeName: "Carrot Soup",
+              success: true,
+              npc: currentMerchant
+            });
+          }
+          
+          // Show success notification
+          if (phaserInstance.scene.alertPrefab) {
+            phaserInstance.scene.alertPrefab.alert("Quest Complete: Yam, Yam! Learned Steamed Carrot recipe!");
+          }
+        }
       }
       
       // Update local state if not using goldManager

@@ -569,8 +569,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	}
 
 	onSceneShutdown() {
-	    console.log(`${this.scene.key} shutting down, saving inventory`);
-
 	    if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
 	        this.newItemHudPrefab.updateGlobalInventory();
 	    }
@@ -582,9 +580,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 	setupStartingItems() {
 	    if (!this.newItemHudPrefab) return;
-
-	    console.log(`Setting up starting items for ${this.scene.key}`);
-
+		
 	    this.newItemHudPrefab.visible = true;
 	    if (this.questBookPrefab) this.questBookPrefab.visible = true;
 
