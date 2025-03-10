@@ -19,15 +19,12 @@ import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import OpenQuest from "../prefabs/hud/OpenQuest";
-import SandStonePrefab_3 from "../prefabs/stone/SandStonePrefab_3";
-import SandStonePrefab_4 from "../prefabs/stone/SandStonePrefab_4";
-import SandStonePrefab_2 from "../prefabs/stone/SandStonePrefab_2";
-import SandStonePrefab_1 from "../prefabs/stone/SandStonePrefab_1";
 /* START-USER-IMPORTS */
 import { EventBus } from '../../game/EventBus';
 import initInventoryBridge from "../../components/phaser-react-bridge";
 import questSystem from "../../components/QuestSystem";
 import { extendSceneWithQuests } from "../../components/QuestSystem";
+import HarvestShellPrefab from "../prefabs/objects/HarvestShellPrefab";
 /* END-USER-IMPORTS */
 
 export default class ShapeTownBeachMapScene extends Phaser.Scene {
@@ -85,8 +82,17 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		// rock_decor_1
 		const rock_decor_1 = shapetownBeach.createLayer("Rock decor", ["RockOnSand_V01"], 0, 0);
 
-		// shell_Decor_1
-		const shell_Decor_1 = shapetownBeach.createLayer("Shell Decor", ["ShellBeach_V01"], 0, 0);
+		// blocker
+		const blocker = shapetownBeach.createLayer("blocker1", ["RockOnSand_V01"], 0, 0);
+
+		// blocker_1
+		const blocker_1 = shapetownBeach.createLayer("blocker2", ["RockOnSand_V01"], 0, 0);
+
+		// blocker_2
+		const blocker_2 = shapetownBeach.createLayer("blocker3", ["RockOnSand_V01"], 0, 0);
+
+		// blocker_3
+		const blocker_3 = shapetownBeach.createLayer("blocker4", ["RockOnSand_V01"], 0, 0);
 
 		// beachHousePrefab
 		const beachHousePrefab = new BeachHousePrefab(this, 1415, 435);
@@ -200,129 +206,8 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		const openQuest = new OpenQuest(this, 504, 1460);
 		this.add.existing(openQuest);
 
-		// sandStonePrefab_3
-		const sandStonePrefab_3 = new SandStonePrefab_3(this, 60, 760);
-		this.add.existing(sandStonePrefab_3);
-
-		// sandStonePrefab_4
-		const sandStonePrefab_4 = new SandStonePrefab_4(this, 99, 715);
-		this.add.existing(sandStonePrefab_4);
-
-		// sandStonePrefab_2
-		const sandStonePrefab_2 = new SandStonePrefab_2(this, 35, 719);
-		this.add.existing(sandStonePrefab_2);
-
-		// sandStonePrefab_1
-		const sandStonePrefab_1 = new SandStonePrefab_1(this, 59, 674);
-		this.add.existing(sandStonePrefab_1);
-
-		// sandStonePrefab
-		const sandStonePrefab = new SandStonePrefab_4(this, 107, 638);
-		this.add.existing(sandStonePrefab);
-
-		// sandStonePrefab_5
-		const sandStonePrefab_5 = new SandStonePrefab_2(this, 171, 613);
-		this.add.existing(sandStonePrefab_5);
-
-		// sandStonePrefab_6
-		const sandStonePrefab_6 = new SandStonePrefab_2(this, 129, 554);
-		this.add.existing(sandStonePrefab_6);
-
-		// sandStonePrefab_7
-		const sandStonePrefab_7 = new SandStonePrefab_3(this, 181, 569);
-		this.add.existing(sandStonePrefab_7);
-
-		// sandStonePrefab_8
-		const sandStonePrefab_8 = new SandStonePrefab_2(this, 193, 532);
-		this.add.existing(sandStonePrefab_8);
-
-		// sandStonePrefab_9
-		const sandStonePrefab_9 = new SandStonePrefab_1(this, 232, 364);
-		this.add.existing(sandStonePrefab_9);
-
-		// sandStonePrefab_10
-		const sandStonePrefab_10 = new SandStonePrefab_4(this, 190, 310);
-		this.add.existing(sandStonePrefab_10);
-
-		// sandStonePrefab_11
-		const sandStonePrefab_11 = new SandStonePrefab_4(this, 125, 250);
-		this.add.existing(sandStonePrefab_11);
-
-		// sandStonePrefab_12
-		const sandStonePrefab_12 = new SandStonePrefab_3(this, 150, 182);
-		this.add.existing(sandStonePrefab_12);
-
-		// sandStonePrefab_13
-		const sandStonePrefab_13 = new SandStonePrefab_1(this, 2505, 749);
-		this.add.existing(sandStonePrefab_13);
-
-		// sandStonePrefab_14
-		const sandStonePrefab_14 = new SandStonePrefab_4(this, 2459, 700);
-		this.add.existing(sandStonePrefab_14);
-
-		// sandStonePrefab_15
-		const sandStonePrefab_15 = new SandStonePrefab_4(this, 2516, 654);
-		this.add.existing(sandStonePrefab_15);
-
-		// sandStonePrefab_16
-		const sandStonePrefab_16 = new SandStonePrefab_4(this, 2449, 618);
-		this.add.existing(sandStonePrefab_16);
-
-		// sandStonePrefab_17
-		const sandStonePrefab_17 = new SandStonePrefab_2(this, 2440, 662);
-		this.add.existing(sandStonePrefab_17);
-
-		// sandStonePrefab_18
-		const sandStonePrefab_18 = new SandStonePrefab_3(this, 2526, 604);
-		this.add.existing(sandStonePrefab_18);
-
-		// sandStonePrefab_19
-		const sandStonePrefab_19 = new SandStonePrefab_1(this, 2466, 558);
-		this.add.existing(sandStonePrefab_19);
-
-		// sandStonePrefab_20
-		const sandStonePrefab_20 = new SandStonePrefab_2(this, 2540, 551);
-		this.add.existing(sandStonePrefab_20);
-
-		// sandStonePrefab_21
-		const sandStonePrefab_21 = new SandStonePrefab_1(this, 2497, 539);
-		this.add.existing(sandStonePrefab_21);
-
-		// sandStonePrefab_22
-		const sandStonePrefab_22 = new SandStonePrefab_3(this, 2517, 491);
-		this.add.existing(sandStonePrefab_22);
-
-		// sandStonePrefab_23
-		const sandStonePrefab_23 = new SandStonePrefab_3(this, 2463, 459);
-		this.add.existing(sandStonePrefab_23);
-
-		// sandStonePrefab_24
-		const sandStonePrefab_24 = new SandStonePrefab_4(this, 2518, 429);
-		this.add.existing(sandStonePrefab_24);
-
-		// sandStonePrefab_25
-		const sandStonePrefab_25 = new SandStonePrefab_1(this, 2558, 385);
-		this.add.existing(sandStonePrefab_25);
-
-		// sandStonePrefab_26
-		const sandStonePrefab_26 = new SandStonePrefab_1(this, 2525, 331);
-		this.add.existing(sandStonePrefab_26);
-
-		// sandStonePrefab_27
-		const sandStonePrefab_27 = new SandStonePrefab_4(this, 2548, 273);
-		this.add.existing(sandStonePrefab_27);
-
-		// sandStonePrefab_28
-		const sandStonePrefab_28 = new SandStonePrefab_3(this, 2536, 200);
-		this.add.existing(sandStonePrefab_28);
-
-		// sandStonePrefab_29
-		const sandStonePrefab_29 = new SandStonePrefab_2(this, 2506, 245);
-		this.add.existing(sandStonePrefab_29);
-
-		// sandStonePrefab_30
-		const sandStonePrefab_30 = new SandStonePrefab_4(this, 2520, 143);
-		this.add.existing(sandStonePrefab_30);
+		// shellAreas_1
+		const shellAreas_1 = shapetownBeach.createLayer("ShellAreas", ["BeachDeckSheet"], 0, 0);
 
 		this.sand_1 = sand_1;
 		this.beachDeckPrefab = beachDeckPrefab;
@@ -332,7 +217,10 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.tree_1 = tree_1;
 		this.stonesoad_1 = stonesoad_1;
 		this.rock_decor_1 = rock_decor_1;
-		this.shell_Decor_1 = shell_Decor_1;
+		this.blocker = blocker;
+		this.blocker_1 = blocker_1;
+		this.blocker_2 = blocker_2;
+		this.blocker_3 = blocker_3;
 		this.beachHousePrefab = beachHousePrefab;
 		this.playerPrefab = playerPrefab;
 		this.seaLevelBuildingLighthousePrefab = seaLevelBuildingLighthousePrefab;
@@ -360,37 +248,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.minimapPrefab = minimapPrefab;
 		this.optionsListPrefab = optionsListPrefab;
 		this.openQuest = openQuest;
-		this.sandStonePrefab_3 = sandStonePrefab_3;
-		this.sandStonePrefab_4 = sandStonePrefab_4;
-		this.sandStonePrefab_2 = sandStonePrefab_2;
-		this.sandStonePrefab_1 = sandStonePrefab_1;
-		this.sandStonePrefab = sandStonePrefab;
-		this.sandStonePrefab_5 = sandStonePrefab_5;
-		this.sandStonePrefab_6 = sandStonePrefab_6;
-		this.sandStonePrefab_7 = sandStonePrefab_7;
-		this.sandStonePrefab_8 = sandStonePrefab_8;
-		this.sandStonePrefab_9 = sandStonePrefab_9;
-		this.sandStonePrefab_10 = sandStonePrefab_10;
-		this.sandStonePrefab_11 = sandStonePrefab_11;
-		this.sandStonePrefab_12 = sandStonePrefab_12;
-		this.sandStonePrefab_13 = sandStonePrefab_13;
-		this.sandStonePrefab_14 = sandStonePrefab_14;
-		this.sandStonePrefab_15 = sandStonePrefab_15;
-		this.sandStonePrefab_16 = sandStonePrefab_16;
-		this.sandStonePrefab_17 = sandStonePrefab_17;
-		this.sandStonePrefab_18 = sandStonePrefab_18;
-		this.sandStonePrefab_19 = sandStonePrefab_19;
-		this.sandStonePrefab_20 = sandStonePrefab_20;
-		this.sandStonePrefab_21 = sandStonePrefab_21;
-		this.sandStonePrefab_22 = sandStonePrefab_22;
-		this.sandStonePrefab_23 = sandStonePrefab_23;
-		this.sandStonePrefab_24 = sandStonePrefab_24;
-		this.sandStonePrefab_25 = sandStonePrefab_25;
-		this.sandStonePrefab_26 = sandStonePrefab_26;
-		this.sandStonePrefab_27 = sandStonePrefab_27;
-		this.sandStonePrefab_28 = sandStonePrefab_28;
-		this.sandStonePrefab_29 = sandStonePrefab_29;
-		this.sandStonePrefab_30 = sandStonePrefab_30;
+		this.shellAreas_1 = shellAreas_1;
 		this.shapetownBeach = shapetownBeach;
 
 		this.events.emit("scene-awake");
@@ -413,7 +271,13 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	rock_decor_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	shell_Decor_1;
+	blocker;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	blocker_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	blocker_2;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	blocker_3;
 	/** @type {BeachHousePrefab} */
 	beachHousePrefab;
 	/** @type {PlayerPrefab} */
@@ -468,68 +332,8 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	optionsListPrefab;
 	/** @type {OpenQuest} */
 	openQuest;
-	/** @type {SandStonePrefab_3} */
-	sandStonePrefab_3;
-	/** @type {SandStonePrefab_4} */
-	sandStonePrefab_4;
-	/** @type {SandStonePrefab_2} */
-	sandStonePrefab_2;
-	/** @type {SandStonePrefab_1} */
-	sandStonePrefab_1;
-	/** @type {SandStonePrefab_4} */
-	sandStonePrefab;
-	/** @type {SandStonePrefab_2} */
-	sandStonePrefab_5;
-	/** @type {SandStonePrefab_2} */
-	sandStonePrefab_6;
-	/** @type {SandStonePrefab_3} */
-	sandStonePrefab_7;
-	/** @type {SandStonePrefab_2} */
-	sandStonePrefab_8;
-	/** @type {SandStonePrefab_1} */
-	sandStonePrefab_9;
-	/** @type {SandStonePrefab_4} */
-	sandStonePrefab_10;
-	/** @type {SandStonePrefab_4} */
-	sandStonePrefab_11;
-	/** @type {SandStonePrefab_3} */
-	sandStonePrefab_12;
-	/** @type {SandStonePrefab_1} */
-	sandStonePrefab_13;
-	/** @type {SandStonePrefab_4} */
-	sandStonePrefab_14;
-	/** @type {SandStonePrefab_4} */
-	sandStonePrefab_15;
-	/** @type {SandStonePrefab_4} */
-	sandStonePrefab_16;
-	/** @type {SandStonePrefab_2} */
-	sandStonePrefab_17;
-	/** @type {SandStonePrefab_3} */
-	sandStonePrefab_18;
-	/** @type {SandStonePrefab_1} */
-	sandStonePrefab_19;
-	/** @type {SandStonePrefab_2} */
-	sandStonePrefab_20;
-	/** @type {SandStonePrefab_1} */
-	sandStonePrefab_21;
-	/** @type {SandStonePrefab_3} */
-	sandStonePrefab_22;
-	/** @type {SandStonePrefab_3} */
-	sandStonePrefab_23;
-	/** @type {SandStonePrefab_4} */
-	sandStonePrefab_24;
-	/** @type {SandStonePrefab_1} */
-	sandStonePrefab_25;
-	/** @type {SandStonePrefab_1} */
-	sandStonePrefab_26;
-	/** @type {SandStonePrefab_4} */
-	sandStonePrefab_27;
-	/** @type {SandStonePrefab_3} */
-	sandStonePrefab_28;
-	/** @type {SandStonePrefab_2} */
-	sandStonePrefab_29;
-	/** @type {SandStonePrefab_4} */
-	sandStonePrefab_30;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	shellAreas_1;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownBeach;
 
@@ -580,7 +384,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 
 	setupStartingItems() {
 	    if (!this.newItemHudPrefab) return;
-		
+
 	    this.newItemHudPrefab.visible = true;
 	    if (this.questBookPrefab) this.questBookPrefab.visible = true;
 
@@ -605,7 +409,36 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	        });
 	    }
 	}
+	setupHarvestTiles() {
+		const soilLayer = this.shellAreas_1;
+		const width = soilLayer.width;
+		const height = soilLayer.height;
 
+		for (let y = 0; y < height; y++) {
+			for (let x = 0; x < width; x++) {
+				const tile = soilLayer.getTileAt(x, y);
+
+				if (tile && tile.index === 773) {
+					const spawnChance = 0.2;
+                
+            	    if (Math.random() < spawnChance) {
+            	        const worldX = tile.pixelX + soilLayer.x + (tile.width / 2);
+            	        const worldY = tile.pixelY + soilLayer.y + (tile.height / 2);
+					
+            	        const harvestTile = new HarvestShellPrefab(this, worldX, worldY);
+            	        this.add.existing(harvestTile);
+            	        harvestTile.state = "SHELL"; 
+            	        harvestTile.setupBasedOnState();
+            	        harvestTile.setDepth(5);
+            	        if (!this.harvestTiles) {
+            	            this.harvestTiles = [];
+            	        }
+            	        this.harvestTiles.push(harvestTile);
+            	    }
+            	}
+			}
+		}
+	}
 	setupLayerDepths() {
 	    this.profilePrefab?.setDepth(90);
 	    this.openInventory?.setDepth(90);
@@ -634,7 +467,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	    }
 
 	    extendSceneWithQuests(this);
-
+		this.setupHarvestTiles();
 	    window.getQuestProgress = () => {
 	        if (this.game && this.game.questSystem) {
 	            return this.game.questSystem.getQuestProgress();

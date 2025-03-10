@@ -185,7 +185,7 @@ const MerchantSellScreen = ({ onClose, phaserInstance, merchantType = MERCHANT_T
     const saleValue = selectedItem.sellPrice * quantity;
     console.log(`Selling ${quantity}x ${selectedItem.name} for ${saleValue} gold`);
     
-    const isIronItem = selectedItem.id === "IronIngot";
+    const isIronItem = selectedItem.id === "IronIngot" || selectedItem.id === "Ironbar";
     const isQuestActive = phaserInstance?.scene?.questSystem?.isQuestActive("002");
     
     // Log quest status

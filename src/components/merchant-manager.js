@@ -12,7 +12,7 @@ export const MERCHANT_TYPES = {
         icon: 'crops-seed bags-bok choy',
         iconPath: '/assets/InventoryIcons/crops-seed bags-bok choy.png',
         quantity: 999,
-        buyPrice: 25,
+        buyPrice: 40,
         sellPrice: 8,
         description: 'Crop Seed',
         category: 'seeds'
@@ -23,7 +23,7 @@ export const MERCHANT_TYPES = {
         icon: 'crops-seed bags-broccoli',
         iconPath: '/assets/InventoryIcons/crops-seed bags-broccoli.png',
         quantity: 999,
-        buyPrice: 30,
+        buyPrice: 55,
         sellPrice: 10,
         description: 'Crop Seed',
         category: 'seeds'
@@ -34,7 +34,7 @@ export const MERCHANT_TYPES = {
         icon: 'crops-seed bags-carrot',
         iconPath: '/assets/InventoryIcons/crops-seed bags-carrot.png',
         quantity: 5,
-        buyPrice: 120,
+        buyPrice: 10,
         sellPrice: 6,
         description: 'Crop Seed',
         category: 'seeds'
@@ -45,7 +45,7 @@ export const MERCHANT_TYPES = {
         icon: 'crops-seed bags-cauliflower',
         iconPath: '/assets/InventoryIcons/crops-seed bags-cauliflower.png',
         quantity: 5,
-        buyPrice: 80,
+        buyPrice: 30,
         sellPrice: 12,
         description: 'Crop Seed',
         category: 'seeds'
@@ -56,7 +56,7 @@ export const MERCHANT_TYPES = {
         icon: 'crops-seed bags-chili',
         iconPath: '/assets/InventoryIcons/crops-seed bags-chili.png',
         quantity: 3,
-        buyPrice: 150,
+        buyPrice: 70,
         sellPrice: 9,
         description: 'Crop Seed',
         category: 'seeds'
@@ -67,7 +67,7 @@ export const MERCHANT_TYPES = {
         icon: 'crops-seed bags-corn',
         iconPath: '/assets/InventoryIcons/crops-seed bags-corn.png',
         quantity: 2,
-        buyPrice: 200,
+        buyPrice: 50,
         sellPrice: 8,
         description: 'Crop Seed',
         category: 'seeds'
@@ -81,7 +81,7 @@ export const MERCHANT_TYPES = {
         icon: 'food-material',
         iconPath: '/assets/InventoryIcons/Icon_Flour.png',
         quantity: 10,
-        buyPrice: 20,
+        buyPrice: 35,
         sellPrice: 5,
         description: 'Flour',
         category: 'food'
@@ -92,9 +92,9 @@ export const MERCHANT_TYPES = {
         icon: 'drink-wine',
         iconPath: '/assets/InventoryIcons/Icon_Bottle_Of_Wine.png',
         quantity: 5,
-        buyPrice: 50,
+        buyPrice: 1250,
         sellPrice: 0,
-        description: 'OH YAM YAM YAM YAM...',
+        description: 'Bottle Of fine wine',
         category: 'recipe'
       },
       {
@@ -105,23 +105,12 @@ export const MERCHANT_TYPES = {
         quantity: 5,
         buyPrice: 0,
         sellPrice: 1,
-        description: 'Bottle Of fine wine',
+        description: 'OH YAM YAM YAM YAM...',
         category: 'drink'
       },
     ],
     
     [MERCHANT_TYPES.BLACKSMITH]: [
-      {
-        id: 'ToolPickaxe',
-        name: 'Pickaxe',
-        icon: 'IconToolPickaxe',
-        iconPath: '/assets/InventoryIcons/IconToolPickaxe.png',
-        quantity: 1,
-        buyPrice: 500,
-        sellPrice: 250,
-        description: 'Breaks rocks and mines ore',
-        category: 'tools'
-      },
       {
         id: 'IronSword',
         name: 'Iron Sword',

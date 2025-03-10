@@ -3212,6 +3212,11 @@
                 "key": "ShapetownSquare"
             },
             {
+                "url": "assets/InventoryIcons/ShellBeach_Icon.png",
+                "type": "image",
+                "key": "ShellBeach_Icon"
+            },
+            {
                 "url": "assets/Decoration/ShellBeach_V01.png",
                 "frameConfig": {
                     "frameWidth": 32,

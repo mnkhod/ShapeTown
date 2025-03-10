@@ -182,11 +182,77 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "b18a6bb2-3a25-42df-81db-97b830824c11",
-            "label": "shell_Decor_1",
+            "id": "afa447a9-a008-4bcb-bda9-9866e950a722",
+            "label": "blocker",
             "scope": "CLASS",
             "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
-            "layerName": "Shell Decor",
+            "layerName": "blocker1",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "65188a17-c072-44c7-8638-ff2bd367776a",
+            "label": "blocker_1",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "blocker2",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "15c029be-33e4-4476-b684-7a2f4d5c545d",
+            "label": "blocker_2",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "blocker3",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "81fbd3aa-fce1-46d2-95d1-a9496f16e5d1",
+            "label": "blocker_3",
+            "scope": "CLASS",
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "blocker4",
             "tilesets": [
                 "BeachWaterSheet_v01",
                 "BeachDeckSheet",
@@ -531,376 +597,26 @@
             "y": 1460
         },
         {
-            "prefabId": "4305e628-5f83-41b3-8b00-6a1c44c84d84",
-            "id": "385fca66-06c8-4849-97e7-cc1eb176bd3c",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_3",
+            "type": "TilemapLayer",
+            "id": "7bb06653-ce52-4a70-bd85-6423878e314b",
+            "label": "shellAreas_1",
             "scope": "CLASS",
-            "x": 60,
-            "y": 760
-        },
-        {
-            "prefabId": "0873c53b-c176-43a5-9c5d-f412c0e22d9e",
-            "id": "b3a5f3d7-785f-4b89-a9af-9c77e5194e88",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_4",
-            "scope": "CLASS",
-            "x": 99,
-            "y": 715
-        },
-        {
-            "prefabId": "ac9f6070-30a8-4bc7-9857-b21c357d5cd7",
-            "id": "727ce7f3-eae3-4a1b-b4a2-a609cac66525",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_2",
-            "scope": "CLASS",
-            "x": 35,
-            "y": 719
-        },
-        {
-            "prefabId": "2a1475b3-24c8-4a60-adac-5ae5ec6e91d6",
-            "id": "8fe7b0f3-c733-491b-a2b8-4d35552bc79f",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_1",
-            "scope": "CLASS",
-            "x": 59,
-            "y": 674
-        },
-        {
-            "prefabId": "0873c53b-c176-43a5-9c5d-f412c0e22d9e",
-            "id": "5f78f51a-5366-4ddf-b1b3-7cdfc85ae6fc",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab",
-            "scope": "CLASS",
-            "x": 107,
-            "y": 638
-        },
-        {
-            "prefabId": "ac9f6070-30a8-4bc7-9857-b21c357d5cd7",
-            "id": "2e0b320e-3766-425a-8ade-a00f98a9284d",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_5",
-            "scope": "CLASS",
-            "x": 171,
-            "y": 613
-        },
-        {
-            "prefabId": "ac9f6070-30a8-4bc7-9857-b21c357d5cd7",
-            "id": "c4b164ca-6c6d-4ce8-a111-ce3dc03f8d46",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_6",
-            "scope": "CLASS",
-            "x": 129,
-            "y": 554
-        },
-        {
-            "prefabId": "4305e628-5f83-41b3-8b00-6a1c44c84d84",
-            "id": "4a139818-17e5-42ef-88cb-4c473d803982",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_7",
-            "scope": "CLASS",
-            "x": 181,
-            "y": 569
-        },
-        {
-            "prefabId": "ac9f6070-30a8-4bc7-9857-b21c357d5cd7",
-            "id": "88e6a4b0-6010-4cae-9227-a5a2428c9ccf",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_8",
-            "scope": "CLASS",
-            "x": 193,
-            "y": 532
-        },
-        {
-            "prefabId": "2a1475b3-24c8-4a60-adac-5ae5ec6e91d6",
-            "id": "4b4ea058-2a3b-42fe-ad98-037446497517",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_9",
-            "scope": "CLASS",
-            "x": 232,
-            "y": 364
-        },
-        {
-            "prefabId": "0873c53b-c176-43a5-9c5d-f412c0e22d9e",
-            "id": "28c14682-9973-463c-a919-9545deb8eaa5",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_10",
-            "scope": "CLASS",
-            "x": 190,
-            "y": 310
-        },
-        {
-            "prefabId": "0873c53b-c176-43a5-9c5d-f412c0e22d9e",
-            "id": "1d46d789-269c-4b8f-ad56-8e370603c976",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_11",
-            "scope": "CLASS",
-            "x": 125,
-            "y": 250
-        },
-        {
-            "prefabId": "4305e628-5f83-41b3-8b00-6a1c44c84d84",
-            "id": "27a9602b-ca17-474f-95fa-f4cd21c71cb8",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_12",
-            "scope": "CLASS",
-            "x": 150,
-            "y": 182
-        },
-        {
-            "prefabId": "2a1475b3-24c8-4a60-adac-5ae5ec6e91d6",
-            "id": "23b4b716-ea6f-4069-baf0-280c8b688c4e",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_13",
-            "scope": "CLASS",
-            "x": 2505,
-            "y": 749
-        },
-        {
-            "prefabId": "0873c53b-c176-43a5-9c5d-f412c0e22d9e",
-            "id": "4dd9315b-2b74-41df-a8cb-6891ecd33d65",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_14",
-            "scope": "CLASS",
-            "x": 2459,
-            "y": 700
-        },
-        {
-            "prefabId": "0873c53b-c176-43a5-9c5d-f412c0e22d9e",
-            "id": "60786e4b-f8d1-4830-9e3e-35635ab532ba",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_15",
-            "scope": "CLASS",
-            "x": 2516,
-            "y": 654
-        },
-        {
-            "prefabId": "0873c53b-c176-43a5-9c5d-f412c0e22d9e",
-            "id": "aa6cbbb1-d56b-4152-8e3a-6ee7b3945301",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_16",
-            "scope": "CLASS",
-            "x": 2449,
-            "y": 618
-        },
-        {
-            "prefabId": "ac9f6070-30a8-4bc7-9857-b21c357d5cd7",
-            "id": "db1bd88d-a3f0-403d-b146-352f19427e6c",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_17",
-            "scope": "CLASS",
-            "x": 2440,
-            "y": 662
-        },
-        {
-            "prefabId": "4305e628-5f83-41b3-8b00-6a1c44c84d84",
-            "id": "ae9fe040-483d-42ad-a9bd-8043f3ced7f1",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_18",
-            "scope": "CLASS",
-            "x": 2526,
-            "y": 604
-        },
-        {
-            "prefabId": "2a1475b3-24c8-4a60-adac-5ae5ec6e91d6",
-            "id": "254b8a90-492c-4ff6-a78a-0366203258e7",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_19",
-            "scope": "CLASS",
-            "x": 2466,
-            "y": 558
-        },
-        {
-            "prefabId": "ac9f6070-30a8-4bc7-9857-b21c357d5cd7",
-            "id": "f027c3d6-974f-4149-a752-3e4f5c02e953",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_20",
-            "scope": "CLASS",
-            "x": 2540,
-            "y": 551
-        },
-        {
-            "prefabId": "2a1475b3-24c8-4a60-adac-5ae5ec6e91d6",
-            "id": "9c147812-4a4b-425f-8f1f-d3a5ec10452e",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_21",
-            "scope": "CLASS",
-            "x": 2497,
-            "y": 539
-        },
-        {
-            "prefabId": "4305e628-5f83-41b3-8b00-6a1c44c84d84",
-            "id": "76f72dff-7e17-444e-8740-accccc244dd0",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_22",
-            "scope": "CLASS",
-            "x": 2517,
-            "y": 491
-        },
-        {
-            "prefabId": "4305e628-5f83-41b3-8b00-6a1c44c84d84",
-            "id": "7f7d7290-7ff1-40b3-aa0a-acc0a20836e2",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_23",
-            "scope": "CLASS",
-            "x": 2463,
-            "y": 459
-        },
-        {
-            "prefabId": "0873c53b-c176-43a5-9c5d-f412c0e22d9e",
-            "id": "03e4f03c-8b4b-4eca-9c7a-45678827d062",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_24",
-            "scope": "CLASS",
-            "x": 2518,
-            "y": 429
-        },
-        {
-            "prefabId": "2a1475b3-24c8-4a60-adac-5ae5ec6e91d6",
-            "id": "b04a922a-65f6-4f93-8054-54d62a6edff0",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_25",
-            "scope": "CLASS",
-            "x": 2558,
-            "y": 385
-        },
-        {
-            "prefabId": "2a1475b3-24c8-4a60-adac-5ae5ec6e91d6",
-            "id": "cca4b3d3-2802-4af0-b841-8c04bd9388c4",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_26",
-            "scope": "CLASS",
-            "x": 2525,
-            "y": 331
-        },
-        {
-            "prefabId": "0873c53b-c176-43a5-9c5d-f412c0e22d9e",
-            "id": "c98d4ec3-a471-4f4c-9ec6-2e0b831c2a11",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_27",
-            "scope": "CLASS",
-            "x": 2548,
-            "y": 273
-        },
-        {
-            "prefabId": "4305e628-5f83-41b3-8b00-6a1c44c84d84",
-            "id": "2d579b19-9cfb-49ef-ba84-b6267ff4b819",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_28",
-            "scope": "CLASS",
-            "x": 2536,
-            "y": 200
-        },
-        {
-            "prefabId": "ac9f6070-30a8-4bc7-9857-b21c357d5cd7",
-            "id": "5e8a5c5d-49c5-48ef-a43d-ea5c4cb7ee6a",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_29",
-            "scope": "CLASS",
-            "x": 2506,
-            "y": 245
-        },
-        {
-            "prefabId": "0873c53b-c176-43a5-9c5d-f412c0e22d9e",
-            "id": "12232896-cfb4-4843-ab47-c23eaf6cb17e",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "sandStonePrefab_30",
-            "scope": "CLASS",
-            "x": 2520,
-            "y": 143
+            "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
+            "layerName": "ShellAreas",
+            "tilesets": [
+                "BeachWaterSheet_v01",
+                "BeachDeckSheet",
+                "Lighthouse_v01",
+                "ShipStranded_01",
+                "BoatStranded",
+                "PalmTreePattern",
+                "TreePalmSheet_01",
+                "TreePalmSheet_03",
+                "TreePalmSheet_02",
+                "CapitansCabin",
+                "RockOnSand_V01",
+                "ShellBeach_V01"
+            ]
         }
     ],
     "plainObjects": [
