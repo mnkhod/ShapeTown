@@ -403,7 +403,7 @@ const MerchantBuyScreen = ({ onClose, phaserInstance, merchantType = MERCHANT_TY
             >
               <div className="flex justify-between items-center mb-4 gap-2">
                 <div 
-                  className="w-28 h-28 relative"
+                  className="w-24 h-24 relative"
                   style={{
                     backgroundImage: 'url("/assets/hud/Merchant/Hud_SellArea_Item_BackGround_3.png")',
                     backgroundSize: 'contain',
@@ -416,14 +416,14 @@ const MerchantBuyScreen = ({ onClose, phaserInstance, merchantType = MERCHANT_TY
                       <img 
                         src={selectedItem.iconPath || `/assets/${selectedItem.icon || 'items/default'}.png`}
                         alt={selectedItem.name}
-                        className="max-w-full max-h-full"
+                        className="max-w-full max-h-full h-12 w-12"
                         style={{ imageRendering: 'pixelated' }}
                       />
                     </div>
                   )}
                 </div>
 
-                <div className="w-16 h-20 flex items-center justify-center">
+                <div className="w-16 h-16 flex items-center justify-center">
                   <img 
                     src="/assets/hud/Merchant/Hud_SellArea_ExchangeIcon_BackGround_3.png"
                     alt="Exchange"
@@ -432,7 +432,7 @@ const MerchantBuyScreen = ({ onClose, phaserInstance, merchantType = MERCHANT_TY
                 </div>
 
                 <div 
-                  className="w-1/3 h-12 relative"
+                  className="w-24 h-12 relative"
                   style={{
                     backgroundImage: 'url("/assets/hud/Merchant/Hud_SellArea_GoldPrice_BackGround_3.png")',
                     backgroundSize: 'contain',

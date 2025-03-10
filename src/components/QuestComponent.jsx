@@ -191,39 +191,39 @@ const QuestComponent = ({ onClose, playerProgress = {}, onQuestUpdate }) => {
       //   ],
       //   reward: "15g each Goblin ear"
       // },
-      // {
-      //   id: "007",
-      //   title: "Treasure From Sea",
-      //   description: "Collect seashells for Lydia",
-      //   category: "Daily Quest",
-      //   location: "Beach area",
-      //   prerequisites: "#002 Have to meet NPC Lydia",
-      //   questGiver: "NPC Lydia",
-      //   completed: playerProgress["007"]?.completed || false,
-      //   subtasks: [
-      //     {
-      //       id: "007-1",
-      //       text: "Meet the NPC Lydia",
-      //       completed: playerProgress["007"]?.subtasks?.["007-1"] || false
-      //     },
-      //     {
-      //       id: "007-2",
-      //       text: "Go to the beach",
-      //       completed: playerProgress["007"]?.subtasks?.["007-2"] || false
-      //     },
-      //     {
-      //       id: "007-3",
-      //       text: "Collect the seashells from the beach",
-      //       completed: playerProgress["007"]?.subtasks?.["007-3"] || false
-      //     },
-      //     {
-      //       id: "007-4",
-      //       text: "Back to meet NPC Lydia",
-      //       completed: playerProgress["007"]?.subtasks?.["007-4"] || false
-      //     }
-      //   ],
-      //   reward: "15g each seashell"
-      // },
+      {
+        id: "007",
+        title: "Treasure From Sea",
+        description: "Collect seashells for Lydia",
+        category: "Daily Quest",
+        location: "Beach area",
+        prerequisites: "#002 Have to meet NPC Lydia",
+        questGiver: "NPC Lydia",
+        completed: playerProgress["007"]?.completed || false,
+        subtasks: [
+          {
+            id: "007-1",
+            text: "Meet the NPC Lydia",
+            completed: playerProgress["007"]?.subtasks?.["007-1"] || false
+          },
+          {
+            id: "007-2",
+            text: "Go to the beach",
+            completed: playerProgress["007"]?.subtasks?.["007-2"] || false
+          },
+          {
+            id: "007-3",
+            text: "Collect the seashells from the beach",
+            completed: playerProgress["007"]?.subtasks?.["007-3"] || false
+          },
+          {
+            id: "007-4",
+            text: "Back to meet NPC Lydia",
+            completed: playerProgress["007"]?.subtasks?.["007-4"] || false
+          }
+        ],
+        reward: "15g each seashell"
+      },
       {
         id: "008",
         title: "Yam, Yam",

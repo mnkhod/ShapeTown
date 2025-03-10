@@ -134,15 +134,15 @@ export const MERCHANT_TYPES = {
         category: 'weapons'
       },
       {
-        id: 'item_axe',
-        name: 'Woodcutter\'s Axe',
-        icon: 'woodcutters-axe',
-        iconPath: '/assets/InventoryIcons/woodcutters-axe.png',
+        id: 'GoldenSword',
+        name: 'Golden Sword',
+        icon: 'GoldenSword',
+        iconPath: '/assets/InventoryIcons/Icon_Gold_Sword.png',
         quantity: 1,
-        buyPrice: 450,
-        sellPrice: 225,
-        description: 'Chops trees efficiently',
-        category: 'tools'
+        buyPrice: 50000,
+        sellPrice: 25000,
+        description: 'Oh- OH!? SHINY!',
+        category: 'weapons'
       }
     ]
   };
