@@ -17,6 +17,8 @@ import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 import OpenQuest from "../prefabs/hud/OpenQuest";
+import FarmingTree1 from "../prefabs/Trees/FarmingTree1";
+import FarmingTree2 from "../prefabs/Trees/FarmingTree2";
 /* START-USER-IMPORTS */
 import questSystem from "../../components/QuestSystem";
 import { extendSceneWithQuests } from "../../components/QuestSystem"; 
@@ -72,6 +74,9 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// bG_Cliff_1
 		const bG_Cliff_1 = shapetownFarmingMap.createLayer("BG/Cliff", ["GroundTileset_V02","RockOnGrass_V02"], 0, 0);
 
+		// bG_tall_grass_1
+		const bG_tall_grass_1 = shapetownFarmingMap.createLayer("BG/tall grass", ["GroundTileset_V02"], 0, 0);
+
 		// bG_Rock_On_Cliff_1
 		const bG_Rock_On_Cliff_1 = shapetownFarmingMap.createLayer("BG/Rock On Cliff", ["RocksOnGrass_V01"], 0, 0);
 
@@ -79,10 +84,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const bG_ramp_1 = shapetownFarmingMap.createLayer("BG/ramp", [], 0, 0);
 
 		// lake_lake_1
-		const lake_lake_1 = shapetownFarmingMap.createLayer("Lake/lake", ["LakeBorderAni","LakeBorderCornerAni","Fishes_3_32x32"], 0, 0);
-
-		// frog_1
-		const frog_1 = shapetownFarmingMap.createLayer("Frog", ["Frog_Sheet_V01"], 0, 0);
+		const lake_lake_1 = shapetownFarmingMap.createLayer("Lake/lake", ["LakeBorderAni","LakeBorderCornerAni","Fishes_3_32x32","GroundTileset_V02"], 0, 0);
 
 		// tree_border_Fence_1
 		const tree_border_Fence_1 = shapetownFarmingMap.createLayer("tree border/Fence", ["RoadStone"], 0, 0);
@@ -117,9 +119,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// playerPrefab
 		const playerPrefab = new PlayerPrefab(this, 434, 633);
 		this.add.existing(playerPrefab);
-
-		// bG_tall_grass_1
-		const bG_tall_grass_1 = shapetownFarmingMap.createLayer("BG/tall grass", ["GroundTileset_V02"], 0, 0);
 
 		// shapeFarmingHousePrefab
 		const shapeFarmingHousePrefab = new ShapeFarmingHousePrefab(this, 576, 360);
@@ -181,12 +180,14 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const profilePrefab = new ProfilePrefab(this, 1188, 901);
 		this.add.existing(profilePrefab);
 
-		// swan_1
-		const swan_1 = shapetownFarmingMap.createLayer("swan", ["Swan_Sheet_V01"], 0, 0);
-
 		// optionsListPrefab
 		const optionsListPrefab = new OptionsListPrefab(this, 2398, 758);
 		this.add.existing(optionsListPrefab);
+
+		// frogFrog_Sheet
+		const frogFrog_Sheet = this.add.sprite(190, 1585, "Frog_Sheet_V01", 0);
+		frogFrog_Sheet.flipX = true;
+		frogFrog_Sheet.play("FrogFrog_Sheet");
 
 		// minimapPrefab
 		const minimapPrefab = new MinimapPrefab(this, 926, 934);
@@ -227,6 +228,23 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const farmingLakeFish_1Fishes_1_32x32gif = this.add.sprite(297, 1624, "Fishes_1_32x32gif", 0);
 		farmingLakeFish_1Fishes_1_32x32gif.play("FarmingLakeFish_1Fishes_1_32x32gif");
 
+		// swanSwan_Sheet
+		const swanSwan_Sheet = this.add.sprite(441, 1595, "Swan_Sheet_V01", 0);
+		swanSwan_Sheet.flipX = true;
+		swanSwan_Sheet.play("SwanSwan_Sheet");
+
+		// swanSwan_Sheet_1
+		const swanSwan_Sheet_1 = this.add.sprite(482, 1595, "Swan_Sheet_V01", 0);
+		swanSwan_Sheet_1.play("SwanSwan_Sheet");
+
+		// farmingTree1
+		const farmingTree1 = new FarmingTree1(this, 441, 975);
+		this.add.existing(farmingTree1);
+
+		// farmingTree2
+		const farmingTree2 = new FarmingTree2(this, 445, 774);
+		this.add.existing(farmingTree2);
+
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
 		oldManJackNpcPrefab.msgPrefab = messagePrefab;
@@ -234,10 +252,10 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 
 		this.bG_Grass_1 = bG_Grass_1;
 		this.bG_Cliff_1 = bG_Cliff_1;
+		this.bG_tall_grass_1 = bG_tall_grass_1;
 		this.bG_Rock_On_Cliff_1 = bG_Rock_On_Cliff_1;
 		this.bG_ramp_1 = bG_ramp_1;
 		this.lake_lake_1 = lake_lake_1;
-		this.frog_1 = frog_1;
 		this.tree_border_Fence_1 = tree_border_Fence_1;
 		this.tree_border_ = tree_border_;
 		this.tree_border = tree_border;
@@ -249,7 +267,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.tree_border_5 = tree_border_5;
 		this.tree_border_6 = tree_border_6;
 		this.playerPrefab = playerPrefab;
-		this.bG_tall_grass_1 = bG_tall_grass_1;
 		this.shapeFarmingHousePrefab = shapeFarmingHousePrefab;
 		this.tree_border_7 = tree_border_7;
 		this.sceneTile = sceneTile;
@@ -264,10 +281,14 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.openInventory = openInventory;
 		this.openMapPrefab = openMapPrefab;
 		this.profilePrefab = profilePrefab;
-		this.swan_1 = swan_1;
 		this.optionsListPrefab = optionsListPrefab;
+		this.frogFrog_Sheet = frogFrog_Sheet;
 		this.minimapPrefab = minimapPrefab;
 		this.harvest_1 = harvest_1;
+		this.swanSwan_Sheet = swanSwan_Sheet;
+		this.swanSwan_Sheet_1 = swanSwan_Sheet_1;
+		this.farmingTree1 = farmingTree1;
+		this.farmingTree2 = farmingTree2;
 		this.shapetownFarmingMap = shapetownFarmingMap;
 
 		this.events.emit("scene-awake");
@@ -278,13 +299,13 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	bG_Cliff_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	bG_tall_grass_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	bG_Rock_On_Cliff_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	bG_ramp_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	lake_lake_1;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	frog_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_border_Fence_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -307,8 +328,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	tree_border_6;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	bG_tall_grass_1;
 	/** @type {ShapeFarmingHousePrefab} */
 	shapeFarmingHousePrefab;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -337,20 +356,31 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	openMapPrefab;
 	/** @type {ProfilePrefab} */
 	profilePrefab;
-	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	swan_1;
 	/** @type {OptionsListPrefab} */
 	optionsListPrefab;
+	/** @type {Phaser.GameObjects.Sprite} */
+	frogFrog_Sheet;
 	/** @type {MinimapPrefab} */
 	minimapPrefab;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	harvest_1;
+	/** @type {Phaser.GameObjects.Sprite} */
+	swanSwan_Sheet;
+	/** @type {Phaser.GameObjects.Sprite} */
+	swanSwan_Sheet_1;
+	/** @type {FarmingTree1} */
+	farmingTree1;
+	/** @type {FarmingTree2} */
+	farmingTree2;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownFarmingMap;
 
 	/* START-USER-CODE */
 
 	// Write your code here
+
+
+
 	setupHarvestTiles() {
 		const soilLayer = this.harvest_1;
 		const width = soilLayer.width;
@@ -360,7 +390,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 			for (let x = 0; x < width; x++) {
 				const tile = soilLayer.getTileAt(x, y);
 
-				if (tile && tile.index === 2402) {
+				if (tile && tile.index === 2177) {
 					const worldX = tile.pixelX + soilLayer.x + (tile.width / 2);
 					const worldY = tile.pixelY + soilLayer.y + (tile.height / 2);
 
@@ -469,6 +499,7 @@ initInventorySystem() {
 	}
 	create() {
 
+
 		var counter = 0;
 		this.editorCreate();
 		window.questBookPrefab = null;
@@ -490,6 +521,7 @@ initInventorySystem() {
 
 			this.cameras.main.fadeIn(500, 0, 0, 0);
 		});
+
 		extendSceneWithQuests(this);
 		extendHarvestPrefab(HarvestPrefab);
 		extendJackNpc(OldManJackNpcPrefab);
@@ -555,6 +587,8 @@ initInventorySystem() {
 	  	this.newItemHudPrefab.visible = true;
 
 	  	this.shapeFarmingHousePrefab.setupCollision(this.playerPrefab);
+		this.farmingTree1.setupCollision(this.playerPrefab)
+		this.farmingTree2.setupCollision(this.playerPrefab)
 
 	  	this.physics.add.collider(this.playerPrefab, this.lake_lake_1);
 	  	this.lake_lake_1.setCollisionBetween(0, 10000);
@@ -606,15 +640,15 @@ initInventorySystem() {
 		        if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
 		            this.newItemHudPrefab.updateGlobalInventory();
 		        }
-		
+
 		        const playerX = this.playerPrefab.x;
-		
+
 		        this.scene.switch("ShapeTownSquareMapScene");
 		        const targetScene = this.scene.get("ShapeTownSquareMapScene");
 		        if (targetScene && targetScene.playerPrefab) {
 		            targetScene.playerPrefab.x = 304;
 		        }
-		
+
 		        this.cameras.main.fadeIn(2000, 0, 0, 0);
 		    } else {
 		        this.playerPrefab.x -= 200;

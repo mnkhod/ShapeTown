@@ -74,6 +74,35 @@
         },
         {
             "type": "TilemapLayer",
+            "id": "d74d5283-f8e2-4bc9-bce5-5a0f818b3216",
+            "label": "bG_tall_grass_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "BG/tall grass",
+            "tilesets": [
+                "GroundTileset",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundTileset_V02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone",
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
             "id": "af1990c1-64f2-4324-90ad-52e0d72d9cdd",
             "label": "bG_Rock_On_Cliff_1",
             "scope": "CLASS",
@@ -137,35 +166,6 @@
             "scope": "CLASS",
             "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
             "layerName": "Lake/lake",
-            "tilesets": [
-                "GroundTileset",
-                "TreePatteren",
-                "CityHouses_v02",
-                "Building_5_Door_32x32_2",
-                "LakeBorderCornerAni",
-                "LakeBorderAni",
-                "Fishes_3_32x32",
-                "LakeDecoration",
-                "LakeFloatingRock_V03",
-                "LakeFloatingRock_V01",
-                "LakeFloatingRock_V02",
-                "GroundTileset_V02",
-                "RocksOnGrass_V01",
-                "RockOnGrass_V02",
-                "RoadStone",
-                "Fence_V01",
-                "Farming_Soil_Tile_V01",
-                "Swan_Sheet_V01",
-                "Frog_Sheet_V01"
-            ]
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "f2b3decb-0366-4d20-8e85-2aab08029fc6",
-            "label": "frog_1",
-            "scope": "CLASS",
-            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
-            "layerName": "Frog",
             "tilesets": [
                 "GroundTileset",
                 "TreePatteren",
@@ -491,35 +491,6 @@
             "y": 633
         },
         {
-            "type": "TilemapLayer",
-            "id": "d74d5283-f8e2-4bc9-bce5-5a0f818b3216",
-            "label": "bG_tall_grass_1",
-            "scope": "CLASS",
-            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
-            "layerName": "BG/tall grass",
-            "tilesets": [
-                "GroundTileset",
-                "TreePatteren",
-                "CityHouses_v02",
-                "Building_5_Door_32x32_2",
-                "LakeBorderCornerAni",
-                "LakeBorderAni",
-                "Fishes_3_32x32",
-                "LakeDecoration",
-                "LakeFloatingRock_V03",
-                "LakeFloatingRock_V01",
-                "LakeFloatingRock_V02",
-                "GroundTileset_V02",
-                "RocksOnGrass_V01",
-                "RockOnGrass_V02",
-                "RoadStone",
-                "Fence_V01",
-                "Farming_Soil_Tile_V01",
-                "Swan_Sheet_V01",
-                "Frog_Sheet_V01"
-            ]
-        },
-        {
             "prefabId": "05b18f69-d6c6-46a7-b8a8-62b2841aef15",
             "id": "f052b291-ce1a-4a6b-80a5-9027d430216f",
             "unlock": [
@@ -718,35 +689,6 @@
             "y": 901
         },
         {
-            "type": "TilemapLayer",
-            "id": "d09c8f9f-eb05-4887-9c13-9d40a114ae28",
-            "label": "swan_1",
-            "scope": "CLASS",
-            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
-            "layerName": "swan",
-            "tilesets": [
-                "GroundTileset",
-                "TreePatteren",
-                "CityHouses_v02",
-                "Building_5_Door_32x32_2",
-                "LakeBorderCornerAni",
-                "LakeBorderAni",
-                "Fishes_3_32x32",
-                "LakeDecoration",
-                "LakeFloatingRock_V03",
-                "LakeFloatingRock_V01",
-                "LakeFloatingRock_V02",
-                "GroundTileset_V02",
-                "RocksOnGrass_V01",
-                "RockOnGrass_V02",
-                "RoadStone",
-                "Fence_V01",
-                "Farming_Soil_Tile_V01",
-                "Swan_Sheet_V01",
-                "Frog_Sheet_V01"
-            ]
-        },
-        {
             "prefabId": "e1ab5904-77e5-46c1-9532-c3d7be0e73be",
             "id": "b40ab7f7-4710-42b5-926d-99a24e421e42",
             "unlock": [
@@ -757,6 +699,21 @@
             "scope": "CLASS",
             "x": 2398,
             "y": 758
+        },
+        {
+            "type": "Sprite",
+            "id": "4df86f49-783c-45dd-8066-d04a4ef44e45",
+            "label": "frogFrog_Sheet",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Frog_Sheet_V01",
+                "frame": 0
+            },
+            "x": 190,
+            "y": 1585,
+            "flipX": true,
+            "animationPlayMethod": 1,
+            "animationKey": "FrogFrog_Sheet"
         },
         {
             "prefabId": "2e844f73-6bf0-4cf6-98c7-64322f7616d0",
@@ -900,6 +857,59 @@
             "y": 1624,
             "animationPlayMethod": 1,
             "animationKey": "FarmingLakeFish_1Fishes_1_32x32gif"
+        },
+        {
+            "type": "Sprite",
+            "id": "0cdf701a-bd5e-4e53-a202-e8802ccc6999",
+            "label": "swanSwan_Sheet",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Swan_Sheet_V01",
+                "frame": 0
+            },
+            "x": 441,
+            "y": 1595,
+            "flipX": true,
+            "animationPlayMethod": 1,
+            "animationKey": "SwanSwan_Sheet"
+        },
+        {
+            "type": "Sprite",
+            "id": "1c98450f-5655-4ffb-b685-1c39f60fea31",
+            "label": "swanSwan_Sheet_1",
+            "scope": "CLASS",
+            "texture": {
+                "key": "Swan_Sheet_V01",
+                "frame": 0
+            },
+            "x": 482,
+            "y": 1595,
+            "animationPlayMethod": 1,
+            "animationKey": "SwanSwan_Sheet"
+        },
+        {
+            "prefabId": "a7903b0c-7f21-471b-a2e1-631581b2453d",
+            "id": "462afa01-6ec7-4818-b969-aeafb8fc3ab2",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "farmingTree1",
+            "scope": "CLASS",
+            "x": 441,
+            "y": 975
+        },
+        {
+            "prefabId": "0d420743-2d39-4d4c-b29c-77fbac434769",
+            "id": "1745e458-f9ae-4af3-88c5-49742ffcdfae",
+            "unlock": [
+                "x",
+                "y"
+            ],
+            "label": "farmingTree2",
+            "scope": "CLASS",
+            "x": 445,
+            "y": 774
         }
     ],
     "plainObjects": [

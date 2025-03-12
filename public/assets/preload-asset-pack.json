@@ -1484,8 +1484,8 @@
             {
                 "url": "assets/Mob/Friendly/Frog_Sheet_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3398,8 +3398,8 @@
             {
                 "url": "assets/Mob/Friendly/Swan_Sheet_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 64,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3593,8 +3593,8 @@
             {
                 "url": "assets/Tree/Tree_v01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 160,
+                    "frameHeight": 196,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3632,8 +3632,8 @@
             {
                 "url": "assets/Tree/Tree_v03.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 64,
+                    "frameHeight": 96,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3658,8 +3658,8 @@
             {
                 "url": "assets/Tree/Tree_v05.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 128,
+                    "frameHeight": 128,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3671,8 +3671,8 @@
             {
                 "url": "assets/Tree/Tree_v06.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 128,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3723,8 +3723,8 @@
             {
                 "url": "assets/Tree/TreeNaked_V01.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 160,
+                    "frameHeight": 192,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3736,8 +3736,8 @@
             {
                 "url": "assets/Tree/TreeNaked_V02.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 192,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3749,8 +3749,8 @@
             {
                 "url": "assets/Tree/TreeNaked_V03.png",
                 "frameConfig": {
-                    "frameWidth": 32,
-                    "frameHeight": 32,
+                    "frameWidth": 96,
+                    "frameHeight": 192,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
