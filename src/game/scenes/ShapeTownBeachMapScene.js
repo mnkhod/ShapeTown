@@ -449,6 +449,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	    this.openMapPrefab?.setDepth(90);
 	    this.optionsListPrefab?.setDepth(90);
 	    this.minimapPrefab?.setDepth(90);
+		this.openQuest?.setDepth(90);
 
 	    this.playerPrefab?.setDepth(90);
 	}

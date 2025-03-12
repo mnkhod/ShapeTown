@@ -593,26 +593,26 @@ initInventorySystem() {
 	  	// this.tree_border_Fence_1.renderDebug(this.add.graphics());
 
 		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-			
-			if ( this.scene.questSystem && this.scene.questSystem.isQuestCompleted("001")){
-				if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-					this.newItemHudPrefab.updateGlobalInventory();
-				}
-
-				const playerX = this.playerPrefab.x;
-
-				this.scene.switch("ShapeTownSquareMapScene");
-				const targetScene = this.scene.get("ShapeTownSquareMapScene");
-				if (targetScene && targetScene.playerPrefab) {
-					targetScene.playerPrefab.x = 304;
-				}
-
-				this.cameras.main.fadeIn(2000, 0, 0, 0);
-			}else{
-				this.playerPrefab.x -= 200;
-				this.alertPrefab.alert("First Quest is not over, please finish your quest and try again");
-				counter++;
-			}
+		    // Access questSystem from this.game instead of this.scene
+		    if (this.game && this.game.questSystem && this.game.questSystem.isQuestCompleted("001")) {
+		        if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+		            this.newItemHudPrefab.updateGlobalInventory();
+		        }
+		
+		        const playerX = this.playerPrefab.x;
+		
+		        this.scene.switch("ShapeTownSquareMapScene");
+		        const targetScene = this.scene.get("ShapeTownSquareMapScene");
+		        if (targetScene && targetScene.playerPrefab) {
+		            targetScene.playerPrefab.x = 304;
+		        }
+		
+		        this.cameras.main.fadeIn(2000, 0, 0, 0);
+		    } else {
+		        this.playerPrefab.x -= 200;
+		        this.alertPrefab.alert("First Quest is not over, please finish your quest and try again");
+		        counter++;
+		    }
 		});
 		this.initInventorySystem();
 
