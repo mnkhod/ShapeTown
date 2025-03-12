@@ -3,14 +3,14 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "ShapetownMineEntrance.json",
+    "activeFile": "ShapetownFarmingMap.json",
     "expandedProjectPaths": [
         "."
     ],
     "fileStates": {
         "": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1
+            "scaleInDock": 4,
+            "scaleInEditor": 4
         },
         "C:/Users/eenee/Desktop/Pixel game assets/Epic assets/ERW - Sea Adventures (GL 2.0 expansion) V1.4.1/TiledMap Editor/Tilesets/Atlas-props-sprites.tsx": {
             "scaleInDock": 1
@@ -71,8 +71,8 @@
             "scale": 0.75,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 1280,
-                "y": 712
+                "x": 1014.6666666666666,
+                "y": 441.33333333333326
             }
         },
         "ShapetownBeach.json#BeachDeckSheet": {
@@ -116,15 +116,13 @@
         },
         "ShapetownFarmingMap.json": {
             "expandedGroupLayers": [
-                9,
-                18,
-                24
+                9
             ],
             "scale": 0.25,
-            "selectedLayer": 3,
+            "selectedLayer": 11,
             "viewCenter": {
-                "x": 1564,
-                "y": 880
+                "x": 1456,
+                "y": 1008
             }
         },
         "ShapetownFarmingMap.json#Building_5_Door_32x32_2": {
@@ -135,13 +133,27 @@
             "scaleInDock": 1
         },
         "ShapetownFarmingMap.json#CityHouses_v02": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "ShapetownFarmingMap.json#Farming_Soil_Tile_V01": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "ShapetownFarmingMap.json#Fence_V01": {
+            "scaleInDock": 4,
+            "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#Fishes_3_32x32": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#ForrestLadge": {
             "scaleInDock": 1
+        },
+        "ShapetownFarmingMap.json#Frog_Sheet_V01": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#GroundAccessor": {
             "scaleInDock": 1
@@ -151,7 +163,7 @@
             "scaleInEditor": 3
         },
         "ShapetownFarmingMap.json#GroundTileset_V02": {
-            "scaleInDock": 0.75,
+            "scaleInDock": 2,
             "scaleInEditor": 1.5
         },
         "ShapetownFarmingMap.json#LakeBorderAni": {
@@ -159,10 +171,12 @@
             "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#LakeBorderCornerAni": {
-            "scaleInDock": 1
+            "scaleInDock": 5.5,
+            "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#LakeDecoration": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#LakeFloatingRock_V01": {
             "scaleInDock": 1,
@@ -177,20 +191,28 @@
             "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#RoadStone": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#RockOnGrass_V02": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#RocksOnGrass_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#SoilCorner_v02": {
             "scaleInDock": 1,
             "scaleInEditor": 1.5
         },
+        "ShapetownFarmingMap.json#Swan_Sheet_V01": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "ShapetownFarmingMap.json#TreePatteren": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#cabin -  closing animation door with slight shading detail for better integration with the cabin while accessing the interior ": {
             "scaleInEditor": 1
@@ -202,7 +224,7 @@
             "scale": 0.75,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 1658.6666666666665,
+                "x": 1280,
                 "y": 720
             }
         },
@@ -226,8 +248,8 @@
             "scale": 0.75,
             "selectedLayer": 17,
             "viewCenter": {
-                "x": 1158.6666666666667,
-                "y": 681.3333333333334
+                "x": 1120,
+                "y": 720
             }
         },
         "ShapetownMineEntrance.json#AncientScript_V01": {
@@ -293,15 +315,18 @@
         },
         "ShapetownSquare.json": {
             "expandedGroupLayers": [
+                13,
                 10,
+                56,
+                81,
                 57,
-                81
+                45
             ],
             "scale": 0.5,
-            "selectedLayer": 2,
+            "selectedLayer": 20,
             "viewCenter": {
-                "x": 2070,
-                "y": 2052
+                "x": 1886,
+                "y": 1164
             }
         },
         "ShapetownSquare.json#AdventureGuildBuilding": {
@@ -518,8 +543,8 @@
             "scale": 1.5,
             "selectedLayer": 17,
             "viewCenter": {
-                "x": 1258.6666666666665,
-                "y": 886
+                "x": 1271.3333333333333,
+                "y": 967.3333333333333
             }
         },
         "ThePlayerHouseInterior.json#Building_5_Door_32x32_2": {
@@ -572,27 +597,25 @@
             "scaleInDock": 1
         }
     },
-    "frame.defaultDuration": 120,
-    "last.imagePath": "C:/Users/eenee/Desktop/BitQuest/Hackton/assets/Decoration",
+    "frame.defaultDuration": 100,
+    "last.imagePath": "C:/Users/nmh/Documents/GitHub/ShapeTown/public/assets/Mob/Friendly",
     "map.height": 30,
     "map.lastUsedFormat": "json",
     "map.width": 40,
     "openFiles": [
         "ShapetownFarmingMap.json",
-        "ThePlayerHouseInterior.json",
-        "ShapetownInsideTownHall.json",
         "ShapetownSquare.json",
         "ShapetownBeach.json",
         "ShapetownMineEntrance.json"
     ],
     "project": "Shapetown.tiled-project",
     "recentFiles": [
+        "ShapetownMineEntrance.json",
+        "ShapetownBeach.json",
+        "ShapetownSquare.json",
         "ShapetownFarmingMap.json",
         "ThePlayerHouseInterior.json",
         "ShapetownInsideTownHall.json",
-        "ShapetownSquare.json",
-        "ShapetownBeach.json",
-        "ShapetownMineEntrance.json",
         "C:/Users/eenee/Desktop/Pixel game assets/map assets/tree wall/gentle 32x32 v02.tsx",
         "C:/Users/eenee/Desktop/Pixel game assets/map assets/tree wall/gentle 32x32 v01.tsx",
         "C:/Users/eenee/Desktop/Pixel game assets/map assets/tree wall/gentle forest v10.tsx",

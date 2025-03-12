@@ -4,7 +4,6 @@
 
 import PlayerPrefab from "../prefabs/PlayerPrefab";
 import ShapeFarmingHousePrefab from "../prefabs/House/ShapeFarmingHousePrefab";
-import AppleTreePrefab from "../prefabs/Trees/AppleTreePrefab";
 import OldManJackNpcPrefab from "../prefabs/npcs/OldManJackNpcPrefab";
 import MessagePrefab from "../prefabs/hud/MessagePrefab";
 import NewItemHudPrefab from "../../../NewItemHudPrefab";
@@ -37,7 +36,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// Write your code here.
 		this.reactEvent = EventBus
 		this.achievements = {};
-		
+
 		const counter = 0;
 		/* END-USER-CTR-CODE */
 	}
@@ -59,11 +58,13 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		shapetownFarmingMap.addTilesetImage("LakeFloatingRock_V01", "LakeFloatingRock_V01");
 		shapetownFarmingMap.addTilesetImage("LakeFloatingRock_V02", "LakeFloatingRock_V02");
 		shapetownFarmingMap.addTilesetImage("GroundTileset_V02", "GroundTileset_V02");
-		shapetownFarmingMap.addTilesetImage("SoilCorner_v02", "SoilCorner_v02");
 		shapetownFarmingMap.addTilesetImage("RocksOnGrass_V01", "RocksOnGrass_V01");
 		shapetownFarmingMap.addTilesetImage("RockOnGrass_V02", "RockOnGrass_V02");
 		shapetownFarmingMap.addTilesetImage("RoadStone", "RoadStone");
 		shapetownFarmingMap.addTilesetImage("Fence_V01", "Fence_V01");
+		shapetownFarmingMap.addTilesetImage("Farming_Soil_Tile_V01", "Farming_Soil_Tile_V01");
+		shapetownFarmingMap.addTilesetImage("Swan_Sheet_V01", "Swan_Sheet_V01");
+		shapetownFarmingMap.addTilesetImage("Frog_Sheet_V01", "Frog_Sheet_V01");
 
 		// bG_Grass_1
 		const bG_Grass_1 = shapetownFarmingMap.createLayer("BG/Grass", ["GroundTileset_V02"], 0, 0);
@@ -79,6 +80,9 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 
 		// lake_lake_1
 		const lake_lake_1 = shapetownFarmingMap.createLayer("Lake/lake", ["LakeBorderAni","LakeBorderCornerAni","Fishes_3_32x32"], 0, 0);
+
+		// frog_1
+		const frog_1 = shapetownFarmingMap.createLayer("Frog", ["Frog_Sheet_V01"], 0, 0);
 
 		// tree_border_Fence_1
 		const tree_border_Fence_1 = shapetownFarmingMap.createLayer("tree border/Fence", ["RoadStone"], 0, 0);
@@ -114,13 +118,12 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const playerPrefab = new PlayerPrefab(this, 434, 633);
 		this.add.existing(playerPrefab);
 
+		// bG_tall_grass_1
+		const bG_tall_grass_1 = shapetownFarmingMap.createLayer("BG/tall grass", ["GroundTileset_V02"], 0, 0);
+
 		// shapeFarmingHousePrefab
 		const shapeFarmingHousePrefab = new ShapeFarmingHousePrefab(this, 576, 360);
 		this.add.existing(shapeFarmingHousePrefab);
-
-		// appleTreePrefab
-		const appleTreePrefab = new AppleTreePrefab(this, 526, 967);
-		this.add.existing(appleTreePrefab);
 
 		// tree_border_7
 		const tree_border_7 = shapetownFarmingMap.createLayer("tree border/7", ["TreePatteren"], 0, 0);
@@ -178,6 +181,9 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const profilePrefab = new ProfilePrefab(this, 1188, 901);
 		this.add.existing(profilePrefab);
 
+		// swan_1
+		const swan_1 = shapetownFarmingMap.createLayer("swan", ["Swan_Sheet_V01"], 0, 0);
+
 		// optionsListPrefab
 		const optionsListPrefab = new OptionsListPrefab(this, 2398, 758);
 		this.add.existing(optionsListPrefab);
@@ -185,9 +191,6 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// minimapPrefab
 		const minimapPrefab = new MinimapPrefab(this, 926, 934);
 		this.add.existing(minimapPrefab);
-
-		// plantingArea_1
-		const plantingArea_1 = shapetownFarmingMap.createLayer("PlantingArea", ["GroundTileset_V02"], 0, 0);
 
 		// openQuest
 		const openQuest = new OpenQuest(this, 307, 1317);
@@ -213,6 +216,9 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const farmingLakeStone_3LakeFloatingRock = this.add.sprite(435, 1677, "LakeFloatingRock_V03", 0);
 		farmingLakeStone_3LakeFloatingRock.play("FarmingLakeStone_3LakeFloatingRock");
 
+		// harvest_1
+		const harvest_1 = shapetownFarmingMap.createLayer("harvest", ["GroundTileset_V02"], 0, 0);
+
 		// farmingLakeFishFishes_3_32x
 		const farmingLakeFishFishes_3_32x = this.add.sprite(611, 1682, "Fishes_3_32x32", 0);
 		farmingLakeFishFishes_3_32x.play("FarmingLakeFishFishes_3_32x");
@@ -231,6 +237,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.bG_Rock_On_Cliff_1 = bG_Rock_On_Cliff_1;
 		this.bG_ramp_1 = bG_ramp_1;
 		this.lake_lake_1 = lake_lake_1;
+		this.frog_1 = frog_1;
 		this.tree_border_Fence_1 = tree_border_Fence_1;
 		this.tree_border_ = tree_border_;
 		this.tree_border = tree_border;
@@ -242,8 +249,8 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.tree_border_5 = tree_border_5;
 		this.tree_border_6 = tree_border_6;
 		this.playerPrefab = playerPrefab;
+		this.bG_tall_grass_1 = bG_tall_grass_1;
 		this.shapeFarmingHousePrefab = shapeFarmingHousePrefab;
-		this.appleTreePrefab = appleTreePrefab;
 		this.tree_border_7 = tree_border_7;
 		this.sceneTile = sceneTile;
 		this.oldManJackNpcPrefab = oldManJackNpcPrefab;
@@ -257,9 +264,10 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.openInventory = openInventory;
 		this.openMapPrefab = openMapPrefab;
 		this.profilePrefab = profilePrefab;
+		this.swan_1 = swan_1;
 		this.optionsListPrefab = optionsListPrefab;
 		this.minimapPrefab = minimapPrefab;
-		this.plantingArea_1 = plantingArea_1;
+		this.harvest_1 = harvest_1;
 		this.shapetownFarmingMap = shapetownFarmingMap;
 
 		this.events.emit("scene-awake");
@@ -275,6 +283,8 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	bG_ramp_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	lake_lake_1;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	frog_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_border_Fence_1;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
@@ -297,10 +307,10 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	tree_border_6;
 	/** @type {PlayerPrefab} */
 	playerPrefab;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	bG_tall_grass_1;
 	/** @type {ShapeFarmingHousePrefab} */
 	shapeFarmingHousePrefab;
-	/** @type {AppleTreePrefab} */
-	appleTreePrefab;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
 	tree_border_7;
 	/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
@@ -327,12 +337,14 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	openMapPrefab;
 	/** @type {ProfilePrefab} */
 	profilePrefab;
+	/** @type {Phaser.Tilemaps.TilemapLayer} */
+	swan_1;
 	/** @type {OptionsListPrefab} */
 	optionsListPrefab;
 	/** @type {MinimapPrefab} */
 	minimapPrefab;
 	/** @type {Phaser.Tilemaps.TilemapLayer} */
-	plantingArea_1;
+	harvest_1;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownFarmingMap;
 
@@ -340,7 +352,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 
 	// Write your code here
 	setupHarvestTiles() {
-		const soilLayer = this.plantingArea_1;
+		const soilLayer = this.harvest_1;
 		const width = soilLayer.width;
 		const height = soilLayer.height;
 
@@ -348,7 +360,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 			for (let x = 0; x < width; x++) {
 				const tile = soilLayer.getTileAt(x, y);
 
-				if (tile && tile.index === 2401) {
+				if (tile && tile.index === 2402) {
 					const worldX = tile.pixelX + soilLayer.x + (tile.width / 2);
 					const worldY = tile.pixelY + soilLayer.y + (tile.height / 2);
 
@@ -456,7 +468,7 @@ initInventorySystem() {
 		this.playerPrefab?.setDepth(90);
 	}
 	create() {
-		
+
 		var counter = 0;
 		this.editorCreate();
 		window.questBookPrefab = null;
@@ -579,10 +591,6 @@ initInventorySystem() {
 	  	this.physics.add.collider(this.playerPrefab, this.bG_Cliff_1);
 	  	this.bG_Cliff_1.setCollisionBetween(0, 10000);
 	  	// this.bG_Cliff_1.renderDebug(this.add.graphics());
-
-	  	this.appleTreePrefab.setupCollision(this.playerPrefab);
-	  	this.physics.add.collider(this.playerPrefab, this.appleTreePrefab);
-	  	// this.appleTreePrefab.renderDebug(this.add.graphics());
 
 	  	this.physics.add.collider(this.playerPrefab, this.farm_Fence_1);
 	  	this.farm_Fence_1.setCollisionBetween(0, 10000);

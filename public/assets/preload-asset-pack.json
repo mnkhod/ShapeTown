@@ -1482,6 +1482,19 @@
                 "key": "ForrestLadge"
             },
             {
+                "url": "assets/Mob/Friendly/Frog_Sheet_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Frog_Sheet_V01"
+            },
+            {
                 "url": "assets/Crops/Fruit Growt Cycle/Fruit_Cycle_Artichoke.png",
                 "frameConfig": {
                     "frameWidth": 32,
@@ -2074,6 +2087,19 @@
                 },
                 "type": "spritesheet",
                 "key": "LakeBorderCornerAni"
+            },
+            {
+                "url": "assets/Decoration/LakeDecoration.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "LakeDecoration"
             },
             {
                 "url": "assets/mapAssets/LakeFloatingRock_V01.png",
@@ -3368,6 +3394,19 @@
                 "url": "assets/InventoryIcons/sunfish.png",
                 "type": "image",
                 "key": "sunfish"
+            },
+            {
+                "url": "assets/Mob/Friendly/Swan_Sheet_V01.png",
+                "frameConfig": {
+                    "frameWidth": 32,
+                    "frameHeight": 32,
+                    "startFrame": 0,
+                    "endFrame": -1,
+                    "spacing": 0,
+                    "margin": 0
+                },
+                "type": "spritesheet",
+                "key": "Swan_Sheet_V01"
             },
             {
                 "url": "assets/mapAssets/Tent.png",

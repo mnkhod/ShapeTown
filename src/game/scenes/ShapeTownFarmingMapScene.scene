@@ -34,11 +34,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -61,11 +63,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -88,11 +92,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -115,11 +121,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -142,11 +150,42 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
+            ]
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "f2b3decb-0366-4d20-8e85-2aab08029fc6",
+            "label": "frog_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "Frog",
+            "tilesets": [
+                "GroundTileset",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundTileset_V02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone",
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -169,11 +208,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -196,11 +237,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -223,11 +266,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -250,11 +295,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -277,11 +324,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -304,11 +353,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -331,11 +382,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -358,11 +411,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -385,11 +440,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -412,11 +469,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -432,6 +491,35 @@
             "y": 633
         },
         {
+            "type": "TilemapLayer",
+            "id": "d74d5283-f8e2-4bc9-bce5-5a0f818b3216",
+            "label": "bG_tall_grass_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "BG/tall grass",
+            "tilesets": [
+                "GroundTileset",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundTileset_V02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone",
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
+            ]
+        },
+        {
             "prefabId": "05b18f69-d6c6-46a7-b8a8-62b2841aef15",
             "id": "f052b291-ce1a-4a6b-80a5-9027d430216f",
             "unlock": [
@@ -442,18 +530,6 @@
             "scope": "CLASS",
             "x": 576,
             "y": 360
-        },
-        {
-            "prefabId": "3f334556-ed3f-4297-8ad8-f1c3aa42e40f",
-            "id": "5811feeb-272f-4978-bdbd-54b405c9e54b",
-            "unlock": [
-                "x",
-                "y"
-            ],
-            "label": "appleTreePrefab",
-            "scope": "CLASS",
-            "x": 526,
-            "y": 967
         },
         {
             "type": "TilemapLayer",
@@ -475,11 +551,13 @@
                 "LakeFloatingRock_V01",
                 "LakeFloatingRock_V02",
                 "GroundTileset_V02",
-                "SoilCorner_v02",
                 "RocksOnGrass_V01",
                 "RockOnGrass_V02",
                 "RoadStone",
-                "Fence_V01"
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
             ]
         },
         {
@@ -640,6 +718,35 @@
             "y": 901
         },
         {
+            "type": "TilemapLayer",
+            "id": "d09c8f9f-eb05-4887-9c13-9d40a114ae28",
+            "label": "swan_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "swan",
+            "tilesets": [
+                "GroundTileset",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundTileset_V02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone",
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
+            ]
+        },
+        {
             "prefabId": "e1ab5904-77e5-46c1-9532-c3d7be0e73be",
             "id": "b40ab7f7-4710-42b5-926d-99a24e421e42",
             "unlock": [
@@ -662,33 +769,6 @@
             "scope": "CLASS",
             "x": 926,
             "y": 934
-        },
-        {
-            "type": "TilemapLayer",
-            "id": "ba4f5d78-d4b5-44a7-b4bd-0a9777e13544",
-            "label": "plantingArea_1",
-            "scope": "CLASS",
-            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
-            "layerName": "PlantingArea",
-            "tilesets": [
-                "GroundTileset",
-                "TreePatteren",
-                "CityHouses_v02",
-                "Building_5_Door_32x32_2",
-                "LakeBorderCornerAni",
-                "LakeBorderAni",
-                "Fishes_3_32x32",
-                "LakeDecoration",
-                "LakeFloatingRock_V03",
-                "LakeFloatingRock_V01",
-                "LakeFloatingRock_V02",
-                "GroundTileset_V02",
-                "SoilCorner_v02",
-                "RocksOnGrass_V01",
-                "RockOnGrass_V02",
-                "RoadStone",
-                "Fence_V01"
-            ]
         },
         {
             "prefabId": "2c30c124-0411-4631-af99-2308825ee3ac",
@@ -765,6 +845,35 @@
             "y": 1677,
             "animationPlayMethod": 1,
             "animationKey": "FarmingLakeStone_3LakeFloatingRock"
+        },
+        {
+            "type": "TilemapLayer",
+            "id": "43f2d38f-d5ca-45e8-8fb1-7267f7e4de3b",
+            "label": "harvest_1",
+            "scope": "CLASS",
+            "tilemapId": "31978ed7-ea46-4d76-b9a2-fb84f6e8c7f4",
+            "layerName": "harvest",
+            "tilesets": [
+                "GroundTileset",
+                "TreePatteren",
+                "CityHouses_v02",
+                "Building_5_Door_32x32_2",
+                "LakeBorderCornerAni",
+                "LakeBorderAni",
+                "Fishes_3_32x32",
+                "LakeDecoration",
+                "LakeFloatingRock_V03",
+                "LakeFloatingRock_V01",
+                "LakeFloatingRock_V02",
+                "GroundTileset_V02",
+                "RocksOnGrass_V01",
+                "RockOnGrass_V02",
+                "RoadStone",
+                "Fence_V01",
+                "Farming_Soil_Tile_V01",
+                "Swan_Sheet_V01",
+                "Frog_Sheet_V01"
+            ]
         },
         {
             "type": "Sprite",
@@ -849,10 +958,6 @@
                     "imageKey": "GroundTileset_V02"
                 },
                 {
-                    "name": "SoilCorner_v02",
-                    "imageKey": "SoilCorner_v02"
-                },
-                {
                     "name": "RocksOnGrass_V01",
                     "imageKey": "RocksOnGrass_V01"
                 },
@@ -867,6 +972,18 @@
                 {
                     "name": "Fence_V01",
                     "imageKey": "Fence_V01"
+                },
+                {
+                    "name": "Farming_Soil_Tile_V01",
+                    "imageKey": "Farming_Soil_Tile_V01"
+                },
+                {
+                    "name": "Swan_Sheet_V01",
+                    "imageKey": "Swan_Sheet_V01"
+                },
+                {
+                    "name": "Frog_Sheet_V01",
+                    "imageKey": "Frog_Sheet_V01"
                 }
             ]
         }
