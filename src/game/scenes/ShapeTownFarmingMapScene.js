@@ -19,6 +19,10 @@ import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 import OpenQuest from "../prefabs/hud/OpenQuest";
 import FarmingTree1 from "../prefabs/Trees/FarmingTree1";
 import FarmingTree2 from "../prefabs/Trees/FarmingTree2";
+import StonePrefab_2 from "../prefabs/stone/StonePrefab_2";
+import WaterwellPrefab from "../prefabs/Fountan/WaterwellPrefab";
+import DeadTree2 from "../prefabs/Trees/DeadTree2";
+import DeadTree1 from "../prefabs/Trees/DeadTree1";
 /* START-USER-IMPORTS */
 import questSystem from "../../components/QuestSystem";
 import { extendSceneWithQuests } from "../../components/QuestSystem"; 
@@ -84,7 +88,7 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		const bG_ramp_1 = shapetownFarmingMap.createLayer("BG/ramp", [], 0, 0);
 
 		// lake_lake_1
-		const lake_lake_1 = shapetownFarmingMap.createLayer("Lake/lake", ["LakeBorderAni","LakeBorderCornerAni","Fishes_3_32x32","GroundTileset_V02"], 0, 0);
+		const lake_lake_1 = shapetownFarmingMap.createLayer("Lake/lake", ["LakeBorderAni","LakeBorderCornerAni","Fishes_3_32x32"], 0, 0);
 
 		// tree_border_Fence_1
 		const tree_border_Fence_1 = shapetownFarmingMap.createLayer("tree border/Fence", ["RoadStone"], 0, 0);
@@ -240,10 +244,156 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// farmingTree1
 		const farmingTree1 = new FarmingTree1(this, 441, 975);
 		this.add.existing(farmingTree1);
+		farmingTree1.flipX = true;
+		farmingTree1.flipY = false;
 
 		// farmingTree2
 		const farmingTree2 = new FarmingTree2(this, 445, 774);
 		this.add.existing(farmingTree2);
+
+		// farmingTree_1
+		const farmingTree_1 = new FarmingTree1(this, 930, 746);
+		this.add.existing(farmingTree_1);
+
+		// farmingTree
+		const farmingTree = new FarmingTree2(this, 838, 763);
+		this.add.existing(farmingTree);
+		farmingTree.flipX = true;
+		farmingTree.flipY = false;
+
+		// farmingTree_2
+		const farmingTree_2 = new FarmingTree2(this, 853, 843);
+		this.add.existing(farmingTree_2);
+
+		// stonePrefab_2
+		const stonePrefab_2 = new StonePrefab_2(this, 541, 929);
+		this.add.existing(stonePrefab_2);
+
+		// farmingTree_3
+		const farmingTree_3 = new FarmingTree2(this, 948, 948);
+		this.add.existing(farmingTree_3);
+		farmingTree_3.flipX = true;
+		farmingTree_3.flipY = false;
+
+		// farmingTree_5
+		const farmingTree_5 = new FarmingTree1(this, 1191, 787);
+		this.add.existing(farmingTree_5);
+
+		// stonePrefab_5
+		const stonePrefab_5 = new StonePrefab_1(this, 1502, 641);
+		this.add.existing(stonePrefab_5);
+
+		// farmingTree_6
+		const farmingTree_6 = new FarmingTree1(this, 1832, 1191);
+		this.add.existing(farmingTree_6);
+
+		// farmingTree_7
+		const farmingTree_7 = new FarmingTree2(this, 2006, 1072);
+		this.add.existing(farmingTree_7);
+
+		// farmingTree_8
+		const farmingTree_8 = new FarmingTree2(this, 1599, 887);
+		this.add.existing(farmingTree_8);
+
+		// stonePrefab_6
+		const stonePrefab_6 = new StonePrefab_4(this, 2288, 1203);
+		this.add.existing(stonePrefab_6);
+
+		// stonePrefab_7
+		const stonePrefab_7 = new StonePrefab_2(this, 1152, 385);
+		this.add.existing(stonePrefab_7);
+
+		// farmingTree_4
+		const farmingTree_4 = new FarmingTree2(this, 950, 454);
+		this.add.existing(farmingTree_4);
+
+		// stonePrefab_8
+		const stonePrefab_8 = new StonePrefab_2(this, 1299, 577);
+		this.add.existing(stonePrefab_8);
+
+		// farmingTree_9
+		const farmingTree_9 = new FarmingTree2(this, 1479, 383);
+		this.add.existing(farmingTree_9);
+
+		// waterwellPrefab
+		const waterwellPrefab = new WaterwellPrefab(this, 1542, 501);
+		this.add.existing(waterwellPrefab);
+
+		// stonePrefab_9
+		const stonePrefab_9 = new StonePrefab_2(this, 2008, 1441);
+		this.add.existing(stonePrefab_9);
+
+		// stonePrefab_10
+		const stonePrefab_10 = new StonePrefab_3(this, 1776, 1553);
+		this.add.existing(stonePrefab_10);
+
+		// farmingTree_10
+		const farmingTree_10 = new FarmingTree2(this, 2151, 864);
+		this.add.existing(farmingTree_10);
+		farmingTree_10.flipX = true;
+		farmingTree_10.flipY = false;
+
+		// farmingTree_11
+		const farmingTree_11 = new FarmingTree2(this, 1399, 563);
+		this.add.existing(farmingTree_11);
+
+		// farmingTree_12
+		const farmingTree_12 = new FarmingTree1(this, 1066, 1201);
+		this.add.existing(farmingTree_12);
+		farmingTree_12.flipX = true;
+		farmingTree_12.flipY = false;
+
+		// farmingTree_13
+		const farmingTree_13 = new FarmingTree2(this, 1365, 1167);
+		this.add.existing(farmingTree_13);
+		farmingTree_13.flipX = true;
+		farmingTree_13.flipY = false;
+
+		// farmingTree_14
+		const farmingTree_14 = new FarmingTree2(this, 1410, 893);
+		this.add.existing(farmingTree_14);
+
+		// farmingTree_15
+		const farmingTree_15 = new FarmingTree2(this, 2175, 1354);
+		this.add.existing(farmingTree_15);
+
+		// farmingTree_16
+		const farmingTree_16 = new FarmingTree1(this, 1797, 1006);
+		this.add.existing(farmingTree_16);
+		farmingTree_16.flipX = true;
+		farmingTree_16.flipY = false;
+
+		// farmingTree_17
+		const farmingTree_17 = new FarmingTree1(this, 608, 1273);
+		this.add.existing(farmingTree_17);
+
+		// farmingTree_18
+		const farmingTree_18 = new FarmingTree1(this, 1930, 1569);
+		this.add.existing(farmingTree_18);
+
+		// deadTree2
+		const deadTree2 = new DeadTree2(this, 1113, 1030);
+		this.add.existing(deadTree2);
+		deadTree2.flipX = true;
+		deadTree2.flipY = false;
+
+		// deadTree_1
+		const deadTree_1 = new DeadTree2(this, 1048, 791);
+		this.add.existing(deadTree_1);
+
+		// deadTree1
+		const deadTree1 = new DeadTree1(this, 1614, 1585);
+		this.add.existing(deadTree1);
+
+		// deadTree
+		const deadTree = new DeadTree1(this, 383, 1148);
+		this.add.existing(deadTree);
+
+		// deadTree_2
+		const deadTree_2 = new DeadTree1(this, 917, 1424);
+		this.add.existing(deadTree_2);
+		deadTree_2.flipX = true;
+		deadTree_2.flipY = false;
 
 		// oldManJackNpcPrefab (prefab fields)
 		oldManJackNpcPrefab.player = playerPrefab;
@@ -289,6 +439,38 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		this.swanSwan_Sheet_1 = swanSwan_Sheet_1;
 		this.farmingTree1 = farmingTree1;
 		this.farmingTree2 = farmingTree2;
+		this.farmingTree_1 = farmingTree_1;
+		this.farmingTree = farmingTree;
+		this.farmingTree_2 = farmingTree_2;
+		this.stonePrefab_2 = stonePrefab_2;
+		this.farmingTree_3 = farmingTree_3;
+		this.farmingTree_5 = farmingTree_5;
+		this.stonePrefab_5 = stonePrefab_5;
+		this.farmingTree_6 = farmingTree_6;
+		this.farmingTree_7 = farmingTree_7;
+		this.farmingTree_8 = farmingTree_8;
+		this.stonePrefab_6 = stonePrefab_6;
+		this.stonePrefab_7 = stonePrefab_7;
+		this.farmingTree_4 = farmingTree_4;
+		this.stonePrefab_8 = stonePrefab_8;
+		this.farmingTree_9 = farmingTree_9;
+		this.waterwellPrefab = waterwellPrefab;
+		this.stonePrefab_9 = stonePrefab_9;
+		this.stonePrefab_10 = stonePrefab_10;
+		this.farmingTree_10 = farmingTree_10;
+		this.farmingTree_11 = farmingTree_11;
+		this.farmingTree_12 = farmingTree_12;
+		this.farmingTree_13 = farmingTree_13;
+		this.farmingTree_14 = farmingTree_14;
+		this.farmingTree_15 = farmingTree_15;
+		this.farmingTree_16 = farmingTree_16;
+		this.farmingTree_17 = farmingTree_17;
+		this.farmingTree_18 = farmingTree_18;
+		this.deadTree2 = deadTree2;
+		this.deadTree_1 = deadTree_1;
+		this.deadTree1 = deadTree1;
+		this.deadTree = deadTree;
+		this.deadTree_2 = deadTree_2;
 		this.shapetownFarmingMap = shapetownFarmingMap;
 
 		this.events.emit("scene-awake");
@@ -372,6 +554,70 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 	farmingTree1;
 	/** @type {FarmingTree2} */
 	farmingTree2;
+	/** @type {FarmingTree1} */
+	farmingTree_1;
+	/** @type {FarmingTree2} */
+	farmingTree;
+	/** @type {FarmingTree2} */
+	farmingTree_2;
+	/** @type {StonePrefab_2} */
+	stonePrefab_2;
+	/** @type {FarmingTree2} */
+	farmingTree_3;
+	/** @type {FarmingTree1} */
+	farmingTree_5;
+	/** @type {StonePrefab_1} */
+	stonePrefab_5;
+	/** @type {FarmingTree1} */
+	farmingTree_6;
+	/** @type {FarmingTree2} */
+	farmingTree_7;
+	/** @type {FarmingTree2} */
+	farmingTree_8;
+	/** @type {StonePrefab_4} */
+	stonePrefab_6;
+	/** @type {StonePrefab_2} */
+	stonePrefab_7;
+	/** @type {FarmingTree2} */
+	farmingTree_4;
+	/** @type {StonePrefab_2} */
+	stonePrefab_8;
+	/** @type {FarmingTree2} */
+	farmingTree_9;
+	/** @type {WaterwellPrefab} */
+	waterwellPrefab;
+	/** @type {StonePrefab_2} */
+	stonePrefab_9;
+	/** @type {StonePrefab_3} */
+	stonePrefab_10;
+	/** @type {FarmingTree2} */
+	farmingTree_10;
+	/** @type {FarmingTree2} */
+	farmingTree_11;
+	/** @type {FarmingTree1} */
+	farmingTree_12;
+	/** @type {FarmingTree2} */
+	farmingTree_13;
+	/** @type {FarmingTree2} */
+	farmingTree_14;
+	/** @type {FarmingTree2} */
+	farmingTree_15;
+	/** @type {FarmingTree1} */
+	farmingTree_16;
+	/** @type {FarmingTree1} */
+	farmingTree_17;
+	/** @type {FarmingTree1} */
+	farmingTree_18;
+	/** @type {DeadTree2} */
+	deadTree2;
+	/** @type {DeadTree2} */
+	deadTree_1;
+	/** @type {DeadTree1} */
+	deadTree1;
+	/** @type {DeadTree1} */
+	deadTree;
+	/** @type {DeadTree1} */
+	deadTree_2;
 	/** @type {Phaser.Tilemaps.Tilemap} */
 	shapetownFarmingMap;
 
@@ -564,6 +810,11 @@ initInventorySystem() {
 			}
 		});
 
+		this.shapeFarmingHousePrefab.setupCollision(this.playerPrefab);
+		this.setupAllTreesCollision();
+		this.setupAllStonesCollision();
+		this.deadTree2.setupCollision(this.playerPrefab)
+
 		this.setupHarvestTiles();
 		this.setupLayerDepths();
 		this.achievements = {
@@ -589,6 +840,13 @@ initInventorySystem() {
 	  	this.shapeFarmingHousePrefab.setupCollision(this.playerPrefab);
 		this.farmingTree1.setupCollision(this.playerPrefab)
 		this.farmingTree2.setupCollision(this.playerPrefab)
+		this.deadTree_1.setupCollision(this.playerPrefab)
+		this.deadTree2.setupCollision(this.playerPrefab)
+
+		this.deadTree.setupCollision(this.playerPrefab)
+		this.deadTree1.setupCollision(this.playerPrefab)
+		this.deadTree_2.setupCollision(this.playerPrefab)
+
 
 	  	this.physics.add.collider(this.playerPrefab, this.lake_lake_1);
 	  	this.lake_lake_1.setCollisionBetween(0, 10000);
@@ -686,16 +944,91 @@ initInventorySystem() {
 	    }
 	});
 
+
+
       this.physics.add.existing(this.stonePrefab, true);
       this.physics.add.existing(this.stonePrefab_1, true);	
       this.physics.add.existing(this.stonePrefab_3, true);
       this.physics.add.existing(this.stonePrefab_4, true);
+	  this.physics.add.existing(this.stonePrefab_5, true);
+      this.physics.add.existing(this.stonePrefab_6, true);	
+      this.physics.add.existing(this.stonePrefab_7, true);
+      this.physics.add.existing(this.stonePrefab_8, true);
+	  this.physics.add.existing(this.stonePrefab_9, true);
+      this.physics.add.existing(this.stonePrefab_10, true);	
 
       this.physics.add.collider(this.playerPrefab, this.stonePrefab);
       this.physics.add.collider(this.playerPrefab, this.stonePrefab_1);
       this.physics.add.collider(this.playerPrefab, this.stonePrefab_3);
       this.physics.add.collider(this.playerPrefab, this.stonePrefab_4);
+	  this.physics.add.collider(this.playerPrefab, this.stonePrefab_5);
+      this.physics.add.collider(this.playerPrefab, this.stonePrefab_6);
+	  this.physics.add.collider(this.playerPrefab, this.stonePrefab_7);
+      this.physics.add.collider(this.playerPrefab, this.stonePrefab_8);
+	  this.physics.add.collider(this.playerPrefab, this.stonePrefab_9);
+      this.physics.add.collider(this.playerPrefab, this.stonePrefab_10);
+
+
 	}
+	setupAllTreesCollision() {
+    // Regular trees
+    const farmingTrees = [
+        this.farmingTree1,
+        this.farmingTree2,
+        this.farmingTree_1,
+        this.farmingTree,
+        this.farmingTree_2,
+        this.farmingTree_3,
+        this.farmingTree_5,
+        this.farmingTree_6, 
+        this.farmingTree_7,
+        this.farmingTree_8,
+        this.farmingTree_4,
+        this.farmingTree_9,
+        this.farmingTree_10,
+		this.farmingTree_12,
+		this.farmingTree_11,
+		this.farmingTree_13,
+		this.farmingTree_14,
+		this.farmingTree_15,
+		this.farmingTree_16,
+		this.farmingTree_17,
+		this.farmingTree_18
+    ];
+
+    farmingTrees.forEach(tree => {
+        if (tree && typeof tree.setupCollision === 'function') {
+            tree.setupCollision(this.playerPrefab);
+        }
+    });
+
+    if (this.waterwellPrefab && typeof this.waterwellPrefab.setupCollision === 'function') {
+        this.waterwellPrefab.setupCollision(this.playerPrefab);
+    }
+}
+
+setupAllStonesCollision() {
+    const stones = [
+        this.stonePrefab,
+        this.stonePrefab_1,
+        this.stonePrefab_2,
+        this.stonePrefab_3,
+        this.stonePrefab_4,
+        this.stonePrefab_5,
+        this.stonePrefab_6,
+        this.stonePrefab_7,
+        this.stonePrefab_8,
+        this.stonePrefab_9,
+        this.stonePrefab_10
+    ];
+
+    stones.forEach(stone => {
+        if (stone) {
+            this.physics.add.existing(stone, true);
+            this.physics.add.collider(this.playerPrefab, stone);
+        }
+    });
+}
 	/* END-USER-CODE */
 }
 

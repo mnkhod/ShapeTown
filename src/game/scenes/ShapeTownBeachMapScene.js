@@ -54,7 +54,6 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		shapetownBeach.addTilesetImage("TreePalmSheet_03", "TreePalmSheet_03");
 		shapetownBeach.addTilesetImage("TreePalmSheet_02", "TreePalmSheet_02");
 		shapetownBeach.addTilesetImage("CapitansCabin", "CapitansCabin");
-		shapetownBeach.addTilesetImage("RockOnSand_V01", "RockOnSand_V01");
 		shapetownBeach.addTilesetImage("ShellBeach_V01", "ShellBeach_V01");
 
 		// sand_1
@@ -80,19 +79,19 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		const stonesoad_1 = shapetownBeach.createLayer("stonesoad", ["BeachDeckSheet"], 0, 0);
 
 		// rock_decor_1
-		const rock_decor_1 = shapetownBeach.createLayer("Rock decor", ["RockOnSand_V01"], 0, 0);
+		const rock_decor_1 = shapetownBeach.createLayer("Rock decor", [], 0, 0);
 
 		// blocker
-		const blocker = shapetownBeach.createLayer("blocker1", ["RockOnSand_V01"], 0, 0);
+		const blocker = shapetownBeach.createLayer("blocker1", [], 0, 0);
 
 		// blocker_1
-		const blocker_1 = shapetownBeach.createLayer("blocker2", ["RockOnSand_V01"], 0, 0);
+		const blocker_1 = shapetownBeach.createLayer("blocker2", [], 0, 0);
 
 		// blocker_2
-		const blocker_2 = shapetownBeach.createLayer("blocker3", ["RockOnSand_V01"], 0, 0);
+		const blocker_2 = shapetownBeach.createLayer("blocker3", [], 0, 0);
 
 		// blocker_3
-		const blocker_3 = shapetownBeach.createLayer("blocker4", ["RockOnSand_V01"], 0, 0);
+		const blocker_3 = shapetownBeach.createLayer("blocker4", [], 0, 0);
 
 		// beachHousePrefab
 		const beachHousePrefab = new BeachHousePrefab(this, 1415, 435);
@@ -207,7 +206,7 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		this.add.existing(openQuest);
 
 		// shellAreas_1
-		const shellAreas_1 = shapetownBeach.createLayer("ShellAreas", ["BeachDeckSheet"], 0, 0);
+		const shellAreas_1 = shapetownBeach.createLayer("shellAreas_1", ["BeachDeckSheet"], 0, 0);
 
 		this.sand_1 = sand_1;
 		this.beachDeckPrefab = beachDeckPrefab;
@@ -418,13 +417,13 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 			for (let x = 0; x < width; x++) {
 				const tile = soilLayer.getTileAt(x, y);
 
-				if (tile && tile.index === 773) {
+				if (tile && tile.index === 923) {
 					const spawnChance = 0.2;
-                
+
             	    if (Math.random() < spawnChance) {
             	        const worldX = tile.pixelX + soilLayer.x + (tile.width / 2);
             	        const worldY = tile.pixelY + soilLayer.y + (tile.height / 2);
-					
+
             	        const harvestTile = new HarvestShellPrefab(this, worldX, worldY);
             	        this.add.existing(harvestTile);
             	        harvestTile.state = "SHELL"; 

@@ -9,7 +9,7 @@
 export default class StoneBridgeDownPrefab extends Phaser.GameObjects.Image {
 
 	constructor(scene, x, y, texture, frame) {
-		super(scene, x ?? 699, y ?? 360, texture || "StoneBridgeVertical_Prefab_V01", frame ?? 0);
+		super(scene, x ?? 540, y ?? 387, texture || "StoneBridgeVertical_Prefab_V01", frame ?? 0);
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.

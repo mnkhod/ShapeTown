@@ -9,7 +9,7 @@
     ],
     "fileStates": {
         "": {
-            "scaleInDock": 4,
+            "scaleInDock": 1,
             "scaleInEditor": 4
         },
         "C:/Users/eenee/Desktop/Pixel game assets/Epic assets/ERW - Sea Adventures (GL 2.0 expansion) V1.4.1/TiledMap Editor/Tilesets/Atlas-props-sprites.tsx": {
@@ -68,11 +68,11 @@
             "scaleInDock": 1
         },
         "ShapetownBeach.json": {
-            "scale": 0.75,
+            "scale": 0.33,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 1014.6666666666666,
-                "y": 441.33333333333326
+                "x": 1557.5757575757577,
+                "y": 1433.3333333333335
             }
         },
         "ShapetownBeach.json#BeachDeckSheet": {
@@ -84,45 +84,54 @@
             "scaleInEditor": 1.5
         },
         "ShapetownBeach.json#BoatStranded": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownBeach.json#CapitansCabin": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownBeach.json#Lighthouse_v01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownBeach.json#PalmTreePattern": {
-            "scaleInDock": 1.5
+            "scaleInDock": 1.5,
+            "scaleInEditor": 1
         },
         "ShapetownBeach.json#RockOnSand_V01": {
             "scaleInDock": 1.5
         },
         "ShapetownBeach.json#ShellBeach_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownBeach.json#ShipStranded_01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownBeach.json#TreePalmSheet_01": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "ShapetownBeach.json#TreePalmSheet_02": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownBeach.json#TreePalmSheet_03": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json": {
             "expandedGroupLayers": [
+                24,
                 9
             ],
-            "scale": 0.25,
-            "selectedLayer": 11,
+            "scale": 0.33,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 1456,
-                "y": 1008
+                "x": 2463.636363636364,
+                "y": 1069.6969696969695
             }
         },
         "ShapetownFarmingMap.json#Building_5_Door_32x32_2": {
@@ -163,7 +172,7 @@
             "scaleInEditor": 3
         },
         "ShapetownFarmingMap.json#GroundTileset_V02": {
-            "scaleInDock": 2,
+            "scaleInDock": 0.5,
             "scaleInEditor": 1.5
         },
         "ShapetownFarmingMap.json#LakeBorderAni": {
@@ -171,7 +180,7 @@
             "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#LakeBorderCornerAni": {
-            "scaleInDock": 5.5,
+            "scaleInDock": 1.5,
             "scaleInEditor": 1
         },
         "ShapetownFarmingMap.json#LakeDecoration": {
@@ -245,11 +254,11 @@
             "scaleInDock": 1
         },
         "ShapetownMineEntrance.json": {
-            "scale": 0.75,
+            "scale": 0.33,
             "selectedLayer": 17,
             "viewCenter": {
-                "x": 1120,
-                "y": 720
+                "x": 1206.0606060606062,
+                "y": 760.6060606060606
             }
         },
         "ShapetownMineEntrance.json#AncientScript_V01": {
@@ -315,37 +324,40 @@
         },
         "ShapetownSquare.json": {
             "expandedGroupLayers": [
-                13,
-                10,
-                56,
-                81,
+                28,
                 57,
-                45
+                10
             ],
-            "scale": 0.5,
-            "selectedLayer": 20,
+            "scale": 0.33,
+            "selectedLayer": 8,
             "viewCenter": {
-                "x": 1886,
-                "y": 1164
+                "x": 2948.484848484849,
+                "y": 1151.5151515151515
             }
         },
         "ShapetownSquare.json#AdventureGuildBuilding": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Apple": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#BarricadeSpikes_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#BarricadeSpikes_V02": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#BarricadeSpikes_V03": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Barricade_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#BeachWaterSheet_v01": {
             "scaleInEditor": 3
@@ -363,95 +375,118 @@
             "scaleInEditor": 1
         },
         "ShapetownSquare.json#Campfire_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#CarriageBroken_01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Carriage_v01": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "ShapetownSquare.json#DecorationWeaponStand": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Fence_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Foodstand": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#FoodstandBarrel_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#FoodstandIcon": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#FoodstandStall_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Foodstand_Busket": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#GroundTileset": {
             "scaleInDock": 1
         },
         "ShapetownSquare.json#GroundTileset_V02": {
-            "scaleInDock": 3,
+            "scaleInDock": 0.75,
             "scaleInEditor": 1
         },
         "ShapetownSquare.json#Log_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#MerchantCabin_v01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#MerchantIcon": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#MerchentanCarriege": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#NPCGuardian_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#NPCMarcus_Mining_Fullset": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#NPCRowan_Fullset_Walk_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#NPCShopStandMaerchant": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#NPCSoilderSpearAttack_V01": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "ShapetownSquare.json#NPCSoildersFullsetWalking_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#NpcBlaksmith": {
             "scaleInDock": 1,
             "scaleInEditor": 3
         },
         "ShapetownSquare.json#RiverShallowSheet_v01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#RoadStone": {
             "scaleInDock": 1
         },
         "ShapetownSquare.json#RockOnGrass_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#RockOnGrass_V02": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#RockOnGrass_V03": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#RockOnGrass_V04": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#ShapetownHall_v01": {
             "scaleInDock": 1
@@ -464,58 +499,76 @@
             "scaleInDock": 1
         },
         "ShapetownSquare.json#StoneBridgeHorizontal_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#StoneBridgeVertical_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tent_V02": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tent_V03": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tent_V04": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#TorchBowl_V01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#TownHall": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#TreePatteren": {
-            "scaleInDock": 0.5
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tree_v01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tree_v014": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tree_v02": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tree_v03": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tree_v05": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tree_v06": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tree_v08": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Tree_v09": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#WatchtowerBack_01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#WatchtowerFront_01": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#Watchtower_01": {
             "scaleInDock": 1
@@ -525,16 +578,20 @@
             "scaleInEditor": 3
         },
         "ShapetownSquare.json#Waterwell": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#WaterwellRoof": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#bush": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ShapetownSquare.json#dragon fossil - complete - with grass": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "ThePlayerHouseInterior.json": {
             "expandedGroupLayers": [
@@ -598,7 +655,7 @@
         }
     },
     "frame.defaultDuration": 100,
-    "last.imagePath": "C:/Users/nmh/Documents/GitHub/ShapeTown/public/assets/Mob/Friendly",
+    "last.imagePath": "C:/Users/nmh/Documents/GitHub/ShapeTown/public/assets/Tree",
     "map.height": 30,
     "map.lastUsedFormat": "json",
     "map.width": 40,
@@ -610,9 +667,9 @@
     ],
     "project": "Shapetown.tiled-project",
     "recentFiles": [
-        "ShapetownMineEntrance.json",
-        "ShapetownBeach.json",
         "ShapetownSquare.json",
+        "ShapetownBeach.json",
+        "ShapetownMineEntrance.json",
         "ShapetownFarmingMap.json",
         "ThePlayerHouseInterior.json",
         "ShapetownInsideTownHall.json",

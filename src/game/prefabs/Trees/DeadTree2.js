@@ -11,6 +11,7 @@ export default class DeadTree2 extends Phaser.GameObjects.Image {
         this.body.setSize(50, 20, false);
         this.body.setOffset(8, 70);
         this.body.moves = false;
+        this.body.immovable = true;
 
         // Track transparency states
         this.isTreeInvisible = false;
@@ -81,7 +82,9 @@ export default class DeadTree2 extends Phaser.GameObjects.Image {
     }
 
     setupCollision(player) {
-        this.scene.physics.add.collider(player, this);
+        if (!this.scene || !player) return;
+
+        this.scene.physics.add.collider(player, this, null, null, this);
         this.player = player;
     }
 

@@ -12,6 +12,7 @@ export default class FarmingTree1 extends Phaser.GameObjects.Image {
 
         /* START-USER-CTR-CODE */
         // Setup physics
+        
         scene.add.existing(this);
         scene.physics.add.existing(this, false);
 

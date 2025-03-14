@@ -97,6 +97,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		shapetownSquare.addTilesetImage("WatchtowerBack_01", "WatchtowerBack_01");
 		shapetownSquare.addTilesetImage("WatchtowerFront_01", "WatchtowerFront_01");
 		shapetownSquare.addTilesetImage("Barricade_V01", "BarricadeSpikes_V01");
+		shapetownSquare.addTilesetImage("dragon fossil - complete - with grass");
 		shapetownSquare.addTilesetImage("AdventureGuildBuilding", "AdventureGuildBuilding");
 		shapetownSquare.addTilesetImage("NPCSoilderSpearAttack_V01", "NPCSoilderSpearAttack_V01");
 		shapetownSquare.addTilesetImage("NPCGuardian_V01", "NPCGuardian_V01");
@@ -130,7 +131,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const collution_StoneFence_1 = shapetownSquare.createLayer("Collution/StoneFence", ["GroundTileset_V02"], 0, 0);
 
 		// river_River_1
-		const river_River_1 = shapetownSquare.createLayer("River/River", ["RiverShallowSheet_v01"], 0, 0);
+		const river_River_1 = shapetownSquare.createLayer("River/River", ["RiverShallowSheet_v01","GroundTileset_V02"], 0, 0);
 
 		// decoration_
 		const decoration_ = shapetownSquare.createLayer("Decoration/9", ["TreePatteren"], 0, 0);
@@ -208,7 +209,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		const barracks_Barricade_1 = shapetownSquare.createLayer("Barracks/Barricade2", ["BarricadeSpikes_V03","BarricadeSpikes_V02","BarricadeSpikes_V01"], 0, 0);
 
 		// barracks_Barricade_2
-		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
+		const barracks_Barricade_2 = shapetownSquare.createLayer("Barracks/Barricade1", ["Barricade_V01","BarricadeSpikes_V02","BarricadeSpikes_V03","BarricadeSpikes_V01"], 0, 0);
 
 		// playerPrefab
 		const playerPrefab = new PlayerPrefab(this, 1630, 1988);
@@ -270,11 +271,11 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 		this.add.existing(squareCampFirePrefab_3);
 
 		// stoneBridgeDownPrefab
-		const stoneBridgeDownPrefab = new StoneBridgeDownPrefab(this, 2434, 2536);
+		const stoneBridgeDownPrefab = new StoneBridgeDownPrefab(this, 2408, 2536);
 		this.add.existing(stoneBridgeDownPrefab);
 
 		// stoneBridgeRightPrefab
-		const stoneBridgeRightPrefab = new StoneBridgeRightPrefab(this, 3183, 1731);
+		const stoneBridgeRightPrefab = new StoneBridgeRightPrefab(this, 3183, 1757);
 		this.add.existing(stoneBridgeRightPrefab);
 
 		// decoration_Rock
@@ -1291,6 +1292,7 @@ create() {
 	this.merchantCabinPrefab.setupCollision(this.playerPrefab)
 	this.blacksmithPrefab.setupCollision(this.playerPrefab)
 
+
     this.physics.add.collider(this.playerPrefab, this.collution_WoodenFence_1);
     this.collution_WoodenFence_1.setCollisionBetween(0, 10000);
 
@@ -1362,6 +1364,9 @@ create() {
 
     this.physics.add.collider(this.playerPrefab, this.forager_home_Tent_1);
     this.forager_home_Tent_1.setCollisionBetween(0, 10000);
+
+	this.physics.add.collider(this.playerPrefab, this.tree_left_side_5);
+    this.tree_left_side_5.setCollisionBetween(0, 10000);
 
     this.physics.add.existing(this.barricade_V_2, true);
     this.physics.add.existing(this.barricade_V_1, true);

@@ -2,7 +2,6 @@
     "id": "4d2fb1bf-853f-4c5d-adbc-4126a1d17a5d",
     "sceneType": "SCENE",
     "settings": {
-        "snapEnabled": true,
         "snapWidth": 2560,
         "snapHeight": 1920,
         "exportClass": true,
@@ -32,7 +31,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -66,7 +64,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -88,7 +85,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -110,7 +106,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -132,7 +127,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -154,7 +148,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -176,7 +169,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -198,7 +190,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -220,7 +211,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -242,7 +232,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -264,7 +253,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         },
@@ -598,11 +586,11 @@
         },
         {
             "type": "TilemapLayer",
-            "id": "7bb06653-ce52-4a70-bd85-6423878e314b",
+            "id": "b3cef5b8-0b53-4ac7-9728-8f7a4b441f75",
             "label": "shellAreas_1",
             "scope": "CLASS",
             "tilemapId": "a3130f0d-8456-4f2b-9938-8fa93589c815",
-            "layerName": "ShellAreas",
+            "layerName": "shellAreas_1",
             "tilesets": [
                 "BeachWaterSheet_v01",
                 "BeachDeckSheet",
@@ -614,7 +602,6 @@
                 "TreePalmSheet_03",
                 "TreePalmSheet_02",
                 "CapitansCabin",
-                "RockOnSand_V01",
                 "ShellBeach_V01"
             ]
         }
@@ -665,10 +652,6 @@
                 {
                     "name": "CapitansCabin",
                     "imageKey": "CapitansCabin"
-                },
-                {
-                    "name": "RockOnSand_V01",
-                    "imageKey": "RockOnSand_V01"
                 },
                 {
                     "name": "ShellBeach_V01",

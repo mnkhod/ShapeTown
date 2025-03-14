@@ -3354,7 +3354,7 @@
             {
                 "url": "assets/Ground tileset/StoneBridgeVertical_Prefab_V01.png",
                 "frameConfig": {
-                    "frameWidth": 96,
+                    "frameWidth": 128,
                     "frameHeight": 160,
                     "startFrame": 0,
                     "endFrame": -1,
