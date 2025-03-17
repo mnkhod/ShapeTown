@@ -47,6 +47,7 @@
                     "lineSpacing": 3,
                     "align": "center",
                     "fontSize": "12px",
+                    "color": "#000",
                     "maxLines": 3,
                     "wordWrapWidth": 250,
                     "wordWrapUseAdvanced": true

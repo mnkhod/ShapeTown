@@ -24,7 +24,7 @@ export default class AlertPrefab extends Phaser.GameObjects.Container {
 		const msg = scene.add.text(150.81828568909967, 47.456869152431125, "", {});
 		msg.setOrigin(0.5, 0.5);
 		msg.text = "New text";
-		msg.setStyle({ "align": "center", "fixedWidth": 250, "fontSize": "12px", "maxLines": 3 });
+		msg.setStyle({ "align": "center", "color": "#000", "fixedWidth": 250, "fontSize": "12px", "maxLines": 3 });
 		msg.setLineSpacing(3);
 		msg.setWordWrapWidth(250, true);
 		this.add(msg);

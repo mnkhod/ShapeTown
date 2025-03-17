@@ -15,7 +15,7 @@ class GoldManager {
      */
     getGoldFromGame() {
       const instance = this.phaserInstance;
-      if (!instance) return 0;
+      if (!instance) return 10000;
       
       // Try to get gold from all possible locations
       if (instance.gold !== undefined) {
@@ -26,7 +26,7 @@ class GoldManager {
         return instance.TotalGoldPrefab.TotalGold;
       }
       
-      return 0;
+      return 10000;
     }
     
     /**

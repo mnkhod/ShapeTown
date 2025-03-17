@@ -1876,9 +1876,19 @@
                 "key": "HudItemSlot"
             },
             {
+                "url": "assets/InventoryIcons/Icon_Bottle_Of_Wine.png",
+                "type": "image",
+                "key": "Icon_Bottle_Of_Wine"
+            },
+            {
                 "url": "assets/InventoryIcons/Icon_Coal.png",
                 "type": "image",
                 "key": "Icon_Coal"
+            },
+            {
+                "url": "assets/InventoryIcons/Icon_Flour.png",
+                "type": "image",
+                "key": "Icon_Flour"
             },
             {
                 "url": "assets/InventoryIcons/Icon_Goblin_Ear.png",
