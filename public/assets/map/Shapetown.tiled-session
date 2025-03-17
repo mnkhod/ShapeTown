@@ -72,7 +72,7 @@
             "selectedLayer": 8,
             "viewCenter": {
                 "x": 1557.5757575757577,
-                "y": 1433.3333333333335
+                "y": 1433.3333333333333
             }
         },
         "ShapetownBeach.json#BeachDeckSheet": {
@@ -130,8 +130,8 @@
             "scale": 0.33,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 2463.636363636364,
-                "y": 1069.6969696969695
+                "x": 1330.3030303030303,
+                "y": 881.8181818181818
             }
         },
         "ShapetownFarmingMap.json#Building_5_Door_32x32_2": {
@@ -325,14 +325,14 @@
         "ShapetownSquare.json": {
             "expandedGroupLayers": [
                 28,
-                57,
-                10
+                10,
+                57
             ],
             "scale": 0.33,
             "selectedLayer": 8,
             "viewCenter": {
-                "x": 2948.484848484849,
-                "y": 1151.5151515151515
+                "x": 1912.121212121212,
+                "y": 1013.6363636363636
             }
         },
         "ShapetownSquare.json#AdventureGuildBuilding": {
