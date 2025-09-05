@@ -1,25 +1,25 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
-import Phaser from 'phaser';
-import { PhaserGame } from './game/PhaserGame';
-import SettingsComponent from './components/Settings';
-import AchievementHUD from './components/AchievementHUD';
-import InventoryHUD from './components/InventoryHUD';
-import TokenTrader from './components/TokenTrader';
-import QuestComponent from './components/QuestComponent';
-import NavigateBack from './components/NavigateBack';
-import MailInterface from './components/MailComponent';
-import HelpInterface from './components/HelpAndSupport';
-import SignOutModal from './components/LogoutComponent';
-import LeaderboardComponent from './components/LeaderBoard';
-import MerchantSellScreen from './components/TradingSell';
-import MerchantBuyScreen from './components/TradingBuy';
-
+import Phaser from "phaser";
+import { PhaserGame } from "./game/PhaserGame";
+import SettingsComponent from "./components/Settings";
+import AchievementHUD from "./components/AchievementHUD";
+import InventoryHUD from "./components/InventoryHUD";
+import TokenTrader from "./components/TokenTrader";
+import QuestComponent from "./components/QuestComponent";
+import NavigateBack from "./components/NavigateBack";
+import MailInterface from "./components/MailComponent";
+import HelpInterface from "./components/HelpAndSupport";
+import SignOutModal from "./components/LogoutComponent";
+import LeaderboardComponent from "./components/LeaderBoard";
+import MerchantSellScreen from "./components/TradingSell";
+import MerchantBuyScreen from "./components/TradingBuy";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ethers } from "ethers";
 import { EventBus } from "./game/EventBus";
 
-
 function App() {
+    const client = new QueryClient();
     const phaserRef = useRef();
 
     const [showAchievements, setShowAchievements] = useState(false);
@@ -36,20 +36,18 @@ function App() {
     const [showLeaderboard, setShowLeaderboard] = useState(false);
     const [showShopSell, setShowShopSell] = useState(false);
     const [showShopBuy, setShowShopBuy] = useState(false);
-    const [merchantType, setMerchantType] = useState('farmer');
+    const [merchantType, setMerchantType] = useState("farmer");
 
     const [gameData] = useState({});
 
-    const currentScene = (scene) => {
-
-    }
+    const currentScene = (scene) => {};
 
     const handleTrade = ({ fromAmount, fromToken, toToken }) => {
-        console.log('Trading:', { fromAmount, fromToken, toToken });
+        console.log("Trading:", { fromAmount, fromToken, toToken });
     };
 
     const showModal = (id, modalData) => {
-        console.log('App showModal received:', { id, modalData });
+        console.log("App showModal received:", { id, modalData });
         setShowAchievements(false);
         setShowInventory(false);
         setShowTrader(false);
@@ -61,13 +59,13 @@ function App() {
         setShowLeaderboard(false);
         setShowShopSell(false);
         setShowShopBuy(false);
-    
+
         switch (id) {
             case "ACHIVEMENTS":
                 setShowAchievements(true);
                 break;
             case "INVENTORY":
-                console.log('Inventory modal data:', modalData);
+                console.log("Inventory modal data:", modalData);
                 if (modalData && modalData.phaserInstance) {
                     setPhaserInstance(modalData.phaserInstance);
                     setShowInventory(true);
@@ -123,9 +121,9 @@ function App() {
 
     useEffect(() => {
         getMetamaskAccount();
-        
+
         const handleOpenMerchantBuy = (data) => {
-            console.log('Opening merchant buy screen with data:', data);
+            console.log("Opening merchant buy screen with data:", data);
             if (data && data.phaserInstance) {
                 setPhaserInstance(data.phaserInstance);
                 if (data.merchantType) {
@@ -141,7 +139,7 @@ function App() {
         };
 
         const handleOpenMerchantSell = (data) => {
-            console.log('Opening merchant sell screen with data:', data);
+            console.log("Opening merchant sell screen with data:", data);
             if (data && data.phaserInstance) {
                 setPhaserInstance(data.phaserInstance);
                 if (data.merchantType) {
@@ -156,29 +154,29 @@ function App() {
             setPhaserInstance(null);
         };
 
-        EventBus.on('open-merchant-buy', handleOpenMerchantBuy);
-        EventBus.on('close-merchant-buy', handleCloseMerchantBuy);
-        EventBus.on('open-merchant-sell', handleOpenMerchantSell);
-        EventBus.on('close-merchant-sell', handleCloseMerchantSell);
+        EventBus.on("open-merchant-buy", handleOpenMerchantBuy);
+        EventBus.on("close-merchant-buy", handleCloseMerchantBuy);
+        EventBus.on("open-merchant-sell", handleOpenMerchantSell);
+        EventBus.on("close-merchant-sell", handleCloseMerchantSell);
 
         return () => {
-            EventBus.off('open-merchant-buy', handleOpenMerchantBuy);
-            EventBus.off('close-merchant-buy', handleCloseMerchantBuy);
-            EventBus.off('open-merchant-sell', handleOpenMerchantSell);
-            EventBus.off('close-merchant-sell', handleCloseMerchantSell);
+            EventBus.off("open-merchant-buy", handleOpenMerchantBuy);
+            EventBus.off("close-merchant-buy", handleCloseMerchantBuy);
+            EventBus.off("open-merchant-sell", handleOpenMerchantSell);
+            EventBus.off("close-merchant-sell", handleCloseMerchantSell);
         };
     }, []);
-    
+
     useEffect(() => {
         if (showQuest && window.getQuestProgress) {
             const progress = window.getQuestProgress();
             setQuestProgress(progress);
-        
+
             const intervalId = setInterval(() => {
                 const updatedProgress = window.getQuestProgress();
                 setQuestProgress(updatedProgress);
             }, 1000);
-            
+
             return () => clearInterval(intervalId);
         }
     }, [showQuest]);
@@ -187,116 +185,118 @@ function App() {
 
         let provider;
         if (window.ethereum) {
-            provider = new ethers.BrowserProvider(window.ethereum)
+            provider = new ethers.BrowserProvider(window.ethereum);
             signer = await provider.getSigner();
 
-            EventBus.emit("blockchain-account", signer.address)
+            EventBus.emit("blockchain-account", signer.address);
         }
     }
 
     return (
-        <div id="app">
-            <PhaserGame 
-                ref={phaserRef} 
-                currentActiveScene={currentScene} 
-                showModal={showModal} 
-                gameData={gameData} 
-            />
-            {showAchievements && (
-                <AchievementHUD
-                    onClose={() => setShowAchievements(false)}
+        <QueryClientProvider client={client}>
+            <div id="app">
+                <PhaserGame
+                    ref={phaserRef}
+                    currentActiveScene={currentScene}
+                    showModal={showModal}
+                    gameData={gameData}
                 />
-            )}
-            {showInventory && (
-                <InventoryHUD
-                    phaserInstance={phaserInstance}
-                    onClose={() => {
-                        setShowInventory(false);
-                        setPhaserInstance(null);
-                    }}
-                />
-            )}
-            {showTrader && (
-                <TokenTrader
-                    balance={1000}
-                    onTrade={handleTrade}
-                    onClose={() => setShowTrader(false)}
-                />
-            )}
-            {showQuest && (
-                <QuestComponent 
-                    onClose={() => setShowQuest(false)}
-                    playerProgress={questProgress}
-                    onQuestUpdate={(update) => {
-                        if (window.updateQuestProgress) {
-                            window.updateQuestProgress(update);
-                            setQuestProgress(window.getQuestProgress());
-                        }
-                    }}
-                />
-            )}
-            {showSettingsModal && (
-                <SettingsComponent
-                    isOpen={showSettingsModal}
-                    onClose={() => setShowSettingsModal(false)}
-                />
-            )}
-            {showNavigateBack && (
-                <NavigateBack
-                    onClose={() => setShowNavigateBack(false)}
-                    isOpen={showNavigateBack}
-                />
-            )}
-            {showMail && (
-                <MailInterface
-                    onClose={() => setShowMail(false)}
-                    isOpen={showMail}
-                />
-            )}
-            {showHelpSupport && (
-                <HelpInterface
-                  onClose={() => setShowHelpSupport(false)}
-                  isOpen={showHelpSupport}
-                />
-            )}
-            {showSignOutModal && (
-                <SignOutModal
-                    onClose={() => setShowSignOutModal(false)}
-                    isOpen={showSignOutModal}
-                />
-            )}
-            {showLeaderboard && (
-                <LeaderboardComponent
-                    onClose={() => setShowLeaderboard(false)}
-                    isOpen={showLeaderboard}
-                />
-            )}
-            {showShopSell && (
-                <MerchantSellScreen
-                    phaserInstance={phaserInstance}
-                    merchantType={merchantType}
-                    onClose={() => {
-                        setShowShopSell(false);
-                        setPhaserInstance(null);
-                    }}
-                    isOpen={showShopSell}
-                />
-            )}
+                {showAchievements && (
+                    <AchievementHUD
+                        onClose={() => setShowAchievements(false)}
+                    />
+                )}
+                {showInventory && (
+                    <InventoryHUD
+                        phaserInstance={phaserInstance}
+                        onClose={() => {
+                            setShowInventory(false);
+                            setPhaserInstance(null);
+                        }}
+                    />
+                )}
+                {showTrader && (
+                    <TokenTrader
+                        balance={1000}
+                        onTrade={handleTrade}
+                        onClose={() => setShowTrader(false)}
+                    />
+                )}
+                {showQuest && (
+                    <QuestComponent
+                        onClose={() => setShowQuest(false)}
+                        playerProgress={questProgress}
+                        onQuestUpdate={(update) => {
+                            if (window.updateQuestProgress) {
+                                window.updateQuestProgress(update);
+                                setQuestProgress(window.getQuestProgress());
+                            }
+                        }}
+                    />
+                )}
+                {showSettingsModal && (
+                    <SettingsComponent
+                        isOpen={showSettingsModal}
+                        onClose={() => setShowSettingsModal(false)}
+                    />
+                )}
+                {showNavigateBack && (
+                    <NavigateBack
+                        onClose={() => setShowNavigateBack(false)}
+                        isOpen={showNavigateBack}
+                    />
+                )}
+                {showMail && (
+                    <MailInterface
+                        onClose={() => setShowMail(false)}
+                        isOpen={showMail}
+                    />
+                )}
+                {showHelpSupport && (
+                    <HelpInterface
+                        onClose={() => setShowHelpSupport(false)}
+                        isOpen={showHelpSupport}
+                    />
+                )}
+                {showSignOutModal && (
+                    <SignOutModal
+                        onClose={() => setShowSignOutModal(false)}
+                        isOpen={showSignOutModal}
+                    />
+                )}
+                {showLeaderboard && (
+                    <LeaderboardComponent
+                        onClose={() => setShowLeaderboard(false)}
+                        isOpen={showLeaderboard}
+                    />
+                )}
+                {showShopSell && (
+                    <MerchantSellScreen
+                        phaserInstance={phaserInstance}
+                        merchantType={merchantType}
+                        onClose={() => {
+                            setShowShopSell(false);
+                            setPhaserInstance(null);
+                        }}
+                        isOpen={showShopSell}
+                    />
+                )}
 
-            {showShopBuy && (
-                <MerchantBuyScreen
-                    phaserInstance={phaserInstance}
-                    merchantType={merchantType}
-                    onClose={() => {
-                        setShowShopBuy(false);
-                        setPhaserInstance(null);
-                    }}
-                    isOpen={showShopBuy}
-                />
-            )}
-
-        </div>
-    )
+                {showShopBuy && (
+                    <MerchantBuyScreen
+                        phaserInstance={phaserInstance}
+                        merchantType={merchantType}
+                        onClose={() => {
+                            setShowShopBuy(false);
+                            setPhaserInstance(null);
+                        }}
+                        isOpen={showShopBuy}
+                    />
+                )}
+            </div>
+        </QueryClientProvider>
+    );
 }
 
-export default App
+export default App;
+

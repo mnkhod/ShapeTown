@@ -1,4 +1,4 @@
-import api from "./axiosInstance.js";
+import api from "./axios.js";
 
 export const connectWallet = async ({ walletAddress, signature, message }) => {
     const response = await api.post("/auth/connect", {
