@@ -1,4 +1,7 @@
 import { EventEmitter } from "events";
+import { QueryClient } from '@tanstack/react-query';
+import { getQuests } from '../lib/query-helper';
+import { QUEST_KEYS } from '../hooks/useQuests';
 
 class QuestSystem extends EventEmitter {
     constructor() {
@@ -17,8 +20,23 @@ class QuestSystem extends EventEmitter {
         this.activeQuests = new Set();
         this.completedQuests = new Set();
         this.playerProgress = {};
+        this.questsLoaded = false;
+        this.queryClient = null;
+        this.authInitialized = false;
 
-        this.initializeQuestData();
+        // Don't initialize quest data immediately - wait for auth
+    }
+
+    setQueryClient(queryClient) {
+        this.queryClient = queryClient;
+    }
+
+    async initializeWithAuth() {
+        if (this.authInitialized) return;
+        
+        console.log("Initializing quest system with authentication...");
+        this.authInitialized = true;
+        await this.initializeQuestData();
     }
     resetDailyQuest(questId) {
         const quest = this.quests[questId];
@@ -42,270 +60,184 @@ class QuestSystem extends EventEmitter {
         );
     }
 
-    initializeQuestData() {
-        this.quests = {
-            "001": {
-                id: "001",
-                title: "The First Harvest",
-                description: "Learn the basics of farming",
-                category: "Main Quest",
-                location: "Farm area",
-                prerequisites: "none",
-                questGiver: "NPC Jack",
-                completed: false,
-                active: true,
-                subtasks: {
-                    "001-1": {
-                        id: "001-1",
-                        text: "Use a Pickaxe to remove rocks.",
-                        completed: false,
-                    },
-                    "001-2": {
-                        id: "001-2",
-                        text: "Prepare the ground to plant seeds. Use a Hoe tool to get Soil.",
-                        completed: false,
-                    },
-                    "001-3": {
-                        id: "001-3",
-                        text: "Plant carrot seeds. Select a bag of seeds, click on already prepared soil.",
-                        completed: false,
-                    },
-                    "001-4": {
-                        id: "001-4",
-                        text: "Water the planted seed. Select the watering can to water, click on soil planted with seed.",
-                        completed: false,
-                    },
-                    "001-5": {
-                        id: "001-5",
-                        text: "Harvest the goods. Click on already grown carrot.",
-                        completed: false,
-                    },
-                    "001-6": {
-                        id: "001-6",
-                        text: "Go back to meet Jack.",
-                        completed: false,
-                    },
-                },
-                reward: "Pickaxe, Hoe, Watering Can, Carrot seeds x5",
-            },
-            "002": {
-                id: "002",
-                title: "Taste of Gold",
-                description: "Learn about trading in Shape Town",
-                category: "Main Quest",
-                location: "Farm and Town area",
-                prerequisites: "#001",
-                questGiver: "NPC Jack",
-                completed: false,
-                active: false,
-                subtasks: {
-                    "002-1": {
-                        id: "002-1",
-                        text: "Go meet NPC Jack",
-                        completed: false,
-                    },
-                    "002-2": {
-                        id: "002-2",
-                        text: "Go to Shape Town",
-                        completed: false,
-                    },
-                    "002-3": {
-                        id: "002-3",
-                        text: "Find and meet NPC Lady Lydia",
-                        completed: false,
-                    },
-                    "002-4": {
-                        id: "002-4",
-                        text: "Sell items from NPC Jack",
-                        completed: false,
-                    },
-                },
-                reward: "Taste of gold achievement + 1000 gold",
-            },
-            "003": {
-                id: "003",
-                title: "Good Invitation",
-                description: "Get to know the townspeople",
-                category: "Main Quest",
-                location: "Farm, Town, Beach",
-                prerequisites: "#002",
-                questGiver: "Game System",
-                completed: false,
-                active: false,
-                subtasks: {
-                    "003-1": {
-                        id: "003-1",
-                        text: "Go greeting with everyone in town NPCs",
-                        completed: false,
-                    },
-                },
-                reward: "Good Invitation achievement",
-            },
-            "004": {
-                id: "004",
-                title: "Master of the Fields",
-                description: "Become a farming expert",
-                category: "Main Quest",
-                location: "Farm area",
-                prerequisites: "#002 Have to meet NPC Lily",
-                questGiver: "Game System",
-                completed: false,
-                active: false,
-                subtasks: {
-                    "004-1": {
-                        id: "004-1",
-                        text: "Successfully grow one of each crop type",
-                        completed: false,
-                    },
-                },
-                reward: "Open next tier item on Farming",
-            },
-            "005": {
-                id: "005",
-                title: "Adventure Quest",
-                description: "Help Victoria with a monster problem",
-                category: "Daily Quest",
-                location: "Beach area",
-                prerequisites: "#002 Have to meet NPC Victoria",
-                questGiver: "NPC Victoria",
-                completed: false,
-                active: false,
-                subtasks: {
-                    "005-1": {
-                        id: "005-1",
-                        text: "Meet the NPC Victoria",
-                        completed: false,
-                    },
-                    "005-2": {
-                        id: "005-2",
-                        text: "Go to the beach",
-                        completed: false,
-                    },
-                    "005-3": {
-                        id: "005-3",
-                        text: "Kill all of the Monsters",
-                        completed: false,
-                    },
-                    "005-4": {
-                        id: "005-4",
-                        text: "Report Back to NPC Victoria",
-                        completed: false,
-                    },
-                },
-                reward: "Everyday 50g",
-            },
-            "006": {
-                id: "006",
-                title: "Goblin Slayer",
-                description: "Clear the South Hill of goblins",
-                category: "Daily Quest",
-                location: "South Hill",
-                prerequisites: "#002 Have to meet NPC Commander Rowan",
-                questGiver: "NPC Rowan",
-                completed: false,
-                active: false,
-                subtasks: {
-                    "006-1": {
-                        id: "006-1",
-                        text: "Meet the NPC Commander Rowan",
-                        completed: false,
-                    },
-                    "006-2": {
-                        id: "006-2",
-                        text: "Go to the South Hill",
-                        completed: false,
-                    },
-                    "006-3": {
-                        id: "006-3",
-                        text: "Kill all of the Goblins",
-                        completed: false,
-                    },
-                    "006-4": {
-                        id: "006-4",
-                        text: "Report Back to NPC Commander Rowan",
-                        completed: false,
-                    },
-                },
-                reward: "15g each Goblin ear",
-            },
-            "007": {
-                id: "007",
-                title: "Treasure From Sea",
-                description: "Collect seashells for Lydia",
-                category: "Daily Quest",
-                location: "Beach area",
-                prerequisites: "#002 Have to meet NPC Lydia",
-                questGiver: "NPC Lydia",
-                completed: false,
-                active: false,
-                subtasks: {
-                    "007-1": {
-                        id: "007-1",
-                        text: "Meet the NPC Lydia",
-                        completed: false,
-                    },
-                    "007-2": {
-                        id: "007-2",
-                        text: "Go to the beach",
-                        completed: false,
-                    },
-                    "007-3": {
-                        id: "007-3",
-                        text: "Collect the seashells from the beach",
-                        completed: false,
-                    },
-                    "007-4": {
-                        id: "007-4",
-                        text: "Back to meet NPC Lydia",
-                        completed: false,
-                    },
-                },
-                reward: "15g each seashell",
-            },
-            "008": {
-                id: "008",
-                title: "Yam, Yam",
-                description: "Learn to cook with carrots",
-                category: "Side Quest",
-                location: "Town area",
-                prerequisites: "#002",
-                questGiver: "NPC Lily",
-                completed: false,
-                active: false,
-                subtasks: {
-                    "008-1": {
-                        id: "008-1",
-                        text: 'Cook "Carrot Soup" using a recipe from NPC Lily',
-                        completed: false,
-                    },
-                },
-                reward: "Yam, Yam achievement, Recipe: Steamed Carrot",
-            },
-            "012": {
-                id: "012",
-                title: "Every Day!",
-                description: "Give 5 carrots to NPC Jack",
-                category: "Daily Quest",
-                location: "Farm area",
-                prerequisites: "none",
-                questGiver: "NPC Jack",
-                completed: false,
-                active: true,
-                subtasks: {
-                    "012-1": {
-                        id: "012-1",
-                        text: "Give 5 carrots to NPC Jack",
-                        completed: false,
-                    },
-                },
-                reward: "5 carrot seeds",
-            },
-        };
-
-        this.activeQuests.add("001");
+    async initializeQuestData() {
+        try {
+            console.log("Fetching quests using TanStack Query...");
+            
+            // Check if we have a token
+            const token = localStorage.getItem("token");
+            if (!token) {
+                console.warn("No auth token available, loading fallback quests");
+                this.loadFallbackQuests();
+                return;
+            }
+            
+            // Try to get cached data first, then fetch if needed
+            let questData;
+            
+            if (this.queryClient) {
+                questData = await this.queryClient.fetchQuery({
+                    queryKey: QUEST_KEYS.lists(),
+                    queryFn: getQuests,
+                    staleTime: 5 * 60 * 1000, // 5 minutes
+                });
+            } else {
+                // Fallback to direct API call if queryClient not available
+                questData = await getQuests();
+            }
+            
+            if (questData && questData.success && questData.data) {
+                const backendQuests = questData.data;
+                console.log("Successfully fetched quests from backend:", backendQuests.length);
+                
+                this.processQuestData(backendQuests);
+            } else {
+                console.error("Invalid quest data format received from backend");
+                this.loadFallbackQuests();
+            }
+        } catch (error) {
+            console.error("Failed to fetch quests from backend:", error);
+            
+            // Log more detailed error info
+            if (error.response) {
+                console.error("Backend error response:", {
+                    status: error.response.status,
+                    statusText: error.response.statusText,
+                    data: error.response.data,
+                    headers: error.response.headers
+                });
+            }
+            
+            this.loadFallbackQuests();
+        }
     }
 
-    getQuestProgress() {
+    processQuestData(backendQuests) {
+        // Transform backend quest data to internal format
+        this.quests = {};
+        backendQuests.forEach((quest, index) => {
+            const legacyId = String(index + 1).padStart(3, '0');
+            
+            // Create subtasks from tasks
+            const subtasks = {};
+            quest.tasks.forEach((task, taskIndex) => {
+                const subtaskId = `${legacyId}-${taskIndex + 1}`;
+                subtasks[subtaskId] = {
+                    id: subtaskId,
+                    text: task.description,
+                    completed: false,
+                    type: task.type,
+                    ...(task.npcId && { npcId: task.npcId }),
+                    ...(task.mapId && { mapId: task.mapId }),
+                    ...(task.amount && { amount: task.amount }),
+                    ...(task.itemType && { itemType: task.itemType }),
+                    ...(task.recipe && { recipe: task.recipe })
+                };
+            });
+
+            // Map quest type to category
+            const categoryMap = {
+                'MAIN_QUEST': 'Main Quest',
+                'SIDE_QUEST': 'Side Quest',
+                'DAILY_QUEST': 'Daily Quest'
+            };
+
+            // Build reward string
+            let rewardString = '';
+            if (quest.rewards && quest.rewards.length > 0) {
+                const rewardParts = quest.rewards.map(reward => {
+                    if (reward.rewardType === 'GOLD') {
+                        return `${reward.goldAmount} gold`;
+                    } else if (reward.rewardType === 'ITEM') {
+                        return `${reward.item.name} x${reward.itemQuantity}`;
+                    } else if (reward.rewardType === 'ACHIEVEMENT') {
+                        return reward.achievement.name;
+                    }
+                    return '';
+                }).filter(Boolean);
+                rewardString = rewardParts.join(', ');
+            }
+
+            // Determine prerequisites
+            let prerequisites = 'none';
+            if (quest.prerequisites && quest.prerequisites.length > 0) {
+                const prereqQuest = backendQuests.find(q => q.id === quest.prerequisites[0].prerequisiteId);
+                if (prereqQuest) {
+                    const prereqIndex = backendQuests.indexOf(prereqQuest);
+                    prerequisites = `#${String(prereqIndex + 1).padStart(3, '0')}`;
+                }
+            }
+
+            this.quests[legacyId] = {
+                id: legacyId,
+                backendId: quest.id,
+                title: quest.name,
+                description: quest.description,
+                category: categoryMap[quest.questType] || quest.questType,
+                location: quest.mapId ? 'Various locations' : 'Unknown',
+                prerequisites,
+                questGiver: quest.questGiver ? quest.questGiver.name : 'Unknown',
+                completed: false,
+                active: false,
+                subtasks,
+                reward: rewardString,
+                questData: quest // Keep original data for reference
+            };
+        });
+
+        // Find and activate "The First Harvest" quest
+        const firstHarvestQuest = Object.values(this.quests).find(
+            quest => quest.title === "The First Harvest"
+        );
+        
+        if (firstHarvestQuest) {
+            firstHarvestQuest.active = true;
+            this.activeQuests.add(firstHarvestQuest.id);
+            console.log(`Activated quest: ${firstHarvestQuest.title} (${firstHarvestQuest.id})`);
+        }
+
+        this.questsLoaded = true;
+        this.emit('quests:loaded', { quests: this.quests });
+    }
+
+    loadFallbackQuests() {
+        console.log("Loading fallback quest data...");
+        
+        // Fallback quest data (minimal set)
+        const fallbackQuests = [
+            {
+                id: "fallback-001",
+                name: "The First Harvest",
+                description: "Learn the basics of farming",
+                questType: "MAIN_QUEST",
+                tasks: [
+                    { type: "CLEAR_AREA", description: "Clean up the highlighted area using a Pickaxe to remove rocks" },
+                    { type: "PREPARE_SOIL", description: "Use a Hoe tool to prepare the soil for planting" },
+                    { type: "PLANT_SEEDS", description: "Plant carrot seeds in the prepared soil" },
+                    { type: "WATER_PLANTS", description: "Water the planted seeds with the watering can" },
+                    { type: "HARVEST_CROP", description: "Harvest the grown carrots" },
+                    { type: "RETURN_TO_NPC", description: "Return to Old Man Jack" }
+                ],
+                questGiver: { name: "Old Man Jack" },
+                rewards: [{ rewardType: "ITEM", item: { name: "Watering Can" }, itemQuantity: 1 }],
+                prerequisites: []
+            }
+        ];
+
+        this.processQuestData(fallbackQuests);
+    }
+
+    async waitForQuestsLoaded() {
+        if (this.questsLoaded) return;
+        
+        return new Promise((resolve) => {
+            this.once('quests:loaded', resolve);
+        });
+    }
+
+    async getQuestProgress() {
+        await this.waitForQuestsLoaded();
+        
         const progress = {};
 
         Object.values(this.quests).forEach((quest) => {
@@ -397,6 +329,15 @@ class QuestSystem extends EventEmitter {
         this.checkQuestPrerequisites();
 
         this.emit("quest:completed", { questId });
+        
+        // Invalidate TanStack Query cache
+        this.invalidateQuestCache();
+    }
+
+    invalidateQuestCache() {
+        if (this.queryClient) {
+            this.queryClient.invalidateQueries({ queryKey: QUEST_KEYS.all });
+        }
     }
 
     activateQuest(questId) {
@@ -438,6 +379,9 @@ class QuestSystem extends EventEmitter {
         }
 
         this.emit("quest:activated", { questId });
+        
+        // Invalidate TanStack Query cache
+        this.invalidateQuestCache();
     }
 
     checkQuestPrerequisites() {
@@ -467,15 +411,18 @@ class QuestSystem extends EventEmitter {
         return this.completedQuests.has(questId);
     }
 
-    getActiveQuests() {
+    async getActiveQuests() {
+        await this.waitForQuestsLoaded();
         return Array.from(this.activeQuests).map((id) => this.quests[id]);
     }
 
-    getCompletedQuests() {
+    async getCompletedQuests() {
+        await this.waitForQuestsLoaded();
         return Array.from(this.completedQuests).map((id) => this.quests[id]);
     }
 
-    getAllQuests() {
+    async getAllQuests() {
+        await this.waitForQuestsLoaded();
         return Object.values(this.quests);
     }
 
@@ -939,6 +886,17 @@ class QuestSystem extends EventEmitter {
 const questSystem = new QuestSystem();
 
 export default questSystem;
+
+// Helper function to initialize with QueryClient
+export function initializeQuestSystemWithQuery(queryClient) {
+    questSystem.setQueryClient(queryClient);
+    return questSystem;
+}
+
+// Helper function to initialize with auth
+export function initializeQuestSystemWithAuth() {
+    return questSystem.initializeWithAuth();
+}
 
 export function extendSceneWithQuests(scene) {
     if (typeof scene === "function") {

@@ -1,63 +1,30 @@
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { ethers } from "ethers";
-import { connectWallet } from "../lib/authApiService";
+import { useAuth } from "../contexts/AuthContext";
 
 function Login() {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
+    const { login, isAuthenticated, isLoading } = useAuth();
+    const [connecting, setConnecting] = useState(false);
 
-    // Check if wallet is already connected
+    // Check if already authenticated
     useEffect(() => {
-        const checkWallet = async () => {
-            if (window.ethereum?.selectedAddress) {
-                try {
-                    // Optional: Verify with backend if already authenticated
-                    // const data = await verifySession();
-                    navigate("/customize");
-                } catch (err) {
-                    console.error("Failed to verify session:", err);
-                }
-            }
-        };
-        checkWallet();
-    }, []);
+        if (isAuthenticated) {
+            navigate("/customize");
+        }
+    }, [isAuthenticated, navigate]);
 
     const openLogin = async () => {
-        if (!window.ethereum) {
-            alert("No MetaMask detected");
-            return;
-        }
-
-        setLoading(true);
+        setConnecting(true);
 
         try {
-            const provider = new ethers.BrowserProvider(window.ethereum);
-            await provider.send("eth_requestAccounts", []); // Request access
-            const signer = await provider.getSigner();
-            const walletAddress = await signer.getAddress();
-
-            // Create a message to sign
-            const message = `Login request at ${new Date().toISOString()}`;
-            const signature = await signer.signMessage(message);
-
-            // Send to backend
-            const data = await connectWallet({
-                walletAddress,
-                signature,
-                message,
-            });
-            console.log("Backend response:", data);
-
-            // You could store token or user info in localStorage here if needed
-            // localStorage.setItem("token", data.token);
-
+            await login();
             navigate("/customize");
         } catch (err) {
             console.error(err);
             alert("Failed to connect wallet");
         } finally {
-            setLoading(false);
+            setConnecting(false);
         }
     };
 
@@ -79,7 +46,7 @@ function Login() {
                     <button
                         className="absolute bottom-6 left-0 w-full flex justify-center"
                         onClick={openLogin}
-                        disabled={loading}
+                        disabled={connecting || isLoading}
                     >
                         <img
                             src="/assets/loginConnect.png"

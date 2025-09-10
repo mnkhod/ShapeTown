@@ -2,8 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { characterConfig } from "./CharacterConfig";
 import { updateProfile } from "../lib/query-helper";
+import { useAuth } from "../contexts/AuthContext";
 const CharacterCustomizer = () => {
     const navigate = useNavigate();
+    const { isAuthenticated, getAuthHeaders } = useAuth();
     const [playerName, setPlayerName] = useState("Player");
 
     const options = {
@@ -83,8 +85,8 @@ const CharacterCustomizer = () => {
                         src === "PlayerWalking_V03.png"
                             ? "BaseModel/"
                             : src.startsWith("PlayerHairWalking")
-                            ? "Hair/"
-                            : "Clothing/"
+                              ? "Hair/"
+                              : "Clothing/"
                     }${src})`,
                     backgroundPosition: `0 -${
                         spriteSheetMap[direction] * SPRITE_SIZE
@@ -122,8 +124,8 @@ const CharacterCustomizer = () => {
                 {category === "skin"
                     ? `SKIN ${options[category].indexOf(value) + 1}`
                     : category === "hair"
-                    ? `HAIR STYLE ${options[category].indexOf(value) + 1}`
-                    : `OUTFIT ${options[category].indexOf(value) + 1}`}
+                      ? `HAIR STYLE ${options[category].indexOf(value) + 1}`
+                      : `OUTFIT ${options[category].indexOf(value) + 1}`}
             </div>
             <button
                 onClick={() => cycleOption(category, true)}
@@ -240,6 +242,20 @@ const CharacterCustomizer = () => {
                     <button
                         onClick={async () => {
                             const savedData = {
+                                username: playerName.trim() || "Player",
+                                clothStyle: customization.clothing
+                                    .replace("CharacterOutfit_", "")
+                                    .split(".")[0],
+                                hairStyle: customization.hair
+                                    .replace("PlayerHairWalking_", "")
+                                    .split(".")[0],
+                                skinTone: customization.skin
+                                    .replace("PlayerWalking_", "")
+                                    .split(".")[0],
+                            };
+
+                            // Also save for game engine (different format)
+                            const gameCustomization = {
                                 skin: customization.skin
                                     .replace("PlayerWalking_", "")
                                     .split(".")[0],
@@ -253,13 +269,31 @@ const CharacterCustomizer = () => {
                             };
 
                             try {
-                                // Send to backend
-                                await updateProfile(savedData);
+                                // Debug localStorage
+                                console.log(
+                                    "localStorage token:",
+                                    localStorage.getItem("token"),
+                                );
+                                console.log(
+                                    "isAuthenticated:",
+                                    isAuthenticated,
+                                );
 
-                                // Optional: also keep in localStorage
+                                // Check authentication first
+                                if (!isAuthenticated) {
+                                    alert("Please log in first");
+                                    navigate("/login");
+                                    return;
+                                }
+
+                                // Send to backend with auth headers
+                                const authHeaders = getAuthHeaders();
+                                await updateProfile(savedData, authHeaders);
+
+                                // Save for game engine in localStorage (different field names)
                                 localStorage.setItem(
                                     "playerCustomization",
-                                    JSON.stringify(savedData)
+                                    JSON.stringify(gameCustomization),
                                 );
 
                                 // Navigate to game
@@ -267,10 +301,10 @@ const CharacterCustomizer = () => {
                             } catch (error) {
                                 console.error(
                                     "Failed to update profile:",
-                                    error
+                                    error,
                                 );
                                 alert(
-                                    "Something went wrong saving your customization."
+                                    "Something went wrong saving your customization.",
                                 );
                             }
                         }}
@@ -285,4 +319,3 @@ const CharacterCustomizer = () => {
 };
 
 export default CharacterCustomizer;
-

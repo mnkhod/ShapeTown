@@ -7,6 +7,7 @@ import AchievementHUD from "./components/AchievementHUD";
 import InventoryHUD from "./components/InventoryHUD";
 import TokenTrader from "./components/TokenTrader";
 import QuestComponent from "./components/QuestComponent";
+import QuestComponentTanStack from "./components/QuestComponentTanStack";
 import NavigateBack from "./components/NavigateBack";
 import MailInterface from "./components/MailComponent";
 import HelpInterface from "./components/HelpAndSupport";
@@ -14,19 +15,23 @@ import SignOutModal from "./components/LogoutComponent";
 import LeaderboardComponent from "./components/LeaderBoard";
 import MerchantSellScreen from "./components/TradingSell";
 import MerchantBuyScreen from "./components/TradingBuy";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
 import { ethers } from "ethers";
 import { EventBus } from "./game/EventBus";
 
+import Providers from "./Providers";
+import { useAuth } from "./contexts/AuthContext";
+import { initializeQuestSystemWithQuery, initializeQuestSystemWithAuth } from "./components/QuestSystem";
+
 function App() {
-    const client = new QueryClient();
+    const { walletAddress, signer, isAuthenticated } = useAuth();
+    const queryClient = useQueryClient();
     const phaserRef = useRef();
 
     const [showAchievements, setShowAchievements] = useState(false);
     const [showInventory, setShowInventory] = useState(false);
     const [showTrader, setShowTrader] = useState(false);
     const [showQuest, setShowQuest] = useState(false);
-    const [questProgress, setQuestProgress] = useState({});
     const [showSettingsModal, setShowSettingsModal] = useState(false);
     const [phaserInstance, setPhaserInstance] = useState(null);
     const [showNavigateBack, setShowNavigateBack] = useState(false);
@@ -120,7 +125,16 @@ function App() {
     };
 
     useEffect(() => {
-        getMetamaskAccount();
+        // Initialize quest system with QueryClient
+        if (queryClient) {
+            initializeQuestSystemWithQuery(queryClient);
+            console.log("Quest system initialized with TanStack Query");
+        }
+
+        // Emit wallet address when available
+        if (walletAddress) {
+            EventBus.emit("blockchain-account", walletAddress);
+        }
 
         const handleOpenMerchantBuy = (data) => {
             console.log("Opening merchant buy screen with data:", data);
@@ -165,35 +179,19 @@ function App() {
             EventBus.off("open-merchant-sell", handleOpenMerchantSell);
             EventBus.off("close-merchant-sell", handleCloseMerchantSell);
         };
-    }, []);
+    }, [walletAddress]);
 
+    // Initialize quest data when user is authenticated
     useEffect(() => {
-        if (showQuest && window.getQuestProgress) {
-            const progress = window.getQuestProgress();
-            setQuestProgress(progress);
-
-            const intervalId = setInterval(() => {
-                const updatedProgress = window.getQuestProgress();
-                setQuestProgress(updatedProgress);
-            }, 1000);
-
-            return () => clearInterval(intervalId);
+        if (isAuthenticated && queryClient) {
+            console.log("User authenticated, initializing quest data...");
+            initializeQuestSystemWithAuth();
         }
-    }, [showQuest]);
-    async function getMetamaskAccount() {
-        let signer = null;
+    }, [isAuthenticated, queryClient]);
 
-        let provider;
-        if (window.ethereum) {
-            provider = new ethers.BrowserProvider(window.ethereum);
-            signer = await provider.getSigner();
-
-            EventBus.emit("blockchain-account", signer.address);
-        }
-    }
 
     return (
-        <QueryClientProvider client={client}>
+        <Providers>
             <div id="app">
                 <PhaserGame
                     ref={phaserRef}
@@ -223,15 +221,8 @@ function App() {
                     />
                 )}
                 {showQuest && (
-                    <QuestComponent
+                    <QuestComponentTanStack
                         onClose={() => setShowQuest(false)}
-                        playerProgress={questProgress}
-                        onQuestUpdate={(update) => {
-                            if (window.updateQuestProgress) {
-                                window.updateQuestProgress(update);
-                                setQuestProgress(window.getQuestProgress());
-                            }
-                        }}
                     />
                 )}
                 {showSettingsModal && (
@@ -294,9 +285,8 @@ function App() {
                     />
                 )}
             </div>
-        </QueryClientProvider>
+        </Providers>
     );
 }
 
 export default App;
-

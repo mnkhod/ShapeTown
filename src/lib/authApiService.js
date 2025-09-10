@@ -8,8 +8,3 @@ export const connectWallet = async ({ walletAddress, signature, message }) => {
     });
     return response.data;
 };
-
-export const refreshToken = async () => {
-    const response = await api.post("/auth/refresh");
-    return response.data;
-};

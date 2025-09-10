@@ -1,21 +1,16 @@
-import { AlchemyAccountProvider } from "@account-kit/react";
-import { QueryClientProvider,QueryClient } from "@tanstack/react-query";
-import { PropsWithChildren,useEffect,useState } from "react";
-import { config } from './config.js';
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { config } from "./config.ts";
+import { WagmiProvider } from "wagmi";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
 
-
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 export default function Providers(props) {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <AlchemyAccountProvider
-        config={config}
-        queryClient={queryClient}
-        initialState={props.initialState}
-      >
-        {props.children}
-      </AlchemyAccountProvider>
-    </QueryClientProvider>
-  )
+    return (
+        <QueryClientProvider client={queryClient}>
+            <WagmiProvider config={config}>
+                <AuthProvider>{props.children}</AuthProvider>
+            </WagmiProvider>
+        </QueryClientProvider>
+    );
 }
