@@ -34,11 +34,11 @@ export const AuthProvider = ({ children }) => {
             if (window.ethereum) {
                 window.ethereum.removeListener(
                     "accountsChanged",
-                    handleAccountsChanged,
+                    handleAccountsChanged
                 );
                 window.ethereum.removeListener(
                     "chainChanged",
-                    handleChainChanged,
+                    handleChainChanged
                 );
             }
         };
@@ -47,12 +47,12 @@ export const AuthProvider = ({ children }) => {
     const checkWalletConnection = async () => {
         try {
             const hasWallet = window.ethereum?.selectedAddress;
-            const hasToken = localStorage.getItem("token");
+            const hasToken = localStorage.getItem("accessToken");
             console.log(
                 "Checking wallet connection - hasWallet:",
                 hasWallet,
                 "hasToken:",
-                hasToken,
+                hasToken
             );
 
             if (hasWallet && hasToken) {
@@ -65,11 +65,11 @@ export const AuthProvider = ({ children }) => {
                 setWalletAddress(address);
                 setIsAuthenticated(true);
                 console.log(
-                    "Auto-authenticated with existing wallet and token",
+                    "Auto-authenticated with existing wallet and token"
                 );
             } else if (hasWallet && !hasToken) {
                 console.log(
-                    "Wallet connected but no token - user needs to login",
+                    "Wallet connected but no token - user needs to login"
                 );
                 const provider = new ethers.BrowserProvider(window.ethereum);
                 const signer = await provider.getSigner();
@@ -129,10 +129,10 @@ export const AuthProvider = ({ children }) => {
             console.log("Login response:", userData);
 
             // Store token if provided by backend
-            if (userData.data.token) {
-                const token = userData.data.token;
-                localStorage.setItem("token", token);
-                console.log("Token stored:", token);
+            if (userData.data.accessToken) {
+                const accessToken = userData.data.accessToken;
+                localStorage.setItem("token", accessToken);
+                console.log("Token stored:", accessToken);
             } else {
                 console.warn("No token received from backend:", userData);
             }
@@ -174,14 +174,14 @@ export const AuthProvider = ({ children }) => {
     };
 
     const getAuthHeaders = () => {
-        const token = localStorage.getItem("token");
-        console.log("Getting auth headers, token:", token);
-        if (!token) {
+        const accessToken = localStorage.getItem("accessToken");
+        console.log("Getting auth headers, token:", accessToken);
+        if (!accessToken) {
             console.error("No token found in localStorage");
             throw new Error("User not authenticated");
         }
         return {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: { Authorization: `Bearer ${accessToken}` },
         };
     };
 
@@ -202,3 +202,4 @@ export const AuthProvider = ({ children }) => {
         <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
     );
 };
+

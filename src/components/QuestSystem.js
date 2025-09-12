@@ -1,7 +1,7 @@
 import { EventEmitter } from "events";
-import { QueryClient } from '@tanstack/react-query';
-import { getQuests } from '../lib/query-helper';
-import { QUEST_KEYS } from '../hooks/useQuests';
+import { QueryClient } from "@tanstack/react-query";
+import { getQuests } from "../lib/query-helper";
+import { QUEST_KEYS } from "../hooks/useQuests";
 
 class QuestSystem extends EventEmitter {
     constructor() {
@@ -33,7 +33,7 @@ class QuestSystem extends EventEmitter {
 
     async initializeWithAuth() {
         if (this.authInitialized) return;
-        
+
         console.log("Initializing quest system with authentication...");
         this.authInitialized = true;
         await this.initializeQuestData();
@@ -63,18 +63,20 @@ class QuestSystem extends EventEmitter {
     async initializeQuestData() {
         try {
             console.log("Fetching quests using TanStack Query...");
-            
+
             // Check if we have a token
-            const token = localStorage.getItem("token");
-            if (!token) {
-                console.warn("No auth token available, loading fallback quests");
+            const accessToken = localStorage.getItem("accessToken");
+            if (!accessToken) {
+                console.warn(
+                    "No auth token available, loading fallback quests"
+                );
                 this.loadFallbackQuests();
                 return;
             }
-            
+
             // Try to get cached data first, then fetch if needed
             let questData;
-            
+
             if (this.queryClient) {
                 questData = await this.queryClient.fetchQuery({
                     queryKey: QUEST_KEYS.lists(),
@@ -85,29 +87,34 @@ class QuestSystem extends EventEmitter {
                 // Fallback to direct API call if queryClient not available
                 questData = await getQuests();
             }
-            
+
             if (questData && questData.success && questData.data) {
                 const backendQuests = questData.data;
-                console.log("Successfully fetched quests from backend:", backendQuests.length);
-                
+                console.log(
+                    "Successfully fetched quests from backend:",
+                    backendQuests.length
+                );
+
                 this.processQuestData(backendQuests);
             } else {
-                console.error("Invalid quest data format received from backend");
+                console.error(
+                    "Invalid quest data format received from backend"
+                );
                 this.loadFallbackQuests();
             }
         } catch (error) {
             console.error("Failed to fetch quests from backend:", error);
-            
+
             // Log more detailed error info
             if (error.response) {
                 console.error("Backend error response:", {
                     status: error.response.status,
                     statusText: error.response.statusText,
                     data: error.response.data,
-                    headers: error.response.headers
+                    headers: error.response.headers,
                 });
             }
-            
+
             this.loadFallbackQuests();
         }
     }
@@ -116,8 +123,8 @@ class QuestSystem extends EventEmitter {
         // Transform backend quest data to internal format
         this.quests = {};
         backendQuests.forEach((quest, index) => {
-            const legacyId = String(index + 1).padStart(3, '0');
-            
+            const legacyId = String(index + 1).padStart(3, "0");
+
             // Create subtasks from tasks
             const subtasks = {};
             quest.tasks.forEach((task, taskIndex) => {
@@ -131,40 +138,47 @@ class QuestSystem extends EventEmitter {
                     ...(task.mapId && { mapId: task.mapId }),
                     ...(task.amount && { amount: task.amount }),
                     ...(task.itemType && { itemType: task.itemType }),
-                    ...(task.recipe && { recipe: task.recipe })
+                    ...(task.recipe && { recipe: task.recipe }),
                 };
             });
 
             // Map quest type to category
             const categoryMap = {
-                'MAIN_QUEST': 'Main Quest',
-                'SIDE_QUEST': 'Side Quest',
-                'DAILY_QUEST': 'Daily Quest'
+                MAIN_QUEST: "Main Quest",
+                SIDE_QUEST: "Side Quest",
+                DAILY_QUEST: "Daily Quest",
             };
 
             // Build reward string
-            let rewardString = '';
+            let rewardString = "";
             if (quest.rewards && quest.rewards.length > 0) {
-                const rewardParts = quest.rewards.map(reward => {
-                    if (reward.rewardType === 'GOLD') {
-                        return `${reward.goldAmount} gold`;
-                    } else if (reward.rewardType === 'ITEM') {
-                        return `${reward.item.name} x${reward.itemQuantity}`;
-                    } else if (reward.rewardType === 'ACHIEVEMENT') {
-                        return reward.achievement.name;
-                    }
-                    return '';
-                }).filter(Boolean);
-                rewardString = rewardParts.join(', ');
+                const rewardParts = quest.rewards
+                    .map((reward) => {
+                        if (reward.rewardType === "GOLD") {
+                            return `${reward.goldAmount} gold`;
+                        } else if (reward.rewardType === "ITEM") {
+                            return `${reward.item.name} x${reward.itemQuantity}`;
+                        } else if (reward.rewardType === "ACHIEVEMENT") {
+                            return reward.achievement.name;
+                        }
+                        return "";
+                    })
+                    .filter(Boolean);
+                rewardString = rewardParts.join(", ");
             }
 
             // Determine prerequisites
-            let prerequisites = 'none';
+            let prerequisites = "none";
             if (quest.prerequisites && quest.prerequisites.length > 0) {
-                const prereqQuest = backendQuests.find(q => q.id === quest.prerequisites[0].prerequisiteId);
+                const prereqQuest = backendQuests.find(
+                    (q) => q.id === quest.prerequisites[0].prerequisiteId
+                );
                 if (prereqQuest) {
                     const prereqIndex = backendQuests.indexOf(prereqQuest);
-                    prerequisites = `#${String(prereqIndex + 1).padStart(3, '0')}`;
+                    prerequisites = `#${String(prereqIndex + 1).padStart(
+                        3,
+                        "0"
+                    )}`;
                 }
             }
 
@@ -174,35 +188,39 @@ class QuestSystem extends EventEmitter {
                 title: quest.name,
                 description: quest.description,
                 category: categoryMap[quest.questType] || quest.questType,
-                location: quest.mapId ? 'Various locations' : 'Unknown',
+                location: quest.mapId ? "Various locations" : "Unknown",
                 prerequisites,
-                questGiver: quest.questGiver ? quest.questGiver.name : 'Unknown',
+                questGiver: quest.questGiver
+                    ? quest.questGiver.name
+                    : "Unknown",
                 completed: false,
                 active: false,
                 subtasks,
                 reward: rewardString,
-                questData: quest // Keep original data for reference
+                questData: quest, // Keep original data for reference
             };
         });
 
         // Find and activate "The First Harvest" quest
         const firstHarvestQuest = Object.values(this.quests).find(
-            quest => quest.title === "The First Harvest"
+            (quest) => quest.title === "The First Harvest"
         );
-        
+
         if (firstHarvestQuest) {
             firstHarvestQuest.active = true;
             this.activeQuests.add(firstHarvestQuest.id);
-            console.log(`Activated quest: ${firstHarvestQuest.title} (${firstHarvestQuest.id})`);
+            console.log(
+                `Activated quest: ${firstHarvestQuest.title} (${firstHarvestQuest.id})`
+            );
         }
 
         this.questsLoaded = true;
-        this.emit('quests:loaded', { quests: this.quests });
+        this.emit("quests:loaded", { quests: this.quests });
     }
 
     loadFallbackQuests() {
         console.log("Loading fallback quest data...");
-        
+
         // Fallback quest data (minimal set)
         const fallbackQuests = [
             {
@@ -211,17 +229,44 @@ class QuestSystem extends EventEmitter {
                 description: "Learn the basics of farming",
                 questType: "MAIN_QUEST",
                 tasks: [
-                    { type: "CLEAR_AREA", description: "Clean up the highlighted area using a Pickaxe to remove rocks" },
-                    { type: "PREPARE_SOIL", description: "Use a Hoe tool to prepare the soil for planting" },
-                    { type: "PLANT_SEEDS", description: "Plant carrot seeds in the prepared soil" },
-                    { type: "WATER_PLANTS", description: "Water the planted seeds with the watering can" },
-                    { type: "HARVEST_CROP", description: "Harvest the grown carrots" },
-                    { type: "RETURN_TO_NPC", description: "Return to Old Man Jack" }
+                    {
+                        type: "CLEAR_AREA",
+                        description:
+                            "Clean up the highlighted area using a Pickaxe to remove rocks",
+                    },
+                    {
+                        type: "PREPARE_SOIL",
+                        description:
+                            "Use a Hoe tool to prepare the soil for planting",
+                    },
+                    {
+                        type: "PLANT_SEEDS",
+                        description: "Plant carrot seeds in the prepared soil",
+                    },
+                    {
+                        type: "WATER_PLANTS",
+                        description:
+                            "Water the planted seeds with the watering can",
+                    },
+                    {
+                        type: "HARVEST_CROP",
+                        description: "Harvest the grown carrots",
+                    },
+                    {
+                        type: "RETURN_TO_NPC",
+                        description: "Return to Old Man Jack",
+                    },
                 ],
                 questGiver: { name: "Old Man Jack" },
-                rewards: [{ rewardType: "ITEM", item: { name: "Watering Can" }, itemQuantity: 1 }],
-                prerequisites: []
-            }
+                rewards: [
+                    {
+                        rewardType: "ITEM",
+                        item: { name: "Watering Can" },
+                        itemQuantity: 1,
+                    },
+                ],
+                prerequisites: [],
+            },
         ];
 
         this.processQuestData(fallbackQuests);
@@ -229,15 +274,15 @@ class QuestSystem extends EventEmitter {
 
     async waitForQuestsLoaded() {
         if (this.questsLoaded) return;
-        
+
         return new Promise((resolve) => {
-            this.once('quests:loaded', resolve);
+            this.once("quests:loaded", resolve);
         });
     }
 
     async getQuestProgress() {
         await this.waitForQuestsLoaded();
-        
+
         const progress = {};
 
         Object.values(this.quests).forEach((quest) => {
@@ -329,7 +374,7 @@ class QuestSystem extends EventEmitter {
         this.checkQuestPrerequisites();
 
         this.emit("quest:completed", { questId });
-        
+
         // Invalidate TanStack Query cache
         this.invalidateQuestCache();
     }
@@ -379,7 +424,7 @@ class QuestSystem extends EventEmitter {
         }
 
         this.emit("quest:activated", { questId });
-        
+
         // Invalidate TanStack Query cache
         this.invalidateQuestCache();
     }
@@ -1784,8 +1829,7 @@ export function extendLydiaNpc(LydiaNpcPrefab) {
                                     "npc:lydiaSeashellQuest",
                                     { npc: this }
                                 );
-                            }
-                            else if (
+                            } else if (
                                 questSystem.isQuestActive("007") &&
                                 questSystem.quests["007"].subtasks["007-3"]
                                     .completed &&
@@ -2190,3 +2234,4 @@ export function setupItemGiftSystem(scene) {
 
     return scene.showGiftDialog.bind(scene);
 }
+

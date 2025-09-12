@@ -85,8 +85,8 @@ const CharacterCustomizer = () => {
                         src === "PlayerWalking_V03.png"
                             ? "BaseModel/"
                             : src.startsWith("PlayerHairWalking")
-                              ? "Hair/"
-                              : "Clothing/"
+                            ? "Hair/"
+                            : "Clothing/"
                     }${src})`,
                     backgroundPosition: `0 -${
                         spriteSheetMap[direction] * SPRITE_SIZE
@@ -124,8 +124,8 @@ const CharacterCustomizer = () => {
                 {category === "skin"
                     ? `SKIN ${options[category].indexOf(value) + 1}`
                     : category === "hair"
-                      ? `HAIR STYLE ${options[category].indexOf(value) + 1}`
-                      : `OUTFIT ${options[category].indexOf(value) + 1}`}
+                    ? `HAIR STYLE ${options[category].indexOf(value) + 1}`
+                    : `OUTFIT ${options[category].indexOf(value) + 1}`}
             </div>
             <button
                 onClick={() => cycleOption(category, true)}
@@ -271,12 +271,12 @@ const CharacterCustomizer = () => {
                             try {
                                 // Debug localStorage
                                 console.log(
-                                    "localStorage token:",
-                                    localStorage.getItem("token"),
+                                    "localStorage accessToken:",
+                                    localStorage.getItem("accessToken")
                                 );
                                 console.log(
                                     "isAuthenticated:",
-                                    isAuthenticated,
+                                    isAuthenticated
                                 );
 
                                 // Check authentication first
@@ -293,7 +293,7 @@ const CharacterCustomizer = () => {
                                 // Save for game engine in localStorage (different field names)
                                 localStorage.setItem(
                                     "playerCustomization",
-                                    JSON.stringify(gameCustomization),
+                                    JSON.stringify(gameCustomization)
                                 );
 
                                 // Navigate to game
@@ -301,10 +301,10 @@ const CharacterCustomizer = () => {
                             } catch (error) {
                                 console.error(
                                     "Failed to update profile:",
-                                    error,
+                                    error
                                 );
                                 alert(
-                                    "Something went wrong saving your customization.",
+                                    "Something went wrong saving your customization."
                                 );
                             }
                         }}
@@ -319,3 +319,4 @@ const CharacterCustomizer = () => {
 };
 
 export default CharacterCustomizer;
+
