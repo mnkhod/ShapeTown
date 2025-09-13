@@ -103,9 +103,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const login = async () => {
-        if (!window.ethereum) {
-            throw new Error("No wallet detected");
-        }
+        if (!window.ethereum) throw new Error("No wallet detected");
 
         setIsLoading(true);
 
@@ -115,7 +113,8 @@ export const AuthProvider = ({ children }) => {
             const signer = await provider.getSigner();
             const address = await signer.getAddress();
 
-            // Create signature for authentication
+            // Message and timestamp
+            const timestamp = Date.now();
             const message = `Login request at ${new Date().toISOString()}`;
             const signature = await signer.signMessage(message);
 
@@ -124,17 +123,14 @@ export const AuthProvider = ({ children }) => {
                 walletAddress: address,
                 signature,
                 message,
+                timestamp,
             });
 
             console.log("Login response:", userData);
 
-            // Store token if provided by backend
+            // Store token properly
             if (userData.data.accessToken) {
-                const accessToken = userData.data.accessToken;
-                localStorage.setItem("token", accessToken);
-                console.log("Token stored:", accessToken);
-            } else {
-                console.warn("No token received from backend:", userData);
+                localStorage.setItem("accessToken", userData.data.accessToken);
             }
 
             setProvider(provider);
@@ -150,6 +146,16 @@ export const AuthProvider = ({ children }) => {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const hasCompletedProfile = () => {
+        if (!user?.data?.user) return false;
+        let userData = user.data.user;
+        return (userData =
+            user.data.user &&
+            userData.username !==
+                `Player_${userData.walletAddress?.slice(2, 8)}` &&
+            userData.avatar);
     };
 
     const logout = () => {

@@ -1,20 +1,26 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getQuests, getActiveQuests, getCompletedQuests, startQuest, updateQuestTask } from '../lib/query-helper';
-import { useAuth } from '../contexts/AuthContext';
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+    getQuests,
+    getActiveQuests,
+    getCompletedQuests,
+    startQuest,
+    updateQuestTask,
+} from "../lib/query-helper";
+import { useAuth } from "../contexts/AuthContext";
 
 export const QUEST_KEYS = {
-    all: ['quests'],
-    lists: () => [...QUEST_KEYS.all, 'list'],
+    all: ["quests"],
+    lists: () => [...QUEST_KEYS.all, "list"],
     list: (filters) => [...QUEST_KEYS.lists(), { filters }],
-    details: () => [...QUEST_KEYS.all, 'detail'],
+    details: () => [...QUEST_KEYS.all, "detail"],
     detail: (id) => [...QUEST_KEYS.details(), id],
-    active: () => [...QUEST_KEYS.all, 'active'],
-    completed: () => [...QUEST_KEYS.all, 'completed'],
+    active: () => [...QUEST_KEYS.all, "active"],
+    completed: () => [...QUEST_KEYS.all, "completed"],
 };
 
 export function useQuests() {
     const { isAuthenticated } = useAuth();
-    
+
     return useQuery({
         queryKey: QUEST_KEYS.lists(),
         queryFn: getQuests,
@@ -26,7 +32,7 @@ export function useQuests() {
 
 export function useActiveQuests() {
     const { isAuthenticated } = useAuth();
-    
+
     return useQuery({
         queryKey: QUEST_KEYS.active(),
         queryFn: getActiveQuests,
@@ -37,7 +43,7 @@ export function useActiveQuests() {
 
 export function useCompletedQuests() {
     const { isAuthenticated } = useAuth();
-    
+
     return useQuery({
         queryKey: QUEST_KEYS.completed(),
         queryFn: getCompletedQuests,
@@ -48,34 +54,34 @@ export function useCompletedQuests() {
 
 export function useStartQuest() {
     const queryClient = useQueryClient();
-    
+
     return useMutation({
         mutationFn: (questId) => startQuest(questId),
         onSuccess: (data, questId) => {
-            console.log('Quest started successfully:', data);
+            console.log("Quest started successfully:", data);
             // Invalidate and refetch quest data
             queryClient.invalidateQueries({ queryKey: QUEST_KEYS.all });
         },
         onError: (error, questId) => {
-            console.error('Failed to start quest:', error);
-            console.error('Quest ID:', questId);
+            console.error("Failed to start quest:", error);
+            console.error("Quest ID:", questId);
         },
     });
 }
 
 export function useUpdateQuestTask() {
     const queryClient = useQueryClient();
-    
+
     return useMutation({
         mutationFn: updateQuestTask,
         onSuccess: (data, variables) => {
-            console.log('Quest task updated successfully:', data);
+            console.log("Quest task updated successfully:", data);
             // Invalidate and refetch quest data
             queryClient.invalidateQueries({ queryKey: QUEST_KEYS.all });
         },
         onError: (error, variables) => {
-            console.error('Failed to update quest task:', error);
-            console.error('Variables:', variables);
+            console.error("Failed to update quest task:", error);
+            console.error("Variables:", variables);
         },
     });
 }

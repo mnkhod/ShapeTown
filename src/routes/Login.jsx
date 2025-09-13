@@ -4,22 +4,41 @@ import { useAuth } from "../contexts/AuthContext";
 
 function Login() {
     const navigate = useNavigate();
-    const { login, isAuthenticated, isLoading } = useAuth();
+    const { login, isAuthenticated, isLoading, user } = useAuth();
     const [connecting, setConnecting] = useState(false);
 
     // Check if already authenticated
     useEffect(() => {
-        if (isAuthenticated) {
-            navigate("/customize");
+        if (isAuthenticated && user) {
+            // Check if user has completed profile setup
+            const hasCompletedProfile =
+                user.data?.user?.username &&
+                !user.data.user.username.startsWith("Player_");
+
+            if (hasCompletedProfile) {
+                navigate("/game"); // Skip customization for returning users
+            } else {
+                navigate("/customize"); // First time users go to customization
+            }
         }
-    }, [isAuthenticated, navigate]);
+    }, [isAuthenticated, user, navigate]);
 
     const openLogin = async () => {
         setConnecting(true);
 
         try {
-            await login();
-            navigate("/customize");
+            const userData = await login();
+
+            // Check if user needs customization after login
+            const needsCustomization =
+                !userData.data?.user?.username ||
+                userData.data.user.username.startsWith("Player_");
+
+            if (needsCustomization) {
+                navigate("/customize");
+            } else {
+                navigate("/game");
+            }
         } catch (err) {
             console.error(err);
             alert("Failed to connect wallet");
@@ -31,7 +50,7 @@ function Login() {
     return (
         <div className="relative h-screen w-full">
             <img
-                src="/assets/ShapeTownBg.png"
+                src="/assets/harvesting.jpg"
                 className="absolute top-0 left-0 z-0 object-cover h-full w-full"
             />
 

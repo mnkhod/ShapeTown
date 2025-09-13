@@ -6,7 +6,9 @@ import { useAuth } from "../contexts/AuthContext";
 const CharacterCustomizer = () => {
     const navigate = useNavigate();
     const { isAuthenticated, getAuthHeaders } = useAuth();
-    const [playerName, setPlayerName] = useState("Player");
+    const [playerName, setPlayerName] = useState("");
+    const [nameError, setNameError] = useState(false);
+    const [serverError, setServerError] = useState("");
 
     const options = {
         skin: characterConfig.skin.getOptions(),
@@ -31,7 +33,7 @@ const CharacterCustomizer = () => {
     const COLS = 6;
 
     const handleNameChange = (e) => {
-        const value = e.target.value.slice(0, 12);
+        const value = e.target.value.slice(0, 20);
         setPlayerName(value);
     };
 
@@ -170,11 +172,26 @@ const CharacterCustomizer = () => {
                             <input
                                 type="text"
                                 value={playerName}
-                                onChange={handleNameChange}
-                                className="w-full px-4 py-2 bg-transparent font-bold text-black text-center"
+                                onChange={(e) => {
+                                    setPlayerName(e.target.value.slice(0, 20));
+                                    setNameError(false); // reset error when typing
+                                    setServerError(""); // also reset server error when typing
+                                }}
+                                className={`w-full px-4 py-2 font-bold text-black text-center 
+        ${nameError ? "border-2 border-red-500" : "border border-transparent"} 
+        bg-transparent`}
                                 placeholder="Enter name..."
-                                maxLength={12}
+                                maxLength={20}
                             />
+
+                            {/* Show error text directly under input, without pushing layout */}
+                            {(nameError || serverError) && (
+                                <div className="absolute left-0 right-0 -bottom-5 text-red-500 text-xs text-center">
+                                    {nameError
+                                        ? "Please enter a name"
+                                        : serverError}
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="text-white font-bold mb-2 text-center">
@@ -241,6 +258,11 @@ const CharacterCustomizer = () => {
 
                     <button
                         onClick={async () => {
+                            if (!playerName.trim()) {
+                                setNameError(true);
+                                return; // stop here, don’t continue to save or navigate
+                            }
+
                             const savedData = {
                                 username: playerName.trim() || "Player",
                                 clothStyle: customization.clothing
@@ -254,7 +276,6 @@ const CharacterCustomizer = () => {
                                     .split(".")[0],
                             };
 
-                            // Also save for game engine (different format)
                             const gameCustomization = {
                                 skin: customization.skin
                                     .replace("PlayerWalking_", "")
@@ -269,7 +290,7 @@ const CharacterCustomizer = () => {
                             };
 
                             try {
-                                // Debug localStorage
+                                // Debugging info
                                 console.log(
                                     "localStorage accessToken:",
                                     localStorage.getItem("accessToken")
@@ -279,33 +300,40 @@ const CharacterCustomizer = () => {
                                     isAuthenticated
                                 );
 
-                                // Check authentication first
                                 if (!isAuthenticated) {
-                                    alert("Please log in first");
+                                    setServerError("Please log in first");
                                     navigate("/login");
                                     return;
                                 }
 
-                                // Send to backend with auth headers
                                 const authHeaders = getAuthHeaders();
                                 await updateProfile(savedData, authHeaders);
 
-                                // Save for game engine in localStorage (different field names)
+                                // Save for game engine
                                 localStorage.setItem(
                                     "playerCustomization",
                                     JSON.stringify(gameCustomization)
                                 );
 
-                                // Navigate to game
                                 navigate("/game");
                             } catch (error) {
                                 console.error(
                                     "Failed to update profile:",
                                     error
                                 );
-                                alert(
-                                    "Something went wrong saving your customization."
-                                );
+
+                                if (error.response?.status === 409) {
+                                    // Username conflict from backend
+                                    setServerError(
+                                        error.response.data.error.message ||
+                                            "Username is already taken"
+                                    );
+                                } else {
+                                    // Other errors
+                                    setServerError(
+                                        "Something went wrong saving your customization."
+                                    );
+                                }
                             }
                         }}
                         className="w-full py-3 bg-green-500 rounded-lg text-white font-bold hover:bg-green-600 tracking-wider"
