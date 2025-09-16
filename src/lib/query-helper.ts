@@ -219,3 +219,18 @@ export const autoSave = async () => {
     return res.data;
 };
 
+export const interactWithNpc = async (npcId: string) => {
+    const res = await api.get(`/npcs/${npcId}/interact`);
+    return res.data;
+};
+
+export const startNpcQuest = async (npcId: string) => {
+    const res = await api.post(`/npcs/${npcId}/start-quest`, {});
+    return res.data;
+};
+
+export const getAvailableQuestsForNpc = async (npcId: string) => {
+    const res = await api.get(`/quests/${npcId}/npc`);
+    return res.data;
+};
+

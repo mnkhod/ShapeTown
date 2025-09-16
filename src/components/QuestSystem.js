@@ -3,6 +3,14 @@ import { QueryClient } from "@tanstack/react-query";
 import { getQuests } from "../lib/query-helper";
 import { QUEST_KEYS } from "../hooks/useQuests";
 
+export const npcsToGreet = [
+    { id: "709543ba-531e-4eac-996f-6e3dfbcd4794", name: "Victoria" },
+    { id: "9975304d-1c88-46e4-b112-9b31499f4cea", name: "Old Man Jack" },
+    { id: "9b01da01-4c6f-4b3e-a573-252f4e9c54df", name: "Master Smith" },
+    { id: "c11d8e4a-13ce-49ce-885e-a85ced5b3900", name: "Lady Lydia" },
+    { id: "c715a816-97cd-46cd-be2b-0335c933d653", name: "Lily" },
+];
+
 class QuestSystem extends EventEmitter {
     constructor() {
         super();
@@ -570,15 +578,20 @@ class QuestSystem extends EventEmitter {
                 if (this.isQuestActive("003")) {
                     if (!params.scene.greetedNPCs)
                         params.scene.greetedNPCs = new Set();
-                    params.scene.greetedNPCs.add("Lydia");
+                    // params.scene.greetedNPCs.add("Lydia");
 
-                    if (
-                        params.scene.greetedNPCs.size >= 4 &&
-                        params.scene.greetedNPCs.has("Lydia") &&
-                        params.scene.greetedNPCs.has("Victoria") &&
-                        params.scene.greetedNPCs.has("Rowan") &&
-                        params.scene.greetedNPCs.has("Lily")
-                    ) {
+                    const lydiaNpc = npcsToGreet.find(
+                        (n) => n.name === "Lady Lydia"
+                    );
+                    if (lydiaNpc) {
+                        params.scene.greetedNPCs.add(lydiaNpc.id);
+                    }
+
+                    const requiredNpcIds = npcsToGreet.map((n) => n.id);
+                    const allGreeted = requiredNpcIds.every((id) =>
+                        params.scene.greetedNPCs.has(id)
+                    );
+                    if (allGreeted) {
                         this.updateSubtask("003", "003-1", true);
                     }
                 }
@@ -914,9 +927,14 @@ class QuestSystem extends EventEmitter {
                 break;
             case "npc:greetedByName":
                 if (this.isQuestActive("003") && params.npcName) {
-                    console.log(`NPC greeted by name: ${params.npcName}`);
-                    if (params.scene && params.scene.markNPCGreeted) {
-                        params.scene.markNPCGreeted(params.npcName);
+                    const npc = npcsToGreet.find(
+                        (n) => n.name === params.npcName
+                    );
+                    if (npc) {
+                        console.log(`NPC greeted by name: ${params.npcName}`);
+                        if (params.scene && params.scene.markNPCGreeted) {
+                            params.scene.markNPCGreeted(params.npcName);
+                        }
                     }
                 }
                 break;
@@ -1658,8 +1676,10 @@ export function extendJackNpc(OldManJackNpcPrefab) {
         originalPrefabCreateCycle.call(this);
 
         if (this.npc) {
-            const originalPointerDown = this.npc.listeners("pointerdown")[0];
+            // Assign unique ID
+            this.npc.id = "9975304d-1c88-46e4-b112-9b31499f4cea";
 
+            const originalPointerDown = this.npc.listeners("pointerdown")[0];
             if (originalPointerDown) {
                 this.npc.off("pointerdown", originalPointerDown);
 
@@ -1669,17 +1689,12 @@ export function extendJackNpc(OldManJackNpcPrefab) {
                         if (this.scene.triggerQuestEvent) {
                             this.scene.triggerQuestEvent(
                                 "npc:jackInteraction",
-                                { npc: this }
+                                { npc: this.npc }
                             );
                         }
 
-                        if (
-                            this.scene.markNPCGreeted &&
-                            this.scene.questSystem
-                        ) {
-                            if (this.scene.questSystem.isQuestActive("003")) {
-                                this.scene.markNPCGreeted("Jack");
-                            }
+                        if (this.scene.markNPCGreeted) {
+                            this.scene.markNPCGreeted(this.npc.id);
                         }
 
                         await originalPointerDown.call(this, _pointer);
@@ -1799,8 +1814,10 @@ export function extendLydiaNpc(LydiaNpcPrefab) {
         originalPrefabCreateCycle.call(this);
 
         if (this.npc) {
-            const originalPointerDown = this.npc.listeners("pointerdown")[0];
+            // Assign unique ID
+            this.npc.id = "c11d8e4a-13ce-49ce-885e-a85ced5b3900";
 
+            const originalPointerDown = this.npc.listeners("pointerdown")[0];
             if (originalPointerDown) {
                 this.npc.off("pointerdown", originalPointerDown);
 
@@ -1813,7 +1830,7 @@ export function extendLydiaNpc(LydiaNpcPrefab) {
                         if (this.scene.triggerQuestEvent) {
                             this.scene.triggerQuestEvent(
                                 "npc:lydiaInteraction",
-                                { npc: this }
+                                { npc: this.npc }
                             );
                         }
 
@@ -1827,7 +1844,7 @@ export function extendLydiaNpc(LydiaNpcPrefab) {
                             ) {
                                 this.scene.triggerQuestEvent(
                                     "npc:lydiaSeashellQuest",
-                                    { npc: this }
+                                    { npc: this.npc }
                                 );
                             } else if (
                                 questSystem.isQuestActive("007") &&
@@ -1838,15 +1855,13 @@ export function extendLydiaNpc(LydiaNpcPrefab) {
                             ) {
                                 this.scene.triggerQuestEvent(
                                     "npc:lydiaSeashellDelivery",
-                                    { npc: this }
+                                    { npc: this.npc }
                                 );
                             }
                         }
 
-                        if (this.scene.markNPCGreeted && questSystem) {
-                            if (questSystem.isQuestActive("003")) {
-                                this.scene.markNPCGreeted("Lydia");
-                            }
+                        if (this.scene.markNPCGreeted) {
+                            this.scene.markNPCGreeted(this.npc.id);
                         }
 
                         await originalPointerDown.call(this, _pointer);
@@ -1867,8 +1882,10 @@ export function extendLilyNpc(LilyNpcPrefab) {
         originalPrefabCreateCycle.call(this);
 
         if (this.npc) {
-            const originalPointerDown = this.npc.listeners("pointerdown")[0];
+            // Assign unique ID
+            this.npc.id = "c715a816-97cd-46cd-be2b-0335c933d653";
 
+            const originalPointerDown = this.npc.listeners("pointerdown")[0];
             if (originalPointerDown) {
                 this.npc.off("pointerdown", originalPointerDown);
 
@@ -1888,15 +1905,13 @@ export function extendLilyNpc(LilyNpcPrefab) {
                             ) {
                                 this.scene.triggerQuestEvent(
                                     "npc:lilyRecipeQuest",
-                                    { npc: this }
+                                    { npc: this.npc }
                                 );
                             }
                         }
 
-                        if (this.scene.markNPCGreeted && questSystem) {
-                            if (questSystem.isQuestActive("003")) {
-                                this.scene.markNPCGreeted("Lily");
-                            }
+                        if (this.scene.markNPCGreeted) {
+                            this.scene.markNPCGreeted(this.npc.id);
                         }
 
                         await originalPointerDown.call(this, _pointer);
