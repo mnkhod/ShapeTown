@@ -1,15 +1,24 @@
 import { EventEmitter } from "events";
 import { QueryClient } from "@tanstack/react-query";
-import { getQuests } from "../lib/query-helper";
+import {
+    getQuests,
+    getNpcs,
+    getActiveQuests,
+    getCompletedQuests,
+    saveGameState,
+} from "../lib/query-helper";
 import { QUEST_KEYS } from "../hooks/useQuests";
 
-export const npcsToGreet = [
-    { id: "709543ba-531e-4eac-996f-6e3dfbcd4794", name: "Victoria" },
-    { id: "9975304d-1c88-46e4-b112-9b31499f4cea", name: "Old Man Jack" },
-    { id: "9b01da01-4c6f-4b3e-a573-252f4e9c54df", name: "Master Smith" },
-    { id: "c11d8e4a-13ce-49ce-885e-a85ced5b3900", name: "Lady Lydia" },
-    { id: "c715a816-97cd-46cd-be2b-0335c933d653", name: "Lily" },
+// Default NPC list as fallback
+const defaultNpcsToGreet = [
+    { id: "8a357e7c-ae42-4121-9636-258e4443c2a5", name: "Captain Valor" },
+    { id: "09a59f2a-aac8-4336-9eff-50711546b7a0", name: "Lady Lydia" },
+    { id: "52c3c3e4-c1fe-4e47-b161-89670078ccb5", name: "Master Smith" },
+    { id: "933dd35a-748e-4a86-8c44-8d6d95fba093", name: "Merchant Maya" },
+    { id: "39a66baf-120b-4f1d-894e-f8e6725cb24d", name: "Old Man Jack" },
 ];
+
+export let npcsToGreet = [...defaultNpcsToGreet];
 
 class QuestSystem extends EventEmitter {
     constructor() {
@@ -44,7 +53,45 @@ class QuestSystem extends EventEmitter {
 
         console.log("Initializing quest system with authentication...");
         this.authInitialized = true;
+
+        // Load NPCs from backend first
+        await this.loadNPCs();
+
+        // Then initialize quest data
         await this.initializeQuestData();
+    }
+
+    async loadNPCs() {
+        try {
+            console.log("Loading NPCs from backend...");
+            const npcData = await getNpcs();
+
+            if (npcData && npcData.success && npcData.data) {
+                const backendNpcs = npcData.data;
+                console.log(
+                    "Successfully loaded NPCs from backend:",
+                    backendNpcs.length
+                );
+
+                // Update the global npcsToGreet array
+                npcsToGreet.length = 0; // Clear existing
+                npcsToGreet.push(
+                    ...backendNpcs.map((npc) => ({
+                        id: npc.id,
+                        name: npc.name,
+                    }))
+                );
+
+                console.log("Updated npcsToGreet:", npcsToGreet);
+
+                this.emit("npcs:loaded", { npcs: npcsToGreet });
+            } else {
+                console.warn("Invalid NPC data format, using defaults");
+            }
+        } catch (error) {
+            console.error("Failed to load NPCs from backend:", error);
+            console.log("Using default NPC data");
+        }
     }
     resetDailyQuest(questId) {
         const quest = this.quests[questId];
@@ -103,7 +150,14 @@ class QuestSystem extends EventEmitter {
                     backendQuests.length
                 );
 
+                // Sync frontend quest progress with backend state
+                await this.syncQuestProgress();
                 this.processQuestData(backendQuests);
+
+                // Sync inventory from backend on startup (disabled - causes errors)
+                // setTimeout(() => {
+                //     this.syncInventoryFromBackend();
+                // }, 2000);
             } else {
                 console.error(
                     "Invalid quest data format received from backend"
@@ -127,6 +181,170 @@ class QuestSystem extends EventEmitter {
         }
     }
 
+    async syncQuestProgress() {
+        try {
+            console.log("Syncing quest progress with backend...");
+
+            // Fetch active and completed quests from backend
+            const [activeQuestsResponse, completedQuestsResponse] =
+                await Promise.all([getActiveQuests(), getCompletedQuests()]);
+
+            // Initialize quest progress tracking
+            this.activeQuestIds = new Set();
+            this.completedQuestIds = new Set();
+            this.questTaskProgress = new Map(); // questId -> taskProgress array
+
+            // Process active quests
+            if (
+                activeQuestsResponse &&
+                activeQuestsResponse.success &&
+                activeQuestsResponse.data
+            ) {
+                activeQuestsResponse.data.forEach((userQuest) => {
+                    if (userQuest.quest) {
+                        this.activeQuestIds.add(userQuest.quest.id);
+                        if (userQuest.taskProgress) {
+                            this.questTaskProgress.set(
+                                userQuest.quest.id,
+                                userQuest.taskProgress
+                            );
+                        }
+                        console.log(
+                            `Active quest: ${userQuest.quest.name} (${userQuest.quest.id})`
+                        );
+                    }
+                });
+            }
+
+            // Process completed quests
+            if (
+                completedQuestsResponse &&
+                completedQuestsResponse.success &&
+                completedQuestsResponse.data
+            ) {
+                completedQuestsResponse.data.forEach((userQuest) => {
+                    if (userQuest.quest) {
+                        this.completedQuestIds.add(userQuest.quest.id);
+                        console.log(
+                            `Completed quest: ${userQuest.quest.name} (${userQuest.quest.id})`
+                        );
+                    }
+                });
+            }
+
+            console.log("Quest progress sync completed:");
+            console.log("- Active quests:", this.activeQuestIds.size);
+            console.log("- Completed quests:", this.completedQuestIds.size);
+        } catch (error) {
+            console.error("Failed to sync quest progress:", error);
+        }
+    }
+
+    async syncInventoryFromBackend() {
+        try {
+            console.log("🎒 Syncing inventory from backend...");
+
+            // Fetch user inventory from correct endpoint
+            const inventoryResponse = await fetch("http://localhost:3333/api/my/inventory", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (!inventoryResponse.ok) {
+                console.error("Failed to fetch inventory from backend");
+                return;
+            }
+
+            const inventoryData = await inventoryResponse.json();
+            console.log("📦 Inventory data received:", inventoryData);
+
+            if (inventoryData.success && inventoryData.data) {
+                this.mapBackendInventoryToFrontend(inventoryData.data);
+            }
+
+        } catch (error) {
+            console.error("Failed to sync inventory from backend:", error);
+        }
+    }
+
+    mapBackendInventoryToFrontend(inventorySlots) {
+        console.log("🗺️ Mapping backend inventory to frontend...");
+        console.log("Debug: this.scene =", this.scene);
+        console.log("Debug: this.game =", this.game);
+        console.log("Debug: window.phaserGame =", window.phaserGame);
+
+        // Item name mapping: Backend → Frontend
+        const itemMapping = {
+            'Iron Hoe': { key: 'ToolHoe', texture: 'IconToolHoe' },
+            'Watering Can': { key: 'ToolWateringCan', texture: 'IconToolWateringCan' },
+            'Steel Pickaxe': { key: 'ToolPickaxe', texture: 'IconToolPickaxe' },
+            'Carrot Seeds': { key: 'seed_carrot', texture: 'crops-seed bags-carrot' },
+            'Carrot': { key: 'CARROT', texture: 'crops-carrot' },
+            'Potato': { key: 'POTATO', texture: 'crops-potato' },
+            'Iron Sword': { key: 'ToolSword', texture: 'IconToolSword' },
+            'Steel Axe': { key: 'ToolAxe', texture: 'IconToolAxe' },
+        };
+
+        // Find scene with newItemHud
+        let scene = null;
+
+        // Try to find the scene with newItemHud
+        if (this.scene && this.scene.newItemHud) {
+            scene = this.scene;
+        } else if (this.game && this.game.scene && this.game.scene.scenes) {
+            scene = Object.values(this.game.scene.scenes).find(s => s.newItemHud);
+        } else {
+            // Try global quest system's game reference
+            if (window.questSystem && window.questSystem.game && window.questSystem.game.scene) {
+                scene = Object.values(window.questSystem.game.scene.scenes).find(s => s.newItemHud);
+            } else if (window.phaserGame && window.phaserGame.scene) {
+                scene = Object.values(window.phaserGame.scene.scenes).find(s => s.newItemHud);
+            }
+        }
+
+        if (!scene || !scene.newItemHud) {
+            console.warn("⚠️ newItemHud not found, cannot sync inventory. Available scenes:");
+            if (window.questSystem && window.questSystem.game && window.questSystem.game.scene) {
+                const scenes = window.questSystem.game.scene.scenes;
+                console.warn("Scenes:", Object.keys(scenes));
+                console.warn("Scenes with newItemHud:", Object.keys(scenes).filter(key => scenes[key].newItemHud));
+            }
+
+            // Retry up to 3 times only
+            if (!this.inventorySyncRetries) this.inventorySyncRetries = 0;
+            if (this.inventorySyncRetries < 3) {
+                this.inventorySyncRetries++;
+                console.warn(`Will retry inventory sync in 3 seconds (attempt ${this.inventorySyncRetries}/3)...`);
+                setTimeout(() => {
+                    this.syncInventoryFromBackend();
+                }, 3000);
+            } else {
+                console.error("❌ Failed to sync inventory after 3 attempts. newItemHud not available.");
+            }
+            return;
+        }
+
+        // Clear existing inventory (optional)
+        // scene.newItemHud.clearAllItems();
+
+        // Add items from backend inventory
+        inventorySlots.forEach(slot => {
+            const backendItem = slot.item;
+            const mapping = itemMapping[backendItem.name];
+
+            if (mapping) {
+                console.log(`➕ Adding ${slot.quantity}x ${backendItem.name} as ${mapping.key}`);
+                scene.newItemHud.addItem(mapping.key, mapping.texture, 0, slot.quantity);
+            } else {
+                console.warn(`⚠️ No mapping found for backend item: ${backendItem.name}`);
+            }
+        });
+
+        console.log("✅ Inventory sync completed");
+    }
+
     processQuestData(backendQuests) {
         // Transform backend quest data to internal format
         this.quests = {};
@@ -137,10 +355,21 @@ class QuestSystem extends EventEmitter {
             const subtasks = {};
             quest.tasks.forEach((task, taskIndex) => {
                 const subtaskId = `${legacyId}-${taskIndex + 1}`;
+
+                // Check if this task is completed based on backend progress
+                let isTaskCompleted = false;
+                const questTaskProgress = this.questTaskProgress?.get(quest.id);
+                if (questTaskProgress) {
+                    const taskProgress = questTaskProgress.find(
+                        (tp) => tp.taskIndex === taskIndex
+                    );
+                    isTaskCompleted = taskProgress?.isCompleted || false;
+                }
+
                 subtasks[subtaskId] = {
                     id: subtaskId,
                     text: task.description,
-                    completed: false,
+                    completed: isTaskCompleted,
                     type: task.type,
                     ...(task.npcId && { npcId: task.npcId }),
                     ...(task.mapId && { mapId: task.mapId }),
@@ -201,8 +430,8 @@ class QuestSystem extends EventEmitter {
                 questGiver: quest.questGiver
                     ? quest.questGiver.name
                     : "Unknown",
-                completed: false,
-                active: false,
+                completed: this.completedQuestIds?.has(quest.id) || false,
+                active: this.activeQuestIds?.has(quest.id) || false,
                 subtasks,
                 reward: rewardString,
                 questData: quest, // Keep original data for reference
@@ -385,6 +614,145 @@ class QuestSystem extends EventEmitter {
 
         // Invalidate TanStack Query cache
         this.invalidateQuestCache();
+
+        // Save checkpoint after quest completion - non-blocking
+        setTimeout(
+            () =>
+                this.saveQuestProgressCheckpoint(`Quest ${questId} completed`),
+            0
+        );
+    }
+
+    async saveQuestProgressCheckpoint(notes = "Quest progress saved") {
+        try {
+            console.log("🔄 Starting quest progress checkpoint save...");
+
+            // Collect current quest state
+            const questState = {
+                quests: this.quests,
+                activeQuests: Array.from(this.activeQuests),
+                completedQuests: Array.from(this.completedQuests),
+                playerProgress: this.playerProgress,
+            };
+
+            console.log("📋 Quest state to save:", {
+                totalQuests: Object.keys(this.quests).length,
+                activeQuests: questState.activeQuests,
+                completedQuests: questState.completedQuests,
+            });
+
+            // Collect NPC progress from localStorage
+            const npcProgress = {
+                jackLifeCycleStep: localStorage.getItem("jackLifeCycleStep"),
+                gameAchievements: localStorage.getItem("gameAchievements"),
+                greetedNPCs: localStorage.getItem("greetedNPCs"),
+            };
+
+            console.log("🧙 NPC progress to save:", npcProgress);
+
+            // Collect inventory from localStorage
+            let inventory = null;
+            try {
+                inventory = JSON.parse(
+                    localStorage.getItem("gameInventory") || "{}"
+                );
+                console.log("🎒 Inventory to save:", inventory);
+            } catch (e) {
+                console.warn("Failed to parse inventory from localStorage:", e);
+            }
+
+            const checkpointData = {
+                questProgress: questState,
+                npcProgress,
+                inventory,
+            };
+
+            console.log("💾 Sending checkpoint data to backend...");
+            const result = await saveGameState(checkpointData);
+
+            console.log(
+                "✅ Quest progress checkpoint saved successfully:",
+                result
+            );
+        } catch (error) {
+            console.error(
+                "❌ Failed to save quest progress checkpoint:",
+                error
+            );
+        }
+    }
+
+    restoreFromCheckpoint(checkpointQuestData) {
+        try {
+            console.log(
+                "Restoring quest system from checkpoint:",
+                checkpointQuestData
+            );
+
+            if (checkpointQuestData.quests) {
+                // Restore quest states
+                Object.keys(checkpointQuestData.quests).forEach((questId) => {
+                    if (this.quests[questId]) {
+                        const savedQuest = checkpointQuestData.quests[questId];
+                        this.quests[questId].completed = savedQuest.completed;
+                        this.quests[questId].active = savedQuest.active;
+
+                        // Restore subtask completion states
+                        if (
+                            savedQuest.subtasks &&
+                            this.quests[questId].subtasks
+                        ) {
+                            Object.keys(savedQuest.subtasks).forEach(
+                                (subtaskId) => {
+                                    if (
+                                        this.quests[questId].subtasks[subtaskId]
+                                    ) {
+                                        this.quests[questId].subtasks[
+                                            subtaskId
+                                        ].completed =
+                                            savedQuest.subtasks[
+                                                subtaskId
+                                            ].completed;
+                                    }
+                                }
+                            );
+                        }
+                    }
+                });
+            }
+
+            if (checkpointQuestData.activeQuests) {
+                this.activeQuests = new Set(checkpointQuestData.activeQuests);
+            }
+
+            if (checkpointQuestData.completedQuests) {
+                this.completedQuests = new Set(
+                    checkpointQuestData.completedQuests
+                );
+            }
+
+            if (checkpointQuestData.playerProgress) {
+                this.playerProgress = {
+                    ...this.playerProgress,
+                    ...checkpointQuestData.playerProgress,
+                };
+            }
+
+            console.log("Quest system restored from checkpoint successfully");
+            console.log("Active quests:", Array.from(this.activeQuests));
+            console.log("Completed quests:", Array.from(this.completedQuests));
+
+            // Emit restoration event
+            this.emit("quest:restored", {
+                activeQuests: Array.from(this.activeQuests),
+                completedQuests: Array.from(this.completedQuests),
+            });
+        } catch (error) {
+            console.error(
+                "Failed to restore quest system from checkpoint:",
+                error
+            );
+        }
     }
 
     invalidateQuestCache() {
@@ -457,10 +825,22 @@ class QuestSystem extends EventEmitter {
     }
 
     isQuestActive(questId) {
+        // Check backend state first if available
+        const quest = this.quests[questId];
+        if (quest && quest.backendId) {
+            return this.activeQuestIds?.has(quest.backendId) || false;
+        }
+        // Fallback to legacy system
         return this.activeQuests.has(questId);
     }
 
     isQuestCompleted(questId) {
+        // Check backend state first if available
+        const quest = this.quests[questId];
+        if (quest && quest.backendId) {
+            return this.completedQuestIds?.has(quest.backendId) || false;
+        }
+        // Fallback to legacy system
         return this.completedQuests.has(questId);
     }
 
@@ -489,32 +869,88 @@ class QuestSystem extends EventEmitter {
         switch (eventName) {
             case "harvest:rockRemoved":
                 this.updateSubtask("001", "001-1");
+                // Update backend: taskIndex 0 (CLEAR_AREA) - non-blocking
+                setTimeout(async () => {
+                    const questId1 = await this.getFirstHarvestQuestId();
+                    if (questId1)
+                        await this.updateBackendTaskProgress(questId1, 0);
+                }, 0);
                 break;
 
             case "harvest:groundHoed":
                 this.updateSubtask("001", "001-2");
+                // Update backend: taskIndex 1 (PREPARE_SOIL) - non-blocking
+                setTimeout(async () => {
+                    const questId2 = await this.getFirstHarvestQuestId();
+                    if (questId2)
+                        await this.updateBackendTaskProgress(questId2, 1);
+                }, 0);
                 break;
 
             case "harvest:seedPlanted":
                 if (params.crop === "CARROT" || params.seed === "CARROT") {
                     this.updateSubtask("001", "001-3");
+                    // Update backend: taskIndex 2 (PLANT_SEEDS) - non-blocking
+                    setTimeout(async () => {
+                        const questId3 = await this.getFirstHarvestQuestId();
+                        if (questId3)
+                            await this.updateBackendTaskProgress(questId3, 2);
+                    }, 0);
                 }
                 break;
 
             case "harvest:cropWatered":
                 this.updateSubtask("001", "001-4");
+                // Update backend: taskIndex 3 (WATER_PLANTS) - non-blocking
+                setTimeout(async () => {
+                    const questId4 = await this.getFirstHarvestQuestId();
+                    if (questId4)
+                        await this.updateBackendTaskProgress(questId4, 3);
+                }, 0);
                 break;
 
             case "harvest:cropHarvested":
                 if (params.crop === "CARROT") {
                     this.updateSubtask("001", "001-5");
+                    // Update backend: taskIndex 4 (HARVEST_CROP) - non-blocking
+                    setTimeout(async () => {
+                        const questId5 = await this.getFirstHarvestQuestId();
+                        if (questId5)
+                            await this.updateBackendTaskProgress(questId5, 4);
+                    }, 0);
                 }
                 break;
 
             case "npc:jackInteraction":
+                // Check if "The First Harvest" quest should be started - non-blocking
+                setTimeout(() => this.tryStartFirstHarvestQuest(), 0);
+
+                console.log("🔍 Jack Interaction Debug:");
+                console.log("  - Quest 001 exists?", !!this.quests["001"]);
+                console.log("  - Quest 001 data:", this.quests["001"]);
+                console.log("  - Is quest 001 completed in backend?", this.isQuestCompleted("001"));
+
                 const harvestStep = this.quests["001"]?.subtasks["001-5"];
+                console.log("  - Harvest step (001-5):", harvestStep);
+
                 if (harvestStep && harvestStep.completed) {
+                    console.log("✅ Harvest step completed, updating Return to NPC step");
                     this.updateSubtask("001", "001-6");
+                    // Update backend: taskIndex 5 (RETURN_TO_NPC) - non-blocking
+                    setTimeout(async () => {
+                        const questId6 = await this.getFirstHarvestQuestId();
+                        if (questId6)
+                            await this.updateBackendTaskProgress(questId6, 5);
+                    }, 0);
+                } else {
+                    console.log("❌ Harvest step not completed yet or doesn't exist");
+                }
+
+                // Check if quest should be completed after return to NPC
+                const returnStep = this.quests["001"]?.subtasks["001-6"];
+                if (returnStep && returnStep.completed) {
+                    console.log("✅ Return to NPC completed - Quest should be finished!");
+                    this.completeQuest("001");
                 }
 
                 if (
@@ -944,9 +1380,284 @@ class QuestSystem extends EventEmitter {
                 break;
         }
     }
+
+    async tryStartFirstHarvestQuest() {
+        try {
+            // Check if quest is already completed first
+            if (this.isQuestCompleted("001")) {
+                console.log(
+                    "The First Harvest quest is already completed, not starting again"
+                );
+                return;
+            }
+
+            // Check if quest is already active
+            if (this.isQuestActive("001")) {
+                console.log("The First Harvest quest is already active");
+                return;
+            }
+
+            // Also check backend directly for safety
+            const [activeResponse, completedResponse] = await Promise.all([
+                fetch("http://localhost:3333/api/quests/active", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                        "Content-Type": "application/json",
+                    },
+                }),
+                fetch("http://localhost:3333/api/quests/completed", {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                        "Content-Type": "application/json",
+                    },
+                }),
+            ]);
+
+            // Check if already completed
+            if (completedResponse.ok) {
+                const completedData = await completedResponse.json();
+                const completedQuests = completedData.data || [];
+                const firstHarvestCompleted = completedQuests.find(
+                    (quest) =>
+                        quest.quest && quest.quest.name === "The First Harvest"
+                );
+                if (firstHarvestCompleted) {
+                    console.log(
+                        "The First Harvest quest is already completed in backend"
+                    );
+                    return;
+                }
+            }
+
+            // Check if already active
+            if (activeResponse.ok) {
+                const activeData = await activeResponse.json();
+                const activeQuests = activeData.data || [];
+                const firstHarvestActive = activeQuests.find(
+                    (quest) =>
+                        quest.quest && quest.quest.name === "The First Harvest"
+                );
+                if (firstHarvestActive) {
+                    console.log(
+                        "The First Harvest quest is already active in backend"
+                    );
+                    return;
+                }
+            }
+
+            // Get the actual quest ID dynamically
+            const questsResponse = await fetch(
+                "http://localhost:3333/api/quests",
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            let firstHarvestQuestId = null;
+            if (questsResponse.ok) {
+                const questsData = await questsResponse.json();
+                const firstHarvestQuest = questsData.data?.find(
+                    (q) => q.name === "The First Harvest"
+                );
+                firstHarvestQuestId = firstHarvestQuest?.id;
+            }
+
+            if (!firstHarvestQuestId) {
+                console.error("Could not find The First Harvest quest ID");
+                return;
+            }
+
+            // Only start the quest if it's not active AND not completed
+            // Start "The First Harvest" quest
+            console.log("Starting The First Harvest quest via backend API...");
+            console.log("Using quest ID:", firstHarvestQuestId);
+            const startResponse = await fetch(
+                `http://localhost:3333/api/quests/${firstHarvestQuestId}/start`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            if (startResponse.ok) {
+                const startData = await startResponse.json();
+                console.log(
+                    "Successfully started The First Harvest quest:",
+                    startData
+                );
+
+                // CRITICAL: Add quest to activeQuestIds so frontend knows it's active
+                this.activeQuestIds.add(firstHarvestQuestId);
+                console.log("Added quest to activeQuestIds. Active quests now:", this.activeQuestIds.size);
+
+                // Also activate the quest in the frontend quest system
+                this.activateQuest("001");
+
+                // Sync inventory to show the tools given by backend
+                setTimeout(() => {
+                    this.syncInventoryFromBackend();
+                }, 1000);
+            } else {
+                console.error("Failed to start quest:", startResponse.status);
+            }
+        } catch (error) {
+            console.error(
+                "Error checking/starting First Harvest quest:",
+                error
+            );
+        }
+    }
+
+    async getFirstHarvestQuestId() {
+        // Return cached ID immediately if available
+        if (this._firstHarvestQuestId) {
+            return this._firstHarvestQuestId;
+        }
+
+        // If already fetching, return the promise to avoid duplicate requests
+        if (this._fetchingQuestId) {
+            return this._fetchingQuestId;
+        }
+
+        // Start fetching and cache the promise
+        this._fetchingQuestId = this._doFetchFirstHarvestQuestId();
+        const result = await this._fetchingQuestId;
+
+        // Clear the fetching promise
+        this._fetchingQuestId = null;
+
+        return result;
+    }
+
+    async _doFetchFirstHarvestQuestId() {
+        try {
+            console.log("🔍 Fetching First Harvest quest ID from backend...");
+            const questsResponse = await fetch(
+                "http://localhost:3333/api/quests",
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            if (questsResponse.ok) {
+                const questsData = await questsResponse.json();
+                const firstHarvestQuest = questsData.data?.find(
+                    (q) => q.name === "The First Harvest"
+                );
+                if (firstHarvestQuest) {
+                    this._firstHarvestQuestId = firstHarvestQuest.id;
+                    console.log(
+                        "✅ Cached First Harvest quest ID:",
+                        this._firstHarvestQuestId
+                    );
+                    return this._firstHarvestQuestId;
+                }
+            }
+        } catch (error) {
+            console.error("❌ Error fetching First Harvest quest ID:", error);
+        }
+        return null;
+    }
+
+    async updateBackendTaskProgress(questId, taskIndex, progressIncrement = 1) {
+        try {
+            console.log(
+                `Updating backend task progress: Quest ${questId}, Task ${taskIndex}`
+            );
+
+            // Get userId from token
+            const token = localStorage.getItem("accessToken");
+            let userId = null;
+
+            if (token) {
+                try {
+                    const payload = JSON.parse(atob(token.split(".")[1]));
+                    userId = payload.userId;
+                } catch (error) {
+                    console.error("Failed to decode JWT token:", error);
+                    return;
+                }
+            }
+
+            const requestData = {
+                questId,
+                taskIndex,
+                progress: progressIncrement || 1,
+            };
+
+            console.log("🔄 Sending task update request:", requestData);
+
+            const response = await fetch(
+                "http://localhost:3333/api/quests/update-task",
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(requestData),
+                }
+            );
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log(
+                    "Successfully updated backend task progress:",
+                    data
+                );
+            } else {
+                const errorData = await response.text();
+                console.error(
+                    "Failed to update backend task progress:",
+                    response.status,
+                    errorData
+                );
+                console.error("Request data that failed:", requestData);
+
+                // Debug: Check if quest is actually active in frontend
+                console.error("🔍 DEBUG: Is quest active in frontend?", this.isQuestActive("001"));
+                console.error("🔍 DEBUG: Frontend activeQuestIds:", Array.from(this.activeQuestIds || []));
+
+                // If error is "Quest not found or not in progress", re-sync quest state
+                if (errorData.includes("Quest not found or not in progress")) {
+                    console.warn("🔄 Quest sync issue detected. Re-syncing quest progress...");
+                    setTimeout(() => {
+                        this.syncQuestProgress();
+                    }, 1000);
+                }
+            }
+        } catch (error) {
+            console.error("Error updating backend task progress:", error);
+        }
+    }
 }
 
 const questSystem = new QuestSystem();
+// Make quest system globally available for checkpoint restoration
+window.questSystem = questSystem;
 
 export default questSystem;
 
@@ -1676,8 +2387,13 @@ export function extendJackNpc(OldManJackNpcPrefab) {
         originalPrefabCreateCycle.call(this);
 
         if (this.npc) {
-            // Assign unique ID
-            this.npc.id = "9975304d-1c88-46e4-b112-9b31499f4cea";
+            // Assign unique ID from loaded NPCs
+            const jackNpc = npcsToGreet.find(
+                (npc) => npc.name === "Old Man Jack"
+            );
+            this.npc.id = jackNpc
+                ? jackNpc.id
+                : "39a66baf-120b-4f1d-894e-f8e6725cb24d";
 
             const originalPointerDown = this.npc.listeners("pointerdown")[0];
             if (originalPointerDown) {
@@ -1814,8 +2530,13 @@ export function extendLydiaNpc(LydiaNpcPrefab) {
         originalPrefabCreateCycle.call(this);
 
         if (this.npc) {
-            // Assign unique ID
-            this.npc.id = "c11d8e4a-13ce-49ce-885e-a85ced5b3900";
+            // Assign unique ID from loaded NPCs
+            const lydiaServerNpc = npcsToGreet.find(
+                (npc) => npc.name === "Lady Lydia"
+            );
+            this.npc.id = lydiaServerNpc
+                ? lydiaServerNpc.id
+                : "09a59f2a-aac8-4336-9eff-50711546b7a0";
 
             const originalPointerDown = this.npc.listeners("pointerdown")[0];
             if (originalPointerDown) {
@@ -1882,8 +2603,13 @@ export function extendLilyNpc(LilyNpcPrefab) {
         originalPrefabCreateCycle.call(this);
 
         if (this.npc) {
-            // Assign unique ID
-            this.npc.id = "c715a816-97cd-46cd-be2b-0335c933d653";
+            // Assign unique ID from loaded NPCs
+            const merchantNpc = npcsToGreet.find(
+                (npc) => npc.name === "Merchant Maya"
+            );
+            this.npc.id = merchantNpc
+                ? merchantNpc.id
+                : "933dd35a-748e-4a86-8c44-8d6d95fba093";
 
             const originalPointerDown = this.npc.listeners("pointerdown")[0];
             if (originalPointerDown) {

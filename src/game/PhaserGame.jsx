@@ -3,8 +3,9 @@ import { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
 import StartGame from "./main";
 import { EventBus } from "./EventBus";
 import SceneManager from "../components/SceneManager";
-import { useCheckpoint } from "../hooks/useCheckpoint";
+import { useAutoCheckpointSync } from "../hooks/useCheckpoint";
 import { useAuth } from "../contexts/AuthContext";
+import { autoSave, createCheckpoint } from "../lib/query-helper";
 
 export const PhaserGame = forwardRef(function PhaserGame(
     { currentActiveScene, showModal, gameData },
@@ -14,24 +15,144 @@ export const PhaserGame = forwardRef(function PhaserGame(
     const sceneManager = useRef();
     const { user, isAuthenticated } = useAuth();
 
-    const { player, loadLastCheckpoint, autoSaveCheckpoint } = useCheckpoint(
-        user?.data?.user?.id || null
-    );
+    const { checkpointData, isLoading } = useAutoCheckpointSync();
 
     useEffect(() => {
-        // Only load checkpoint if user is authenticated
-        if (isAuthenticated && user?.data?.user?.id) {
-            loadLastCheckpoint();
+        // Checkpoint data is automatically synced via the hook
+        if (isAuthenticated && checkpointData) {
+            console.log("Checkpoint data loaded:", checkpointData);
+
+            // Log the actual checkpoint structure for debugging
+            console.log("Full checkpoint structure:", JSON.stringify(checkpointData, null, 2));
+
+            // Try to restore from multiple possible checkpoint data locations
+            let checkpointPayload = null;
+            if (checkpointData.data && checkpointData.data.data) {
+                checkpointPayload = checkpointData.data.data;
+            } else if (checkpointData.data) {
+                checkpointPayload = checkpointData.data;
+            }
+
+            if (checkpointPayload) {
+                // Restore quest progress from checkpoint if available
+                if (checkpointPayload.questProgress) {
+                    try {
+                        console.log("🔄 Restoring quest progress from checkpoint:", checkpointPayload.questProgress);
+                        // Emit event to quest system to restore state
+                        if (window.questSystem) {
+                            console.log("📋 Quest system found, restoring state...");
+                            window.questSystem.restoreFromCheckpoint(checkpointPayload.questProgress);
+                        } else {
+                            console.warn("⚠️ Quest system not available, quest state restoration skipped");
+                        }
+                    } catch (error) {
+                        console.error("❌ Error restoring quest progress from checkpoint:", error);
+                    }
+                } else {
+                    console.log("ℹ️ No quest progress found in checkpoint");
+                }
+
+                // Restore inventory from checkpoint if available
+                if (checkpointPayload.inventory) {
+                    try {
+                        localStorage.setItem('gameInventory', JSON.stringify(checkpointPayload.inventory));
+                        console.log("Restored inventory from checkpoint");
+                    } catch (error) {
+                        console.error("Error restoring inventory from checkpoint:", error);
+                    }
+                }
+
+                // Restore achievements from checkpoint if available
+                if (checkpointPayload.achievements) {
+                    try {
+                        localStorage.setItem('gameAchievements', JSON.stringify(checkpointPayload.achievements));
+                        console.log("Restored achievements from checkpoint:", checkpointPayload.achievements);
+                    } catch (error) {
+                        console.error("Error restoring achievements from checkpoint:", error);
+                    }
+                }
+
+                // Restore NPC progress from checkpoint if available
+                if (checkpointPayload.npcProgress) {
+                    try {
+                        if (checkpointPayload.npcProgress.jackLifeCycleStep !== undefined) {
+                            localStorage.setItem('jackLifeCycleStep', checkpointPayload.npcProgress.jackLifeCycleStep.toString());
+                            console.log("Restored Jack lifecycle step:", checkpointPayload.npcProgress.jackLifeCycleStep);
+                        }
+                        if (checkpointPayload.npcProgress.jackDailyQuestCompleted !== undefined) {
+                            localStorage.setItem('jackDailyQuestCompleted', checkpointPayload.npcProgress.jackDailyQuestCompleted.toString());
+                            console.log("Restored Jack daily quest state:", checkpointPayload.npcProgress.jackDailyQuestCompleted);
+                        }
+                        if (checkpointPayload.npcProgress.gameAchievements) {
+                            localStorage.setItem('gameAchievements', checkpointPayload.npcProgress.gameAchievements);
+                            console.log("Restored achievements from NPC progress");
+                        }
+                        if (checkpointPayload.npcProgress.greetedNPCs) {
+                            localStorage.setItem('greetedNPCs', checkpointPayload.npcProgress.greetedNPCs);
+                            console.log("Restored greeted NPCs");
+                        }
+                    } catch (error) {
+                        console.error("Error restoring NPC progress from checkpoint:", error);
+                    }
+                }
+
+                // Restore player position from checkpoint if available
+                if (checkpointPayload.positionX !== undefined && checkpointPayload.positionX !== null &&
+                    checkpointPayload.positionY !== undefined && checkpointPayload.positionY !== null) {
+                    try {
+                        // Store position in localStorage so the scene can restore it
+                        localStorage.setItem('checkpointPlayerX', checkpointPayload.positionX.toString());
+                        localStorage.setItem('checkpointPlayerY', checkpointPayload.positionY.toString());
+                        console.log(`🎯 Player position restored from checkpoint: (${checkpointPayload.positionX}, ${checkpointPayload.positionY})`);
+
+                        // Also set a flag to indicate position should be restored
+                        localStorage.setItem('shouldRestorePosition', 'true');
+                    } catch (error) {
+                        console.error("Error restoring player position from checkpoint:", error);
+                    }
+                } else {
+                    console.log("ℹ️ No player position found in checkpoint");
+                }
+            } else {
+                console.log("No checkpoint payload found to restore from");
+            }
         }
-    }, [isAuthenticated, user]);
+    }, [isAuthenticated, checkpointData]);
 
     // Auto-save only if authenticated
     useEffect(() => {
         if (!isAuthenticated || !user?.data?.user?.id) return;
 
         const interval = setInterval(() => {
-            autoSaveCheckpoint();
-        }, 60_000);
+            // Make auto-save non-blocking to prevent game lag
+            setTimeout(async () => {
+                try {
+                    // Collect current game state for checkpoint
+                    const gameState = {
+                        achievements: JSON.parse(localStorage.getItem('gameAchievements') || '{}'),
+                        npcProgress: {
+                            jackLifeCycleStep: parseInt(localStorage.getItem('jackLifeCycleStep') || '0', 10),
+                            jackDailyQuestCompleted: localStorage.getItem('jackDailyQuestCompleted') === 'true'
+                        },
+                        timestamp: new Date().toISOString()
+                    };
+
+                    // Include player position if available
+                    const playerX = localStorage.getItem('currentPlayerX');
+                    const playerY = localStorage.getItem('currentPlayerY');
+                    if (playerX && playerY) {
+                        gameState.positionX = parseInt(playerX, 10);
+                        gameState.positionY = parseInt(playerY, 10);
+                        console.log(`💾 Auto-saving with player position: (${gameState.positionX}, ${gameState.positionY})`);
+                    }
+
+                    // Save checkpoint with game state
+                    await createCheckpoint(gameState);
+                } catch (error) {
+                    console.error('Auto-checkpoint save failed:', error);
+                }
+            }, 0);
+        }, 120_000); // Reduced frequency: auto-save every 2 minutes instead of 1
 
         return () => clearInterval(interval);
     }, [isAuthenticated, user]);
@@ -52,7 +173,7 @@ export const PhaserGame = forwardRef(function PhaserGame(
                         if (sceneManager.current) {
                             sceneManager.current.changeScene(sceneName, {
                                 ...data,
-                                checkpoint: player,
+                                checkpoint: checkpointData,
                             });
                         }
                     },
@@ -71,7 +192,7 @@ export const PhaserGame = forwardRef(function PhaserGame(
                 game.current = undefined;
             }
         };
-    }, [ref, player]);
+    }, [ref, checkpointData]);
 
     useEffect(() => {
         EventBus.on("current-scene-ready", (currentScene) => {

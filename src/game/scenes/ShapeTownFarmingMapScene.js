@@ -120,16 +120,48 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// tree_border_6
 		const tree_border_6 = shapetownFarmingMap.createLayer("tree border/0", ["TreePatteren"], 0, 0);
 
-		// playerPrefab
-		const playerPrefab = new PlayerPrefab(this, 434, 633);
+		// playerPrefab - check for checkpoint position restoration
+		let playerX = 576;  // default X position (centered with house at 576, 360)
+		let playerY = 420;  // default Y position (in front of house entrance, below house bottom at 375)
+
+		// Check if we should restore position from checkpoint
+		const shouldRestorePosition = localStorage.getItem('shouldRestorePosition') === 'true';
+		if (shouldRestorePosition) {
+			const checkpointX = localStorage.getItem('checkpointPlayerX');
+			const checkpointY = localStorage.getItem('checkpointPlayerY');
+
+			if (checkpointX && checkpointY) {
+				playerX = parseInt(checkpointX, 10);
+				playerY = parseInt(checkpointY, 10);
+				console.log(`🎯 Restoring player position from checkpoint: (${playerX}, ${playerY})`);
+
+				// Clear the restoration flags
+				localStorage.removeItem('shouldRestorePosition');
+				localStorage.removeItem('checkpointPlayerX');
+				localStorage.removeItem('checkpointPlayerY');
+			}
+		}
+
+		const playerPrefab = new PlayerPrefab(this, playerX, playerY);
 		this.add.existing(playerPrefab);
 
 		// shapeFarmingHousePrefab
 		const shapeFarmingHousePrefab = new ShapeFarmingHousePrefab(this, 576, 360);
 		this.add.existing(shapeFarmingHousePrefab);
 
-		// tree_border_7
-		const tree_border_7 = shapetownFarmingMap.createLayer("tree border/7", ["TreePatteren"], 0, 0);
+		// tree_border_7 - Handle duplicate layer ID gracefully
+		let tree_border_7;
+		try {
+			// Check if layer already exists first
+			tree_border_7 = shapetownFarmingMap.getLayer("tree border/7");
+			if (!tree_border_7) {
+				tree_border_7 = shapetownFarmingMap.createLayer("tree border/7", ["TreePatteren"], 0, 0);
+			}
+		} catch (error) {
+			console.warn("Could not create/get tree border layer:", error.message);
+			// Create a fallback empty layer to prevent crashes
+			tree_border_7 = null;
+		}
 
 		// sceneTile
 		/** @type {Phaser.GameObjects.Sprite & { body: Phaser.Physics.Arcade.Body }} */
@@ -750,8 +782,7 @@ initInventorySystem() {
 		this.editorCreate();
 		window.questBookPrefab = null;
 		this.cameras.main.setBounds(0, 0, 2550, 1920);
-		this.physics.world.bounds.width = 1000;
-		this.physics.world.bounds.height = 800;
+		this.physics.world.setBounds(0, 0, 2550, 1920);
 
 		if (!this.game.questSystem) {
 			this.game.questSystem = questSystem;
@@ -822,6 +853,7 @@ initInventorySystem() {
 			giftFromNatureAchievement: false,
 			firstFishAchievement: false
 		};
+		this.loadAchievements();
 		if (this.minimapPrefab && this.playerPrefab) {
             this.minimapPrefab.setPlayer(this.playerPrefab);
             this.minimapPrefab.visible = false;
@@ -915,6 +947,24 @@ initInventorySystem() {
 		    }
 		});
 		this.initInventorySystem();
+
+		// Set up player position tracking for checkpoint system (reduced frequency)
+		this.time.addEvent({
+			delay: 30000, // Update every 30 seconds instead of 5 (less database load)
+			callback: () => {
+				if (this.playerPrefab) {
+					localStorage.setItem('currentPlayerX', Math.round(this.playerPrefab.x).toString());
+					localStorage.setItem('currentPlayerY', Math.round(this.playerPrefab.y).toString());
+				}
+			},
+			loop: true
+		});
+
+		// Also update position immediately to ensure we have current data
+		if (this.playerPrefab) {
+			localStorage.setItem('currentPlayerX', Math.round(this.playerPrefab.x).toString());
+			localStorage.setItem('currentPlayerY', Math.round(this.playerPrefab.y).toString());
+		}
 
 	const waterTile = this.lake_lake_1.getTilesWithin();
 	    waterTile.forEach(tile => {
@@ -1033,5 +1083,28 @@ setupAllStonesCollision() {
 }
 
 /* END OF COMPILED CODE */
+
+// Achievement persistence methods
+ShapeTownFarmingMapScene.prototype.loadAchievements = function() {
+    try {
+        const savedAchievements = localStorage.getItem('gameAchievements');
+        if (savedAchievements) {
+            const parsed = JSON.parse(savedAchievements);
+            Object.assign(this.achievements, parsed);
+            console.log('Loaded achievements:', this.achievements);
+        }
+    } catch (error) {
+        console.error('Error loading achievements:', error);
+    }
+}
+
+ShapeTownFarmingMapScene.prototype.saveAchievements = function() {
+    try {
+        localStorage.setItem('gameAchievements', JSON.stringify(this.achievements));
+        console.log('Saved achievements:', this.achievements);
+    } catch (error) {
+        console.error('Error saving achievements:', error);
+    }
+}
 
 // You can write more code here

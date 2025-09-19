@@ -90,13 +90,42 @@ export default class MinimapPrefab extends Phaser.GameObjects.Rectangle {
     }
 
     destroy(fromScene) {
-        if (this.updateListener) {
-            this.updateListener.remove();
+        try {
+            if (this.updateListener) {
+                try {
+                    if (typeof this.updateListener.remove === 'function') {
+                        this.updateListener.remove();
+                    } else if (typeof this.updateListener === 'function') {
+                        // If it's an event listener function, try to remove it from the scene
+                        if (this.scene && this.scene.events) {
+                            this.scene.events.off('update', this.updateListener);
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Could not remove update listener:', error);
+                }
+                this.updateListener = null;
+            }
+
+            if (this.minimapCamera) {
+                try {
+                    // Remove camera from scene cameras manager safely
+                    if (this.scene && this.scene.cameras && this.scene.cameras.cameras) {
+                        const cameraIndex = this.scene.cameras.cameras.indexOf(this.minimapCamera);
+                        if (cameraIndex > -1) {
+                            this.scene.cameras.remove(this.minimapCamera);
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Could not remove minimap camera properly:', error);
+                }
+                this.minimapCamera = null;
+            }
+
+            super.destroy(fromScene);
+        } catch (error) {
+            console.error('Error in MinimapPrefab destroy:', error);
         }
-        if (this.minimapCamera) {
-            this.minimapCamera.destroy();
-        }
-        super.destroy(fromScene);
     }
 
 

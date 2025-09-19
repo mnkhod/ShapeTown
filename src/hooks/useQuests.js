@@ -3,6 +3,8 @@ import {
     getQuests,
     getActiveQuests,
     getCompletedQuests,
+    getSystemQuests,
+    getAvailableQuests,
     startQuest,
     updateQuestTask,
 } from "../lib/query-helper";
@@ -16,6 +18,8 @@ export const QUEST_KEYS = {
     detail: (id) => [...QUEST_KEYS.details(), id],
     active: () => [...QUEST_KEYS.all, "active"],
     completed: () => [...QUEST_KEYS.all, "completed"],
+    system: () => [...QUEST_KEYS.all, "system"],
+    available: () => [...QUEST_KEYS.all, "available"],
 };
 
 export function useQuests() {
@@ -52,6 +56,17 @@ export function useCompletedQuests() {
     });
 }
 
+export function useSystemQuests() {
+    const { isAuthenticated } = useAuth();
+
+    return useQuery({
+        queryKey: QUEST_KEYS.system(),
+        queryFn: getSystemQuests,
+        staleTime: 1 * 60 * 1000, // 1 minute
+        enabled: isAuthenticated, // Only fetch when authenticated
+    });
+}
+
 export function useStartQuest() {
     const queryClient = useQueryClient();
 
@@ -66,6 +81,17 @@ export function useStartQuest() {
             console.error("Failed to start quest:", error);
             console.error("Quest ID:", questId);
         },
+    });
+}
+
+export function useAvailableQuests() {
+    const { isAuthenticated } = useAuth();
+
+    return useQuery({
+        queryKey: QUEST_KEYS.available(),
+        queryFn: getAvailableQuests,
+        staleTime: 1 * 60 * 1000, // 1 minute
+        enabled: isAuthenticated, // Only fetch when authenticated
     });
 }
 

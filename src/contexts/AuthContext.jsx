@@ -103,43 +103,79 @@ export const AuthProvider = ({ children }) => {
     };
 
     const login = async () => {
-        if (!window.ethereum) throw new Error("No wallet detected");
+        if (!window.ethereum) {
+            alert("MetaMask not detected! Please install MetaMask browser extension.");
+            throw new Error("No wallet detected");
+        }
 
+        console.log("🔵 Starting wallet connection...");
         setIsLoading(true);
 
         try {
+            console.log("🔵 Creating provider...");
             const provider = new ethers.BrowserProvider(window.ethereum);
-            await provider.send("eth_requestAccounts", []);
+
+            console.log("🔵 Requesting account access from MetaMask...");
+            // Try multiple methods to trigger MetaMask popup
+            let accounts;
+            try {
+                // Method 1: Use eth_requestAccounts
+                accounts = await provider.send("eth_requestAccounts", []);
+                console.log("✅ MetaMask popup method 1 successful, accounts:", accounts);
+            } catch (error) {
+                console.log("⚠️ Method 1 failed, trying alternative method...");
+                // Method 2: Direct ethereum.request
+                try {
+                    accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    console.log("✅ MetaMask popup method 2 successful, accounts:", accounts);
+                } catch (error2) {
+                    console.error("❌ Both MetaMask connection methods failed:", error, error2);
+                    throw new Error("Failed to connect to MetaMask. Please ensure MetaMask is unlocked and try again.");
+                }
+            }
+
+            console.log("🔵 Getting signer...");
             const signer = await provider.getSigner();
+
+            console.log("🔵 Getting wallet address...");
             const address = await signer.getAddress();
+            console.log("✅ Wallet connected:", address);
 
             // Message and timestamp
+            console.log("🔵 Creating signature...");
             const timestamp = Date.now();
             const message = `Login request at ${new Date().toISOString()}`;
             const signature = await signer.signMessage(message);
+            console.log("✅ Signature created");
 
             // Authenticate with backend
-            const userData = await connectWallet({
-                walletAddress: address,
-                signature,
-                message,
-                timestamp,
-            });
+            console.log("🔵 Connecting to backend...");
+            try {
+                const userData = await connectWallet({
+                    walletAddress: address,
+                    signature,
+                    message,
+                    timestamp,
+                });
 
-            console.log("Login response:", userData);
+                console.log("✅ Backend connection successful:", userData);
 
-            // Store token properly
-            if (userData.data.accessToken) {
-                localStorage.setItem("accessToken", userData.data.accessToken);
+                // Store token properly
+                if (userData.data.accessToken) {
+                    localStorage.setItem("accessToken", userData.data.accessToken);
+                }
+
+                setProvider(provider);
+                setSigner(signer);
+                setWalletAddress(address);
+                setUser(userData);
+                setIsAuthenticated(true);
+
+                return userData;
+            } catch (backendError) {
+                console.error("❌ Backend connection failed:", backendError);
+                throw new Error("Backend connection failed. The database may be temporarily unavailable. Please try again later.");
             }
-
-            setProvider(provider);
-            setSigner(signer);
-            setWalletAddress(address);
-            setUser(userData);
-            setIsAuthenticated(true);
-
-            return userData;
         } catch (error) {
             console.error("Login failed:", error);
             throw error;

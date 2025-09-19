@@ -44,8 +44,24 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         this.lifeCycleStep = 0;
 
         this.dailyQuestCompleted = false;
-        
+
         this.checkNewDay();
+        this.loadLifeCycleStep();
+
+        // Load inventory from localStorage on startup
+        setTimeout(() => {
+            this.loadInventoryFromLocalStorage();
+        }, 1000);
+
+        // Add a small delay to ensure achievements are loaded before checking them
+        setTimeout(() => {
+            console.log('Jack lifecycle step after load:', this.lifeCycleStep);
+            if (this.scene && this.scene.achievements) {
+                console.log('Scene achievements state:', this.scene.achievements);
+            } else {
+                console.log('Scene achievements not yet loaded');
+            }
+        }, 1000);
         
         this.newDayInterval = setInterval(() => {
             this.checkNewDay();
@@ -77,19 +93,27 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
             msg: "Those will be handy soon.",
             onComplete: () => {
                 this.newItemHud.visible = true;
-                this.newItemHud.addItem("ToolPickaxe", "IconToolPickaxe", 0);
-                this.newItemHud.addItem("ToolHoe", "IconToolHoe", 0);
-                this.newItemHud.addItem("ToolWateringCan", "IconToolWateringCan", 0);
-                this.newItemHud.forceSelectTool("ToolPickaxe");
+                // Give tools IMMEDIATELY during dialogue so player can use them for the quest
+                this.giveStartingToolsNow();
             }
         },
         { msg: "Alright, I am giving you a Quest. Therefore, you may be spot on your Quest Book." },
         {
             msg: "Alright, here's your quest. You may see it in your quest book, good luck!",
             onComplete: () => {
-                this.bookHud.visible = true;
-                this.scene.profilePrefab.visible = true;
-                this.bookHud.play("bookLightingUpAnim")
+                if (this.bookHud) {
+                    this.bookHud.visible = true;
+                    this.bookHud.play("bookLightingUpAnim");
+                }
+                if (this.scene.profilePrefab) {
+                    this.scene.profilePrefab.visible = true;
+                }
+
+                // NOW start the quest through the quest system AFTER giving tools
+                if (this.scene.questSystem && this.scene.questSystem.tryStartFirstHarvestQuest) {
+                    console.log("🎯 Starting First Harvest quest from dialogue completion");
+                    this.scene.questSystem.tryStartFirstHarvestQuest();
+                }
             }
         },
         { msg: "You have to plant some seeds for me." },
@@ -113,22 +137,22 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
     tasteOfGoldDialogueLifeCycle = [
         { msg: "Well done with the harvest! I'm impressed by your farming skills." },
-        { msg: "Now that you've learned the basics of farming, it's time to learn about trading." },
-        { msg: "There's a merchant named Lydia in Shape Town who can help you sell your goods." },
-        { 
+        { msg: "Now that you've learned the basics of farming, it's time for your next MAIN QUEST." },
+        { msg: "There's a merchant named Lady Lydia in Shape Town who can help you sell your goods." },
+        {
             msg: "I have some iron bars that need to be sold. Could you take them to Lydia for me?",
             onComplete: () => {
                 if (this.scene.alertPrefab) {
-                    this.scene.alertPrefab.alert("New Quest: Taste of Gold");
+                    this.scene.alertPrefab.alert("New Main Quest: Taste of Gold (Quest #002)");
                 }
-                
+
                 this.questMark.play("BeforeQuest");
             }
         },
         { msg: "Head to Shape Town - it's northeast from here. Just follow the path." },
-        { msg: "Find Lydia at her merchant stall and sell these goods to her." },
-        { 
-            msg: "She'll give you a good price. Come back when you're done!",
+        { msg: "Find Lady Lydia at her merchant stall and sell these goods to her." },
+        {
+            msg: "Complete this quest to unlock more adventures and unlock SIDE QUESTS and DAILY QUESTS!",
             onComplete: () => {
                 // Activate Quest #002
                 if (this.scene.triggerQuestEvent) {
@@ -145,14 +169,14 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
     everyDayQuestDialogueLifeCycle = [
         { msg: "Hello there! I'm running low on carrots for my stew." },
-        { msg: "Could you bring me 5 carrots today? I'll reward you with some seeds." },
-        { 
-            msg: "It's a simple task, but it helps me out a lot!",
+        { msg: "Could you bring me 5 carrots today? This is a DAILY QUEST that resets every day." },
+        {
+            msg: "Complete daily quests to earn steady rewards and help the townspeople!",
             onComplete: () => {
                 if (this.scene.questSystem && !this.scene.questSystem.isQuestActive("012")) {
                     this.scene.questSystem.activateQuest("012");
                     if (this.scene.alertPrefab) {
-                        this.scene.alertPrefab.alert("Daily Quest: Every day!");
+                        this.scene.alertPrefab.alert("Daily Quest: Daily Harvest (Resets Daily)");
                     }
                 }
             }
@@ -210,6 +234,48 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         }
     }
 
+    saveLifeCycleStep() {
+        // Get current user ID to make lifecycle step user-specific
+        const token = localStorage.getItem('token');
+        let userId = 'default';
+
+        if (token) {
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                userId = payload.userId;
+            } catch (error) {
+                console.log('Could not decode token for user-specific lifecycle');
+            }
+        }
+
+        localStorage.setItem(`jackLifeCycleStep_${userId}`, this.lifeCycleStep.toString());
+        console.log('Saved Jack lifecycle step for user', userId + ':', this.lifeCycleStep);
+    }
+
+    loadLifeCycleStep() {
+        // Get current user ID to make lifecycle step user-specific
+        const token = localStorage.getItem('token');
+        let userId = 'default';
+
+        if (token) {
+            try {
+                const payload = JSON.parse(atob(token.split('.')[1]));
+                userId = payload.userId;
+            } catch (error) {
+                console.log('Could not decode token for user-specific lifecycle');
+            }
+        }
+
+        const saved = localStorage.getItem(`jackLifeCycleStep_${userId}`);
+        if (saved !== null) {
+            this.lifeCycleStep = parseInt(saved, 10);
+            console.log('Loaded Jack lifecycle step for user', userId + ':', this.lifeCycleStep);
+        } else {
+            console.log('No lifecycle step found for user', userId + ', starting fresh at 0');
+            this.lifeCycleStep = 0;
+        }
+    }
+
     prefabCreateCycle() {
         console.log('Prefab create cycle started');
 
@@ -227,13 +293,14 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
         this.npc.on('pointerdown', async function (_pointer) {
             console.log("Jack NPC clicked");
-            
-            if (this.scene.triggerQuestEvent) {
-                console.log("Triggering Jack interaction quest event");
-                this.scene.triggerQuestEvent('npc:jackInteraction', { npc: this });
-            } else {
-                console.log("triggerQuestEvent not available on scene");
-            }
+
+            // DON'T trigger automatic quest events - let dialogue handle quest starting
+            // if (this.scene.triggerQuestEvent) {
+            //     console.log("Triggering Jack interaction quest event");
+            //     this.scene.triggerQuestEvent('npc:jackInteraction', { npc: this });
+            // } else {
+            //     console.log("triggerQuestEvent not available on scene");
+            // }
             
             let distance = this.getDistance(this.player, this)
         
@@ -249,9 +316,10 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         
             if (!this.scene.achievements) return;
         
-            if (this.scene.questSystem?.isQuestCompleted("002")) {
-                console.log("Taste of Gold completed, handling daily quest");
-                
+            // Daily quests are only available after completing "Making Friends" (Quest #003)
+            if (this.scene.questSystem?.isQuestCompleted("003")) {
+                console.log("Making Friends completed, daily quests are now available");
+
                 const currentCarrots = this.newItemHud.getItemCount("CARROT") || 0;
                 if (currentCarrots >= 5) {
                     console.log("Player had", currentCarrots, "carrots, removing exactly 5");
@@ -264,7 +332,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
                         this.newItemHud.addItem("CARROT", "crops-carrot", 0, remainingCarrots);
                     }
 
-                    console.log("Adding 5 carrot seeds");
+                    console.log("Adding 5 carrot seeds as daily quest reward");
                     this.newItemHud.addItem("seed_carrot", "crops-seed bags-carrot", 0, 5);
 
                     this.msgPrefab.conversation(this.everyDayQuestCompletedDialogueLifeCycle);
@@ -275,69 +343,140 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
                     this.msgPrefab.conversation(this.everyDayQuestDialogueLifeCycle);
                 }
                 return;
-            }
-            
-            if (this.scene.achievements.firstHarvestAchievement && this.scene.questSystem?.isQuestActive("002")) {
-                this.msgPrefab.conversation(this.tasteOfGoldReminderDialogueLifeCycle);
+            } else if (this.scene.questSystem?.isQuestCompleted("002")) {
+                // After Taste of Gold but before Making Friends
+                this.msgPrefab.conversation([
+                    { msg: "You're doing great with the main quests!" },
+                    { msg: "Complete the 'Making Friends' quest first to unlock daily quests." },
+                    { msg: "Go meet all the townspeople in Shape Town!" }
+                ]);
                 return;
             }
             
-            if (this.scene.achievements.firstHarvestAchievement && 
-                !this.scene.questSystem?.isQuestActive("002") && 
-                !this.scene.questSystem?.isQuestCompleted("002")) {
-                
-                this.msgPrefab.conversation(this.tasteOfGoldDialogueLifeCycle);
+            // DEBUG: Log current state for troubleshooting
+            console.log("🔍 Jack NPC Debug Info:");
+            console.log("  - lifeCycleStep:", this.lifeCycleStep);
+            console.log("  - achievements:", this.scene.achievements);
+            console.log("  - firstHarvestAchievement:", this.scene.achievements?.firstHarvestAchievement);
+            console.log("  - questSystem available:", !!this.scene.questSystem);
+
+            // Priority 1: Check if this is a new player who needs to start First Harvest
+            // Only run dialogue if lifecycle step is 0 (never talked to Jack before)
+            if (this.lifeCycleStep === 0) {
+                console.log("🎬 PRIORITY 1: Starting First Harvest dialogue - first time talking to Jack");
+                this.msgPrefab.conversation(this.firstHarvestDialogueLifeCycle);
+                this.lifeCycleStep = 1;
+                this.saveLifeCycleStep();
                 return;
+            } else {
+                console.log("❌ PRIORITY 1 FAILED: lifeCycleStep is NOT 0, it's:", this.lifeCycleStep);
             }
-            
-            if (this.newItemHud.checkItem("CARROT")) {
+
+            // DEBUG: If you want to reset for testing, uncomment this:
+            // if (confirm("Reset Jack dialogue for testing?")) {
+            //     this.lifeCycleStep = 0;
+            //     this.saveLifeCycleStep();
+            //     this.msgPrefab.conversation(this.firstHarvestDialogueLifeCycle);
+            //     return;
+            // }
+
+            // Priority 2: Check if player has carrot and needs to complete First Harvest
+            const hasCarrot = this.newItemHud.checkItem("CARROT");
+            console.log("🥕 DEBUG: Player has CARROT?", hasCarrot);
+
+            if (hasCarrot) {
                 this.questMark.play("AfterQuest");
                 
-                if (this.scene.achievements.firstHarvestAchievement) {
+                if (this.scene.achievements?.firstHarvestAchievement) {
                     this.scene.alertPrefab.alert("Already Has Achievement NFT");
                 } else {
                     this.isMinting = true;
                     this.scene.alertPrefab.alert("Minting Has Started");
-                    
+
                     const prefab = this;
                     setTimeout(() => {
                         this.scene.alertPrefab.alert("First Harvest Achievement");
+                        if (!this.scene.achievements) {
+                            this.scene.achievements = {};
+                        }
                         this.scene.achievements.firstHarvestAchievement = true;
+                        if (this.scene.saveAchievements) {
+                            this.scene.saveAchievements();
+                        }
                         this.newItemHud.removeItemByKey("CARROT");
                         this.isMinting = false;
                         
                         if (this.scene.questSystem && !this.scene.questSystem.isQuestCompleted("001")) {
-                            console.log("Forcing completion of Quest #001");
+                            console.log("Completing Quest #001 and claiming rewards");
                             this.scene.questSystem.completeQuest("001");
+
+                            // Give quest rewards from backend
+                            this.claimFirstHarvestRewards();
+
+                            // Quest progression: Quest #002 should auto-unlock after #001
+                            setTimeout(() => {
+                                console.log("🔄 Quest progression: Unlocking Quest #002 'Taste of Gold'");
+                                if (this.scene.questSystem) {
+                                    this.scene.questSystem.checkQuestPrerequisites();
+                                }
+                            }, 1000);
                         }
-                        
-                        if (this.scene.questSystem && this.scene.questSystem.isQuestActive("002")) {
-                            console.log("Quest #002 is already active, deactivating it");
-                            this.scene.questSystem.activeQuests.delete("002");
-                        }
-                        
+
                         setTimeout(() => {
                             console.log("Showing Taste of Gold dialogue");
                             this.newItemHud.addItem("IronIngot", "Icon_IronBar", 0, 3);
-                            
+
                             prefab.msgPrefab.conversation(prefab.tasteOfGoldDialogueLifeCycle);
                         }, 2000);
                     }, 1500);
                 }
                 return;
             }
-            
-            // If they don't have a carrot and don't have the achievement,
-            // Check if this is their first time talking to Jack
-            // or if they need a reminder
-            if (this.lifeCycleStep === 0) {
-                // First time talking to Jack
-                this.msgPrefab.conversation(this.firstHarvestDialogueLifeCycle);
-                this.lifeCycleStep = 1; // Mark that they've talked to Jack before
-            } else {
-                // They've talked to Jack before, show the reminder dialogue
-                this.msgPrefab.conversation(this.firstHarvestReminderDialogueLifeCycle);
+
+            // Priority 3: Handle Taste of Gold quest progression
+            // ONLY show these dialogues if First Harvest is actually completed AND achievements exist
+            if (this.scene.achievements?.firstHarvestAchievement === true && this.scene.questSystem?.isQuestActive("002")) {
+                console.log("🔄 Showing Taste of Gold reminder dialogue");
+                this.msgPrefab.conversation(this.tasteOfGoldReminderDialogueLifeCycle);
+                return;
             }
+
+            console.log("🔍 PRIORITY 3 CHECK:");
+            console.log("  - firstHarvestAchievement === true?", this.scene.achievements?.firstHarvestAchievement === true);
+            console.log("  - quest 002 NOT active?", !this.scene.questSystem?.isQuestActive("002"));
+            console.log("  - quest 002 NOT completed?", !this.scene.questSystem?.isQuestCompleted("002"));
+
+            if (this.scene.achievements?.firstHarvestAchievement === true &&
+                !this.scene.questSystem?.isQuestActive("002") &&
+                !this.scene.questSystem?.isQuestCompleted("002")) {
+                console.log("🎯 PRIORITY 3 TRIGGERED: Showing Taste of Gold start dialogue");
+                this.msgPrefab.conversation(this.tasteOfGoldDialogueLifeCycle);
+                return;
+            }
+
+            // Priority 4: First Harvest reminders for players who have talked to Jack before but don't have carrot
+            if (this.lifeCycleStep > 0 && !this.scene.achievements?.firstHarvestAchievement) {
+                console.log("🔄 Showing First Harvest reminder dialogue");
+                this.msgPrefab.conversation(this.firstHarvestReminderDialogueLifeCycle);
+                return;
+            }
+
+            // FALLBACK: If none of the above conditions are met and this is a new user, show first dialogue
+            if (!this.scene.achievements?.firstHarvestAchievement) {
+                console.log("🆘 FALLBACK: Showing First Harvest dialogue for new/uninitialized user");
+                this.msgPrefab.conversation(this.firstHarvestDialogueLifeCycle);
+                this.lifeCycleStep = 1;
+                this.saveLifeCycleStep();
+                return;
+            }
+
+            // If we get here, something is wrong - log it
+            console.warn("❌ Jack NPC: No dialogue condition matched! This shouldn't happen.");
+            console.warn("State:", {
+                lifeCycleStep: this.lifeCycleStep,
+                achievements: this.scene.achievements,
+                firstHarvestAchievement: this.scene.achievements?.firstHarvestAchievement
+            });
         }, this);
     }
 
@@ -372,6 +511,84 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
         });
     }
     
+    giveStartingToolsNow() {
+        console.log("🛠️ Giving starting tools DURING dialogue");
+
+        // Check if tools already given to prevent duplicates
+        const hasPickaxe = this.newItemHud.checkItem("ToolPickaxe");
+        const hasHoe = this.newItemHud.checkItem("ToolHoe");
+        const hasWateringCan = this.newItemHud.checkItem("ToolWateringCan");
+
+        if (hasPickaxe && hasHoe && hasWateringCan) {
+            console.log("🛠️ Tools already given, skipping duplicate gift");
+            return;
+        }
+
+        // Give tools IMMEDIATELY during dialogue so player can use them for quest tasks
+        this.newItemHud.addItem("ToolPickaxe", "IconToolPickaxe", 0);
+        this.newItemHud.addItem("ToolHoe", "IconToolHoe", 0);
+        this.newItemHud.addItem("ToolWateringCan", "IconToolWateringCan", 0);
+        this.newItemHud.forceSelectTool("ToolPickaxe");
+
+        // Give carrot seeds
+        this.newItemHud.addItem("seed_carrot", "crops-seed bags-carrot", 0, 5);
+
+        // Save inventory to localStorage for persistence
+        this.saveInventoryToLocalStorage();
+
+        if (this.scene.alertPrefab) {
+            this.scene.alertPrefab.alert("Received starting tools and carrot seeds!");
+        }
+
+        console.log("✅ Starting tools given during dialogue - ready to start quest tasks!");
+    }
+
+    saveInventoryToLocalStorage() {
+        try {
+            if (this.newItemHud && this.newItemHud.items) {
+                const inventoryData = JSON.stringify(this.newItemHud.items);
+                localStorage.setItem('playerInventory', inventoryData);
+                console.log("💾 Inventory saved to localStorage");
+            }
+        } catch (error) {
+            console.error("Failed to save inventory to localStorage:", error);
+        }
+    }
+
+    loadInventoryFromLocalStorage() {
+        try {
+            const savedInventory = localStorage.getItem('playerInventory');
+            if (savedInventory && this.newItemHud) {
+                const inventoryData = JSON.parse(savedInventory);
+
+                // Restore items to inventory
+                Object.keys(inventoryData).forEach(itemKey => {
+                    const item = inventoryData[itemKey];
+                    if (item && item.count > 0) {
+                        this.newItemHud.addItem(itemKey, item.texture, 0, item.count);
+                    }
+                });
+
+                console.log("💾 Inventory loaded from localStorage");
+            }
+        } catch (error) {
+            console.error("Failed to load inventory from localStorage:", error);
+        }
+    }
+
+    claimFirstHarvestRewards() {
+        console.log("🎁 First Harvest quest completed - tools already given during dialogue");
+
+        // Tools and seeds were already given during dialogue
+        // Only give the remaining rewards here (gold)
+        // TODO: Add gold to player (need to integrate with player gold system)
+        if (this.scene.alertPrefab) {
+            this.scene.alertPrefab.alert("Quest Complete! Received 100 Gold!");
+        }
+
+        console.log("✅ First Harvest quest completion rewards given");
+    }
+
     destroy() {
         if (this.newDayInterval) {
             clearInterval(this.newDayInterval);

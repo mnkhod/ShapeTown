@@ -91,6 +91,14 @@ export const getMap = async (id: string) => {
 };
 
 //////////////////////
+// NPCs (no token needed)
+//////////////////////
+export const getNpcs = async () => {
+    const res = await api.get("/npcs");
+    return res.data;
+};
+
+//////////////////////
 // Quests (requires AuthMiddleware + PlayerOwnershipMiddleware)
 //////////////////////
 export const getQuests = async () => {
@@ -110,6 +118,11 @@ export const getActiveQuests = async () => {
 
 export const getCompletedQuests = async () => {
     const res = await api.get("/quests/completed");
+    return res.data;
+};
+
+export const getSystemQuests = async () => {
+    const res = await api.get("/quests/system");
     return res.data;
 };
 
@@ -216,6 +229,30 @@ export const getCheckpointStats = async () => {
 
 export const autoSave = async () => {
     const res = await api.post("/session/auto-save", {});
+    return res.data;
+};
+
+//////////////////////
+// Checkpoint System (requires AuthMiddleware + PlayerOwnershipMiddleware)
+//////////////////////
+export const syncCheckpoint = async () => {
+    const res = await api.get("/session/checkpoint/latest");
+    return res.data;
+};
+
+export const saveCheckpoint = async (payload: any) => {
+    const res = await api.post("/session/checkpoint", payload);
+    return res.data;
+};
+
+export const saveGameState = async (payload: {
+    positionX?: number;
+    positionY?: number;
+    questProgress?: any;
+    inventory?: any;
+    npcProgress?: any;
+}) => {
+    const res = await api.post("/session/save-progress", payload);
     return res.data;
 };
 

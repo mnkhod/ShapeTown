@@ -19,36 +19,46 @@ import ShapeTownSquareMapScene from "./scenes/ShapeTownSquareMapScene"
 // Find out more information about the Game Config at:
 // https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config = {
-    type: Phaser.AUTO,
-    // width: 1920,
-    // height: 1080,
+    type: Phaser.AUTO, // Auto-detect best renderer (WebGL or Canvas fallback)
     parent: 'game-container',
     backgroundColor: '#028af8',
+    width: 1920,
+    height: 1080,
     physics: {
         default: "arcade",
         arcade: {
             debug: false,
             tileBias: 32,
+            fps: 60, // Lock to 60 FPS
         }
     },
     render: {
         pixelArt: true,
+        antialias: false, // Disable for better performance with pixel art
+        powerPreference: 'high-performance', // Use high-performance GPU
+        mipmapFilter: 'LINEAR', // Better performance
+        roundPixels: true, // Better pixel art rendering
     },
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: "100%",
-        height: "100%",
-        // width: 1920,
-        // height: 1080,
-        // min: {
-        //     width: 800,
-        //     height: 450
-        // },
-        // max: {
-        //     width: 3480,
-        //     height: 2160
-        // }
+        width: 1920,
+        height: 1080,
+        min: {
+            width: 800,
+            height: 600
+        },
+        max: {
+            width: 1920,
+            height: 1080
+        }
+    },
+    fps: {
+        target: 60,
+        forceSetTimeOut: true // Better performance control
+    },
+    loader: {
+        maxParallelDownloads: 4, // Limit concurrent downloads for better performance
     },
     scene: [
         Boot,
@@ -69,7 +79,19 @@ const config = {
 };
 
 const StartGame = (parent) => {
-    return new Phaser.Game({ ...config, parent });
+    try {
+        return new Phaser.Game({ ...config, parent });
+    } catch (error) {
+        console.error('Failed to start Phaser game:', error);
+
+        // Try with Canvas fallback if WebGL fails
+        if (error.message.includes('WebGL')) {
+            console.log('WebGL failed, trying Canvas renderer...');
+            return new Phaser.Game({ ...config, parent, type: Phaser.CANVAS });
+        }
+
+        throw error;
+    }
 }
 
 export default StartGame;

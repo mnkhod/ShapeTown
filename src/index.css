@@ -13,7 +13,13 @@
 }
 @font-face {
     font-family: 'Little Malio 8-Bit';
-    src: url('fonts/Little Malio 8-Bit.otf') format('truetype');
+    src: url('/assets/fonts/Little Malio 8-Bit.otf') format('opentype');
+    font-display: swap;
+}
+
+@font-face {
+    font-family: '8-bit Arcade In';
+    src: url('/assets/fonts/8-bit Arcade In.ttf') format('truetype');
     font-display: swap;
 }
 

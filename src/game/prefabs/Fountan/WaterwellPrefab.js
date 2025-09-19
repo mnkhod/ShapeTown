@@ -12,7 +12,14 @@ export default class WaterwellPrefab extends Phaser.GameObjects.Container {
 
 		// Create the base well
 		const waterwell = scene.add.sprite(0, 0, "Waterwell");
-		waterwell.play("Waterwell"); // If there's an animation
+		// Only play animation if it exists
+		try {
+			if (waterwell.anims && waterwell.anims.exists("Waterwell")) {
+				waterwell.play("Waterwell");
+			}
+		} catch (error) {
+			console.warn("Waterwell animation not found:", error.message);
+		}
 		this.add(waterwell);
 		this.wellBase = waterwell;
 

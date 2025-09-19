@@ -1160,8 +1160,8 @@
             {
                 "url": "assets/files/image 35.png",
                 "frameConfig": {
-                    "frameWidth": 64,
-                    "frameHeight": 64,
+                    "frameWidth": 44,
+                    "frameHeight": 48,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3174,7 +3174,7 @@
                 "url": "assets/Building/SeaLevelBuildingLighthouse_v01.png",
                 "frameConfig": {
                     "frameWidth": 256,
-                    "frameHeight": 704,
+                    "frameHeight": 640,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,
@@ -3604,7 +3604,7 @@
                 "url": "assets/Tree/Tree_v01.png",
                 "frameConfig": {
                     "frameWidth": 160,
-                    "frameHeight": 196,
+                    "frameHeight": 192,
                     "startFrame": 0,
                     "endFrame": -1,
                     "spacing": 0,

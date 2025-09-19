@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     useQuests,
     useActiveQuests,
     useCompletedQuests,
-    useUpdateQuestTask,
+    useSystemQuests,
+    useAvailableQuests,
     useStartQuest,
 } from "../hooks/useQuests";
 import { useAuth } from "../contexts/AuthContext";
@@ -18,8 +19,44 @@ const QuestComponentTanStack = ({ onClose }) => {
         useActiveQuests();
     const { data: completedQuests, isLoading: completedQuestsLoading } =
         useCompletedQuests();
-    const updateQuestTask = useUpdateQuestTask();
+    const { data: systemQuests, isLoading: systemQuestsLoading } =
+        useSystemQuests();
+    const { data: availableQuests, isLoading: availableQuestsLoading } =
+        useAvailableQuests();
     const startQuest = useStartQuest();
+
+    // Auto-start available quests
+    useEffect(() => {
+        if (availableQuests?.data && availableQuests.data.length > 0) {
+            console.log("Available quests found:", availableQuests.data);
+
+            // Don't auto-start if we're already starting a quest
+            if (startQuest.isPending) {
+                console.log(
+                    "Quest start already in progress, skipping auto-start"
+                );
+                return;
+            }
+
+            // Only auto-start if no active quests exist
+            if (activeQuests?.data && activeQuests.data.length > 0) {
+                console.log("Active quests exist, not auto-starting new quest");
+                return;
+            }
+
+            // Auto-start the first available quest
+            const firstAvailableQuest = availableQuests.data[0];
+            if (firstAvailableQuest && firstAvailableQuest.quest) {
+                console.log(
+                    "Auto-starting quest:",
+                    firstAvailableQuest.quest.name,
+                    "ID:",
+                    firstAvailableQuest.quest.id
+                );
+                startQuest.mutate(firstAvailableQuest.quest.id);
+            }
+        }
+    }, [availableQuests?.data, activeQuests?.data, startQuest]);
 
     const toggleQuestExpansion = (questId) => {
         const newExpanded = new Set(expandedQuests);
@@ -31,47 +68,13 @@ const QuestComponentTanStack = ({ onClose }) => {
         setExpandedQuests(newExpanded);
     };
 
-    const handleStartQuest = (questId) => {
-        startQuest.mutate(questId);
-    };
-
-    const handleTaskComplete = (quest, taskIndex) => {
-        // Check if quest is started - if not, start it first
-        const isQuestStarted = activeQuests?.data?.some(
-            (activeQuest) => activeQuest.id === quest.id
-        );
-
-        if (!isQuestStarted) {
-            console.log("Quest not started, starting quest first...");
-            handleStartQuest(quest.id);
-            return;
-        }
-
-        // Get userId from JWT token
-        const token = localStorage.getItem("token");
-        let userId = null;
-
-        if (token) {
-            try {
-                const payload = JSON.parse(atob(token.split(".")[1]));
-                userId = payload.userId;
-            } catch (error) {
-                console.error("Failed to decode JWT token:", error);
-            }
-        }
-
-        updateQuestTask.mutate({
-            userId,
-            questId: quest.id,
-            taskIndex,
-            progressIncrement: 1,
-        });
-    };
+    // Tasks are now automatically updated by game actions, no manual completion needed
 
     const getQuestsByTab = () => {
         switch (activeTab) {
-            case "Active":
-                return (activeQuests?.data || []).map((q) => ({
+            case "Active": {
+                // Combine both NPC and system active quests
+                const npcQuests = (activeQuests?.data || []).map((q) => ({
                     ...q.quest, // flatten quest object
                     status: q.status,
                     taskProgress: q.taskProgress,
@@ -80,32 +83,48 @@ const QuestComponentTanStack = ({ onClose }) => {
                     completedAt: q.completedAt,
                 }));
 
+                const activeSystemQuests = (systemQuests?.data || []).map(
+                    (q) => ({
+                        ...q.quest, // flatten quest object
+                        status: q.status,
+                        taskProgress: q.taskProgress,
+                        overallProgress: q.overallProgress,
+                        startedAt: q.startedAt,
+                        completedAt: q.completedAt,
+                    })
+                );
+
+                return [...npcQuests, ...activeSystemQuests];
+            }
+
             case "Completed":
-                return completedQuests?.data || [];
+                return (completedQuests?.data || []).map((q) => ({
+                    ...q.quest, // flatten quest object
+                    status: q.status,
+                    startedAt: q.startedAt,
+                    completedAt: q.completedAt,
+                }));
 
-            case "All":
-                return (allQuests?.data || []).filter((quest) => {
-                    // Find quest in active or completed quests
-                    const isActive = activeQuests?.data?.some(
-                        (aq) => aq.questId === quest.id
-                    );
-                    const isCompleted = completedQuests?.data?.some(
-                        (cq) => cq.questId === quest.id
-                    );
-
-                    // Exclude if active or completed
-                    if (isActive || isCompleted) return false;
-
-                    // Optional: only show NPC-given quests for "Start" button
-                    return quest.questGiverType === "NPC";
-                });
+            case "System":
+                return (systemQuests?.data || []).map((q) => ({
+                    ...q.quest, // flatten quest object
+                    status: q.status,
+                    taskProgress: q.taskProgress,
+                    overallProgress: q.overallProgress,
+                    startedAt: q.startedAt,
+                    completedAt: q.completedAt,
+                }));
 
             default:
                 return [];
         }
     };
     const isLoading =
-        allQuestsLoading || activeQuestsLoading || completedQuestsLoading;
+        allQuestsLoading ||
+        activeQuestsLoading ||
+        completedQuestsLoading ||
+        systemQuestsLoading ||
+        availableQuestsLoading;
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -125,7 +144,7 @@ const QuestComponentTanStack = ({ onClose }) => {
 
                 {/* Tab Navigation */}
                 <div className="flex mb-4 border-b border-gray-700">
-                    {["Active", "Completed", "All"].map((tab) => (
+                    {["Active", "Completed", "System"].map((tab) => (
                         <button
                             key={tab}
                             onClick={() => setActiveTab(tab)}
@@ -191,49 +210,46 @@ const QuestComponentTanStack = ({ onClose }) => {
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        {(() => {
-                                            const isActive =
-                                                activeQuests?.data?.some(
-                                                    (aq) => aq.id === quest.id
-                                                );
-                                            const isCompleted =
-                                                completedQuests?.data?.some(
-                                                    (cq) => cq.id === quest.id
-                                                );
-
-                                            if (isCompleted) {
-                                                return (
-                                                    <span className="text-sm font-bold text-green-400">
-                                                        COMPLETED
-                                                    </span>
-                                                );
-                                            } else if (isActive) {
-                                                return (
-                                                    <span className="text-sm font-bold text-yellow-400">
-                                                        IN PROGRESS
-                                                    </span>
-                                                );
-                                            } else {
-                                                return (
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            handleStartQuest(
-                                                                quest.id
-                                                            );
-                                                        }}
-                                                        disabled={
-                                                            startQuest.isPending
+                                        {quest.status === "COMPLETED" ? (
+                                            <span className="text-sm font-bold text-green-400">
+                                                COMPLETED
+                                            </span>
+                                        ) : quest.status === "IN_PROGRESS" ? (
+                                            <div>
+                                                <span className="text-sm font-bold text-yellow-400">
+                                                    IN PROGRESS
+                                                </span>
+                                                {quest.overallProgress && (
+                                                    <div className="text-xs text-gray-400 mt-1">
+                                                        {
+                                                            quest
+                                                                .overallProgress
+                                                                .completedTasks
                                                         }
-                                                        className="bg-blue-600 hover:bg-blue-700 text-white text-sm px-3 py-1 rounded disabled:opacity-50"
-                                                    >
-                                                        {startQuest.isPending
-                                                            ? "Starting..."
-                                                            : "Start Quest"}
-                                                    </button>
-                                                );
-                                            }
-                                        })()}
+                                                        /
+                                                        {
+                                                            quest
+                                                                .overallProgress
+                                                                .totalTasks
+                                                        }{" "}
+                                                        tasks (
+                                                        {
+                                                            quest
+                                                                .overallProgress
+                                                                .percentage
+                                                        }
+                                                        %)
+                                                    </div>
+                                                )}
+                                            </div>
+                                        ) : (
+                                            <span className="text-sm font-bold text-blue-400">
+                                                {quest.questGiverType ===
+                                                "GAME_SYSTEM"
+                                                    ? "SYSTEM QUEST"
+                                                    : "AVAILABLE"}
+                                            </span>
+                                        )}
                                         <div className="text-gray-400 text-xs mt-1">
                                             {expandedQuests.has(quest.id)
                                                 ? "▼"
@@ -270,24 +286,28 @@ const QuestComponentTanStack = ({ onClose }) => {
                                                                 : "bg-gray-700"
                                                         }`}
                                                     >
-                                                        <input
-                                                            type="checkbox"
-                                                            checked={
+                                                        {/* Visual status indicator instead of interactive checkbox */}
+                                                        <div
+                                                            className={`w-4 h-4 mr-3 rounded border-2 flex items-center justify-center ${
                                                                 isCompleted
-                                                            }
-                                                            onChange={() =>
-                                                                !isCompleted &&
-                                                                handleTaskComplete(
-                                                                    quest,
-                                                                    index
-                                                                )
-                                                            }
-                                                            className="mr-2"
-                                                            disabled={
-                                                                isCompleted ||
-                                                                updateQuestTask.isPending
-                                                            }
-                                                        />
+                                                                    ? "bg-green-500 border-green-500"
+                                                                    : "border-gray-400"
+                                                            }`}
+                                                        >
+                                                            {isCompleted && (
+                                                                <svg
+                                                                    className="w-3 h-3 text-white"
+                                                                    fill="currentColor"
+                                                                    viewBox="0 0 20 20"
+                                                                >
+                                                                    <path
+                                                                        fillRule="evenodd"
+                                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                                        clipRule="evenodd"
+                                                                    />
+                                                                </svg>
+                                                            )}
+                                                        </div>
                                                         <span
                                                             className={
                                                                 isCompleted
@@ -297,6 +317,20 @@ const QuestComponentTanStack = ({ onClose }) => {
                                                         >
                                                             {task.description}
                                                         </span>
+                                                        {progress &&
+                                                            progress.progress >
+                                                                0 && (
+                                                                <span className="ml-auto text-sm text-blue-300">
+                                                                    (
+                                                                    {
+                                                                        progress.progress
+                                                                    }
+                                                                    /
+                                                                    {task.amount ||
+                                                                        1}
+                                                                    )
+                                                                </span>
+                                                            )}
                                                     </div>
                                                 );
                                             })}
@@ -306,14 +340,22 @@ const QuestComponentTanStack = ({ onClose }) => {
                                         {quest.rewards?.length > 0 && (
                                             <div>
                                                 <h4 className="text-yellow-400 font-bold mb-2">
-                                                    Rewards:
+                                                    {quest.status ===
+                                                    "COMPLETED"
+                                                        ? "Rewards Claimed:"
+                                                        : "Rewards:"}
                                                 </h4>
                                                 <div className="text-sm text-gray-300">
                                                     {quest.rewards.map(
                                                         (reward, index) => (
                                                             <div
                                                                 key={index}
-                                                                className="mb-1"
+                                                                className={`mb-1 ${
+                                                                    quest.status ===
+                                                                    "COMPLETED"
+                                                                        ? "opacity-75"
+                                                                        : ""
+                                                                }`}
                                                             >
                                                                 {reward.rewardType ===
                                                                     "GOLD" && (
@@ -323,6 +365,9 @@ const QuestComponentTanStack = ({ onClose }) => {
                                                                             reward.goldAmount
                                                                         }{" "}
                                                                         Gold
+                                                                        {quest.status ===
+                                                                            "COMPLETED" &&
+                                                                            " ✓"}
                                                                     </span>
                                                                 )}
                                                                 {reward.rewardType ===
@@ -339,6 +384,9 @@ const QuestComponentTanStack = ({ onClose }) => {
                                                                             {
                                                                                 reward.itemQuantity
                                                                             }
+                                                                            {quest.status ===
+                                                                                "COMPLETED" &&
+                                                                                " ✓"}
                                                                         </span>
                                                                     )}
                                                                 {reward.rewardType ===
@@ -351,6 +399,9 @@ const QuestComponentTanStack = ({ onClose }) => {
                                                                                     .achievement
                                                                                     .name
                                                                             }
+                                                                            {quest.status ===
+                                                                                "COMPLETED" &&
+                                                                                " ✓"}
                                                                         </span>
                                                                     )}
                                                             </div>
@@ -372,18 +423,10 @@ const QuestComponentTanStack = ({ onClose }) => {
                     </div>
                 )}
 
-                {/* Update Status */}
-                {updateQuestTask.isPending && (
-                    <div className="fixed bottom-4 right-4 bg-blue-600 text-white px-4 py-2 rounded">
-                        Updating quest...
-                    </div>
-                )}
-
-                {updateQuestTask.isError && (
-                    <div className="fixed bottom-4 right-4 bg-red-600 text-white px-4 py-2 rounded">
-                        Failed to update quest
-                    </div>
-                )}
+                {/* Status messages for quest auto-updates */}
+                <div className="text-center text-sm text-gray-400 mt-4">
+                    Quest tasks update automatically as you play the game
+                </div>
             </div>
         </div>
     );
