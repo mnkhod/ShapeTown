@@ -305,23 +305,14 @@ class QuestSystem extends EventEmitter {
         }
 
         if (!scene || !scene.newItemHud) {
-            console.warn("⚠️ newItemHud not found, cannot sync inventory. Available scenes:");
-            if (window.questSystem && window.questSystem.game && window.questSystem.game.scene) {
-                const scenes = window.questSystem.game.scene.scenes;
-                console.warn("Scenes:", Object.keys(scenes));
-                console.warn("Scenes with newItemHud:", Object.keys(scenes).filter(key => scenes[key].newItemHud));
-            }
+            console.log("🔄 newItemHud not available, using forceApplyInventory instead");
 
-            // Retry up to 3 times only
-            if (!this.inventorySyncRetries) this.inventorySyncRetries = 0;
-            if (this.inventorySyncRetries < 3) {
-                this.inventorySyncRetries++;
-                console.warn(`Will retry inventory sync in 3 seconds (attempt ${this.inventorySyncRetries}/3)...`);
-                setTimeout(() => {
-                    this.syncInventoryFromBackend();
-                }, 3000);
+            // Try forceApplyInventory as fallback
+            if (typeof window !== 'undefined' && window.forceApplyInventory) {
+                window.forceApplyInventory();
+                console.log("✅ Used forceApplyInventory as fallback");
             } else {
-                console.error("❌ Failed to sync inventory after 3 attempts. newItemHud not available.");
+                console.warn("❌ No inventory sync method available");
             }
             return;
         }
@@ -838,10 +829,26 @@ class QuestSystem extends EventEmitter {
         // Check backend state first if available
         const quest = this.quests[questId];
         if (quest && quest.backendId) {
-            return this.completedQuestIds?.has(quest.backendId) || false;
+            const isCompleted = this.completedQuestIds?.has(quest.backendId) || false;
+            console.log(`🔍 Quest ${questId} (${quest.backendId}) completion check:`, isCompleted);
+            return isCompleted;
         }
         // Fallback to legacy system
-        return this.completedQuests.has(questId);
+        const legacyCompleted = this.completedQuests.has(questId);
+        console.log(`🔍 Quest ${questId} legacy completion check:`, legacyCompleted);
+        return legacyCompleted;
+    }
+
+    // Debug function to check quest status
+    debugQuestStatus(questId = "001") {
+        console.log(`🔍 DEBUG: Quest ${questId} Status`);
+        console.log("- Quest exists:", !!this.quests[questId]);
+        console.log("- Quest data:", this.quests[questId]);
+        console.log("- Backend quest ID:", this.quests[questId]?.backendId);
+        console.log("- Completed quest IDs:", Array.from(this.completedQuestIds || []));
+        console.log("- Is completed:", this.isQuestCompleted(questId));
+        console.log("- Active quest IDs:", Array.from(this.activeQuestIds || []));
+        console.log("- Legacy completed quests:", Array.from(this.completedQuests || []));
     }
 
     async getActiveQuests() {
@@ -936,22 +943,43 @@ class QuestSystem extends EventEmitter {
                 if (harvestStep && harvestStep.completed) {
                     console.log("✅ Harvest step completed, updating Return to NPC step");
                     this.updateSubtask("001", "001-6");
+
                     // Update backend: taskIndex 5 (RETURN_TO_NPC) - non-blocking
                     setTimeout(async () => {
-                        const questId6 = await this.getFirstHarvestQuestId();
-                        if (questId6)
-                            await this.updateBackendTaskProgress(questId6, 5);
+                        try {
+                            const questId6 = await this.getFirstHarvestQuestId();
+                            if (questId6) {
+                                console.log("🔄 Updating backend task progress for RETURN_TO_NPC...");
+                                await this.updateBackendTaskProgress(questId6, 5);
+                                console.log("✅ Backend task progress updated successfully");
+                            }
+                        } catch (error) {
+                            console.error("❌ Failed to update backend task progress:", error);
+                        }
                     }, 0);
                 } else {
                     console.log("❌ Harvest step not completed yet or doesn't exist");
                 }
 
                 // Check if quest should be completed after return to NPC
-                const returnStep = this.quests["001"]?.subtasks["001-6"];
-                if (returnStep && returnStep.completed) {
-                    console.log("✅ Return to NPC completed - Quest should be finished!");
-                    this.completeQuest("001");
-                }
+                // Give the backend time to process the interaction
+                setTimeout(async () => {
+                    try {
+                        // Reload quest data from backend to get latest status
+                        await this.syncQuestProgress();
+                        console.log("🔄 Quest data reloaded from backend after Jack interaction");
+
+                        const returnStep = this.quests["001"]?.subtasks["001-6"];
+                        if (returnStep && returnStep.completed) {
+                            console.log("✅ Return to NPC completed - Quest should be finished!");
+                            this.completeQuest("001");
+                        } else {
+                            console.log("ℹ️ Return to NPC step not completed yet after reload");
+                        }
+                    } catch (error) {
+                        console.error("❌ Failed to reload quest data:", error);
+                    }
+                }, 1000); // Wait 1 second for backend processing
 
                 if (
                     this.isQuestActive("002") &&
@@ -1362,7 +1390,7 @@ class QuestSystem extends EventEmitter {
                 }
                 break;
             case "npc:greetedByName":
-                if (this.isQuestActive("003") && params.npcName) {
+                if (this.isQuestActiveByName("Making Friends") && params.npcName) {
                     const npc = npcsToGreet.find(
                         (n) => n.name === params.npcName
                     );
@@ -1510,9 +1538,21 @@ class QuestSystem extends EventEmitter {
                 this.activateQuest("001");
 
                 // Sync inventory to show the tools given by backend
+                // Use longer delay to avoid conflicts with scene transitions
                 setTimeout(() => {
-                    this.syncInventoryFromBackend();
-                }, 1000);
+                    // Only sync if we have a stable scene with newItemHud
+                    if (this.game && this.game.scene && this.game.scene.scenes) {
+                        const scene = Object.values(this.game.scene.scenes).find(s => s.newItemHud && s.scene.isActive());
+                        if (scene) {
+                            this.syncInventoryFromBackend();
+                        } else {
+                            console.log("🔄 Scene not ready for inventory sync, will try with regular forceApplyInventory");
+                            if (typeof window !== 'undefined' && window.forceApplyInventory) {
+                                window.forceApplyInventory();
+                            }
+                        }
+                    }
+                }, 3000);
             } else {
                 console.error("Failed to start quest:", startResponse.status);
             }
@@ -2976,3 +3016,16 @@ export function setupItemGiftSystem(scene) {
     return scene.showGiftDialog.bind(scene);
 }
 
+
+
+// Global debug function for quest status
+if (typeof window !== 'undefined') {
+    window.debugQuest = (questId = "001") => {
+        if (window.questSystem) {
+            window.questSystem.debugQuestStatus(questId);
+        } else {
+            console.log("❌ Quest system not available. Try again after game loads.");
+        }
+    };
+    console.log("✅ Global quest debug function available: window.debugQuest()");
+}

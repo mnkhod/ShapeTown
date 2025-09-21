@@ -20,8 +20,10 @@ export default class NPCVictoria extends Phaser.GameObjects.Image {
 		// this.name = "Victoria";
 		// this.questIndicator = null;
 		
-		// Initialize with scene events
-		scene.events.on('create', this.prefabCreateCycle, this);
+		// Use scene.time to delay initialization until scene is fully ready
+		scene.time.delayedCall(10, () => {
+			this.prefabCreateCycle();
+		});
 		/* END-USER-CTR-CODE */
 	}
 
@@ -37,8 +39,8 @@ export default class NPCVictoria extends Phaser.GameObjects.Image {
 
 	// Initialize the NPC functionality
 	prefabCreateCycle() {
-		console.log("Victoria NPC create cycle started");
-		
+		console.log("👩 NPCVictoria initializing...");
+
 		// Make the NPC interactive
 		this.setInteractive({ useHandCursor: true });
 		

@@ -216,17 +216,31 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
     itemData = [null, null, null, null, null];
 
     onSceneCreate() {
-        this.items.map((item) => {
-            item.visible = false;
-            // item.setInteractive({ useHandCursor: true });
-        });
+        // Add safety check for scene initialization
+        if (!this.scene || !this.scene.sys) {
+            console.warn('⚠️ ItemHudPrefab: Scene not ready, delaying initialization');
+            if (this.scene && this.scene.time) {
+                this.scene.time.delayedCall(100, () => this.onSceneCreate());
+            }
+            return;
+        }
 
-        this.itemCounters.map((counter) => {
-            counter.visible = false;
-        });
+        try {
+            this.items.map((item) => {
+                item.visible = false;
+                // item.setInteractive({ useHandCursor: true });
+            });
 
-        this.itemBoxs.map((box, index) => {
-            box.setInteractive({ useHandCursor: true });
+            this.itemCounters.map((counter) => {
+                counter.visible = false;
+            });
+
+            this.itemBoxs.map((box, index) => {
+                if (box && box.setInteractive) {
+                    box.setInteractive({ useHandCursor: true });
+                } else {
+                    console.warn(`⚠️ ItemBox ${index} not ready for setInteractive`);
+                }
             box.on(
                 "pointerdown",
                 function (_pointer) {
@@ -242,6 +256,13 @@ export default class ItemHudPrefab extends Phaser.GameObjects.Container {
                 this
             );
         });
+        } catch (error) {
+            console.error('❌ Error in ItemHudPrefab onSceneCreate:', error);
+            // Retry after a delay
+            if (this.scene && this.scene.time) {
+                this.scene.time.delayedCall(200, () => this.onSceneCreate());
+            }
+        }
     }
 
     onSceneUpdate() {

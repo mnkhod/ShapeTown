@@ -1,4 +1,5 @@
 // You can write more code here
+import portalManager from "../systems/PortalManager";
 
 /* START OF COMPILED CODE */
 
@@ -600,18 +601,8 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 	    //  this.sand_1.renderDebug(this.add.graphics())
 
 	    this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-	        if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-	            this.newItemHudPrefab.updateGlobalInventory();
-	        }
-
-	        this.scene.switch("ShapeTownSquareMapScene");
-
-	        const targetScene = this.scene.get("ShapeTownSquareMapScene");
-	        if (targetScene && targetScene.playerPrefab) {
-	            targetScene.playerPrefab.y -= 80;
-	        }
-
-			this.cameras.main.fadeIn(2000, 0, 0, 0);
+	        // Use Portal Manager for consistent transitions
+	        portalManager.transition(this, "ShapeTownSquareMapScene");
 		});
 
 		const sandStones = [

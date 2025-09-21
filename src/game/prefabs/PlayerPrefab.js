@@ -122,7 +122,15 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     moveSpeed = 500;
 
     prefabCreateCycle() {
-        this.loadCustomization();
+        // Ensure scene is properly initialized before loading customization
+        if (this.scene && this.scene.time) {
+            // Delay customization loading to ensure sprites are fully initialized
+            this.scene.time.delayedCall(100, () => {
+                this.loadCustomization();
+            });
+        } else {
+            console.warn('⚠️ Scene time not available, skipping customization');
+        }
         this.settingUpAnimations();
     }
 
@@ -197,19 +205,54 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     }
 
     loadCustomization() {
-        const savedCustomization = localStorage.getItem('playerCustomization'); 
-        if (savedCustomization) {
-            const customization = JSON.parse(savedCustomization);
+        try {
+            // Validate scene and sprite initialization
+            if (!this.scene || !this.scene.sys || !this.scene.sys.game) {
+                console.warn('⚠️ Scene not ready for customization, retrying...');
+                if (this.scene && this.scene.time) {
+                    this.scene.time.delayedCall(200, () => this.loadCustomization());
+                }
+                return;
+            }
 
-            const skinKey = `PlayerWalking_${customization.skin}`;
-            const hairKey = `PlayerHairWalking_${customization.hair}`;
-            const outfitKey = `CharacterOutfit_${customization.clothing}`;
+            const savedCustomization = localStorage.getItem('playerCustomization');
+            if (savedCustomization) {
+                const customization = JSON.parse(savedCustomization);
 
-            this.skin.setTexture(skinKey);
-            this.hair.setTexture(hairKey);
-            this.outfit.setTexture(outfitKey);
+                const skinKey = `PlayerWalking_${customization.skin}`;
+                const hairKey = `PlayerHairWalking_${customization.hair}`;
+                const outfitKey = `CharacterOutfit_${customization.clothing}`;
 
-            this.settingUpAnimations();
+                // Enhanced safety checks with scene validation
+                if (this.skin && this.skin.setTexture && this.skin.scene && this.skin.scene.sys) {
+                    this.skin.setTexture(skinKey);
+                    console.log('✅ Set skin texture:', skinKey);
+                } else {
+                    console.warn('⚠️ Skin sprite not ready');
+                }
+
+                if (this.hair && this.hair.setTexture && this.hair.scene && this.hair.scene.sys) {
+                    this.hair.setTexture(hairKey);
+                    console.log('✅ Set hair texture:', hairKey);
+                } else {
+                    console.warn('⚠️ Hair sprite not ready');
+                }
+
+                if (this.outfit && this.outfit.setTexture && this.outfit.scene && this.outfit.scene.sys) {
+                    this.outfit.setTexture(outfitKey);
+                    console.log('✅ Set outfit texture:', outfitKey);
+                } else {
+                    console.warn('⚠️ Outfit sprite not ready');
+                }
+
+                this.settingUpAnimations();
+            }
+        } catch (error) {
+            console.error('❌ Error in loadCustomization:', error);
+            // Retry after a longer delay if there's an error
+            if (this.scene && this.scene.time) {
+                this.scene.time.delayedCall(500, () => this.loadCustomization());
+            }
         }
     }
 
@@ -263,12 +306,15 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     }
 
     playAnimations(direction) {
-        try {
+        // Check if animations exist before playing them to prevent Phaser warnings
+        if (this.hair.anims && this.hair.anims.animationManager.get(`hair${direction}`)) {
             this.hair.play(`hair${direction}`, true);
+        }
+        if (this.skin.anims && this.skin.anims.animationManager.get(`walk${direction}`)) {
             this.skin.play(`walk${direction}`, true);
+        }
+        if (this.outfit.anims && this.outfit.anims.animationManager.get(`outfit${direction}`)) {
             this.outfit.play(`outfit${direction}`, true);
-        } catch (error) {
-            console.warn(`Failed to play animations for direction ${direction}: ${error}`);
         }
     }
 
@@ -338,10 +384,20 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 
         toolSprite.visible = true;
         
-        // Play the player idle animation
-        this.hair.play(`hair${'idle' + directionCap}`, true);
-        this.skin.play(`walk${'idle' + directionCap}`, true);
-        this.outfit.play(`outfit${'idle' + directionCap}`, true);
+        // Play the player idle animation (check if animations exist to prevent Phaser warnings)
+        const hairIdleAnim = `hair${'idle' + directionCap}`;
+        const skinIdleAnim = `walk${'idle' + directionCap}`;
+        const outfitIdleAnim = `outfit${'idle' + directionCap}`;
+
+        if (this.hair.anims && this.hair.anims.animationManager.get(hairIdleAnim)) {
+            this.hair.play(hairIdleAnim, true);
+        }
+        if (this.skin.anims && this.skin.anims.animationManager.get(skinIdleAnim)) {
+            this.skin.play(skinIdleAnim, true);
+        }
+        if (this.outfit.anims && this.outfit.anims.animationManager.get(outfitIdleAnim)) {
+            this.outfit.play(outfitIdleAnim, true);
+        }
         
         // Play the tool animation
         try {

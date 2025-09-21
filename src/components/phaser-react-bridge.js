@@ -89,6 +89,43 @@ export function initInventoryBridge(phaserInstance, reactEvents) {
   };
 
   /**
+   * Gets the current quantity of a specific item
+   */
+  phaserInstance.getItemCount = function(itemKey) {
+    if (!itemKey) return 0;
+
+    // Check quick access slots (slots 0-7)
+    if (this.itemData) {
+      for (let i = 0; i < this.itemData.length; i++) {
+        if (this.itemData[i] === itemKey) {
+          const counterText = this.itemCounters?.[i]?.text;
+          if (counterText) {
+            return parseInt(counterText) || 0;
+          }
+        }
+      }
+    }
+
+    // Check main inventory
+    if (this.mainInventoryData) {
+      for (const item of this.mainInventoryData) {
+        if (item && (item.id === itemKey || item.name === itemKey)) {
+          return item.quantity || 0;
+        }
+      }
+    }
+
+    return 0;
+  };
+
+  /**
+   * Checks if a specific item exists in inventory
+   */
+  phaserInstance.checkItem = function(itemKey) {
+    return this.getItemCount(itemKey) > 0;
+  };
+
+  /**
    * Syncs the HUD with the global inventory data
    */
   phaserInstance.syncWithGlobalInventory = function() {

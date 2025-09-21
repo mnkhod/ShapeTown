@@ -7,6 +7,7 @@ import {
     MERCHANT_TYPES,
     getMerchantInventory,
 } from "../../../components/merchant-manager";
+import { startQuest, updateQuestTask } from "../../../lib/query-helper";
 /* END-USER-IMPORTS */
 
 export default class MerchantPrefab extends Phaser.GameObjects.Container {
@@ -93,7 +94,17 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
                 }
 
                 if (this.scene.markNPCGreeted) {
-                    this.scene.markNPCGreeted("Lydia");
+                    this.scene.markNPCGreeted("Lady Lydia");
+                }
+
+                // Update backend quest task for "Taste of Gold" if active
+                if (this.isQuestActiveByName("Taste of Gold")) {
+                    this.updateTasteOfGoldProgress();
+                }
+
+                // Update backend quest task for "Making Friends" if active
+                if (this.isQuestActiveByName("Making Friends")) {
+                    this.updateMakingFriendsProgress();
                 }
 
                 const currentGreeting =
@@ -123,7 +134,7 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
                         this.scene.questSystem.isQuestActive
                     ) {
                         isQuestActive =
-                            this.scene.questSystem.isQuestActive("002");
+                            this.isQuestActiveByName("Taste of Gold");
                     }
                 } catch (error) {
                     console.error("Error checking quest status:", error);
@@ -131,7 +142,35 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
 
                 let dialogueLines;
 
-                if (hasIronBars && isQuestActive) {
+                // Check if Taste of Gold was just completed (has iron bars but quest just finished)
+                const tasteOfGoldCompleted = this.isQuestCompletedByName("Taste of Gold");
+                const makingFriendsActive = this.isQuestActiveByName("Making Friends");
+                const makingFriendsCompleted = this.isQuestCompletedByName("Making Friends");
+
+                if (tasteOfGoldCompleted && !makingFriendsActive && !makingFriendsCompleted) {
+                    // Start Making Friends quest
+                    dialogueLines = [
+                        {
+                            msg: "Thank you for selling those iron bars! You've proven yourself to be quite capable.",
+                        },
+                        {
+                            msg: "Now that you're familiar with ShapeTown's trading system, I have another opportunity for you.",
+                        },
+                        {
+                            msg: "To truly become part of our community, you should meet all the townspeople.",
+                        },
+                        {
+                            msg: "Would you like to take on the quest to make friends with everyone in ShapeTown?",
+                            onComplete: () => {
+                                // Start the Making Friends quest
+                                this.startMakingFriendsQuest();
+                            }
+                        },
+                        {
+                            msg: "Visit each NPC in town and introduce yourself. They all have interesting stories to share!",
+                        }
+                    ];
+                } else if (hasIronBars && isQuestActive) {
                     dialogueLines = [
                         {
                             msg: currentGreeting,
@@ -247,6 +286,166 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
 
     getInventory() {
         return getMerchantInventory(this.merchantType);
+    }
+
+    isQuestActiveByName(questName) {
+        try {
+            const activeQuests = this.scene.questProvider?.activeQuests?.data;
+            if (!activeQuests) return false;
+
+            return activeQuests.some(questEntry =>
+                questEntry.quest.name === questName
+            );
+        } catch (error) {
+            console.error("Error checking active quest by name:", error);
+            return false;
+        }
+    }
+
+    isQuestCompletedByName(questName) {
+        try {
+            const completedQuests = this.scene.questProvider?.completedQuests?.data;
+            if (!completedQuests) return false;
+
+            return completedQuests.some(questEntry =>
+                questEntry.quest.name === questName
+            );
+        } catch (error) {
+            console.error("Error checking completed quest by name:", error);
+            return false;
+        }
+    }
+
+    async startMakingFriendsQuest() {
+        try {
+            console.log("🎯 Starting 'Making Friends' quest through backend");
+
+            // Get available quests to find the "Making Friends" quest ID
+            const availableQuests = await this.scene.questProvider?.availableQuests?.data;
+            if (!availableQuests) {
+                console.error("❌ No available quests data found");
+                return;
+            }
+
+            const makingFriendsQuest = availableQuests.find(questEntry =>
+                questEntry.quest.name === "Making Friends"
+            );
+
+            if (!makingFriendsQuest) {
+                console.error("❌ 'Making Friends' quest not found in available quests");
+                return;
+            }
+
+            console.log("✅ Found 'Making Friends' quest:", makingFriendsQuest.quest.id);
+
+            // Start the quest using backend API
+            await startQuest(makingFriendsQuest.quest.id);
+
+            // Show success message
+            if (this.scene.alertPrefab) {
+                this.scene.alertPrefab.alert("New Main Quest: Making Friends");
+            }
+
+            // Refresh quest data from backend
+            if (this.scene.questProvider?.refreshQuests) {
+                this.scene.questProvider.refreshQuests();
+            }
+
+            console.log("✅ 'Making Friends' quest started successfully");
+        } catch (error) {
+            console.error("❌ Failed to start 'Making Friends' quest:", error);
+
+            // Fallback: Show alert even if backend call fails
+            if (this.scene.alertPrefab) {
+                this.scene.alertPrefab.alert("New Main Quest: Making Friends");
+            }
+        }
+    }
+
+    async updateMakingFriendsProgress() {
+        try {
+            console.log("🤝 Updating 'Making Friends' quest progress for Lady Lydia");
+
+            // Get active quests to find the "Making Friends" quest
+            const activeQuests = this.scene.questProvider?.activeQuests?.data;
+            if (!activeQuests) {
+                console.error("❌ No active quests data found");
+                return;
+            }
+
+            const makingFriendsQuest = activeQuests.find(questEntry =>
+                questEntry.quest.name === "Making Friends"
+            );
+
+            if (!makingFriendsQuest) {
+                console.error("❌ 'Making Friends' quest not found in active quests");
+                return;
+            }
+
+            console.log("✅ Found 'Making Friends' quest:", makingFriendsQuest.quest.id);
+
+            // Update the TALK_TO_ALL_NPCS task
+            await updateQuestTask({
+                questId: makingFriendsQuest.quest.id,
+                taskIndex: 0, // First task: TALK_TO_ALL_NPCS
+                progressData: {
+                    npcId: "09a59f2a-aac8-4336-9eff-50711546b7a0", // Lady Lydia ID from backend
+                    action: "talked_to_npc"
+                }
+            });
+
+            // Refresh quest data from backend
+            if (this.scene.questProvider?.refreshQuests) {
+                this.scene.questProvider.refreshQuests();
+            }
+
+            console.log("✅ 'Making Friends' quest progress updated for Lady Lydia");
+        } catch (error) {
+            console.error("❌ Failed to update 'Making Friends' quest progress:", error);
+        }
+    }
+
+    async updateTasteOfGoldProgress() {
+        try {
+            console.log("🥇 Updating 'Taste of Gold' quest progress for Lady Lydia interaction");
+
+            // Get active quests to find the "Taste of Gold" quest
+            const activeQuests = this.scene.questProvider?.activeQuests?.data;
+            if (!activeQuests) {
+                console.error("❌ No active quests data found");
+                return;
+            }
+
+            const tasteOfGoldQuest = activeQuests.find(questEntry =>
+                questEntry.quest.name === "Taste of Gold"
+            );
+
+            if (!tasteOfGoldQuest) {
+                console.error("❌ 'Taste of Gold' quest not found in active quests");
+                return;
+            }
+
+            console.log("✅ Found 'Taste of Gold' quest:", tasteOfGoldQuest.quest.id);
+
+            // Update the TALK_TO_NPC task (should be task index 1)
+            await updateQuestTask({
+                questId: tasteOfGoldQuest.quest.id,
+                taskIndex: 1, // Second task: TALK_TO_NPC (Lady Lydia)
+                progressData: {
+                    npcId: "09a59f2a-aac8-4336-9eff-50711546b7a0", // Lady Lydia ID from backend
+                    action: "talked_to_npc"
+                }
+            });
+
+            // Refresh quest data from backend
+            if (this.scene.questProvider?.refreshQuests) {
+                this.scene.questProvider.refreshQuests();
+            }
+
+            console.log("✅ 'Taste of Gold' quest progress updated for Lady Lydia");
+        } catch (error) {
+            console.error("❌ Failed to update 'Taste of Gold' quest progress:", error);
+        }
     }
 
     /* END-USER-CODE */

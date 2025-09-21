@@ -49,7 +49,10 @@ export default class GoblinMonster extends Phaser.GameObjects.Sprite {
 
 		scene.events.once('update', () => {
 		    this.createAnimations();
-		    this.play('goblin-walking');
+		    // Check if animation exists before playing to prevent Phaser warnings
+		    if (this.scene.anims.exists('goblin-walking')) {
+		        this.play('goblin-walking');
+		    }
 		    scene.events.on('update', this.updateAI, this);
 		});
 		/* END-USER-CTR-CODE */

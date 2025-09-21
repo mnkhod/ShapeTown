@@ -28,8 +28,8 @@ export function useQuests() {
     return useQuery({
         queryKey: QUEST_KEYS.lists(),
         queryFn: getQuests,
-        staleTime: 5 * 60 * 1000, // 5 minutes
-        gcTime: 10 * 60 * 1000, // 10 minutes
+        staleTime: 10 * 60 * 1000, // 10 minutes - longer cache for faster loading
+        gcTime: 30 * 60 * 1000, // 30 minutes - keep in memory longer
         enabled: isAuthenticated, // Only fetch when authenticated
     });
 }
@@ -40,7 +40,10 @@ export function useActiveQuests() {
     return useQuery({
         queryKey: QUEST_KEYS.active(),
         queryFn: getActiveQuests,
-        staleTime: 1 * 60 * 1000, // 1 minute
+        staleTime: 2 * 1000, // 2 seconds - very fresh data
+        gcTime: 30 * 1000, // Keep in cache for 30 seconds
+        refetchInterval: 3 * 1000, // Auto-refetch every 3 seconds during active gameplay
+        refetchOnWindowFocus: true, // Refetch when user returns to tab
         enabled: isAuthenticated, // Only fetch when authenticated
     });
 }
@@ -51,7 +54,9 @@ export function useCompletedQuests() {
     return useQuery({
         queryKey: QUEST_KEYS.completed(),
         queryFn: getCompletedQuests,
-        staleTime: 5 * 60 * 1000, // 5 minutes
+        staleTime: 10 * 60 * 1000, // 10 minutes - completed quests rarely change
+        gcTime: 30 * 60 * 1000, // Keep in cache for 30 minutes
+        refetchOnWindowFocus: false, // Don't refetch completed quests on window focus
         enabled: isAuthenticated, // Only fetch when authenticated
     });
 }
@@ -62,7 +67,9 @@ export function useSystemQuests() {
     return useQuery({
         queryKey: QUEST_KEYS.system(),
         queryFn: getSystemQuests,
-        staleTime: 1 * 60 * 1000, // 1 minute
+        staleTime: 5 * 60 * 1000, // 5 minutes - system quests are fairly static
+        gcTime: 15 * 60 * 1000, // Keep in cache for 15 minutes
+        refetchInterval: 30 * 1000, // Auto-refetch every 30 seconds (less aggressive)
         enabled: isAuthenticated, // Only fetch when authenticated
     });
 }
@@ -74,8 +81,10 @@ export function useStartQuest() {
         mutationFn: (questId) => startQuest(questId),
         onSuccess: (data, questId) => {
             console.log("Quest started successfully:", data);
-            // Invalidate and refetch quest data
-            queryClient.invalidateQueries({ queryKey: QUEST_KEYS.all });
+            // Immediately invalidate only the relevant queries for faster UI updates
+            queryClient.invalidateQueries({ queryKey: QUEST_KEYS.active() });
+            queryClient.invalidateQueries({ queryKey: QUEST_KEYS.available() });
+            // Don't invalidate completed quests as they don't change when starting new quests
         },
         onError: (error, questId) => {
             console.error("Failed to start quest:", error);
@@ -90,7 +99,8 @@ export function useAvailableQuests() {
     return useQuery({
         queryKey: QUEST_KEYS.available(),
         queryFn: getAvailableQuests,
-        staleTime: 1 * 60 * 1000, // 1 minute
+        staleTime: 2 * 60 * 1000, // 2 minutes - available quests change moderately
+        gcTime: 10 * 60 * 1000, // Keep in cache for 10 minutes
         enabled: isAuthenticated, // Only fetch when authenticated
     });
 }
@@ -102,8 +112,9 @@ export function useUpdateQuestTask() {
         mutationFn: updateQuestTask,
         onSuccess: (data, variables) => {
             console.log("Quest task updated successfully:", data);
-            // Invalidate and refetch quest data
-            queryClient.invalidateQueries({ queryKey: QUEST_KEYS.all });
+            // Only invalidate active quests instead of all quest data for better performance
+            queryClient.invalidateQueries({ queryKey: QUEST_KEYS.active() });
+            queryClient.invalidateQueries({ queryKey: QUEST_KEYS.system() });
         },
         onError: (error, variables) => {
             console.error("Failed to update quest task:", error);

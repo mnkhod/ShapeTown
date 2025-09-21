@@ -67,6 +67,11 @@ export const getMyInventory = async () => {
     return res.data;
 };
 
+export const updateMyInventory = async (inventoryData: any[]) => {
+    const res = await api.put("/my/inventory", { inventoryData });
+    return res.data;
+};
+
 export const getMyQuests = async () => {
     const res = await api.get("/my/quests");
     return res.data;

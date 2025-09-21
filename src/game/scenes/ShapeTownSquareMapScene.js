@@ -1,4 +1,5 @@
 // You can write more code here
+import portalManager from "../systems/PortalManager";
 
 /* START OF COMPILED CODE */
 
@@ -34,6 +35,7 @@ import initInventoryBridge from "../../components/phaser-react-bridge";
 import { EventBus } from "../../game/EventBus";
 import { initMerchantBridge } from "../../components/merchant-bridge";
 import { MERCHANT_TYPES } from "../../components/merchant-manager";
+import { updateQuestTask } from "../../lib/query-helper";
 /* END-USER-IMPORTS */
 
 export default class ShapeTownSquareMapScene extends Phaser.Scene {
@@ -455,8 +457,38 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
             0
         );
 
-        // playerPrefab
-        const playerPrefab = new PlayerPrefab(this, 1630, 1988);
+        // playerPrefab - check for checkpoint position restoration
+        let playerX = 1200; // default X position (center of square, matches PortalManager)
+        let playerY = 1500; // default Y position (center of square, matches PortalManager)
+
+        // Check if we should restore position from checkpoint
+        const shouldRestorePosition =
+            localStorage.getItem("shouldRestorePosition") === "true";
+        if (shouldRestorePosition) {
+            const checkpointX = localStorage.getItem("checkpointPlayerX");
+            const checkpointY = localStorage.getItem("checkpointPlayerY");
+            if (checkpointX && checkpointY) {
+                const cpX = parseInt(checkpointX, 10);
+                const cpY = parseInt(checkpointY, 10);
+
+                // Only use checkpoint if it's reasonable (exclude emergency position)
+                if (cpX > 300 && cpX < 2800 && cpY > 400 && cpY < 3000) {
+                    playerX = cpX;
+                    playerY = cpY;
+                    console.log(
+                        `🎯 Restoring player position from checkpoint: (${playerX}, ${playerY})`
+                    );
+                } else {
+                    console.log(`⚠️ Checkpoint position (${cpX}, ${cpY}) seems invalid, using default`);
+                }
+                // Clear the restoration flags
+                localStorage.removeItem("shouldRestorePosition");
+                localStorage.removeItem("checkpointPlayerX");
+                localStorage.removeItem("checkpointPlayerY");
+            }
+        }
+
+        const playerPrefab = new PlayerPrefab(this, playerX, playerY);
         this.add.existing(playerPrefab);
 
         // squareFountanPrefab
@@ -1226,6 +1258,9 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
                 if (!this.playerEnteredTown) {
                     this.playerEnteredTown = true;
 
+                    // Update backend quest task for "Taste of Gold" if active
+                    this.updateTasteOfGoldTravelProgress();
+
                     if (this.triggerQuestEvent) {
                         console.log(
                             "Player entered town - triggering quest event"
@@ -1734,11 +1769,63 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         };
 
         this.initInventorySystem();
+
+        // Set up player position tracking for checkpoint system
+        this.time.addEvent({
+            delay: 30000, // Update every 30 seconds (reduced frequency for less database load)
+            callback: () => {
+                if (this.playerPrefab) {
+                    localStorage.setItem(
+                        "currentPlayerX",
+                        Math.round(this.playerPrefab.x).toString()
+                    );
+                    localStorage.setItem(
+                        "currentPlayerY",
+                        Math.round(this.playerPrefab.y).toString()
+                    );
+                }
+            },
+            loop: true,
+        });
+
+        // Also update position immediately to ensure we have current data
+        if (this.playerPrefab) {
+            localStorage.setItem(
+                "currentPlayerX",
+                Math.round(this.playerPrefab.x).toString()
+            );
+            localStorage.setItem(
+                "currentPlayerY",
+                Math.round(this.playerPrefab.y).toString()
+            );
+        }
+
         this.setupLayerDepths();
 
         // Handle scene wake events
         this.events.on("wake", () => {
             this.cameras.main.fadeIn(300);
+
+            // Restore player position on wake to prevent respawning at (0,0)
+            if (this.playerPrefab) {
+                const currentX = localStorage.getItem("currentPlayerX");
+                const currentY = localStorage.getItem("currentPlayerY");
+                if (currentX && currentY) {
+                    this.playerPrefab.x = parseInt(currentX, 10);
+                    this.playerPrefab.y = parseInt(currentY, 10);
+                    console.log(
+                        `🔄 Restored player position on wake: (${this.playerPrefab.x}, ${this.playerPrefab.y})`
+                    );
+                }
+            }
+
+            // Reset transition flags when scene wakes up with a small delay
+            this.time.delayedCall(100, () => {
+                this.isTransitioningToFarm = false;
+                console.log(
+                    "🏛️ SquareMapScene woke up, reset transition flags"
+                );
+            });
 
             if (this.newItemHudPrefab) {
                 this.time.delayedCall(200, () => {
@@ -1750,6 +1837,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
                         }
                     );
                 });
+
+                // Skip forceApplyInventory on wake to avoid conflicts with transition logic
             }
         });
 
@@ -1932,39 +2021,65 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         });
 
         this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
-            if (
-                this.newItemHudPrefab &&
-                this.newItemHudPrefab.updateGlobalInventory
-            ) {
-                this.newItemHudPrefab.updateGlobalInventory();
-            }
-
-            this.scene.switch("ShapeTownBeachMapScene");
-
-            const targetScene_1 = this.scene.get("ShapeTownBeachMapScene");
-            if (targetScene_1 && targetScene_1.playerPrefab) {
-                targetScene_1.playerPrefab.y += 40;
-            }
-
-            this.cameras.main.fadeIn(2000, 0, 0, 0);
+            // Use Portal Manager for consistent transitions
+            portalManager.transition(this, "ShapeTownBeachMapScene");
         });
+        // Add transition flag to prevent multiple triggers
+        this.isTransitioningToFarm = false;
+
         this.physics.add.overlap(this.sceneTile_1, this.playerPrefab, () => {
-            if (
-                this.newItemHudPrefab &&
-                this.newItemHudPrefab.updateGlobalInventory
-            ) {
-                this.newItemHudPrefab.updateGlobalInventory();
-            }
-
-            this.scene.switch("ShapeTownFarmingMapScene");
-
-            const targetScene = this.scene.get("ShapeTownFarmingMapScene");
-            if (targetScene && targetScene.playerPrefab) {
-                targetScene.playerPrefab.x -= 40;
-            }
-
-            this.cameras.main.fadeIn(2000, 0, 0, 0);
+            // Use Portal Manager for consistent transitions
+            portalManager.transition(this, "ShapeTownFarmingMapScene");
         });
+    }
+
+    async updateTasteOfGoldTravelProgress() {
+        try {
+            console.log("🗺️ Updating 'Taste of Gold' quest progress for traveling to ShapeTown");
+
+            // Check if questProvider is available
+            if (!this.questProvider) {
+                console.warn("❌ Quest provider not available on scene");
+                return;
+            }
+
+            // Get active quests to find the "Taste of Gold" quest
+            const activeQuests = this.questProvider?.activeQuests?.data;
+            if (!activeQuests) {
+                console.error("❌ No active quests data found");
+                return;
+            }
+
+            const tasteOfGoldQuest = activeQuests.find(questEntry =>
+                questEntry.quest.name === "Taste of Gold"
+            );
+
+            if (!tasteOfGoldQuest) {
+                console.warn("❌ 'Taste of Gold' quest not found in active quests");
+                return;
+            }
+
+            console.log("✅ Found 'Taste of Gold' quest:", tasteOfGoldQuest.quest.id);
+
+            // Update the TRAVEL_TO_MAP task (should be task index 0)
+            await updateQuestTask({
+                questId: tasteOfGoldQuest.quest.id,
+                taskIndex: 0, // First task: TRAVEL_TO_MAP (ShapeTown)
+                progressData: {
+                    mapId: "ShapeTownSquareMapScene",
+                    action: "traveled_to_map"
+                }
+            });
+
+            // Refresh quest data from backend
+            if (this.questProvider?.refreshQuests) {
+                this.questProvider.refreshQuests();
+            }
+
+            console.log("✅ 'Taste of Gold' quest travel progress updated");
+        } catch (error) {
+            console.error("❌ Failed to update 'Taste of Gold' quest travel progress:", error);
+        }
     }
 
     /* END-USER-CODE */

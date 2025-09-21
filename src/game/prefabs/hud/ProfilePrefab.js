@@ -51,18 +51,48 @@ export default class ProfilePrefab extends Phaser.GameObjects.Container {
     }
 
 onSceneCreate() {
-    this.setInteractive({ 
-        useHandCursor: true,
-        hitArea: new Phaser.Geom.Rectangle(-60, -20, 120, 70),
-        hitAreaCallback: Phaser.Geom.Rectangle.Contains
-    });
+    // Add safety check and delay to ensure proper initialization
+    if (!this.scene || !this.scene.sys) {
+        console.warn('⚠️ ProfilePrefab: Scene not ready, delaying interactive setup');
+        if (this.scene && this.scene.time) {
+            this.scene.time.delayedCall(100, () => this.onSceneCreate());
+        }
+        return;
+    }
 
-    this.on('pointerdown', () => {
-        if (this.scene.reactEvent == undefined) throw Error("REACT EVENT BUS NOT HOOKED IN");
-        this.scene.reactEvent.emit("show-achievements-modal", this);
-    }, this);
+    try {
+        this.setInteractive({
+            useHandCursor: true,
+            hitArea: new Phaser.Geom.Rectangle(-60, -20, 120, 70),
+            hitAreaCallback: Phaser.Geom.Rectangle.Contains
+        });
+    } catch (error) {
+        console.error('❌ Error setting ProfilePrefab interactive:', error);
+        // Retry after a delay
+        if (this.scene && this.scene.time) {
+            this.scene.time.delayedCall(200, () => this.onSceneCreate());
+        }
+    }
 
-    this.loadCustomization();
+    // Add event handler with safety check
+    try {
+        this.on('pointerdown', () => {
+            if (!this.scene || !this.scene.reactEvent) {
+                console.warn("⚠️ React event bus not available");
+                return;
+            }
+            this.scene.reactEvent.emit("show-achievements-modal", this);
+        }, this);
+    } catch (error) {
+        console.error('❌ Error setting up ProfilePrefab pointerdown event:', error);
+    }
+
+    // Load customization with safety check
+    try {
+        this.loadCustomization();
+    } catch (error) {
+        console.error('❌ Error loading ProfilePrefab customization:', error);
+    }
 }
 
 onSceneUpdate() {

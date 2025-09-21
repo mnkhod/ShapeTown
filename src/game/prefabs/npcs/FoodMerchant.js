@@ -28,7 +28,10 @@ export default class FoodMerchant extends Phaser.GameObjects.Container {
         this.questMark = questMark;
 
         /* START-USER-CTR-CODE */
-        scene.events.on('create', this.prefabCreateCycle, this);
+        // Use scene.time to delay initialization until scene is fully ready
+        scene.time.delayedCall(10, () => {
+            this.prefabCreateCycle();
+        });
         npc.setInteractive({ useHandCursor: true });
         this.merchantType = MERCHANT_TYPES.FOOD;
         /* END-USER-CTR-CODE */
@@ -48,6 +51,9 @@ export default class FoodMerchant extends Phaser.GameObjects.Container {
     /* START-USER-CODE */
 
     prefabCreateCycle() {
+        // Container objects should have this.scene available by default
+        console.log('🍔 FoodMerchant initializing...');
+
         this.npc.on('pointerover', function (_pointer) {
             this.preFX.addGlow(16777215, 4, 0, false);
         });
@@ -133,9 +139,7 @@ export default class FoodMerchant extends Phaser.GameObjects.Container {
         });
         
         // Set up listener for cooking events
-        if (this.scene.events) {
-            this.scene.events.on('carrot-soup-cooked', this.handleCarrotSoupCooked, this);
-        }
+        this.scene.events.on('carrot-soup-cooked', this.handleCarrotSoupCooked, this);
     }
     
     // Handler for when Carrot Soup is cooked

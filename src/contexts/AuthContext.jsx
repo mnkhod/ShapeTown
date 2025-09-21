@@ -1,6 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import { connectWallet } from "../lib/authApiService";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+    getQuests,
+    getActiveQuests,
+    getCompletedQuests,
+    getSystemQuests,
+    getAvailableQuests
+} from "../lib/query-helper";
+import { QUEST_KEYS } from "../hooks/useQuests";
 
 const AuthContext = createContext();
 
@@ -19,6 +28,44 @@ export const AuthProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [provider, setProvider] = useState(null);
     const [signer, setSigner] = useState(null);
+    const queryClient = useQueryClient();
+
+    // Prefetch all quest data for instant quest journal loading
+    const prefetchQuests = async () => {
+        console.log("🚀 Prefetching quest data for instant access...");
+        try {
+            await Promise.all([
+                queryClient.prefetchQuery({
+                    queryKey: QUEST_KEYS.lists(),
+                    queryFn: getQuests,
+                    staleTime: 5 * 60 * 1000,
+                }),
+                queryClient.prefetchQuery({
+                    queryKey: QUEST_KEYS.active(),
+                    queryFn: getActiveQuests,
+                    staleTime: 2 * 1000,
+                }),
+                queryClient.prefetchQuery({
+                    queryKey: QUEST_KEYS.completed(),
+                    queryFn: getCompletedQuests,
+                    staleTime: 5 * 60 * 1000,
+                }),
+                queryClient.prefetchQuery({
+                    queryKey: QUEST_KEYS.system(),
+                    queryFn: getSystemQuests,
+                    staleTime: 5 * 60 * 1000,
+                }),
+                queryClient.prefetchQuery({
+                    queryKey: QUEST_KEYS.available(),
+                    queryFn: getAvailableQuests,
+                    staleTime: 30 * 1000,
+                })
+            ]);
+            console.log("✅ Quest data prefetched successfully!");
+        } catch (error) {
+            console.error("⚠️ Failed to prefetch some quest data:", error);
+        }
+    };
 
     // Check if wallet is connected on mount
     useEffect(() => {
@@ -67,6 +114,9 @@ export const AuthProvider = ({ children }) => {
                 console.log(
                     "Auto-authenticated with existing wallet and token"
                 );
+
+                // Prefetch quest data immediately after authentication
+                prefetchQuests();
             } else if (hasWallet && !hasToken) {
                 console.log(
                     "Wallet connected but no token - user needs to login"
@@ -98,8 +148,10 @@ export const AuthProvider = ({ children }) => {
     };
 
     const handleChainChanged = () => {
-        // Reload the page to avoid state inconsistencies
-        window.location.reload();
+        // Instead of reloading, just reset auth state
+        console.log("Chain changed, resetting auth state");
+        logout();
+        checkWalletConnection();
     };
 
     const login = async () => {
@@ -170,6 +222,9 @@ export const AuthProvider = ({ children }) => {
                 setWalletAddress(address);
                 setUser(userData);
                 setIsAuthenticated(true);
+
+                // Prefetch quest data immediately after authentication
+                prefetchQuests();
 
                 return userData;
             } catch (backendError) {

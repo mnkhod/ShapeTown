@@ -50,7 +50,10 @@ export default class RockMonster extends Phaser.GameObjects.Sprite {
 
         scene.events.once('update', () => {
     	    this.createAnimations();
-    	    this.play('rockMonster-walking');
+    	    // Check if animation exists before playing to prevent Phaser warnings
+    	    if (this.scene.anims.exists('rockMonster-walking')) {
+    	        this.play('rockMonster-walking');
+    	    }
     	});
 
         scene.events.on('update', this.updateAI, this);
@@ -199,9 +202,12 @@ export default class RockMonster extends Phaser.GameObjects.Sprite {
         this.state = 'dead';
         this.disableInteractive();
 
-        const deathAnim = this.play('rockMonster-death');
-        if (deathAnim) {
-            deathAnim.repeat = 0; 
+        // Check if animation exists before playing to prevent Phaser warnings
+        if (this.scene.anims.exists('rockMonster-death')) {
+            const deathAnim = this.play('rockMonster-death');
+            if (deathAnim) {
+                deathAnim.repeat = 0;
+            }
         }
 
         this.generateDrops();

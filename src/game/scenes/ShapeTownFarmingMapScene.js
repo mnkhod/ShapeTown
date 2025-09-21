@@ -1,4 +1,5 @@
 // You can write more code here
+import portalManager from "../systems/PortalManager";
 
 /* START OF COMPILED CODE */
 
@@ -120,20 +121,49 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// tree_border_6
 		const tree_border_6 = shapetownFarmingMap.createLayer("tree border/0", ["TreePatteren"], 0, 0);
 
-		// playerPrefab - check for checkpoint position restoration
-		let playerX = 576;  // default X position (centered with house at 576, 360)
-		let playerY = 420;  // default Y position (in front of house entrance, below house bottom at 375)
+		// playerPrefab - check for position restoration with improved logic
+		let playerX = 600;  // default X position (left side of Old Man Jack at 650, 660)
+		let playerY = 620;  // default Y position (near the house, closer to Jack)
 
-		// Check if we should restore position from checkpoint
+		// First, check for saved position from localStorage (most recent position)
+		const currentX = localStorage.getItem('currentPlayerX');
+		const currentY = localStorage.getItem('currentPlayerY');
+		const lastMapId = localStorage.getItem('lastMapId');
+
+		if (currentX && currentY && lastMapId === 'ShapeTownFarmingMapScene') {
+			const savedX = parseInt(currentX, 10);
+			const savedY = parseInt(currentY, 10);
+
+			// Only use saved position if it's reasonable (not at edge of map or emergency position)
+			// Exclude the old emergency position (150, 200) and similar invalid positions
+			if (savedX > 300 && savedX < 2500 && savedY > 400 && savedY < 2000) {
+				playerX = savedX;
+				playerY = savedY;
+				console.log(`🔄 Restoring player position from last session: (${playerX}, ${playerY})`);
+			} else {
+				console.log(`⚠️ Saved position (${savedX}, ${savedY}) seems invalid, using default`);
+				// Clear bad saved data
+				localStorage.removeItem('currentPlayerX');
+				localStorage.removeItem('currentPlayerY');
+			}
+		}
+
+		// Also check for checkpoint position restoration (fallback)
 		const shouldRestorePosition = localStorage.getItem('shouldRestorePosition') === 'true';
 		if (shouldRestorePosition) {
 			const checkpointX = localStorage.getItem('checkpointPlayerX');
 			const checkpointY = localStorage.getItem('checkpointPlayerY');
 
 			if (checkpointX && checkpointY) {
-				playerX = parseInt(checkpointX, 10);
-				playerY = parseInt(checkpointY, 10);
-				console.log(`🎯 Restoring player position from checkpoint: (${playerX}, ${playerY})`);
+				const cpX = parseInt(checkpointX, 10);
+				const cpY = parseInt(checkpointY, 10);
+
+				// Only use checkpoint if it's reasonable (exclude emergency position)
+				if (cpX > 300 && cpX < 2500 && cpY > 400 && cpY < 2000) {
+					playerX = cpX;
+					playerY = cpY;
+					console.log(`🎯 Restoring player position from checkpoint: (${playerX}, ${playerY})`);
+				}
 
 				// Clear the restoration flags
 				localStorage.removeItem('shouldRestorePosition');
@@ -819,6 +849,23 @@ initInventorySystem() {
 		this.events.on('wake', () => {
 			this.cameras.main.fadeIn(300);
 
+			// Restore player position on wake to prevent respawning at (0,0)
+			if (this.playerPrefab) {
+				const currentX = localStorage.getItem('currentPlayerX');
+				const currentY = localStorage.getItem('currentPlayerY');
+				if (currentX && currentY) {
+					this.playerPrefab.x = parseInt(currentX, 10);
+					this.playerPrefab.y = parseInt(currentY, 10);
+					console.log(`🔄 Restored player position on wake: (${this.playerPrefab.x}, ${this.playerPrefab.y})`);
+				}
+			}
+
+			// Reset transition flag when scene wakes up with a small delay
+			this.time.delayedCall(100, () => {
+				this.isTransitioning = false;
+				console.log("🚪 FarmingMapScene woke up, reset transition flag");
+			});
+
 			if (this.newItemHudPrefab) {
 				this.time.delayedCall(200, () => {
 					import('../../components/GlobalInvetoryManager').then(({ globalInventory }) => {
@@ -827,19 +874,22 @@ initInventorySystem() {
 						}
 					});
 				});
-			}
-		});
-		this.events.on('shutdown', () => {
-			if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-				this.newItemHudPrefab.updateGlobalInventory();
-			}
-		});
 
-		this.events.on('sleep', () => {
-			if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-				this.newItemHudPrefab.updateGlobalInventory();
+				// Skip forceApplyInventory on wake to avoid conflicts with transition logic
 			}
 		});
+		// Disabled shutdown/sleep inventory updates to prevent transition conflicts
+		// this.events.on('shutdown', () => {
+		//	if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+		//		this.newItemHudPrefab.updateGlobalInventory();
+		//	}
+		// });
+
+		// this.events.on('sleep', () => {
+		//	if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
+		//		this.newItemHudPrefab.updateGlobalInventory();
+		//	}
+		// });
 
 		this.shapeFarmingHousePrefab.setupCollision(this.playerPrefab);
 		this.setupAllTreesCollision();
@@ -924,26 +974,51 @@ initInventorySystem() {
 	  	this.tree_border_Fence_1.setCollisionBetween(0, 10000);
 	  	// this.tree_border_Fence_1.renderDebug(this.add.graphics());
 
-		this.physics.add.overlap(this.sceneTile, this.playerPrefab, () => {
+		// Add transition flag to prevent multiple triggers
+		this.isTransitioning = false;
+
+		this.physics.add.overlap(this.sceneTile, this.playerPrefab, async () => {
+		    // Prevent multiple transitions
+		    if (this.isTransitioning) {
+		        console.log("🚫 Blocked duplicate transition to square");
+		        return;
+		    }
+		    console.log("🚪 Starting transition from Farm to Square");
+		    this.isTransitioning = true;
+
 		    // Access questSystem from this.game instead of this.scene
-		    if (this.game && this.game.questSystem && this.game.questSystem.isQuestCompleted("001")) {
-		        if (this.newItemHudPrefab && this.newItemHudPrefab.updateGlobalInventory) {
-		            this.newItemHudPrefab.updateGlobalInventory();
+		    const questSystem = this.game && this.game.questSystem;
+
+		    if (questSystem) {
+		        // Force sync quest progress before checking completion to avoid stale data
+		        console.log("🔄 Syncing quest progress before map transition...");
+		        try {
+		            if (questSystem.syncQuestProgress) {
+		                await questSystem.syncQuestProgress();
+		                console.log("✅ Quest progress synced before transition check");
+		            }
+		        } catch (error) {
+		            console.warn("⚠️ Failed to sync quest progress:", error);
 		        }
 
-		        const playerX = this.playerPrefab.x;
+		        if (questSystem.isQuestCompleted("001")) {
+		        // Skip updateGlobalInventory during transition to avoid conflicts
 
-		        this.scene.switch("ShapeTownSquareMapScene");
-		        const targetScene = this.scene.get("ShapeTownSquareMapScene");
-		        if (targetScene && targetScene.playerPrefab) {
-		            targetScene.playerPrefab.x = 304;
+		        // Use Portal Manager for consistent transitions
+		        portalManager.transition(this, "ShapeTownSquareMapScene");
+		        } else {
+		            this.playerPrefab.x -= 200;
+		            this.alertPrefab.alert("First Quest is not over, please finish your quest and try again");
+		            counter++;
+		            // Reset transition flag after failed attempt
+		            this.isTransitioning = false;
 		        }
-
-		        this.cameras.main.fadeIn(2000, 0, 0, 0);
 		    } else {
+		        console.warn("⚠️ Quest system not available");
 		        this.playerPrefab.x -= 200;
-		        this.alertPrefab.alert("First Quest is not over, please finish your quest and try again");
-		        counter++;
+		        this.alertPrefab.alert("Quest system not ready, please try again");
+		        // Reset transition flag after failed attempt
+		        this.isTransitioning = false;
 		    }
 		});
 		this.initInventorySystem();

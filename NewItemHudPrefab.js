@@ -511,26 +511,61 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
     mainInventoryData = Array(24).fill(null);
 
     onSceneCreate() {
-        this.items.forEach((item) => {
-            if (item) item.visible = false;
-        });
+        // Add safety check for scene initialization
+        if (!this.scene || !this.scene.sys) {
+            console.warn(
+                "⚠️ NewItemHudPrefab: Scene not ready, delaying initialization"
+            );
+            if (this.scene && this.scene.time) {
+                this.scene.time.delayedCall(100, () => this.onSceneCreate());
+            }
+            return;
+        }
 
-        this.itemCounters.forEach((counter) => {
-            if (counter) counter.visible = false;
-        });
+        try {
+            this.items.forEach((item) => {
+                if (item) item.visible = false;
+            });
 
-        this.setupSlotHandlers();
+            this.itemCounters.forEach((counter) => {
+                if (counter) counter.visible = false;
+            });
 
-        this.setupKeyboardHandlers();
+            this.setupSlotHandlers();
 
-        this.scene.events.on("update", this.validateSelectionState, this);
+            this.setupKeyboardHandlers();
+
+            this.scene.events.on("update", this.validateSelectionState, this);
+        } catch (error) {
+            console.error("❌ Error in NewItemHudPrefab onSceneCreate:", error);
+            // Retry after a delay
+            if (this.scene && this.scene.time) {
+                this.scene.time.delayedCall(200, () => this.onSceneCreate());
+            }
+        }
     }
 
     setupSlotHandlers() {
         this.passiveItemSlots.forEach((slot, index) => {
             if (!slot) return;
 
-            slot.setInteractive({ useHandCursor: true });
+            // Add safety check for slot scene context
+            if (!slot.scene || !slot.scene.sys) {
+                console.warn(
+                    `⚠️ Slot ${index} scene not ready for setInteractive`
+                );
+                return;
+            }
+
+            try {
+                slot.setInteractive({ useHandCursor: true });
+            } catch (error) {
+                console.error(
+                    `❌ Error setting slot ${index} interactive:`,
+                    error
+                );
+                return;
+            }
 
             slot.off("pointerdown");
 
@@ -1018,3 +1053,4 @@ export default class NewItemHudPrefab extends Phaser.GameObjects.Container {
 /* END OF COMPILED CODE */
 
 // You can write more code here
+

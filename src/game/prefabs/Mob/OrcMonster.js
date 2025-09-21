@@ -49,7 +49,10 @@ export default class OrcMonster extends Phaser.GameObjects.Sprite {
 
 		scene.events.once('update', () => {
 		    this.createAnimations();
-		    this.play('orc-walking');
+		    // Check if animation exists before playing to prevent Phaser warnings
+		    if (this.scene.anims.exists('orc-walking')) {
+		        this.play('orc-walking');
+		    }
 		    scene.events.on('update', this.updateAI, this);
 		});
 		/* END-USER-CTR-CODE */

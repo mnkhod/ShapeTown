@@ -13,9 +13,11 @@ export function useCheckpointSync() {
     return useQuery({
         queryKey: CHECKPOINT_KEYS.latest(),
         queryFn: syncCheckpoint,
-        staleTime: 30 * 1000, // 30 seconds
+        staleTime: 5 * 60 * 1000, // 5 minutes - much longer stale time
         enabled: isAuthenticated,
-        refetchInterval: 60 * 1000, // Auto-sync every minute
+        refetchInterval: 5 * 60 * 1000, // Auto-sync every 5 minutes instead of every minute
+        refetchOnWindowFocus: false, // Prevent refetch on window focus
+        refetchOnMount: true, // Only refetch on mount
     });
 }
 

@@ -433,7 +433,13 @@ export default class HarvestPrefab extends Phaser.GameObjects.Sprite {
                 this.hideGrowthInfo();
                 
                 this.scene.newItemHudPrefab.addItem(this.seed, harvestAsset, 0, 1, true);
-                
+
+                // Emit inventory changed event for database sync
+                if (this.scene.events) {
+                    this.scene.events.emit('inventory-changed');
+                    console.log("📦 Emitted inventory-changed event for database sync");
+                }
+
                 console.log("Harvesting crop:", this.seed);
                 if (this.scene.triggerQuestEvent) {
                     console.log("Triggering harvest quest event");
