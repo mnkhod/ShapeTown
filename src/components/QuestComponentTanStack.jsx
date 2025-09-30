@@ -415,9 +415,11 @@ const QuestComponentTanStack = ({ onClose }) => {
                                                                                                 {
                                                                                                     progress.progress
                                                                                                 }
+
                                                                                                 /
                                                                                                 {task.amount ||
                                                                                                     1}
+
                                                                                                 )
                                                                                             </span>
                                                                                         )}
