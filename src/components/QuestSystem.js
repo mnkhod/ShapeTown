@@ -245,12 +245,17 @@ class QuestSystem extends EventEmitter {
             console.log("🎒 Syncing inventory from backend...");
 
             // Fetch user inventory from correct endpoint
-            const inventoryResponse = await fetch("http://localhost:3333/api/my/inventory", {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-                    "Content-Type": "application/json",
-                },
-            });
+            const inventoryResponse = await fetch(
+                "https://shape-town-staging-36635880ccdb.herokuapp.com/api/my/inventory",
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "accessToken"
+                        )}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
 
             if (!inventoryResponse.ok) {
                 console.error("Failed to fetch inventory from backend");
@@ -263,7 +268,6 @@ class QuestSystem extends EventEmitter {
             if (inventoryData.success && inventoryData.data) {
                 this.mapBackendInventoryToFrontend(inventoryData.data);
             }
-
         } catch (error) {
             console.error("Failed to sync inventory from backend:", error);
         }
@@ -277,14 +281,20 @@ class QuestSystem extends EventEmitter {
 
         // Item name mapping: Backend → Frontend
         const itemMapping = {
-            'Iron Hoe': { key: 'ToolHoe', texture: 'IconToolHoe' },
-            'Watering Can': { key: 'ToolWateringCan', texture: 'IconToolWateringCan' },
-            'Steel Pickaxe': { key: 'ToolPickaxe', texture: 'IconToolPickaxe' },
-            'Carrot Seeds': { key: 'seed_carrot', texture: 'crops-seed bags-carrot' },
-            'Carrot': { key: 'CARROT', texture: 'crops-carrot' },
-            'Potato': { key: 'POTATO', texture: 'crops-potato' },
-            'Iron Sword': { key: 'ToolSword', texture: 'IconToolSword' },
-            'Steel Axe': { key: 'ToolAxe', texture: 'IconToolAxe' },
+            "Iron Hoe": { key: "ToolHoe", texture: "IconToolHoe" },
+            "Watering Can": {
+                key: "ToolWateringCan",
+                texture: "IconToolWateringCan",
+            },
+            "Steel Pickaxe": { key: "ToolPickaxe", texture: "IconToolPickaxe" },
+            "Carrot Seeds": {
+                key: "seed_carrot",
+                texture: "crops-seed bags-carrot",
+            },
+            Carrot: { key: "CARROT", texture: "crops-carrot" },
+            Potato: { key: "POTATO", texture: "crops-potato" },
+            "Iron Sword": { key: "ToolSword", texture: "IconToolSword" },
+            "Steel Axe": { key: "ToolAxe", texture: "IconToolAxe" },
         };
 
         // Find scene with newItemHud
@@ -294,21 +304,33 @@ class QuestSystem extends EventEmitter {
         if (this.scene && this.scene.newItemHud) {
             scene = this.scene;
         } else if (this.game && this.game.scene && this.game.scene.scenes) {
-            scene = Object.values(this.game.scene.scenes).find(s => s.newItemHud);
+            scene = Object.values(this.game.scene.scenes).find(
+                (s) => s.newItemHud
+            );
         } else {
             // Try global quest system's game reference
-            if (window.questSystem && window.questSystem.game && window.questSystem.game.scene) {
-                scene = Object.values(window.questSystem.game.scene.scenes).find(s => s.newItemHud);
+            if (
+                window.questSystem &&
+                window.questSystem.game &&
+                window.questSystem.game.scene
+            ) {
+                scene = Object.values(
+                    window.questSystem.game.scene.scenes
+                ).find((s) => s.newItemHud);
             } else if (window.phaserGame && window.phaserGame.scene) {
-                scene = Object.values(window.phaserGame.scene.scenes).find(s => s.newItemHud);
+                scene = Object.values(window.phaserGame.scene.scenes).find(
+                    (s) => s.newItemHud
+                );
             }
         }
 
         if (!scene || !scene.newItemHud) {
-            console.log("🔄 newItemHud not available, using forceApplyInventory instead");
+            console.log(
+                "🔄 newItemHud not available, using forceApplyInventory instead"
+            );
 
             // Try forceApplyInventory as fallback
-            if (typeof window !== 'undefined' && window.forceApplyInventory) {
+            if (typeof window !== "undefined" && window.forceApplyInventory) {
                 window.forceApplyInventory();
                 console.log("✅ Used forceApplyInventory as fallback");
             } else {
@@ -321,15 +343,24 @@ class QuestSystem extends EventEmitter {
         // scene.newItemHud.clearAllItems();
 
         // Add items from backend inventory
-        inventorySlots.forEach(slot => {
+        inventorySlots.forEach((slot) => {
             const backendItem = slot.item;
             const mapping = itemMapping[backendItem.name];
 
             if (mapping) {
-                console.log(`➕ Adding ${slot.quantity}x ${backendItem.name} as ${mapping.key}`);
-                scene.newItemHud.addItem(mapping.key, mapping.texture, 0, slot.quantity);
+                console.log(
+                    `➕ Adding ${slot.quantity}x ${backendItem.name} as ${mapping.key}`
+                );
+                scene.newItemHud.addItem(
+                    mapping.key,
+                    mapping.texture,
+                    0,
+                    slot.quantity
+                );
             } else {
-                console.warn(`⚠️ No mapping found for backend item: ${backendItem.name}`);
+                console.warn(
+                    `⚠️ No mapping found for backend item: ${backendItem.name}`
+                );
             }
         });
 
@@ -829,13 +860,20 @@ class QuestSystem extends EventEmitter {
         // Check backend state first if available
         const quest = this.quests[questId];
         if (quest && quest.backendId) {
-            const isCompleted = this.completedQuestIds?.has(quest.backendId) || false;
-            console.log(`🔍 Quest ${questId} (${quest.backendId}) completion check:`, isCompleted);
+            const isCompleted =
+                this.completedQuestIds?.has(quest.backendId) || false;
+            console.log(
+                `🔍 Quest ${questId} (${quest.backendId}) completion check:`,
+                isCompleted
+            );
             return isCompleted;
         }
         // Fallback to legacy system
         const legacyCompleted = this.completedQuests.has(questId);
-        console.log(`🔍 Quest ${questId} legacy completion check:`, legacyCompleted);
+        console.log(
+            `🔍 Quest ${questId} legacy completion check:`,
+            legacyCompleted
+        );
         return legacyCompleted;
     }
 
@@ -845,10 +883,19 @@ class QuestSystem extends EventEmitter {
         console.log("- Quest exists:", !!this.quests[questId]);
         console.log("- Quest data:", this.quests[questId]);
         console.log("- Backend quest ID:", this.quests[questId]?.backendId);
-        console.log("- Completed quest IDs:", Array.from(this.completedQuestIds || []));
+        console.log(
+            "- Completed quest IDs:",
+            Array.from(this.completedQuestIds || [])
+        );
         console.log("- Is completed:", this.isQuestCompleted(questId));
-        console.log("- Active quest IDs:", Array.from(this.activeQuestIds || []));
-        console.log("- Legacy completed quests:", Array.from(this.completedQuests || []));
+        console.log(
+            "- Active quest IDs:",
+            Array.from(this.activeQuestIds || [])
+        );
+        console.log(
+            "- Legacy completed quests:",
+            Array.from(this.completedQuests || [])
+        );
     }
 
     async getActiveQuests() {
@@ -935,30 +982,48 @@ class QuestSystem extends EventEmitter {
                 console.log("🔍 Jack Interaction Debug:");
                 console.log("  - Quest 001 exists?", !!this.quests["001"]);
                 console.log("  - Quest 001 data:", this.quests["001"]);
-                console.log("  - Is quest 001 completed in backend?", this.isQuestCompleted("001"));
+                console.log(
+                    "  - Is quest 001 completed in backend?",
+                    this.isQuestCompleted("001")
+                );
 
                 const harvestStep = this.quests["001"]?.subtasks["001-5"];
                 console.log("  - Harvest step (001-5):", harvestStep);
 
                 if (harvestStep && harvestStep.completed) {
-                    console.log("✅ Harvest step completed, updating Return to NPC step");
+                    console.log(
+                        "✅ Harvest step completed, updating Return to NPC step"
+                    );
                     this.updateSubtask("001", "001-6");
 
                     // Update backend: taskIndex 5 (RETURN_TO_NPC) - non-blocking
                     setTimeout(async () => {
                         try {
-                            const questId6 = await this.getFirstHarvestQuestId();
+                            const questId6 =
+                                await this.getFirstHarvestQuestId();
                             if (questId6) {
-                                console.log("🔄 Updating backend task progress for RETURN_TO_NPC...");
-                                await this.updateBackendTaskProgress(questId6, 5);
-                                console.log("✅ Backend task progress updated successfully");
+                                console.log(
+                                    "🔄 Updating backend task progress for RETURN_TO_NPC..."
+                                );
+                                await this.updateBackendTaskProgress(
+                                    questId6,
+                                    5
+                                );
+                                console.log(
+                                    "✅ Backend task progress updated successfully"
+                                );
                             }
                         } catch (error) {
-                            console.error("❌ Failed to update backend task progress:", error);
+                            console.error(
+                                "❌ Failed to update backend task progress:",
+                                error
+                            );
                         }
                     }, 0);
                 } else {
-                    console.log("❌ Harvest step not completed yet or doesn't exist");
+                    console.log(
+                        "❌ Harvest step not completed yet or doesn't exist"
+                    );
                 }
 
                 // Check if quest should be completed after return to NPC
@@ -967,14 +1032,21 @@ class QuestSystem extends EventEmitter {
                     try {
                         // Reload quest data from backend to get latest status
                         await this.syncQuestProgress();
-                        console.log("🔄 Quest data reloaded from backend after Jack interaction");
+                        console.log(
+                            "🔄 Quest data reloaded from backend after Jack interaction"
+                        );
 
-                        const returnStep = this.quests["001"]?.subtasks["001-6"];
+                        const returnStep =
+                            this.quests["001"]?.subtasks["001-6"];
                         if (returnStep && returnStep.completed) {
-                            console.log("✅ Return to NPC completed - Quest should be finished!");
+                            console.log(
+                                "✅ Return to NPC completed - Quest should be finished!"
+                            );
                             this.completeQuest("001");
                         } else {
-                            console.log("ℹ️ Return to NPC step not completed yet after reload");
+                            console.log(
+                                "ℹ️ Return to NPC step not completed yet after reload"
+                            );
                         }
                     } catch (error) {
                         console.error("❌ Failed to reload quest data:", error);
@@ -1390,7 +1462,10 @@ class QuestSystem extends EventEmitter {
                 }
                 break;
             case "npc:greetedByName":
-                if (this.isQuestActiveByName("Making Friends") && params.npcName) {
+                if (
+                    this.isQuestActiveByName("Making Friends") &&
+                    params.npcName
+                ) {
                     const npc = npcsToGreet.find(
                         (n) => n.name === params.npcName
                     );
@@ -1427,24 +1502,30 @@ class QuestSystem extends EventEmitter {
 
             // Also check backend directly for safety
             const [activeResponse, completedResponse] = await Promise.all([
-                fetch("http://localhost:3333/api/quests/active", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            "accessToken"
-                        )}`,
-                        "Content-Type": "application/json",
-                    },
-                }),
-                fetch("http://localhost:3333/api/quests/completed", {
-                    method: "GET",
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem(
-                            "accessToken"
-                        )}`,
-                        "Content-Type": "application/json",
-                    },
-                }),
+                fetch(
+                    "https://shape-town-staging-36635880ccdb.herokuapp.com/api/quests/active",
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                                "accessToken"
+                            )}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                ),
+                fetch(
+                    "https://shape-town-staging-36635880ccdb.herokuapp.com/api/quests/completed",
+                    {
+                        method: "GET",
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem(
+                                "accessToken"
+                            )}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                ),
             ]);
 
             // Check if already completed
@@ -1481,7 +1562,7 @@ class QuestSystem extends EventEmitter {
 
             // Get the actual quest ID dynamically
             const questsResponse = await fetch(
-                "http://localhost:3333/api/quests",
+                "https://shape-town-staging-36635880ccdb.herokuapp.com/api/quests",
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem(
@@ -1511,7 +1592,7 @@ class QuestSystem extends EventEmitter {
             console.log("Starting The First Harvest quest via backend API...");
             console.log("Using quest ID:", firstHarvestQuestId);
             const startResponse = await fetch(
-                `http://localhost:3333/api/quests/${firstHarvestQuestId}/start`,
+                `https://shape-town-staging-36635880ccdb.herokuapp.com/api/quests/${firstHarvestQuestId}/start`,
                 {
                     method: "POST",
                     headers: {
@@ -1532,7 +1613,10 @@ class QuestSystem extends EventEmitter {
 
                 // CRITICAL: Add quest to activeQuestIds so frontend knows it's active
                 this.activeQuestIds.add(firstHarvestQuestId);
-                console.log("Added quest to activeQuestIds. Active quests now:", this.activeQuestIds.size);
+                console.log(
+                    "Added quest to activeQuestIds. Active quests now:",
+                    this.activeQuestIds.size
+                );
 
                 // Also activate the quest in the frontend quest system
                 this.activateQuest("001");
@@ -1541,13 +1625,24 @@ class QuestSystem extends EventEmitter {
                 // Use longer delay to avoid conflicts with scene transitions
                 setTimeout(() => {
                     // Only sync if we have a stable scene with newItemHud
-                    if (this.game && this.game.scene && this.game.scene.scenes) {
-                        const scene = Object.values(this.game.scene.scenes).find(s => s.newItemHud && s.scene.isActive());
+                    if (
+                        this.game &&
+                        this.game.scene &&
+                        this.game.scene.scenes
+                    ) {
+                        const scene = Object.values(
+                            this.game.scene.scenes
+                        ).find((s) => s.newItemHud && s.scene.isActive());
                         if (scene) {
                             this.syncInventoryFromBackend();
                         } else {
-                            console.log("🔄 Scene not ready for inventory sync, will try with regular forceApplyInventory");
-                            if (typeof window !== 'undefined' && window.forceApplyInventory) {
+                            console.log(
+                                "🔄 Scene not ready for inventory sync, will try with regular forceApplyInventory"
+                            );
+                            if (
+                                typeof window !== "undefined" &&
+                                window.forceApplyInventory
+                            ) {
                                 window.forceApplyInventory();
                             }
                         }
@@ -1589,7 +1684,7 @@ class QuestSystem extends EventEmitter {
         try {
             console.log("🔍 Fetching First Harvest quest ID from backend...");
             const questsResponse = await fetch(
-                "http://localhost:3333/api/quests",
+                "https://shape-town-staging-36635880ccdb.herokuapp.com/api/quests",
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem(
@@ -1649,7 +1744,7 @@ class QuestSystem extends EventEmitter {
             console.log("🔄 Sending task update request:", requestData);
 
             const response = await fetch(
-                "http://localhost:3333/api/quests/update-task",
+                "https://shape-town-staging-36635880ccdb.herokuapp.com/api/quests/update-task",
                 {
                     method: "POST",
                     headers: {
@@ -1678,12 +1773,20 @@ class QuestSystem extends EventEmitter {
                 console.error("Request data that failed:", requestData);
 
                 // Debug: Check if quest is actually active in frontend
-                console.error("🔍 DEBUG: Is quest active in frontend?", this.isQuestActive("001"));
-                console.error("🔍 DEBUG: Frontend activeQuestIds:", Array.from(this.activeQuestIds || []));
+                console.error(
+                    "🔍 DEBUG: Is quest active in frontend?",
+                    this.isQuestActive("001")
+                );
+                console.error(
+                    "🔍 DEBUG: Frontend activeQuestIds:",
+                    Array.from(this.activeQuestIds || [])
+                );
 
                 // If error is "Quest not found or not in progress", re-sync quest state
                 if (errorData.includes("Quest not found or not in progress")) {
-                    console.warn("🔄 Quest sync issue detected. Re-syncing quest progress...");
+                    console.warn(
+                        "🔄 Quest sync issue detected. Re-syncing quest progress..."
+                    );
                     setTimeout(() => {
                         this.syncQuestProgress();
                     }, 1000);
@@ -3016,16 +3119,19 @@ export function setupItemGiftSystem(scene) {
     return scene.showGiftDialog.bind(scene);
 }
 
-
-
 // Global debug function for quest status
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
     window.debugQuest = (questId = "001") => {
         if (window.questSystem) {
             window.questSystem.debugQuestStatus(questId);
         } else {
-            console.log("❌ Quest system not available. Try again after game loads.");
+            console.log(
+                "❌ Quest system not available. Try again after game loads."
+            );
         }
     };
-    console.log("✅ Global quest debug function available: window.debugQuest()");
+    console.log(
+        "✅ Global quest debug function available: window.debugQuest()"
+    );
 }
+

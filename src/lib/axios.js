@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:3333/api",
+    baseURL: "https://shape-town-staging-36635880ccdb.herokuapp.com/api",
     headers: {
         "Content-Type": "application/json",
     },
