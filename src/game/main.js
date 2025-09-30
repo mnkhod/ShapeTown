@@ -21,7 +21,7 @@ import ShapeTownSquareMapScene from "./scenes/ShapeTownSquareMapScene"
 const config = {
     type: Phaser.AUTO, // Auto-detect best renderer (WebGL or Canvas fallback)
     parent: 'game-container',
-    backgroundColor: '#028af8',
+    backgroundColor: '#000000',
     width: 1920,
     height: 1080,
     physics: {

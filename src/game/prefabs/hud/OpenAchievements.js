@@ -38,6 +38,9 @@ export default class OpenAchievements extends Phaser.GameObjects.Container {
                 this.isAchievementsOpen = false;
             });
         }
+
+        // Set high depth to prevent icon from disappearing under trees/objects
+        this.setDepth(10000);
 		/* END-USER-CTR-CODE */
 	}
 

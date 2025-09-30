@@ -143,22 +143,38 @@ const QuestComponentTanStack = ({ onClose }) => {
         );
 
         // Filter by quest type based on active tab
+        let filteredQuests;
         switch (activeTab) {
             case "Main":
-                return uniqueQuests.filter(
+                filteredQuests = uniqueQuests.filter(
                     (quest) => quest.questType === "MAIN_QUEST"
                 );
+                break;
             case "Daily":
-                return uniqueQuests.filter(
+                filteredQuests = uniqueQuests.filter(
                     (quest) => quest.questType === "DAILY_QUEST"
                 );
+                break;
             case "Side":
-                return uniqueQuests.filter(
+                filteredQuests = uniqueQuests.filter(
                     (quest) => quest.questType === "SIDE_QUEST"
                 );
+                break;
             default:
-                return [];
+                filteredQuests = [];
         }
+
+        // Sort: Active > Available > Not Started > Completed > Locked
+        return filteredQuests.sort((a, b) => {
+            const statusOrder = {
+                IN_PROGRESS: 1,
+                AVAILABLE: 2,
+                NOT_STARTED: 3,
+                COMPLETED: 4,
+                LOCKED: 5,
+            };
+            return (statusOrder[a.status] || 999) - (statusOrder[b.status] || 999);
+        });
     };
 
     // Only show loading if ALL quest data is loading (unlikely with prefetching)
@@ -286,18 +302,47 @@ const QuestComponentTanStack = ({ onClose }) => {
                                                 />
                                                 <div className="flex-1">
                                                     <div className="flex justify-between items-start">
-                                                        <div>
-                                                            <p
-                                                                className={`text-sm font-bold font-malio ${
-                                                                    quest.status ===
-                                                                    "COMPLETED"
-                                                                        ? "text-green-600"
-                                                                        : "text-gray-900/90"
-                                                                }`}
-                                                            >
-                                                                {quest.name}
-                                                            </p>
-                                                            <p className="text-xs font-malio text-gray-600 mt-1">
+                                                        <div className="flex-1">
+                                                            <div className="flex items-center gap-2 flex-wrap">
+                                                                <p
+                                                                    className={`text-sm font-bold font-malio ${
+                                                                        quest.status === "COMPLETED"
+                                                                            ? "text-green-700"
+                                                                            : quest.status === "IN_PROGRESS"
+                                                                            ? "text-blue-700"
+                                                                            : quest.status === "AVAILABLE"
+                                                                            ? "text-amber-700"
+                                                                            : quest.status === "LOCKED"
+                                                                            ? "text-gray-400"
+                                                                            : "text-gray-600"
+                                                                    }`}
+                                                                >
+                                                                    {quest.name}
+                                                                </p>
+                                                                {quest.status === "IN_PROGRESS" && (
+                                                                    <span className="text-[10px] bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-bold">
+                                                                        ACTIVE
+                                                                    </span>
+                                                                )}
+                                                                {quest.status === "AVAILABLE" && (
+                                                                    <span className="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold">
+                                                                        AVAILABLE
+                                                                    </span>
+                                                                )}
+                                                                {quest.status === "COMPLETED" && (
+                                                                    <span className="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">
+                                                                        COMPLETED
+                                                                    </span>
+                                                                )}
+                                                                {quest.status === "LOCKED" && (
+                                                                    <span className="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-bold">
+                                                                        LOCKED
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                            <p className={`text-xs font-malio mt-1 ${
+                                                                quest.status === "LOCKED" ? "text-gray-400" : "text-gray-600"
+                                                            }`}>
                                                                 {
                                                                     quest.description
                                                                 }

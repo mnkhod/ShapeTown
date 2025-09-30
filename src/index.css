@@ -5,10 +5,50 @@
     .scrollbar-hidden::-webkit-scrollbar {
       display: none;
     }
-  
+
     .scrollbar-hidden {
       scrollbar-width: none;
       -ms-overflow-style: none;
+    }
+
+    /* Custom scrollbar for achievement grid */
+    .scrollbar-thin::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-track {
+      background: #e5e7eb;
+      border-radius: 10px;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+      background: #9ca3af;
+      border-radius: 10px;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+      background: #6b7280;
+    }
+
+    .scrollbar-thumb-gray-400 {
+      scrollbar-color: #9ca3af #e5e7eb;
+    }
+
+    /* Rainbow border animation for mintable achievements */
+    @keyframes rainbow {
+      0% { border-color: #ff0000; }
+      16.67% { border-color: #ff8000; }
+      33.33% { border-color: #ffff00; }
+      50% { border-color: #00ff00; }
+      66.67% { border-color: #0000ff; }
+      83.33% { border-color: #8000ff; }
+      100% { border-color: #ff0000; }
+    }
+
+    .rainbow-border {
+      animation: rainbow 3s linear infinite;
+      border-width: 3px;
+      border-style: solid;
     }
 }
 @font-face {

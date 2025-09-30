@@ -37,19 +37,62 @@ export default class Preloader extends Phaser.Scene {
 	// Write your code here
     init ()
     {
-        this.editorCreate();
-        this.progressBar.visible = false;
+        // Get actual screen dimensions
+        const width = this.cameras.main.width;
+        const height = this.cameras.main.height;
 
-        //  This is the progress bar itself. It will increase in size from the left based on the % of progress.
-        // const bar = this.add.rectangle(this.progressBar.x - this.progressBar.width / 2 + 4, this.progressBar.y, 4, 28, 0xffffff);
+        // Create a black background rectangle first to cover any gaps
+        const bgRect = this.add.rectangle(0, 0, width * 2, height * 2, 0x000000);
+        bgRect.setOrigin(0, 0);
+        bgRect.setDepth(-2);
+
+        // Create loading screen background
+        const bg = this.add.image(width / 2, height / 2, 'loadingBackground');
+        bg.setOrigin(0.5, 0.5);
+
+        // Scale background to cover entire screen (even with some overflow)
+        const scaleX = width / bg.width;
+        const scaleY = height / bg.height;
+        const scale = Math.max(scaleX, scaleY) * 1.1; // 10% extra to ensure full coverage
+        bg.setScale(scale);
+        bg.setScrollFactor(0);
+        bg.setDepth(-1);
+
+        // Create loading bar background (dark semi-transparent box)
+        const barWidth = 600;
+        const barHeight = 40;
+        const barX = width / 2;
+        const barY = height - 100;
+
+        const barBg = this.add.rectangle(barX, barY, barWidth, barHeight, 0x000000, 0.5);
+        const barBorder = this.add.rectangle(barX, barY, barWidth, barHeight);
+        barBorder.setStrokeStyle(3, 0xffffff, 0.8);
+
+        // Create the actual progress bar
+        const progressBar = this.add.rectangle(
+            barX - barWidth / 2 + 10,
+            barY,
+            10,
+            barHeight - 10,
+            0x4ade80
+        );
+        progressBar.setOrigin(0, 0.5);
+
+        // Percentage text
+        const percentText = this.add.text(barX, barY, '0%', {
+            fontFamily: 'Arial',
+            fontSize: 20,
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 3
+        }).setOrigin(0.5);
 
         //  Use the 'progress' event emitted by the LoaderPlugin to update the loading bar
         this.load.on('progress', (progress) => {
-            //  Update the progress bar (our bar is 464px wide, so 100% = 464px)
-            // bar.width = 4 + (460 * progress);
+            //  Update the progress bar width
+            progressBar.width = 10 + ((barWidth - 20) * progress);
+            percentText.setText(Math.round(progress * 100) + '%');
         });
-
-
     }
 
     preload ()

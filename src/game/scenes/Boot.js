@@ -12,6 +12,8 @@ export default class Boot extends Scene
     preload ()
     {
         this.load.image('background', 'assets/bg.png');
+        // Load the loading screen image for Preloader scene
+        this.load.image('loadingBackground', 'assets/harvestynLoading.jpg');
     }
 
     create() {

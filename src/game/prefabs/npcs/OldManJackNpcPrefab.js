@@ -94,7 +94,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
     firstHarvestDialogueLifeCycle = [
         {
-            msg: "Hello there… Welcome to Shaper Town. I'm Jack. This is my humble farm.",
+            msg: "Hello there… Welcome to Harvestyn. I'm Jack. This is my humble farm.",
         },
         {
             msg: "You haven't chosen your 'Profession' yet. I will help you choose one today. So we shall start?",
@@ -168,7 +168,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
             msg: "Now that you've learned the basics of farming, it's time for your next MAIN QUEST.",
         },
         {
-            msg: "There's a merchant named Lady Lydia in Shape Town who can help you sell your goods.",
+            msg: "There's a merchant named Lady Lydia in Harvestyn who can help you sell your goods.",
         },
         {
             msg: "I have some iron bars that need to be sold. Could you take them to Lydia for me?",
@@ -179,7 +179,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
             },
         },
         {
-            msg: "Head to Shape Town - it's northeast from here. Just follow the path.",
+            msg: "Head to Harvestyn - it's northeast from here. Just follow the path.",
         },
         {
             msg: "Find Lady Lydia at her merchant stall and sell these goods to her.",
@@ -203,7 +203,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
             msg: "Have you found Lydia yet? She's in town at the merchant stall.",
         },
         {
-            msg: "Don't forget to sell those iron bars I gave you. Head northeast to Shape Town and find Lydia.",
+            msg: "Don't forget to sell those iron bars I gave you. Head northeast to Harvestyn and find Lydia.",
         },
     ];
 
@@ -369,6 +369,12 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
             async function (_pointer) {
                 console.log("Jack NPC clicked");
 
+                // Freeze player movement during interaction
+                if (this.player && this.player.body) {
+                    this.player.body.setVelocity(0, 0);
+                    this.player.isInteracting = true;
+                }
+
                 // Trigger quest events for proper quest progression
                 if (this.scene.triggerQuestEvent) {
                     console.log("Triggering Jack interaction quest event");
@@ -403,11 +409,15 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
                 if (distance > 60) {
                     this.scene.alertPrefab.alert("Too Far");
+                    // Unfreeze player if too far
+                    if (this.player) {
+                        this.player.isInteracting = false;
+                    }
                     return;
                 }
 
                 if (this.isMinting) {
-                    this.scene.alertPrefab.alert("Minting");
+                    this.scene.alertPrefab.alert("Achievement is Mintable");
                     return;
                 }
 
@@ -485,7 +495,7 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
                         {
                             msg: "Complete the 'Making Friends' quest first to unlock daily quests.",
                         },
-                        { msg: "Go meet all the townspeople in Shape Town!" },
+                        { msg: "Go meet all the townspeople in Harvestyn!" },
                     ]);
                     return;
                 }
@@ -539,17 +549,65 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
                     if (this.scene.achievements?.firstHarvestAchievement) {
                         this.scene.alertPrefab.alert(
-                            "Already Has Achievement NFT"
+                            "You can get your achievement in the Achievement Book"
                         );
                     } else {
                         this.isMinting = true;
-                        this.scene.alertPrefab.alert("Minting Has Started");
+                        this.scene.alertPrefab.alert("Achievement Unlocked!");
 
                         const prefab = this;
-                        setTimeout(() => {
+                        setTimeout(async () => {
                             this.scene.alertPrefab.alert(
-                                "First Harvest Achievement"
+                                "First Harvest Achievement Unlocked!"
                             );
+
+                            // Create achievement in backend database
+                            try {
+                                const api = (await import("../../../lib/axios")).default;
+                                console.log("🔍 Fetching all achievements from backend...");
+                                const allAchievements = await api.get("/achievements");
+                                console.log("📋 All achievements:", allAchievements.data.data);
+
+                                // Find "First Harvest" achievement (NFT ID 7)
+                                const firstHarvestAchievement = allAchievements.data.data.find(
+                                    a => a.name === "First Harvest" || a.nftId === 7
+                                );
+
+                                if (firstHarvestAchievement) {
+                                    console.log("🏆 Found First Harvest achievement:", firstHarvestAchievement);
+                                    console.log("🏆 Unlocking achievement with ID:", firstHarvestAchievement.id);
+
+                                    // Create UserAchievement
+                                    const result = await api.post(`/user/achievements/${firstHarvestAchievement.id}/unlock`);
+                                    console.log("✅ Achievement unlocked successfully!", result.data);
+
+                                    // Force refresh achievement data in React Query cache
+                                    if (window.queryClient) {
+                                        console.log("🔄 Invalidating achievement cache...");
+                                        // Invalidate all achievement-related queries
+                                        await window.queryClient.invalidateQueries({ queryKey: ["achievements"] });
+                                        // Force immediate refetch
+                                        await window.queryClient.refetchQueries({ queryKey: ["achievements", "my"] });
+                                        console.log("✅ Cache invalidated and refetched");
+                                    }
+
+                                    // Show success alert
+                                    setTimeout(() => {
+                                        this.scene.alertPrefab.alert("Achievement Unlocked! Open Achievement Book to Mint NFT!");
+                                    }, 2000);
+                                } else {
+                                    console.warn("⚠️ First Harvest achievement not found in database");
+                                    console.warn("Available achievements:", allAchievements.data.data.map(a => ({name: a.name, nftId: a.nftId})));
+                                }
+                            } catch (error) {
+                                console.error("❌ Failed to create achievement:");
+                                console.error("Error message:", error.message);
+                                console.error("Error response:", error.response?.data);
+                                console.error("Full error:", error);
+                                // Show error alert
+                                this.scene.alertPrefab.alert("Achievement unlock failed - check console");
+                            }
+
                             if (!this.scene.achievements) {
                                 this.scene.achievements = {};
                             }
@@ -600,13 +658,27 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
                                 console.log("Showing Taste of Gold dialogue");
 
                                 // Only give iron bars if Taste of Gold quest hasn't been started yet
-                                const tasteOfGoldActive = this.isQuestActiveByName("Taste of Gold");
-                                const tasteOfGoldCompleted = this.isQuestCompletedByName("Taste of Gold");
-                                const currentIronCount = this.newItemHud.checkItem("IronIngot") ?
-                                    this.newItemHud.getItemCount("IronIngot") : 0;
+                                const tasteOfGoldActive =
+                                    this.isQuestActiveByName("Taste of Gold");
+                                const tasteOfGoldCompleted =
+                                    this.isQuestCompletedByName(
+                                        "Taste of Gold"
+                                    );
+                                const currentIronCount =
+                                    this.newItemHud.checkItem("IronIngot")
+                                        ? this.newItemHud.getItemCount(
+                                              "IronIngot"
+                                          )
+                                        : 0;
 
-                                if (!tasteOfGoldActive && !tasteOfGoldCompleted && currentIronCount === 0) {
-                                    console.log("🔧 Giving 3 iron bars for Taste of Gold quest (first time)");
+                                if (
+                                    !tasteOfGoldActive &&
+                                    !tasteOfGoldCompleted &&
+                                    currentIronCount === 0
+                                ) {
+                                    console.log(
+                                        "🔧 Giving 3 iron bars for Taste of Gold quest (first time)"
+                                    );
                                     this.newItemHud.addItem(
                                         "IronIngot",
                                         "Icon_IronBar",
@@ -616,13 +688,17 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
                                     // Trigger inventory sync after giving iron bars
                                     if (this.scene.events) {
-                                        this.scene.events.emit("inventory-changed");
+                                        this.scene.events.emit(
+                                            "inventory-changed"
+                                        );
                                         console.log(
                                             "📦 Emitted inventory-changed event after giving iron bars"
                                         );
                                     }
                                 } else {
-                                    console.log(`🔧 Not giving iron bars - Quest active: ${tasteOfGoldActive}, completed: ${tasteOfGoldCompleted}, iron count: ${currentIronCount}`);
+                                    console.log(
+                                        `🔧 Not giving iron bars - Quest active: ${tasteOfGoldActive}, completed: ${tasteOfGoldCompleted}, iron count: ${currentIronCount}`
+                                    );
                                 }
 
                                 prefab.msgPrefab.conversation(
@@ -918,8 +994,8 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
             const activeQuests = this.scene.questProvider?.activeQuests?.data;
             if (!activeQuests) return false;
 
-            return activeQuests.some(questEntry =>
-                questEntry.quest.name === questName
+            return activeQuests.some(
+                (questEntry) => questEntry.quest.name === questName
             );
         } catch (error) {
             console.error("Error checking active quest by name:", error);
@@ -929,11 +1005,12 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 
     isQuestCompletedByName(questName) {
         try {
-            const completedQuests = this.scene.questProvider?.completedQuests?.data;
+            const completedQuests =
+                this.scene.questProvider?.completedQuests?.data;
             if (!completedQuests) return false;
 
-            return completedQuests.some(questEntry =>
-                questEntry.quest.name === questName
+            return completedQuests.some(
+                (questEntry) => questEntry.quest.name === questName
             );
         } catch (error) {
             console.error("Error checking completed quest by name:", error);
@@ -954,3 +1031,4 @@ export default class OldManJackNpcPrefab extends Phaser.GameObjects.Container {
 /* END OF COMPILED CODE */
 
 // You can write more code here
+

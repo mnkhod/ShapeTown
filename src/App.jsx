@@ -9,6 +9,8 @@ import { useAuth } from "./contexts/AuthContext";
 import { initializeQuestSystemWithQuery, initializeQuestSystemWithAuth } from "./components/QuestSystem";
 import { useGameModals } from "./hooks/useGameModals";
 import { useGameEvents } from "./hooks/useGameEvents";
+// Import clear game data utility (makes it available globally)
+import "./utils/clearGameData";
 
 function App() {
     const { walletAddress, isAuthenticated } = useAuth();

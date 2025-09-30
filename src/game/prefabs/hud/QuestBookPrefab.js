@@ -19,6 +19,8 @@ export default class QuestBookPrefab extends Phaser.GameObjects.Sprite {
 			this.scene.reactEvent.emit("show-quest-modal", this.scene);
 		},this)
 		this.scene.events.on('update', this.onSceneUpdate, this);
+		// Set high depth to prevent icon from disappearing under trees/objects
+		this.setDepth(10000);
 		/* END-USER-CTR-CODE */
 	}
 

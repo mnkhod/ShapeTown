@@ -139,10 +139,30 @@ export const AuthProvider = ({ children }) => {
     };
 
     const handleAccountsChanged = (accounts) => {
+        console.log("🔄 Account changed detected:", accounts);
+
         if (accounts.length === 0) {
+            // User disconnected wallet
             logout();
         } else {
-            setWalletAddress(accounts[0]);
+            const newAddress = accounts[0];
+            const currentAddress = walletAddress;
+
+            // If switching to a different account, clear all data
+            if (currentAddress && newAddress.toLowerCase() !== currentAddress.toLowerCase()) {
+                console.log("🔄 Switching from", currentAddress, "to", newAddress);
+                console.log("🧹 Clearing localStorage for account switch...");
+
+                // Clear all game data
+                localStorage.clear();
+
+                // Clear React Query cache
+                queryClient.clear();
+
+                console.log("✅ localStorage cleared, ready for new account");
+            }
+
+            setWalletAddress(newAddress);
             checkWalletConnection();
         }
     };
@@ -249,13 +269,32 @@ export const AuthProvider = ({ children }) => {
             userData.avatar);
     };
 
-    const logout = () => {
+    const logout = async () => {
+        console.log("🔓 Logging out and clearing all data...");
+
+        try {
+            // Call backend logout to clear refresh token cookie
+            const api = (await import("../lib/axios")).default;
+            await api.post("/auth/logout");
+            console.log("✅ Backend logout successful");
+        } catch (error) {
+            console.warn("⚠️ Backend logout failed (non-critical):", error);
+        }
+
+        // Clear all state
         setUser(null);
         setWalletAddress(null);
         setIsAuthenticated(false);
         setProvider(null);
         setSigner(null);
-        localStorage.removeItem("token");
+
+        // Clear all localStorage
+        localStorage.clear();
+
+        // Clear React Query cache
+        queryClient.clear();
+
+        console.log("✅ Logout complete, all data cleared");
     };
 
     const getBalance = async () => {

@@ -208,6 +208,20 @@ export const PhaserGame = forwardRef(function PhaserGame(
         return () => EventBus.removeListener("show-achievements-modal");
     }, [showModal, ref]);
 
+    // Listen for in-game alert messages
+    useEffect(() => {
+        const handleGameAlert = (message) => {
+            const currentScene = sceneManager.current?.getCurrentScene();
+            if (currentScene?.alertPrefab) {
+                currentScene.alertPrefab.alert(message);
+            }
+        };
+
+        EventBus.on("show-game-alert", handleGameAlert);
+
+        return () => EventBus.removeListener("show-game-alert", handleGameAlert);
+    }, []);
+
     useEffect(() => {
         const handleSettingsModal = (currentScene) => {
             showModal("SETTINGS", currentScene);

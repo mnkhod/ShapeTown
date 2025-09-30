@@ -56,17 +56,37 @@ export async function mintFirstHarvestAchievement({ onSuccess, onError }) {
 	let metamaskAccount = await fetchMetamaskAccount()
 	let baseURL = `${import.meta.env.VITE_REST_ENDPOINT}`;
 
+	console.log("🎨 Minting First Harvest NFT...");
+	console.log("📍 Endpoint:", `${baseURL}/shape/nft/create/0/${metamaskAccount}`);
+
 	try {
 		let result = await axios({
 			method: 'get',
-			url: `${baseURL}/shape/nft/create/0/${metamaskAccount}`
+			url: `${baseURL}/shape/nft/create/0/${metamaskAccount}`,
+			timeout: 30000 // 30 second timeout
 		})
+
+		console.log("📦 Mint response:", result.data);
+
 		if (result.data.hash) {
+			console.log("✅ NFT minted with hash:", result.data.hash);
 			onSuccess()
+		} else if (result.status === 200) {
+			// Success even without hash
+			console.log("✅ NFT mint successful (no hash returned)");
+			onSuccess()
+		} else {
+			console.error("❌ Unexpected response:", result);
+			onError(new Error("Unexpected response from mint API"))
 		}
 	} catch (e) {
-		console.log(e);
-		onError()
+		console.error("❌ Mint error:", e);
+		console.error("Error details:", {
+			message: e.message,
+			response: e.response?.data,
+			status: e.response?.status
+		});
+		onError(e)
 	}
 }
 

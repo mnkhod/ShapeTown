@@ -52,11 +52,12 @@ export default class OptionsListPrefab extends Phaser.GameObjects.Container {
 		logoutIconLogoutIcon.play("LogoutIconLogoutIcon");
 		this.add(logoutIconLogoutIcon);
 
-		// trophyIconTrophyIcon
+		// trophyIconTrophyIcon - Hidden temporarily (leaderboard not ready yet)
 		const trophyIconTrophyIcon = scene.add.sprite(8, 172, "TrophyIcon", 0);
 		trophyIconTrophyIcon.scaleX = 0.5;
 		trophyIconTrophyIcon.scaleY = 0.5;
 		trophyIconTrophyIcon.play("TrophyIconTrophyIcon");
+		trophyIconTrophyIcon.visible = false; // Hide the icon completely
 		this.add(trophyIconTrophyIcon);
 
 		/* START-USER-CTR-CODE */
@@ -67,7 +68,7 @@ export default class OptionsListPrefab extends Phaser.GameObjects.Container {
             inboxIconInboxIcon,
             helpBottomIconHelpBottomIcon,
             logoutIconLogoutIcon,
-            trophyIconTrophyIcon
+            // trophyIconTrophyIcon // Hidden temporarily - leaderboard not ready yet
         ];
 
         this.icons.forEach(icon => {

@@ -1089,7 +1089,7 @@ class QuestSystem extends EventEmitter {
 
             case "player:enteredTown":
                 if (this.isQuestActive("002")) {
-                    console.log("Completing subtask 002-2: Go to Shape Town");
+                    console.log("Completing subtask 002-2: Go to Harvestyn");
                     this.updateSubtask("002", "002-2");
 
                     if (params.scene && params.scene.alertPrefab) {

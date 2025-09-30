@@ -380,6 +380,11 @@ export default class MessagePrefab extends Phaser.GameObjects.Container {
         this.conversationIndex = 0;
         this.dialogue = null;
         this.isTyping = false;
+
+        // Unfreeze player when dialog closes
+        if (this.scene && this.scene.playerPrefab) {
+            this.scene.playerPrefab.isInteracting = false;
+        }
     }
     /* END-USER-CODE */
 }
