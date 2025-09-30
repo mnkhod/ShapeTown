@@ -24,6 +24,7 @@ import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import FoodMerchant from "../prefabs/npcs/FoodMerchant";
 import MerchantPrefab from "../prefabs/npcs/MerchantPrefab";
 import OpenQuest from "../prefabs/hud/OpenQuest";
+import OpenAchievements from "../prefabs/hud/OpenAchievements";
 import MerchantCabinPrefab from "../prefabs/House/MerchantCabinPrefab";
 import BlacksmithPrefab from "../prefabs/House/BlacksmithPrefab";
 import WaterwellPrefab from "../prefabs/Fountan/WaterwellPrefab";
@@ -820,6 +821,10 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         const openQuest = new OpenQuest(this, 2801, 1640);
         this.add.existing(openQuest);
 
+        // openAchievements
+        const openAchievements = new OpenAchievements(this, 2801, 1640);
+        this.add.existing(openAchievements);
+
         // merchantCabinPrefab
         const merchantCabinPrefab = new MerchantCabinPrefab(this, 1936, 2070);
         this.add.existing(merchantCabinPrefab);
@@ -911,6 +916,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         this.foodMerchant = foodMerchant;
         this.merchantPrefab = merchantPrefab;
         this.openQuest = openQuest;
+        this.openAchievements = openAchievements;
         this.merchantCabinPrefab = merchantCabinPrefab;
         this.blacksmithPrefab = blacksmithPrefab;
         this.waterwellPrefab_1 = waterwellPrefab_1;
@@ -1067,6 +1073,8 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
     merchantPrefab;
     /** @type {OpenQuest} */
     openQuest;
+    /** @type {OpenAchievements} */
+    openAchievements;
     /** @type {MerchantCabinPrefab} */
     merchantCabinPrefab;
     /** @type {BlacksmithPrefab} */
@@ -1091,6 +1099,7 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
         this.minimapPrefab?.setDepth(90);
         this.blackSmithPrefab.setDepth(2);
         this.openQuest?.setDepth(90);
+        this.openAchievements?.setDepth(90);
 
         this.playerPrefab?.setDepth(90);
 

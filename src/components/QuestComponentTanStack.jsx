@@ -139,431 +139,238 @@ const QuestComponentTanStack = ({ onClose }) => {
                 return uniqueQuests.filter(quest => quest.questType === 'DAILY_QUEST');
             case "Side":
                 return uniqueQuests.filter(quest => quest.questType === 'SIDE_QUEST');
-            case "Future":
-                // Show placeholder future quests for discussion
-                return getFutureQuestIdeas();
             default:
                 return [];
         }
-    };
-
-    // Future quest ideas for discussion
-    const getFutureQuestIdeas = () => {
-        return [
-            {
-                id: "future-1",
-                name: "Mining Expedition",
-                description: "Discover rare minerals deep underground",
-                questType: "MAIN_QUEST",
-                status: "FUTURE",
-                questGiver: { name: "To be determined" },
-                tasks: [
-                    { description: "Build mining equipment" },
-                    { description: "Explore underground caves" },
-                    { description: "Find rare gems and metals" }
-                ],
-                rewards: []
-            },
-            {
-                id: "future-2",
-                name: "Fishing Master",
-                description: "Master the art of fishing and catch legendary fish",
-                questType: "SIDE_QUEST",
-                status: "FUTURE",
-                questGiver: { name: "Fisher NPC (new)" },
-                tasks: [
-                    { description: "Learn basic fishing techniques" },
-                    { description: "Catch 10 different fish species" },
-                    { description: "Catch a legendary fish" }
-                ],
-                rewards: []
-            },
-            {
-                id: "future-3",
-                name: "Weekly Tournament",
-                description: "Compete in weekly farming competitions",
-                questType: "DAILY_QUEST",
-                status: "FUTURE",
-                questGiver: { name: "Tournament Organizer (new)" },
-                tasks: [
-                    { description: "Submit your best crops" },
-                    { description: "Compete against other players" },
-                    { description: "Win tournament prizes" }
-                ],
-                rewards: []
-            },
-            {
-                id: "future-4",
-                name: "Magic & Alchemy",
-                description: "Learn to craft magical potions and enchantments",
-                questType: "SIDE_QUEST",
-                status: "FUTURE",
-                questGiver: { name: "Wizard NPC (new)" },
-                tasks: [
-                    { description: "Gather magical herbs" },
-                    { description: "Learn potion recipes" },
-                    { description: "Craft powerful enchantments" }
-                ],
-                rewards: []
-            },
-            {
-                id: "future-5",
-                name: "Town Builder",
-                description: "Help expand ShapeTown with new buildings",
-                questType: "MAIN_QUEST",
-                status: "FUTURE",
-                questGiver: { name: "Mayor (new)" },
-                tasks: [
-                    { description: "Gather building materials" },
-                    { description: "Design new structures" },
-                    { description: "Construct town improvements" }
-                ],
-                rewards: []
-            }
-        ];
     };
 
     // Only show loading if ALL quest data is loading (unlikely with prefetching)
     const isLoading = activeQuestsLoading && completedQuestsLoading && systemQuestsLoading && availableQuestsLoading && allQuestsLoading;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-gray-900 p-6 rounded-lg w-11/12 max-w-4xl max-h-5/6 overflow-auto border-2 border-yellow-500">
-                {/* Header */}
-                <div className="flex justify-between items-center mb-4">
-                    <h2 className="text-2xl font-bold text-yellow-400">
-                        Quest Journal
-                    </h2>
-                    <button
+        <div
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-40 font-malio"
+            onClick={onClose}
+        >
+            <div
+                onClick={(e) => e.stopPropagation()}
+                className="relative"
+            >
+                <img
+                    src="/assets/hud/Tasksframe.png"
+                    alt="Frame"
+                    className="w-auto h-auto"
+                />
+
+                <div className="absolute inset-0">
+                    <div
+                        className="absolute top-0 -right-2 cursor-pointer"
                         onClick={onClose}
-                        className="text-gray-400 hover:text-white text-xl font-bold"
                     >
-                        ×
-                    </button>
-                </div>
+                        <img
+                            src="/assets/files/image%2035.png"
+                            alt="Close"
+                            className="w-10 h-10 mr-4 mt-2 hover:opacity-80 transition-opacity"
+                        />
+                    </div>
 
-                {/* Tab Navigation */}
-                <div className="flex mb-4 border-b border-gray-700">
-                    {["Main", "Daily", "Side", "Future"].map((tab) => (
-                        <button
-                            key={tab}
-                            onClick={() => setActiveTab(tab)}
-                            className={`px-4 py-2 mr-2 rounded-t-lg transition-colors ${
-                                activeTab === tab
-                                    ? "bg-yellow-500 text-black font-bold"
-                                    : "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                            }`}
-                        >
-                            {tab} Quests
-                        </button>
-                    ))}
-                </div>
+                    <div className="pt-16 pb-3">
+                        <h2 className="text-base font-malio text-center text-gray-800">QUESTS</h2>
+                        <p className="text-xs font-malio text-center text-gray-600 mt-2">
+                            Complete quests to improve your equipment<br />
+                            and earn achievements
+                        </p>
+                    </div>
 
-                {/* Loading State - Show skeleton instead of full screen loading */}
-                {isLoading && (
-                    <div className="space-y-4">
-                        {[1, 2, 3].map((i) => (
-                            <div key={i} className="border border-gray-700 rounded-lg p-4 animate-pulse">
-                                <div className="h-4 bg-gray-700 rounded w-3/4 mb-2"></div>
-                                <div className="h-3 bg-gray-700 rounded w-1/2 mb-4"></div>
-                                <div className="space-y-2">
-                                    <div className="h-2 bg-gray-700 rounded w-full"></div>
-                                    <div className="h-2 bg-gray-700 rounded w-5/6"></div>
-                                </div>
-                            </div>
+                    {/* Tabs */}
+                    <div className="flex justify-center gap-2 px-16 mb-3">
+                        {['Main', 'Daily', 'Side'].map(tab => (
+                            <button
+                                key={tab}
+                                onClick={() => setActiveTab(tab)}
+                                className={`px-4 py-2 text-xs font-malio rounded-md transition-colors ${
+                                    activeTab === tab
+                                        ? 'bg-green-600 text-white'
+                                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                }`}
+                            >
+                                {tab} Quests
+                            </button>
                         ))}
+                    </div>
+
+                    {/* Progress bar */}
+                    <div className="w-2/3 mx-auto mb-3 bg-gray-200 rounded-full h-2">
+                        <div
+                            className="bg-green-600 h-2 rounded-full"
+                            style={{
+                                width: `${
+                                    getQuestsByTab().length > 0
+                                        ? Math.round(
+                                              (getQuestsByTab().filter((q) => q.status === "COMPLETED").length /
+                                                  getQuestsByTab().length) *
+                                                  100
+                                          )
+                                        : 0
+                                }%`,
+                            }}
+                        ></div>
+                    </div>
+                    <p className="text-xs text-center mb-3 text-gray-700">
+                        {getQuestsByTab().filter((q) => q.status === "COMPLETED").length}/{getQuestsByTab().length} completed
+                    </p>
+
+                {/* Loading State */}
+                {isLoading && (
+                    <div className="px-16 pb-16 h-[calc(100%-16rem)] flex items-center justify-center">
+                        <p className="text-gray-500 text-sm">Loading quests...</p>
                     </div>
                 )}
 
                 {/* Quest List */}
                 {!isLoading && (
-                    <div className="space-y-4">
-                        {getQuestsByTab().map((quest) => (
-                            <div
-                                key={quest.id}
-                                className={`border rounded-lg p-4 ${
-                                    quest.completed
-                                        ? "border-green-500 bg-green-900 bg-opacity-20"
-                                        : "border-yellow-500 bg-gray-800"
-                                }`}
-                            >
-                                {/* Quest Header */}
-                                <div
-                                    className="flex justify-between items-center cursor-pointer"
-                                    onClick={() =>
-                                        toggleQuestExpansion(quest.id)
-                                    }
-                                >
-                                    <div className="flex-1">
-                                        <h3 className="text-lg font-bold text-yellow-400">
-                                            {quest.name}
-                                        </h3>
-                                        <p className="text-gray-300 text-sm">
-                                            {quest.description}
-                                        </p>
-                                        <div className="text-xs text-gray-400 mt-1">
-                                            <span className="bg-blue-600 px-2 py-1 rounded mr-2">
-                                                {quest.questType?.replace(
-                                                    "_",
-                                                    " "
-                                                )}
-                                            </span>
-                                            {quest.questGiver?.name && (
-                                                <span>
-                                                    Given by:{" "}
-                                                    {quest.questGiver.name}
-                                                </span>
-                                            )}
-                                        </div>
-                                    </div>
-                                    <div className="text-right">
-                                        {quest.status === "COMPLETED" ? (
-                                            <span className="text-sm font-bold text-green-400">
-                                                ✅ COMPLETED
-                                            </span>
-                                        ) : quest.status === "IN_PROGRESS" ? (
-                                            <div>
-                                                <span className="text-sm font-bold text-yellow-400">
-                                                    🔄 IN PROGRESS
-                                                </span>
-                                                {quest.overallProgress && (
-                                                    <div className="text-xs text-gray-400 mt-1">
-                                                        {
-                                                            quest
-                                                                .overallProgress
-                                                                .completedTasks
-                                                        }
-                                                        /
-                                                        {
-                                                            quest
-                                                                .overallProgress
-                                                                .totalTasks
-                                                        }{" "}
-                                                        tasks (
-                                                        {
-                                                            quest
-                                                                .overallProgress
-                                                                .percentage
-                                                        }
-                                                        %)
+                    <div className="px-16 pb-16 h-[calc(100%-16rem)] overflow-y-auto overflow-hidden scrollbar-hidden">
+                        <div className="space-y-4">
+                            {getQuestsByTab().length > 0 ? (
+                                getQuestsByTab().map((quest, index) => (
+                                    <div key={quest.id} className="group">
+                                        <div
+                                            className="flex gap-4 items-start cursor-pointer"
+                                            onClick={() => toggleQuestExpansion(quest.id)}
+                                        >
+                                            <img
+                                                src={
+                                                    quest.status === "COMPLETED"
+                                                        ? "/assets/hud/Taskscheckon.png"
+                                                        : "/assets/hud/Taskscheckoff.png"
+                                                }
+                                                alt="Task checkbox"
+                                                className="w-4 h-4 mt-1 flex-shrink-0 object-contain"
+                                            />
+                                            <div className="flex-1">
+                                                <div className="flex justify-between items-start">
+                                                    <div>
+                                                        <p
+                                                            className={`text-sm font-bold font-malio ${
+                                                                quest.status === "COMPLETED"
+                                                                    ? "text-green-600"
+                                                                    : "text-gray-900/90"
+                                                            }`}
+                                                        >
+                                                            {quest.name}
+                                                        </p>
+                                                        <p className="text-xs font-malio text-gray-600 mt-1">
+                                                            {quest.description}
+                                                        </p>
                                                     </div>
-                                                )}
-                                            </div>
-                                        ) : quest.status === "AVAILABLE" ? (
-                                            <span className="text-sm font-bold text-blue-400">
-                                                📋 AVAILABLE
-                                            </span>
-                                        ) : quest.status === "NOT_STARTED" ? (
-                                            <span className="text-sm font-bold text-purple-400">
-                                                👁️ VISIBLE
-                                            </span>
-                                        ) : quest.status === "FUTURE" ? (
-                                            <span className="text-sm font-bold text-cyan-400">
-                                                💭 CONCEPT
-                                            </span>
-                                        ) : quest.questGiverType === "GAME_SYSTEM" ? (
-                                            <span className="text-sm font-bold text-orange-400">
-                                                ⚙️ SYSTEM
-                                            </span>
-                                        ) : (
-                                            <span className="text-sm font-bold text-gray-400">
-                                                🔒 LOCKED
-                                            </span>
-                                        )}
-                                        <div className="text-gray-400 text-xs mt-1">
-                                            {expandedQuests.has(quest.id)
-                                                ? "▼"
-                                                : "▶"}
+                                                    <img
+                                                        src={
+                                                            expandedQuests.has(quest.id)
+                                                                ? "/assets/hud/accordionUp.png"
+                                                                : "/assets/hud/accordionDown.png"
+                                                        }
+                                                        alt={expandedQuests.has(quest.id) ? "Collapse" : "Expand"}
+                                                        className="w-4 h-4 ml-2 transition-transform duration-200"
+                                                    />
+                                                </div>
+                                                {expandedQuests.has(quest.id) && (
+                                    <div className="mt-3 space-y-3 ml-2 transition-all duration-200">
+                                        <div className="bg-gray-100 p-2 rounded-md text-xs font-malio">
+                                            <p>
+                                                <span className="font-semibold">Quest Giver:</span>{" "}
+                                                {quest.questGiver?.name || "Game System"}
+                                            </p>
+                                            {quest.map?.name && (
+                                                <p>
+                                                    <span className="font-semibold">Location:</span> {quest.map.name}
+                                                </p>
+                                            )}
+                                            <p>
+                                                <span className="font-semibold">Type:</span>{" "}
+                                                {quest.questType?.replace("_", " ")}
+                                            </p>
                                         </div>
-                                    </div>
-                                </div>
 
-                                {/* Expanded Quest Details */}
-                                {expandedQuests.has(quest.id) && (
-                                    <div className="mt-4 border-t border-gray-700 pt-4">
-                                        {/* Tasks */}
-                                        <h4 className="text-yellow-400 font-bold mb-2">
-                                            Tasks:
-                                        </h4>
-                                        <div className="space-y-2 mb-4">
+                                        <div className="mt-2">
+                                            <p className="text-xs font-semibold mb-2">Tasks:</p>
                                             {quest.tasks?.map((task, index) => {
-                                                const progress =
-                                                    quest.taskProgress?.find(
-                                                        (tp) =>
-                                                            tp.taskIndex ===
-                                                            index
-                                                    );
-                                                const isCompleted =
-                                                    progress?.isCompleted ||
-                                                    false;
+                                                const progress = quest.taskProgress?.find(
+                                                    (tp) => tp.taskIndex === index
+                                                );
+                                                const isCompleted = progress?.isCompleted || false;
 
                                                 return (
                                                     <div
                                                         key={index}
-                                                        className={`flex items-center p-2 rounded ${
-                                                            isCompleted
-                                                                ? "bg-green-800 bg-opacity-50"
-                                                                : "bg-gray-700"
-                                                        }`}
+                                                        className="flex items-start gap-2 mb-2"
                                                     >
-                                                        {/* Visual status indicator instead of interactive checkbox */}
-                                                        <div
-                                                            className={`w-4 h-4 mr-3 rounded border-2 flex items-center justify-center ${
+                                                        <img
+                                                            src={
                                                                 isCompleted
-                                                                    ? "bg-green-500 border-green-500"
-                                                                    : "border-gray-400"
+                                                                    ? "/assets/hud/Taskscheckon.png"
+                                                                    : "/assets/hud/Taskscheckoff.png"
+                                                            }
+                                                            alt="Subtask checkbox"
+                                                            className="w-3 h-3 mt-1 flex-shrink-0 object-contain"
+                                                        />
+                                                        <p
+                                                            className={`text-xs font-malio ${
+                                                                isCompleted
+                                                                    ? "text-green-600"
+                                                                    : "text-gray-700"
                                                             }`}
                                                         >
-                                                            {isCompleted && (
-                                                                <svg
-                                                                    className="w-3 h-3 text-white"
-                                                                    fill="currentColor"
-                                                                    viewBox="0 0 20 20"
-                                                                >
-                                                                    <path
-                                                                        fillRule="evenodd"
-                                                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                                                        clipRule="evenodd"
-                                                                    />
-                                                                </svg>
-                                                            )}
-                                                        </div>
-                                                        <span
-                                                            className={
-                                                                isCompleted
-                                                                    ? "line-through text-gray-400"
-                                                                    : "text-white"
-                                                            }
-                                                        >
                                                             {task.description}
-                                                        </span>
-                                                        {progress &&
-                                                            progress.progress >
-                                                                0 && (
-                                                                <span className="ml-auto text-sm text-blue-300">
-                                                                    (
-                                                                    {
-                                                                        progress.progress
-                                                                    }
-                                                                    /
-                                                                    {task.amount ||
-                                                                        1}
-                                                                    )
+                                                            {progress && progress.progress > 0 && (
+                                                                <span className="ml-2 text-blue-600">
+                                                                    ({progress.progress}/{task.amount || 1})
                                                                 </span>
                                                             )}
+                                                        </p>
                                                     </div>
                                                 );
                                             })}
                                         </div>
 
-                                        {/* Rewards */}
                                         {quest.rewards?.length > 0 && (
-                                            <div>
-                                                <h4 className="text-yellow-400 font-bold mb-2">
-                                                    {quest.status ===
-                                                    "COMPLETED"
-                                                        ? "Rewards Claimed:"
-                                                        : "Rewards:"}
-                                                </h4>
-                                                <div className="text-sm text-gray-300">
-                                                    {quest.rewards.map(
-                                                        (reward, index) => (
-                                                            <div
-                                                                key={index}
-                                                                className={`mb-1 ${
-                                                                    quest.status ===
-                                                                    "COMPLETED"
-                                                                        ? "opacity-75"
-                                                                        : ""
-                                                                }`}
-                                                            >
-                                                                {reward.rewardType ===
-                                                                    "GOLD" && (
-                                                                    <span className="text-yellow-300">
-                                                                        💰{" "}
-                                                                        {
-                                                                            reward.goldAmount
-                                                                        }{" "}
-                                                                        Gold
-                                                                        {quest.status ===
-                                                                            "COMPLETED" &&
-                                                                            " ✓"}
-                                                                    </span>
-                                                                )}
-                                                                {reward.rewardType ===
-                                                                    "ITEM" &&
-                                                                    reward.item && (
-                                                                        <span className="text-blue-300">
-                                                                            📦{" "}
-                                                                            {
-                                                                                reward
-                                                                                    .item
-                                                                                    .name
-                                                                            }{" "}
-                                                                            x
-                                                                            {
-                                                                                reward.itemQuantity
-                                                                            }
-                                                                            {quest.status ===
-                                                                                "COMPLETED" &&
-                                                                                " ✓"}
-                                                                        </span>
-                                                                    )}
-                                                                {reward.rewardType ===
-                                                                    "ACHIEVEMENT" &&
-                                                                    reward.achievement && (
-                                                                        <span className="text-purple-300">
-                                                                            🏆{" "}
-                                                                            {
-                                                                                reward
-                                                                                    .achievement
-                                                                                    .name
-                                                                            }
-                                                                            {quest.status ===
-                                                                                "COMPLETED" &&
-                                                                                " ✓"}
-                                                                        </span>
-                                                                    )}
-                                                            </div>
-                                                        )
-                                                    )}
-                                                </div>
+                                            <div className="bg-gray-100 p-2 rounded-md mt-2">
+                                                <p className="text-xs font-malio text-gray-700">
+                                                    <span className="font-bold">Reward:</span>{" "}
+                                                    {quest.rewards.map((reward, idx) => {
+                                                        if (reward.rewardType === "GOLD") {
+                                                            return `${reward.goldAmount} gold`;
+                                                        } else if (reward.rewardType === "ITEM" && reward.item) {
+                                                            return `${reward.item.name} x${reward.itemQuantity}`;
+                                                        } else if (
+                                                            reward.rewardType === "ACHIEVEMENT" &&
+                                                            reward.achievement
+                                                        ) {
+                                                            return reward.achievement.name;
+                                                        }
+                                                        return "";
+                                                    }).filter(Boolean).join(", ")}
+                                                </p>
                                             </div>
                                         )}
                                     </div>
                                 )}
-                            </div>
-                        ))}
-
-                        {getQuestsByTab().length === 0 && !isLoading && (
-                            <div className="text-center py-8 text-gray-400">
-                                <div className="text-lg mb-2">No {activeTab.toLowerCase()} quests available</div>
-                                <div className="text-sm">
-                                    {activeTab === "Main" && "Complete previous main quests to unlock new ones"}
-                                    {activeTab === "Daily" && "Daily quests reset every 24 hours"}
-                                    {activeTab === "Side" && "Side quests are optional adventures for extra rewards"}
-                                    {activeTab === "Future" && "These are concept ideas for future development"}
+                                            </div>
+                                        </div>
+                                        {quest.id !== getQuestsByTab()[getQuestsByTab().length - 1].id && (
+                                            <div className="h-px bg-gray-900/10 mt-4" />
+                                        )}
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="text-center py-8">
+                                    <p className="text-gray-500 text-sm">
+                                        No {activeTab.toLowerCase()} quests available.
+                                    </p>
                                 </div>
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
                 )}
-
-                {/* Status Legend */}
-                <div className="mt-6 p-4 bg-gray-800 rounded-lg border border-gray-700">
-                    <h4 className="text-yellow-400 font-bold mb-2 text-center">Quest Status Guide</h4>
-                    <div className="grid grid-cols-2 gap-2 text-xs">
-                        <div><span className="text-green-400">✅ COMPLETED</span> - Quest finished</div>
-                        <div><span className="text-yellow-400">🔄 IN PROGRESS</span> - Currently active</div>
-                        <div><span className="text-blue-400">📋 AVAILABLE</span> - Ready to start</div>
-                        <div><span className="text-purple-400">👁️ VISIBLE</span> - Can see but not start yet</div>
-                        <div><span className="text-cyan-400">💭 CONCEPT</span> - Future idea for discussion</div>
-                        <div><span className="text-orange-400">⚙️ SYSTEM</span> - Auto-unlocked quest</div>
-                        <div><span className="text-gray-400">🔒 LOCKED</span> - Prerequisites needed</div>
-                    </div>
-                    <div className="text-center text-gray-400 mt-3 text-xs">
-                        Quest tasks update automatically as you play the game
-                    </div>
                 </div>
             </div>
         </div>

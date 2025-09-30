@@ -1,4 +1,5 @@
 import React from 'react';
+import { EventBus } from '../game/EventBus';
 import ModalErrorBoundary from './ModalErrorBoundary';
 import AchievementHUD from './AchievementHUD';
 import InventoryHUD from './InventoryHUD';
@@ -53,7 +54,10 @@ const GameModals = ({
       {showAchievements && (
         <ModalErrorBoundary modalName="Achievements">
           <AchievementHUD
-            onClose={() => setShowAchievements(false)}
+            onClose={() => {
+              setShowAchievements(false);
+              EventBus.emit('achievements-closed');
+            }}
           />
         </ModalErrorBoundary>
       )}

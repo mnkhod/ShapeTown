@@ -20,6 +20,7 @@ import NewItemHudPrefab from "../../../NewItemHudPrefab";
 import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import OpenQuest from "../prefabs/hud/OpenQuest";
+import OpenAchievements from "../prefabs/hud/OpenAchievements";
 /* START-USER-IMPORTS */
 import { EventBus } from '../../game/EventBus';
 import initInventoryBridge from "../../components/phaser-react-bridge";
@@ -205,6 +206,10 @@ export default class ShapeTownBeachMapScene extends Phaser.Scene {
 		// openQuest
 		const openQuest = new OpenQuest(this, 504, 1460);
 		this.add.existing(openQuest);
+
+		// openAchievements
+		const openAchievements = new OpenAchievements(this, 504, 1460);
+		this.add.existing(openAchievements);
 
 		// shellAreas_1
 		const shellAreas_1 = shapetownBeach.createLayer("shellAreas_1", ["BeachDeckSheet"], 0, 0);

@@ -6,8 +6,6 @@
 /* END-USER-IMPORTS */
 
 export default class PlayerPrefab extends Phaser.GameObjects.Container {
-    
-
     constructor(scene, x, y) {
         super(scene, x ?? 33.46849927902156, y ?? 20.681273293494687);
 
@@ -39,7 +37,12 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         this.add(outfit);
 
         // Watering tool
-        const wateringTool = scene.add.sprite(14, 27, "FarmingToolsWatering", 0);
+        const wateringTool = scene.add.sprite(
+            14,
+            27,
+            "FarmingToolsWatering",
+            0
+        );
         wateringTool.scaleX = 1.5;
         wateringTool.scaleY = 1.5;
         wateringTool.visible = false;
@@ -53,7 +56,12 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         this.add(axeTool);
 
         // Pickaxe tool
-        const pickaxeTool = scene.add.sprite(14, 27, "MiningToolPickaxe_V01", 0);
+        const pickaxeTool = scene.add.sprite(
+            14,
+            27,
+            "MiningToolPickaxe_V01",
+            0
+        );
         pickaxeTool.scaleX = 1.5;
         pickaxeTool.scaleY = 1.5;
         pickaxeTool.visible = false;
@@ -72,7 +80,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         this.wateringTool = wateringTool;
         this.axeTool = axeTool;
         this.pickaxeTool = pickaxeTool;
-        this.swordTool = swordTool
+        this.swordTool = swordTool;
 
         /* START-USER-CTR-CODE */
         // Write your code here.
@@ -85,16 +93,15 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 
         this.player = this;
 
-        scene.events.on('update', this.prefabUpdateCycle, this);
-        scene.events.on('create', this.prefabCreateCycle, this);
-        
+        scene.events.on("update", this.prefabUpdateCycle, this);
+        scene.events.on("create", this.prefabCreateCycle, this);
+
         // Mouse click to use the selected tool
-        scene.input.on('pointerdown', () => {
+        scene.input.on("pointerdown", () => {
             this.useSelectedTool();
         });
         /* END-USER-CTR-CODE */
     }
-
 
     /** @type {Phaser.GameObjects.Sprite} */
     skin;
@@ -118,8 +125,8 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     /** @type {Phaser.Physics.Arcade.Container} */
     player;
 
-    lastDirection = 'down';
-    moveSpeed = 500;
+    lastDirection = "down";
+    moveSpeed = 250;
 
     prefabCreateCycle() {
         // Ensure scene is properly initialized before loading customization
@@ -129,7 +136,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
                 this.loadCustomization();
             });
         } else {
-            console.warn('⚠️ Scene time not available, skipping customization');
+            console.warn("⚠️ Scene time not available, skipping customization");
         }
         this.settingUpAnimations();
     }
@@ -147,52 +154,58 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 
     playerMovement() {
         if (this.isUsingTool) return;
-        
+
         let input = this.scene.input;
 
         const upKey = input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         const downKey = input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         const leftKey = input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-        const rightKey = input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        const rightKey = input.keyboard.addKey(
+            Phaser.Input.Keyboard.KeyCodes.D
+        );
 
         if (rightKey.isDown) {
-            this.lastDirection = 'right';
-            this.moveInDirection('right');
+            this.lastDirection = "right";
+            this.moveInDirection("right");
         } else if (leftKey.isDown) {
-            this.lastDirection = 'left';
-            this.moveInDirection('left');
+            this.lastDirection = "left";
+            this.moveInDirection("left");
         } else if (upKey.isDown) {
-            this.lastDirection = 'up';
-            this.moveInDirection('up');
+            this.lastDirection = "up";
+            this.moveInDirection("up");
         } else if (downKey.isDown) {
-            this.lastDirection = 'down';
-            this.moveInDirection('down');
+            this.lastDirection = "down";
+            this.moveInDirection("down");
         } else {
-            this.moveInDirection(`idle${this.capitalizeFirstLetter(this.lastDirection)}`);
+            this.moveInDirection(
+                `idle${this.capitalizeFirstLetter(this.lastDirection)}`
+            );
         }
     }
 
     updateToolFromInventory() {
-        if (this.scene.newItemHudPrefab && this.scene.newItemHudPrefab.selectedItem) {
+        if (
+            this.scene.newItemHudPrefab &&
+            this.scene.newItemHudPrefab.selectedItem
+        ) {
             const item = this.scene.newItemHudPrefab.selectedItem;
             if (item === "ToolWateringCan") {
-                if (this.selectedTool !== 'watering') {
-                    this.selectTool('watering');
+                if (this.selectedTool !== "watering") {
+                    this.selectTool("watering");
                 }
             } else if (item === "ToolHoe") {
-                if (this.selectedTool !== 'axe') {
-                    this.selectTool('axe');
+                if (this.selectedTool !== "axe") {
+                    this.selectTool("axe");
                 }
             } else if (item === "ToolPickaxe") {
-                if (this.selectedTool !== 'pickaxe') {
-                    this.selectTool('pickaxe');
+                if (this.selectedTool !== "pickaxe") {
+                    this.selectTool("pickaxe");
                 }
             } else if (item === "ToolIronSword") {
-                if (this.selectedTool !== 'Sword') {
-                    this.selectTool('sword');
+                if (this.selectedTool !== "Sword") {
+                    this.selectTool("sword");
                 }
-            }
-             else {
+            } else {
                 if (this.selectedTool !== null) {
                     this.selectTool(null);
                 }
@@ -208,14 +221,20 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         try {
             // Validate scene and sprite initialization
             if (!this.scene || !this.scene.sys || !this.scene.sys.game) {
-                console.warn('⚠️ Scene not ready for customization, retrying...');
+                console.warn(
+                    "⚠️ Scene not ready for customization, retrying..."
+                );
                 if (this.scene && this.scene.time) {
-                    this.scene.time.delayedCall(200, () => this.loadCustomization());
+                    this.scene.time.delayedCall(200, () =>
+                        this.loadCustomization()
+                    );
                 }
                 return;
             }
 
-            const savedCustomization = localStorage.getItem('playerCustomization');
+            const savedCustomization = localStorage.getItem(
+                "playerCustomization"
+            );
             if (savedCustomization) {
                 const customization = JSON.parse(savedCustomization);
 
@@ -224,34 +243,51 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
                 const outfitKey = `CharacterOutfit_${customization.clothing}`;
 
                 // Enhanced safety checks with scene validation
-                if (this.skin && this.skin.setTexture && this.skin.scene && this.skin.scene.sys) {
+                if (
+                    this.skin &&
+                    this.skin.setTexture &&
+                    this.skin.scene &&
+                    this.skin.scene.sys
+                ) {
                     this.skin.setTexture(skinKey);
-                    console.log('✅ Set skin texture:', skinKey);
+                    console.log("✅ Set skin texture:", skinKey);
                 } else {
-                    console.warn('⚠️ Skin sprite not ready');
+                    console.warn("⚠️ Skin sprite not ready");
                 }
 
-                if (this.hair && this.hair.setTexture && this.hair.scene && this.hair.scene.sys) {
+                if (
+                    this.hair &&
+                    this.hair.setTexture &&
+                    this.hair.scene &&
+                    this.hair.scene.sys
+                ) {
                     this.hair.setTexture(hairKey);
-                    console.log('✅ Set hair texture:', hairKey);
+                    console.log("✅ Set hair texture:", hairKey);
                 } else {
-                    console.warn('⚠️ Hair sprite not ready');
+                    console.warn("⚠️ Hair sprite not ready");
                 }
 
-                if (this.outfit && this.outfit.setTexture && this.outfit.scene && this.outfit.scene.sys) {
+                if (
+                    this.outfit &&
+                    this.outfit.setTexture &&
+                    this.outfit.scene &&
+                    this.outfit.scene.sys
+                ) {
                     this.outfit.setTexture(outfitKey);
-                    console.log('✅ Set outfit texture:', outfitKey);
+                    console.log("✅ Set outfit texture:", outfitKey);
                 } else {
-                    console.warn('⚠️ Outfit sprite not ready');
+                    console.warn("⚠️ Outfit sprite not ready");
                 }
 
                 this.settingUpAnimations();
             }
         } catch (error) {
-            console.error('❌ Error in loadCustomization:', error);
+            console.error("❌ Error in loadCustomization:", error);
             // Retry after a longer delay if there's an error
             if (this.scene && this.scene.time) {
-                this.scene.time.delayedCall(500, () => this.loadCustomization());
+                this.scene.time.delayedCall(500, () =>
+                    this.loadCustomization()
+                );
             }
         }
     }
@@ -259,45 +295,45 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     moveInDirection(direction) {
         try {
             switch (direction) {
-                case 'right':
+                case "right":
                     this.player.body.velocity.x = this.moveSpeed;
                     this.player.body.velocity.y = 0;
-                    this.playAnimations('Right');
+                    this.playAnimations("Right");
                     break;
-                case 'left':
+                case "left":
                     this.player.body.velocity.x = -this.moveSpeed;
                     this.player.body.velocity.y = 0;
-                    this.playAnimations('Left');
+                    this.playAnimations("Left");
                     break;
-                case 'up':
+                case "up":
                     this.player.body.velocity.y = -this.moveSpeed;
                     this.player.body.velocity.x = 0;
-                    this.playAnimations('Up');
+                    this.playAnimations("Up");
                     break;
-                case 'down':
+                case "down":
                     this.player.body.velocity.y = this.moveSpeed;
                     this.player.body.velocity.x = 0;
-                    this.playAnimations('Down');
+                    this.playAnimations("Down");
                     break;
-                case 'idleRight':
+                case "idleRight":
                     this.player.body.velocity.x = 0;
                     this.player.body.velocity.y = 0;
-                    this.playAnimations('IdleRight');
+                    this.playAnimations("IdleRight");
                     break;
-                case 'idleLeft':
+                case "idleLeft":
                     this.player.body.velocity.x = 0;
                     this.player.body.velocity.y = 0;
-                    this.playAnimations('IdleLeft');
+                    this.playAnimations("IdleLeft");
                     break;
-                case 'idleUp':
+                case "idleUp":
                     this.player.body.velocity.x = 0;
                     this.player.body.velocity.y = 0;
-                    this.playAnimations('IdleUp');
+                    this.playAnimations("IdleUp");
                     break;
-                case 'idleDown':
+                case "idleDown":
                     this.player.body.velocity.x = 0;
                     this.player.body.velocity.y = 0;
-                    this.playAnimations('IdleDown');
+                    this.playAnimations("IdleDown");
                     break;
             }
         } catch (error) {
@@ -307,13 +343,22 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 
     playAnimations(direction) {
         // Check if animations exist before playing them to prevent Phaser warnings
-        if (this.hair.anims && this.hair.anims.animationManager.get(`hair${direction}`)) {
+        if (
+            this.hair.anims &&
+            this.hair.anims.animationManager.get(`hair${direction}`)
+        ) {
             this.hair.play(`hair${direction}`, true);
         }
-        if (this.skin.anims && this.skin.anims.animationManager.get(`walk${direction}`)) {
+        if (
+            this.skin.anims &&
+            this.skin.anims.animationManager.get(`walk${direction}`)
+        ) {
             this.skin.play(`walk${direction}`, true);
         }
-        if (this.outfit.anims && this.outfit.anims.animationManager.get(`outfit${direction}`)) {
+        if (
+            this.outfit.anims &&
+            this.outfit.anims.animationManager.get(`outfit${direction}`)
+        ) {
             this.outfit.play(`outfit${direction}`, true);
         }
     }
@@ -325,18 +370,18 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
 
     useSelectedTool() {
         if (!this.selectedTool || this.isUsingTool) return;
-        
+
         switch (this.selectedTool) {
-            case 'watering':
+            case "watering":
                 this.startWatering();
                 break;
-            case 'axe':
+            case "axe":
                 this.startAxe();
                 break;
-            case 'pickaxe':
+            case "pickaxe":
                 this.startPickaxe();
                 break;
-            case 'sword':
+            case "sword":
                 this.startSword();
                 break;
             default:
@@ -349,28 +394,28 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     startWatering() {
         if (this.isUsingTool) return;
         this.isUsingTool = true;
-        this.playToolAnimation(this.wateringTool, 'watering');
+        this.playToolAnimation(this.wateringTool, "watering");
     }
 
     // AXE TOOL FUNCTIONS
     startAxe() {
         if (this.isUsingTool) return;
         this.isUsingTool = true;
-        this.playToolAnimation(this.axeTool, 'axe');
+        this.playToolAnimation(this.axeTool, "axe");
     }
 
     // PICKAXE TOOL FUNCTIONS
     startPickaxe() {
         if (this.isUsingTool) return;
         this.isUsingTool = true;
-        this.playToolAnimation(this.pickaxeTool, 'pickaxe');
+        this.playToolAnimation(this.pickaxeTool, "pickaxe");
     }
 
     // SWORD TOOL FUNCTIONS
     startSword() {
         if (this.isUsingTool) return;
         this.isUsingTool = true;
-        this.playToolAnimation(this.swordTool, 'sword');
+        this.playToolAnimation(this.swordTool, "sword");
     }
 
     // Generic method to play tool animations
@@ -378,27 +423,36 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         // Stop any current movement
         this.player.body.velocity.x = 0;
         this.player.body.velocity.y = 0;
-        
+
         const directionCap = this.capitalizeFirstLetter(this.lastDirection);
         this.positionTool(toolSprite);
 
         toolSprite.visible = true;
-        
-        // Play the player idle animation (check if animations exist to prevent Phaser warnings)
-        const hairIdleAnim = `hair${'idle' + directionCap}`;
-        const skinIdleAnim = `walk${'idle' + directionCap}`;
-        const outfitIdleAnim = `outfit${'idle' + directionCap}`;
 
-        if (this.hair.anims && this.hair.anims.animationManager.get(hairIdleAnim)) {
+        // Play the player idle animation (check if animations exist to prevent Phaser warnings)
+        const hairIdleAnim = `hair${"idle" + directionCap}`;
+        const skinIdleAnim = `walk${"idle" + directionCap}`;
+        const outfitIdleAnim = `outfit${"idle" + directionCap}`;
+
+        if (
+            this.hair.anims &&
+            this.hair.anims.animationManager.get(hairIdleAnim)
+        ) {
             this.hair.play(hairIdleAnim, true);
         }
-        if (this.skin.anims && this.skin.anims.animationManager.get(skinIdleAnim)) {
+        if (
+            this.skin.anims &&
+            this.skin.anims.animationManager.get(skinIdleAnim)
+        ) {
             this.skin.play(skinIdleAnim, true);
         }
-        if (this.outfit.anims && this.outfit.anims.animationManager.get(outfitIdleAnim)) {
+        if (
+            this.outfit.anims &&
+            this.outfit.anims.animationManager.get(outfitIdleAnim)
+        ) {
             this.outfit.play(outfitIdleAnim, true);
         }
-        
+
         // Play the tool animation
         try {
             toolSprite.play(`${toolType}${directionCap}`, true);
@@ -406,7 +460,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
             console.warn(`${toolType} animation not found: ${error}`);
             toolSprite.setFrame(this.getToolFrame(toolType));
         }
-        
+
         // Duration of animation
         this.scene.time.delayedCall(400, () => {
             this.stopToolAnimation(toolSprite);
@@ -416,19 +470,19 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     // Position tool based on direction
     positionTool(toolSprite) {
         switch (this.lastDirection) {
-            case 'right':
+            case "right":
                 toolSprite.setPosition(24, 27);
                 toolSprite.setDepth(1.5);
                 break;
-            case 'left':
+            case "left":
                 toolSprite.setPosition(4, 27);
                 toolSprite.setDepth(1.5);
                 break;
-            case 'up':
+            case "up":
                 toolSprite.setPosition(14, 17);
-                toolSprite.setDepth(0.5); 
+                toolSprite.setDepth(0.5);
                 break;
-            case 'down':
+            case "down":
                 toolSprite.setPosition(14, 37);
                 toolSprite.setDepth(2);
                 break;
@@ -436,20 +490,22 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     }
 
     getToolFrame(toolType) {
-        const baseFrame = {
-            'watering': 0,
-            'axe': 0,
-            'pickaxe': 0,
-            'sword': 0
-        }[toolType] || 0;
-        
-        const offset = {
-            'right': 8,
-            'left': 12,
-            'up': 4,
-            'down': 0
-        }[this.lastDirection] || 0;
-        
+        const baseFrame =
+            {
+                watering: 0,
+                axe: 0,
+                pickaxe: 0,
+                sword: 0,
+            }[toolType] || 0;
+
+        const offset =
+            {
+                right: 8,
+                left: 12,
+                up: 4,
+                down: 0,
+            }[this.lastDirection] || 0;
+
         return baseFrame + offset;
     }
 
@@ -457,7 +513,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     stopToolAnimation(toolSprite) {
         this.isUsingTool = false;
         toolSprite.visible = false;
-        
+
         // Return to idle animation
         const directionCap = this.capitalizeFirstLetter(this.lastDirection);
         this.moveInDirection(`idle${directionCap}`);
@@ -466,64 +522,71 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
     // Setup all tool animations
     setupToolAnimations() {
         if (!this.scene || !this.scene.anims) return;
-    
+
         // Animation frame ranges for all tools
         const toolAnimFrames = {
             watering: {
                 down: { start: 0, end: 3 },
                 up: { start: 4, end: 7 },
                 right: { start: 8, end: 11 },
-                left: { start: 12, end: 15 }
+                left: { start: 12, end: 15 },
             },
             axe: {
                 down: { start: 0, end: 3 },
                 up: { start: 4, end: 7 },
                 right: { start: 8, end: 11 },
-                left: { start: 12, end: 15 }
+                left: { start: 12, end: 15 },
             },
             pickaxe: {
                 down: { start: 0, end: 3 },
                 up: { start: 4, end: 7 },
                 right: { start: 8, end: 11 },
-                left: { start: 12, end: 15 }
+                left: { start: 12, end: 15 },
             },
             sword: {
                 down: { start: 0, end: 2 },
                 up: { start: 3, end: 5 },
                 right: { start: 6, end: 8 },
-                left: { start: 9, end: 11 }
-            }
+                left: { start: 9, end: 11 },
+            },
         };
-        
+
         // Tool sprite sheet keys
         const toolSpriteSheets = {
             watering: "FarmingToolsWatering",
             axe: "FarmingToolsHoe_1",
             pickaxe: "MiningToolPickaxe_V01",
-            sword: "NPCRowan_Sword_Draw"
+            sword: "NPCRowan_Sword_Draw",
         };
-        
+
         // Create animations for each tool and direction
-        Object.keys(toolAnimFrames).forEach(tool => {
-            ["right", "left", "up", "down"].forEach(direction => {
-                const animKey = `${tool}${this.capitalizeFirstLetter(direction)}`;
-                
+        Object.keys(toolAnimFrames).forEach((tool) => {
+            ["right", "left", "up", "down"].forEach((direction) => {
+                const animKey = `${tool}${this.capitalizeFirstLetter(
+                    direction
+                )}`;
+
                 if (this.scene.anims.exists(animKey)) {
                     this.scene.anims.remove(animKey);
                 }
-                
+
                 try {
                     this.scene.anims.create({
                         key: animKey,
-                        frames: this.scene.anims.generateFrameNumbers(toolSpriteSheets[tool], {
-                            start: toolAnimFrames[tool][direction].start,
-                            end: toolAnimFrames[tool][direction].end
-                        }),
+                        frames: this.scene.anims.generateFrameNumbers(
+                            toolSpriteSheets[tool],
+                            {
+                                start: toolAnimFrames[tool][direction].start,
+                                end: toolAnimFrames[tool][direction].end,
+                            }
+                        ),
                         frameRate: 10,
-                        repeat: 0 
+                        repeat: 0,
                     });
                 } catch (error) {
-                    console.warn(`Failed to create ${tool} animation ${animKey}: ${error}`);
+                    console.warn(
+                        `Failed to create ${tool} animation ${animKey}: ${error}`
+                    );
                 }
             });
         });
@@ -540,14 +603,23 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
             idleRight: { start: 14, end: 14 },
             idleLeft: { start: 21, end: 21 },
             idleUp: { start: 7, end: 7 },
-            idleDown: { start: 0, end: 0 }
+            idleDown: { start: 0, end: 0 },
         };
-    
+
         const skinKey = this.skin.texture.key;
         const hairKey = this.hair.texture.key;
         const outfitKey = this.outfit.texture.key;
 
-        ["right", "left", "up", "down", "idleRight", "idleLeft", "idleUp", "idleDown"].forEach((i) => {
+        [
+            "right",
+            "left",
+            "up",
+            "down",
+            "idleRight",
+            "idleLeft",
+            "idleUp",
+            "idleDown",
+        ].forEach((i) => {
             const animKey = `walk${this.capitalizeFirstLetter(i)}`;
             if (this.scene.anims.exists(animKey)) {
                 this.scene.anims.remove(animKey);
@@ -556,7 +628,7 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
                 key: animKey,
                 frames: this.scene.anims.generateFrameNumbers(skinKey, {
                     start: movementAnimKeys[i].start,
-                    end: movementAnimKeys[i].end
+                    end: movementAnimKeys[i].end,
                 }),
                 frameRate: 10,
                 repeat: -1,
@@ -569,23 +641,35 @@ export default class PlayerPrefab extends Phaser.GameObjects.Container {
         ];
 
         anims.forEach((anim) => {
-            ["right", "left", "up", "down", "idleRight", "idleLeft", "idleUp", "idleDown"].forEach((i) => {
+            [
+                "right",
+                "left",
+                "up",
+                "down",
+                "idleRight",
+                "idleLeft",
+                "idleUp",
+                "idleDown",
+            ].forEach((i) => {
                 const animKey = `${anim.key}${this.capitalizeFirstLetter(i)}`;
                 if (this.scene.anims.exists(animKey)) {
                     this.scene.anims.remove(animKey);
                 }
                 this.scene.anims.create({
                     key: animKey,
-                    frames: this.scene.anims.generateFrameNumbers(anim.assetKey, {
-                        start: movementAnimKeys[i].start,
-                        end: movementAnimKeys[i].end
-                    }),
+                    frames: this.scene.anims.generateFrameNumbers(
+                        anim.assetKey,
+                        {
+                            start: movementAnimKeys[i].start,
+                            end: movementAnimKeys[i].end,
+                        }
+                    ),
                     frameRate: 10,
                     repeat: -1,
                 });
             });
         });
-        
+
         // Setup tool animations
         this.setupToolAnimations();
     }

@@ -18,6 +18,7 @@ import ProfilePrefab from "../prefabs/hud/ProfilePrefab";
 import OptionsListPrefab from "../prefabs/hud/OptionsListPrefab";
 import MinimapPrefab from "../prefabs/hud/MinimapPrefab";
 import OpenQuest from "../prefabs/hud/OpenQuest";
+import OpenAchievements from "../prefabs/hud/OpenAchievements";
 import FarmingTree1 from "../prefabs/Trees/FarmingTree1";
 import FarmingTree2 from "../prefabs/Trees/FarmingTree2";
 import StonePrefab_2 from "../prefabs/stone/StonePrefab_2";
@@ -262,6 +263,10 @@ export default class ShapeTownFarmingMapScene extends Phaser.Scene {
 		// openQuest
 		const openQuest = new OpenQuest(this, 307, 1317);
 		this.add.existing(openQuest);
+
+		// openAchievements
+		const openAchievements = new OpenAchievements(this, 307, 1317);
+		this.add.existing(openAchievements);
 
 		// farmingLakeStone_1LakeFloatingRock
 		const farmingLakeStone_1LakeFloatingRock = this.add.sprite(491, 1790, "LakeFloatingRock_V01", 0);

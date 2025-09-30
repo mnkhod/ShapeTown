@@ -1,190 +1,160 @@
-import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import axios from "axios";
-import { ethers } from "ethers";
+import PropTypes from "prop-types";
+import { useState } from "react";
+
+const ACHIEVEMENTS = [
+    {
+        name: "Gift from Nature",
+        description:
+            "Your first successful forage marks the beginning of understanding the forest's bounty. The wilderness has shared its secrets with you, teaching you that nature provides for those who respect and learn from it.",
+        image: "https://raw.githubusercontent.com/mnkhod/shape-town-api/refs/heads/main/api/public/GiftFromNatureAchievement.png",
+        minted: false,
+    },
+    {
+        name: "First Fish",
+        description:
+            "A milestone every aspiring angler remembers - your first successful catch! Whether it's a tiny minnow or a surprising trophy fish, this achievement marks your entry into the world of fishing.",
+        image: "https://raw.githubusercontent.com/mnkhod/shape-town-api/refs/heads/main/api/public/FirstFishAchievement.png",
+        minted: false,
+    },
+    {
+        name: "Natural Forager",
+        description:
+            "The wilderness holds countless treasures for those who know where to look. Master the art of foraging by collecting various wild plants and mushrooms from the forest. Be cautious - not everything that grows is safe to eat.",
+        image: "https://raw.githubusercontent.com/mnkhod/shape-town-api/refs/heads/main/api/public/NaturalForagerAchievement.png",
+        minted: false,
+    },
+    {
+        name: "Taste of Gold",
+        description:
+            "Your first earned coins mark an important milestone in your journey. By completing honest work and trading with fellow villagers, you'll experience the satisfaction of earning your own money and learn the value of commerce in our community.",
+        image: "https://raw.githubusercontent.com/mnkhod/shape-town-api/refs/heads/main/api/public/TasteOfGoldAchievement.png",
+        minted: false,
+    },
+    {
+        name: "Good Invitation",
+        description:
+            "Your first earned coins mark an important milestone in your journey. By completing honest work and trading with fellow villagers, you'll experience the satisfaction of earning your own money and learn the value of commerce in our community.",
+        image: "https://raw.githubusercontent.com/mnkhod/shape-town-api/refs/heads/main/api/public/GoodInvitation.png",
+        minted: false,
+    },
+    {
+        name: "Master Of The Field",
+        description:
+            "Your first earned coins mark an important milestone in your journey. By completing honest work and trading with fellow villagers, you'll experience the satisfaction of earning your own money and learn the value of commerce in our community.",
+        image: "https://raw.githubusercontent.com/mnkhod/shape-town-api/refs/heads/main/api/public/MasterOfTheField.png",
+        minted: false,
+    },
+    {
+        name: "First Harvest",
+        description:
+            "As a novice settler in these untamed lands, you must prove your worth by gathering your first crop. Visit your assigned plot of farmland, plant the provided seeds, and tend to them until they bear fruit. Learn the basics of cultivation and experience the satisfaction of reaping what you sow.",
+        image: "https://raw.githubusercontent.com/mnkhod/shape-town-api/refs/heads/main/api/public/FirstHarvestAchievement.png",
+        minted: false,
+    },
+];
 
 const AchievementSlot = ({ achievement }) => {
-  const [showTooltip, setShowTooltip] = useState(false);
-
-  return (
-    <div 
-      className="relative w-full h-full p-2"
-      onMouseEnter={() => setShowTooltip(true)}
-      onMouseLeave={() => setShowTooltip(false)}
-    >
-      <div className="w-full h-full bg-[url('hud/achievementSlot.png')] bg-contain bg-no-repeat bg-center">
-        <div className="absolute inset-[20%] flex items-center justify-center">
-          {achievement && (
-            <img 
-              src={achievement.image}
-              alt={achievement.title}
-              className={`w-3/4 h-3/4 object-contain ${!achievement.unlocked ? 'opacity-30' : ''}`}
-            />
-          )}
+    return (
+        <div className="flex flex-col items-center text-center w-full px-4 py-4 border-b border-gray-300 last:border-none">
+            <div
+                className={`w-24 h-24 mb-3 transition-all ${
+                    achievement.minted ? "" : "grayscale opacity-40"
+                }`}
+            >
+                <img
+                    src={achievement.image}
+                    alt={achievement.name}
+                    className="w-full h-full object-contain"
+                />
+            </div>
+            <h3
+                className={`text-base font-bold mb-2 ${
+                    achievement.minted ? "text-yellow-900" : "text-gray-500"
+                }`}
+            >
+                {achievement.name}
+            </h3>
+            <p
+                className={`text-sm leading-snug ${
+                    achievement.minted ? "text-gray-800" : "text-gray-500"
+                }`}
+                style={{
+                    maxWidth: "280px",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                }}
+            >
+                {achievement.description}
+            </p>
         </div>
-      </div>
-
-      {showTooltip && achievement && (
-        <div className="absolute z-50 w-64 p-2 font-malio bg-orange-100 border-2 border-yellow-900 rounded-lg top-0 left-56 transform -translate-x-1/2">
-          <h3 className="font-bold text-sm pb-2 text-yellow-900">{achievement.title}</h3>
-          <p className="text-xs text-yellow-800">{achievement.description}</p>
-        </div>
-      )}
-    </div>
-  );
+    );
 };
 
 const AchievementHUD = ({ onClose }) => {
-  const [nfts, setNfts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [dots, setDots] = useState(0);
+    const [achievements] = useState(ACHIEVEMENTS);
 
-  useEffect(() => {
-    fetchAchievementInfo();
-    
-    const dotsInterval = setInterval(() => {
-      setDots(prev => (prev + 1) % 4);
-    }, 500);
+    return (
+        <div
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-40 font-malio"
+            onClick={onClose}
+        >
+            <div onClick={(e) => e.stopPropagation()} className="relative">
+                <img
+                    src="/assets/hud/Tasksframe.png"
+                    alt="Frame"
+                    className="w-auto h-auto"
+                />
 
-    return () => clearInterval(dotsInterval);
-  }, []);
+                <div className="absolute inset-0">
+                    <div
+                        className="absolute top-0 -right-2 cursor-pointer"
+                        onClick={onClose}
+                    >
+                        <img
+                            src="/assets/files/image%2035.png"
+                            alt="Close"
+                            className="w-10 h-10 mr-4 mt-2 hover:opacity-80 transition-opacity"
+                        />
+                    </div>
 
-  async function fetchAchievementInfo() {
-    try {
-      setIsLoading(true);
-      let contractAddress = "0x23d6e7fe6dc435cdDC32e5aBBd3d6bE7f807bAbD";
-      // let contractAddress = "0x6bc9Da82cB85D6D9e34EF7b8B2F930a8A83F5FB2";
-      let contractAbi = [
-        "function balanceOf(address,uint256) view returns (uint256)",
-        "function mint(address,uint256,uint256,bytes)",
-        "function uri(uint256) view returns (string)"
-      ];
+                    <div className="pt-16 pb-3">
+                        <h2 className="text-base font-malio text-center text-gray-800">
+                            ACHIEVEMENTS
+                        </h2>
+                        <p className="text-xs font-malio text-center text-gray-600 mt-2">
+                            Collect achievements and mint them as NFTs
+                        </p>
+                    </div>
 
-      let provider = new ethers.JsonRpcProvider("https://rpc.open-campus-codex.gelato.digital");
-	    // let provider = new ethers.JsonRpcProvider("https://mainnet.shape.network")
-      let metamaskAccount = await fetchMetamaskAccount();
-
-      const nftContract = new ethers.Contract(contractAddress, contractAbi, provider);
-
-      let nftIds = [0, 1, 2, 3, 4];
-      let results = [];
-
-      for (let i = 0; i < nftIds.length; i++) {
-        const nftId = nftIds[i];
-        let result = await nftContract.balanceOf(metamaskAccount, nftId);
-        if (result > 0) {
-          let axiosResult = await axios.get(`https://shape-town-api.vercel.app/nft/data/${nftId}`);
-          results.push({
-            id: nftId.toString(),
-            title: axiosResult.data.name,
-            description: axiosResult.data.description,
-            image: axiosResult.data.image,
-            unlocked: true
-          });
-        }
-      }
-
-      setNfts(results);
-    } catch (error) {
-      console.error('Error fetching achievements:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  async function fetchMetamaskAccount() {
-    if (!window.ethereum || !window.ethereum.selectedAddress) 
-      return "0x081901916FF0eBff4573533D1b34D54029B89B07";
-    return window.ethereum.selectedAddress;
-  }
-
-  const filledSlots = isLoading 
-    ? Array(9).fill(null) 
-    : [...nfts];
-
-  while (filledSlots.length < 9) {
-    filledSlots.push(null);
-  }
-
-  return (
-    <div 
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-40 font-malio"
-      onClick={onClose}
-    >
-      <div 
-        onClick={(e) => e.stopPropagation()}
-        className="relative"
-      >
-        {isLoading ? (
-          <div className="w-96 h-96 relative">
-            <img 
-              src="/assets/files/LoadingFrame.png"
-              alt="Loading frame"
-              className="w-full h-full object-contain"
-            />
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-gray-600 mb-4 font-pixel inline-flex w-24 justify-center">
-                Loading{'.'.repeat(dots)}
-                <span className="invisible">...</span>
-              </span>
-              <img 
-                src="/assets/files/LoadingIcon.png"
-                alt="Loading icon"
-                className="w-20 h-20 animate-spin"
-                style={{ animationDuration: '1s' }}
-              />
-              <img 
-                src="/assets/TradeIcons/Merchant/IconGold.png"
-                alt="Loading icon"
-                className="w-8 h-8 absolute mt-12 animate-bounce"
-                style={{ animationDuration: '1s'  }}
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="bg-[url('hud/achievementDashboard.png')] bg-contain bg-no-repeat pr-16 pl-10 py-10">
-            <img 
-              src="/assets/files/image%2035.png"
-              alt="Close"
-              onClick={onClose}
-              className="w-12 h-12 right-0 top-0 absolute cursor-pointer hover:opacity-80"
-            />
-            <div className="bg-[url('hud/achievementBackground.png')] bg-contain bg-no-repeat">
-              <div className="px-4 py-2">
-                <div className="text-xl font-bold text-yellow-900 flex justify-between items-center">
-                  <span>Achievements</span>
+                    {/* ✅ Vertical scroll list */}
+                    <div className="px-8 pb-16 h-[calc(100%-16rem)] overflow-y-auto scrollbar-hidden">
+                        <div className="flex flex-col items-center gap-8">
+                            {achievements.map((achievement, index) => (
+                                <AchievementSlot
+                                    key={index}
+                                    achievement={achievement}
+                                />
+                            ))}
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div className="w-96 aspect-square pt-6 ml-2 mt-1 pr-8 pb-4">
-                <div className="w-full h-full grid grid-cols-3">
-                  {filledSlots.map((achievement, index) => (
-                    <AchievementSlot
-                      key={achievement?.id || `empty-${index}`}
-                      achievement={achievement}
-                    />
-                  ))}
-                </div>
-              </div>
             </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 AchievementHUD.propTypes = {
-  onClose: PropTypes.func.isRequired
+    onClose: PropTypes.func.isRequired,
 };
 
 AchievementSlot.propTypes = {
-  achievement: PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    image: PropTypes.string,
-    unlocked: PropTypes.bool
-  })
+    achievement: PropTypes.shape({
+        name: PropTypes.string,
+        description: PropTypes.string,
+        image: PropTypes.string,
+        minted: PropTypes.bool,
+    }),
 };
 
 export default AchievementHUD;
+
