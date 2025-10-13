@@ -7,22 +7,38 @@ import {
 } from "../hooks/useAchievements";
 import { EventBus } from "../game/EventBus";
 
-const AchievementRow = ({
-    achievement,
-    onMint,
-    isExpanded,
-    onToggle,
-    isMinting,
-}) => {
+// Achievement Card - Shows only image in grid
+const AchievementCard = ({ achievement, onClick }) => {
     const isMintable = achievement.unlocked && !achievement.minted;
 
     return (
-        <div className={`group ${isMintable ? "rainbow-border rounded-md p-2" : ""}`}>
+        <div
+            className={`relative cursor-pointer rounded-md overflow-hidden transition-all hover:scale-110 ${
+                isMintable
+                    ? "rainbow-border" // RGB rainbow animation for mintable
+                    : "" // No border class, use inline style
+            }`}
+            onClick={() => onClick(achievement)}
+            style={{
+                backgroundColor: "#8B7355", // Brownish background
+                border: isMintable ? undefined : "5px solid #5D4E37", // Thick dark brown border for authentic look
+            }}
+        >
+            {/* Achievement Image */}
             <div
-                className="flex gap-4 items-start cursor-pointer"
-                onClick={onToggle}
+                className={`w-full aspect-square p-2 flex items-center justify-center ${
+                    achievement.unlocked ? "" : "grayscale opacity-40"
+                }`}
             >
-                {/* Status Icon */}
+                <img
+                    src={achievement.imageUrl || achievement.image}
+                    alt={achievement.name}
+                    className="max-w-full max-h-full object-contain"
+                />
+            </div>
+
+            {/* Status Badge - Bottom Right */}
+            <div className="absolute bottom-0.5 right-0.5">
                 <img
                     src={
                         achievement.minted
@@ -31,121 +47,151 @@ const AchievementRow = ({
                             ? "/assets/hud/Taskscheckon.png"
                             : "/assets/hud/Taskscheckoff.png"
                     }
-                    alt="Achievement status"
-                    className="w-4 h-4 mt-1 flex-shrink-0 object-contain"
+                    alt="Status"
+                    className="w-4 h-4 object-contain drop-shadow-lg"
                 />
+            </div>
 
-                <div className="flex-1">
-                    <div className="flex justify-between items-start">
-                        <div className="flex-1">
-                            <div className="flex items-center gap-2">
-                                <p
-                                    className={`text-sm font-bold font-malio ${
-                                        achievement.minted
-                                            ? "text-purple-600"
-                                            : achievement.unlocked
-                                            ? "text-green-600"
-                                            : "text-gray-500"
-                                    }`}
-                                >
-                                    {achievement.name}
-                                </p>
-                                {achievement.minted && (
-                                    <span className="text-[10px] bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-bold">
-                                        NFT
-                                    </span>
-                                )}
-                                {achievement.unlocked && !achievement.minted && (
-                                    <span className="text-[10px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold">
-                                        MINTABLE
-                                    </span>
-                                )}
-                            </div>
-                            <p className="text-xs font-malio text-gray-600 mt-1">
-                                {achievement.description}
-                            </p>
+            {/* Mintable Badge */}
+            {isMintable && (
+                <div className="absolute top-0.5 left-0.5">
+                    <span className="text-[8px] bg-green-500 text-white px-1 py-0.5 rounded-full font-bold shadow-lg">
+                        READY
+                    </span>
+                </div>
+            )}
+
+            {/* Minted Badge */}
+            {achievement.minted && (
+                <div className="absolute top-0.5 left-0.5">
+                    <span className="text-[8px] bg-purple-500 text-white px-1 py-0.5 rounded-full font-bold shadow-lg">
+                        NFT
+                    </span>
+                </div>
+            )}
+        </div>
+    );
+};
+
+// Achievement Detail Modal - Opens when clicking a card
+const AchievementDetail = ({ achievement, onClose, onMint, isMinting }) => {
+    if (!achievement) return null;
+
+    return (
+        <div
+            className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 font-malio"
+            onClick={onClose}
+        >
+            <div
+                className="relative max-w-md w-full mx-4 rounded-lg overflow-hidden shadow-2xl"
+                style={{
+                    backgroundColor: "#8B7355", // Brownish background
+                    border: "6px solid #5D4E37", // Dark brown border
+                }}
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Close Button */}
+                <button
+                    onClick={onClose}
+                    className="absolute top-2 right-2 z-10 w-8 h-8 hover:opacity-80 transition-opacity"
+                >
+                    <img
+                        src="/assets/files/image%2035.png"
+                        alt="Close"
+                        className="w-full h-full object-contain"
+                    />
+                </button>
+
+                {/* Content */}
+                <div className="p-6">
+                    {/* Achievement Image */}
+                    <div className="flex justify-center mb-4">
+                        <div
+                            className={`w-40 h-40 p-4 rounded-lg flex items-center justify-center ${
+                                achievement.unlocked
+                                    ? "bg-amber-100"
+                                    : "bg-gray-300 grayscale opacity-50"
+                            }`}
+                        >
+                            <img
+                                src={achievement.imageUrl || achievement.image}
+                                alt={achievement.name}
+                                className="max-w-full max-h-full object-contain"
+                            />
                         </div>
-                        <img
-                            src={
-                                isExpanded
-                                    ? "/assets/hud/accordionUp.png"
-                                    : "/assets/hud/accordionDown.png"
-                            }
-                            alt={isExpanded ? "Collapse" : "Expand"}
-                            className="w-4 h-4 ml-2 transition-transform duration-200"
-                        />
                     </div>
 
-                    {/* Expanded Content */}
-                    {isExpanded && (
-                        <div className="mt-3 ml-2 transition-all duration-200">
-                            {/* Achievement Image */}
-                            <div className="flex justify-center mb-3">
-                                <div
-                                    className={`w-32 h-32 p-2 bg-gray-50 rounded-lg transition-all duration-300 ${
-                                        achievement.unlocked
-                                            ? ""
-                                            : "grayscale opacity-50"
-                                    }`}
-                                >
-                                    <img
-                                        src={
-                                            achievement.imageUrl ||
-                                            achievement.image
-                                        }
-                                        alt={achievement.name}
-                                        className="w-full h-full object-contain"
-                                    />
-                                </div>
-                            </div>
+                    {/* Achievement Name */}
+                    <h3
+                        className={`text-xl font-bold text-center mb-2 ${
+                            achievement.minted
+                                ? "text-purple-200"
+                                : achievement.unlocked
+                                ? "text-amber-100"
+                                : "text-gray-400"
+                        }`}
+                    >
+                        {achievement.name}
+                    </h3>
 
-                            {/* Achievement Info */}
-                            <div className="bg-gray-100 p-2 rounded-md text-xs font-malio mb-2">
-                                <p>
-                                    <span className="font-semibold">
-                                        Status:
-                                    </span>{" "}
-                                    {achievement.minted
-                                        ? "Minted as NFT"
-                                        : achievement.unlocked
-                                        ? "Unlocked - Ready to Mint!"
-                                        : "Locked - Complete quests to unlock"}
-                                </p>
-                                {achievement.nftId && (
-                                    <p>
-                                        <span className="font-semibold">
-                                            NFT ID:
-                                        </span>{" "}
-                                        {achievement.nftId}
-                                    </p>
-                                )}
-                            </div>
+                    {/* Status Badges */}
+                    <div className="flex justify-center gap-2 mb-3">
+                        {achievement.minted && (
+                            <span className="text-xs bg-purple-500 text-white px-3 py-1 rounded-full font-bold">
+                                NFT Minted
+                            </span>
+                        )}
+                        {achievement.unlocked && !achievement.minted && (
+                            <span className="text-xs bg-green-500 text-white px-3 py-1 rounded-full font-bold">
+                                Ready to Mint
+                            </span>
+                        )}
+                        {!achievement.unlocked && (
+                            <span className="text-xs bg-gray-500 text-white px-3 py-1 rounded-full font-bold">
+                                Locked
+                            </span>
+                        )}
+                    </div>
 
-                            {/* Mint Button */}
-                            {achievement.unlocked && !achievement.minted && (
-                                <button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        onMint(achievement);
-                                    }}
-                                    disabled={isMinting}
-                                    className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white text-xs font-bold py-2 px-4 rounded-md transition-colors"
-                                >
-                                    {isMinting ? "Minting..." : "Mint as NFT"}
-                                </button>
-                            )}
+                    {/* Description */}
+                    <div className="bg-amber-100 rounded-lg p-4 mb-4">
+                        <p className="text-sm text-gray-800 text-center">
+                            {achievement.description}
+                        </p>
+                    </div>
 
-                            {achievement.minted && (
-                                <div className="bg-purple-100 text-purple-700 text-xs font-semibold text-center py-2 px-4 rounded-md">
-                                    NFT Minted Successfully!
-                                </div>
-                            )}
+                    {/* Status Info */}
+                    <div className="bg-amber-50 rounded-lg p-3 mb-4 text-xs text-gray-700">
+                        <p className="text-center">
+                            <span className="font-semibold">Status:</span>{" "}
+                            {achievement.minted
+                                ? "Minted as NFT"
+                                : achievement.unlocked
+                                ? "Unlocked - Ready to Mint!"
+                                : "Locked - Complete quests to unlock"}
+                        </p>
+                    </div>
 
-                            {!achievement.unlocked && (
-                                <div className="bg-gray-200 text-gray-600 text-xs font-semibold text-center py-2 px-4 rounded-md">
-                                    Complete quests to unlock
-                                </div>
-                            )}
+                    {/* Action Buttons */}
+                    {achievement.unlocked && !achievement.minted && (
+                        <button
+                            onClick={() => onMint(achievement)}
+                            disabled={isMinting}
+                            className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white text-sm font-bold py-3 px-4 rounded-lg transition-colors shadow-lg"
+                        >
+                            {isMinting ? "Minting..." : "🎨 Mint as NFT"}
+                        </button>
+                    )}
+
+                    {achievement.minted && (
+                        <div className="bg-purple-100 text-purple-700 text-sm font-semibold text-center py-3 px-4 rounded-lg">
+                            ✅ NFT Minted Successfully!
+                        </div>
+                    )}
+
+                    {!achievement.unlocked && (
+                        <div className="bg-gray-300 text-gray-700 text-sm font-semibold text-center py-3 px-4 rounded-lg">
+                            🔒 Complete quests to unlock this achievement
                         </div>
                     )}
                 </div>
@@ -155,7 +201,7 @@ const AchievementRow = ({
 };
 
 const AchievementHUD = ({ onClose }) => {
-    const [expandedAchievements, setExpandedAchievements] = useState(new Set());
+    const [selectedAchievement, setSelectedAchievement] = useState(null);
     const [mintingAchievements, setMintingAchievements] = useState(new Set());
 
     // Fetch data from backend
@@ -286,15 +332,23 @@ const AchievementHUD = ({ onClose }) => {
         }
     };
 
-    const toggleExpansion = (achievementId) => {
-        const newExpanded = new Set(expandedAchievements);
-        if (newExpanded.has(achievementId)) {
-            newExpanded.delete(achievementId);
-        } else {
-            newExpanded.add(achievementId);
-        }
-        setExpandedAchievements(newExpanded);
+    const handleCardClick = (achievement) => {
+        setSelectedAchievement(achievement);
     };
+
+    const handleCloseDetail = () => {
+        setSelectedAchievement(null);
+    };
+
+    // Update selectedAchievement when achievements array updates (e.g., after minting)
+    useEffect(() => {
+        if (selectedAchievement) {
+            const updatedAchievement = achievements.find(a => a.id === selectedAchievement.id);
+            if (updatedAchievement) {
+                setSelectedAchievement(updatedAchievement);
+            }
+        }
+    }, [achievements, selectedAchievement]);
 
     const unlockedCount = achievements.filter((a) => a.unlocked).length;
     const mintedCount = achievements.filter((a) => a.minted).length;
@@ -315,90 +369,101 @@ const AchievementHUD = ({ onClose }) => {
             className="fixed inset-0 bg-black/50 flex items-center justify-center z-40 font-malio"
             onClick={onClose}
         >
-            <div onClick={(e) => e.stopPropagation()} className="relative">
-                <img
-                    src="/assets/hud/Tasksframe.png"
-                    alt="Frame"
-                    className="w-auto h-auto"
-                />
-
-                <div className="absolute inset-0">
+            {/* Book Container - Portrait Orientation */}
+            <div
+                onClick={(e) => e.stopPropagation()}
+                className="relative"
+                style={{
+                    width: '400px',
+                    maxHeight: '85vh',
+                }}
+            >
+                {/* Book Background */}
+                <div
+                    className="w-full rounded-lg shadow-2xl overflow-hidden"
+                    style={{
+                        backgroundColor: "#D4B896", // Brighter tan/beige
+                        border: "8px solid #5D4E37", // Dark brown border
+                        aspectRatio: "3/4" // Book-like ratio
+                    }}
+                >
                     {/* Close Button */}
                     <div
-                        className="absolute top-0 -right-2 cursor-pointer"
+                        className="absolute top-1 right-1 cursor-pointer z-10"
                         onClick={onClose}
                     >
                         <img
                             src="/assets/files/image%2035.png"
                             alt="Close"
-                            className="w-10 h-10 mr-4 mt-2 hover:opacity-80 transition-opacity"
+                            className="w-7 h-7 hover:opacity-80 transition-opacity"
                         />
                     </div>
 
-                    {/* Header */}
-                    <div className="pt-16 pb-3">
-                        <h2 className="text-base font-malio text-center text-gray-800">
-                            ACHIEVEMENTS
-                        </h2>
-                        <p className="text-xs font-malio text-center text-gray-600 mt-2">
-                            Complete achievements and mint them as NFTs
+                    {/* Content */}
+                    <div className="h-full flex flex-col p-4">
+                        {/* Header */}
+                        <div className="pb-2">
+                            <h2 className="text-sm font-malio text-center text-amber-900 font-bold">
+                                ACHIEVEMENT JOURNAL
+                            </h2>
+                            <p className="text-[9px] font-malio text-center text-amber-800 mt-0.5">
+                                Complete & Mint as NFTs
+                            </p>
+                        </div>
+
+                        {/* Progress Bar */}
+                        <div className="w-full mb-1.5 bg-amber-200 rounded-full h-1.5 border border-amber-900">
+                            <div
+                                className="bg-green-600 h-full rounded-full"
+                                style={{
+                                    width: `${
+                                        achievements.length > 0
+                                            ? Math.round(
+                                                  (unlockedCount /
+                                                      achievements.length) *
+                                                      100
+                                              )
+                                            : 0
+                                    }%`,
+                                }}
+                            ></div>
+                        </div>
+                        <p className="text-[9px] text-center mb-2 text-amber-900 font-semibold">
+                            {unlockedCount}/{achievements.length} unlocked • {mintedCount} minted
                         </p>
-                    </div>
 
-                    {/* Progress Bar */}
-                    <div className="w-2/3 mx-auto mb-3 bg-gray-200 rounded-full h-2">
-                        <div
-                            className="bg-green-600 h-2 rounded-full"
-                            style={{
-                                width: `${
-                                    achievements.length > 0
-                                        ? Math.round(
-                                              (unlockedCount /
-                                                  achievements.length) *
-                                                  100
-                                          )
-                                        : 0
-                                }%`,
-                            }}
-                        ></div>
-                    </div>
-                    <p className="text-xs text-center mb-3 text-gray-700">
-                        {unlockedCount}/{achievements.length} unlocked •{" "}
-                        {mintedCount} minted
-                    </p>
-
-                    {/* Achievement List */}
-                    <div className="px-16 pb-16 h-[calc(100%-16rem)] overflow-y-auto scrollbar-hidden">
-                        <div className="space-y-4">
-                            {achievements.length > 0 ? (
-                                achievements.map((achievement, index) => (
-                                    <React.Fragment key={achievement.id}>
-                                        <AchievementRow
+                        {/* Achievement Book - 3x3 Grid Layout */}
+                        <div className="flex-1 overflow-y-auto scrollbar-hidden">
+                            <div className="grid grid-cols-3 gap-2">
+                                {achievements.length > 0 ? (
+                                    achievements.map((achievement) => (
+                                        <AchievementCard
+                                            key={achievement.id}
                                             achievement={achievement}
-                                            onMint={handleMint}
-                                            isExpanded={expandedAchievements.has(
-                                                achievement.id
-                                            )}
-                                            onToggle={() =>
-                                                toggleExpansion(achievement.id)
-                                            }
-                                            isMinting={mintingAchievements.has(achievement.id)}
+                                            onClick={handleCardClick}
                                         />
-                                        {index !== achievements.length - 1 && (
-                                            <div className="h-px bg-gray-900/10" />
-                                        )}
-                                    </React.Fragment>
-                                ))
-                            ) : (
-                                <div className="text-center py-8">
-                                    <p className="text-gray-500 text-sm">
-                                        No achievements available yet.
-                                    </p>
-                                </div>
-                            )}
+                                    ))
+                                ) : (
+                                    <div className="col-span-3 text-center py-8">
+                                        <p className="text-amber-800 text-xs">
+                                            No achievements available yet.
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                {/* Achievement Detail Modal */}
+                {selectedAchievement && (
+                    <AchievementDetail
+                        achievement={selectedAchievement}
+                        onClose={handleCloseDetail}
+                        onMint={handleMint}
+                        isMinting={mintingAchievements.has(selectedAchievement.id)}
+                    />
+                )}
             </div>
         </div>
     );
@@ -408,7 +473,23 @@ AchievementHUD.propTypes = {
     onClose: PropTypes.func.isRequired,
 };
 
-AchievementRow.propTypes = {
+AchievementCard.propTypes = {
+    achievement: PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+        description: PropTypes.string,
+        imageUrl: PropTypes.string,
+        image: PropTypes.string,
+        unlocked: PropTypes.bool,
+        minted: PropTypes.bool,
+        points: PropTypes.number,
+        nftId: PropTypes.number,
+        userAchievementId: PropTypes.string,
+    }).isRequired,
+    onClick: PropTypes.func.isRequired,
+};
+
+AchievementDetail.propTypes = {
     achievement: PropTypes.shape({
         id: PropTypes.string,
         name: PropTypes.string,
@@ -421,9 +502,8 @@ AchievementRow.propTypes = {
         nftId: PropTypes.number,
         userAchievementId: PropTypes.string,
     }),
+    onClose: PropTypes.func.isRequired,
     onMint: PropTypes.func.isRequired,
-    isExpanded: PropTypes.bool.isRequired,
-    onToggle: PropTypes.func.isRequired,
     isMinting: PropTypes.bool,
 };
 

@@ -3,6 +3,8 @@
  * Ensures players always teleport to the correct location when moving between maps
  */
 
+import { inventoryService } from '../../lib/inventory-service';
+
 class PortalManager {
   constructor() {
     // Define portal connections with exact coordinates for logical map positions
@@ -71,7 +73,7 @@ class PortalManager {
    * @param {string} targetSceneName - The scene the player is going to
    * @param {Object} options - Optional settings
    */
-  transition(currentScene, targetSceneName, options = {}) {
+  async transition(currentScene, targetSceneName, options = {}) {
     if (this.isTransitioning) {
       console.log("🚫 Portal transition blocked - already transitioning");
       return false;
@@ -88,8 +90,8 @@ class PortalManager {
     console.log(`🚪 Starting portal transition: ${portal.from} → ${portal.to}`);
     this.isTransitioning = true;
 
-    // Save current scene inventory
-    this.saveSceneInventory(currentScene);
+    // Save current scene inventory (wait for sync to complete)
+    await this.saveSceneInventory(currentScene);
 
     // Perform the scene transition
     this.performTransition(currentScene, portal, options);
@@ -106,17 +108,20 @@ class PortalManager {
    * Save inventory from the current scene before transition
    * @param {Object} currentScene - Scene to save inventory from
    */
-  saveSceneInventory(currentScene) {
+  async saveSceneInventory(currentScene) {
     try {
       // Update global inventory
       if (currentScene.newItemHudPrefab && currentScene.newItemHudPrefab.updateGlobalInventory) {
         currentScene.newItemHudPrefab.updateGlobalInventory();
       }
 
-      // Force sync to database if available
-      if (typeof window !== "undefined" && window.forceInventorySync) {
+      // Sync inventory to database before transitioning
+      if (currentScene.newItemHudPrefab) {
         console.log("🔄 Syncing inventory to database before portal transition...");
-        window.forceInventorySync();
+        await inventoryService.syncInventoryToDatabase(currentScene.newItemHudPrefab);
+        console.log("✅ Inventory synced to database successfully");
+      } else {
+        console.warn("⚠️ No HUD prefab available for inventory sync");
       }
     } catch (error) {
       console.error("❌ Error saving inventory during portal transition:", error);
@@ -157,7 +162,7 @@ class PortalManager {
    * Position the player at the correct location in the target scene
    * @param {Object} portal - Portal configuration
    */
-  positionPlayerInTargetScene(portal) {
+  async positionPlayerInTargetScene(portal) {
     const targetScene = window.debugGame?.game?.scene?.getScene(portal.to);
 
     if (!targetScene) {
@@ -182,13 +187,21 @@ class PortalManager {
       targetScene.cameras.main.fadeIn(1000, 0, 0, 0);
     }
 
-    // Force inventory reload in target scene
-    setTimeout(() => {
-      if (typeof window !== 'undefined' && window.forceApplyInventory) {
-        console.log("🔄 Applying database inventory to target scene...");
-        window.forceApplyInventory();
+    // Load inventory from database and apply to target scene
+    setTimeout(async () => {
+      try {
+        if (targetScene.newItemHudPrefab) {
+          console.log("🔄 Loading inventory from database for target scene...");
+          await inventoryService.loadInventoryFromDatabase();
+          inventoryService.applyInventoryToGame(targetScene.newItemHudPrefab);
+          console.log("✅ Inventory loaded and applied to target scene");
+        } else {
+          console.warn("⚠️ No HUD prefab available in target scene for inventory reload");
+        }
+      } catch (error) {
+        console.error("❌ Failed to reload inventory in target scene:", error);
       }
-    }, 1000);
+    }, 500);
 
     // Save current position to localStorage for checkpoint system
     this.savePlayerPosition(portal.targetPosition, portal.to);

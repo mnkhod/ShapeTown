@@ -69,6 +69,10 @@ export default class BlackSmithPrefab extends Phaser.GameObjects.Container {
             if (this.scene.markNPCGreeted) {
                 this.scene.markNPCGreeted("Rowan");
             }
+
+            // Update Making Friends quest progress if active
+            this.updateMakingFriendsProgress();
+
             const currentGreeting = this.greetings[this.currentDialogueIndex];
             
             this.currentDialogueIndex = (this.currentDialogueIndex + 1) % this.greetings.length;
@@ -117,13 +121,64 @@ export default class BlackSmithPrefab extends Phaser.GameObjects.Container {
 
     getDistance(texture1, texture2) {
         if (!texture1 || !texture2) return Infinity;
-        
+
         return Phaser.Math.Distance.Between(
             texture1.x,
             texture1.y,
             texture2.x,
             texture2.y
         );
+    }
+
+    // Update Making Friends quest progress
+    async updateMakingFriendsProgress() {
+        try {
+            console.log("🤝 Checking if 'Making Friends' quest is active for Master Smith...");
+
+            // Import query helpers dynamically
+            const { getActiveQuests, updateQuestTask } = await import("../../../lib/query-helper");
+
+            // Check if Making Friends quest is active
+            const activeQuestsResponse = await getActiveQuests();
+
+            if (!activeQuestsResponse?.success || !activeQuestsResponse?.data) {
+                console.log("No active quests found");
+                return;
+            }
+
+            const makingFriendsQuest = activeQuestsResponse.data.find(
+                questEntry => questEntry.quest.name === "Making Friends"
+            );
+
+            if (!makingFriendsQuest) {
+                console.log("'Making Friends' quest is not active");
+                return;
+            }
+
+            console.log("✅ 'Making Friends' quest is active! Updating progress for Master Smith...");
+
+            // Update the TALK_TO_ALL_NPCS task
+            const result = await updateQuestTask({
+                questId: makingFriendsQuest.quest.id,
+                taskIndex: 0,
+                progress: 1 // Increment by 1
+            });
+
+            console.log("✅ Backend response:", result);
+
+            // Emit event to React to refresh quest data
+            if (this.scene.reactEvent) {
+                this.scene.reactEvent.emit("quest-updated", {
+                    questId: makingFriendsQuest.quest.id,
+                    taskIndex: 0,
+                    questCompleted: result?.questCompleted || false
+                });
+            }
+
+            console.log("✅ 'Making Friends' quest progress updated for Master Smith");
+        } catch (error) {
+            console.error("❌ Failed to update 'Making Friends' quest progress:", error);
+        }
     }
 
     getInventory() {

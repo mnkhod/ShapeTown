@@ -480,7 +480,9 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
                         `🎯 Restoring player position from checkpoint: (${playerX}, ${playerY})`
                     );
                 } else {
-                    console.log(`⚠️ Checkpoint position (${cpX}, ${cpY}) seems invalid, using default`);
+                    console.log(
+                        `⚠️ Checkpoint position (${cpX}, ${cpY}) seems invalid, using default`
+                    );
                 }
                 // Clear the restoration flags
                 localStorage.removeItem("shouldRestorePosition");
@@ -1264,10 +1266,11 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
             this.playerPrefab,
             townZone,
             () => {
+                // Only trigger once per scene load to prevent spamming API calls
                 if (!this.playerEnteredTown) {
                     this.playerEnteredTown = true;
 
-                    // Update backend quest task for "Taste of Gold" if active
+                    // Update quest progress when entering town
                     this.updateTasteOfGoldTravelProgress();
 
                     if (this.triggerQuestEvent) {
@@ -1275,12 +1278,6 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
                             "Player entered town - triggering quest event"
                         );
                         this.triggerQuestEvent("player:enteredTown");
-
-                        if (this.alertPrefab) {
-                            this.alertPrefab.alert(
-                                "Quest Updated: Entered Town"
-                            );
-                        }
                     } else {
                         console.warn(
                             "triggerQuestEvent not available on scene"
@@ -1410,12 +1407,12 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
                 `Progress: ${this.greetedNPCs.size}/${npcsToGreet.length} NPCs greeted`
             );
 
-            // Show notification
-            if (this.alertPrefab) {
-                this.alertPrefab.alert(
-                    `Greeted ${npcName} (${this.greetedNPCs.size}/${npcsToGreet.length})`
-                );
-            }
+            // Show notification - DISABLED (user doesn't want to see greeted notifications)
+            // if (this.alertPrefab) {
+            //     this.alertPrefab.alert(
+            //         `Greeted ${npcName} (${this.greetedNPCs.size}/${npcsToGreet.length})`
+            //     );
+            // }
 
             // Check if all NPCs have been greeted
             this.checkAllNPCsGreeted();
@@ -2044,50 +2041,70 @@ export default class ShapeTownSquareMapScene extends Phaser.Scene {
 
     async updateTasteOfGoldTravelProgress() {
         try {
-            console.log("🗺️ Updating 'Taste of Gold' quest progress for traveling to ShapeTown");
+            console.log(
+                "🗺️ Updating 'Taste of Gold' quest progress for traveling to Harvestyn"
+            );
 
-            // Check if questProvider is available
-            if (!this.questProvider) {
-                console.warn("❌ Quest provider not available on scene");
-                return;
-            }
+            // Import getActiveQuests dynamically to fetch latest data
+            const { getActiveQuests } = await import("../../lib/query-helper");
 
-            // Get active quests to find the "Taste of Gold" quest
-            const activeQuests = this.questProvider?.activeQuests?.data;
-            if (!activeQuests) {
+            // Fetch active quests from backend
+            const activeQuestsResponse = await getActiveQuests();
+
+            if (!activeQuestsResponse?.success || !activeQuestsResponse?.data) {
                 console.error("❌ No active quests data found");
                 return;
             }
 
-            const tasteOfGoldQuest = activeQuests.find(questEntry =>
-                questEntry.quest.name === "Taste of Gold"
+            const activeQuests = activeQuestsResponse.data;
+            const tasteOfGoldQuest = activeQuests.find(
+                (questEntry) => questEntry.quest.name === "Taste of Gold"
             );
 
             if (!tasteOfGoldQuest) {
-                console.warn("❌ 'Taste of Gold' quest not found in active quests");
+                console.warn(
+                    "❌ 'Taste of Gold' quest not found in active quests"
+                );
                 return;
             }
 
-            console.log("✅ Found 'Taste of Gold' quest:", tasteOfGoldQuest.quest.id);
+            console.log(
+                "✅ Found 'Taste of Gold' quest:",
+                tasteOfGoldQuest.quest.id
+            );
 
             // Update the TRAVEL_TO_MAP task (should be task index 0)
-            await updateQuestTask({
+            const result = await updateQuestTask({
                 questId: tasteOfGoldQuest.quest.id,
                 taskIndex: 0, // First task: TRAVEL_TO_MAP (ShapeTown)
-                progressData: {
-                    mapId: "ShapeTownSquareMapScene",
-                    action: "traveled_to_map"
-                }
+                progress: 1, // Mark as completed (backend checks progress >= 1 for TRAVEL_TO_MAP)
             });
 
-            // Refresh quest data from backend
-            if (this.questProvider?.refreshQuests) {
-                this.questProvider.refreshQuests();
+            console.log("✅ Backend response:", result);
+
+            // Emit event to React to refresh quest data
+            if (this.reactEvent) {
+                this.reactEvent.emit("quest-updated", {
+                    questId: tasteOfGoldQuest.quest.id,
+                    taskIndex: 0,
+                });
+            }
+
+            // Show alert
+            if (this.alertPrefab) {
+                this.alertPrefab.alert("Quest Updated: Traveled to Harvestyn");
             }
 
             console.log("✅ 'Taste of Gold' quest travel progress updated");
         } catch (error) {
-            console.error("❌ Failed to update 'Taste of Gold' quest travel progress:", error);
+            console.error(
+                "❌ Failed to update 'Taste of Gold' quest travel progress:",
+                error
+            );
+            console.error(
+                "Error details:",
+                error.response?.data || error.message
+            );
         }
     }
 

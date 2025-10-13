@@ -47,7 +47,7 @@
 
     .rainbow-border {
       animation: rainbow 3s linear infinite;
-      border-width: 3px;
+      border-width: 5px;
       border-style: solid;
     }
 }

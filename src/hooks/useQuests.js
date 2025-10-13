@@ -40,9 +40,8 @@ export function useActiveQuests() {
     return useQuery({
         queryKey: QUEST_KEYS.active(),
         queryFn: getActiveQuests,
-        staleTime: 2 * 1000, // 2 seconds - very fresh data
+        staleTime: 0, // Always consider stale - instant updates
         gcTime: 30 * 1000, // Keep in cache for 30 seconds
-        refetchInterval: 3 * 1000, // Auto-refetch every 3 seconds during active gameplay
         refetchOnWindowFocus: true, // Refetch when user returns to tab
         enabled: isAuthenticated, // Only fetch when authenticated
     });
@@ -54,7 +53,7 @@ export function useCompletedQuests() {
     return useQuery({
         queryKey: QUEST_KEYS.completed(),
         queryFn: getCompletedQuests,
-        staleTime: 10 * 60 * 1000, // 10 minutes - completed quests rarely change
+        staleTime: 0, // Always fresh - instant updates when quest completes
         gcTime: 30 * 60 * 1000, // Keep in cache for 30 minutes
         refetchOnWindowFocus: false, // Don't refetch completed quests on window focus
         enabled: isAuthenticated, // Only fetch when authenticated
@@ -79,15 +78,17 @@ export function useStartQuest() {
 
     return useMutation({
         mutationFn: (questId) => startQuest(questId),
-        onSuccess: (data, questId) => {
-            console.log("Quest started successfully:", data);
-            // Immediately invalidate only the relevant queries for faster UI updates
-            queryClient.invalidateQueries({ queryKey: QUEST_KEYS.active() });
-            queryClient.invalidateQueries({ queryKey: QUEST_KEYS.available() });
-            // Don't invalidate completed quests as they don't change when starting new quests
+        onSuccess: async (data, questId) => {
+            console.log("✅ Quest started successfully:", data);
+            // Force immediate refetch (not just invalidate) for instant UI update
+            await Promise.all([
+                queryClient.refetchQueries({ queryKey: QUEST_KEYS.active() }),
+                queryClient.refetchQueries({ queryKey: QUEST_KEYS.available() }),
+            ]);
+            console.log("🔄 Quest data refreshed instantly");
         },
         onError: (error, questId) => {
-            console.error("Failed to start quest:", error);
+            console.error("❌ Failed to start quest:", error);
             console.error("Quest ID:", questId);
         },
     });
@@ -110,14 +111,31 @@ export function useUpdateQuestTask() {
 
     return useMutation({
         mutationFn: updateQuestTask,
-        onSuccess: (data, variables) => {
-            console.log("Quest task updated successfully:", data);
-            // Only invalidate active quests instead of all quest data for better performance
-            queryClient.invalidateQueries({ queryKey: QUEST_KEYS.active() });
-            queryClient.invalidateQueries({ queryKey: QUEST_KEYS.system() });
+        onSuccess: async (data, variables) => {
+            console.log("✅ Quest task updated successfully:", data);
+
+            // Force immediate refetch for instant UI updates
+            const refetchPromises = [
+                queryClient.refetchQueries({ queryKey: QUEST_KEYS.active() }),
+                queryClient.refetchQueries({ queryKey: QUEST_KEYS.system() }),
+            ];
+
+            // If quest was completed, also refetch completed quests immediately
+            if (data?.data?.questCompleted || data?.questCompleted) {
+                console.log("🎉 Quest completed! Refreshing completed quests...");
+                refetchPromises.push(
+                    queryClient.refetchQueries({ queryKey: QUEST_KEYS.completed() })
+                );
+                refetchPromises.push(
+                    queryClient.refetchQueries({ queryKey: QUEST_KEYS.available() })
+                );
+            }
+
+            await Promise.all(refetchPromises);
+            console.log("🔄 All quest data refreshed instantly");
         },
         onError: (error, variables) => {
-            console.error("Failed to update quest task:", error);
+            console.error("❌ Failed to update quest task:", error);
             console.error("Variables:", variables);
         },
     });

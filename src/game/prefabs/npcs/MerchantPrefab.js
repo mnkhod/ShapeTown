@@ -77,7 +77,7 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
 
         this.npc.on(
             "pointerdown",
-            function (_pointer) {
+            async function (_pointer) {
                 console.log("Lydia NPC clicked");
 
                 let distance = this.getDistance(this.player, this);
@@ -97,80 +97,138 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
                     this.scene.markNPCGreeted("Lady Lydia");
                 }
 
-                // Update backend quest task for "Taste of Gold" if active
-                if (this.isQuestActiveByName("Taste of Gold")) {
+                // Batch all quest status checks into one API call
+                const { getActiveQuests, getCompletedQuests } = await import("../../../lib/query-helper");
+
+                let tasteOfGoldActive = false;
+                let makingFriendsActive = false;
+                let tasteOfGoldCompleted = false;
+                let makingFriendsCompleted = false;
+
+                try {
+                    const [activeQuestsResponse, completedQuestsResponse] = await Promise.all([
+                        getActiveQuests(),
+                        getCompletedQuests()
+                    ]);
+
+                    if (activeQuestsResponse?.success && activeQuestsResponse?.data) {
+                        tasteOfGoldActive = activeQuestsResponse.data.some(q => q.quest.name === "Taste of Gold");
+                        makingFriendsActive = activeQuestsResponse.data.some(q => q.quest.name === "Making Friends");
+                    }
+
+                    if (completedQuestsResponse?.success && completedQuestsResponse?.data) {
+                        tasteOfGoldCompleted = completedQuestsResponse.data.some(q => q.quest.name === "Taste of Gold");
+                        makingFriendsCompleted = completedQuestsResponse.data.some(q => q.quest.name === "Making Friends");
+                    }
+                } catch (error) {
+                    console.error("Error fetching quest status:", error);
+                }
+
+                // Update quest progress if active
+                if (tasteOfGoldActive) {
+                    console.log("🥇 Taste of Gold quest is active, updating progress...");
                     this.updateTasteOfGoldProgress();
                 }
 
-                // Update backend quest task for "Making Friends" if active
-                if (this.isQuestActiveByName("Making Friends")) {
+                if (makingFriendsActive) {
+                    console.log("🤝 Making Friends quest is active, updating progress...");
                     this.updateMakingFriendsProgress();
                 }
 
-                const currentGreeting =
-                    this.greetings[this.currentDialogueIndex];
-                this.currentDialogueIndex =
-                    (this.currentDialogueIndex + 1) % this.greetings.length;
+                const currentGreeting = this.greetings[this.currentDialogueIndex];
+                this.currentDialogueIndex = (this.currentDialogueIndex + 1) % this.greetings.length;
 
                 let hasIronBars = false;
                 let ironItemId = null;
-                let isQuestActive = false;
 
-                try {
-                    if (
-                        this.scene.newItemHudPrefab &&
-                        this.scene.newItemHudPrefab.checkItem
-                    ) {
-                        if (
-                            this.scene.newItemHudPrefab.checkItem("IronIngot")
-                        ) {
-                            hasIronBars = true;
-                            ironItemId = "IronIngot";
-                        }
+                if (
+                    this.scene.newItemHudPrefab &&
+                    this.scene.newItemHudPrefab.checkItem
+                ) {
+                    if (this.scene.newItemHudPrefab.checkItem("IronIngot")) {
+                        hasIronBars = true;
+                        ironItemId = "IronIngot";
                     }
-
-                    if (
-                        this.scene.questSystem &&
-                        this.scene.questSystem.isQuestActive
-                    ) {
-                        isQuestActive =
-                            this.isQuestActiveByName("Taste of Gold");
-                    }
-                } catch (error) {
-                    console.error("Error checking quest status:", error);
                 }
 
                 let dialogueLines;
 
-                // Check if Taste of Gold was just completed (has iron bars but quest just finished)
-                const tasteOfGoldCompleted = this.isQuestCompletedByName("Taste of Gold");
-                const makingFriendsActive = this.isQuestActiveByName("Making Friends");
-                const makingFriendsCompleted = this.isQuestCompletedByName("Making Friends");
-
                 if (tasteOfGoldCompleted && !makingFriendsActive && !makingFriendsCompleted) {
-                    // Start Making Friends quest
-                    dialogueLines = [
-                        {
-                            msg: "Thank you for selling those iron bars! You've proven yourself to be quite capable.",
-                        },
-                        {
-                            msg: "Now that you're familiar with ShapeTown's trading system, I have another opportunity for you.",
-                        },
-                        {
-                            msg: "To truly become part of our community, you should meet all the townspeople.",
-                        },
-                        {
-                            msg: "Would you like to take on the quest to make friends with everyone in ShapeTown?",
-                            onComplete: () => {
-                                // Start the Making Friends quest
-                                this.startMakingFriendsQuest();
+                    // Check if we've already shown this dialogue
+                    if (!this.hasShownMakingFriendsDialogue) {
+                        this.hasShownMakingFriendsDialogue = true;
+
+                        // Auto-start Making Friends quest immediately
+                        this.startMakingFriendsQuest();
+
+                        // Show dialogue
+                        dialogueLines = [
+                            {
+                                msg: "Thank you for selling those iron ingots! You've proven yourself to be quite capable.",
+                            },
+                            {
+                                msg: "Now that you're familiar with Harvestyn's trading system, I have another opportunity for you.",
+                            },
+                            {
+                                msg: "To truly become part of our community, you should meet all the townspeople.",
+                            },
+                            {
+                                msg: "I've started a new quest for you - make friends with everyone in Harvestyn!",
+                            },
+                            {
+                                msg: "Visit each NPC in town and introduce yourself. They all have interesting stories to share!",
                             }
-                        },
-                        {
-                            msg: "Visit each NPC in town and introduce yourself. They all have interesting stories to share!",
-                        }
-                    ];
-                } else if (hasIronBars && isQuestActive) {
+                        ];
+                    } else {
+                        // After quest has been given, show regular dialogue
+                        dialogueLines = [
+                            {
+                                msg: currentGreeting,
+                                options: [
+                                    {
+                                        text: "I want to buy seeds and supplies",
+                                        onSelect: () => {
+                                            console.log(
+                                                "Emitting show-shop-buy-modal event"
+                                            );
+                                            if (this.scene.reactEvent) {
+                                                this.scene.reactEvent.emit(
+                                                    "show-shop-buy-modal",
+                                                    this
+                                                );
+                                            }
+                                        },
+                                        nextDialogue: 1,
+                                    },
+                                    {
+                                        text: "I want to sell items",
+                                        onSelect: () => {
+                                            console.log(
+                                                "Emitting show-shop-sell-modal event"
+                                            );
+                                            if (this.scene.reactEvent) {
+                                                this.scene.reactEvent.emit(
+                                                    "show-shop-sell-modal",
+                                                    this
+                                                );
+                                            }
+                                        },
+                                        nextDialogue: 1,
+                                    },
+                                    {
+                                        text: "Just browsing",
+                                        nextDialogue: [
+                                            {
+                                                msg: "Feel free to look around. Let me know if you need anything.",
+                                            },
+                                        ],
+                                    },
+                                ],
+                            },
+                            { msg: "Thank you for your business! Come back soon!" },
+                        ];
+                    }
+                } else if (hasIronBars && tasteOfGoldActive) {
                     dialogueLines = [
                         {
                             msg: currentGreeting,
@@ -288,12 +346,14 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         return getMerchantInventory(this.merchantType);
     }
 
-    isQuestActiveByName(questName) {
+    async isQuestActiveByName(questName) {
         try {
-            const activeQuests = this.scene.questProvider?.activeQuests?.data;
-            if (!activeQuests) return false;
+            const { getActiveQuests } = await import("../../../lib/query-helper");
+            const response = await getActiveQuests();
 
-            return activeQuests.some(questEntry =>
+            if (!response?.success || !response?.data) return false;
+
+            return response.data.some(questEntry =>
                 questEntry.quest.name === questName
             );
         } catch (error) {
@@ -302,12 +362,14 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         }
     }
 
-    isQuestCompletedByName(questName) {
+    async isQuestCompletedByName(questName) {
         try {
-            const completedQuests = this.scene.questProvider?.completedQuests?.data;
-            if (!completedQuests) return false;
+            const { getCompletedQuests } = await import("../../../lib/query-helper");
+            const response = await getCompletedQuests();
 
-            return completedQuests.some(questEntry =>
+            if (!response?.success || !response?.data) return false;
+
+            return response.data.some(questEntry =>
                 questEntry.quest.name === questName
             );
         } catch (error) {
@@ -320,14 +382,18 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         try {
             console.log("🎯 Starting 'Making Friends' quest through backend");
 
-            // Get available quests to find the "Making Friends" quest ID
-            const availableQuests = await this.scene.questProvider?.availableQuests?.data;
-            if (!availableQuests) {
+            // Import API helpers
+            const { getAvailableQuests, updateQuestTask } = await import("../../../lib/query-helper");
+
+            // Fetch available quests from backend API
+            const availableQuestsResponse = await getAvailableQuests();
+
+            if (!availableQuestsResponse?.success || !availableQuestsResponse?.data) {
                 console.error("❌ No available quests data found");
                 return;
             }
 
-            const makingFriendsQuest = availableQuests.find(questEntry =>
+            const makingFriendsQuest = availableQuestsResponse.data.find(questEntry =>
                 questEntry.quest.name === "Making Friends"
             );
 
@@ -341,19 +407,31 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
             // Start the quest using backend API
             await startQuest(makingFriendsQuest.quest.id);
 
+            // Immediately update progress to 1 (Lydia herself counts as first NPC greeted)
+            console.log("🎯 Setting initial progress to 1 (Lydia already greeted)");
+            await updateQuestTask({
+                questId: makingFriendsQuest.quest.id,
+                taskIndex: 0,
+                progress: 1
+            });
+
             // Show success message
             if (this.scene.alertPrefab) {
-                this.scene.alertPrefab.alert("New Main Quest: Making Friends");
+                this.scene.alertPrefab.alert("New Main Quest: Making Friends (1/4)");
             }
 
-            // Refresh quest data from backend
-            if (this.scene.questProvider?.refreshQuests) {
-                this.scene.questProvider.refreshQuests();
+            // Emit event to refresh quest UI
+            if (this.scene.reactEvent) {
+                this.scene.reactEvent.emit("quest-updated", {
+                    questId: makingFriendsQuest.quest.id,
+                    taskIndex: 0,
+                });
             }
 
-            console.log("✅ 'Making Friends' quest started successfully");
+            console.log("✅ 'Making Friends' quest started successfully with initial progress");
         } catch (error) {
             console.error("❌ Failed to start 'Making Friends' quest:", error);
+            console.error("Error details:", error.response?.data || error.message);
 
             // Fallback: Show alert even if backend call fails
             if (this.scene.alertPrefab) {
@@ -366,13 +444,18 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         try {
             console.log("🤝 Updating 'Making Friends' quest progress for Lady Lydia");
 
-            // Get active quests to find the "Making Friends" quest
-            const activeQuests = this.scene.questProvider?.activeQuests?.data;
-            if (!activeQuests) {
+            // Import getActiveQuests dynamically
+            const { getActiveQuests } = await import("../../../lib/query-helper");
+
+            // Fetch active quests from backend
+            const activeQuestsResponse = await getActiveQuests();
+
+            if (!activeQuestsResponse?.success || !activeQuestsResponse?.data) {
                 console.error("❌ No active quests data found");
                 return;
             }
 
+            const activeQuests = activeQuestsResponse.data;
             const makingFriendsQuest = activeQuests.find(questEntry =>
                 questEntry.quest.name === "Making Friends"
             );
@@ -385,23 +468,27 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
             console.log("✅ Found 'Making Friends' quest:", makingFriendsQuest.quest.id);
 
             // Update the TALK_TO_ALL_NPCS task
-            await updateQuestTask({
+            const result = await updateQuestTask({
                 questId: makingFriendsQuest.quest.id,
                 taskIndex: 0, // First task: TALK_TO_ALL_NPCS
-                progressData: {
-                    npcId: "09a59f2a-aac8-4336-9eff-50711546b7a0", // Lady Lydia ID from backend
-                    action: "talked_to_npc"
-                }
+                progress: 1 // Increment progress by 1 (backend handles TALK_TO_ALL_NPCS counting)
             });
 
-            // Refresh quest data from backend
-            if (this.scene.questProvider?.refreshQuests) {
-                this.scene.questProvider.refreshQuests();
+            console.log("✅ Backend response:", result);
+
+            // Emit event to React to refresh quest data
+            if (this.scene.reactEvent) {
+                this.scene.reactEvent.emit("quest-updated", {
+                    questId: makingFriendsQuest.quest.id,
+                    taskIndex: 0,
+                    questCompleted: result?.questCompleted || false
+                });
             }
 
             console.log("✅ 'Making Friends' quest progress updated for Lady Lydia");
         } catch (error) {
             console.error("❌ Failed to update 'Making Friends' quest progress:", error);
+            console.error("Error details:", error.response?.data || error.message);
         }
     }
 
@@ -409,13 +496,18 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
         try {
             console.log("🥇 Updating 'Taste of Gold' quest progress for Lady Lydia interaction");
 
-            // Get active quests to find the "Taste of Gold" quest
-            const activeQuests = this.scene.questProvider?.activeQuests?.data;
-            if (!activeQuests) {
+            // Import getActiveQuests dynamically
+            const { getActiveQuests } = await import("../../../lib/query-helper");
+
+            // Fetch active quests from backend
+            const activeQuestsResponse = await getActiveQuests();
+
+            if (!activeQuestsResponse?.success || !activeQuestsResponse?.data) {
                 console.error("❌ No active quests data found");
                 return;
             }
 
+            const activeQuests = activeQuestsResponse.data;
             const tasteOfGoldQuest = activeQuests.find(questEntry =>
                 questEntry.quest.name === "Taste of Gold"
             );
@@ -428,23 +520,27 @@ export default class MerchantPrefab extends Phaser.GameObjects.Container {
             console.log("✅ Found 'Taste of Gold' quest:", tasteOfGoldQuest.quest.id);
 
             // Update the TALK_TO_NPC task (should be task index 1)
-            await updateQuestTask({
+            const result = await updateQuestTask({
                 questId: tasteOfGoldQuest.quest.id,
                 taskIndex: 1, // Second task: TALK_TO_NPC (Lady Lydia)
-                progressData: {
-                    npcId: "09a59f2a-aac8-4336-9eff-50711546b7a0", // Lady Lydia ID from backend
-                    action: "talked_to_npc"
-                }
+                progress: 1 // Mark as completed (backend checks progress >= 1 for TALK_TO_NPC)
             });
 
-            // Refresh quest data from backend
-            if (this.scene.questProvider?.refreshQuests) {
-                this.scene.questProvider.refreshQuests();
+            console.log("✅ Backend response:", result);
+
+            // Emit event to React to refresh quest data
+            if (this.scene.reactEvent) {
+                this.scene.reactEvent.emit("quest-updated", {
+                    questId: tasteOfGoldQuest.quest.id,
+                    taskIndex: 1,
+                    questCompleted: result?.questCompleted || false
+                });
             }
 
             console.log("✅ 'Taste of Gold' quest progress updated for Lady Lydia");
         } catch (error) {
             console.error("❌ Failed to update 'Taste of Gold' quest progress:", error);
+            console.error("Error details:", error.response?.data || error.message);
         }
     }
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useInventorySync } from './inventory-sync';
 import { getGoldManager } from './gold-manager';
 import { MERCHANT_TYPES } from './merchant-manager';
+import { inventoryService } from '../lib/inventory-service';
 
 const InventoryItem = ({ item, onClick, isSelected }) => {
   if (!item) return (
@@ -179,51 +180,98 @@ const MerchantSellScreen = ({ onClose, phaserInstance, merchantType = MERCHANT_T
     }
   };
 
-  const handleSell = () => {
+  const handleSell = async () => {
     if (!selectedItem || !goldManager) return;
-    
+
     const saleValue = selectedItem.sellPrice * quantity;
     console.log(`Selling ${quantity}x ${selectedItem.name} for ${saleValue} gold`);
-    
-    const isIronItem = selectedItem.id === "IronIngot" || selectedItem.id === "Ironbar";
-    const isQuestActive = phaserInstance?.scene?.questSystem?.isQuestActive("002");
-    
-    // Log quest status
-    console.log(`Selling iron item: ${isIronItem}, Quest active: ${isQuestActive}`);
-    
+
+    const isIronIngot = selectedItem.id === "IronIngot";
+
     const itemRemoved = removeItemFromInventory(selectedItem, quantity);
-    
+
     if (itemRemoved) {
       goldManager.addGold(saleValue);
-      
+
       setLastSoldGold(saleValue);
-      
-      // Trigger quest completion if selling iron items
-      if (isIronItem && isQuestActive) {
-        console.log("Triggering quest completion from sell screen");
-        if (phaserInstance.scene?.triggerQuestEvent) {
-          phaserInstance.scene.triggerQuestEvent('quest:sold-items-to-lydia', { 
-            npc: phaserInstance.scene.children.list.find(c => c.constructor.name === "MerchantPrefab")
-          });
-          
-          goldManager.addGold(1000);
-          
-          if (phaserInstance.scene.alertPrefab) {
-            phaserInstance.scene.alertPrefab.alert("Quest Complete: Taste of Gold");
+
+      // Sync inventory to database immediately after selling
+      try {
+        console.log("💾 Syncing inventory to database after selling items...");
+        await inventoryService.syncInventoryToDatabase(phaserInstance);
+        console.log("✅ Inventory synced to database successfully");
+      } catch (error) {
+        console.error("❌ Failed to sync inventory after selling:", error);
+      }
+
+      // Update quest progress for selling items
+      if (isIronIngot) {
+        try {
+          console.log("🥇 Checking if 'Taste of Gold' quest is active...");
+
+          // Dynamically import query helpers
+          const { getActiveQuests, updateQuestTask } = await import('../lib/query-helper');
+
+          // Fetch active quests from backend
+          const activeQuestsResponse = await getActiveQuests();
+
+          if (activeQuestsResponse?.success && activeQuestsResponse?.data) {
+            const activeQuests = activeQuestsResponse.data;
+            const tasteOfGoldQuest = activeQuests.find(
+              (questEntry) => questEntry.quest.name === "Taste of Gold"
+            );
+
+            if (tasteOfGoldQuest) {
+              console.log("✅ Found 'Taste of Gold' quest, updating SELL_ITEMS task...");
+
+              // Update the SELL_ITEMS task (task index 2)
+              const result = await updateQuestTask({
+                questId: tasteOfGoldQuest.quest.id,
+                taskIndex: 2, // Third task: SELL_ITEMS
+                progress: 1 // Mark as completed
+              });
+
+              console.log("✅ Backend response:", result);
+
+              // Emit event to React to refresh quest data
+              if (phaserInstance?.scene?.reactEvent) {
+                phaserInstance.scene.reactEvent.emit("quest-updated", {
+                  questId: tasteOfGoldQuest.quest.id,
+                  taskIndex: 2,
+                  questCompleted: result?.data?.questCompleted || false
+                });
+              }
+
+              // Show success message if quest is completed
+              if (result?.success && result?.data?.questCompleted) {
+                if (phaserInstance.scene.alertPrefab) {
+                  phaserInstance.scene.alertPrefab.alert("Quest Complete: Taste of Gold");
+                }
+                console.log("🎉 Quest 'Taste of Gold' completed!");
+              } else {
+                if (phaserInstance.scene.alertPrefab) {
+                  phaserInstance.scene.alertPrefab.alert("Quest Updated: Items Sold");
+                }
+              }
+            } else {
+              console.log("⚠️ 'Taste of Gold' quest not active");
+            }
           }
+        } catch (error) {
+          console.error("❌ Failed to update 'Taste of Gold' quest progress:", error);
         }
       }
-      
+
       setTimeout(() => {
         setLastSoldGold(0);
       }, 3000);
-  
+
       refreshInventory();
-  
+
       if (quantity >= selectedItem.quantity) {
         setSelectedItem(null);
       }
-  
+
       setQuantity(1);
     }
   };
